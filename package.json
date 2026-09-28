@@ -12,7 +12,9 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky",
+    "format:check": "prettier --check ."
   },
   "private": true,
   "packageManager": "pnpm@10.34.5",
@@ -36,6 +38,8 @@
     "@angular/cli": "^22.2.0",
     "@angular/compiler-cli": "^22.2.0",
     "@changesets/cli": "^3.0.3",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
     "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.6.0",
     "@storybook/addon-docs": "^10.6.0",
@@ -43,7 +47,9 @@
     "@types/node": "^24.0.0",
     "angular-eslint": "22.5.0",
     "eslint": "^10.9.1",
+    "husky": "^9.1.7",
     "jsdom": "^30.0.0",
+    "lint-staged": "^17.6.0",
     "ng-packagr": "^22.2.0",
     "prettier": "^3.8.1",
     "storybook": "^10.6.0",
@@ -54,5 +60,12 @@
   },
   "engines": {
     "node": "^22.22.3 || >=24.15.0"
+  },
+  "lint-staged": {
+    "*.{ts,html}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss,json,md,mdx,yml,yaml,js}": "prettier --write"
   }
 }
