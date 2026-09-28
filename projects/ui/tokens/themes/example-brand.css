@@ -1,0 +1,13 @@
+/*
+ * Exemplo de tema de produto/tenant.
+ *
+ * Um tema só sobrescreve tokens SEMÂNTICOS, sempre no <html> (:root), porque os
+ * estados derivados (hover, pressed, subtle) são calculados lá. Copie este
+ * arquivo para o produto e ajuste; valores dinâmicos por tenant (vindos do
+ * banco) devem ser aplicados com o serviço ArgTheme.
+ */
+:root[data-arg-brand='example'] {
+  --arg-color-primary: light-dark(#1d4f91, #8fb3ee);
+  --arg-color-on-primary: light-dark(#ffffff, #0e1a2b);
+  --arg-radius-control: var(--arg-core-radius-full);
+}

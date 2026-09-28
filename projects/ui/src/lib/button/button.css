@@ -1,0 +1,169 @@
+/*
+ * Tokens de componente (camada 3): derivados dos semânticos e sobrescrevíveis
+ * por instância, ex.: <button arg-button style="--arg-button-radius: 0">.
+ */
+:host {
+  --arg-button-bg: var(--arg-color-primary);
+  --arg-button-bg-hover: var(--arg-color-primary-hover);
+  --arg-button-bg-pressed: var(--arg-color-primary-pressed);
+  --arg-button-fg: var(--arg-color-on-primary);
+  --arg-button-border: transparent;
+  --arg-button-radius: var(--arg-radius-control);
+  --arg-button-height: 2.5rem;
+  --arg-button-padding-inline: var(--arg-space-4);
+  --arg-button-gap: var(--arg-space-2);
+  --arg-button-font-size: var(--arg-font-size-body);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--arg-button-gap);
+  min-height: var(--arg-button-height);
+  padding: 0 var(--arg-button-padding-inline);
+  border: 1px solid var(--arg-button-border);
+  border-radius: var(--arg-button-radius);
+  background: var(--arg-button-bg);
+  color: var(--arg-button-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-button-font-size);
+  font-weight: var(--arg-font-weight-strong);
+  line-height: var(--arg-line-height-control);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--arg-motion-fast) var(--arg-motion-easing),
+    border-color var(--arg-motion-fast) var(--arg-motion-easing),
+    color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+:host(:hover) {
+  background: var(--arg-button-bg-hover);
+}
+
+:host(:active) {
+  background: var(--arg-button-bg-pressed);
+}
+
+:host(:focus-visible) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+/* Variantes */
+:host(.arg-button--secondary) {
+  --arg-button-bg: transparent;
+  --arg-button-bg-hover: var(--arg-color-primary-subtle);
+  --arg-button-bg-pressed: color-mix(
+    in oklab,
+    var(--arg-color-primary) 22%,
+    var(--arg-color-surface)
+  );
+  --arg-button-fg: var(--arg-color-primary);
+  --arg-button-border: var(--arg-color-primary);
+}
+
+:host(.arg-button--tertiary) {
+  --arg-button-bg: transparent;
+  --arg-button-bg-hover: var(--arg-color-primary-subtle);
+  --arg-button-bg-pressed: color-mix(
+    in oklab,
+    var(--arg-color-primary) 22%,
+    var(--arg-color-surface)
+  );
+  --arg-button-fg: var(--arg-color-primary);
+  --arg-button-padding-inline: var(--arg-space-3);
+}
+
+:host(.arg-button--danger) {
+  --arg-button-bg: var(--arg-color-danger);
+  --arg-button-bg-hover: var(--arg-color-danger-hover);
+  --arg-button-bg-pressed: var(--arg-color-danger-pressed);
+  --arg-button-fg: var(--arg-color-on-danger);
+}
+
+/* Tamanhos: md é o padrão; lg atinge a área de toque recomendada (48px) */
+:host(.arg-button--sm) {
+  --arg-button-height: 2rem;
+  --arg-button-padding-inline: var(--arg-space-3);
+  --arg-button-gap: var(--arg-space-1);
+  --arg-button-font-size: var(--arg-font-size-body-sm);
+}
+
+:host(.arg-button--lg) {
+  --arg-button-height: 3rem;
+  --arg-button-padding-inline: var(--arg-space-6);
+  --arg-button-font-size: var(--arg-font-size-body-lg);
+}
+
+:host(.arg-button--full-width) {
+  display: flex;
+  width: 100%;
+}
+
+/* Desabilitado (nativo em <button>, aria-disabled em <a>) */
+:host([disabled]),
+:host([aria-disabled='true']) {
+  --arg-button-bg: var(--arg-color-disabled-bg);
+  --arg-button-bg-hover: var(--arg-color-disabled-bg);
+  --arg-button-bg-pressed: var(--arg-color-disabled-bg);
+  --arg-button-fg: var(--arg-color-text-disabled);
+  --arg-button-border: var(--arg-color-disabled-border);
+  cursor: not-allowed;
+}
+
+:host(.arg-button--tertiary[disabled]),
+:host(.arg-button--tertiary[aria-disabled='true']) {
+  --arg-button-bg: transparent;
+  --arg-button-bg-hover: transparent;
+  --arg-button-bg-pressed: transparent;
+  --arg-button-border: transparent;
+}
+
+/* Carregando: mantém a largura do rótulo e sobrepõe o indicador */
+:host(.arg-button--loading) {
+  cursor: progress;
+}
+
+:host(.arg-button--loading) .arg-button__content {
+  visibility: hidden;
+}
+
+.arg-button__content {
+  display: inline-flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.arg-button__spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.125em;
+  height: 1.125em;
+  border: 2px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: 50%;
+  animation: arg-button-spin 700ms linear infinite;
+}
+
+@keyframes arg-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arg-button__spinner {
+    animation-duration: 2s;
+  }
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: ButtonText;
+  }
+}
