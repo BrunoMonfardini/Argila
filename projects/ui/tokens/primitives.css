@@ -1,0 +1,115 @@
+/*
+ * Argila — tokens primitivos (camada 1)
+ *
+ * Valores brutos, sem significado de uso. Componentes NUNCA usam estes tokens
+ * diretamente: eles passam pela camada semântica (semantic.css).
+ */
+:root {
+  /* Cor: argila (marca padrão) */
+  --arg-core-clay-50: #fbf3ee;
+  --arg-core-clay-100: #f6e2d6;
+  --arg-core-clay-200: #edc3aa;
+  --arg-core-clay-300: #e19d77;
+  --arg-core-clay-400: #d27a4c;
+  --arg-core-clay-500: #c05f2f;
+  --arg-core-clay-600: #a24c24;
+  --arg-core-clay-700: #823c1f;
+  --arg-core-clay-800: #62301c;
+  --arg-core-clay-900: #432316;
+
+  /* Cor: neutros (cinza quente) */
+  --arg-core-neutral-0: #ffffff;
+  --arg-core-neutral-50: #faf9f7;
+  --arg-core-neutral-100: #f2f0ed;
+  --arg-core-neutral-200: #e4e0db;
+  --arg-core-neutral-300: #cdc7c0;
+  --arg-core-neutral-400: #a8a098;
+  --arg-core-neutral-500: #827a72;
+  --arg-core-neutral-600: #635c55;
+  --arg-core-neutral-700: #4a4540;
+  --arg-core-neutral-800: #312d2a;
+  --arg-core-neutral-900: #1e1b19;
+  --arg-core-neutral-950: #141211;
+
+  /* Cor: feedback */
+  --arg-core-blue-50: #eef4fd;
+  --arg-core-blue-100: #d9e6fb;
+  --arg-core-blue-300: #8fb3ee;
+  --arg-core-blue-500: #2f6fd6;
+  --arg-core-blue-600: #2459b3;
+  --arg-core-blue-700: #1d4789;
+  --arg-core-blue-900: #13284a;
+
+  --arg-core-green-50: #ecf7f0;
+  --arg-core-green-100: #d2eddb;
+  --arg-core-green-300: #85c9a0;
+  --arg-core-green-500: #2e8b57;
+  --arg-core-green-600: #237047;
+  --arg-core-green-700: #1b5737;
+  --arg-core-green-900: #122e1f;
+
+  --arg-core-yellow-50: #fdf6e7;
+  --arg-core-yellow-100: #faeac2;
+  --arg-core-yellow-300: #eec35e;
+  --arg-core-yellow-500: #c98a0b;
+  --arg-core-yellow-600: #a56f06;
+  --arg-core-yellow-700: #7f5507;
+  --arg-core-yellow-900: #3f2c07;
+
+  --arg-core-red-50: #fdefee;
+  --arg-core-red-100: #fad7d4;
+  --arg-core-red-300: #ee8e86;
+  --arg-core-red-500: #d23c32;
+  --arg-core-red-600: #b02f27;
+  --arg-core-red-700: #8a2620;
+  --arg-core-red-900: #4a1714;
+
+  /* Espaçamento: base 4px */
+  --arg-core-space-0: 0;
+  --arg-core-space-1: 0.25rem; /* 4px */
+  --arg-core-space-2: 0.5rem; /* 8px */
+  --arg-core-space-3: 0.75rem; /* 12px */
+  --arg-core-space-4: 1rem; /* 16px */
+  --arg-core-space-5: 1.25rem; /* 20px */
+  --arg-core-space-6: 1.5rem; /* 24px */
+  --arg-core-space-8: 2rem; /* 32px */
+  --arg-core-space-10: 2.5rem; /* 40px */
+  --arg-core-space-12: 3rem; /* 48px */
+  --arg-core-space-16: 4rem; /* 64px */
+
+  /* Raio */
+  --arg-core-radius-0: 0;
+  --arg-core-radius-1: 0.25rem;
+  --arg-core-radius-2: 0.5rem;
+  --arg-core-radius-3: 0.75rem;
+  --arg-core-radius-4: 1rem;
+  --arg-core-radius-full: 9999px;
+
+  /* Tipografia */
+  --arg-core-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --arg-core-font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --arg-core-font-size-12: 0.75rem;
+  --arg-core-font-size-14: 0.875rem;
+  --arg-core-font-size-16: 1rem;
+  --arg-core-font-size-18: 1.125rem;
+  --arg-core-font-size-20: 1.25rem;
+  --arg-core-font-size-24: 1.5rem;
+  --arg-core-font-size-32: 2rem;
+  --arg-core-font-size-40: 2.5rem;
+
+  --arg-core-font-weight-regular: 400;
+  --arg-core-font-weight-medium: 500;
+  --arg-core-font-weight-semibold: 600;
+  --arg-core-font-weight-bold: 700;
+
+  --arg-core-line-height-tight: 1.2;
+  --arg-core-line-height-snug: 1.35;
+  --arg-core-line-height-normal: 1.5;
+
+  /* Movimento */
+  --arg-core-duration-100: 100ms;
+  --arg-core-duration-200: 200ms;
+  --arg-core-duration-300: 300ms;
+  --arg-core-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+}

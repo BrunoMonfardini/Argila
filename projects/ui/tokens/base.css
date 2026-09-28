@@ -1,0 +1,32 @@
+/*
+ * Argila — estilos base opcionais.
+ * Aplica fonte, cores e foco padrão ao documento. Use em apps novos; em apps
+ * que já têm reset próprio, importe só argila.css.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--arg-font-family);
+  font-size: 100%;
+  line-height: var(--arg-line-height-body);
+  color: var(--arg-color-text);
+  background: var(--arg-color-background);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+a {
+  color: var(--arg-color-text-link);
+}

@@ -1,0 +1,4 @@
+# Mantém LF no repositório e no Windows, igual ao Prettier e ao CI
+* text=auto eol=lf
+*.png binary
+*.avif binary

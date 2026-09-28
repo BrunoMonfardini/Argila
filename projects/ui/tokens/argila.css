@@ -1,0 +1,6 @@
+/*
+ * Argila — ponto de entrada dos tokens.
+ * Inclua uma vez na aplicação (angular.json → "styles") antes dos estilos do produto.
+ */
+@import './primitives.css';
+@import './semantic.css';

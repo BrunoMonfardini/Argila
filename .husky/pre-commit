@@ -1,0 +1,7 @@
+branch="$(git rev-parse --abbrev-ref HEAD)"
+if [ "$branch" = "main" ]; then
+  echo "Commit direto na main não é permitido. Crie uma branch: git switch -c feat/minha-mudanca"
+  exit 1
+fi
+
+lint-staged

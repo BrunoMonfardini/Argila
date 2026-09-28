@@ -1,0 +1,167 @@
+/*
+ * Argila — tokens semânticos (camada 2)
+ *
+ * Nomeados pelo USO, não pelo valor. É esta camada que componentes consomem e
+ * que cada produto/tenant sobrescreve (ver themes/ e ArgTheme).
+ *
+ * Claro/escuro: cores usam light-dark(), então o modo é decidido por
+ * `color-scheme`. Controle pelo atributo `data-arg-theme` no <html>:
+ *   light | dark | auto (segue o sistema operacional)
+ *
+ * Estados derivados (hover, pressed, subtle) usam color-mix() a partir da cor
+ * base: um tenant só precisa sobrescrever --arg-color-primary.
+ */
+:root,
+[data-arg-theme='light'] {
+  color-scheme: light;
+}
+[data-arg-theme='dark'] {
+  color-scheme: dark;
+}
+[data-arg-theme='auto'] {
+  color-scheme: light dark;
+}
+
+:root {
+  /* Cor usada para escurecer (claro) ou clarear (escuro) estados de interação */
+  --arg-color-shade: light-dark(#000, #fff);
+
+  /* Marca */
+  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-400));
+  --arg-color-on-primary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-primary-hover: color-mix(
+    in oklab,
+    var(--arg-color-primary),
+    var(--arg-color-shade) 12%
+  );
+  --arg-color-primary-pressed: color-mix(
+    in oklab,
+    var(--arg-color-primary),
+    var(--arg-color-shade) 22%
+  );
+  --arg-color-primary-subtle: color-mix(
+    in oklab,
+    var(--arg-color-primary) 12%,
+    var(--arg-color-surface)
+  );
+
+  /* Superfícies */
+  --arg-color-background: light-dark(var(--arg-core-neutral-50), var(--arg-core-neutral-950));
+  --arg-color-surface: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
+  --arg-color-surface-raised: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-800));
+  --arg-color-surface-sunken: light-dark(var(--arg-core-neutral-100), var(--arg-core-neutral-950));
+  --arg-color-overlay: rgb(20 18 17 / 0.56);
+
+  /* Texto */
+  --arg-color-text: light-dark(var(--arg-core-neutral-900), var(--arg-core-neutral-50));
+  --arg-color-text-muted: light-dark(var(--arg-core-neutral-600), var(--arg-core-neutral-400));
+  --arg-color-text-disabled: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-600));
+  --arg-color-text-link: var(--arg-color-primary);
+
+  /* Bordas */
+  --arg-color-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));
+  --arg-color-border-strong: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-500));
+  --arg-color-focus: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
+
+  /* Desabilitado */
+  --arg-color-disabled-bg: light-dark(var(--arg-core-neutral-100), var(--arg-core-neutral-800));
+  --arg-color-disabled-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));
+
+  /* Feedback: base (texto/ícone), subtle (fundo), on (texto sobre a base) */
+  --arg-color-info: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
+  --arg-color-info-subtle: light-dark(var(--arg-core-blue-50), var(--arg-core-blue-900));
+  --arg-color-on-info: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+
+  --arg-color-success: light-dark(var(--arg-core-green-600), var(--arg-core-green-300));
+  --arg-color-success-subtle: light-dark(var(--arg-core-green-50), var(--arg-core-green-900));
+  --arg-color-on-success: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+
+  --arg-color-warning: light-dark(var(--arg-core-yellow-700), var(--arg-core-yellow-300));
+  --arg-color-warning-subtle: light-dark(var(--arg-core-yellow-50), var(--arg-core-yellow-900));
+  --arg-color-on-warning: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+
+  --arg-color-danger: light-dark(var(--arg-core-red-600), var(--arg-core-red-300));
+  --arg-color-danger-subtle: light-dark(var(--arg-core-red-50), var(--arg-core-red-900));
+  --arg-color-on-danger: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-danger-hover: color-mix(
+    in oklab,
+    var(--arg-color-danger),
+    var(--arg-color-shade) 12%
+  );
+  --arg-color-danger-pressed: color-mix(
+    in oklab,
+    var(--arg-color-danger),
+    var(--arg-color-shade) 22%
+  );
+
+  /* Espaçamento */
+  --arg-space-0: var(--arg-core-space-0);
+  --arg-space-1: var(--arg-core-space-1);
+  --arg-space-2: var(--arg-core-space-2);
+  --arg-space-3: var(--arg-core-space-3);
+  --arg-space-4: var(--arg-core-space-4);
+  --arg-space-5: var(--arg-core-space-5);
+  --arg-space-6: var(--arg-core-space-6);
+  --arg-space-8: var(--arg-core-space-8);
+  --arg-space-10: var(--arg-core-space-10);
+  --arg-space-12: var(--arg-core-space-12);
+  --arg-space-16: var(--arg-core-space-16);
+
+  /* Raio: por papel, para o tenant poder deixar botões "pílula" sem mexer em cards */
+  --arg-radius-control: var(--arg-core-radius-2);
+  --arg-radius-container: var(--arg-core-radius-3);
+  --arg-radius-full: var(--arg-core-radius-full);
+
+  /* Tipografia */
+  --arg-font-family: var(--arg-core-font-sans);
+  --arg-font-family-mono: var(--arg-core-font-mono);
+
+  --arg-font-size-caption: var(--arg-core-font-size-12);
+  --arg-font-size-body-sm: var(--arg-core-font-size-14);
+  --arg-font-size-body: var(--arg-core-font-size-16);
+  --arg-font-size-body-lg: var(--arg-core-font-size-18);
+  --arg-font-size-heading-sm: var(--arg-core-font-size-20);
+  --arg-font-size-heading-md: var(--arg-core-font-size-24);
+  --arg-font-size-heading-lg: var(--arg-core-font-size-32);
+  --arg-font-size-display: var(--arg-core-font-size-40);
+
+  --arg-font-weight-regular: var(--arg-core-font-weight-regular);
+  --arg-font-weight-medium: var(--arg-core-font-weight-medium);
+  --arg-font-weight-strong: var(--arg-core-font-weight-semibold);
+  --arg-font-weight-heading: var(--arg-core-font-weight-bold);
+
+  --arg-line-height-heading: var(--arg-core-line-height-tight);
+  --arg-line-height-control: var(--arg-core-line-height-snug);
+  --arg-line-height-body: var(--arg-core-line-height-normal);
+
+  /* Elevação */
+  --arg-shadow-color: light-dark(rgb(30 27 25 / 0.12), rgb(0 0 0 / 0.5));
+  --arg-shadow-sm: 0 1px 2px var(--arg-shadow-color);
+  --arg-shadow-md: 0 4px 12px var(--arg-shadow-color);
+  --arg-shadow-lg: 0 12px 32px var(--arg-shadow-color);
+
+  /* Foco */
+  --arg-focus-ring-width: 2px;
+  --arg-focus-ring-offset: 2px;
+
+  /* Movimento */
+  --arg-motion-fast: var(--arg-core-duration-100);
+  --arg-motion-base: var(--arg-core-duration-200);
+  --arg-motion-slow: var(--arg-core-duration-300);
+  --arg-motion-easing: var(--arg-core-easing-standard);
+
+  /* Camadas */
+  --arg-z-dropdown: 1000;
+  --arg-z-sticky: 1100;
+  --arg-z-overlay: 1200;
+  --arg-z-modal: 1300;
+  --arg-z-toast: 1400;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --arg-motion-fast: 0ms;
+    --arg-motion-base: 0ms;
+    --arg-motion-slow: 0ms;
+  }
+}
