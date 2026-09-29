@@ -1,5 +1,5 @@
 /*
- * API pública do @argila/ui
+ * API pública do @brunomonfardini/ui
  */
 
 export * from './lib/button/button';

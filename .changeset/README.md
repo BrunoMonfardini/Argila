@@ -1,6 +1,6 @@
 # Changesets
 
-Toda mudança visível para quem consome o `@argila/ui` precisa de um changeset:
+Toda mudança visível para quem consome o `@brunomonfardini/ui` precisa de um changeset:
 
 ```sh
 pnpm changeset
