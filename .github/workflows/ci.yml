@@ -30,7 +30,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm format:check
       - run: pnpm lint
-      - run: pnpm test --watch=false
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm dup:check
       - run: pnpm build
       - run: pnpm build-storybook
       - name: Publica o Storybook para o review

@@ -4,6 +4,8 @@ Design system em Angular compartilhado entre todos os nossos produtos. Component
 
 Publicado como `@argila/ui`. Documentação de uso para produtos: [projects/ui/README.md](projects/ui/README.md).
 
+Este repositório segue o [padrão de pipeline e qualidade de código](docs/padrao-de-pipeline.md), comum a todos os projetos da empresa: testes unitários obrigatórios, DRY, main protegida e a mesma esteira de CI.
+
 ## Requisitos
 
 - Node 24 (ver `.nvmrc`; Angular 22 exige `^22.22.3` ou `>=24.15`)
@@ -11,17 +13,24 @@ Publicado como `@argila/ui`. Documentação de uso para produtos: [projects/ui/R
 
 ## Comandos
 
-| Comando          | O que faz                                                |
-| ---------------- | -------------------------------------------------------- |
-| `pnpm storybook` | Documentação e playground em http://localhost:6006       |
-| `pnpm test`      | Testes unitários (Vitest)                                |
-| `pnpm lint`      | ESLint, incluindo regras de acessibilidade nos templates |
-| `pnpm build`     | Gera o pacote em `dist/ui`                               |
-| `pnpm changeset` | Registra uma mudança para a próxima versão               |
+| Comando             | O que faz                                                           |
+| ------------------- | ------------------------------------------------------------------- |
+| `pnpm storybook`    | Documentação e playground em <http://localhost:6006>                |
+| `pnpm test`         | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
+| `pnpm lint`         | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
+| `pnpm typecheck`    | Checagem de tipos da biblioteca, dos testes e do Storybook          |
+| `pnpm dup:check`    | Detecta código duplicado (jscpd); falha acima de 3%                 |
+| `pnpm format:check` | Verifica a formatação (Prettier)                                    |
+| `pnpm build`        | Gera o pacote em `dist/ui`                                          |
+| `pnpm changeset`    | Registra uma mudança para a próxima versão                          |
+
+O relatório de cobertura em HTML fica em `coverage/` depois de `pnpm test`.
 
 ## Estrutura
 
-```
+```text
+docs/
+  padrao-de-pipeline.md   → regras de pipeline e qualidade de todos os projetos
 projects/ui/
   tokens/                 → CSS dos tokens, publicado em @argila/ui/tokens/
     primitives.css        → camada 1: valores brutos (--arg-core-*)
