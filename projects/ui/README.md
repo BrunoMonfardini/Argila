@@ -1,19 +1,29 @@
-# @argila/ui
+# @brunomonfardini/ui
 
 Componentes Angular acessíveis e temas por cliente via design tokens.
 
 ## Instalação
 
+O pacote é privado, publicado no GitHub Packages. No produto, crie um `.npmrc` na raiz:
+
+```ini
+@brunomonfardini:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+- **Local:** exporte `NODE_AUTH_TOKEN` com um token do GitHub com permissão `read:packages`.
+- **CI:** use `NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}` com `permissions: packages: read` no job, e dê ao repositório do produto acesso ao pacote (página do pacote → Package settings → Manage Actions access).
+
 ```sh
-pnpm add @argila/ui
+pnpm add @brunomonfardini/ui
 ```
 
 Inclua os tokens uma vez, no `angular.json` do produto:
 
 ```json
 "styles": [
-  "node_modules/@argila/ui/tokens/argila.css",
-  "node_modules/@argila/ui/tokens/base.css",
+  "node_modules/@brunomonfardini/ui/tokens/argila.css",
+  "node_modules/@brunomonfardini/ui/tokens/base.css",
   "src/styles.css"
 ]
 ```
@@ -24,7 +34,7 @@ no pacote: carregue-a no produto ou troque `--arg-font-family`.
 ## Uso
 
 ```ts
-import { ArgButton } from '@argila/ui';
+import { ArgButton } from '@brunomonfardini/ui';
 
 @Component({
   imports: [ArgButton],
