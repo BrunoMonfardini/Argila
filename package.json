@@ -5,16 +5,18 @@
     "ng": "ng",
     "build": "ng build ui",
     "watch": "ng build ui --watch --configuration development",
-    "test": "ng test ui",
+    "test": "ng test ui --watch=false",
+    "typecheck": "tsc --noEmit -p projects/ui/tsconfig.lib.json && tsc --noEmit -p projects/ui/tsconfig.spec.json && tsc --noEmit -p projects/ui/.storybook/tsconfig.json",
     "lint": "ng lint",
+    "dup:check": "jscpd",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "storybook": "ng run ui:storybook",
     "build-storybook": "ng run ui:build-storybook",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "format": "prettier --write .",
-    "prepare": "husky",
-    "format:check": "prettier --check ."
+    "prepare": "husky"
   },
   "private": true,
   "packageManager": "pnpm@10.34.5",
@@ -45,9 +47,11 @@
     "@storybook/addon-docs": "^10.6.0",
     "@storybook/angular-vite": "^10.6.0",
     "@types/node": "^24.0.0",
+    "@vitest/coverage-v8": "5.0.2",
     "angular-eslint": "22.5.0",
     "eslint": "^10.9.1",
     "husky": "^9.1.7",
+    "jscpd": "5.3.3",
     "jsdom": "^30.0.0",
     "lint-staged": "^17.6.0",
     "ng-packagr": "^22.2.0",
@@ -63,7 +67,7 @@
   },
   "lint-staged": {
     "*.{ts,html}": [
-      "eslint --fix",
+      "eslint --fix --max-warnings 0",
       "prettier --write"
     ],
     "*.{css,scss,json,md,mdx,yml,yaml,js}": "prettier --write"

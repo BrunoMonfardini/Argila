@@ -1,0 +1,16 @@
+{
+  "threshold": 3,
+  "minLines": 10,
+  "minTokens": 50,
+  "pattern": "**/*.{ts,html,css,scss}",
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/storybook-static/**",
+    "**/*.spec.ts",
+    "**/*.stories.ts"
+  ],
+  "reporters": ["console"],
+  "exitCode": 1
+}

@@ -28,7 +28,16 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ui/tsconfig.spec.json"
+            "tsConfig": "projects/ui/tsconfig.spec.json",
+            "coverage": true,
+            "coverageExclude": ["**/*.stories.ts", "**/public-api.ts"],
+            "coverageReporters": ["text-summary", "html"],
+            "coverageThresholds": {
+              "lines": 80,
+              "branches": 80,
+              "functions": 80,
+              "statements": 80
+            }
           }
         },
         "storybook": {
@@ -51,7 +60,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": ["projects/ui/**/*.ts", "projects/ui/**/*.html"],
-            "eslintConfig": "projects/ui/eslint.config.js"
+            "eslintConfig": "projects/ui/eslint.config.js",
+            "maxWarnings": 0
           }
         }
       }
