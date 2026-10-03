@@ -1,0 +1,47 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-spinner style="--arg-spinner-color: currentColor">.
+ */
+:host {
+  --arg-spinner-size: 1.5rem;
+  --arg-spinner-thickness: 3px;
+  --arg-spinner-color: var(--arg-color-primary);
+
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--arg-spinner-size);
+  height: var(--arg-spinner-size);
+  border: var(--arg-spinner-thickness) solid var(--arg-spinner-color);
+  border-inline-end-color: transparent;
+  border-radius: var(--arg-radius-full);
+  animation: arg-spinner-spin 700ms linear infinite;
+}
+
+:host(.arg-spinner--sm) {
+  --arg-spinner-size: 1rem;
+  --arg-spinner-thickness: 2px;
+}
+
+:host(.arg-spinner--lg) {
+  --arg-spinner-size: 2.5rem;
+  --arg-spinner-thickness: 4px;
+}
+
+@keyframes arg-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mais lento, mas não parado: o usuário ainda precisa perceber que há progresso */
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    animation-duration: 2s;
+  }
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+    border-inline-end-color: transparent;
+  }
+}
