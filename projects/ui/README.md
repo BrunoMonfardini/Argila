@@ -43,6 +43,33 @@ import { ArgButton } from '@brunomonfardini/ui';
 export class Exemplo {}
 ```
 
+### Componentes
+
+| Componente | Uso                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------ |
+| Botão      | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`        |
+| Spinner    | `<arg-spinner label="Carregando pedidos" />`                                         |
+| Skeleton   | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`) |
+| Lista      | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`    |
+
+Item de lista, com áreas opcionais:
+
+```html
+<ul arg-list divided>
+  <li arg-list-item>
+    <img arg-list-leading src="avatar.png" alt="" />
+    <span arg-list-title>Maria Souza</span>
+    <span arg-list-description>maria@exemplo.com</span>
+    <span arg-list-trailing>Admin</span>
+  </li>
+  <li arg-list-item>
+    <a arg-list-action routerLink="/pedidos/42"><span arg-list-title>Pedido #42</span></a>
+  </li>
+</ul>
+```
+
+Exemplos vivos e padrões combinados (carregamento, vazio) no Storybook: `pnpm storybook`.
+
 ## Tema
 
 Modo de cor, no `<html>`: `data-arg-theme="light" | "dark" | "auto"`.

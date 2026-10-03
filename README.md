@@ -39,7 +39,11 @@ projects/ui/
     themes/               → exemplos de tema de produto
   src/lib/
     button/               → um componente por pasta: .ts, .html, .css, .spec.ts, .stories.ts
+    list/                 → lista (ArgList, ArgListItem, ArgListAction)
+    skeleton/             → placeholder com shimmer
+    spinner/              → indicador de carregamento
     theme/                → ArgTheme: tema e marca em tempo de execução
+  src/patterns/           → stories de padrões de uso (componentes combinados)
   .storybook/
 ```
 
