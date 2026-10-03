@@ -1,0 +1,69 @@
+/*
+ * Tokens de componente (camada 3). Cores derivadas do texto para funcionar
+ * sobre qualquer superfície, no claro e no escuro.
+ */
+:host {
+  --arg-skeleton-bg: color-mix(in oklab, var(--arg-color-text) 9%, transparent);
+  --arg-skeleton-highlight: color-mix(in oklab, var(--arg-color-surface) 55%, transparent);
+  --arg-skeleton-radius: var(--arg-radius-control);
+  --arg-skeleton-duration: 1.4s;
+
+  display: block;
+  width: 100%;
+  height: 1em;
+  border-radius: var(--arg-skeleton-radius);
+  background:
+    linear-gradient(90deg, transparent 0%, var(--arg-skeleton-highlight) 50%, transparent 100%)
+      no-repeat,
+    var(--arg-skeleton-bg);
+  background-size:
+    50% 100%,
+    100% 100%;
+  animation: arg-skeleton-shimmer var(--arg-skeleton-duration) ease-in-out infinite;
+}
+
+/* Linha de texto: altura da fonte, com respiro de uma linha de corpo */
+:host(.arg-skeleton--text) {
+  height: 0.8em;
+  margin-block: 0.35em;
+  --arg-skeleton-radius: var(--arg-radius-full);
+}
+
+:host(.arg-skeleton--rect) {
+  height: 8rem;
+  --arg-skeleton-radius: var(--arg-radius-container);
+}
+
+:host(.arg-skeleton--circle) {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  --arg-skeleton-radius: var(--arg-radius-full);
+}
+
+@keyframes arg-skeleton-shimmer {
+  from {
+    background-position:
+      -150% 0,
+      0 0;
+  }
+  to {
+    background-position:
+      250% 0,
+      0 0;
+  }
+}
+
+/* Sem movimento: fica só o bloco, que já comunica "carregando" */
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    animation: none;
+    background: var(--arg-skeleton-bg);
+  }
+}
+
+@media (forced-colors: active) {
+  :host {
+    background: GrayText;
+  }
+}
