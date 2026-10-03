@@ -1,5 +1,5 @@
 {
-  "name": "@argila/ui",
+  "name": "@brunomonfardini/ui",
   "version": "0.0.0",
   "description": "Design system Argila: componentes Angular acessíveis e temas por cliente via design tokens.",
   "repository": {
@@ -18,7 +18,8 @@
     "*.css"
   ],
   "publishConfig": {
-    "directory": "../../dist/ui"
+    "directory": "../../dist/ui",
+    "registry": "https://npm.pkg.github.com"
   },
   "exports": {
     "./tokens/*": {

@@ -2,7 +2,7 @@
 
 Design system em Angular compartilhado entre todos os nossos produtos. Componentes acessíveis e temas por cliente via design tokens.
 
-Publicado como `@argila/ui`. Documentação de uso para produtos: [projects/ui/README.md](projects/ui/README.md).
+Publicado como `@brunomonfardini/ui`. Documentação de uso para produtos: [projects/ui/README.md](projects/ui/README.md).
 
 Este repositório segue o [padrão de pipeline e qualidade de código](docs/padrao-de-pipeline.md), comum a todos os projetos da empresa: testes unitários obrigatórios, DRY, main protegida e a mesma esteira de CI.
 
@@ -32,14 +32,18 @@ O relatório de cobertura em HTML fica em `coverage/` depois de `pnpm test`.
 docs/
   padrao-de-pipeline.md   → regras de pipeline e qualidade de todos os projetos
 projects/ui/
-  tokens/                 → CSS dos tokens, publicado em @argila/ui/tokens/
+  tokens/                 → CSS dos tokens, publicado em @brunomonfardini/ui/tokens/
     primitives.css        → camada 1: valores brutos (--arg-core-*)
     semantic.css          → camada 2: valores por uso (--arg-*), claro/escuro
     base.css              → estilos base opcionais do documento
     themes/               → exemplos de tema de produto
   src/lib/
     button/               → um componente por pasta: .ts, .html, .css, .spec.ts, .stories.ts
+    list/                 → lista (ArgList, ArgListItem, ArgListAction)
+    skeleton/             → placeholder com shimmer
+    spinner/              → indicador de carregamento
     theme/                → ArgTheme: tema e marca em tempo de execução
+  src/patterns/           → stories de padrões de uso (componentes combinados)
   .storybook/
 ```
 
@@ -62,6 +66,18 @@ Regras:
 - Standalone, `OnPush`, `input()` com signals.
 - Toda story passa no addon de acessibilidade (a11y configurado como `error`).
 
-## Versionamento
+## Versionamento e publicação
 
 Semver com Changesets. Todo PR que muda o pacote inclui um changeset (`pnpm changeset`); breaking change só em major, com nota de migração.
+
+A publicação é automática pelo workflow `release.yml`, no GitHub Packages:
+
+1. Um merge na `main` com changesets pendentes abre (ou atualiza) o PR `chore: version packages`, com a nova versão e o changelog.
+2. O merge desse PR builda e publica `@brunomonfardini/ui`.
+
+O escopo do pacote precisa ser o dono do repositório no GitHub; se o Argila mudar para uma organização, o nome do pacote muda junto.
+
+Configuração única no GitHub:
+
+- Secret `RELEASE_TOKEN`: token com permissão de `contents` e `pull-requests` no Argila. Sem ele o PR de versão é aberto com o `GITHUB_TOKEN`, que não dispara o CI, e o ruleset bloqueia o merge.
+- Depois da primeira publicação, na página do pacote (Package settings → Manage Actions access), dê acesso de leitura a cada repositório de produto.

@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Uma release por vez; nunca cancelar uma publicação no meio
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Só este job pode abrir o PR de versão e publicar no GitHub Packages
+    permissions:
+      contents: write
+      pull-requests: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://npm.pkg.github.com
+          scope: '@brunomonfardini'
+      - run: pnpm install --frozen-lockfile
+      # Com changesets pendentes: abre/atualiza o PR "chore: version packages".
+      # Sem changesets (PR de versão mergeado): builda e publica o pacote.
+      - uses: changesets/action@v1
+        with:
+          version: pnpm version-packages
+          publish: pnpm release
+          title: 'chore: version packages'
+          commit: 'chore: version packages'
+        env:
+          # PR aberto com o GITHUB_TOKEN não dispara o CI, e o ruleset exige verify e
+          # pr-checks. Com RELEASE_TOKEN (PAT com contents e pull-requests) os checks rodam.
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

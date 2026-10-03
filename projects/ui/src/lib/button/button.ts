@@ -7,6 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { ArgSpinner } from '../spinner/spinner';
 
 export type ArgButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger';
 export type ArgButtonSize = 'sm' | 'md' | 'lg';
@@ -21,6 +22,7 @@ export type ArgButtonSize = 'sm' | 'md' | 'lg';
  */
 @Component({
   selector: 'button[arg-button], a[arg-button]',
+  imports: [ArgSpinner],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button.html',
   styleUrl: './button.css',

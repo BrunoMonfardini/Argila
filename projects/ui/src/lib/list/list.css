@@ -1,0 +1,128 @@
+/*
+ * Sem encapsulamento (ver ArgList): todo seletor começa em .arg-list.
+ * Tokens de componente (camada 3), ex.: <ul arg-list style="--arg-list-padding-block: 0.25rem">.
+ */
+.arg-list {
+  --arg-list-bg: transparent;
+  --arg-list-bg-hover: color-mix(in oklab, var(--arg-color-text) 5%, transparent);
+  --arg-list-bg-pressed: color-mix(in oklab, var(--arg-color-text) 9%, transparent);
+  --arg-list-divider: var(--arg-color-border);
+  --arg-list-padding-block: var(--arg-space-3);
+  --arg-list-padding-inline: var(--arg-space-4);
+  --arg-list-gap: var(--arg-space-3);
+  --arg-list-min-height: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--arg-list-bg);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-body);
+}
+
+.arg-list--bordered {
+  --arg-list-bg: var(--arg-color-surface);
+
+  overflow: hidden;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+}
+
+.arg-list--divided > .arg-list__item + .arg-list__item {
+  border-block-start: 1px solid var(--arg-list-divider);
+}
+
+/* Linha: item simples ou ação que ocupa o item inteiro */
+.arg-list .arg-list__item,
+.arg-list .arg-list__action {
+  display: flex;
+  align-items: center;
+  gap: var(--arg-list-gap);
+  min-height: var(--arg-list-min-height);
+  padding: var(--arg-list-padding-block) var(--arg-list-padding-inline);
+}
+
+.arg-list .arg-list__item--interactive {
+  padding: 0;
+}
+
+.arg-list .arg-list__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.arg-list .arg-list__action {
+  flex: 1;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+.arg-list .arg-list__action:hover {
+  background: var(--arg-list-bg-hover);
+}
+
+.arg-list .arg-list__action:active {
+  background: var(--arg-list-bg-pressed);
+}
+
+/* Anel de foco para dentro: a lista pode estar num contêiner com overflow */
+.arg-list .arg-list__action:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: calc(var(--arg-focus-ring-width) * -1);
+}
+
+.arg-list .arg-list__action:disabled {
+  background: transparent;
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Áreas do item */
+.arg-list [arg-list-title] {
+  overflow: hidden;
+  font-weight: var(--arg-font-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arg-list [arg-list-description] {
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-list .arg-list__action:disabled [arg-list-description] {
+  color: inherit;
+}
+
+.arg-list [arg-list-leading],
+.arg-list [arg-list-trailing] {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--arg-space-2);
+  color: var(--arg-color-text-muted);
+}
+
+.arg-list [arg-list-trailing] {
+  font-size: var(--arg-font-size-body-sm);
+}
+
+@media (forced-colors: active) {
+  .arg-list .arg-list__action:focus-visible {
+    outline-color: Highlight;
+  }
+}

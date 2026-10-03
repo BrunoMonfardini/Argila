@@ -1,19 +1,29 @@
-# @argila/ui
+# @brunomonfardini/ui
 
 Componentes Angular acessíveis e temas por cliente via design tokens.
 
 ## Instalação
 
+O pacote é privado, publicado no GitHub Packages. No produto, crie um `.npmrc` na raiz:
+
+```ini
+@brunomonfardini:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+- **Local:** exporte `NODE_AUTH_TOKEN` com um token do GitHub com permissão `read:packages`.
+- **CI:** use `NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}` com `permissions: packages: read` no job, e dê ao repositório do produto acesso ao pacote (página do pacote → Package settings → Manage Actions access).
+
 ```sh
-pnpm add @argila/ui
+pnpm add @brunomonfardini/ui
 ```
 
 Inclua os tokens uma vez, no `angular.json` do produto:
 
 ```json
 "styles": [
-  "node_modules/@argila/ui/tokens/argila.css",
-  "node_modules/@argila/ui/tokens/base.css",
+  "node_modules/@brunomonfardini/ui/tokens/argila.css",
+  "node_modules/@brunomonfardini/ui/tokens/base.css",
   "src/styles.css"
 ]
 ```
@@ -24,7 +34,7 @@ no pacote: carregue-a no produto ou troque `--arg-font-family`.
 ## Uso
 
 ```ts
-import { ArgButton } from '@argila/ui';
+import { ArgButton } from '@brunomonfardini/ui';
 
 @Component({
   imports: [ArgButton],
@@ -32,6 +42,33 @@ import { ArgButton } from '@argila/ui';
 })
 export class Exemplo {}
 ```
+
+### Componentes
+
+| Componente | Uso                                                                                  |
+| ---------- | ------------------------------------------------------------------------------------ |
+| Botão      | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`        |
+| Spinner    | `<arg-spinner label="Carregando pedidos" />`                                         |
+| Skeleton   | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`) |
+| Lista      | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`    |
+
+Item de lista, com áreas opcionais:
+
+```html
+<ul arg-list divided>
+  <li arg-list-item>
+    <img arg-list-leading src="avatar.png" alt="" />
+    <span arg-list-title>Maria Souza</span>
+    <span arg-list-description>maria@exemplo.com</span>
+    <span arg-list-trailing>Admin</span>
+  </li>
+  <li arg-list-item>
+    <a arg-list-action routerLink="/pedidos/42"><span arg-list-title>Pedido #42</span></a>
+  </li>
+</ul>
+```
+
+Exemplos vivos e padrões combinados (carregamento, vazio) no Storybook: `pnpm storybook`.
 
 ## Tema
 

@@ -139,27 +139,13 @@
 }
 
 .arg-button__spinner {
+  --arg-spinner-size: 1.125em;
+  --arg-spinner-thickness: 2px;
+  --arg-spinner-color: currentColor;
+
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 1.125em;
-  height: 1.125em;
-  border: 2px solid currentColor;
-  border-inline-end-color: transparent;
-  border-radius: 50%;
-  animation: arg-button-spin 700ms linear infinite;
-}
-
-@keyframes arg-button-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .arg-button__spinner {
-    animation-duration: 2s;
-  }
 }
 
 @media (forced-colors: active) {
