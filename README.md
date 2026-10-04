@@ -11,11 +11,20 @@ Este repositório segue o [padrão de pipeline e qualidade de código](docs/padr
 - Node 24 (ver `.nvmrc`; Angular 22 exige `^22.22.3` ou `>=24.15`)
 - pnpm 10 (`corepack enable pnpm`)
 
+## Começando
+
+```sh
+pnpm install   # instale com pnpm: o lockfile do projeto é o pnpm-lock.yaml
+npm run dev    # abre a biblioteca de componentes em http://localhost:6006
+```
+
+A biblioteca começa pela página **Introdução**, com links para os fundamentos, cada componente e os padrões de uso.
+
 ## Comandos
 
 | Comando             | O que faz                                                           |
 | ------------------- | ------------------------------------------------------------------- |
-| `pnpm storybook`    | Documentação e playground em <http://localhost:6006>                |
+| `npm run dev`       | Biblioteca navegável dos componentes em <http://localhost:6006>     |
 | `pnpm test`         | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
 | `pnpm lint`         | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
 | `pnpm typecheck`    | Checagem de tipos da biblioteca, dos testes e do Storybook          |

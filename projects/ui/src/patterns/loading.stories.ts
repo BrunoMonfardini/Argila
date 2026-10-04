@@ -119,6 +119,7 @@ class DemoOrders implements OnInit {
 const meta: Meta<DemoOrders> = {
   title: 'Padrões/Carregamento de lista',
   component: DemoOrders,
+  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
