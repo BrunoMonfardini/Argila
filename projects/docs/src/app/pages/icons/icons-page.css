@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  max-width: 64rem;
+}
+
+.doc-icons__rules li + li {
+  margin-block-start: var(--arg-space-2);
+}
+
+.doc-icons__search {
+  display: grid;
+  gap: var(--arg-space-1);
+  max-width: 20rem;
+  margin-block: var(--arg-space-8) var(--arg-space-2);
+}
+
+/* Campo nativo provisório: o Input do Argila chega na onda 1 */
+.doc-icons__search input {
+  min-height: 2.5rem;
+  padding: 0 var(--arg-space-3);
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font: inherit;
+}
+
+.doc-icons__count {
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-icons__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--arg-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doc-icons__tile {
+  display: grid;
+  gap: var(--arg-space-2);
+  justify-items: center;
+  width: 100%;
+  padding: var(--arg-space-4) var(--arg-space-2);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+.doc-icons__tile:hover {
+  border-color: var(--arg-color-primary);
+  color: var(--arg-color-primary);
+}
+
+.doc-icons__tile:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.doc-icons__name {
+  font-family: var(--arg-font-family-mono);
+  font-size: var(--arg-font-size-caption);
+}
+
+.doc-icons__empty {
+  grid-column: 1 / -1;
+  color: var(--arg-color-text-muted);
+}

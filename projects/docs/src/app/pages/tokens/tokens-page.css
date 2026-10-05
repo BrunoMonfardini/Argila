@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  max-width: 64rem;
+}
+
+.doc-tokens__hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.doc-tokens__sample-cell {
+  width: 5rem;
+}
+
+.doc-tokens__swatch,
+.doc-tokens__radius,
+.doc-tokens__shadow {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-control);
+}
+
+.doc-tokens__radius {
+  border: 2px solid var(--arg-color-primary);
+  background: var(--arg-color-primary-subtle);
+}
+
+.doc-tokens__shadow {
+  border: 0;
+  background: var(--arg-color-surface-raised);
+}
+
+.doc-tokens__space {
+  display: block;
+  height: 0.75rem;
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-primary);
+}
+
+.doc-tokens__type {
+  line-height: 1;
+}
+
+.doc-tokens__current {
+  color: var(--arg-color-text-muted);
+  font-family: var(--arg-font-family-mono);
+  font-size: var(--arg-font-size-caption);
+}

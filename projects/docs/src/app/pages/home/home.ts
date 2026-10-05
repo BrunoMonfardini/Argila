@@ -1,15 +1,20 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DocCode } from '../../code/code';
+import { DOC_PAGES } from '../../registry';
+import { DocText } from '../../shared/text';
+import { buildNavigation } from '../../shell/navigation';
 
-/** Página inicial do catálogo. */
+/** Página inicial: o que é o Argila e um índice de tudo o que o catálogo tem. */
 @Component({
   selector: 'doc-home-page',
+  imports: [DocCode, DocText, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <h1>Argila</h1>
-    <p class="doc-lead">
-      Biblioteca de componentes Angular compartilhada entre todos os nossos produtos. Cada página
-      mostra o componente funcionando, os controles para testar variações e o código para copiar.
-    </p>
-  `,
+  templateUrl: './home.html',
+  styleUrl: './home.css',
 })
-export class HomePage {}
+export class HomePage {
+  protected readonly install = 'pnpm add @brunomonfardini/ui';
+  /** As mesmas seções da barra lateral, sem o "Começo", que é esta página. */
+  protected readonly sections = buildNavigation(inject(DOC_PAGES)).slice(1);
+}

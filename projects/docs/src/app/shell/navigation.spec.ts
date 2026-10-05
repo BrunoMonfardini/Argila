@@ -15,17 +15,25 @@ describe('navegação do catálogo', () => {
   it('agrupa por categoria, em ordem alfabética, depois do Início', () => {
     const sections = buildNavigation(pages);
 
-    expect(sections.map((s) => s.title)).toEqual(['Começo', 'Componentes', 'Padrões']);
-    expect(sections[1].links.map((l) => l.label)).toEqual(['Button', 'Spinner']);
-    expect(sections[1].links[0]).toEqual({
+    expect(sections.map((s) => s.title)).toEqual([
+      'Começo',
+      'Fundamentos',
+      'Componentes',
+      'Padrões',
+    ]);
+    expect(sections[2].links.map((l) => l.label)).toEqual(['Button', 'Spinner']);
+    expect(sections[2].links[0]).toEqual({
       label: 'Button',
       path: '/componentes/button',
       summary: 'Dispara uma ação',
     });
   });
 
-  it('esconde categorias sem páginas', () => {
-    expect(buildNavigation([]).map((s) => s.title)).toEqual(['Começo']);
+  it('esconde categorias sem páginas; Fundamentos sempre tem Tokens e Ícones', () => {
+    const sections = buildNavigation([page('Cores', 'Fundamentos')]);
+
+    expect(sections.map((s) => s.title)).toEqual(['Começo', 'Fundamentos']);
+    expect(sections[1].links.map((l) => l.label)).toEqual(['Tokens', 'Ícones', 'Cores']);
   });
 
   it('busca pelo título e pelo resumo, sem diferenciar acento e maiúsculas', () => {

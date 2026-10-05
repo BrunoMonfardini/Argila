@@ -1,0 +1,107 @@
+<p class="doc-page__category">Fundamentos</p>
+<h1>Tokens</h1>
+<p class="doc-lead">
+  Os valores visuais do Argila, em três camadas. Um produto ou cliente muda a aparência
+  sobrescrevendo os tokens semânticos no <code>&lt;html&gt;</code>. Troque o tema e a marca no topo:
+  as amostras e os valores acompanham.
+</p>
+
+<div class="doc-table" tabindex="0" role="region" aria-label="Camadas de tokens">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Camada</th>
+        <th scope="col">Prefixo</th>
+        <th scope="col">Exemplo</th>
+        <th scope="col">Quem usa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Primitivos</th>
+        <td><code>--arg-core-*</code></td>
+        <td><code>--arg-core-clay-600</code></td>
+        <td>Só a camada semântica</td>
+      </tr>
+      <tr>
+        <th scope="row">Semânticos</th>
+        <td><code>--arg-*</code></td>
+        <td><code>--arg-color-primary</code></td>
+        <td>Componentes e produtos</td>
+      </tr>
+      <tr>
+        <th scope="row">Componente</th>
+        <td><code>--arg-&lt;componente&gt;-*</code></td>
+        <td><code>--arg-button-bg</code></td>
+        <td>O próprio componente; ajuste fino por instância</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+@for (group of groups(); track group.name) {
+  <section [attr.aria-labelledby]="slug(group.name)">
+    <h2 [id]="slug(group.name)">{{ group.name }}</h2>
+    <div class="doc-table" tabindex="0" role="region" [attr.aria-labelledby]="slug(group.name)">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"><span class="doc-tokens__hidden">Amostra</span></th>
+            <th scope="col">Token</th>
+            <th scope="col">Definição</th>
+            <th scope="col">Valor agora</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (token of group.tokens; track token.name) {
+            <tr>
+              <td class="doc-tokens__sample-cell">
+                @switch (token.kind) {
+                  @case ('color') {
+                    <span
+                      class="doc-tokens__swatch"
+                      [style.background]="'var(' + token.name + ')'"
+                    ></span>
+                  }
+                  @case ('space') {
+                    <span
+                      class="doc-tokens__space"
+                      [style.width]="'var(' + token.name + ')'"
+                    ></span>
+                  }
+                  @case ('radius') {
+                    <span
+                      class="doc-tokens__radius"
+                      [style.border-radius]="'var(' + token.name + ')'"
+                    ></span>
+                  }
+                  @case ('shadow') {
+                    <span
+                      class="doc-tokens__shadow"
+                      [style.box-shadow]="'var(' + token.name + ')'"
+                    ></span>
+                  }
+                  @case ('font-size') {
+                    <span
+                      class="doc-tokens__type"
+                      aria-hidden="true"
+                      [style.font-size]="'var(' + token.name + ')'"
+                      >Aa</span
+                    >
+                  }
+                }
+              </td>
+              <th scope="row">
+                <code>{{ token.name }}</code>
+              </th>
+              <td>
+                <code>{{ token.value }}</code>
+              </td>
+              <td class="doc-tokens__current">{{ token.current }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+}

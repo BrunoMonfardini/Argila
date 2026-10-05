@@ -14,14 +14,31 @@ export interface DocNavSection {
 
 const CATEGORY_ORDER: DocCategory[] = ['Fundamentos', 'Componentes', 'Padrões'];
 
+/** Páginas próprias do catálogo, que não vêm de um `*.docs.ts`. */
+export const FOUNDATION_LINKS: DocNavLink[] = [
+  {
+    label: 'Tokens',
+    path: '/fundamentos/tokens',
+    summary: 'Cores, espaçamento, raio e tipografia, e como um produto muda a aparência.',
+  },
+  {
+    label: 'Ícones',
+    path: '/fundamentos/icones',
+    summary: 'Os ícones desenhados pelo time, com busca e código para copiar.',
+  },
+];
+
 /** Seções da barra lateral, na ordem em que aparecem; seções vazias somem. */
 export function buildNavigation(pages: readonly DocPage[]): DocNavSection[] {
   const sections: DocNavSection[] = [{ title: 'Começo', links: [{ label: 'Início', path: '/' }] }];
   for (const category of CATEGORY_ORDER) {
-    const links = pages
+    const links: DocNavLink[] = pages
       .filter((page) => page.category === category)
       .sort((a, b) => a.title.localeCompare(b.title, 'pt-BR'))
       .map((page) => ({ label: page.title, path: pagePath(page), summary: page.summary }));
+    if (category === 'Fundamentos') {
+      links.unshift(...FOUNDATION_LINKS);
+    }
     if (links.length) {
       sections.push({ title: category, links });
     }

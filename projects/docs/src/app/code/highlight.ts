@@ -1,4 +1,4 @@
-export type CodeLanguage = 'ts' | 'html' | 'css';
+export type CodeLanguage = 'ts' | 'html' | 'css' | 'sh';
 
 export type TokenKind =
   'plain' | 'comment' | 'string' | 'keyword' | 'number' | 'decorator' | 'tag' | 'attr' | 'property';
@@ -37,7 +37,13 @@ const CSS_RULES: Rule[] = [
   ['number', /-?\b\d+(?:\.\d+)?(?:px|rem|em|%|ms|s)?\b/y],
 ];
 
-const RULES: Record<CodeLanguage, Rule[]> = { ts: TS_RULES, html: HTML_RULES, css: CSS_RULES };
+// Comandos de terminal ficam sem cor: são curtos e qualquer regra erraria mais que acertaria
+const RULES: Record<CodeLanguage, Rule[]> = {
+  ts: TS_RULES,
+  html: HTML_RULES,
+  css: CSS_RULES,
+  sh: [],
+};
 
 /**
  * Quebra o código em trechos com tipo, para colorir sem biblioteca. Em

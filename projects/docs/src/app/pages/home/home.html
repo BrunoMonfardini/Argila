@@ -1,0 +1,34 @@
+<h1>Argila</h1>
+<p class="doc-lead">
+  Biblioteca de componentes Angular compartilhada entre todos os nossos produtos. Cada página mostra
+  o componente funcionando, os controles para testar variações e o código para copiar.
+</p>
+<p>
+  Use a barra no topo para trocar o <strong>tema</strong> (claro, escuro ou automático) e a
+  <strong>marca</strong>: todos os componentes acompanham, porque só usam tokens.
+</p>
+
+@for (section of sections; track section.title) {
+  <section [attr.aria-labelledby]="'inicio-' + $index">
+    <h2 [id]="'inicio-' + $index">{{ section.title }}</h2>
+    <ul class="doc-home__cards">
+      @for (page of section.links; track page.path) {
+        <li>
+          <a class="doc-home__card" [routerLink]="page.path">
+            <span class="doc-home__title">{{ page.label }}</span>
+            <span class="doc-home__summary"><doc-text [text]="page.summary ?? ''" /></span>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+}
+
+<section aria-labelledby="como-usar">
+  <h2 id="como-usar">Como usar num produto</h2>
+  <doc-code [code]="install" language="sh" label="Comando de instalação" />
+  <p class="doc-home__after-code">
+    Instalação, tokens e tema por cliente: veja o README do pacote em
+    <code>projects/ui/README.md</code>.
+  </p>
+</section>

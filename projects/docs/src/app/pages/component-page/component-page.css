@@ -3,13 +3,6 @@
   max-width: 60rem;
 }
 
-.doc-page__category {
-  margin-block-end: var(--arg-space-1);
-  color: var(--arg-color-primary);
-  font-size: var(--arg-font-size-body-sm);
-  font-weight: var(--arg-font-weight-strong);
-}
-
 .doc-page__guidelines {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));

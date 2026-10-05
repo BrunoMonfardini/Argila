@@ -9,6 +9,8 @@ import {
 } from '@angular/router';
 import { ComponentPage } from './pages/component-page/component-page';
 import { HomePage } from './pages/home/home';
+import { IconsPage } from './pages/icons/icons-page';
+import { TokensPage } from './pages/tokens/tokens-page';
 import { DOC_PAGES, findPage } from './registry';
 
 /** Título da aba: "Button · Argila". */
@@ -23,6 +25,8 @@ export const pageTitle: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
 
 export const routes: Routes = [
   { path: '', component: HomePage, title: 'Argila' },
+  { path: 'fundamentos/tokens', component: TokensPage, title: 'Tokens · Argila' },
+  { path: 'fundamentos/icones', component: IconsPage, title: 'Ícones · Argila' },
   { path: ':categoria/:slug', component: ComponentPage, title: pageTitle },
   { path: '**', redirectTo: '' },
 ];
