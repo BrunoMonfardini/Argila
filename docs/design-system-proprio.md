@@ -177,7 +177,7 @@ providers: [provideArgIcons([argIconPlus, argIconTrash, argIconCalendar])];
 
 - [x] Token de fonte sem `Inter`; nenhuma fonte ou ícone carregado de um domínio externo.
 - [ ] Primeiro lote de ícones desenhado no padrão e validado pelo `gerar-icones.ts`.
-- [ ] `arg-icon` e `provideArgIcons` com testes; nome de ícone inválido não compila.
+- [x] `arg-icon` e `provideArgIcons` com testes; nome de ícone inválido não compila.
 
 ---
 

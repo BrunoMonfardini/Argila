@@ -52,6 +52,18 @@ export class Exemplo {}
 | Spinner    | `<arg-spinner label="Carregando pedidos" />`                                                                          |
 | Skeleton   | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho) |
 | Lista      | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                     |
+| Ícone      | `<arg-icon name="plus" />`; com significado sozinho, `<arg-icon name="alert-triangle" label="Atenção" />`             |
+
+Ícones: registre só os que o produto usa, no `app.config.ts`. Nome errado não compila.
+
+```ts
+import { argIconPlus, argIconX, provideArgIcons } from '@brunomonfardini/ui';
+
+providers: [provideArgIcons([argIconPlus, argIconX])];
+```
+
+O ícone herda a cor do texto. Tamanho: `size="sm | md | lg"` (16, 20 e 24 px, pelos tokens
+`--arg-icon-size-*`); sem `size`, acompanha o texto ao redor.
 
 Item de lista, com áreas opcionais:
 
