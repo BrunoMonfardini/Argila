@@ -4,12 +4,18 @@ import { ArgSkeleton, ArgSkeletonShape } from './skeleton';
 
 @Component({
   imports: [ArgSkeleton],
-  template: `<arg-skeleton [shape]="shape()" [width]="width()" [height]="height()" />`,
+  template: `<arg-skeleton
+    [shape]="shape()"
+    [width]="width()"
+    [height]="height()"
+    [animated]="animated()"
+  />`,
 })
 class Host {
   readonly shape = signal<ArgSkeletonShape>('text');
   readonly width = signal<string | undefined>(undefined);
   readonly height = signal<string | undefined>(undefined);
+  readonly animated = signal(true);
 }
 
 describe('ArgSkeleton', () => {
@@ -44,6 +50,17 @@ describe('ArgSkeleton', () => {
     host.width.set('3rem');
     await fixture.whenStable();
     expect(skeleton.style.height).toBe('3rem');
+  });
+
+  it('é animado por padrão e fica estático com animated=false', async () => {
+    const { fixture, host, skeleton } = await setup();
+    expect(skeleton.classList).not.toContain('arg-skeleton--static');
+
+    host.animated.set(false);
+    await fixture.whenStable();
+
+    expect(skeleton.classList).toContain('arg-skeleton--static');
+    expect(skeleton.classList).toContain('arg-skeleton--text');
   });
 
   it('não força altura inline em texto sem altura informada', async () => {

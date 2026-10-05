@@ -9,14 +9,16 @@ const meta: Meta<ArgSkeleton> = {
     shape: { control: 'inline-radio', options: ['text', 'rect', 'circle'] },
     width: { control: 'text' },
     height: { control: 'text' },
+    animated: { control: 'boolean' },
   },
   args: {
     shape: 'text',
     width: '16rem',
+    animated: true,
   },
   render: (args) => ({
     props: args,
-    template: `<arg-skeleton [shape]="shape" [width]="width" [height]="height" />`,
+    template: `<arg-skeleton [shape]="shape" [width]="width" [height]="height" [animated]="animated" />`,
   }),
 };
 
@@ -67,4 +69,9 @@ export const Card: Story = {
       </div>
     `,
   }),
+};
+
+/** Sem brilho: para listas longas ou quando o movimento distrai. */
+export const Static: Story = {
+  args: { animated: false },
 };

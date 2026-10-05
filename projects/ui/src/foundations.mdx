@@ -56,7 +56,28 @@ Use a barra de ferramentas (Tema, Marca) para ver claro/escuro e o tema de exemp
       danger: 'var(--arg-color-danger)',
     }}
   />
+  <ColorItem
+    title="Carregamento"
+    subtitle="--arg-loading-*"
+    colors={{
+      fundo: 'var(--arg-loading-bg)',
+      brilho: 'var(--arg-loading-highlight)',
+    }}
+  />
 </ColorPalette>
+
+## Carregamento
+
+Skeleton e spinner leem os tokens `--arg-loading-*`. Sobrescreva no `:root` para mudar o sistema inteiro:
+
+| Token                            | Padrão                  | Controla                   |
+| -------------------------------- | ----------------------- | -------------------------- |
+| `--arg-loading-bg`               | cor do texto a 9%       | Fundo do skeleton          |
+| `--arg-loading-highlight`        | cor da superfície a 55% | Faixa de brilho do shimmer |
+| `--arg-loading-shimmer-duration` | 1400ms                  | Velocidade do shimmer      |
+| `--arg-loading-spin-duration`    | 700ms                   | Velocidade do spinner      |
+
+Uma instância ajusta só a si mesma com `--arg-skeleton-*` e `--arg-spinner-*`.
 
 ## Espaçamento
 

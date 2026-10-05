@@ -150,6 +150,12 @@
   --arg-motion-slow: var(--arg-core-duration-300);
   --arg-motion-easing: var(--arg-core-easing-standard);
 
+  /* Carregamento: skeleton e spinner. Sobrescreva no :root para mudar o sistema inteiro */
+  --arg-loading-bg: color-mix(in oklab, var(--arg-color-text) 9%, transparent);
+  --arg-loading-highlight: color-mix(in oklab, var(--arg-color-surface) 55%, transparent);
+  --arg-loading-shimmer-duration: var(--arg-core-duration-1400);
+  --arg-loading-spin-duration: var(--arg-core-duration-700);
+
   /* Camadas */
   --arg-z-dropdown: 1000;
   --arg-z-sticky: 1100;
