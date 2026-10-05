@@ -2,3 +2,4 @@ dist
 storybook-static
 pnpm-lock.yaml
 coverage
+projects/ui/src/lib/icon/icons.generated.ts
