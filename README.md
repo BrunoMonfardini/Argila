@@ -6,8 +6,6 @@ Publicado como `@brunomonfardini/ui`. Documentação de uso para produtos: [proj
 
 Este repositório segue o [padrão de pipeline e qualidade de código](docs/padrao-de-pipeline.md), comum a todos os projetos da empresa: testes unitários obrigatórios, DRY, main protegida e a mesma esteira de CI.
 
-Para onde o Argila vai: o [design system 100% nosso](docs/design-system-proprio.md) (sem objetos de terceiros, catálogo próprio, 41 componentes) e o [plano de execução](docs/plano-de-execucao.md), PR a PR.
-
 ## Requisitos
 
 - Node 24 (ver `.nvmrc`; Angular 22 exige `^22.22.3` ou `>=24.15`)
@@ -33,8 +31,6 @@ O relatório de cobertura em HTML fica em `coverage/` depois de `pnpm test`.
 ```text
 docs/
   padrao-de-pipeline.md   → regras de pipeline e qualidade de todos os projetos
-  design-system-proprio.md → como o Argila fica 100% nosso
-  plano-de-execucao.md    → ordem dos PRs, dependências e estimativas
 projects/ui/
   tokens/                 → CSS dos tokens, publicado em @brunomonfardini/ui/tokens/
     primitives.css        → camada 1: valores brutos (--arg-core-*)
@@ -85,3 +81,7 @@ Configuração única no GitHub:
 
 - Secret `RELEASE_TOKEN`: token com permissão de `contents` e `pull-requests` no Argila. Sem ele o PR de versão é aberto com o `GITHUB_TOKEN`, que não dispara o CI, e o ruleset bloqueia o merge.
 - Depois da primeira publicação, na página do pacote (Package settings → Manage Actions access), dê acesso de leitura a cada repositório de produto.
+
+## Próximos passos
+
+Para onde o Argila vai: o [design system 100% nosso](docs/design-system-proprio.md) (sem objetos de terceiros, catálogo próprio, 41 componentes) e o [plano de execução](docs/plano-de-execucao.md), PR a PR.
