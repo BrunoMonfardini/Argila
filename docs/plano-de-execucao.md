@@ -12,6 +12,32 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 - **Estimativas** são aproximadas, em dias de trabalho de uma pessoa, e incluem testes e documentação. Servem para planejar, não como prazo.
 - **Coluna "Depende de":** o item só começa quando esses estiverem mergeados.
 
+## Onde estamos
+
+_Atualizado em 05/10/2026._
+
+| Marco | Situação                                                                                                   |
+| ----- | ---------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4) |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)            |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio roda com `npm run docs`, ao lado do Storybook               |
+| M3    | **Próximo:** PR-14 (migrar List, Skeleton, Spinner, Icon e Carregamento para o catálogo)                   |
+| M4-M6 | Não iniciados                                                                                              |
+
+**O que já funciona no catálogo** (`npm run docs`, <http://localhost:4200>):
+
+- Barra de tema (claro, escuro, automático) e de marca, com o próprio `ArgTheme`; barra lateral com busca; menu no celular.
+- Página de componente a partir do `*.docs.ts`: playground com controles gerados e estado na URL, exemplos com "Ver código", propriedades, tokens do componente, faça/não faça e acessibilidade.
+- Páginas Início, Tokens (valores no tema atual) e Ícones (busca e cópia do código).
+- Só o Button tem página por enquanto; os demais componentes entram no PR-14.
+
+**Pendências conhecidas:**
+
+- O Storybook continua sendo o `npm run dev` até o PR-15.
+- Só existem 3 ícones de exemplo (`plus`, `x`, `check`); o botão "Menu" do catálogo fica sem ícone até o `menu` ser desenhado.
+- Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma.
+- PR-04 a PR-13 foram entregues juntos num único PR, com um commit por item.
+
 ## Visão geral
 
 | Marco | Entrega                                                         | Depende de | Estimativa       |
