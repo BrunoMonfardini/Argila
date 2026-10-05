@@ -44,6 +44,11 @@ const preview: Preview = {
     },
   ],
   parameters: {
+    options: {
+      storySort: {
+        order: ['Introdução', 'Fundamentos', 'Componentes', 'Padrões'],
+      },
+    },
     backgrounds: { disable: true },
     controls: {
       matchers: {

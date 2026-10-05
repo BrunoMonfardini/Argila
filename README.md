@@ -6,25 +6,174 @@ Publicado como `@brunomonfardini/ui`. Documentação de uso para produtos: [proj
 
 Este repositório segue o [padrão de pipeline e qualidade de código](docs/padrao-de-pipeline.md), comum a todos os projetos da empresa: testes unitários obrigatórios, DRY, main protegida e a mesma esteira de CI.
 
-## Requisitos
+## Comandos no Git Bash
 
-- Node 24 (ver `.nvmrc`; Angular 22 exige `^22.22.3` ou `>=24.15`)
-- pnpm 10 (`corepack enable pnpm`)
+**Todos os comandos deste README são para o Git Bash**, no Windows. Para abrir:
 
-## Comandos
+- No VS Code: menu do terminal (seta ao lado do `+`) → **Git Bash**.
+- No Explorador de Arquivos: botão direito na pasta `Argila` → **Open Git Bash here**.
 
-| Comando             | O que faz                                                           |
-| ------------------- | ------------------------------------------------------------------- |
-| `pnpm storybook`    | Documentação e playground em <http://localhost:6006>                |
-| `pnpm test`         | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
-| `pnpm lint`         | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
-| `pnpm typecheck`    | Checagem de tipos da biblioteca, dos testes e do Storybook          |
-| `pnpm dup:check`    | Detecta código duplicado (jscpd); falha acima de 3%                 |
-| `pnpm format:check` | Verifica a formatação (Prettier)                                    |
-| `pnpm build`        | Gera o pacote em `dist/ui`                                          |
-| `pnpm changeset`    | Registra uma mudança para a próxima versão                          |
+Regras do Git Bash:
 
-O relatório de cobertura em HTML fica em `coverage/` depois de `pnpm test`.
+- Caminhos usam `/` e começam com a letra do disco em minúsculo: `C:\Users` vira `/c/Users`.
+- Caminho com espaço vai **entre aspas**: `cd "/c/Users/vieir/OneDrive/dev/publico/03 - completo/Projeto - todos/Argila"`.
+- Rode tudo **dentro da pasta `Argila`**. Fora dela, o Angular responde `This command is not available when running the Angular CLI outside a workspace`.
+- Instale dependências com `pnpm install`; rode scripts com `npm run <script>`. Não use `npm install`: ele ignora o `pnpm-lock.yaml`.
+- Não chame `ng` direto: pode existir um Angular CLI global de outra versão. Use os scripts abaixo.
+
+### 1. Preparar a máquina (uma vez)
+
+Confira as versões. É preciso Node **24** ou mais novo (Angular 22 recusa versões anteriores) e pnpm **10**:
+
+```bash
+node -v
+pnpm -v
+git --version
+```
+
+Se o Node for mais antigo que 24, instale a versão LTS e **feche e reabra o Git Bash**:
+
+```bash
+winget.exe install OpenJS.NodeJS.LTS
+```
+
+Se o `pnpm` não existir (`pnpm: command not found`), instale-o e **feche e reabra o Git Bash**:
+
+```bash
+npm install -g pnpm@10
+```
+
+### 2. Baixar o projeto (uma vez)
+
+```bash
+cd "/c/Users/vieir/OneDrive/dev/publico/03 - completo/Projeto - todos"
+git clone https://github.com/BrunoMonfardini/Argila.git
+cd Argila
+pnpm install
+```
+
+O `pnpm install` também instala os hooks do Git (husky).
+
+### 3. Abrir a biblioteca de componentes
+
+```bash
+cd "/c/Users/vieir/OneDrive/dev/publico/03 - completo/Projeto - todos/Argila"
+npm run dev
+```
+
+Abre <http://localhost:6006> no navegador, começando pela página **Introdução**, com links para os fundamentos, cada componente e os padrões de uso. Mudanças no código aparecem na hora.
+
+Para parar o servidor: **Ctrl + C** no Git Bash.
+
+Se a porta 6006 estiver ocupada:
+
+```bash
+npm run dev -- --port 6007
+```
+
+### 4. Começar o dia
+
+```bash
+cd "/c/Users/vieir/OneDrive/dev/publico/03 - completo/Projeto - todos/Argila"
+git switch main
+git pull
+pnpm install
+```
+
+### 5. Fazer uma mudança e abrir o PR
+
+Commit direto na `main` é bloqueado. Crie uma branch (prefixos: `feat/`, `fix/`, `chore/`, `docs/`, `refactor/`):
+
+```bash
+git switch -c feat/nome-da-mudanca
+```
+
+Depois de alterar o código, registre a mudança para a próxima versão do pacote. O assistente pergunta o tipo (`patch`, `minor`, `major`) e uma descrição:
+
+```bash
+npm run changeset
+```
+
+Mudança que não afeta o pacote publicado (documentação, Storybook, CI) também precisa de changeset, vazio:
+
+```bash
+npm run changeset -- --empty
+```
+
+Faça o commit e envie. A mensagem segue Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`):
+
+```bash
+git add -A
+git commit -m "feat: descreve a mudança"
+git push -u origin feat/nome-da-mudanca
+```
+
+Abra o PR no navegador:
+
+```bash
+start "https://github.com/BrunoMonfardini/Argila/compare/feat/nome-da-mudanca?expand=1"
+```
+
+O título do PR também segue Conventional Commits: no merge (squash) ele vira a mensagem do commit na `main`.
+
+### 6. Verificar antes de abrir o PR
+
+Os mesmos passos que o CI roda. Se todos passarem aqui, passam lá:
+
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm run test
+npm run dup:check
+npm run build
+npm run build-storybook
+npm run changeset -- status --since=origin/main
+```
+
+| Comando                   | O que faz                                                           |
+| ------------------------- | ------------------------------------------------------------------- |
+| `npm run format:check`    | Verifica a formatação (Prettier)                                    |
+| `npm run lint`            | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
+| `npm run typecheck`       | Checagem de tipos da biblioteca, dos testes e do Storybook          |
+| `npm run test`            | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
+| `npm run dup:check`       | Detecta código duplicado (jscpd); falha acima de 3%                 |
+| `npm run build`           | Gera o pacote em `dist/ui`                                          |
+| `npm run build-storybook` | Gera a biblioteca estática em `storybook-static/`                   |
+| `npm run changeset -- …`  | Confere se a branch tem changeset quando o pacote mudou             |
+
+Corrigir a formatação de todos os arquivos:
+
+```bash
+npm run format
+```
+
+Abrir o relatório de cobertura dos testes (depois de `npm run test`):
+
+```bash
+start coverage/ui/index.html
+```
+
+Recompilar o pacote a cada alteração, para testar num produto local:
+
+```bash
+npm run watch
+```
+
+Os scripts `version-packages` e `release` são do workflow de publicação. **Não rode localmente.**
+
+### Problemas comuns
+
+| Mensagem                                                                         | Causa                                         | O que fazer                                                            |
+| -------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------- |
+| `This command is not available when running the Angular CLI outside a workspace` | Comando rodado fora da pasta `Argila`         | `cd` para a pasta `Argila` (seção 3) e rode de novo                    |
+| `The Angular CLI requires a minimum Node.js version`                             | Node mais antigo que 24                       | `winget.exe install OpenJS.NodeJS.LTS`, feche e reabra o Git Bash      |
+| `pnpm: command not found`                                                        | pnpm não instalado                            | `npm install -g pnpm@10`, feche e reabra o Git Bash                    |
+| `ERR_PNPM_OUTDATED_LOCKFILE` (no CI)                                             | `package.json` mudou sem atualizar o lockfile | `pnpm install`, depois commit do `pnpm-lock.yaml`                      |
+| `Commit direto na main não é permitido`                                          | Commit na branch `main`                       | `git switch -c feat/nome-da-mudanca` e commit de novo                  |
+| `subject may not be empty` / `type may not be empty`                             | Mensagem fora do padrão Conventional Commits  | `git commit -m "feat: descreve a mudança"`                             |
+| `Some packages have been changed but no changesets were found`                   | Mudança sem changeset                         | `npm run changeset` (ou `npm run changeset -- --empty`), commit e push |
+| `Port 6006 is not available`                                                     | Outro Storybook já está rodando               | Feche o outro (Ctrl + C) ou `npm run dev -- --port 6007`               |
 
 ## Estrutura
 
