@@ -53,6 +53,7 @@
   position: sticky;
   inset-block-start: 4rem;
   align-self: start;
+  min-height: calc(100dvh - 4rem);
   max-height: calc(100dvh - 4rem);
   overflow-y: auto;
   padding: var(--arg-space-6) var(--arg-space-3);
@@ -93,6 +94,7 @@
   .doc-shell__nav {
     display: none;
     position: static;
+    min-height: 0;
     max-height: none;
     border-inline-end: 0;
     border-block-end: 1px solid var(--arg-color-border);

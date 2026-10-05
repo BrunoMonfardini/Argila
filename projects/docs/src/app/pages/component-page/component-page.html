@@ -1,0 +1,54 @@
+@if (page(); as page) {
+  <article>
+    <p class="doc-page__category">{{ page.category }}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="doc-lead"><doc-text [text]="page.summary" /></p>
+
+    @if (page.examples.length) {
+      <section aria-labelledby="exemplos">
+        <h2 id="exemplos">Exemplos</h2>
+        @for (example of page.examples; track example.name) {
+          <doc-example-frame [example]="example" [headingId]="'exemplo-' + $index" />
+        }
+      </section>
+    }
+
+    @if (page.guidelines; as guidelines) {
+      <section aria-labelledby="uso">
+        <h2 id="uso">Uso</h2>
+        <div class="doc-page__guidelines">
+          <div class="doc-page__do">
+            <h3>Faça</h3>
+            <ul>
+              @for (rule of guidelines.do; track rule) {
+                <li><doc-text [text]="rule" /></li>
+              }
+            </ul>
+          </div>
+          <div class="doc-page__dont">
+            <h3>Não faça</h3>
+            <ul>
+              @for (rule of guidelines.dont; track rule) {
+                <li><doc-text [text]="rule" /></li>
+              }
+            </ul>
+          </div>
+        </div>
+      </section>
+    }
+
+    @if (page.accessibility; as accessibility) {
+      <section aria-labelledby="acessibilidade">
+        <h2 id="acessibilidade">Acessibilidade</h2>
+        <ul>
+          @for (note of accessibility; track note) {
+            <li><doc-text [text]="note" /></li>
+          }
+        </ul>
+      </section>
+    }
+  </article>
+} @else {
+  <h1>Página não encontrada</h1>
+  <p>Não existe uma página com esse endereço. <a routerLink="/">Voltar ao início</a>.</p>
+}

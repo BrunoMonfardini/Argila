@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  max-width: 60rem;
+}
+
+.doc-page__category {
+  margin-block-end: var(--arg-space-1);
+  color: var(--arg-color-primary);
+  font-size: var(--arg-font-size-body-sm);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.doc-page__guidelines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--arg-space-4);
+}
+
+.doc-page__do,
+.doc-page__dont {
+  padding: var(--arg-space-4) var(--arg-space-5);
+  border-block-start: 4px solid var(--arg-color-success);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+}
+
+.doc-page__dont {
+  border-block-start-color: var(--arg-color-danger);
+}
+
+ul {
+  margin: 0;
+  padding-inline-start: var(--arg-space-5);
+}
+
+li + li {
+  margin-block-start: var(--arg-space-2);
+}

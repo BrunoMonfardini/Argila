@@ -1,4 +1,16 @@
-@for (section of sections(); track section.title) {
+<div class="doc-sidebar__search" role="search">
+  <label for="busca-catalogo">Buscar</label>
+  <input
+    id="busca-catalogo"
+    type="search"
+    placeholder="Componente ou padrão"
+    autocomplete="off"
+    [value]="query()"
+    (input)="search($event)"
+  />
+</div>
+
+@for (section of visible(); track section.title) {
   <section class="doc-sidebar__section" [attr.aria-labelledby]="'nav-' + $index">
     <h2 class="doc-sidebar__title" [id]="'nav-' + $index">{{ section.title }}</h2>
     <ul arg-list>
@@ -18,4 +30,6 @@
       }
     </ul>
   </section>
+} @empty {
+  <p class="doc-sidebar__empty" role="status">Nada encontrado para "{{ query() }}".</p>
 }

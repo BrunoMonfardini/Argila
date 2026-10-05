@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { App } from './app';
-import { routes } from './app.routes';
+import { provideDocRouter } from './app.routes';
 
 describe('App', () => {
   it('abre o catálogo na página inicial', async () => {
-    TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
+    TestBed.configureTestingModule({ providers: [provideDocRouter()] });
     const fixture = TestBed.createComponent(App);
 
     await fixture.whenStable();

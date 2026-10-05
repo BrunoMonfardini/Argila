@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ArgButton } from '@brunomonfardini/ui';
+import { DOC_PAGES } from '../registry';
 import { buildNavigation } from './navigation';
 import { DocSidebar } from './sidebar';
 import { DocThemeBar } from './theme-bar';
@@ -14,7 +15,7 @@ import { DocThemeBar } from './theme-bar';
   styleUrl: './shell.css',
 })
 export class DocShell {
-  protected readonly sections = buildNavigation();
+  protected readonly sections = buildNavigation(inject(DOC_PAGES));
   /** Menu lateral aberto no celular; no desktop ele fica sempre visível. */
   protected readonly menuOpen = signal(false);
 
