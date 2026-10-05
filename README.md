@@ -230,3 +230,7 @@ Configuração única no GitHub:
 
 - Secret `RELEASE_TOKEN`: token com permissão de `contents` e `pull-requests` no Argila. Sem ele o PR de versão é aberto com o `GITHUB_TOKEN`, que não dispara o CI, e o ruleset bloqueia o merge.
 - Depois da primeira publicação, na página do pacote (Package settings → Manage Actions access), dê acesso de leitura a cada repositório de produto.
+
+## Próximos passos
+
+Para onde o Argila vai: o [design system 100% nosso](docs/design-system-proprio.md) (sem objetos de terceiros, catálogo próprio, 41 componentes) e o [plano de execução](docs/plano-de-execucao.md), PR a PR.
