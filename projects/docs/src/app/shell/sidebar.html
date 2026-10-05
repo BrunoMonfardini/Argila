@@ -1,0 +1,21 @@
+@for (section of sections(); track section.title) {
+  <section class="doc-sidebar__section" [attr.aria-labelledby]="'nav-' + $index">
+    <h2 class="doc-sidebar__title" [id]="'nav-' + $index">{{ section.title }}</h2>
+    <ul arg-list>
+      @for (link of section.links; track link.path) {
+        <li arg-list-item>
+          <a
+            arg-list-action
+            [routerLink]="link.path"
+            routerLinkActive="doc-sidebar__link--active"
+            ariaCurrentWhenActive="page"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="navigate.emit()"
+          >
+            <span arg-list-title>{{ link.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+}

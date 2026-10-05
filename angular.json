@@ -65,6 +65,91 @@
           }
         }
       }
+    },
+    "docs": {
+      "projectType": "application",
+      "root": "projects/docs",
+      "sourceRoot": "projects/docs/src",
+      "prefix": "doc",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/docs/src/main.ts",
+            "tsConfig": "projects/docs/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/docs/public"
+              }
+            ],
+            "styles": [
+              "projects/ui/tokens/argila.css",
+              "projects/ui/tokens/base.css",
+              "projects/ui/tokens/themes/example-brand.css",
+              "projects/docs/src/styles.css"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "docs:build:production"
+            },
+            "development": {
+              "buildTarget": "docs:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/docs/tsconfig.spec.json",
+            "coverage": true,
+            "coverageExclude": ["**/*.stories.ts", "**/public-api.ts", "**/main.ts"],
+            "coverageReporters": ["text-summary", "html"],
+            "coverageThresholds": {
+              "lines": 80,
+              "branches": 80,
+              "functions": 80,
+              "statements": 80
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/docs/**/*.ts", "projects/docs/**/*.html"],
+            "eslintConfig": "projects/docs/eslint.config.js",
+            "maxWarnings": 0
+          }
+        }
+      }
     }
   }
 }

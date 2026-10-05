@@ -14,7 +14,7 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@brunomonfardini/ui": ["./dist/ui"]
+      "@brunomonfardini/ui": ["./projects/ui/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {
@@ -29,6 +29,12 @@
     },
     {
       "path": "./projects/ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/docs/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/docs/tsconfig.spec.json"
     }
   ]
 }

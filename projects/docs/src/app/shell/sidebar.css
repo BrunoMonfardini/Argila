@@ -1,0 +1,29 @@
+:host {
+  display: grid;
+  gap: var(--arg-space-6);
+}
+
+.doc-sidebar__title {
+  margin: 0 0 var(--arg-space-1);
+  padding-inline: var(--arg-space-3);
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+ul {
+  --arg-list-min-height: 2.25rem;
+  --arg-list-padding-block: var(--arg-space-2);
+  --arg-list-padding-inline: var(--arg-space-3);
+}
+
+a {
+  border-radius: var(--arg-radius-control);
+}
+
+.doc-sidebar__link--active {
+  background: var(--arg-color-primary-subtle);
+  color: var(--arg-color-primary);
+}

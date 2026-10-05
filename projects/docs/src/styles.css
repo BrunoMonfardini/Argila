@@ -1,0 +1,46 @@
+/*
+ * Estilos globais do catálogo. Só tokens do Argila: o catálogo é o primeiro
+ * cliente do design system.
+ */
+body {
+  background: var(--arg-color-background);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--arg-space-3);
+  line-height: var(--arg-line-height-heading);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+h1 {
+  font-size: var(--arg-font-size-heading-lg);
+}
+
+h2 {
+  margin-block-start: var(--arg-space-10);
+  font-size: var(--arg-font-size-heading-md);
+}
+
+h3 {
+  font-size: var(--arg-font-size-heading-sm);
+}
+
+p {
+  margin: 0 0 var(--arg-space-4);
+}
+
+code {
+  padding: 0.1em 0.3em;
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface-sunken);
+  font-family: var(--arg-font-family-mono);
+  font-size: 0.9em;
+}
+
+.doc-lead {
+  max-width: 42rem;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-lg);
+}

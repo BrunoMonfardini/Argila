@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-4);
+  align-items: center;
+}
+
+.doc-theme-bar__group {
+  display: flex;
+  gap: var(--arg-space-1);
+}
+
+.doc-theme-bar__brand {
+  display: flex;
+  gap: var(--arg-space-2);
+  align-items: center;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+/* Select nativo provisório: o Select do Argila chega na onda 1 */
+.doc-theme-bar__brand select {
+  min-height: 2rem;
+  padding: 0 var(--arg-space-2);
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font: inherit;
+}
