@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { provideDocRouter } from '../../app.routes';
+import { DOC_MANIFEST, Manifest } from '../../manifest';
 import { DOC_PAGES, DocPage } from '../../registry';
 
 @Component({
@@ -29,10 +30,44 @@ const MINIMAL: DocPage = {
   examples: [],
 };
 
+const MANIFEST: Manifest = {
+  tokens: [],
+  pages: {
+    'Componentes/fake': {
+      slug: 'fake',
+      category: 'Componentes',
+      file: 'fake.docs.ts',
+      examples: { Básico: "@Component({ template: '<button>Exemplo vivo</button>' })" },
+      component: {
+        className: 'ArgFake',
+        selector: 'arg-fake',
+        file: 'fake.ts',
+        inputs: [
+          {
+            name: 'tone',
+            type: "'calm' | 'loud'",
+            control: 'options',
+            options: ['calm', 'loud'],
+            defaultValue: "'calm'",
+            required: false,
+            description: 'Tom da `amostra`.',
+          },
+          { name: 'id', type: 'string', control: 'string', required: true, description: '' },
+        ],
+        cssTokens: [{ name: '--arg-fake-gap', value: 'var(--arg-space-2)' }],
+      },
+    },
+  },
+};
+
 describe('ComponentPage', () => {
   async function open(url: string) {
     TestBed.configureTestingModule({
-      providers: [provideDocRouter(), { provide: DOC_PAGES, useValue: [FAKE, MINIMAL] }],
+      providers: [
+        provideDocRouter(),
+        { provide: DOC_PAGES, useValue: [FAKE, MINIMAL] },
+        { provide: DOC_MANIFEST, useValue: MANIFEST },
+      ],
     });
     const harness = await RouterTestingHarness.create(url);
     return { harness, root: harness.routeNativeElement! };
@@ -80,5 +115,49 @@ describe('ComponentPage', () => {
 
     await TestBed.inject(Router).navigateByUrl('/componentes/outra');
     expect(document.title).toBe('Página não encontrada · Argila');
+  });
+
+  it('mostra a tabela de propriedades com tipo, padrão, obrigatoriedade e descrição', async () => {
+    const { root } = await open('/componentes/fake');
+
+    const rows = Array.from(root.querySelectorAll('#propriedades ~ .doc-table tbody tr'));
+    const cells = rows.map((row) => Array.from(row.children, (cell) => cell.textContent?.trim()));
+
+    expect(root.textContent).toContain('arg-fake');
+    expect(cells[0]).toEqual(['tone', "'calm' | 'loud'", "'calm'", 'Tom da amostra.']);
+    expect(cells[1].slice(1)).toEqual(['string', '—', '']);
+    expect(rows[1].querySelector('.doc-table__required')?.textContent).toBe('obrigatória');
+    expect(rows[0].querySelector('.doc-table__required')).toBeNull();
+  });
+
+  it('lista os tokens do componente', async () => {
+    const { root } = await open('/componentes/fake');
+
+    const table = root.querySelector('#tokens-do-componente ~ .doc-table')!;
+
+    expect(table.textContent).toContain('--arg-fake-gap');
+    expect(table.textContent).toContain('var(--arg-space-2)');
+  });
+
+  it('mostra o código do exemplo, vindo do manifesto, ao pedir', async () => {
+    const { harness, root } = await open('/componentes/fake');
+    const toggle = root.querySelector<HTMLButtonElement>('.doc-example__toggle')!;
+    expect(toggle.getAttribute('aria-expanded')).toBe('false');
+    expect(root.querySelector('doc-code')).toBeNull();
+
+    toggle.click();
+    await harness.fixture.whenStable();
+
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    expect(toggle.textContent?.trim()).toBe('Esconder código');
+    expect(root.querySelector('doc-code pre')?.textContent).toContain('Exemplo vivo');
+    expect(document.getElementById(toggle.getAttribute('aria-controls')!)).not.toBeNull();
+  });
+
+  it('sem manifesto para a página, não mostra propriedades nem botão de código', async () => {
+    const { root } = await open('/padroes/minimo');
+
+    expect(root.querySelector('#propriedades')).toBeNull();
+    expect(root.querySelector('.doc-example__toggle')).toBeNull();
   });
 });

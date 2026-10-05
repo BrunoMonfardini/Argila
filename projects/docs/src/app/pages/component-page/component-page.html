@@ -8,9 +8,17 @@
       <section aria-labelledby="exemplos">
         <h2 id="exemplos">Exemplos</h2>
         @for (example of page.examples; track example.name) {
-          <doc-example-frame [example]="example" [headingId]="'exemplo-' + $index" />
+          <doc-example-frame
+            [example]="example"
+            [headingId]="'exemplo-' + $index"
+            [code]="generated()?.examples?.[example.name]"
+          />
         }
       </section>
+    }
+
+    @if (generated()?.component; as component) {
+      <doc-props-table [component]="component" />
     }
 
     @if (page.guidelines; as guidelines) {

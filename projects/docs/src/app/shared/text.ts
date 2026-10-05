@@ -24,7 +24,7 @@ export function splitInlineCode(text: string): TextPart[] {
     @if (part.code) {
       <code>{{ part.text }}</code>
     } @else {
-      {{ part.text }}
+      <ng-container>{{ part.text }}</ng-container>
     }
   }`,
 })

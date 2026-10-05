@@ -22,3 +22,7 @@
   gap: var(--arg-space-3);
   align-items: center;
 }
+
+.doc-example .doc-example__toggle {
+  margin-block: var(--arg-space-2);
+}
