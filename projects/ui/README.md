@@ -28,8 +28,9 @@ Inclua os tokens uma vez, no `angular.json` do produto:
 ]
 ```
 
-`base.css` é opcional (fonte, cores e foco padrão do documento). A fonte Inter não vem
-no pacote: carregue-a no produto ou troque `--arg-font-family`.
+`base.css` é opcional (fonte, cores e foco padrão do documento). O Argila usa a fonte do
+sistema operacional (`system-ui`): nada é baixado de fora. Para outra família, troque
+`--arg-font-family` (ou use `ArgTheme.setBrand({ fontFamily })`).
 
 ## Uso
 

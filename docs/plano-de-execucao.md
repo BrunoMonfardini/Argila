@@ -69,9 +69,9 @@ Precisam de resposta antes do marco indicado. Sem elas, o plano segue a opção 
 
 | ✓   | ID     | Item                                                                                              | Depende de | Pronto quando                                                   | Est. |
 | --- | ------ | ------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------- | ---- |
-| [ ] | PR-01  | `feat: biblioteca navegável de componentes com npm run dev` (branch `feat/biblioteca-dev`)        | —          | Mergeado; `npm run dev` abre a página Introdução                | —    |
-| [ ] | PR-02  | `feat(tokens): tokens semânticos de carregamento` (branch `feat/tokens-carregamento`)             | —          | Mergeado; `--arg-loading-*` no `:root` muda skeleton e spinner  | —    |
-| [ ] | PR-03  | `docs: design system próprio e plano de execução` (branch `docs/design-system-proprio`)           | —          | Mergeado; este plano revisado pelo time                         | —    |
+| [x] | PR-01  | `feat: biblioteca navegável de componentes com npm run dev` (branch `feat/biblioteca-dev`)        | —          | Mergeado; `npm run dev` abre a página Introdução                | —    |
+| [x] | PR-02  | `feat(tokens): tokens semânticos de carregamento` (branch `feat/tokens-carregamento`)             | —          | Mergeado; `--arg-loading-*` no `:root` muda skeleton e spinner  | —    |
+| [x] | PR-03  | `docs: design system próprio e plano de execução` (branch `docs/design-system-proprio`)           | —          | Mergeado; este plano revisado pelo time                         | —    |
 | [ ] | OPS-01 | **Fora do código:** importar o ruleset da `main` no GitHub (Settings → Rules → Rulesets → Import) | —          | Push direto na `main` recusado pelo GitHub; merge só por squash | 0,5  |
 | [ ] | OPS-02 | **Fora do código:** responder D1 a D4                                                             | PR-03      | Respostas registradas na tabela de decisões                     | 0,5  |
 
@@ -81,7 +81,7 @@ Precisam de resposta antes do marco indicado. Sem elas, o plano segue a opção 
 
 | ✓   | ID     | Item                                                                                                                        | Depende de    | Pronto quando                                                                       | Est. |
 | --- | ------ | --------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------- | ---- |
-| [ ] | PR-04  | `feat(tokens): usa a fonte do sistema` (remove `Inter` do `--arg-core-font-sans`)                                           | M0            | Nenhuma referência a `Inter` no repositório                                         | 0,5  |
+| [x] | PR-04  | `feat(tokens): usa a fonte do sistema` (remove `Inter` do `--arg-core-font-sans`)                                           | M0            | Nenhuma referência a `Inter` no repositório                                         | 0,5  |
 | [ ] | PR-05  | `feat(icons): padrão de desenho e gerador de ícones` (`scripts/gerar-icones.ts`, testes, 3 ícones de exemplo)               | M0            | SVG fora do padrão é rejeitado com mensagem clara; testes do gerador com 80%+       | 2    |
 | [ ] | PR-06  | `feat(icon): componente arg-icon e provideArgIcons`                                                                         | PR-05         | `<arg-icon name="plus" />` renderiza; nome inválido não compila; tamanhos por token | 2    |
 | [ ] | DES-01 | **Fora do código:** desenhar o primeiro lote (cerca de 40 ícones, lista na [seção 1.2](design-system-proprio.md#12-ícones)) | PR-05, D2     | Todos os SVGs passam no gerador                                                     | D2   |
