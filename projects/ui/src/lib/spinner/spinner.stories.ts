@@ -22,7 +22,11 @@ const meta: Meta<ArgSpinner> = {
 export default meta;
 type Story = StoryObj<ArgSpinner>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    size: 'lg',
+  },
+};
 
 export const Sizes: Story = {
   render: () => ({
