@@ -45,12 +45,12 @@ export class Exemplo {}
 
 ### Componentes
 
-| Componente | Uso                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------ |
-| Botão      | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`        |
-| Spinner    | `<arg-spinner label="Carregando pedidos" />`                                         |
-| Skeleton   | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`) |
-| Lista      | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`    |
+| Componente | Uso                                                                                                                   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| Botão      | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`                                         |
+| Spinner    | `<arg-spinner label="Carregando pedidos" />`                                                                          |
+| Skeleton   | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho) |
+| Lista      | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                     |
 
 Item de lista, com áreas opcionais:
 
@@ -87,3 +87,16 @@ theme.setColorScheme('auto');
 
 Hover, pressed e fundos suaves são derivados da cor principal automaticamente.
 Garanta contraste de pelo menos 4.5:1 entre `primary` e `onPrimary`.
+
+### Carregamento
+
+Skeleton e spinner seguem os tokens `--arg-loading-*`. Para mudar o shimmer do produto inteiro:
+
+```css
+:root {
+  --arg-loading-shimmer-duration: 2s;
+  --arg-loading-highlight: color-mix(in oklab, var(--arg-color-primary) 20%, transparent);
+}
+```
+
+Para desligar o brilho de um skeleton específico: `<arg-skeleton [animated]="false" />`. Com "reduzir movimento" ativo no sistema, todos ficam estáticos.

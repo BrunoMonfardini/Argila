@@ -5,6 +5,7 @@
   --arg-spinner-size: 1.5rem;
   --arg-spinner-thickness: 3px;
   --arg-spinner-color: var(--arg-color-primary);
+  --arg-spinner-duration: var(--arg-loading-spin-duration);
 
   display: inline-block;
   flex-shrink: 0;
@@ -13,7 +14,7 @@
   border: var(--arg-spinner-thickness) solid var(--arg-spinner-color);
   border-inline-end-color: transparent;
   border-radius: var(--arg-radius-full);
-  animation: arg-spinner-spin 700ms linear infinite;
+  animation: arg-spinner-spin var(--arg-spinner-duration) linear infinite;
 }
 
 :host(.arg-spinner--sm) {
@@ -35,7 +36,7 @@
 /* Mais lento, mas não parado: o usuário ainda precisa perceber que há progresso */
 @media (prefers-reduced-motion: reduce) {
   :host {
-    animation-duration: 2s;
+    animation-duration: calc(var(--arg-spinner-duration) * 3);
   }
 }
 

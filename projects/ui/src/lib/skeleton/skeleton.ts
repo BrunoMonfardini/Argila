@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  booleanAttribute,
+  computed,
+  input,
+} from '@angular/core';
 
 export type ArgSkeletonShape = 'text' | 'rect' | 'circle';
 
@@ -22,6 +28,7 @@ export type ArgSkeletonShape = 'text' | 'rect' | 'circle';
   host: {
     class: 'arg-skeleton',
     '[class]': '`arg-skeleton--${shape()}`',
+    '[class.arg-skeleton--static]': '!animated()',
     'aria-hidden': 'true',
     '[style.width]': 'width()',
     '[style.height]': 'resolvedHeight()',
@@ -34,6 +41,8 @@ export class ArgSkeleton {
   readonly width = input<string>();
   /** Qualquer valor CSS de altura. Em `circle`, o padrão é a largura. */
   readonly height = input<string>();
+  /** Brilho animado. Desligue em listas longas ou quando o movimento distrai. */
+  readonly animated = input(true, { transform: booleanAttribute });
 
   protected readonly resolvedHeight = computed(
     () => this.height() ?? (this.shape() === 'circle' ? this.width() : undefined),

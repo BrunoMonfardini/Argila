@@ -1,12 +1,12 @@
 /*
- * Tokens de componente (camada 3). Cores derivadas do texto para funcionar
- * sobre qualquer superfície, no claro e no escuro.
+ * Tokens de componente (camada 3), derivados de --arg-loading-*: o tenant muda
+ * o shimmer do sistema inteiro no :root; uma instância ajusta --arg-skeleton-*.
  */
 :host {
-  --arg-skeleton-bg: color-mix(in oklab, var(--arg-color-text) 9%, transparent);
-  --arg-skeleton-highlight: color-mix(in oklab, var(--arg-color-surface) 55%, transparent);
+  --arg-skeleton-bg: var(--arg-loading-bg);
+  --arg-skeleton-highlight: var(--arg-loading-highlight);
   --arg-skeleton-radius: var(--arg-radius-control);
-  --arg-skeleton-duration: 1.4s;
+  --arg-skeleton-duration: var(--arg-loading-shimmer-duration);
 
   display: block;
   width: 100%;
@@ -54,7 +54,12 @@
   }
 }
 
-/* Sem movimento: fica só o bloco, que já comunica "carregando" */
+/* Sem movimento (animated=false ou preferência do sistema): fica só o bloco */
+:host(.arg-skeleton--static) {
+  animation: none;
+  background: var(--arg-skeleton-bg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   :host {
     animation: none;

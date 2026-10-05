@@ -111,5 +111,7 @@
   --arg-core-duration-100: 100ms;
   --arg-core-duration-200: 200ms;
   --arg-core-duration-300: 300ms;
+  --arg-core-duration-700: 700ms;
+  --arg-core-duration-1400: 1400ms;
   --arg-core-easing-standard: cubic-bezier(0.2, 0, 0, 1);
 }
