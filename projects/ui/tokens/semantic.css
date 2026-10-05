@@ -23,7 +23,7 @@
 }
 
 :root {
-  /* Cor usada para escurecer (claro) ou clarear (escuro) estados de interação */
+  /* Interação: cor usada para escurecer (claro) ou clarear (escuro) estados */
   --arg-color-shade: light-dark(#000, #fff);
 
   /* Marca */
