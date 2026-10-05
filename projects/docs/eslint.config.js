@@ -26,6 +26,11 @@ module.exports = defineConfig([
     },
   },
   {
+    // Componentes falsos dos testes imitam os da biblioteca (button[arg-x], arg-x)
+    files: ['**/*.spec.ts'],
+    rules: { '@angular-eslint/component-selector': 'off' },
+  },
+  {
     files: ['**/*.html'],
     rules: {},
   },

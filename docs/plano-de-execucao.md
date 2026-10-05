@@ -99,7 +99,7 @@ O Storybook continua funcionando durante todo o M2; os dois convivem até o M3.
 | [x] | PR-09 | `feat(docs): formato DocPage, registro e rotas` (página de componente com resumo e exemplos)               | PR-08        | Página do Button com os exemplos renderizados, navegável pela barra lateral                      | 3    |
 | [x] | PR-10 | `feat(docs): gerador de manifesto` (inputs, tipos, padrões, JSDoc, código dos exemplos, tokens)            | PR-09        | `manifest.json` gerado a partir do código; testes do gerador com 80%+                            | 4    |
 | [x] | PR-11 | `feat(docs): tabela de propriedades e visualizador de código`                                              | PR-10        | Cada exemplo tem "Ver código" com destaque de sintaxe; tabela de propriedades vinda do manifesto | 2    |
-| [ ] | PR-12 | `feat(docs): playground com controles gerados`                                                             | PR-10        | Controles corretos para união de strings, `boolean`, `string`, `number`; estado na URL           | 3    |
+| [x] | PR-12 | `feat(docs): playground com controles gerados`                                                             | PR-10        | Controles corretos para união de strings, `boolean`, `string`, `number`; estado na URL           | 3    |
 | [ ] | PR-13 | `feat(docs): páginas Início, Tokens e Ícones`                                                              | PR-10, PR-06 | Tokens mudam ao trocar tema e marca; ícones com busca e cópia do código                          | 2    |
 
 ---

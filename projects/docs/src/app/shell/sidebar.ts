@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
 import { ARG_LIST } from '@brunomonfardini/ui';
 import { DocNavSection, filterNavigation } from './navigation';
 
@@ -16,6 +16,13 @@ export class DocSidebar {
   /** Avisa quando um link é seguido, para fechar o menu no celular. */
   readonly navigate = output();
 
+  /** Página ativa pelo caminho; o estado do playground na URL não conta. */
+  protected readonly activeOptions: IsActiveMatchOptions = {
+    paths: 'exact',
+    queryParams: 'ignored',
+    matrixParams: 'ignored',
+    fragment: 'ignored',
+  };
   protected readonly query = signal('');
   protected readonly visible = computed(() => filterNavigation(this.sections(), this.query()));
 

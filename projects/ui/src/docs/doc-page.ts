@@ -24,6 +24,8 @@ export interface DocPage {
   summary: string;
   /** Componente documentado; habilita o playground e a tabela de propriedades. */
   component?: Type<unknown>;
+  /** `false` esconde o playground, para componentes que só fazem sentido com conteúdo (List). */
+  playground?: boolean;
   /** Elemento hospedeiro, para componentes de atributo: 'button' em button[arg-button]. */
   hostElement?: string;
   /** Texto projetado no playground, ex.: "Salvar". */

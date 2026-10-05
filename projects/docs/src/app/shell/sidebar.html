@@ -21,7 +21,7 @@
             [routerLink]="link.path"
             routerLinkActive="doc-sidebar__link--active"
             ariaCurrentWhenActive="page"
-            [routerLinkActiveOptions]="{ exact: true }"
+            [routerLinkActiveOptions]="activeOptions"
             (click)="navigate.emit()"
           >
             <span arg-list-title>{{ link.label }}</span>

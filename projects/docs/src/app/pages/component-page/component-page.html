@@ -4,6 +4,10 @@
     <h1>{{ page.title }}</h1>
     <p class="doc-lead"><doc-text [text]="page.summary" /></p>
 
+    @if (page.component && page.playground !== false && generated()?.component; as component) {
+      <doc-playground [page]="page" [component]="component" />
+    }
+
     @if (page.examples.length) {
       <section aria-labelledby="exemplos">
         <h2 id="exemplos">Exemplos</h2>
