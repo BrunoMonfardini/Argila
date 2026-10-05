@@ -37,8 +37,11 @@ export type ArgButtonSize = 'sm' | 'md' | 'lg';
   },
 })
 export class ArgButton {
+  /** Peso visual: uma única ação `primary` por tela; `danger` para ações destrutivas. */
   readonly variant = input<ArgButtonVariant>('primary');
+  /** Altura e texto do botão; `lg` atinge a área de toque recomendada (48 px). */
   readonly size = input<ArgButtonSize>('md');
+  /** Desabilita o botão; em `<a>`, vira `aria-disabled` e sai da ordem de tabulação. */
   readonly disabled = input(false, { transform: booleanAttribute });
   /** Mostra um indicador de progresso e bloqueia novas interações. */
   readonly loading = input(false, { transform: booleanAttribute });

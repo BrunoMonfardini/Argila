@@ -23,7 +23,7 @@
 }
 
 :root {
-  /* Cor usada para escurecer (claro) ou clarear (escuro) estados de interação */
+  /* Interação: cor usada para escurecer (claro) ou clarear (escuro) estados */
   --arg-color-shade: light-dark(#000, #fff);
 
   /* Marca */
@@ -133,6 +133,11 @@
   --arg-line-height-heading: var(--arg-core-line-height-tight);
   --arg-line-height-control: var(--arg-core-line-height-snug);
   --arg-line-height-body: var(--arg-core-line-height-normal);
+
+  /* Ícones: o padrão (sem tamanho) acompanha o texto ao redor */
+  --arg-icon-size-sm: 1rem;
+  --arg-icon-size-md: 1.25rem;
+  --arg-icon-size-lg: 1.5rem;
 
   /* Elevação */
   --arg-shadow-color: light-dark(rgb(30 27 25 / 0.12), rgb(0 0 0 / 0.5));

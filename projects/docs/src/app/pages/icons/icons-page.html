@@ -1,0 +1,62 @@
+<p class="doc-page__category">Fundamentos</p>
+<h1>Ícones</h1>
+<p class="doc-lead">
+  Desenhados pelo time, no padrão de 24 × 24 com traço de 2 px. Clique num ícone para copiar o
+  código. O ícone herda a cor do texto ao redor.
+</p>
+
+<ul class="doc-icons__rules">
+  <li>
+    Registre só os ícones usados no <code>app.config.ts</code>:
+    <code>provideArgIcons([argIconPlus, argIconX])</code>. Nome errado não compila.
+  </li>
+  <li>
+    Tamanho por token: <code>size="sm | md | lg"</code> (16, 20 e 24 px). Sem tamanho, acompanha o
+    texto.
+  </li>
+  <li>
+    Ao lado de texto, o ícone é decorativo. Sozinho e com significado, use
+    <code>label</code>: <code>&lt;arg-icon name="x" label="Fechar" /&gt;</code>.
+  </li>
+  <li>
+    Ícone novo: desenhe o SVG em <code>projects/ui/icons</code> e rode <code>pnpm icons</code>.
+  </li>
+</ul>
+
+<div class="doc-icons__search" role="search">
+  <label for="busca-icones">Buscar ícone</label>
+  <input
+    id="busca-icones"
+    type="search"
+    autocomplete="off"
+    placeholder="Nome, ex.: arrow"
+    [value]="query()"
+    (input)="search($event)"
+  />
+</div>
+
+<p class="doc-icons__count" role="status">
+  @if (copied(); as name) {
+    Copiado: {{ snippet(name) }}
+  } @else {
+    {{ icons().length }} de {{ total }} ícones
+  }
+</p>
+
+<ul class="doc-icons__grid">
+  @for (icon of icons(); track icon.name) {
+    <li>
+      <button
+        type="button"
+        class="doc-icons__tile"
+        [attr.aria-label]="'Copiar código do ícone ' + icon.name"
+        (click)="copy(icon.name)"
+      >
+        <arg-icon [name]="icon.name" size="lg" />
+        <span class="doc-icons__name" aria-hidden="true">{{ icon.name }}</span>
+      </button>
+    </li>
+  } @empty {
+    <li class="doc-icons__empty">Nenhum ícone com "{{ query() }}".</li>
+  }
+</ul>

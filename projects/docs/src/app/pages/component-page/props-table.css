@@ -1,0 +1,10 @@
+.doc-table__required {
+  display: block;
+  margin-block-start: var(--arg-space-1);
+  color: var(--arg-color-danger);
+  font-size: var(--arg-font-size-caption);
+}
+
+.doc-table__none {
+  color: var(--arg-color-text-muted);
+}

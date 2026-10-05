@@ -1,0 +1,94 @@
+/*
+ * Estilos globais do catálogo. Só tokens do Argila: o catálogo é o primeiro
+ * cliente do design system.
+ */
+body {
+  background: var(--arg-color-background);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--arg-space-3);
+  line-height: var(--arg-line-height-heading);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+h1 {
+  font-size: var(--arg-font-size-heading-lg);
+}
+
+h2 {
+  margin-block-start: var(--arg-space-10);
+  font-size: var(--arg-font-size-heading-md);
+}
+
+h3 {
+  font-size: var(--arg-font-size-heading-sm);
+}
+
+p {
+  margin: 0 0 var(--arg-space-4);
+}
+
+code {
+  padding: 0.1em 0.3em;
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface-sunken);
+  font-family: var(--arg-font-family-mono);
+  font-size: 0.9em;
+}
+
+.doc-lead {
+  max-width: 42rem;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-lg);
+}
+
+.doc-page__category {
+  margin-block-end: var(--arg-space-1);
+  color: var(--arg-color-primary);
+  font-size: var(--arg-font-size-body-sm);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+/* Tabelas de referência: propriedades, tokens */
+.doc-table {
+  overflow-x: auto;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+}
+
+.doc-table:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.doc-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-table th,
+.doc-table td {
+  padding: var(--arg-space-3) var(--arg-space-4);
+  border-block-end: 1px solid var(--arg-color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.doc-table tbody tr:last-child > * {
+  border-block-end: 0;
+}
+
+.doc-table thead th {
+  color: var(--arg-color-text-muted);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.doc-table tbody th {
+  font-weight: var(--arg-font-weight-regular);
+  white-space: nowrap;
+}

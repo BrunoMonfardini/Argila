@@ -3,6 +3,10 @@
  */
 
 export * from './lib/button/button';
+export * from './lib/icon/icon';
+export * from './lib/icon/icon-def';
+export * from './lib/icon/icon-registry';
+export * from './lib/icon/icons.generated';
 export * from './lib/list/list';
 export * from './lib/skeleton/skeleton';
 export * from './lib/spinner/spinner';

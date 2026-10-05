@@ -1,0 +1,110 @@
+:host {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100dvh;
+}
+
+.doc-shell__skip {
+  position: absolute;
+  inset-inline-start: var(--arg-space-2);
+  inset-block-start: var(--arg-space-2);
+  z-index: var(--arg-z-toast);
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface-raised);
+  box-shadow: var(--arg-shadow-md);
+  transform: translateY(-200%);
+}
+
+.doc-shell__skip:focus {
+  transform: none;
+}
+
+.doc-shell__header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: var(--arg-z-sticky);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-4);
+  align-items: center;
+  padding: var(--arg-space-3) var(--arg-space-6);
+  border-block-end: 1px solid var(--arg-color-border);
+  background: var(--arg-color-surface);
+}
+
+.doc-shell__logo {
+  color: var(--arg-color-primary);
+  font-size: var(--arg-font-size-heading-sm);
+  font-weight: var(--arg-font-weight-heading);
+  text-decoration: none;
+}
+
+.doc-shell__theme {
+  margin-inline-start: auto;
+}
+
+.doc-shell__body {
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
+}
+
+.doc-shell__nav {
+  position: sticky;
+  inset-block-start: 4rem;
+  align-self: start;
+  min-height: calc(100dvh - 4rem);
+  max-height: calc(100dvh - 4rem);
+  overflow-y: auto;
+  padding: var(--arg-space-6) var(--arg-space-3);
+  border-inline-end: 1px solid var(--arg-color-border);
+}
+
+.doc-shell__main {
+  min-width: 0;
+  padding: var(--arg-space-8) var(--arg-space-8) var(--arg-space-16);
+}
+
+.doc-shell__main:focus {
+  outline: none;
+}
+
+.doc-shell__menu {
+  display: none;
+}
+
+/* Celular: a barra lateral vira um painel aberto pelo botão Menu */
+@media (max-width: 48rem) {
+  .doc-shell__header {
+    padding-inline: var(--arg-space-4);
+  }
+
+  .doc-shell__menu {
+    display: inline-flex;
+  }
+
+  .doc-shell__theme {
+    margin-inline-start: 0;
+  }
+
+  .doc-shell__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc-shell__nav {
+    display: none;
+    position: static;
+    min-height: 0;
+    max-height: none;
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--arg-color-border);
+  }
+
+  .doc-shell__nav--open {
+    display: block;
+  }
+
+  .doc-shell__main {
+    padding: var(--arg-space-6) var(--arg-space-4) var(--arg-space-12);
+  }
+}

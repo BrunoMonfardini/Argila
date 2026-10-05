@@ -1,0 +1,75 @@
+<section class="doc-playground" aria-labelledby="playground">
+  <h2 id="playground">Playground</h2>
+  <div class="doc-playground__layout">
+    <div class="doc-playground__stage" role="group" aria-label="Componente ao vivo" #stage></div>
+
+    <form
+      class="doc-playground__controls"
+      aria-label="Controles"
+      (submit)="$event.preventDefault()"
+    >
+      @for (prop of inputs(); track prop.name) {
+        @switch (prop.control) {
+          @case ('options') {
+            <fieldset>
+              <legend>{{ prop.name }}</legend>
+              @for (option of prop.options; track option) {
+                <label>
+                  <input
+                    type="radio"
+                    [name]="'pg-' + prop.name"
+                    [value]="option"
+                    [checked]="values()[prop.name] === option"
+                    (change)="update(prop, option)"
+                  />
+                  {{ option }}
+                </label>
+              }
+            </fieldset>
+          }
+          @case ('boolean') {
+            <label class="doc-playground__check">
+              <input
+                type="checkbox"
+                [checked]="values()[prop.name] === true"
+                (change)="onCheck(prop, $event)"
+              />
+              {{ prop.name }}
+            </label>
+          }
+          @case ('number') {
+            <label class="doc-playground__field">
+              {{ prop.name }}
+              <input
+                type="number"
+                [value]="values()[prop.name] ?? ''"
+                (input)="onNumber(prop, $event)"
+              />
+            </label>
+          }
+          @default {
+            <label class="doc-playground__field">
+              {{ prop.name }}
+              <input
+                type="text"
+                [value]="values()[prop.name] ?? ''"
+                (input)="onText(prop, $event)"
+              />
+            </label>
+          }
+        }
+      }
+      <button
+        arg-button
+        type="button"
+        variant="tertiary"
+        size="sm"
+        class="doc-playground__reset"
+        (click)="reset()"
+      >
+        Restaurar padrões
+      </button>
+    </form>
+  </div>
+  <doc-code [code]="snippet()" language="html" label="Código da configuração atual" />
+</section>

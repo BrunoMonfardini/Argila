@@ -12,6 +12,32 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 - **Estimativas** são aproximadas, em dias de trabalho de uma pessoa, e incluem testes e documentação. Servem para planejar, não como prazo.
 - **Coluna "Depende de":** o item só começa quando esses estiverem mergeados.
 
+## Onde estamos
+
+_Atualizado em 05/10/2026._
+
+| Marco | Situação                                                                                                   |
+| ----- | ---------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4) |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)            |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio roda com `npm run docs`, ao lado do Storybook               |
+| M3    | **Próximo:** PR-14 (migrar List, Skeleton, Spinner, Icon e Carregamento para o catálogo)                   |
+| M4-M6 | Não iniciados                                                                                              |
+
+**O que já funciona no catálogo** (`npm run docs`, <http://localhost:4200>):
+
+- Barra de tema (claro, escuro, automático) e de marca, com o próprio `ArgTheme`; barra lateral com busca; menu no celular.
+- Página de componente a partir do `*.docs.ts`: playground com controles gerados e estado na URL, exemplos com "Ver código", propriedades, tokens do componente, faça/não faça e acessibilidade.
+- Páginas Início, Tokens (valores no tema atual) e Ícones (busca e cópia do código).
+- Só o Button tem página por enquanto; os demais componentes entram no PR-14.
+
+**Pendências conhecidas:**
+
+- O Storybook continua sendo o `npm run dev` até o PR-15.
+- Só existem 3 ícones de exemplo (`plus`, `x`, `check`); o botão "Menu" do catálogo fica sem ícone até o `menu` ser desenhado.
+- Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma.
+- PR-04 a PR-13 foram entregues juntos num único PR, com um commit por item.
+
 ## Visão geral
 
 | Marco | Entrega                                                         | Depende de | Estimativa       |
@@ -69,9 +95,9 @@ Precisam de resposta antes do marco indicado. Sem elas, o plano segue a opção 
 
 | ✓   | ID     | Item                                                                                              | Depende de | Pronto quando                                                   | Est. |
 | --- | ------ | ------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------- | ---- |
-| [ ] | PR-01  | `feat: biblioteca navegável de componentes com npm run dev` (branch `feat/biblioteca-dev`)        | —          | Mergeado; `npm run dev` abre a página Introdução                | —    |
-| [ ] | PR-02  | `feat(tokens): tokens semânticos de carregamento` (branch `feat/tokens-carregamento`)             | —          | Mergeado; `--arg-loading-*` no `:root` muda skeleton e spinner  | —    |
-| [ ] | PR-03  | `docs: design system próprio e plano de execução` (branch `docs/design-system-proprio`)           | —          | Mergeado; este plano revisado pelo time                         | —    |
+| [x] | PR-01  | `feat: biblioteca navegável de componentes com npm run dev` (branch `feat/biblioteca-dev`)        | —          | Mergeado; `npm run dev` abre a página Introdução                | —    |
+| [x] | PR-02  | `feat(tokens): tokens semânticos de carregamento` (branch `feat/tokens-carregamento`)             | —          | Mergeado; `--arg-loading-*` no `:root` muda skeleton e spinner  | —    |
+| [x] | PR-03  | `docs: design system próprio e plano de execução` (branch `docs/design-system-proprio`)           | —          | Mergeado; este plano revisado pelo time                         | —    |
 | [ ] | OPS-01 | **Fora do código:** importar o ruleset da `main` no GitHub (Settings → Rules → Rulesets → Import) | —          | Push direto na `main` recusado pelo GitHub; merge só por squash | 0,5  |
 | [ ] | OPS-02 | **Fora do código:** responder D1 a D4                                                             | PR-03      | Respostas registradas na tabela de decisões                     | 0,5  |
 
@@ -81,9 +107,9 @@ Precisam de resposta antes do marco indicado. Sem elas, o plano segue a opção 
 
 | ✓   | ID     | Item                                                                                                                        | Depende de    | Pronto quando                                                                       | Est. |
 | --- | ------ | --------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------- | ---- |
-| [ ] | PR-04  | `feat(tokens): usa a fonte do sistema` (remove `Inter` do `--arg-core-font-sans`)                                           | M0            | Nenhuma referência a `Inter` no repositório                                         | 0,5  |
-| [ ] | PR-05  | `feat(icons): padrão de desenho e gerador de ícones` (`scripts/gerar-icones.ts`, testes, 3 ícones de exemplo)               | M0            | SVG fora do padrão é rejeitado com mensagem clara; testes do gerador com 80%+       | 2    |
-| [ ] | PR-06  | `feat(icon): componente arg-icon e provideArgIcons`                                                                         | PR-05         | `<arg-icon name="plus" />` renderiza; nome inválido não compila; tamanhos por token | 2    |
+| [x] | PR-04  | `feat(tokens): usa a fonte do sistema` (remove `Inter` do `--arg-core-font-sans`)                                           | M0            | Nenhuma referência a `Inter` no repositório                                         | 0,5  |
+| [x] | PR-05  | `feat(icons): padrão de desenho e gerador de ícones` (`scripts/gerar-icones.ts`, testes, 3 ícones de exemplo)               | M0            | SVG fora do padrão é rejeitado com mensagem clara; testes do gerador com 80%+       | 2    |
+| [x] | PR-06  | `feat(icon): componente arg-icon e provideArgIcons`                                                                         | PR-05         | `<arg-icon name="plus" />` renderiza; nome inválido não compila; tamanhos por token | 2    |
 | [ ] | DES-01 | **Fora do código:** desenhar o primeiro lote (cerca de 40 ícones, lista na [seção 1.2](design-system-proprio.md#12-ícones)) | PR-05, D2     | Todos os SVGs passam no gerador                                                     | D2   |
 | [ ] | PR-07  | `feat(icons): primeiro lote de ícones`                                                                                      | PR-06, DES-01 | Os ~40 ícones exportados e aparecendo no catálogo                                   | 0,5  |
 
@@ -95,12 +121,12 @@ O Storybook continua funcionando durante todo o M2; os dois convivem até o M3.
 
 | ✓   | ID    | Item                                                                                                       | Depende de   | Pronto quando                                                                                    | Est. |
 | --- | ----- | ---------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------ | ---- |
-| [ ] | PR-08 | `feat(docs): aplicação do catálogo` (`projects/docs`, layout, barra lateral, barra de tema com `ArgTheme`) | M0           | `npm run docs` abre o catálogo em `localhost:4200`, usando componentes do Argila na interface    | 3    |
-| [ ] | PR-09 | `feat(docs): formato DocPage, registro e rotas` (página de componente com resumo e exemplos)               | PR-08        | Página do Button com os exemplos renderizados, navegável pela barra lateral                      | 3    |
-| [ ] | PR-10 | `feat(docs): gerador de manifesto` (inputs, tipos, padrões, JSDoc, código dos exemplos, tokens)            | PR-09        | `manifest.json` gerado a partir do código; testes do gerador com 80%+                            | 4    |
-| [ ] | PR-11 | `feat(docs): tabela de propriedades e visualizador de código`                                              | PR-10        | Cada exemplo tem "Ver código" com destaque de sintaxe; tabela de propriedades vinda do manifesto | 2    |
-| [ ] | PR-12 | `feat(docs): playground com controles gerados`                                                             | PR-10        | Controles corretos para união de strings, `boolean`, `string`, `number`; estado na URL           | 3    |
-| [ ] | PR-13 | `feat(docs): páginas Início, Tokens e Ícones`                                                              | PR-10, PR-06 | Tokens mudam ao trocar tema e marca; ícones com busca e cópia do código                          | 2    |
+| [x] | PR-08 | `feat(docs): aplicação do catálogo` (`projects/docs`, layout, barra lateral, barra de tema com `ArgTheme`) | M0           | `npm run docs` abre o catálogo em `localhost:4200`, usando componentes do Argila na interface    | 3    |
+| [x] | PR-09 | `feat(docs): formato DocPage, registro e rotas` (página de componente com resumo e exemplos)               | PR-08        | Página do Button com os exemplos renderizados, navegável pela barra lateral                      | 3    |
+| [x] | PR-10 | `feat(docs): gerador de manifesto` (inputs, tipos, padrões, JSDoc, código dos exemplos, tokens)            | PR-09        | `manifest.json` gerado a partir do código; testes do gerador com 80%+                            | 4    |
+| [x] | PR-11 | `feat(docs): tabela de propriedades e visualizador de código`                                              | PR-10        | Cada exemplo tem "Ver código" com destaque de sintaxe; tabela de propriedades vinda do manifesto | 2    |
+| [x] | PR-12 | `feat(docs): playground com controles gerados`                                                             | PR-10        | Controles corretos para união de strings, `boolean`, `string`, `number`; estado na URL           | 3    |
+| [x] | PR-13 | `feat(docs): páginas Início, Tokens e Ícones`                                                              | PR-10, PR-06 | Tokens mudam ao trocar tema e marca; ícones com busca e cópia do código                          | 2    |
 
 ---
 

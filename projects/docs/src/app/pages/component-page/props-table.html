@@ -1,0 +1,78 @@
+<section aria-labelledby="propriedades">
+  <h2 id="propriedades">Propriedades</h2>
+  <p>
+    Seletor: <code>{{ component().selector }}</code>
+  </p>
+  @if (component().inputs.length) {
+    <div class="doc-table" tabindex="0" role="region" aria-labelledby="propriedades">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Padrão</th>
+            <th scope="col">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (prop of component().inputs; track prop.name) {
+            <tr>
+              <th scope="row">
+                <code>{{ prop.name }}</code>
+                @if (prop.required) {
+                  <span class="doc-table__required">obrigatória</span>
+                }
+              </th>
+              <td>
+                <code>{{ prop.type }}</code>
+              </td>
+              <td>
+                @if (prop.defaultValue) {
+                  <code>{{ prop.defaultValue }}</code>
+                } @else {
+                  <span class="doc-table__none">—</span>
+                }
+              </td>
+              <td><doc-text [text]="prop.description" /></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <p>Sem propriedades.</p>
+  }
+</section>
+
+@if (component().cssTokens.length) {
+  <section aria-labelledby="tokens-do-componente">
+    <h2 id="tokens-do-componente">Tokens do componente</h2>
+    <p>
+      Ajustam uma instância sem mudar as outras, ex.:
+      <code>style="{{ component().cssTokens[0].name }}: …"</code>. Para mudar o sistema inteiro, use
+      os tokens semânticos.
+    </p>
+    <div class="doc-table" tabindex="0" role="region" aria-labelledby="tokens-do-componente">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Token</th>
+            <th scope="col">Valor padrão</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (token of component().cssTokens; track token.name) {
+            <tr>
+              <th scope="row">
+                <code>{{ token.name }}</code>
+              </th>
+              <td>
+                <code>{{ token.value }}</code>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+}

@@ -35,6 +35,16 @@ module.exports = defineConfig([
     },
   },
   {
+    // Exemplos e páginas do catálogo não são publicados: usam o prefixo do catálogo
+    files: ['**/examples/*.ts', '**/*.docs.ts'],
+    rules: {
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: ['element', 'attribute'], prefix: 'doc', style: 'kebab-case' },
+      ],
+    },
+  },
+  {
     files: ['**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {},

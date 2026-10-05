@@ -1,0 +1,12 @@
+/*
+ * Exemplo de uso em comentário: <arg-sample style="--arg-sample-gap: 0">
+ */
+:host {
+  --arg-sample-bg: var(--arg-color-surface);
+  --arg-sample-gap: var(--arg-space-2);
+  --arg-spinner-size: 1rem;
+}
+
+:host(.compact) {
+  --arg-sample-gap: 0;
+}

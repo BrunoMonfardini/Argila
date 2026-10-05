@@ -71,6 +71,12 @@ Se a porta 6006 estiver ocupada:
 npm run dev -- --port 6007
 ```
 
+O catálogo próprio, que vai substituir o Storybook, já roda ao lado dele em <http://localhost:4200>:
+
+```bash
+npm run docs
+```
+
 ### 4. Começar o dia
 
 ```bash
@@ -140,6 +146,9 @@ npm run changeset -- status --since=origin/main
 | `npm run dup:check`       | Detecta código duplicado (jscpd); falha acima de 3%                 |
 | `npm run build`           | Gera o pacote em `dist/ui`                                          |
 | `npm run build-storybook` | Gera a biblioteca estática em `storybook-static/`                   |
+| `npm run docs`            | Abre o catálogo próprio em <http://localhost:4200>                  |
+| `npm run build:docs`      | Gera o catálogo estático em `dist/docs/browser`                     |
+| `npm run icons`           | Valida os SVGs de `projects/ui/icons` e gera o código dos ícones    |
 | `npm run changeset -- …`  | Confere se a branch tem changeset quando o pacote mudou             |
 
 Corrigir a formatação de todos os arquivos:

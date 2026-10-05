@@ -1,0 +1,32 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-icon style="--arg-icon-size: 2rem">.
+ * A cor é sempre herdada: o traço usa currentColor.
+ */
+:host {
+  --arg-icon-size: 1.25em;
+
+  display: inline-flex;
+  flex-shrink: 0;
+  width: var(--arg-icon-size);
+  height: var(--arg-icon-size);
+  vertical-align: -0.25em;
+}
+
+:host(.arg-icon--sm) {
+  --arg-icon-size: var(--arg-icon-size-sm);
+}
+
+:host(.arg-icon--md) {
+  --arg-icon-size: var(--arg-icon-size-md);
+}
+
+:host(.arg-icon--lg) {
+  --arg-icon-size: var(--arg-icon-size-lg);
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}

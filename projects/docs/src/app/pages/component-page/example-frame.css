@@ -1,0 +1,28 @@
+/* Sem encapsulamento (ver DocExampleFrame): todo seletor começa em .doc-example */
+.doc-example {
+  display: block;
+  margin-block-end: var(--arg-space-8);
+}
+
+.doc-example .doc-example__description {
+  color: var(--arg-color-text-muted);
+}
+
+.doc-example .doc-example__preview {
+  padding: var(--arg-space-6);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+}
+
+/* O exemplo só traz os componentes; o espaçamento entre eles vem daqui */
+.doc-example .doc-example__preview > * {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-3);
+  align-items: center;
+}
+
+.doc-example .doc-example__toggle {
+  margin-block: var(--arg-space-2);
+}

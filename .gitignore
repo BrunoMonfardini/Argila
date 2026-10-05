@@ -49,3 +49,6 @@ storybook-static
 # Storybook
 /storybook-static
 debug-storybook.log
+
+# Manifesto do catálogo: gerado do código por scripts/gerar-manifesto.ts
+/projects/docs/src/generated

@@ -1,0 +1,33 @@
+<a class="doc-shell__skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="doc-shell__header">
+  <button
+    arg-button
+    type="button"
+    variant="tertiary"
+    size="sm"
+    class="doc-shell__menu"
+    aria-controls="navegacao"
+    [attr.aria-expanded]="menuOpen()"
+    (click)="toggleMenu()"
+  >
+    Menu
+  </button>
+  <a class="doc-shell__logo" routerLink="/">Argila</a>
+  <doc-theme-bar class="doc-shell__theme" />
+</header>
+
+<div class="doc-shell__body">
+  <nav
+    id="navegacao"
+    class="doc-shell__nav"
+    aria-label="Páginas do catálogo"
+    [class.doc-shell__nav--open]="menuOpen()"
+  >
+    <doc-sidebar [sections]="sections" (navigate)="closeMenu()" />
+  </nav>
+
+  <main id="conteudo" class="doc-shell__main" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>

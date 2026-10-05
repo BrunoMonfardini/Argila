@@ -26,6 +26,7 @@ export type ArgSpinnerSize = 'sm' | 'md' | 'lg';
   },
 })
 export class ArgSpinner {
+  /** Diâmetro: `sm` (16 px) ao lado de texto, `lg` (40 px) para áreas vazias. */
   readonly size = input<ArgSpinnerSize>('md');
   /** Nome acessível: diga o que está carregando. */
   readonly label = input('Carregando');

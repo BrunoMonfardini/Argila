@@ -1,0 +1,92 @@
+.doc-playground__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16rem;
+  margin-block-end: var(--arg-space-3);
+  overflow: hidden;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+}
+
+.doc-playground__stage {
+  display: grid;
+  place-items: center;
+  min-height: 12rem;
+  padding: var(--arg-space-8);
+}
+
+/* Controles nativos provisórios: Radio, Checkbox e Input do Argila chegam na onda 1 */
+.doc-playground__controls {
+  display: grid;
+  align-content: start;
+  gap: var(--arg-space-4);
+  padding: var(--arg-space-4);
+  border-inline-start: 1px solid var(--arg-color-border);
+  background: var(--arg-color-surface-sunken);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-1) var(--arg-space-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  margin-block-end: var(--arg-space-1);
+  padding: 0;
+  font-family: var(--arg-font-family-mono);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+label {
+  display: inline-flex;
+  gap: var(--arg-space-1);
+  align-items: center;
+}
+
+.doc-playground__field {
+  display: grid;
+  font-family: var(--arg-font-family-mono);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.doc-playground__check {
+  font-family: var(--arg-font-family-mono);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+input[type='text'],
+input[type='number'] {
+  min-height: 2rem;
+  padding: 0 var(--arg-space-2);
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-weight: var(--arg-font-weight-regular);
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  accent-color: var(--arg-color-primary);
+}
+
+.doc-playground__reset {
+  justify-self: start;
+}
+
+@media (max-width: 48rem) {
+  .doc-playground__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc-playground__controls {
+    border-inline-start: 0;
+    border-block-start: 1px solid var(--arg-color-border);
+  }
+}

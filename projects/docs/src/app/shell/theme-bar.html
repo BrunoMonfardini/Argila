@@ -1,0 +1,23 @@
+<div class="doc-theme-bar__group" role="group" aria-label="Modo de cor">
+  @for (option of schemes; track option.value) {
+    <button
+      arg-button
+      type="button"
+      size="sm"
+      [variant]="scheme() === option.value ? 'secondary' : 'tertiary'"
+      [attr.aria-pressed]="scheme() === option.value"
+      (click)="selectScheme(option.value)"
+    >
+      {{ option.label }}
+    </button>
+  }
+</div>
+
+<label class="doc-theme-bar__brand">
+  <span>Marca</span>
+  <select [value]="brand()" (change)="selectBrand($event)">
+    @for (option of brands; track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+</label>

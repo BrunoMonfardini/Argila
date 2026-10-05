@@ -86,7 +86,7 @@
   --arg-core-radius-full: 9999px;
 
   /* Tipografia */
-  --arg-core-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --arg-core-font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --arg-core-font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
   --arg-core-font-size-12: 0.75rem;
