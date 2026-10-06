@@ -35,12 +35,13 @@ jobs:
       # Sem changesets (PR de versão mergeado): builda e publica o pacote.
       - uses: changesets/action@v2
         with:
-          version: pnpm version-packages
-          publish: pnpm release
-          title: 'chore: version packages'
-          commit: 'chore: version packages'
-        env:
+          version-script: pnpm version-packages
+          publish-script: pnpm release
+          pr-title: 'chore: version packages'
+          commit-message: 'chore: version packages'
           # PR aberto com o GITHUB_TOKEN não dispara o CI, e o ruleset exige verify e
           # pr-checks. Com RELEASE_TOKEN (PAT com contents e pull-requests) os checks rodam.
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          # Na v2 o token vai só por este input; a variável GITHUB_TOKEN é ignorada.
+          github-token: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+        env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
