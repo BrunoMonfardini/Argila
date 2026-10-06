@@ -33,7 +33,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       # Com changesets pendentes: abre/atualiza o PR "chore: version packages".
       # Sem changesets (PR de versão mergeado): builda e publica o pacote.
-      - uses: changesets/action@v1
+      - uses: changesets/action@v2
         with:
           version: pnpm version-packages
           publish: pnpm release
