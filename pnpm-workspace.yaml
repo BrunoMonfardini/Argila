@@ -6,3 +6,7 @@ onlyBuiltDependencies:
   - esbuild
   - lmdb
   - msgpackr-extract
+
+# projects/ui declara o Angular como peer: ele vem da raiz, nunca de uma cópia própria.
+# Duas cópias do @angular/core quebram os tipos de signal entre os pacotes.
+autoInstallPeers: false
