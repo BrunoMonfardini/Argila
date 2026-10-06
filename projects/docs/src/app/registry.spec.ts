@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { argIconsAll, provideArgIcons } from '@brunomonfardini/ui';
 import { ALL_DOC_PAGES, DocPage, categoryPath, findPage, pagePath } from './registry';
 
 @Component({ template: '' })
@@ -33,6 +35,19 @@ describe('registro do catálogo', () => {
     for (const page of ALL_DOC_PAGES) {
       const names = page.examples.map((example) => example.name);
       expect(new Set(names).size, page.slug).toBe(names.length);
+    }
+  });
+
+  it('renderiza todos os exemplos de todas as páginas', () => {
+    TestBed.configureTestingModule({ providers: [provideArgIcons(argIconsAll)] });
+    for (const page of ALL_DOC_PAGES) {
+      for (const example of page.examples) {
+        const fixture = TestBed.createComponent(example.component);
+        fixture.detectChanges();
+        const root: HTMLElement = fixture.nativeElement;
+        expect(root.children.length, `${page.slug}: ${example.name}`).toBeGreaterThan(0);
+        fixture.destroy();
+      }
     }
   });
 });
