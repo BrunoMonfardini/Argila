@@ -1,5 +1,10 @@
 import { InjectionToken } from '@angular/core';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
+import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
+import { LIST_DOCS } from '../../../ui/src/lib/list/list.docs';
+import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
+import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
+import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
 import type { DocCategory, DocPage } from '../../../ui/src/docs/doc-page';
 
 export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-page';
@@ -8,7 +13,14 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  * Todas as páginas do catálogo. Componente novo: crie o `<componente>.docs.ts`
  * e acrescente aqui. O CI confere que nenhum componente exportado ficou de fora.
  */
-export const ALL_DOC_PAGES: readonly DocPage[] = [BUTTON_DOCS];
+export const ALL_DOC_PAGES: readonly DocPage[] = [
+  BUTTON_DOCS,
+  ICON_DOCS,
+  LIST_DOCS,
+  SKELETON_DOCS,
+  SPINNER_DOCS,
+  LIST_LOADING_DOCS,
+];
 
 export const DOC_PAGES = new InjectionToken<readonly DocPage[]>('DOC_PAGES', {
   providedIn: 'root',

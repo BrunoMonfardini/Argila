@@ -63,7 +63,7 @@ describe('DocShell', () => {
     const { fixture, nav } = await setup();
     const search = nav.querySelector<HTMLInputElement>('input[type="search"]')!;
 
-    search.value = 'botao';
+    search.value = 'inexistente';
     search.dispatchEvent(new Event('input'));
     await fixture.whenStable();
     expect(nav.querySelector('[role="status"]')?.textContent).toContain('Nada encontrado');
