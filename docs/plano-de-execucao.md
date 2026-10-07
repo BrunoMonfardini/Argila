@@ -14,15 +14,26 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 ## Onde estamos
 
-_Atualizado em 06/10/2026._
+_Atualizado em 07/10/2026._
+
+**Etapa atual: M3.** O PR-14 está pronto e espera review e merge; o PR-15 só começa quando o M1 também fechar.
 
 | Marco | Situação                                                                                                   |
 | ----- | ---------------------------------------------------------------------------------------------------------- |
 | M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4) |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)            |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam D2, DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)        |
 | M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio roda com `npm run docs`, ao lado do Storybook               |
-| M3    | PR-14 pronto: tudo o que o Storybook mostra existe no catálogo. **Próximo:** PR-15, que também espera o M1 |
-| M4-M6 | Não iniciados                                                                                              |
+| M3    | **Em andamento:** PR-14 em review (branch `docs/migra-catalogo`). PR-15 bloqueado pelo PR-14 e pelo M1     |
+| M4-M6 | Não iniciados. O M4 depende do M3; o M6 também depende de D3                                               |
+
+**O que destrava o plano**, em ordem:
+
+1. **Mergear o PR-14**, depois de comparar lado a lado o Storybook (`npm run dev`, porta 6006) e o catálogo (`npm run docs`, porta 4200).
+2. **Responder D2** (quem desenha os ícones e com qual ferramenta) e **fazer o DES-01**. É o caminho crítico: sem os ícones não há PR-07, sem o PR-07 o M1 não fecha, e sem o M1 o Storybook não sai (PR-15).
+3. **PR-07**, meio dia depois do desenho.
+4. **PR-15**, que fecha o M3 e libera o M4 e o M6.
+
+Em paralelo, sem bloquear o código: OPS-01 (ruleset) e as demais decisões (D1 antes do M4, D3 antes do M6, D4 antes do M5).
 
 **O que já funciona no catálogo** (`npm run docs`, <http://localhost:4200>):
 
