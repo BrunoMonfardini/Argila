@@ -227,6 +227,15 @@ Regras:
 - Quando existe elemento nativo equivalente, o componente é um seletor de atributo sobre ele (`button[arg-button]`), para manter teclado, formulários e leitores de tela.
 - Standalone, `OnPush`, `input()` com signals.
 - Todo componente tem página no catálogo (`<componente>.docs.ts` e `examples/`), com faça/não faça e notas de acessibilidade.
+- Todo `*.spec.ts` de componente verifica a acessibilidade em cada estado, com as verificações próprias de `projects/ui/src/testing/a11y.ts`:
+
+  ```ts
+  import { a11yViolations } from '../../testing/a11y';
+
+  expect(a11yViolations(fixture.nativeElement)).toEqual([]);
+  ```
+
+  Elas cobrem nome acessível, `aria-*` válidos e com ids existentes, `tabindex` positivo, `alt` em imagens, `svg` sem nome e foco dentro de `aria-hidden`. O catálogo passa pelas mesmas verificações, em cada exemplo e em cada página.
 
 ## Versionamento e publicação
 

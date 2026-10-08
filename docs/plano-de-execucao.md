@@ -22,7 +22,7 @@ _Atualizado em 07/10/2026._
 | M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)            |
 | M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                              |
 | M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                              |
-| M4    | **Próximo:** PR-16 a PR-19 (verificações próprias e utilitários)                                           |
+| M4    | PR-16 pronto (acessibilidade). **Próximo:** PR-17 a PR-19 (contraste, CI, utilitários)                     |
 | M5-M6 | Não iniciados. O M6 (catálogo publicado) já pode começar, mas depende da decisão D3                        |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
@@ -38,7 +38,7 @@ _Atualizado em 07/10/2026._
 - Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma.
 - PR-04 a PR-13 foram entregues juntos num único PR, com um commit por item.
 - O PR-15 foi feito antes do DES-01 (desenho dos ícones), por decisão do time: remover o Storybook não depende dos ícones.
-- Com o Storybook, saiu também o `axe-core` (addon a11y). Até o PR-16, a acessibilidade é coberta pelo lint de templates e pelos testes de cada componente.
+- D1 seguiu a opção padrão: sem `axe-core`. As verificações próprias (`projects/ui/src/testing/a11y.ts`) rodam nos testes de cada componente, em cada exemplo e em cada página do catálogo.
 - O workflow Release falha até ligar **Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"**.
 
 ## Visão geral
@@ -148,7 +148,7 @@ O Storybook continua funcionando durante todo o M2; os dois convivem até o M3.
 
 | ✓   | ID    | Item                                                                                                      | Depende de | Pronto quando                                                                | Est. |
 | --- | ----- | --------------------------------------------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------- | ---- |
-| [ ] | PR-16 | `test: verificações de acessibilidade próprias` (`src/testing/a11y.ts`, aplicadas aos componentes atuais) | M3, D1     | Remover o `label` de um componente nos testes faz o teste falhar             | 3    |
+| [x] | PR-16 | `test: verificações de acessibilidade próprias` (`src/testing/a11y.ts`, aplicadas aos componentes atuais) | M3, D1     | Remover o `label` de um componente nos testes faz o teste falhar             | 3    |
 | [ ] | PR-17 | `test(tokens): contraste dos tokens em claro e escuro`                                                    | M3         | Trocar `--arg-color-on-primary` por uma cor sem contraste faz o teste falhar | 1    |
 | [ ] | PR-18 | `ci: checagem do manifesto e build do catálogo`                                                           | M3         | Componente exportado sem página no catálogo, ou input sem JSDoc, quebra o CI | 1    |
 | [ ] | PR-19 | `feat(internal): utilitários compartilhados` (ids únicos, navegação por setas, anunciador `aria-live`)    | M3         | Utilitários testados com 80%+ e documentados para uso interno                | 3    |

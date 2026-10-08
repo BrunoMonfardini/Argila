@@ -577,7 +577,11 @@ O Storybook fazia a verificação automática com o addon a11y, que usa o **axe-
    - todo controle interativo tem nome acessível (texto, `aria-label` ou `aria-labelledby`);
    - `aria-*` válidos e com ids que existem na página;
    - nenhum `tabindex` maior que 0;
-   - imagens com `alt`; ícones decorativos com `aria-hidden`.
+   - imagens com `alt`; ícones decorativos com `aria-hidden`;
+   - nenhum elemento focável dentro de `aria-hidden="true"`.
+
+   O catálogo usa as mesmas verificações em cada exemplo e em cada página renderizada.
+
 2. **Teste de contraste dos tokens**: lê os pares de cor de `semantic.css` (`primary` / `on-primary`, `text` / `surface`, cada cor de feedback com a sua `on-`), nos temas claro e escuro, e falha abaixo de 4.5:1. Pega o erro mais comum de tema por cliente.
 3. **Revisão manual** em todo PR de componente: navegação completa por teclado e teste com leitor de tela (NVDA no Windows, VoiceOver no celular), registrados no checklist do PR.
 
