@@ -125,7 +125,7 @@ Regras práticas:
 - **Nomes de código em inglês; textos da interface em português.**
 - **Comentários explicam o porquê, não o quê.** Se o código precisa de comentário para explicar o que faz, renomeie ou quebre em funções.
 - **Erros tratados na borda:** não engula exceção com `catch` vazio. Logue com `tenant_id` e `request_id` e devolva uma mensagem útil.
-- **Front-end:** componentes do design system primeiro; acessibilidade verificada pelo lint de templates e pelo addon de a11y do Storybook.
+- **Front-end:** componentes do design system primeiro; acessibilidade verificada pelo lint de templates e pelas verificações de acessibilidade nos testes.
 - **Banco:** toda tabela de negócio tem `tenant_id` e política de RLS; migration nova vem com teste da política.
 
 ---
@@ -134,15 +134,15 @@ Regras práticas:
 
 Todo repositório expõe **exatamente estes scripts** no `package.json` da raiz. A esteira só chama estes nomes, por isso o YAML é igual em todos os projetos.
 
-| Script            | O que faz                                                                   | Obrigatório         |
-| ----------------- | --------------------------------------------------------------------------- | ------------------- |
-| `format:check`    | `prettier --check .`                                                        | Sim                 |
-| `lint`            | ESLint com `--max-warnings 0`                                               | Sim                 |
-| `typecheck`       | `tsc --noEmit` em cada projeto (no Angular, o build já cobre)               | Sim                 |
-| `test`            | Testes unitários uma vez, sem modo watch, **com cobertura e limite de 80%** | Sim                 |
-| `dup:check`       | `jscpd` com o limite da seção 3.2                                           | Sim                 |
-| `build`           | Build de produção de tudo que é publicado ou implantado                     | Sim                 |
-| `build-storybook` | Build do Storybook                                                          | Só no design system |
+| Script         | O que faz                                                                   | Obrigatório         |
+| -------------- | --------------------------------------------------------------------------- | ------------------- |
+| `format:check` | `prettier --check .`                                                        | Sim                 |
+| `lint`         | ESLint com `--max-warnings 0`                                               | Sim                 |
+| `typecheck`    | `tsc --noEmit` em cada projeto (no Angular, o build já cobre)               | Sim                 |
+| `test`         | Testes unitários uma vez, sem modo watch, **com cobertura e limite de 80%** | Sim                 |
+| `dup:check`    | `jscpd` com o limite da seção 3.2                                           | Sim                 |
+| `build`        | Build de produção de tudo que é publicado ou implantado                     | Sim                 |
+| `build:docs`   | Build do catálogo de componentes (`dist/docs/browser`)                      | Só no design system |
 
 Em monorepos (`apps/*`, `packages/*`), o script da raiz roda em todos os pacotes:
 
@@ -167,13 +167,7 @@ Configuração do jscpd (`.jscpd.json` na raiz):
   "minLines": 10,
   "minTokens": 50,
   "pattern": "**/*.{ts,html,css,scss}",
-  "ignore": [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/*.spec.ts",
-    "**/*.stories.ts",
-    "**/supabase/migrations/**"
-  ],
+  "ignore": ["**/node_modules/**", "**/dist/**", "**/*.spec.ts", "**/supabase/migrations/**"],
   "reporters": ["console"],
   "exitCode": 1
 }
@@ -184,7 +178,7 @@ Limite de cobertura em projetos Angular (`angular.json`, target `test`; requer `
 ```json
 "options": {
   "coverage": true,
-  "coverageExclude": ["**/*.stories.ts", "**/public-api.ts"],
+  "coverageExclude": ["**/public-api.ts"],
   "coverageReporters": ["text-summary", "html"],
   "coverageThresholds": { "lines": 80, "branches": 80, "functions": 80, "statements": 80 }
 }
@@ -196,7 +190,7 @@ Limite de cobertura em projetos sem Angular (`vitest.config.ts`):
 coverage: {
   provider: 'v8',
   thresholds: { lines: 80, branches: 80, functions: 80, statements: 80 },
-  exclude: ['**/*.stories.ts', '**/public-api.ts', '**/index.ts', '**/*.config.*'],
+  exclude: ['**/public-api.ts', '**/index.ts', '**/*.config.*'],
 }
 ```
 
@@ -264,10 +258,10 @@ jobs:
       - run: pnpm dup:check
       - run: pnpm build
       # Só no design system:
-      # - run: pnpm build-storybook
+      # - run: pnpm build:docs
       # - uses: actions/upload-artifact@v7
       #   if: github.event_name == 'pull_request'
-      #   with: { name: storybook, path: storybook-static, retention-days: 7 }
+      #   with: { name: catalogo, path: dist/docs/browser, retention-days: 7 }
 
   pr-checks:
     name: pr-checks
@@ -480,7 +474,7 @@ module.exports = {
 ```json
 "lint-staged": {
   "*.{ts,html}": ["eslint --fix --max-warnings 0", "prettier --write"],
-  "*.{css,scss,json,md,mdx,yml,yaml,js}": "prettier --write"
+  "*.{css,scss,json,md,yml,yaml,js}": "prettier --write"
 }
 ```
 
@@ -554,7 +548,7 @@ Um PR só pode ser aprovado quando:
 - [ ] Título do PR em Conventional Commits, descrevendo a mudança inteira
 - [ ] Migrations de banco (se houver) compatíveis com a versão anterior e com política de RLS
 - [ ] Sem segredo, `console.log`, código comentado ou `TODO` sem issue vinculada
-- [ ] Documentação atualizada quando a mudança altera como alguém usa o projeto (README, Storybook, changeset)
+- [ ] Documentação atualizada quando a mudança altera como alguém usa o projeto (README, catálogo, changeset)
 
 ---
 

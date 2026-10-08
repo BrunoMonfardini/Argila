@@ -81,7 +81,7 @@ Item de lista, com áreas opcionais:
 </ul>
 ```
 
-Exemplos vivos e padrões combinados (carregamento, vazio) no Storybook: `npm run dev`.
+Exemplos vivos, playground e padrões combinados (carregamento, vazio) no catálogo: `npm run dev`.
 
 ## Tema
 

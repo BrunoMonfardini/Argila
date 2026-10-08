@@ -61,20 +61,20 @@ cd "/c/Users/vieir/OneDrive/dev/publico/03 - completo/Projeto - todos/Argila"
 npm run dev
 ```
 
-Abre <http://localhost:6006> no navegador, começando pela página **Introdução**, com links para os fundamentos, cada componente e os padrões de uso. Mudanças no código aparecem na hora.
+Abre o catálogo em <http://localhost:4200>, começando pela página **Início**, com links para os fundamentos (tokens e ícones), cada componente e os padrões de uso. Mudanças nos componentes aparecem na hora.
 
 Para parar o servidor: **Ctrl + C** no Git Bash.
 
-Se a porta 6006 estiver ocupada:
+Se a porta 4200 estiver ocupada:
 
 ```bash
-npm run dev -- --port 6007
+npm run dev -- --port 4201
 ```
 
-O catálogo próprio, que vai substituir o Storybook, já roda ao lado dele em <http://localhost:4200>:
+Mudou uma input, um exemplo ou um token e quer ver a tabela de propriedades atualizada sem reiniciar? Num segundo terminal, deixe o manifesto se regerando:
 
 ```bash
-npm run docs
+node --watch-path=projects/ui/src --watch-path=projects/ui/tokens scripts/gerar-manifesto.ts
 ```
 
 ### 4. Começar o dia
@@ -100,7 +100,7 @@ Depois de alterar o código, registre a mudança para a próxima versão do paco
 npm run changeset
 ```
 
-Mudança que não afeta o pacote publicado (documentação, Storybook, CI) também precisa de changeset, vazio:
+Mudança que não afeta o pacote publicado (documentação, catálogo, CI) também precisa de changeset, vazio:
 
 ```bash
 npm run changeset -- --empty
@@ -133,23 +133,22 @@ npm run typecheck
 npm run test
 npm run dup:check
 npm run build
-npm run build-storybook
+npm run build:docs
 npm run changeset -- status --since=origin/main
 ```
 
-| Comando                   | O que faz                                                           |
-| ------------------------- | ------------------------------------------------------------------- |
-| `npm run format:check`    | Verifica a formatação (Prettier)                                    |
-| `npm run lint`            | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
-| `npm run typecheck`       | Checagem de tipos da biblioteca, dos testes e do Storybook          |
-| `npm run test`            | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
-| `npm run dup:check`       | Detecta código duplicado (jscpd); falha acima de 3%                 |
-| `npm run build`           | Gera o pacote em `dist/ui`                                          |
-| `npm run build-storybook` | Gera a biblioteca estática em `storybook-static/`                   |
-| `npm run docs`            | Abre o catálogo próprio em <http://localhost:4200>                  |
-| `npm run build:docs`      | Gera o catálogo estático em `dist/docs/browser`                     |
-| `npm run icons`           | Valida os SVGs de `projects/ui/icons` e gera o código dos ícones    |
-| `npm run changeset -- …`  | Confere se a branch tem changeset quando o pacote mudou             |
+| Comando                  | O que faz                                                           |
+| ------------------------ | ------------------------------------------------------------------- |
+| `npm run format:check`   | Verifica a formatação (Prettier)                                    |
+| `npm run lint`           | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
+| `npm run typecheck`      | Checagem de tipos da biblioteca, do catálogo, dos testes e scripts  |
+| `npm run test`           | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
+| `npm run dup:check`      | Detecta código duplicado (jscpd); falha acima de 3%                 |
+| `npm run build`          | Gera o pacote em `dist/ui`                                          |
+| `npm run dev`            | Abre o catálogo em <http://localhost:4200>                          |
+| `npm run build:docs`     | Gera o catálogo estático em `dist/docs/browser`                     |
+| `npm run icons`          | Valida os SVGs de `projects/ui/icons` e gera o código dos ícones    |
+| `npm run changeset -- …` | Confere se a branch tem changeset quando o pacote mudou             |
 
 Corrigir a formatação de todos os arquivos:
 
@@ -182,27 +181,32 @@ Os scripts `version-packages` e `release` são do workflow de publicação. **N�
 | `Commit direto na main não é permitido`                                          | Commit na branch `main`                       | `git switch -c feat/nome-da-mudanca` e commit de novo                  |
 | `subject may not be empty` / `type may not be empty`                             | Mensagem fora do padrão Conventional Commits  | `git commit -m "feat: descreve a mudança"`                             |
 | `Some packages have been changed but no changesets were found`                   | Mudança sem changeset                         | `npm run changeset` (ou `npm run changeset -- --empty`), commit e push |
-| `Port 6006 is not available`                                                     | Outro Storybook já está rodando               | Feche o outro (Ctrl + C) ou `npm run dev -- --port 6007`               |
+| `Port 4200 is already in use`                                                    | Outro catálogo já está rodando                | Feche o outro (Ctrl + C) ou `npm run dev -- --port 4201`               |
 
 ## Estrutura
 
 ```text
 docs/
   padrao-de-pipeline.md   → regras de pipeline e qualidade de todos os projetos
+  design-system-proprio.md, plano-de-execucao.md → plano do design system 100% nosso
+projects/docs/            → o catálogo: aplicação Angular nossa (npm run dev)
+scripts/                  → geradores de ícones e do manifesto do catálogo, com testes
 projects/ui/
   tokens/                 → CSS dos tokens, publicado em @brunomonfardini/ui/tokens/
     primitives.css        → camada 1: valores brutos (--arg-core-*)
     semantic.css          → camada 2: valores por uso (--arg-*), claro/escuro
     base.css              → estilos base opcionais do documento
     themes/               → exemplos de tema de produto
+  icons/                  → SVGs dos ícones, desenhados pelo time
   src/lib/
-    button/               → um componente por pasta: .ts, .html, .css, .spec.ts, .stories.ts
+    button/               → um componente por pasta: .ts, .html, .css, .spec.ts, .docs.ts, examples/
+    icon/                 → arg-icon e o código gerado dos ícones
     list/                 → lista (ArgList, ArgListItem, ArgListAction)
     skeleton/             → placeholder com shimmer
     spinner/              → indicador de carregamento
     theme/                → ArgTheme: tema e marca em tempo de execução
-  src/patterns/           → stories de padrões de uso (componentes combinados)
-  .storybook/
+  src/patterns/           → páginas de padrões de uso (componentes combinados)
+  src/docs/doc-page.ts    → formato das páginas do catálogo (não publicado)
 ```
 
 ## Tokens em três camadas
@@ -222,7 +226,7 @@ Regras:
 - Prefixo `arg` nos seletores e `Arg` nas classes (`ArgButton`).
 - Quando existe elemento nativo equivalente, o componente é um seletor de atributo sobre ele (`button[arg-button]`), para manter teclado, formulários e leitores de tela.
 - Standalone, `OnPush`, `input()` com signals.
-- Toda story passa no addon de acessibilidade (a11y configurado como `error`).
+- Todo componente tem página no catálogo (`<componente>.docs.ts` e `examples/`), com faça/não faça e notas de acessibilidade.
 
 ## Versionamento e publicação
 

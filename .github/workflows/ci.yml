@@ -35,13 +35,13 @@ jobs:
       - run: pnpm test
       - run: pnpm dup:check
       - run: pnpm build
-      - run: pnpm build-storybook
-      - name: Publica o Storybook para o review
+      - run: pnpm build:docs
+      - name: Publica o catálogo para o review
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v7
         with:
-          name: storybook
-          path: storybook-static
+          name: catalogo
+          path: dist/docs/browser
           retention-days: 7
 
   pr-checks:
