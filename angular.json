@@ -30,7 +30,7 @@
           "options": {
             "tsConfig": "projects/ui/tsconfig.spec.json",
             "coverage": true,
-            "coverageExclude": ["**/*.stories.ts", "**/public-api.ts"],
+            "coverageExclude": ["**/public-api.ts"],
             "coverageReporters": ["text-summary", "html"],
             "coverageThresholds": {
               "lines": 80,
@@ -38,22 +38,6 @@
               "functions": 80,
               "statements": 80
             }
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular-vite:start-storybook",
-          "options": {
-            "configDir": "projects/ui/.storybook",
-            "browserTarget": "ui:build",
-            "port": 6006
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular-vite:build-storybook",
-          "options": {
-            "configDir": "projects/ui/.storybook",
-            "browserTarget": "ui:build",
-            "outputDir": "storybook-static"
           }
         },
         "lint": {
@@ -131,7 +115,7 @@
           "options": {
             "tsConfig": "projects/docs/tsconfig.spec.json",
             "coverage": true,
-            "coverageExclude": ["**/*.stories.ts", "**/public-api.ts", "**/main.ts"],
+            "coverageExclude": ["**/public-api.ts", "**/main.ts"],
             "coverageReporters": ["text-summary", "html"],
             "coverageThresholds": {
               "lines": 80,

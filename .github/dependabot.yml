@@ -17,11 +17,9 @@ updates:
       angular:
         patterns:
           ['@angular/*', '@angular-devkit/*', '@angular-eslint/*', 'angular-eslint', 'ng-packagr']
-      storybook:
-        patterns: ['storybook', '@storybook/*']
       dev-tools:
         dependency-type: development
-        exclude-patterns: ['@angular/*', '@angular-devkit/*', 'storybook', '@storybook/*']
+        exclude-patterns: ['@angular/*', '@angular-devkit/*']
   - package-ecosystem: github-actions
     directory: /
     schedule:

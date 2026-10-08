@@ -14,17 +14,18 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 ## Onde estamos
 
-_Atualizado em 06/10/2026._
+_Atualizado em 07/10/2026._
 
 | Marco | Situação                                                                                                   |
 | ----- | ---------------------------------------------------------------------------------------------------------- |
 | M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4) |
 | M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)            |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio roda com `npm run docs`, ao lado do Storybook               |
-| M3    | PR-14 pronto: tudo o que o Storybook mostra existe no catálogo. **Próximo:** PR-15, que também espera o M1 |
-| M4-M6 | Não iniciados                                                                                              |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                              |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                              |
+| M4    | **Próximo:** PR-16 a PR-19 (verificações próprias e utilitários)                                           |
+| M5-M6 | Não iniciados. O M6 (catálogo publicado) já pode começar, mas depende da decisão D3                        |
 
-**O que já funciona no catálogo** (`npm run docs`, <http://localhost:4200>):
+**O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
 - Barra de tema (claro, escuro, automático) e de marca, com o próprio `ArgTheme`; barra lateral com busca; menu no celular.
 - Página de componente a partir do `*.docs.ts`: playground com controles gerados e estado na URL, exemplos com "Ver código", propriedades, tokens do componente, faça/não faça e acessibilidade.
@@ -33,10 +34,12 @@ _Atualizado em 06/10/2026._
 
 **Pendências conhecidas:**
 
-- O Storybook continua sendo o `npm run dev` até o PR-15.
 - Só existem 3 ícones de exemplo (`plus`, `x`, `check`); o botão "Menu" do catálogo fica sem ícone até o `menu` ser desenhado.
 - Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma.
 - PR-04 a PR-13 foram entregues juntos num único PR, com um commit por item.
+- O PR-15 foi feito antes do DES-01 (desenho dos ícones), por decisão do time: remover o Storybook não depende dos ícones.
+- Com o Storybook, saiu também o `axe-core` (addon a11y). Até o PR-16, a acessibilidade é coberta pelo lint de templates e pelos testes de cada componente.
+- O workflow Release falha até ligar **Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"**.
 
 ## Visão geral
 
@@ -135,7 +138,7 @@ O Storybook continua funcionando durante todo o M2; os dois convivem até o M3.
 | ✓   | ID    | Item                                                                                                                            | Depende de | Pronto quando                                                                                 | Est. |
 | --- | ----- | ------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- | ---- |
 | [x] | PR-14 | `docs: migra componentes e padrões para o catálogo próprio` (Button, List, Skeleton, Spinner, Carregamento)                     | M2         | Tudo o que o Storybook mostra existe no catálogo, comparado lado a lado                       | 2    |
-| [ ] | PR-15 | `chore: remove o Storybook` (8 dependências, `.storybook/`, `*.stories.ts`, `.mdx`; `dev` abre o catálogo; CI usa `build:docs`) | PR-14, M1  | `grep -ri storybook` não acha nada fora do changelog; CI verde; `npm run dev` abre o catálogo | 1    |
+| [x] | PR-15 | `chore: remove o Storybook` (8 dependências, `.storybook/`, `*.stories.ts`, `.mdx`; `dev` abre o catálogo; CI usa `build:docs`) | PR-14, M1  | `grep -ri storybook` não acha nada fora do changelog; CI verde; `npm run dev` abre o catálogo | 1    |
 
 **Marco atingido:** a partir daqui, nenhum objeto de terceiros no design system.
 
