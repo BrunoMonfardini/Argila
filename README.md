@@ -220,6 +220,7 @@ Regras:
 - Componente nunca usa cor, espaçamento ou raio literal: sempre um token semântico.
 - Estados de interação (hover, pressed, subtle) são derivados com `color-mix()`, então um tenant só troca a cor base.
 - Claro/escuro usa `light-dark()`: um token, dois valores, sem blocos duplicados.
+- O contraste é testado: `npm run test` calcula cada par de cores que aparece junto (texto sobre superfície, `on-primary` sobre `primary` e seus estados, cores de feedback) em claro e escuro, com a marca padrão e com cada arquivo de `tokens/themes/`. Abaixo de 4.5:1 para texto, ou de 3:1 para o anel de foco, o teste falha e diz qual par. Os pares ficam em `scripts/contraste-dos-tokens.spec.ts`.
 
 ## Convenções de componente
 
