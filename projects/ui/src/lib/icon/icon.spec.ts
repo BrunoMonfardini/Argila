@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { ArgIcon, ArgIconSize } from './icon';
 import { ArgIconRegistry, provideArgIcons } from './icon-registry';
 import { ArgIconName, argIconCheck, argIconPlus } from './icons.generated';
+import { a11yViolations } from '../../testing/a11y';
 
 @Component({
   imports: [ArgIcon],
@@ -88,6 +89,15 @@ describe('ArgIcon', () => {
     const invalid: ArgIconName = 'plsu';
 
     expect(invalid).toBe('plsu');
+  });
+
+  it('não tem violações de acessibilidade, decorativo ou com rótulo', async () => {
+    const { fixture, host } = await setup();
+    expect(a11yViolations(fixture.nativeElement)).toEqual([]);
+
+    host.label.set('Atenção');
+    await fixture.whenStable();
+    expect(a11yViolations(fixture.nativeElement)).toEqual([]);
   });
 });
 

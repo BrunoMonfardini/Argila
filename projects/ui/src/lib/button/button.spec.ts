@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ArgButton, ArgButtonVariant } from './button';
+import { a11yViolations } from '../../testing/a11y';
 
 @Component({
   imports: [ArgButton],
@@ -23,6 +24,16 @@ class Host {
   readonly loading = signal(false);
   clicks = 0;
 }
+
+@Component({
+  imports: [ArgButton],
+  // Botão vazio de propósito: o teste prova que a verificação de acessibilidade o acusa
+  template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/elements-content -->
+    <button arg-button type="button"></button>
+  `,
+})
+class EmptyButton {}
 
 describe('ArgButton', () => {
   async function setup() {
@@ -79,5 +90,29 @@ describe('ArgButton', () => {
     const event = new MouseEvent('click', { bubbles: true, cancelable: true });
     link.dispatchEvent(event);
     expect(event.defaultPrevented).toBe(true);
+  });
+
+  it('não tem violações de acessibilidade, nem desabilitado nem carregando', async () => {
+    const { fixture, host } = await setup();
+    const root: HTMLElement = fixture.nativeElement;
+    expect(a11yViolations(root)).toEqual([]);
+
+    host.disabled.set(true);
+    await fixture.whenStable();
+    expect(a11yViolations(root)).toEqual([]);
+
+    host.disabled.set(false);
+    host.loading.set(true);
+    await fixture.whenStable();
+    expect(a11yViolations(root)).toEqual([]);
+  });
+
+  it('acusa botão sem rótulo', async () => {
+    const fixture = TestBed.createComponent(EmptyButton);
+    await fixture.whenStable();
+
+    const rules = a11yViolations(fixture.nativeElement).map((v) => v.rule);
+
+    expect(rules).toEqual(['nome-acessivel']);
   });
 });

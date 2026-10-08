@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ArgSkeleton, ArgSkeletonShape } from './skeleton';
+import { a11yViolations } from '../../testing/a11y';
 
 @Component({
   imports: [ArgSkeleton],
@@ -68,5 +69,15 @@ describe('ArgSkeleton', () => {
     host.width.set('50%');
     await fixture.whenStable();
     expect(skeleton.style.height).toBe('');
+  });
+
+  it('não tem violações de acessibilidade em nenhum formato', async () => {
+    const { fixture, host } = await setup();
+
+    for (const shape of ['text', 'rect', 'circle'] as const) {
+      host.shape.set(shape);
+      await fixture.whenStable();
+      expect(a11yViolations(fixture.nativeElement)).toEqual([]);
+    }
   });
 });

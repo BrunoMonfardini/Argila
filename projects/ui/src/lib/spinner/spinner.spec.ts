@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ArgSpinner, ArgSpinnerSize } from './spinner';
+import { a11yViolations } from '../../testing/a11y';
 
 @Component({
   imports: [ArgSpinner],
@@ -43,5 +44,23 @@ describe('ArgSpinner', () => {
     expect(spinner.getAttribute('aria-hidden')).toBe('true');
     expect(spinner.hasAttribute('role')).toBe(false);
     expect(spinner.hasAttribute('aria-label')).toBe(false);
+  });
+
+  it('não tem violações de acessibilidade, com rótulo ou decorativo', async () => {
+    const { fixture, host } = await setup();
+    expect(a11yViolations(fixture.nativeElement)).toEqual([]);
+
+    host.decorative.set(true);
+    await fixture.whenStable();
+    expect(a11yViolations(fixture.nativeElement)).toEqual([]);
+  });
+
+  it('acusa spinner sem rótulo', async () => {
+    const { fixture, host } = await setup();
+
+    host.label.set('');
+    await fixture.whenStable();
+
+    expect(a11yViolations(fixture.nativeElement).map((v) => v.rule)).toEqual(['nome-acessivel']);
   });
 });

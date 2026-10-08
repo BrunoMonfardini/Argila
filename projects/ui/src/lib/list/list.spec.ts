@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ARG_LIST } from './list';
+import { a11yViolations } from '../../testing/a11y';
 
 @Component({
   imports: [ARG_LIST],
@@ -77,5 +78,15 @@ describe('ArgList', () => {
     expect(action.classList).toContain('arg-list__action');
     action.click();
     expect(host.clicks).toBe(1);
+  });
+
+  it('não tem violações de acessibilidade, simples ou com borda e divisões', async () => {
+    const { fixture, host } = await setup();
+    expect(a11yViolations(fixture.nativeElement)).toEqual([]);
+
+    host.divided.set(true);
+    host.bordered.set(true);
+    await fixture.whenStable();
+    expect(a11yViolations(fixture.nativeElement)).toEqual([]);
   });
 });
