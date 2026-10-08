@@ -582,7 +582,7 @@ O Storybook fazia a verificação automática com o addon a11y, que usa o **axe-
 
    O catálogo usa as mesmas verificações em cada exemplo e em cada página renderizada.
 
-2. **Teste de contraste dos tokens**: lê os pares de cor de `semantic.css` (`primary` / `on-primary`, `text` / `surface`, cada cor de feedback com a sua `on-`), nos temas claro e escuro, e falha abaixo de 4.5:1. Pega o erro mais comum de tema por cliente.
+2. **Teste de contraste dos tokens** (`scripts/contraste-dos-tokens.spec.ts`): lê os pares de cor de `semantic.css` (`primary` / `on-primary` e seus estados de hover e pressed, `text` / `surface`, cada cor de feedback com a sua `on-` e com a sua `-subtle`), nos temas claro e escuro, com a marca padrão e com cada arquivo de `tokens/themes/`. Falha abaixo de 4.5:1 para texto e de 3:1 para o anel de foco. Pega o erro mais comum de tema por cliente. As expressões (`var()`, `light-dark()`, `color-mix(in oklab)`) são resolvidas por código nosso, em `scripts/lib/contraste.ts`.
 3. **Revisão manual** em todo PR de componente: navegação completa por teclado e teste com leitor de tela (NVDA no Windows, VoiceOver no celular), registrados no checklist do PR.
 
 **Decisão D1 (para o time):** as verificações próprias cobrem as falhas mais comuns, mas não as mais de 90 regras do axe-core. Se o time aceitar uma exceção para uma ferramenta de teste (camada "Ferramentas", fora do catálogo e do pacote), o `axe-core` volta como dependência de desenvolvimento, rodando só dentro dos testes. Sem a exceção, o plano segue como está acima. Os itens 2 e 3 valem nos dois casos.
