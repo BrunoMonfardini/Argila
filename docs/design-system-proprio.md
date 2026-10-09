@@ -591,8 +591,8 @@ O Storybook fazia a verificação automática com o addon a11y, que usa o **axe-
 
 Acrescente ao job `verify`:
 
-- `node scripts/gerar-manifesto.ts --check`: falha se algum componente exportado no `public-api.ts` não tiver `*.docs.ts`, se alguma input não tiver JSDoc, ou se algum exemplo não compilar.
-- `pnpm build:docs`: o catálogo precisa compilar.
+- `pnpm manifest:check` (`node scripts/gerar-manifesto.ts --check`): falha se algum componente exportado no `public-api.ts` não tiver página no catálogo (componentes auxiliares no mesmo arquivo de um documentado, como `ArgListItem`, contam como documentados), se alguma input de componente exportado não tiver JSDoc, ou se algum `*.docs.ts` não estiver no registro do catálogo.
+- `pnpm build:docs`: o catálogo precisa compilar, o que inclui todos os exemplos.
 
 ---
 

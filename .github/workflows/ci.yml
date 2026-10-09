@@ -32,6 +32,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm icons:check
+      - run: pnpm manifest:check
       - run: pnpm test
       - run: pnpm dup:check
       - run: pnpm build

@@ -134,6 +134,7 @@ npm run test
 npm run dup:check
 npm run build
 npm run build:docs
+npm run manifest:check
 npm run changeset -- status --since=origin/main
 ```
 
@@ -148,6 +149,7 @@ npm run changeset -- status --since=origin/main
 | `npm run dev`            | Abre o catálogo em <http://localhost:4200>                          |
 | `npm run build:docs`     | Gera o catálogo estático em `dist/docs/browser`                     |
 | `npm run icons`          | Valida os SVGs de `projects/ui/icons` e gera o código dos ícones    |
+| `npm run manifest:check` | Confere que todo componente exportado tem página e JSDoc nas inputs |
 | `npm run changeset -- …` | Confere se a branch tem changeset quando o pacote mudou             |
 
 Corrigir a formatação de todos os arquivos:

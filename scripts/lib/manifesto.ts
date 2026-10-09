@@ -70,21 +70,28 @@ class ManifestReader {
 
   /** Cada `export const X: DocPage = { ... }` do arquivo vira uma página. */
   readDocsFile(source: ts.SourceFile): ManifestPage[] {
-    const pages: ManifestPage[] = [];
-    for (const statement of source.statements) {
-      if (!ts.isVariableStatement(statement)) continue;
-      for (const declaration of statement.declarationList.declarations) {
-        const init = declaration.initializer;
-        if (
-          declaration.type?.getText() === 'DocPage' &&
-          init &&
-          ts.isObjectLiteralExpression(init)
-        ) {
-          pages.push(this.readPage(init, source));
-        }
+    return docPageDeclarations(source).map(({ page }) => this.readPage(page, source));
+  }
+
+  /** Componentes e diretivas exportados por um arquivo de API pública. */
+  exportedComponents(source: ts.SourceFile): ts.ClassDeclaration[] {
+    const module = this.checker.getSymbolAtLocation(source);
+    if (!module) return [];
+    const classes = new Set<ts.ClassDeclaration>();
+    for (let symbol of this.checker.getExportsOfModule(module)) {
+      if (symbol.flags & ts.SymbolFlags.Alias) {
+        symbol = this.checker.getAliasedSymbol(symbol);
+      }
+      const declaration = symbol.declarations?.find(ts.isClassDeclaration);
+      if (declaration && angularDecorator(declaration)) {
+        classes.add(declaration);
       }
     }
-    return pages;
+    return [...classes];
+  }
+
+  inputsOf(declaration: ts.ClassDeclaration): ManifestInput[] {
+    return declaration.members.flatMap((member) => this.readInput(member));
   }
 
   private readPage(page: ts.ObjectLiteralExpression, source: ts.SourceFile): ManifestPage {
@@ -134,7 +141,7 @@ class ManifestReader {
       className: declaration.name?.text ?? '',
       selector: (decorator && stringProperty(decorator, 'selector')) ?? '',
       file,
-      inputs: declaration.members.flatMap((member) => this.readInput(member)),
+      inputs: this.inputsOf(declaration),
       cssTokens: styleUrl
         ? componentCssTokens(
             readFileSync(resolve(dirname(source.fileName), styleUrl), 'utf8'),
@@ -182,9 +189,26 @@ class ManifestReader {
     return declaration;
   }
 
-  private relative(file: string): string {
+  relative(file: string): string {
     return relative(this.root, file).replace(/\\/g, '/');
   }
+}
+
+/** As declarações `const X: DocPage = { ... }` de um arquivo `*.docs.ts`. */
+function docPageDeclarations(
+  source: ts.SourceFile,
+): { name: string; page: ts.ObjectLiteralExpression }[] {
+  const pages: { name: string; page: ts.ObjectLiteralExpression }[] = [];
+  for (const statement of source.statements) {
+    if (!ts.isVariableStatement(statement)) continue;
+    for (const declaration of statement.declarationList.declarations) {
+      const init = declaration.initializer;
+      if (declaration.type?.getText() === 'DocPage' && init && ts.isObjectLiteralExpression(init)) {
+        pages.push({ name: declaration.name.getText(), page: init });
+      }
+    }
+  }
+  return pages;
 }
 
 function property(object: ts.ObjectLiteralExpression, name: string): ts.Expression | undefined {
@@ -207,6 +231,16 @@ function readString(object: ts.ObjectLiteralExpression, name: string, file: stri
     throw new ManifestError(file, `${name} precisa ser um texto literal`);
   }
   return value;
+}
+
+/** `Component` ou `Directive`, quando a classe tem um desses decorators. */
+function angularDecorator(declaration: ts.ClassDeclaration): string | undefined {
+  for (const decorator of ts.getDecorators(declaration) ?? []) {
+    const call = decorator.expression;
+    const name = ts.isCallExpression(call) ? call.expression.getText() : undefined;
+    if (name === 'Component' || name === 'Directive') return name;
+  }
+  return undefined;
 }
 
 function componentDecorator(
@@ -294,4 +328,73 @@ export function parseSemanticTokens(css: string): ManifestToken[] {
     }
   }
   return tokens;
+}
+
+export interface CatalogCheckOptions {
+  root: string;
+  /** O `public-api.ts` da biblioteca, absoluto. */
+  publicApi: string;
+  /** Arquivos `*.docs.ts`, absolutos. */
+  docsFiles: string[];
+  /** O registro de páginas do catálogo, absoluto. */
+  registryFile: string;
+}
+
+/**
+ * Confere que o catálogo acompanha a biblioteca. Devolve um problema por
+ * linha; lista vazia quando está tudo certo.
+ *
+ * - todo componente exportado tem página (ou está no mesmo arquivo de um que
+ *   tem, como ArgListItem junto de ArgList);
+ * - toda input de componente exportado tem JSDoc;
+ * - toda página `*.docs.ts` está no registro do catálogo.
+ */
+export function checkCatalog(options: CatalogCheckOptions): string[] {
+  const program = ts.createProgram([options.publicApi, ...options.docsFiles], COMPILER_OPTIONS);
+  const reader = new ManifestReader(program.getTypeChecker(), options.root);
+  const registry = reader.relative(options.registryFile);
+  const problems: string[] = [];
+
+  const documented = new Set<string>();
+  const registered = registeredPages(readFileSync(options.registryFile, 'utf8'));
+  for (const file of [...options.docsFiles].sort()) {
+    const source = program.getSourceFile(file);
+    if (!source) throw new ManifestError(file, 'arquivo não encontrado');
+    for (const page of reader.readDocsFile(source)) {
+      if (page.component) documented.add(page.component.file);
+    }
+    for (const { name } of docPageDeclarations(source)) {
+      if (!registered.has(name)) {
+        problems.push(
+          `${name} (${reader.relative(file)}) não está no registro: inclua em ${registry}`,
+        );
+      }
+    }
+  }
+
+  const publicApi = program.getSourceFile(options.publicApi);
+  if (!publicApi) throw new ManifestError(options.publicApi, 'arquivo não encontrado');
+  for (const declaration of reader.exportedComponents(publicApi)) {
+    const name = declaration.name?.text ?? '(sem nome)';
+    const file = reader.relative(declaration.getSourceFile().fileName);
+    if (!documented.has(file)) {
+      problems.push(
+        `${name} (${file}) não tem página no catálogo: crie o *.docs.ts ao lado e inclua em ${registry}`,
+      );
+    }
+    for (const input of reader.inputsOf(declaration)) {
+      if (!input.description) {
+        problems.push(
+          `${name}.${input.name} (${file}) sem JSDoc: descreva a input num comentário /** … */`,
+        );
+      }
+    }
+  }
+  return problems;
+}
+
+/** Nomes listados no array `ALL_DOC_PAGES` do registro. */
+export function registeredPages(registrySource: string): Set<string> {
+  const list = /ALL_DOC_PAGES[^=]*=\s*\[([\s\S]*?)\]/.exec(registrySource)?.[1] ?? '';
+  return new Set(list.match(/[A-Za-z_$][\w$]*/g) ?? []);
 }

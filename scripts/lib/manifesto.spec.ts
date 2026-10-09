@@ -4,6 +4,8 @@ import { describe, expect, it } from 'vitest';
 import {
   ManifestError,
   buildManifest,
+  checkCatalog,
+  registeredPages,
   componentCssTokens,
   parseSemanticTokens,
 } from './manifesto.ts';
@@ -159,5 +161,63 @@ describe('parseSemanticTokens', () => {
     expect(tokens.find((t) => t.name === '--arg-motion-fast')?.value).toBe(
       'var(--arg-core-duration-100)',
     );
+  });
+});
+
+describe('checkCatalog', () => {
+  function check(docsFiles: string[]) {
+    return checkCatalog({
+      root: ROOT,
+      publicApi: resolve(FIXTURES, 'public-api.ts'),
+      docsFiles: docsFiles.map((file) => resolve(FIXTURES, file)),
+      registryFile: resolve(FIXTURES, 'registry.ts'),
+    });
+  }
+
+  it('lista página fora do registro, componente sem página e input sem JSDoc', () => {
+    const dir = 'scripts/lib/__fixtures__/manifesto';
+
+    expect(check(['sample.docs.ts'])).toEqual([
+      `PATTERN_DOCS (${dir}/sample.docs.ts) não está no registro: inclua em ${dir}/registry.ts`,
+      `ArgSample.label (${dir}/sample.ts) sem JSDoc: descreva a input num comentário /** … */`,
+      `ArgSample.items (${dir}/sample.ts) sem JSDoc: descreva a input num comentário /** … */`,
+      `ArgOrphan (${dir}/orphan.ts) não tem página no catálogo: crie o *.docs.ts ao lado e inclua em ${dir}/registry.ts`,
+      `ArgOrphan.size (${dir}/orphan.ts) sem JSDoc: descreva a input num comentário /** … */`,
+    ]);
+  });
+
+  it('aceita componente auxiliar no mesmo arquivo de um componente documentado', () => {
+    const problems = check(['sample.docs.ts']);
+
+    expect(problems.some((p) => p.includes('ArgSampleItem'))).toBe(false);
+    expect(problems.some((p) => p.includes('ArgNoStyle'))).toBe(false);
+  });
+
+  it('acusa arquivo que não existe', () => {
+    expect(() => check(['nao-existe.docs.ts'])).toThrow('arquivo não encontrado');
+    expect(() =>
+      checkCatalog({
+        root: ROOT,
+        publicApi: resolve(FIXTURES, 'nao-existe.ts'),
+        docsFiles: [],
+        registryFile: resolve(FIXTURES, 'registry.ts'),
+      }),
+    ).toThrow('arquivo não encontrado');
+  });
+});
+
+describe('registeredPages', () => {
+  it('lê os nomes do array ALL_DOC_PAGES, mesmo tipado e em várias linhas', () => {
+    const source = `
+      import { A_DOCS } from './a';
+      export const ALL_DOC_PAGES: readonly DocPage[] = [
+        A_DOCS,
+        B_DOCS,
+      ];
+      const OUTRA = [C_DOCS];
+    `;
+
+    expect([...registeredPages(source)]).toEqual(['A_DOCS', 'B_DOCS']);
+    expect(registeredPages('sem registro').size).toBe(0);
   });
 });
