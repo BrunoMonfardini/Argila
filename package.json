@@ -16,6 +16,7 @@
     "icons:check": "node scripts/gerar-icones.ts --check",
     "dev": "pnpm manifest && ng serve docs --open",
     "manifest": "node scripts/gerar-manifesto.ts",
+    "manifest:check": "node scripts/gerar-manifesto.ts --check",
     "build:docs": "pnpm manifest && ng build docs",
     "changeset": "changeset",
     "version-packages": "changeset version",

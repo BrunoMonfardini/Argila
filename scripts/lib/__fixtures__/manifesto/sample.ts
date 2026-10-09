@@ -31,3 +31,7 @@ export class ArgSample {
 
 @Component({ selector: 'arg-no-style', template: '' })
 export class ArgNoStyle {}
+
+/** Parte do ArgSample: documentada pela página dele, por estar no mesmo arquivo. */
+@Component({ selector: 'arg-sample-item', template: '' })
+export class ArgSampleItem {}
