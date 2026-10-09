@@ -47,6 +47,9 @@ module.exports = defineConfig([
   {
     files: ['**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
-    rules: {},
+    rules: {
+      // O arg-icon-button recebe o nome pelo label (vira aria-label): é vazio só no template
+      '@angular-eslint/template/elements-content': ['error', { allowList: ['arg-icon-button'] }],
+    },
   },
 ]);

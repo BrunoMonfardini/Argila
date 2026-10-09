@@ -83,15 +83,39 @@ class ManifestReader {
         symbol = this.checker.getAliasedSymbol(symbol);
       }
       const declaration = symbol.declarations?.find(ts.isClassDeclaration);
-      if (declaration && angularDecorator(declaration)) {
+      const isAbstract = declaration?.modifiers?.some(
+        (modifier) => modifier.kind === ts.SyntaxKind.AbstractKeyword,
+      );
+      if (declaration && angularDecorator(declaration) && !isAbstract) {
         classes.add(declaration);
       }
     }
     return [...classes];
   }
 
+  /** Inputs da classe e das classes base; a declaração mais próxima vence. */
   inputsOf(declaration: ts.ClassDeclaration): ManifestInput[] {
-    return declaration.members.flatMap((member) => this.readInput(member));
+    const inputs = new Map<string, ManifestInput>();
+    for (let current = declaration as ts.ClassDeclaration | undefined; current;) {
+      for (const input of current.members.flatMap((member) => this.readInput(member))) {
+        if (!inputs.has(input.name)) inputs.set(input.name, input);
+      }
+      current = this.baseClassOf(current);
+    }
+    return [...inputs.values()];
+  }
+
+  private baseClassOf(declaration: ts.ClassDeclaration): ts.ClassDeclaration | undefined {
+    const extendsClause = declaration.heritageClauses?.find(
+      (clause) => clause.token === ts.SyntaxKind.ExtendsKeyword,
+    );
+    const base = extendsClause?.types[0]?.expression;
+    if (!base) return undefined;
+    let symbol = this.checker.getSymbolAtLocation(base);
+    if (symbol && symbol.flags & ts.SymbolFlags.Alias) {
+      symbol = this.checker.getAliasedSymbol(symbol);
+    }
+    return symbol?.declarations?.find(ts.isClassDeclaration);
   }
 
   private readPage(page: ts.ObjectLiteralExpression, source: ts.SourceFile): ManifestPage {
@@ -136,18 +160,15 @@ class ManifestReader {
     const source = declaration.getSourceFile();
     const decorator = componentDecorator(declaration);
     const file = this.relative(source.fileName);
-    const styleUrl = decorator && stringProperty(decorator, 'styleUrl');
+    const css = (decorator ? styleUrls(decorator) : [])
+      .map((url) => readFileSync(resolve(dirname(source.fileName), url), 'utf8'))
+      .join('\n');
     return {
       className: declaration.name?.text ?? '',
       selector: (decorator && stringProperty(decorator, 'selector')) ?? '',
       file,
       inputs: this.inputsOf(declaration),
-      cssTokens: styleUrl
-        ? componentCssTokens(
-            readFileSync(resolve(dirname(source.fileName), styleUrl), 'utf8'),
-            slug,
-          )
-        : [],
+      cssTokens: componentCssTokens(css, slug),
     };
   }
 
@@ -231,6 +252,15 @@ function readString(object: ts.ObjectLiteralExpression, name: string, file: stri
     throw new ManifestError(file, `${name} precisa ser um texto literal`);
   }
   return value;
+}
+
+/** Arquivos de estilo do componente: `styleUrl` ou a lista `styleUrls`. */
+function styleUrls(decorator: ts.ObjectLiteralExpression): string[] {
+  const single = stringProperty(decorator, 'styleUrl');
+  if (single) return [single];
+  const list = property(decorator, 'styleUrls');
+  if (!list || !ts.isArrayLiteralExpression(list)) return [];
+  return list.elements.filter(ts.isStringLiteralLike).map((element) => element.text);
 }
 
 /** `Component` ou `Directive`, quando a classe tem um desses decorators. */

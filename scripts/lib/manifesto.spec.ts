@@ -164,6 +164,21 @@ describe('parseSemanticTokens', () => {
   });
 });
 
+describe('buildManifest com herança', () => {
+  const page = build('derived.docs.ts').pages['Componentes/derived'];
+
+  it('inclui as inputs da classe base, com a declaração da filha vencendo', () => {
+    const inputs = page.component!.inputs.map((i) => `${i.name}=${i.defaultValue}`);
+
+    expect(inputs).toEqual(["tone='filha'", "size='sm'"]);
+    expect(page.component!.inputs[1].description).toBe('Tamanho, herdado.');
+  });
+
+  it('lê os tokens de todos os arquivos de styleUrls', () => {
+    expect(page.component!.cssTokens).toEqual([{ name: '--arg-derived-gap', value: '4px' }]);
+  });
+});
+
 describe('checkCatalog', () => {
   function check(docsFiles: string[]) {
     return checkCatalog({

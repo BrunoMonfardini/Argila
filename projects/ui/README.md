@@ -46,13 +46,21 @@ export class Exemplo {}
 
 ### Componentes
 
-| Componente | Uso                                                                                                                   |
-| ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| Botão      | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`                                         |
-| Spinner    | `<arg-spinner label="Carregando pedidos" />`                                                                          |
-| Skeleton   | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho) |
-| Lista      | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                     |
-| Ícone      | `<arg-icon name="plus" />`; com significado sozinho, `<arg-icon name="alert-triangle" label="Atenção" />`             |
+| Componente     | Uso                                                                                                                   |
+| -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Botão          | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`                                         |
+| Botão de ícone | `<button arg-icon-button icon="x" label="Fechar"></button>` (`label` obrigatório: vira o nome acessível)              |
+| Spinner        | `<arg-spinner label="Carregando pedidos" />`                                                                          |
+| Skeleton       | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho) |
+| Lista          | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                     |
+| Ícone          | `<arg-icon name="plus" />`; com significado sozinho, `<arg-icon name="alert-triangle" label="Atenção" />`             |
+
+O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
+`templateAccessibility` do angular-eslint, avise a regra de conteúdo:
+
+```js
+'@angular-eslint/template/elements-content': ['error', { allowList: ['arg-icon-button'] }],
+```
 
 Ícones: registre só os que o produto usa, no `app.config.ts`. Nome errado não compila.
 

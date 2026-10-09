@@ -1,6 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
 import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
+import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.docs';
 import { LIST_DOCS } from '../../../ui/src/lib/list/list.docs';
 import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
 import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
@@ -16,6 +17,7 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
 export const ALL_DOC_PAGES: readonly DocPage[] = [
   BUTTON_DOCS,
   ICON_DOCS,
+  ICON_BUTTON_DOCS,
   LIST_DOCS,
   SKELETON_DOCS,
   SPINNER_DOCS,
