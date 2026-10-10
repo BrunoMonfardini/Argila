@@ -1,0 +1,15 @@
+<label class="arg-field__label" [attr.for]="controlId()"
+  >{{ label() }}
+  @if (required()) {
+    <span class="arg-field__required" aria-hidden="true">*</span>
+  }
+</label>
+@if (hint(); as hint) {
+  <p class="arg-field__hint" [id]="hintId">{{ hint }}</p>
+}
+<div class="arg-field__control">
+  <ng-content />
+</div>
+@if (error(); as error) {
+  <p class="arg-field__error" [id]="errorId">{{ error }}</p>
+}

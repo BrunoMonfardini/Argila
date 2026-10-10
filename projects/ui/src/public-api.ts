@@ -4,6 +4,7 @@
 
 export * from './lib/button/button';
 export * from './lib/divider/divider';
+export * from './lib/field/field';
 export * from './lib/icon/icon';
 export * from './lib/icon/icon-def';
 export * from './lib/icon/icon-registry';

@@ -16,15 +16,15 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 _Atualizado em 07/10/2026._
 
-| Marco | Situação                                                                                                   |
-| ----- | ---------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4) |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)            |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                              |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                              |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos         |
-| M5    | Onda 1 em andamento: W1-01 a W1-03 prontos (Icon Button, Link, Divider). **Próximo:** W1-04 (Field)        |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                          |
+| Marco | Situação                                                                                                             |
+| ----- | -------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)           |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                      |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                        |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                        |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                   |
+| M5    | Onda 1 em andamento: W1-01 a W1-04 prontos (Icon Button, Link, Divider, Field). **Próximo:** W1-05 (Input, Textarea) |
+| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                    |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -169,7 +169,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | [x] | W1-01 | Icon Button             | Sem `label` não compila                                                    | 1    |
 | [x] | W1-02 | Link                    | Link externo mostra ícone e avisa o leitor de tela                         | 0,5  |
 | [x] | W1-03 | Divider                 | Horizontal e vertical                                                      | 0,5  |
-| [ ] | W1-04 | Field                   | Rótulo, ajuda e erro ligados por ids; erro anunciado ao aparecer           | 2    |
+| [x] | W1-04 | Field                   | Rótulo, ajuda e erro ligados por ids; erro anunciado ao aparecer           | 2    |
 | [ ] | W1-05 | Input, Textarea         | Funcionam com Reactive Forms e com signals; estados de erro e desabilitado | 2    |
 | [ ] | W1-06 | Checkbox, Radio, Switch | Checkbox indeterminado; grupo de radio navegável por setas                 | 3    |
 | [ ] | W1-07 | Select                  | Nativo estilizado, com Reactive Forms                                      | 2    |
