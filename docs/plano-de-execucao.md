@@ -23,7 +23,7 @@ _Atualizado em 07/10/2026._
 | M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                              |
 | M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                              |
 | M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos         |
-| M5    | **Próximo:** onda 1, base de formulários, começando pelo W1-01 (Icon Button)                               |
+| M5    | Onda 1 em andamento: W1-01 (Icon Button) pronto. **Próximo:** W1-02 (Link)                                 |
 | M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                          |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
@@ -166,7 +166,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 
 | ✓   | ID    | Componente              | Pronto quando, além do checklist                                           | Est. |
 | --- | ----- | ----------------------- | -------------------------------------------------------------------------- | ---- |
-| [ ] | W1-01 | Icon Button             | Sem `label` não compila                                                    | 1    |
+| [x] | W1-01 | Icon Button             | Sem `label` não compila                                                    | 1    |
 | [ ] | W1-02 | Link                    | Link externo mostra ícone e avisa o leitor de tela                         | 0,5  |
 | [ ] | W1-03 | Divider                 | Horizontal e vertical                                                      | 0,5  |
 | [ ] | W1-04 | Field                   | Rótulo, ajuda e erro ligados por ids; erro anunciado ao aparecer           | 2    |

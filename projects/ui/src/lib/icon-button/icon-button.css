@@ -1,0 +1,9 @@
+/*
+ * Os estilos de variante, tamanho e estado vêm de button.css; aqui o botão
+ * vira um quadrado do tamanho da altura. Ajuste por instância com --arg-button-*.
+ */
+:host {
+  flex-shrink: 0;
+  width: var(--arg-button-height);
+  padding: 0;
+}

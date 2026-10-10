@@ -68,11 +68,11 @@ describe('DocShell', () => {
     await fixture.whenStable();
     expect(nav.querySelector('[role="status"]')?.textContent).toContain('Nada encontrado');
 
-    search.value = 'button';
+    search.value = 'icon button';
     search.dispatchEvent(new Event('input'));
     await fixture.whenStable();
     const labels = Array.from(nav.querySelectorAll('a'), (a) => a.textContent?.trim());
-    expect(labels).toEqual(['Button']);
+    expect(labels).toEqual(['Icon Button']);
   });
 
   it('abre a página do Button pela barra lateral, com os exemplos renderizados', async () => {
