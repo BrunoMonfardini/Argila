@@ -34,6 +34,9 @@ const PAIRS: ContrastPair[] = [
   ]),
   { foreground: '--arg-color-text-link', background: '--arg-color-background', minimum: TEXT },
   { foreground: '--arg-color-text-link', background: '--arg-color-surface', minimum: TEXT },
+  // Link no hover (arg-link)
+  { foreground: '--arg-color-primary-hover', background: '--arg-color-background', minimum: TEXT },
+  { foreground: '--arg-color-primary-hover', background: '--arg-color-surface', minimum: TEXT },
   // Botão primário em todos os estados
   { foreground: '--arg-color-on-primary', background: '--arg-color-primary', minimum: TEXT },
   { foreground: '--arg-color-on-primary', background: '--arg-color-primary-hover', minimum: TEXT },
