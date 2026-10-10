@@ -23,6 +23,11 @@
   align-items: center;
 }
 
+/* Contêineres de bloco do exemplo ocupam a linha inteira, como numa página */
+.doc-example .doc-example__preview > * > :is(div, section, article, form) {
+  flex: 1 1 100%;
+}
+
 .doc-example .doc-example__toggle {
   margin-block: var(--arg-space-2);
 }
