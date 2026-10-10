@@ -1,0 +1,84 @@
+/*
+ * Sem encapsulamento (ver ArgField): todo seletor começa em .arg-field.
+ * Tokens de componente (camada 3), ex.: <arg-field style="--arg-field-gap: var(--arg-space-2)">.
+ */
+.arg-field {
+  --arg-field-gap: var(--arg-space-1);
+  --arg-field-control-height: 2.5rem;
+  --arg-field-control-border: var(--arg-color-border-strong);
+
+  display: grid;
+  gap: var(--arg-field-gap);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+}
+
+.arg-field .arg-field__label {
+  font-size: var(--arg-font-size-body-sm);
+  font-weight: var(--arg-font-weight-medium);
+}
+
+.arg-field .arg-field__required {
+  margin-inline-start: 0.2em;
+  color: var(--arg-color-danger);
+}
+
+.arg-field .arg-field__hint,
+.arg-field .arg-field__error {
+  margin: 0;
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-field .arg-field__hint {
+  color: var(--arg-color-text-muted);
+}
+
+/* A cor não é o único aviso: a mensagem sempre diz o que está errado */
+.arg-field .arg-field__error {
+  color: var(--arg-color-danger);
+  font-weight: var(--arg-font-weight-medium);
+}
+
+.arg-field.arg-field--invalid {
+  --arg-field-control-border: var(--arg-color-danger);
+}
+
+/*
+ * Estilo base do controle nativo dentro do campo, até o arg-input (onda 1,
+ * W1-05) assumir o visual dos controles.
+ */
+.arg-field .arg-field__control > :is(input, select, textarea) {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--arg-field-control-height);
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border: 1px solid var(--arg-field-control-border);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font: inherit;
+}
+
+.arg-field .arg-field__control > :is(input, select, textarea):focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+/* Inválido também engrossa a borda: não depende só da cor */
+.arg-field.arg-field--invalid .arg-field__control > :is(input, select, textarea) {
+  border-width: 2px;
+}
+
+.arg-field .arg-field__control > :is(input, select, textarea):disabled {
+  border-color: var(--arg-color-disabled-border);
+  background: var(--arg-color-disabled-bg);
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .arg-field .arg-field__control > :is(input, select, textarea) {
+    border-color: FieldText;
+  }
+}
