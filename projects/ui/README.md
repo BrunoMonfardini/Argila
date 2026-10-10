@@ -51,6 +51,7 @@ export class Exemplo {}
 | Botão          | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`                                                  |
 | Botão de ícone | `<button arg-icon-button icon="x" label="Fechar"></button>` (`label` obrigatório: vira o nome acessível)                       |
 | Link           | `<a arg-link routerLink="/ajuda">Ajuda</a>`; em outra aba, `<a arg-link external href="…">`: ícone e aviso para leitor de tela |
+| Divisor        | `<hr arg-divider />`; entre itens lado a lado, `<hr arg-divider orientation="vertical" decorative />`                          |
 | Spinner        | `<arg-spinner label="Carregando pedidos" />`                                                                                   |
 | Skeleton       | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho)          |
 | Lista          | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                              |

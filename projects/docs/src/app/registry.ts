@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
+import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
 import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
 import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.docs';
 import { LINK_DOCS } from '../../../ui/src/lib/link/link.docs';
@@ -17,6 +18,7 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
   BUTTON_DOCS,
+  DIVIDER_DOCS,
   ICON_DOCS,
   ICON_BUTTON_DOCS,
   LINK_DOCS,

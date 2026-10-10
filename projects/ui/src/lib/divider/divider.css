@@ -1,0 +1,43 @@
+/*
+ * Tokens de componente (camada 3), ex.: <hr arg-divider style="--arg-divider-color: var(--arg-color-border-strong)">.
+ * A linha é uma borda, não um fundo: em forced-colors o navegador apaga fundos e mantém bordas.
+ */
+:host {
+  --arg-divider-color: var(--arg-color-border);
+  --arg-divider-thickness: 1px;
+  --arg-divider-spacing: var(--arg-space-4);
+
+  flex-shrink: 0;
+  /* Num grid que centraliza os itens, ocupa a largura em vez de encolher a zero */
+  justify-self: stretch;
+  box-sizing: border-box;
+  margin: var(--arg-divider-spacing) 0;
+  border: 0;
+  border-block-start: var(--arg-divider-thickness) solid var(--arg-divider-color);
+  block-size: 0;
+}
+
+:host(.arg-divider--vertical) {
+  display: inline-block;
+  justify-self: auto;
+  align-self: stretch;
+  margin: 0 var(--arg-divider-spacing);
+  border-block-start: 0;
+  border-inline-start: var(--arg-divider-thickness) solid var(--arg-divider-color);
+  block-size: auto;
+  min-block-size: 1em;
+  inline-size: 0;
+  vertical-align: middle;
+}
+
+:host(.arg-divider--spacing-none) {
+  --arg-divider-spacing: 0;
+}
+
+:host(.arg-divider--spacing-sm) {
+  --arg-divider-spacing: var(--arg-space-2);
+}
+
+:host(.arg-divider--spacing-lg) {
+  --arg-divider-spacing: var(--arg-space-8);
+}
