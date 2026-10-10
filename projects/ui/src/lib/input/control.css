@@ -1,0 +1,70 @@
+/*
+ * Visual dos controles de texto (arg-input, arg-textarea).
+ * Tokens de componente (camada 3), ex.: <input arg-input style="--arg-input-radius: 0">.
+ */
+:host {
+  --arg-input-height: 2.5rem;
+  --arg-input-padding-block: var(--arg-space-2);
+  --arg-input-padding-inline: var(--arg-space-3);
+  --arg-input-bg: var(--arg-color-surface);
+  --arg-input-border: var(--arg-color-border-strong);
+  --arg-input-border-hover: var(--arg-color-text-muted);
+  --arg-input-border-invalid: var(--arg-color-danger);
+  --arg-input-radius: var(--arg-radius-control);
+
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--arg-input-height);
+  margin: 0;
+  padding: var(--arg-input-padding-block) var(--arg-input-padding-inline);
+  border: 1px solid var(--arg-input-border);
+  border-radius: var(--arg-input-radius);
+  background: var(--arg-input-bg);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-control);
+  transition: border-color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+:host::placeholder {
+  color: var(--arg-color-text-muted);
+  opacity: 1;
+}
+
+:host(:hover:not(:disabled, [readonly])) {
+  border-color: var(--arg-input-border-hover);
+}
+
+/* Campo de texto mostra o foco também pelo mouse: é onde a digitação vai */
+:host(:focus) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+/* Inválido muda a cor e engrossa a borda: não depende só da cor */
+:host([aria-invalid='true']) {
+  border-width: 2px;
+  border-color: var(--arg-input-border-invalid);
+}
+
+:host(:disabled) {
+  border-color: var(--arg-color-disabled-border);
+  background: var(--arg-color-disabled-bg);
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+:host([readonly]) {
+  background: var(--arg-color-surface-sunken);
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: FieldText;
+  }
+
+  :host(:disabled) {
+    border-color: GrayText;
+  }
+}

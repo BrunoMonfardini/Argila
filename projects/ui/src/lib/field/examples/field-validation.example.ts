@@ -2,16 +2,17 @@ import { Component, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArgButton } from '../../button/button';
+import { ArgInput } from '../../input/input';
 import { ARG_FIELD } from '../field';
 
 /** O erro aparece ao sair do campo e é anunciado para leitores de tela. */
 @Component({
   selector: 'doc-field-validation-example',
-  imports: [ARG_FIELD, ArgButton, ReactiveFormsModule],
+  imports: [ARG_FIELD, ArgButton, ArgInput, ReactiveFormsModule],
   template: `
     <form (submit)="$event.preventDefault(); email.markAsTouched()">
       <arg-field label="E-mail" hint="Para o lembrete da consulta." [error]="error()" required>
-        <input argFieldControl type="email" autocomplete="email" [formControl]="email" />
+        <input arg-input type="email" autocomplete="email" [formControl]="email" />
       </arg-field>
       <button arg-button type="submit" variant="secondary">Continuar</button>
     </form>
