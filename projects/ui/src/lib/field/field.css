@@ -45,14 +45,14 @@
 }
 
 /*
- * Estilo base do controle nativo dentro do campo, até o arg-input (onda 1,
- * W1-05) assumir o visual dos controles.
+ * Estilo provisório do <select> nativo dentro do campo, até o arg-select
+ * (onda 1, W1-07). Input e textarea usam arg-input e arg-textarea.
  */
-.arg-field .arg-field__control > :is(input, select, textarea) {
+.arg-field .arg-field__control > select {
   box-sizing: border-box;
   width: 100%;
   min-height: var(--arg-field-control-height);
-  padding: var(--arg-space-2) var(--arg-space-3);
+  padding: 0 var(--arg-space-3);
   border: 1px solid var(--arg-field-control-border);
   border-radius: var(--arg-radius-control);
   background: var(--arg-color-surface);
@@ -60,25 +60,11 @@
   font: inherit;
 }
 
-.arg-field .arg-field__control > :is(input, select, textarea):focus-visible {
+.arg-field .arg-field__control > select:focus-visible {
   outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
   outline-offset: var(--arg-focus-ring-offset);
 }
 
-/* Inválido também engrossa a borda: não depende só da cor */
-.arg-field.arg-field--invalid .arg-field__control > :is(input, select, textarea) {
+.arg-field.arg-field--invalid .arg-field__control > select {
   border-width: 2px;
-}
-
-.arg-field .arg-field__control > :is(input, select, textarea):disabled {
-  border-color: var(--arg-color-disabled-border);
-  background: var(--arg-color-disabled-bg);
-  color: var(--arg-color-text-disabled);
-  cursor: not-allowed;
-}
-
-@media (forced-colors: active) {
-  .arg-field .arg-field__control > :is(input, select, textarea) {
-    border-color: FieldText;
-  }
 }
