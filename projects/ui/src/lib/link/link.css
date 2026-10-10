@@ -1,0 +1,54 @@
+/*
+ * Tokens de componente (camada 3), ex.: <a arg-link style="--arg-link-color: currentColor">.
+ */
+:host {
+  --arg-link-color: var(--arg-color-text-link);
+  --arg-link-color-hover: var(--arg-color-primary-hover);
+  --arg-link-underline-offset: 0.2em;
+
+  color: var(--arg-link-color);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--arg-link-underline-offset);
+  cursor: pointer;
+  transition: color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+/* O traço mais grosso no hover não depende de cor para ser percebido */
+:host(:hover) {
+  color: var(--arg-link-color-hover);
+  text-decoration-thickness: 2px;
+}
+
+:host(:focus-visible) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+:host(.arg-link--muted) {
+  --arg-link-color: var(--arg-color-text-muted);
+  --arg-link-color-hover: var(--arg-color-text);
+}
+
+.arg-link__icon {
+  --arg-icon-size: 0.875em;
+
+  margin-inline-start: 0.2em;
+  vertical-align: -0.1em;
+}
+
+/* Só para leitores de tela */
+.arg-link__hint {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (forced-colors: active) {
+  :host {
+    color: LinkText;
+  }
+}
