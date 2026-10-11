@@ -1,0 +1,22 @@
+@if (icon(); as icon) {
+  <span class="arg-empty-state__icon"><arg-icon [name]="icon" size="lg" /></span>
+}
+@switch (level()) {
+  @case (3) {
+    <h3 class="arg-empty-state__heading" [id]="headingId">{{ heading() }}</h3>
+  }
+  @case (4) {
+    <h4 class="arg-empty-state__heading" [id]="headingId">{{ heading() }}</h4>
+  }
+  @case (5) {
+    <h5 class="arg-empty-state__heading" [id]="headingId">{{ heading() }}</h5>
+  }
+  @case (6) {
+    <h6 class="arg-empty-state__heading" [id]="headingId">{{ heading() }}</h6>
+  }
+  @default {
+    <h2 class="arg-empty-state__heading" [id]="headingId">{{ heading() }}</h2>
+  }
+}
+<div class="arg-empty-state__text"><ng-content /></div>
+<div class="arg-empty-state__actions"><ng-content select="[arg-empty-state-action]" /></div>

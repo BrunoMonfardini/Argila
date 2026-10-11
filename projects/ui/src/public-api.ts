@@ -9,6 +9,7 @@ export * from './lib/button/button';
 export * from './lib/card/card';
 export * from './lib/choice/choice';
 export * from './lib/divider/divider';
+export * from './lib/empty-state/empty-state';
 export * from './lib/field/field';
 export * from './lib/icon/icon';
 export * from './lib/icon/icon-def';

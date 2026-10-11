@@ -29,7 +29,7 @@ export const LIST_LOADING_DOCS: DocPage = {
       'Skeleton no primeiro carregamento de conteúdo com forma conhecida (listas, cards).',
       'Spinner no botão (`loading`) para ações do usuário que atualizam o que já está na tela.',
       'Spinner solto quando o carregamento não tem forma previsível.',
-      'Estado vazio que diga o que falta e, se possível, como resolver.',
+      'Empty State (`arg-empty-state`) quando a busca volta vazia: diga o que falta e ofereça a ação que resolve.',
     ],
     dont: [
       'Não mostre indicador em esperas abaixo de ~300 ms.',
@@ -39,5 +39,6 @@ export const LIST_LOADING_DOCS: DocPage = {
   accessibility: [
     'A lista em skeleton tem `aria-busy="true"` e `aria-label="Carregando pedidos"`; as linhas falsas ficam ocultas.',
     'Ao recarregar, a lista recebe `aria-busy` e o botão anuncia o carregamento.',
+    'O estado vazio tem um título de verdade (`<h5>` aqui, abaixo do `<h4>` da seção), achado por quem navega por títulos.',
   ],
 };
