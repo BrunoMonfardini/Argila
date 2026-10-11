@@ -1,0 +1,74 @@
+/*
+ * Tokens de componente (camada 3), ex.: <section arg-empty-state style="--arg-empty-state-padding: 1rem">.
+ */
+:host {
+  --arg-empty-state-padding: var(--arg-space-8);
+  --arg-empty-state-border: var(--arg-color-border);
+  --arg-empty-state-radius: var(--arg-radius-container);
+  --arg-empty-state-icon-bg: var(--arg-color-surface-sunken);
+  --arg-empty-state-icon-fg: var(--arg-color-text-muted);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--arg-space-2);
+  box-sizing: border-box;
+  padding: var(--arg-empty-state-padding);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-body);
+  text-align: center;
+}
+
+:host(.arg-empty-state--bordered) {
+  border: 1px dashed var(--arg-empty-state-border);
+  border-radius: var(--arg-empty-state-radius);
+}
+
+.arg-empty-state__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-block-end: var(--arg-space-2);
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-empty-state-icon-bg);
+  color: var(--arg-empty-state-icon-fg);
+}
+
+.arg-empty-state__heading {
+  margin: 0;
+  font-size: var(--arg-font-size-body-lg);
+  font-weight: var(--arg-font-weight-strong);
+  line-height: var(--arg-line-height-heading);
+}
+
+.arg-empty-state__text {
+  max-width: 40ch;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-empty-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--arg-space-2);
+  margin-block-start: var(--arg-space-3);
+}
+
+.arg-empty-state__text:empty,
+.arg-empty-state__actions:empty {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  :host(.arg-empty-state--bordered) {
+    border-color: CanvasText;
+  }
+
+  .arg-empty-state__icon {
+    border: 1px solid CanvasText;
+  }
+}

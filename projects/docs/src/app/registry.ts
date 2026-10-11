@@ -6,6 +6,7 @@ import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
 import { CARD_DOCS } from '../../../ui/src/lib/card/card.docs';
 import { CHOICE_DOCS } from '../../../ui/src/lib/choice/choice.docs';
 import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
+import { EMPTY_STATE_DOCS } from '../../../ui/src/lib/empty-state/empty-state.docs';
 import { FIELD_DOCS } from '../../../ui/src/lib/field/field.docs';
 import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
 import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.docs';
@@ -33,6 +34,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   CARD_DOCS,
   CHOICE_DOCS,
   DIVIDER_DOCS,
+  EMPTY_STATE_DOCS,
   FIELD_DOCS,
   ICON_DOCS,
   ICON_BUTTON_DOCS,

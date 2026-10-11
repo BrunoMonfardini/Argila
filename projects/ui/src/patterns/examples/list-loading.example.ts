@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, input, signal } from '@angular/core';
 import { ArgButton } from '../../lib/button/button';
+import { ArgEmptyState } from '../../lib/empty-state/empty-state';
 import { ARG_LIST } from '../../lib/list/list';
 import { ArgSkeleton } from '../../lib/skeleton/skeleton';
 import { ArgSpinner } from '../../lib/spinner/spinner';
@@ -23,7 +24,7 @@ const ORDERS: Order[] = [
  */
 @Component({
   selector: 'doc-list-loading-example',
-  imports: [ArgButton, ArgSkeleton, ArgSpinner, ARG_LIST],
+  imports: [ArgButton, ArgEmptyState, ArgSkeleton, ArgSpinner, ARG_LIST],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section style="width: 100%; max-width: 28rem; display: grid; gap: var(--arg-space-3)">
@@ -54,13 +55,10 @@ const ORDERS: Order[] = [
           </ul>
         }
         @case ('empty') {
-          <p
-            style="margin: 0; padding: var(--arg-space-8); text-align: center;
-            color: var(--arg-color-text-muted); border: 1px dashed var(--arg-color-border);
-            border-radius: var(--arg-radius-container)"
-          >
-            Nenhum pedido por aqui ainda.
-          </p>
+          <section arg-empty-state heading="Nenhum pedido ainda" icon="plus" [level]="5" bordered>
+            Os pedidos feitos no balcão e no site aparecem aqui.
+            <button arg-button arg-empty-state-action size="sm">Novo pedido</button>
+          </section>
         }
         @default {
           <ul arg-list divided bordered [attr.aria-busy]="refreshing() || null">

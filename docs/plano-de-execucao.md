@@ -16,15 +16,15 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 _Atualizado em 07/10/2026._
 
-| Marco | Situação                                                                                                                                                                           |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                         |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                    |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                      |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                      |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                 |
-| M5    | **Onda 1 pronta** (W1-01 a W1-07: base de formulários). **Onda 2 em andamento:** W2-01 (Badge, Tag, Avatar), W2-02 (Card) e W2-03 (Alert) feitos. **Próximo:** W2-04 (Empty State) |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                  |
+| Marco | Situação                                                                                                                                                                                                 |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                               |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                          |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                            |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                            |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                       |
+| M5    | **Onda 1 pronta** (W1-01 a W1-07: base de formulários). **Onda 2 em andamento:** W2-01 (Badge, Tag, Avatar), W2-02 (Card), W2-03 (Alert) e W2-04 (Empty State) feitos. **Próximo:** W2-05 (Progress Bar) |
+| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                                        |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -181,7 +181,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | [x] | W2-01 | Badge, Tag, Avatar | Tag removível por teclado; avatar com iniciais quando não há imagem | 2    |
 | [x] | W2-02 | Card               | Card inteiro clicável sem quebrar os botões internos                | 1    |
 | [x] | W2-03 | Alert              | Quatro variantes, com ícone e `role` corretos                       | 1    |
-| [ ] | W2-04 | Empty State        | Usado no padrão "Carregamento de lista"                             | 1    |
+| [x] | W2-04 | Empty State        | Usado no padrão "Carregamento de lista"                             | 1    |
 | [ ] | W2-05 | Progress Bar       | Determinado e indeterminado, com nome acessível                     | 1    |
 | [ ] | W2-06 | Tooltip            | Abre no foco e no hover; fecha com Esc                              | 2    |
 
