@@ -37,16 +37,6 @@
   vertical-align: -0.1em;
 }
 
-/* Só para leitores de tela */
-.arg-link__hint {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 @media (forced-colors: active) {
   :host {
     color: LinkText;

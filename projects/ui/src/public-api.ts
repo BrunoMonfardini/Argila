@@ -2,6 +2,7 @@
  * API pública do @brunomonfardini/ui
  */
 
+export * from './lib/alert/alert';
 export * from './lib/avatar/avatar';
 export * from './lib/badge/badge';
 export * from './lib/button/button';

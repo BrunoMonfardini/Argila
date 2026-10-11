@@ -1,0 +1,19 @@
+<arg-icon class="arg-alert__icon" [name]="icon()" />
+<div class="arg-alert__body">
+  <span class="arg-alert__sr arg-sr-only">{{ label() }}: </span>
+  @if (heading()) {
+    <p class="arg-alert__heading">{{ heading() }}</p>
+  }
+  <div class="arg-alert__content"><ng-content /></div>
+  <div class="arg-alert__actions"><ng-content select="[arg-alert-action]" /></div>
+</div>
+@if (dismissible()) {
+  <button
+    arg-icon-button
+    class="arg-alert__dismiss"
+    icon="x"
+    size="sm"
+    [label]="dismissText()"
+    (click)="dismissed.emit()"
+  ></button>
+}

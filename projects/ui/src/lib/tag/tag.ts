@@ -26,7 +26,7 @@ import { injectUniqueId } from '../internal/unique-id';
   imports: [ArgIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tag.html',
-  styleUrl: './tag.css',
+  styleUrls: ['./tag.css', '../internal/sr-only.css'],
   host: {
     class: 'arg-tag',
     '[class.arg-tag--removable]': 'removable()',

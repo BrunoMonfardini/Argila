@@ -49,3 +49,15 @@ this.announcer.announce('Horário indisponível', 'assertive'); // só para erro
 ```
 
 A mesma mensagem duas vezes é anunciada duas vezes. Ao sair da tela que gerou as mensagens, `clear()` limpa as pendentes.
+
+## `sr-only.css`: texto só para leitores de tela
+
+Inclua o arquivo em `styleUrls` e use a classe `arg-sr-only` no elemento. Fica fora da tela visualmente, mas o leitor de tela lê:
+
+```ts
+styleUrls: ['./tag.css', '../internal/sr-only.css'],
+```
+
+```html
+<span class="arg-sr-only">Remover</span>
+```

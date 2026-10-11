@@ -57,6 +57,8 @@ const PAIRS: ContrastPair[] = [
     { foreground: `--arg-color-on-${tone}`, background: `--arg-color-${tone}`, minimum: TEXT },
     { foreground: `--arg-color-${tone}`, background: `--arg-color-${tone}-subtle`, minimum: TEXT },
     { foreground: `--arg-color-${tone}`, background: '--arg-color-surface', minimum: TEXT },
+    // Corpo do Alert: texto comum sobre o fundo suave do tom
+    { foreground: '--arg-color-text', background: `--arg-color-${tone}-subtle`, minimum: TEXT },
   ]),
   // Badge e Tag neutros: texto sobre o fundo rebaixado
   { foreground: '--arg-color-text', background: '--arg-color-surface-sunken', minimum: TEXT },

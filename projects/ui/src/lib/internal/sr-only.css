@@ -1,0 +1,12 @@
+/*
+ * Texto só para leitores de tela: fora da tela visualmente, mas lido.
+ * Inclua em styleUrls e use a classe arg-sr-only.
+ */
+.arg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
