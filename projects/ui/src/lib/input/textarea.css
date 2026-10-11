@@ -1,0 +1,5 @@
+/* O textarea cresce para baixo; a largura acompanha o campo */
+:host {
+  min-height: calc(var(--arg-input-height) * 2);
+  resize: vertical;
+}

@@ -4,6 +4,7 @@ import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
 import { FIELD_DOCS } from '../../../ui/src/lib/field/field.docs';
 import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
 import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.docs';
+import { INPUT_DOCS } from '../../../ui/src/lib/input/input.docs';
 import { LINK_DOCS } from '../../../ui/src/lib/link/link.docs';
 import { LIST_DOCS } from '../../../ui/src/lib/list/list.docs';
 import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
@@ -23,6 +24,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   FIELD_DOCS,
   ICON_DOCS,
   ICON_BUTTON_DOCS,
+  INPUT_DOCS,
   LINK_DOCS,
   LIST_DOCS,
   SKELETON_DOCS,
