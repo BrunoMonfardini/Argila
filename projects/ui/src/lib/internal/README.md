@@ -61,3 +61,13 @@ styleUrls: ['./tag.css', '../internal/sr-only.css'],
 ```html
 <span class="arg-sr-only">Remover</span>
 ```
+
+## `placeBeside(gatilho, painel, lado, alinhamento)`: posição sem anchor CSS
+
+Tooltip e Popover se posicionam por anchor CSS. Nos navegadores sem suporte (`supportsAnchor(window)` falso), chame `placeBeside` ao abrir: ele põe o painel (com `position: fixed`) ao lado do gatilho, troca para o lado oposto quando falta espaço e nunca deixa o painel sair da tela.
+
+```ts
+if (!supportsAnchor(this.document.defaultView)) {
+  placeBeside(this.trigger, this.panel, 'bottom', 'start');
+}
+```
