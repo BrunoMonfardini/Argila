@@ -112,6 +112,9 @@
   --arg-radius-container: var(--arg-core-radius-3);
   --arg-radius-full: var(--arg-core-radius-full);
 
+  /* Contorno de botões e campos: temas de contorno grosso (ex.: arcade) aumentam */
+  --arg-border-width-control: 1px;
+
   /* Tipografia */
   --arg-font-family: var(--arg-core-font-sans);
   --arg-font-family-mono: var(--arg-core-font-mono);
@@ -144,6 +147,9 @@
   --arg-shadow-sm: 0 1px 2px var(--arg-shadow-color);
   --arg-shadow-md: 0 4px 12px var(--arg-shadow-color);
   --arg-shadow-lg: 0 12px 32px var(--arg-shadow-color);
+  /* Relevo de botões e de campos de texto; o padrão é plano */
+  --arg-shadow-control: none;
+  --arg-shadow-field: none;
 
   /* Foco */
   --arg-focus-ring-width: 2px;

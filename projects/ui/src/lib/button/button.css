@@ -9,6 +9,7 @@
   --arg-button-fg: var(--arg-color-on-primary);
   --arg-button-border: transparent;
   --arg-button-radius: var(--arg-radius-control);
+  --arg-button-shadow: var(--arg-shadow-control);
   --arg-button-height: 2.5rem;
   --arg-button-padding-inline: var(--arg-space-4);
   --arg-button-gap: var(--arg-space-2);
@@ -21,8 +22,9 @@
   gap: var(--arg-button-gap);
   min-height: var(--arg-button-height);
   padding: 0 var(--arg-button-padding-inline);
-  border: 1px solid var(--arg-button-border);
+  border: var(--arg-border-width-control) solid var(--arg-button-border);
   border-radius: var(--arg-button-radius);
+  box-shadow: var(--arg-button-shadow);
   background: var(--arg-button-bg);
   color: var(--arg-button-fg);
   font-family: var(--arg-font-family);
@@ -76,6 +78,7 @@
   );
   --arg-button-fg: var(--arg-color-primary);
   --arg-button-padding-inline: var(--arg-space-3);
+  --arg-button-shadow: none;
 }
 
 :host(.arg-button--danger) {

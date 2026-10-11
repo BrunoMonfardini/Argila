@@ -10,7 +10,7 @@ export function tokenKind(name: string): TokenKind {
   }
   if (name.startsWith('--arg-space-')) return 'space';
   if (name.startsWith('--arg-radius-')) return 'radius';
-  if (/^--arg-shadow-(sm|md|lg)$/.test(name)) return 'shadow';
+  if (/^--arg-shadow-(sm|md|lg|control|field)$/.test(name)) return 'shadow';
   if (name.startsWith('--arg-font-size-')) return 'font-size';
   return 'other';
 }

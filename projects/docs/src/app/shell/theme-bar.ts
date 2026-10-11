@@ -7,7 +7,7 @@ interface Option<T extends string> {
   label: string;
 }
 
-export type DocBrand = 'argila' | 'example';
+export type DocBrand = 'argila' | 'example' | 'coda' | 'transparente' | 'arcade' | 'windows-xp';
 
 const SCHEMES: Option<ArgColorScheme>[] = [
   { value: 'light', label: 'Claro' },
@@ -19,6 +19,10 @@ const SCHEMES: Option<ArgColorScheme>[] = [
 const BRANDS: Option<DocBrand>[] = [
   { value: 'argila', label: 'Argila (padrão)' },
   { value: 'example', label: 'Exemplo' },
+  { value: 'coda', label: 'CODA' },
+  { value: 'transparente', label: 'Transparente' },
+  { value: 'arcade', label: 'Arcade' },
+  { value: 'windows-xp', label: 'Windows XP' },
 ];
 
 const SCHEME_KEY = 'argila-docs:tema';

@@ -17,8 +17,9 @@
   min-height: var(--arg-input-height);
   margin: 0;
   padding: var(--arg-input-padding-block) var(--arg-input-padding-inline);
-  border: 1px solid var(--arg-input-border);
+  border: var(--arg-border-width-control) solid var(--arg-input-border);
   border-radius: var(--arg-input-radius);
+  box-shadow: var(--arg-shadow-field);
   background-color: var(--arg-input-bg);
   color: var(--arg-color-text);
   font-family: var(--arg-font-family);
@@ -44,7 +45,7 @@
 
 /* Inválido muda a cor e engrossa a borda: não depende só da cor */
 :host([aria-invalid='true']) {
-  border-width: 2px;
+  border-width: calc(var(--arg-border-width-control) + 1px);
   border-color: var(--arg-input-border-invalid);
 }
 
