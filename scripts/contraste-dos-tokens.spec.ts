@@ -34,6 +34,8 @@ const PAIRS: ContrastPair[] = [
   ]),
   { foreground: '--arg-color-text-link', background: '--arg-color-background', minimum: TEXT },
   { foreground: '--arg-color-text-link', background: '--arg-color-surface', minimum: TEXT },
+  // Links sobre a superfície elevada: diálogos, popovers, menus, "pular para o conteúdo"
+  { foreground: '--arg-color-text-link', background: '--arg-color-surface-raised', minimum: TEXT },
   // Link no hover (arg-link)
   { foreground: '--arg-color-primary-hover', background: '--arg-color-background', minimum: TEXT },
   { foreground: '--arg-color-primary-hover', background: '--arg-color-surface', minimum: TEXT },
