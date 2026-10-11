@@ -1,0 +1,29 @@
+/*
+ * Tema CODA (Semana da Computação e Dados da UFABC): rosa e amarelo sobre
+ * grafite, contornos de 2px e fonte pixelada.
+ *
+ * A fonte Silkscreen precisa ser carregada pelo produto (o catálogo carrega
+ * pelo Google Fonts em index.html); sem ela, cai na monoespaçada do sistema.
+ */
+:root[data-arg-brand='coda'] {
+  --arg-color-primary: light-dark(#b0205f, #f27aae);
+  --arg-color-on-primary: light-dark(#ffffff, #1c1c1c);
+
+  --arg-color-background: light-dark(#fff5fa, #1c1c1c);
+  --arg-color-surface: light-dark(#ffffff, #222222);
+  --arg-color-surface-raised: light-dark(#ffffff, #2a2a2a);
+  --arg-color-surface-sunken: light-dark(#fbe7f0, #161616);
+
+  --arg-color-text: light-dark(#1c1c1c, #ffffff);
+  --arg-color-text-muted: light-dark(#5c4a53, #b8b8b8);
+
+  --arg-color-border: light-dark(#e8a3c4, #6e2f4e);
+  --arg-color-border-strong: light-dark(#b0205f, #e8559c);
+  --arg-color-focus: light-dark(#6b5e00, #f5ec3a);
+
+  --arg-radius-control: var(--arg-core-radius-2);
+  --arg-radius-container: var(--arg-core-radius-3);
+  --arg-border-width-control: 2px;
+
+  --arg-font-family: 'Silkscreen', ui-monospace, Consolas, monospace;
+}

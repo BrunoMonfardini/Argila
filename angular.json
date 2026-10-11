@@ -71,6 +71,10 @@
               "projects/ui/tokens/argila.css",
               "projects/ui/tokens/base.css",
               "projects/ui/tokens/themes/example-brand.css",
+              "projects/ui/tokens/themes/coda.css",
+              "projects/ui/tokens/themes/transparente.css",
+              "projects/ui/tokens/themes/arcade.css",
+              "projects/ui/tokens/themes/windows-xp.css",
               "projects/docs/src/styles.css"
             ]
           },
