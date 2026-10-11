@@ -58,6 +58,8 @@ const PAIRS: ContrastPair[] = [
     { foreground: `--arg-color-${tone}`, background: `--arg-color-${tone}-subtle`, minimum: TEXT },
     { foreground: `--arg-color-${tone}`, background: '--arg-color-surface', minimum: TEXT },
   ]),
+  // Badge e Tag neutros: texto sobre o fundo rebaixado
+  { foreground: '--arg-color-text', background: '--arg-color-surface-sunken', minimum: TEXT },
   // Switch: trilho desligado e ligado contra a superfície, e o botão contra o trilho
   { foreground: '--arg-color-text-muted', background: '--arg-color-surface', minimum: NON_TEXT },
   { foreground: '--arg-color-primary', background: '--arg-color-surface', minimum: NON_TEXT },

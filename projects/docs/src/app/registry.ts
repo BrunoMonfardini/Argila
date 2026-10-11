@@ -1,4 +1,6 @@
 import { InjectionToken } from '@angular/core';
+import { AVATAR_DOCS } from '../../../ui/src/lib/avatar/avatar.docs';
+import { BADGE_DOCS } from '../../../ui/src/lib/badge/badge.docs';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
 import { CHOICE_DOCS } from '../../../ui/src/lib/choice/choice.docs';
 import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
@@ -11,6 +13,7 @@ import { LIST_DOCS } from '../../../ui/src/lib/list/list.docs';
 import { SELECT_DOCS } from '../../../ui/src/lib/select/select.docs';
 import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
 import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
+import { TAG_DOCS } from '../../../ui/src/lib/tag/tag.docs';
 import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
 import type { DocCategory, DocPage } from '../../../ui/src/docs/doc-page';
 
@@ -21,6 +24,8 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  * e acrescente aqui. O CI confere que nenhum componente exportado ficou de fora.
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
+  AVATAR_DOCS,
+  BADGE_DOCS,
   BUTTON_DOCS,
   CHOICE_DOCS,
   DIVIDER_DOCS,
@@ -33,6 +38,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   SELECT_DOCS,
   SKELETON_DOCS,
   SPINNER_DOCS,
+  TAG_DOCS,
   LIST_LOADING_DOCS,
 ];
 

@@ -61,6 +61,9 @@ export class Exemplo {}
 | Skeleton        | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho)                                                        |
 | Lista           | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                                                                            |
 | Ícone           | `<arg-icon name="plus" />`; com significado sozinho, `<arg-icon name="alert-triangle" label="Atenção" />`                                                                    |
+| Badge           | `<span arg-badge tone="success">Confirmado</span>` (tons: neutral, primary, info, success, warning, danger)                                                                  |
+| Tag             | `<arg-tag removable (removed)="tirar(f)">{{ f }}</arg-tag>`: o botão se chama "Remover {texto}"; Delete e Backspace também removem                                           |
+| Avatar          | `<arg-avatar name="Maria Souza" [src]="foto()" />`: sem foto, ou se ela falhar, mostra as iniciais; `decorative` com o nome ao lado                                          |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
