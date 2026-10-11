@@ -1,0 +1,48 @@
+/*
+ * Item do menu. Tokens de componente (camada 3), definidos no item.
+ */
+:host {
+  --arg-menu-item-bg-hover: color-mix(in oklab, var(--arg-color-text) 6%, transparent);
+
+  display: flex;
+  align-items: center;
+  gap: var(--arg-space-2);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.25rem;
+  margin: 0;
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border: 0;
+  border-radius: var(--arg-radius-control);
+  background: transparent;
+  color: var(--arg-color-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+:host(:hover),
+:host(:focus) {
+  background: var(--arg-menu-item-bg-hover);
+}
+
+:host(:focus-visible) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: calc(var(--arg-focus-ring-width) * -1);
+}
+
+:host(.arg-menu__item--danger) {
+  color: var(--arg-color-danger);
+}
+
+:host(:disabled) {
+  background: transparent;
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  :host(:focus) {
+    outline: 2px solid Highlight;
+  }
+}

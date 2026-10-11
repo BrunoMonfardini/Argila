@@ -1,0 +1,10 @@
+/*
+ * O menu usa o painel do popover (popover.css) e muda o espaçamento.
+ * Tokens de componente (camada 3), ex.: <arg-menu style="--arg-menu-min-width: 16rem">.
+ */
+:host {
+  --arg-popover-padding: var(--arg-space-1);
+  --arg-menu-min-width: 12rem;
+
+  min-width: var(--arg-menu-min-width);
+}

@@ -15,6 +15,7 @@ import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.do
 import { INPUT_DOCS } from '../../../ui/src/lib/input/input.docs';
 import { LINK_DOCS } from '../../../ui/src/lib/link/link.docs';
 import { LIST_DOCS } from '../../../ui/src/lib/list/list.docs';
+import { MENU_DOCS } from '../../../ui/src/lib/menu/menu.docs';
 import { POPOVER_DOCS } from '../../../ui/src/lib/popover/popover.docs';
 import { PROGRESS_BAR_DOCS } from '../../../ui/src/lib/progress-bar/progress-bar.docs';
 import { SELECT_DOCS } from '../../../ui/src/lib/select/select.docs';
@@ -48,6 +49,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   INPUT_DOCS,
   LINK_DOCS,
   LIST_DOCS,
+  MENU_DOCS,
   POPOVER_DOCS,
   PROGRESS_BAR_DOCS,
   SELECT_DOCS,
