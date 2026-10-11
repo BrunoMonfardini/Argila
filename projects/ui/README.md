@@ -71,6 +71,7 @@ export class Exemplo {}
 | Tooltip            | `<button arg-icon-button icon="x" label="Fechar" argTooltip="Fechar"></button>`; abre no foco e no hover, fecha com Esc; `argTooltipPosition="bottom"`                                                                                                        |
 | Diálogo            | `inject(ArgDialog).open(EditarPet, { data })` devolve `ref.closed`; `await dialog.confirm({ title, message, tone: 'danger' })` devolve `true` ou `false`. No componente: `argDialogTitle`, `argDialogDescription`, `arg-dialog-content`, `arg-dialog-actions` |
 | Gaveta             | `inject(ArgDrawer).open(Filtros, { data, side: 'end' })`: lateral no desktop, de baixo no celular; mesmas áreas e `ArgDialogRef` do diálogo                                                                                                                   |
+| Popover            | `<button arg-button [argPopoverTrigger]="detalhes">Detalhes</button><arg-popover #detalhes label="Detalhes do pet">…</arg-popover>`; clique fora e Esc fecham; importe `ARG_POPOVER`                                                                          |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:

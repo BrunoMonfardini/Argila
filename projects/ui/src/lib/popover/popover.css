@@ -1,0 +1,91 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-popover style="--arg-popover-width: 24rem">.
+ * O popover nativo vem com inset: 0 e margin: auto; zeramos para o anchor posicionar.
+ */
+:host {
+  --arg-popover-bg: var(--arg-color-surface-raised);
+  --arg-popover-fg: var(--arg-color-text);
+  --arg-popover-border: var(--arg-color-border);
+  --arg-popover-radius: var(--arg-radius-container);
+  --arg-popover-shadow: var(--arg-shadow-md);
+  --arg-popover-padding: var(--arg-space-4);
+  --arg-popover-width: 20rem;
+  --arg-popover-gap: var(--arg-space-2);
+
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(var(--arg-popover-width), 100vw - 2 * var(--arg-popover-gap));
+  max-height: calc(100dvh - 2 * var(--arg-popover-gap));
+  margin: 0;
+  padding: var(--arg-popover-padding);
+  overflow: auto;
+  border: 1px solid var(--arg-popover-border);
+  border-radius: var(--arg-popover-radius);
+  box-shadow: var(--arg-popover-shadow);
+  background: var(--arg-popover-bg);
+  color: var(--arg-popover-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-body);
+}
+
+/*
+ * Anchor CSS: o navegador põe o painel junto do gatilho e, se não couber,
+ * tenta o lado oposto em cada eixo, sem sair da tela.
+ */
+@supports (position-area: top) {
+  :host {
+    position-try-fallbacks:
+      flip-block,
+      flip-inline,
+      flip-block flip-inline;
+  }
+
+  :host(.arg-popover--bottom-start) {
+    position-area: block-end span-inline-end;
+    margin-block-start: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--bottom) {
+    position-area: block-end;
+    margin-block-start: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--bottom-end) {
+    position-area: block-end span-inline-start;
+    margin-block-start: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--top-start) {
+    position-area: block-start span-inline-end;
+    margin-block-end: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--top) {
+    position-area: block-start;
+    margin-block-end: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--top-end) {
+    position-area: block-start span-inline-start;
+    margin-block-end: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--start) {
+    position-area: inline-start;
+    margin-inline-end: var(--arg-popover-gap);
+  }
+
+  :host(.arg-popover--end) {
+    position-area: inline-end;
+    margin-inline-start: var(--arg-popover-gap);
+  }
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+}

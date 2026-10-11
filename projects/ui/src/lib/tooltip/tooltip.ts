@@ -13,6 +13,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { placeBeside, supportsAnchor } from '../internal/place-beside';
 import { injectUniqueId } from '../internal/unique-id';
 import { ArgTooltipPanel, ArgTooltipPosition } from './tooltip-panel';
 
@@ -22,8 +23,6 @@ export type { ArgTooltipPosition } from './tooltip-panel';
 const HOVER_OPEN_DELAY = 300;
 /** Espera antes de fechar, para dar tempo de levar o mouse até o balão. */
 const CLOSE_DELAY = 100;
-/** Distância do gatilho no posicionamento sem anchor CSS, em px (igual a --arg-space-2). */
-const FALLBACK_GAP = 8;
 
 /**
  * Texto curto que aparece ao lado de um elemento no foco e no hover, e
@@ -131,7 +130,10 @@ export class ArgTooltip implements OnDestroy {
     element.showPopover?.();
     element.classList.add('arg-tooltip--open');
     this.isOpen.set(true);
-    this.placeWithoutAnchor(element);
+    // Navegadores sem anchor CSS: posiciona por JS
+    if (!supportsAnchor(this.document.defaultView)) {
+      placeBeside(this.host, element, this.argTooltipPosition());
+    }
     this.document.addEventListener('keydown', this.onKeydown, true);
   }
 
@@ -161,26 +163,5 @@ export class ArgTooltip implements OnDestroy {
     if (text !== null && text.trim() !== name) ids.push(this.id);
     if (ids.length) this.host.setAttribute('aria-describedby', ids.join(' '));
     else this.host.removeAttribute('aria-describedby');
-  }
-
-  /** Navegadores sem anchor CSS: posiciona pelo tamanho do gatilho e do balão. */
-  private placeWithoutAnchor(element: HTMLElement): void {
-    const view = this.document.defaultView;
-    if (!view || view.CSS?.supports?.('position-area: top') !== false) return;
-    const trigger = this.host.getBoundingClientRect();
-    const box = element.getBoundingClientRect();
-    const centerX = trigger.left + (trigger.width - box.width) / 2;
-    const centerY = trigger.top + (trigger.height - box.height) / 2;
-    const spots: Record<ArgTooltipPosition, [number, number]> = {
-      top: [centerX, trigger.top - box.height - FALLBACK_GAP],
-      bottom: [centerX, trigger.bottom + FALLBACK_GAP],
-      left: [trigger.left - box.width - FALLBACK_GAP, centerY],
-      right: [trigger.right + FALLBACK_GAP, centerY],
-    };
-    const [left, top] = spots[this.argTooltipPosition()];
-    const clamp = (value: number, size: number, limit: number) =>
-      Math.max(FALLBACK_GAP, Math.min(value, limit - size - FALLBACK_GAP));
-    element.style.left = `${clamp(left, box.width, view.innerWidth)}px`;
-    element.style.top = `${clamp(top, box.height, view.innerHeight)}px`;
   }
 }
