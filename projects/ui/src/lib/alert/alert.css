@@ -1,0 +1,88 @@
+/*
+ * Tokens de componente (camada 3), ex.: <div arg-alert style="--arg-alert-radius: 0">.
+ * O texto é a cor comum sobre o fundo suave do tom; o ícone e a borda usam
+ * a cor do tom (pares testados no contraste).
+ */
+:host {
+  --arg-alert-accent: var(--arg-color-info);
+  --arg-alert-bg: var(--arg-color-info-subtle);
+  --arg-alert-fg: var(--arg-color-text);
+  --arg-alert-radius: var(--arg-radius-container);
+  --arg-alert-padding: var(--arg-space-4);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--arg-space-3);
+  padding: var(--arg-alert-padding);
+  border: 1px solid var(--arg-alert-accent);
+  border-inline-start-width: 4px;
+  border-radius: var(--arg-alert-radius);
+  background: var(--arg-alert-bg);
+  color: var(--arg-alert-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-body);
+}
+
+:host(.arg-alert--success) {
+  --arg-alert-accent: var(--arg-color-success);
+  --arg-alert-bg: var(--arg-color-success-subtle);
+}
+
+:host(.arg-alert--warning) {
+  --arg-alert-accent: var(--arg-color-warning);
+  --arg-alert-bg: var(--arg-color-warning-subtle);
+}
+
+:host(.arg-alert--danger) {
+  --arg-alert-accent: var(--arg-color-danger);
+  --arg-alert-bg: var(--arg-color-danger-subtle);
+}
+
+/* Centraliza o ícone na primeira linha do texto */
+.arg-alert__icon {
+  flex-shrink: 0;
+  margin-block: calc((1lh - var(--arg-icon-size)) / 2);
+  color: var(--arg-alert-accent);
+}
+
+.arg-alert__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--arg-space-1);
+  min-width: 0;
+}
+
+.arg-alert__heading {
+  margin: 0;
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-alert__content:empty,
+.arg-alert__actions:empty {
+  display: none;
+}
+
+.arg-alert__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-2);
+  margin-block-start: var(--arg-space-2);
+}
+
+.arg-alert__dismiss {
+  flex-shrink: 0;
+  margin: calc(var(--arg-space-1) * -1) calc(var(--arg-space-2) * -1) 0 0;
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+
+  .arg-alert__icon {
+    color: CanvasText;
+  }
+}

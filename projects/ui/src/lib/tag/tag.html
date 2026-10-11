@@ -7,7 +7,7 @@
     (click)="removed.emit()"
     (keydown)="onKeydown($event)"
   >
-    <span class="arg-tag__sr" [id]="removeTextId">{{ removeText() }}</span>
+    <span class="arg-tag__sr arg-sr-only" [id]="removeTextId">{{ removeText() }}</span>
     <arg-icon name="x" size="sm" />
   </button>
 }

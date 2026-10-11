@@ -65,6 +65,7 @@ export class Exemplo {}
 | Tag             | `<arg-tag removable (removed)="tirar(f)">{{ f }}</arg-tag>`: o botão se chama "Remover {texto}"; Delete e Backspace também removem                                                                                                               |
 | Avatar          | `<arg-avatar name="Maria Souza" [src]="foto()" />`: sem foto, ou se ela falhar, mostra as iniciais; `decorative` com o nome ao lado                                                                                                              |
 | Card            | `<article arg-card><h3 arg-card-title><a arg-card-link routerLink="…">Thor</a></h3>…<footer arg-card-actions>…</footer></article>`: com `arg-card-link` o card inteiro é clicável e os botões internos continuam funcionando; importe `ARG_CARD` |
+| Alerta          | `<div arg-alert tone="danger" heading="Não foi possível salvar">Tente de novo.</div>`: `role` pelo tom (status ou alert), ícone e nome do tom para leitor de tela; `dismissible` e `(dismissed)`; ações com `arg-alert-action`                   |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:

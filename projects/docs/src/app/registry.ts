@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { ALERT_DOCS } from '../../../ui/src/lib/alert/alert.docs';
 import { AVATAR_DOCS } from '../../../ui/src/lib/avatar/avatar.docs';
 import { BADGE_DOCS } from '../../../ui/src/lib/badge/badge.docs';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
@@ -25,6 +26,7 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  * e acrescente aqui. O CI confere que nenhum componente exportado ficou de fora.
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
+  ALERT_DOCS,
   AVATAR_DOCS,
   BADGE_DOCS,
   BUTTON_DOCS,

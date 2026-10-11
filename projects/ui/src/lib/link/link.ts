@@ -20,11 +20,13 @@ export type ArgLinkVariant = 'default' | 'muted';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<ng-content />
     @if (external()) {
-      <arg-icon class="arg-link__icon" name="external-link" /><span class="arg-link__hint">
+      <arg-icon class="arg-link__icon" name="external-link" /><span
+        class="arg-link__hint arg-sr-only"
+      >
         {{ externalHint() }}</span
       >
     }`,
-  styleUrl: './link.css',
+  styleUrls: ['./link.css', '../internal/sr-only.css'],
   host: {
     class: 'arg-link',
     '[class.arg-link--muted]': 'variant() === "muted"',
