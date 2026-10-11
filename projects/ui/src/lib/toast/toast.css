@@ -1,0 +1,100 @@
+/*
+ * Pilha de avisos no canto inferior direito; no celular, embaixo, na largura toda.
+ * Tokens de componente (camada 3), definidos na pilha.
+ * O popover nativo vem com inset: 0, margin: auto, borda e fundo; zeramos.
+ */
+:host {
+  --arg-toast-width: 24rem;
+  --arg-toast-gap: var(--arg-space-4);
+  --arg-toast-bg: var(--arg-color-surface-raised);
+  --arg-toast-fg: var(--arg-color-text);
+  --arg-toast-radius: var(--arg-radius-container);
+  --arg-toast-shadow: var(--arg-shadow-md);
+
+  position: fixed;
+  inset: auto var(--arg-toast-gap) var(--arg-toast-gap) auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--arg-space-2);
+  width: min(var(--arg-toast-width), 100vw - 2 * var(--arg-toast-gap));
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: none;
+  color: var(--arg-toast-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-body);
+}
+
+.arg-toast {
+  --arg-toast-accent: var(--arg-color-info);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--arg-space-3);
+  padding: var(--arg-space-3) var(--arg-space-2) var(--arg-space-3) var(--arg-space-4);
+  border: 1px solid var(--arg-color-border);
+  border-inline-start: 4px solid var(--arg-toast-accent);
+  border-radius: var(--arg-toast-radius);
+  box-shadow: var(--arg-toast-shadow);
+  background: var(--arg-toast-bg);
+  animation: arg-toast-in var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+.arg-toast--success {
+  --arg-toast-accent: var(--arg-color-success);
+}
+
+.arg-toast--warning {
+  --arg-toast-accent: var(--arg-color-warning);
+}
+
+.arg-toast--danger {
+  --arg-toast-accent: var(--arg-color-danger);
+}
+
+.arg-toast__icon {
+  flex-shrink: 0;
+  margin-block: calc((1lh - var(--arg-icon-size)) / 2);
+  color: var(--arg-toast-accent);
+}
+
+.arg-toast__body {
+  flex: 1;
+  min-width: 0;
+  padding-block: var(--arg-space-1);
+}
+
+.arg-toast__body p {
+  margin: 0;
+}
+
+.arg-toast__title {
+  font-weight: var(--arg-font-weight-strong);
+}
+
+@keyframes arg-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--arg-space-2));
+  }
+}
+
+@media (width < 40rem) {
+  :host {
+    inset-inline: var(--arg-toast-gap);
+    width: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .arg-toast {
+    border-color: CanvasText;
+  }
+
+  .arg-toast__icon {
+    color: CanvasText;
+  }
+}
