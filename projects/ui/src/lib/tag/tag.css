@@ -1,0 +1,66 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-tag style="--arg-tag-bg: var(--arg-color-primary-subtle)">.
+ */
+:host {
+  --arg-tag-bg: var(--arg-color-surface-sunken);
+  --arg-tag-fg: var(--arg-color-text);
+  --arg-tag-border: var(--arg-color-border);
+  --arg-tag-radius: var(--arg-radius-full);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-1);
+  min-height: 1.75rem;
+  padding: 0 var(--arg-space-3);
+  border: 1px solid var(--arg-tag-border);
+  border-radius: var(--arg-tag-radius);
+  background: var(--arg-tag-bg);
+  color: var(--arg-tag-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-control);
+  white-space: nowrap;
+}
+
+:host(.arg-tag--removable) {
+  padding-inline-end: var(--arg-space-1);
+}
+
+.arg-tag__remove {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--arg-radius-full);
+  background: transparent;
+  color: var(--arg-color-text-muted);
+  cursor: pointer;
+}
+
+.arg-tag__remove:hover {
+  background: color-mix(in oklab, var(--arg-color-text) 10%, transparent);
+  color: var(--arg-color-text);
+}
+
+.arg-tag__remove:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: 1px;
+}
+
+/* Só para leitores de tela */
+.arg-tag__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+}

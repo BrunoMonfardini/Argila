@@ -1,0 +1,44 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-avatar style="--arg-avatar-radius: var(--arg-radius-container)">.
+ */
+:host {
+  --arg-avatar-size: 2.5rem;
+  --arg-avatar-bg: var(--arg-color-primary-subtle);
+  --arg-avatar-fg: var(--arg-color-primary);
+  --arg-avatar-radius: var(--arg-radius-full);
+
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: var(--arg-avatar-size);
+  height: var(--arg-avatar-size);
+  overflow: hidden;
+  border-radius: var(--arg-avatar-radius);
+  background: var(--arg-avatar-bg);
+  color: var(--arg-avatar-fg);
+  font-family: var(--arg-font-family);
+  font-size: calc(var(--arg-avatar-size) * 0.4);
+  font-weight: var(--arg-font-weight-strong);
+  line-height: 1;
+  user-select: none;
+}
+
+:host(.arg-avatar--sm) {
+  --arg-avatar-size: 1.5rem;
+}
+
+:host(.arg-avatar--lg) {
+  --arg-avatar-size: 4rem;
+}
+
+.arg-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (forced-colors: active) {
+  :host {
+    border: 1px solid CanvasText;
+  }
+}

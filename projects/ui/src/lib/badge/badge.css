@@ -1,0 +1,55 @@
+/*
+ * Tokens de componente (camada 3), ex.: <span arg-badge style="--arg-badge-radius: 0">.
+ * Cada tom usa a cor de feedback sobre a sua versão suave (pares testados no contraste).
+ */
+:host {
+  --arg-badge-fg: var(--arg-color-text);
+  --arg-badge-bg: var(--arg-color-surface-sunken);
+  --arg-badge-radius: var(--arg-radius-full);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-1);
+  padding: 0.125rem var(--arg-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--arg-badge-radius);
+  background: var(--arg-badge-bg);
+  color: var(--arg-badge-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+  line-height: var(--arg-line-height-control);
+  white-space: nowrap;
+}
+
+:host(.arg-badge--primary) {
+  --arg-badge-fg: var(--arg-color-primary);
+  --arg-badge-bg: var(--arg-color-primary-subtle);
+}
+
+:host(.arg-badge--info) {
+  --arg-badge-fg: var(--arg-color-info);
+  --arg-badge-bg: var(--arg-color-info-subtle);
+}
+
+:host(.arg-badge--success) {
+  --arg-badge-fg: var(--arg-color-success);
+  --arg-badge-bg: var(--arg-color-success-subtle);
+}
+
+:host(.arg-badge--warning) {
+  --arg-badge-fg: var(--arg-color-warning);
+  --arg-badge-bg: var(--arg-color-warning-subtle);
+}
+
+:host(.arg-badge--danger) {
+  --arg-badge-fg: var(--arg-color-danger);
+  --arg-badge-bg: var(--arg-color-danger-subtle);
+}
+
+/* Em alto contraste o fundo some: a borda mantém o formato do rótulo */
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+}

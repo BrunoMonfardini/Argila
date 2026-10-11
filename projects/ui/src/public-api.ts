@@ -2,6 +2,8 @@
  * API pública do @brunomonfardini/ui
  */
 
+export * from './lib/avatar/avatar';
+export * from './lib/badge/badge';
 export * from './lib/button/button';
 export * from './lib/choice/choice';
 export * from './lib/divider/divider';
@@ -17,4 +19,5 @@ export * from './lib/list/list';
 export * from './lib/select/select';
 export * from './lib/skeleton/skeleton';
 export * from './lib/spinner/spinner';
+export * from './lib/tag/tag';
 export * from './lib/theme/theme';

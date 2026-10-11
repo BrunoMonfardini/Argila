@@ -1,0 +1,13 @@
+<span class="arg-tag__text" [id]="textId"><ng-content /></span>
+@if (removable()) {
+  <button
+    type="button"
+    class="arg-tag__remove"
+    [attr.aria-labelledby]="removeTextId + ' ' + textId"
+    (click)="removed.emit()"
+    (keydown)="onKeydown($event)"
+  >
+    <span class="arg-tag__sr" [id]="removeTextId">{{ removeText() }}</span>
+    <arg-icon name="x" size="sm" />
+  </button>
+}
