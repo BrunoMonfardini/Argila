@@ -1,0 +1,91 @@
+/*
+ * Gaveta: o mesmo <dialog> do ArgDialog (ver dialog.css), com as classes
+ * arg-drawer e arg-drawer-start | arg-drawer-end. Sem encapsulamento.
+ */
+.arg-drawer {
+  --arg-dialog-width: 24rem;
+
+  width: min(100% - var(--arg-space-8), var(--arg-dialog-width));
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+}
+
+.arg-drawer.arg-dialog--sm {
+  --arg-dialog-width: 20rem;
+}
+
+.arg-drawer.arg-dialog--lg {
+  --arg-dialog-width: 32rem;
+}
+
+/* O conteúdo ocupa a altura toda: as ações ficam no rodapé da gaveta */
+.arg-drawer > * {
+  flex: 1;
+}
+
+.arg-drawer [arg-dialog-content] {
+  flex: 1;
+}
+
+.arg-drawer-end {
+  margin-inline-start: auto;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.arg-drawer-start {
+  margin-inline-end: auto;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+.arg-drawer-end[open] {
+  animation-name: arg-drawer-from-end;
+}
+
+.arg-drawer-start[open] {
+  animation-name: arg-drawer-from-start;
+}
+
+/* Celular: a gaveta sobe de baixo, na largura toda, e a página continua visível em cima */
+@media (width < 40rem) {
+  .arg-drawer,
+  .arg-drawer.arg-dialog--sm,
+  .arg-drawer.arg-dialog--lg {
+    /* Presa só embaixo: com inset-block: 0 (padrão do <dialog>), a altura esticaria */
+    inset: auto 0 0;
+    width: 100%;
+    height: auto;
+    max-height: 85dvh;
+    margin: 0;
+    border-radius: var(--arg-dialog-radius) var(--arg-dialog-radius) 0 0;
+  }
+
+  .arg-drawer > * {
+    flex: initial;
+  }
+
+  .arg-drawer-end[open],
+  .arg-drawer-start[open] {
+    animation-name: arg-drawer-from-bottom;
+  }
+}
+
+@keyframes arg-drawer-from-end {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes arg-drawer-from-start {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes arg-drawer-from-bottom {
+  from {
+    transform: translateY(100%);
+  }
+}

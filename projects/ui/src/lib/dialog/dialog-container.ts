@@ -4,11 +4,12 @@ import {
   ElementRef,
   ViewContainerRef,
   ViewEncapsulation,
+  computed,
   inject,
   signal,
   viewChild,
 } from '@angular/core';
-import { ArgDialogSize } from './dialog-ref';
+import { ArgDialogLayout, ArgDialogSize } from './dialog-ref';
 
 /**
  * O `<dialog>` em volta do componente aberto pelo `ArgDialog`. Interno: quem
@@ -21,10 +22,10 @@ import { ArgDialogSize } from './dialog-ref';
   selector: 'dialog[arg-dialog-container]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-container #outlet />',
-  styleUrl: './dialog.css',
+  styleUrls: ['./dialog.css', '../drawer/drawer.css'],
   encapsulation: ViewEncapsulation.None,
   host: {
-    '[class]': '"arg-dialog arg-dialog--" + size()',
+    '[class]': 'classes()',
     '[attr.role]': 'role() === "alertdialog" ? "alertdialog" : null',
     '[attr.aria-label]': 'label()',
     '[attr.aria-labelledby]': 'label() ? null : titleId()',
@@ -41,4 +42,11 @@ export class ArgDialogContainer {
   readonly label = signal<string | null>(null);
   readonly titleId = signal<string | null>(null);
   readonly describedBy = signal<string | null>(null);
+  readonly layout = signal<ArgDialogLayout>('dialog');
+
+  protected readonly classes = computed(() => {
+    const base = `arg-dialog arg-dialog--${this.size()}`;
+    const layout = this.layout();
+    return layout === 'dialog' ? base : `${base} arg-drawer arg-${layout}`;
+  });
 }

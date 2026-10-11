@@ -2,6 +2,9 @@ import { InjectionToken, Injector } from '@angular/core';
 
 export type ArgDialogSize = 'sm' | 'md' | 'lg';
 
+/** @internal Forma da camada: diálogo central ou gaveta presa a uma lateral. */
+export type ArgDialogLayout = 'dialog' | 'drawer-start' | 'drawer-end';
+
 export interface ArgDialogConfig<D = unknown> {
   /** Dados para o componente do diálogo, lidos com `inject(ARG_DIALOG_DATA)`. */
   data?: D;

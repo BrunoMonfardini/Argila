@@ -70,6 +70,7 @@ export class Exemplo {}
 | Barra de progresso | `<progress arg-progress label="Enviando fotos" [value]="enviadas()" [max]="total"></progress>`; sem `value`, indeterminada (`label` obrigatório)                                                                                                              |
 | Tooltip            | `<button arg-icon-button icon="x" label="Fechar" argTooltip="Fechar"></button>`; abre no foco e no hover, fecha com Esc; `argTooltipPosition="bottom"`                                                                                                        |
 | Diálogo            | `inject(ArgDialog).open(EditarPet, { data })` devolve `ref.closed`; `await dialog.confirm({ title, message, tone: 'danger' })` devolve `true` ou `false`. No componente: `argDialogTitle`, `argDialogDescription`, `arg-dialog-content`, `arg-dialog-actions` |
+| Gaveta             | `inject(ArgDrawer).open(Filtros, { data, side: 'end' })`: lateral no desktop, de baixo no celular; mesmas áreas e `ArgDialogRef` do diálogo                                                                                                                   |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
