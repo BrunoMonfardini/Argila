@@ -8,14 +8,13 @@ export const FIELD_DOCS: DocPage = {
   title: 'Field',
   category: 'Componentes',
   summary:
-    'Rótulo, ajuda e erro de um campo de formulário, ligados ao controle para leitores de tela. O `arg-input` e o `arg-textarea` se ligam sozinhos; num controle nativo, use `argFieldControl`.',
+    'Rótulo, ajuda e erro de um campo de formulário, ligados ao controle para leitores de tela. O `arg-input`, o `arg-textarea` e o `arg-select` se ligam sozinhos; num controle nativo sem estilo do Argila, use `argFieldControl`.',
   component: ArgField,
   playground: false,
   examples: [
     {
       name: 'Rótulo e ajuda',
-      description:
-        'Com `arg-input`, `arg-textarea` e um `select` nativo marcado com `argFieldControl`.',
+      description: 'Com `arg-input`, `arg-select` e `arg-textarea`.',
       component: FieldBasicExample,
     },
     {

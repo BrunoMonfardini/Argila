@@ -46,19 +46,21 @@ export class Exemplo {}
 
 ### Componentes
 
-| Componente     | Uso                                                                                                                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Botão          | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`                                                                                                |
-| Botão de ícone | `<button arg-icon-button icon="x" label="Fechar"></button>` (`label` obrigatório: vira o nome acessível)                                                                     |
-| Link           | `<a arg-link routerLink="/ajuda">Ajuda</a>`; em outra aba, `<a arg-link external href="…">`: ícone e aviso para leitor de tela                                               |
-| Divisor        | `<hr arg-divider />`; entre itens lado a lado, `<hr arg-divider orientation="vertical" decorative />`                                                                        |
-| Campo          | `<arg-field label="E-mail" hint="…" [error]="erro()"><input argFieldControl /></arg-field>`, importe `ARG_FIELD`                                                             |
-| Texto          | `<input arg-input [formControl]="nome" />`, `<textarea arg-textarea></textarea>`; dentro do `arg-field`, ligam-se sozinhos                                                   |
-| Escolhas       | `<label arg-choice><input type="checkbox" arg-checkbox /> Texto</label>`; também `arg-radio` e `arg-switch`; agrupe com `<arg-choice-group label="…">`; importe `ARG_CHOICE` |
-| Spinner        | `<arg-spinner label="Carregando pedidos" />`                                                                                                                                 |
-| Skeleton       | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho)                                                        |
-| Lista          | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                                                                            |
-| Ícone          | `<arg-icon name="plus" />`; com significado sozinho, `<arg-icon name="alert-triangle" label="Atenção" />`                                                                    |
+| Componente      | Uso                                                                                                                                                                          |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Botão           | `<button arg-button variant="primary" [loading]="salvando()">Salvar</button>`                                                                                                |
+| Botão de ícone  | `<button arg-icon-button icon="x" label="Fechar"></button>` (`label` obrigatório: vira o nome acessível)                                                                     |
+| Link            | `<a arg-link routerLink="/ajuda">Ajuda</a>`; em outra aba, `<a arg-link external href="…">`: ícone e aviso para leitor de tela                                               |
+| Divisor         | `<hr arg-divider />`; entre itens lado a lado, `<hr arg-divider orientation="vertical" decorative />`                                                                        |
+| Campo           | `<arg-field label="E-mail" hint="…" [error]="erro()"><input argFieldControl /></arg-field>`, importe `ARG_FIELD`                                                             |
+| Texto           | `<input arg-input [formControl]="nome" />`, `<textarea arg-textarea></textarea>`; dentro do `arg-field`, ligam-se sozinhos                                                   |
+| Lista de opções | `<select arg-select [formControl]="servico"><option value="">Escolha</option>…</select>`                                                                                     |
+| Seleção         | `<select arg-select [formControl]="especie"><option value="gato">Gato</option></select>`, dentro do `arg-field`                                                              |
+| Escolhas        | `<label arg-choice><input type="checkbox" arg-checkbox /> Texto</label>`; também `arg-radio` e `arg-switch`; agrupe com `<arg-choice-group label="…">`; importe `ARG_CHOICE` |
+| Spinner         | `<arg-spinner label="Carregando pedidos" />`                                                                                                                                 |
+| Skeleton        | `<arg-skeleton shape="text \| rect \| circle" width="60%" />` (sempre `aria-hidden`; `[animated]="false"` sem brilho)                                                        |
+| Lista           | `<ul arg-list divided bordered><li arg-list-item>…</li></ul>`, importe `ARG_LIST`                                                                                            |
+| Ícone           | `<arg-icon name="plus" />`; com significado sozinho, `<arg-icon name="alert-triangle" label="Atenção" />`                                                                    |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:

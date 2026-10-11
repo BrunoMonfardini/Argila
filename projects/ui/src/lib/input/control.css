@@ -19,7 +19,7 @@
   padding: var(--arg-input-padding-block) var(--arg-input-padding-inline);
   border: 1px solid var(--arg-input-border);
   border-radius: var(--arg-input-radius);
-  background: var(--arg-input-bg);
+  background-color: var(--arg-input-bg);
   color: var(--arg-color-text);
   font-family: var(--arg-font-family);
   font-size: var(--arg-font-size-body);
@@ -50,13 +50,13 @@
 
 :host(:disabled) {
   border-color: var(--arg-color-disabled-border);
-  background: var(--arg-color-disabled-bg);
+  background-color: var(--arg-color-disabled-bg);
   color: var(--arg-color-text-disabled);
   cursor: not-allowed;
 }
 
 :host([readonly]) {
-  background: var(--arg-color-surface-sunken);
+  background-color: var(--arg-color-surface-sunken);
 }
 
 @media (forced-colors: active) {
