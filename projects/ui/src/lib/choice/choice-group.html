@@ -1,0 +1,17 @@
+<fieldset class="arg-choice-group__fieldset" [attr.aria-describedby]="describedBy()">
+  <legend class="arg-choice-group__legend">
+    {{ label() }}
+    @if (required()) {
+      <span class="arg-choice-group__required" aria-hidden="true">*</span>
+    }
+  </legend>
+  @if (hint(); as hint) {
+    <p class="arg-choice-group__hint" [id]="hintId">{{ hint }}</p>
+  }
+  <div class="arg-choice-group__options">
+    <ng-content />
+  </div>
+  @if (error(); as error) {
+    <p class="arg-choice-group__error" [id]="errorId">{{ error }}</p>
+  }
+</fieldset>

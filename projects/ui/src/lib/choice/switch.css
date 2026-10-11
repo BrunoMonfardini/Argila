@@ -1,0 +1,58 @@
+/*
+ * Interruptor desenhado sobre um checkbox: o trilho é o fundo e o botão é um
+ * gradiente circular que desliza. Em forced-colors volta ao checkbox nativo,
+ * porque o navegador apaga fundos nesse modo.
+ * Tokens de componente (camada 3), ex.: <input type="checkbox" arg-switch style="--arg-switch-on: var(--arg-color-success)">.
+ */
+:host {
+  --arg-switch-height: 1.5rem;
+  --arg-switch-width: 2.75rem;
+  --arg-switch-off: var(--arg-color-text-muted);
+  --arg-switch-on: var(--arg-color-primary);
+  --arg-switch-thumb: var(--arg-color-surface);
+  --arg-switch-inset: 3px;
+
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: var(--arg-switch-width);
+  height: var(--arg-switch-height);
+  margin: 0;
+  border-radius: var(--arg-radius-full);
+  background-color: var(--arg-switch-off);
+  background-image: radial-gradient(
+    circle closest-side,
+    var(--arg-switch-thumb) calc(100% - 1px),
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-size: calc(var(--arg-switch-height) - var(--arg-switch-inset) * 2)
+    calc(var(--arg-switch-height) - var(--arg-switch-inset) * 2);
+  background-position: var(--arg-switch-inset) center;
+  cursor: pointer;
+  appearance: none;
+  transition:
+    background-color var(--arg-motion-base) var(--arg-motion-easing),
+    background-position var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+:host(:checked) {
+  background-color: var(--arg-switch-on);
+  background-position: calc(100% - var(--arg-switch-inset)) center;
+}
+
+:host(:focus-visible) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+:host(:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  :host {
+    width: var(--arg-switch-height);
+    appearance: auto;
+  }
+}

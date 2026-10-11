@@ -1,0 +1,33 @@
+/*
+ * Checkbox e radio nativos: o navegador desenha, o Argila dá a cor e o
+ * tamanho. Assim o estado indeterminado, o teclado e o alto contraste
+ * continuam nativos.
+ * Tokens de componente (camada 3), ex.: <input type="checkbox" arg-checkbox style="--arg-choice-size: 1.5rem">.
+ */
+:host {
+  --arg-choice-size: 1.25rem;
+  --arg-choice-accent: var(--arg-color-primary);
+
+  flex-shrink: 0;
+  width: var(--arg-choice-size);
+  height: var(--arg-choice-size);
+  margin: 0;
+  accent-color: var(--arg-choice-accent);
+  cursor: pointer;
+}
+
+:host(:focus-visible) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+:host([aria-invalid='true']) {
+  --arg-choice-accent: var(--arg-color-danger);
+
+  outline: 2px solid var(--arg-color-danger);
+  outline-offset: 1px;
+}
+
+:host(:disabled) {
+  cursor: not-allowed;
+}
