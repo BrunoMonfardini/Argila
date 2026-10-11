@@ -1,0 +1,16 @@
+/* O controle e o texto lado a lado; clicar no texto marca a opção */
+:host {
+  display: inline-flex;
+  gap: var(--arg-space-2);
+  align-items: center;
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-control);
+  cursor: pointer;
+}
+
+:host(:has(:disabled)) {
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}

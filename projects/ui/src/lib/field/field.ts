@@ -6,13 +6,11 @@ import {
   ViewEncapsulation,
   booleanAttribute,
   computed,
-  effect,
   inject,
   input,
   signal,
-  untracked,
 } from '@angular/core';
-import { ArgAnnouncer } from '../internal/announcer';
+import { announceErrors } from '../internal/announce-errors';
 import { injectUniqueId } from '../internal/unique-id';
 
 /**
@@ -64,20 +62,8 @@ export class ArgField {
         .join(' ') || null,
   );
 
-  private readonly announcer = inject(ArgAnnouncer);
-
   constructor() {
-    let previous: string | null | undefined;
-    let first = true;
-    effect(() => {
-      const error = this.error();
-      // O erro que já vem na primeira renderização chega pelo aria-describedby, no foco
-      if (!first && error && error !== previous) {
-        untracked(() => this.announcer.announce(`${this.label()}: ${error}`));
-      }
-      previous = error;
-      first = false;
-    });
+    announceErrors(this.error, this.label);
   }
 
   /** Chamado pelo `argFieldControl`, que mantém o id que o controle já tinha. */

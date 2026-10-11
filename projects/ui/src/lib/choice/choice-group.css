@@ -1,0 +1,59 @@
+/*
+ * Sem encapsulamento (ver ArgChoiceGroup): todo seletor começa em .arg-choice-group.
+ * Tokens de componente (camada 3), ex.: <arg-choice-group style="--arg-choice-group-gap: var(--arg-space-4)">.
+ */
+.arg-choice-group {
+  --arg-choice-group-gap: var(--arg-space-2);
+
+  display: block;
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+}
+
+.arg-choice-group .arg-choice-group__fieldset {
+  display: grid;
+  gap: var(--arg-space-1);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.arg-choice-group .arg-choice-group__legend {
+  padding: 0;
+  font-size: var(--arg-font-size-body-sm);
+  font-weight: var(--arg-font-weight-medium);
+}
+
+.arg-choice-group .arg-choice-group__required {
+  margin-inline-start: 0.2em;
+  color: var(--arg-color-danger);
+}
+
+.arg-choice-group .arg-choice-group__hint,
+.arg-choice-group .arg-choice-group__error {
+  margin: 0;
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-choice-group .arg-choice-group__hint {
+  color: var(--arg-color-text-muted);
+}
+
+.arg-choice-group .arg-choice-group__error {
+  color: var(--arg-color-danger);
+  font-weight: var(--arg-font-weight-medium);
+}
+
+.arg-choice-group .arg-choice-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arg-choice-group-gap);
+  padding-block: var(--arg-space-1);
+}
+
+.arg-choice-group.arg-choice-group--horizontal .arg-choice-group__options {
+  flex-flow: row wrap;
+  column-gap: var(--arg-space-6);
+}
