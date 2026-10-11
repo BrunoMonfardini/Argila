@@ -22,6 +22,7 @@ import { SELECT_DOCS } from '../../../ui/src/lib/select/select.docs';
 import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
 import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
 import { TAG_DOCS } from '../../../ui/src/lib/tag/tag.docs';
+import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
 import { TOOLTIP_DOCS } from '../../../ui/src/lib/tooltip/tooltip.docs';
 import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
 import type { DocCategory, DocPage } from '../../../ui/src/docs/doc-page';
@@ -56,6 +57,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   SKELETON_DOCS,
   SPINNER_DOCS,
   TAG_DOCS,
+  TOAST_DOCS,
   TOOLTIP_DOCS,
   LIST_LOADING_DOCS,
 ];

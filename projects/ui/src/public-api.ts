@@ -29,4 +29,5 @@ export * from './lib/skeleton/skeleton';
 export * from './lib/spinner/spinner';
 export * from './lib/tag/tag';
 export * from './lib/theme/theme';
+export * from './lib/toast/toast';
 export * from './lib/tooltip/tooltip';

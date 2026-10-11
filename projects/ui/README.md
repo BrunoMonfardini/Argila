@@ -73,6 +73,7 @@ export class Exemplo {}
 | Gaveta             | `inject(ArgDrawer).open(Filtros, { data, side: 'end' })`: lateral no desktop, de baixo no celular; mesmas áreas e `ArgDialogRef` do diálogo                                                                                                                   |
 | Popover            | `<button arg-button [argPopoverTrigger]="detalhes">Detalhes</button><arg-popover #detalhes label="Detalhes do pet">…</arg-popover>`; clique fora e Esc fecham; importe `ARG_POPOVER`                                                                          |
 | Menu               | `<button arg-button [argMenuTrigger]="acoes">Ações</button><arg-menu #acoes><button arg-menu-item (click)="editar()">Editar</button></arg-menu>`; setas, Home/End, busca por letra e Esc; importe `ARG_MENU`                                                  |
+| Toast              | `inject(ArgToast).show('Agendamento salvo', { tone: 'success' })`; com `action: { label: 'Desfazer', run }`; fila de 3, pausa no hover e no foco, anunciado pelo leitor de tela                                                                               |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
