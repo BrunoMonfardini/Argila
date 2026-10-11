@@ -1,0 +1,110 @@
+/*
+ * Sem encapsulamento (ver ArgDialogContainer): todo seletor começa em .arg-dialog.
+ * Tokens de componente (camada 3), definidos no <dialog>.
+ */
+.arg-dialog {
+  --arg-dialog-bg: var(--arg-color-surface-raised);
+  --arg-dialog-fg: var(--arg-color-text);
+  --arg-dialog-radius: var(--arg-radius-container);
+  --arg-dialog-shadow: var(--arg-shadow-lg);
+  --arg-dialog-padding: var(--arg-space-6);
+  --arg-dialog-gap: var(--arg-space-4);
+  --arg-dialog-width: 32rem;
+  --arg-dialog-backdrop: var(--arg-color-overlay);
+
+  box-sizing: border-box;
+  width: min(100% - 2 * var(--arg-space-4), var(--arg-dialog-width));
+  max-width: none;
+  max-height: calc(100dvh - 2 * var(--arg-space-4));
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--arg-dialog-radius);
+  box-shadow: var(--arg-dialog-shadow);
+  background: var(--arg-dialog-bg);
+  color: var(--arg-dialog-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-body);
+}
+
+.arg-dialog--sm {
+  --arg-dialog-width: 24rem;
+}
+
+.arg-dialog--lg {
+  --arg-dialog-width: 48rem;
+}
+
+/* Aberto, o <dialog> vira coluna: título e ações fixos, conteúdo com rolagem */
+.arg-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  animation: arg-dialog-in var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+.arg-dialog::backdrop {
+  background: var(--arg-dialog-backdrop);
+  animation: arg-dialog-fade var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+/* O componente aberto fica entre o <dialog> e as áreas: participa da coluna */
+.arg-dialog > * {
+  display: flex;
+  flex-direction: column;
+  gap: var(--arg-dialog-gap);
+  min-height: 0;
+  padding: var(--arg-dialog-padding);
+}
+
+.arg-dialog .arg-dialog__title {
+  margin: 0;
+  font-size: var(--arg-font-size-heading-sm);
+  font-weight: var(--arg-font-weight-heading);
+  line-height: var(--arg-line-height-heading);
+}
+
+.arg-dialog .arg-dialog__description {
+  margin: 0;
+  color: var(--arg-color-text-muted);
+}
+
+.arg-dialog [arg-dialog-content] {
+  min-height: 0;
+  margin: 0 calc(var(--arg-dialog-padding) * -1);
+  padding: 0 var(--arg-dialog-padding);
+  overflow-y: auto;
+}
+
+.arg-dialog [arg-dialog-actions] {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: flex-end;
+  gap: var(--arg-space-2);
+  margin: 0;
+  padding-block-start: var(--arg-space-2);
+}
+
+/* A página por baixo não rola enquanto há um diálogo aberto */
+html:has(.arg-dialog[open]) {
+  overflow: hidden;
+}
+
+@keyframes arg-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--arg-space-2));
+  }
+}
+
+@keyframes arg-dialog-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .arg-dialog {
+    border: 1px solid CanvasText;
+  }
+}
