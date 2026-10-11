@@ -1,0 +1,42 @@
+<a class="arg-app-shell__skip" [href]="'#' + mainId" (click)="skipToMain($event)">{{
+  skipText()
+}}</a>
+<header class="arg-app-shell__header">
+  @if (compact()) {
+    <button
+      arg-icon-button
+      icon="menu"
+      class="arg-app-shell__menu"
+      [label]="menuText()"
+      [attr.popovertarget]="navId"
+      [attr.aria-controls]="navId"
+      [attr.aria-expanded]="navOpen()"
+      (click)="onMenuClick()"
+    ></button>
+  }
+  @if (brandHref(); as href) {
+    <a class="arg-app-shell__brand" [href]="href"><ng-container [ngTemplateOutlet]="brand" /></a>
+  } @else {
+    <span class="arg-app-shell__brand"><ng-container [ngTemplateOutlet]="brand" /></span>
+  }
+  <ng-template #brand>
+    @if (brandLogo(); as logo) {
+      <img class="arg-app-shell__logo" [src]="logo" alt="" />
+    }
+    <span class="arg-app-shell__name">{{ brandName() }}</span>
+  </ng-template>
+  <div class="arg-app-shell__actions"><ng-content select="[arg-app-shell-actions]" /></div>
+</header>
+<div
+  #nav
+  class="arg-app-shell__nav"
+  [id]="navId"
+  [attr.popover]="compact() ? 'auto' : null"
+  [style.display]="fallbackDisplay()"
+  (toggle)="onNavToggle($event)"
+>
+  <ng-content select="[arg-app-shell-nav]" />
+</div>
+<main #main class="arg-app-shell__main" [id]="mainId" tabindex="-1">
+  <ng-content />
+</main>
