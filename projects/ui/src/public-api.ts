@@ -21,6 +21,7 @@ export * from './lib/icon-button/icon-button';
 export * from './lib/input/input';
 export * from './lib/link/link';
 export * from './lib/list/list';
+export * from './lib/menu/menu';
 export * from './lib/popover/popover';
 export * from './lib/progress-bar/progress-bar';
 export * from './lib/select/select';
