@@ -67,6 +67,8 @@ const PAIRS: ContrastPair[] = [
   { foreground: '--arg-color-primary', background: '--arg-color-surface', minimum: NON_TEXT },
   { foreground: '--arg-color-surface', background: '--arg-color-text-muted', minimum: NON_TEXT },
   { foreground: '--arg-color-surface', background: '--arg-color-primary', minimum: NON_TEXT },
+  // Tooltip: balão invertido, texto da superfície sobre a cor do texto
+  { foreground: '--arg-color-surface', background: '--arg-color-text', minimum: TEXT },
   // Progress Bar: o preenchimento contra o trilho mostra quanto falta
   {
     foreground: '--arg-color-primary',

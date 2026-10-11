@@ -1,0 +1,61 @@
+/*
+ * Tokens de componente (camada 3), definidos no balão.
+ * O popover nativo vem com inset: 0 e margin: auto; zeramos para o anchor posicionar.
+ */
+:host {
+  --arg-tooltip-bg: var(--arg-color-text);
+  --arg-tooltip-fg: var(--arg-color-surface);
+  --arg-tooltip-radius: var(--arg-radius-control);
+  --arg-tooltip-gap: var(--arg-space-2);
+  --arg-tooltip-max-width: 16rem;
+
+  position: fixed;
+  inset: auto;
+  max-width: var(--arg-tooltip-max-width);
+  margin: 0;
+  padding: var(--arg-space-1) var(--arg-space-2);
+  overflow: visible;
+  border: 0;
+  border-radius: var(--arg-tooltip-radius);
+  background: var(--arg-tooltip-bg);
+  color: var(--arg-tooltip-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-medium);
+  line-height: var(--arg-line-height-control);
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+/* Anchor CSS: o navegador posiciona ao lado do gatilho e vira para o outro lado se faltar espaço */
+@supports (position-area: top) {
+  :host(.arg-tooltip--top) {
+    position-area: top;
+    margin-block-end: var(--arg-tooltip-gap);
+    position-try-fallbacks: flip-block;
+  }
+
+  :host(.arg-tooltip--bottom) {
+    position-area: bottom;
+    margin-block-start: var(--arg-tooltip-gap);
+    position-try-fallbacks: flip-block;
+  }
+
+  :host(.arg-tooltip--left) {
+    position-area: left;
+    margin-inline-end: var(--arg-tooltip-gap);
+    position-try-fallbacks: flip-inline;
+  }
+
+  :host(.arg-tooltip--right) {
+    position-area: right;
+    margin-inline-start: var(--arg-tooltip-gap);
+    position-try-fallbacks: flip-inline;
+  }
+}
+
+@media (forced-colors: active) {
+  :host {
+    border: 1px solid CanvasText;
+  }
+}

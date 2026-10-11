@@ -68,6 +68,7 @@ export class Exemplo {}
 | Alerta             | `<div arg-alert tone="danger" heading="Não foi possível salvar">Tente de novo.</div>`: `role` pelo tom (status ou alert), ícone e nome do tom para leitor de tela; `dismissible` e `(dismissed)`; ações com `arg-alert-action`                   |
 | Estado vazio       | `<section arg-empty-state heading="Nenhum pedido ainda" icon="plus" [level]="3">Texto. <button arg-button arg-empty-state-action>Novo pedido</button></section>`                                                                                 |
 | Barra de progresso | `<progress arg-progress label="Enviando fotos" [value]="enviadas()" [max]="total"></progress>`; sem `value`, indeterminada (`label` obrigatório)                                                                                                 |
+| Tooltip            | `<button arg-icon-button icon="x" label="Fechar" argTooltip="Fechar"></button>`; abre no foco e no hover, fecha com Esc; `argTooltipPosition="bottom"`                                                                                           |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
