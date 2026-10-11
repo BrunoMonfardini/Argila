@@ -5,6 +5,7 @@
 export * from './lib/avatar/avatar';
 export * from './lib/badge/badge';
 export * from './lib/button/button';
+export * from './lib/card/card';
 export * from './lib/choice/choice';
 export * from './lib/divider/divider';
 export * from './lib/field/field';

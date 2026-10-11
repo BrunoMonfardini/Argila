@@ -1,0 +1,155 @@
+/*
+ * Sem encapsulamento (ver ArgCard): todo seletor começa em .arg-card.
+ * Tokens de componente (camada 3), ex.: <article arg-card style="--arg-card-padding: 1.5rem">.
+ */
+.arg-card {
+  --arg-card-bg: var(--arg-color-surface);
+  --arg-card-fg: var(--arg-color-text);
+  --arg-card-border: var(--arg-color-border);
+  --arg-card-border-hover: var(--arg-color-border-strong);
+  --arg-card-radius: var(--arg-radius-container);
+  --arg-card-shadow: none;
+  --arg-card-shadow-hover: var(--arg-shadow-sm);
+  --arg-card-padding: var(--arg-space-4);
+  --arg-card-gap: var(--arg-space-3);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--arg-card-gap);
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--arg-card-padding);
+  border: 1px solid var(--arg-card-border);
+  border-radius: var(--arg-card-radius);
+  box-shadow: var(--arg-card-shadow);
+  background: var(--arg-card-bg);
+  color: var(--arg-card-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-body);
+  list-style: none;
+}
+
+.arg-card--elevated {
+  --arg-card-border: transparent;
+  --arg-card-border-hover: transparent;
+  --arg-card-shadow: var(--arg-shadow-sm);
+  --arg-card-shadow-hover: var(--arg-shadow-md);
+}
+
+/* Áreas */
+.arg-card > [arg-card-media] {
+  display: block;
+  width: calc(100% + 2 * var(--arg-card-padding));
+  max-width: none;
+  margin: calc(var(--arg-card-padding) * -1) calc(var(--arg-card-padding) * -1) 0;
+  border-radius: calc(var(--arg-card-radius) - 1px) calc(var(--arg-card-radius) - 1px) 0 0;
+  object-fit: cover;
+}
+
+.arg-card [arg-card-header] {
+  display: flex;
+  align-items: center;
+  gap: var(--arg-space-3);
+}
+
+.arg-card [arg-card-title] {
+  margin: 0;
+  font-size: var(--arg-font-size-body-lg);
+  font-weight: var(--arg-font-weight-strong);
+  line-height: var(--arg-line-height-heading);
+}
+
+.arg-card [arg-card-description] {
+  margin: 0;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-card [arg-card-content] {
+  margin: 0;
+}
+
+/* Ações ficam no rodapé, mesmo em cards de alturas diferentes lado a lado */
+.arg-card [arg-card-actions] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--arg-space-2);
+  margin: auto 0 0;
+}
+
+/*
+ * Card clicável: o link do título se estica sobre o card inteiro com ::after.
+ * Os outros controles sobem acima dessa camada e continuam recebendo o clique.
+ */
+.arg-card--interactive {
+  position: relative;
+  transition:
+    border-color var(--arg-motion-fast) var(--arg-motion-easing),
+    box-shadow var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+.arg-card .arg-card__link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.arg-card .arg-card__link::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--arg-card-radius);
+}
+
+.arg-card--interactive
+  :is(a[href], button, input, select, textarea, label, summary, [tabindex]):not(.arg-card__link) {
+  position: relative;
+  z-index: 1;
+}
+
+.arg-card .arg-card__link:hover {
+  text-decoration: underline;
+}
+
+.arg-card--interactive:has(.arg-card__link:hover) {
+  border-color: var(--arg-card-border-hover);
+  box-shadow: var(--arg-card-shadow-hover);
+}
+
+/* O anel de foco contorna o card inteiro, que é a área clicável */
+.arg-card .arg-card__link:focus-visible {
+  outline: none;
+}
+
+.arg-card .arg-card__link:focus-visible::after {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.arg-card .arg-card__link:disabled {
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .arg-card {
+    border-color: CanvasText;
+  }
+
+  .arg-card .arg-card__link {
+    color: LinkText;
+  }
+
+  .arg-card .arg-card__link:focus-visible::after {
+    outline-color: Highlight;
+  }
+}
