@@ -2,6 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { AVATAR_DOCS } from '../../../ui/src/lib/avatar/avatar.docs';
 import { BADGE_DOCS } from '../../../ui/src/lib/badge/badge.docs';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
+import { CARD_DOCS } from '../../../ui/src/lib/card/card.docs';
 import { CHOICE_DOCS } from '../../../ui/src/lib/choice/choice.docs';
 import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
 import { FIELD_DOCS } from '../../../ui/src/lib/field/field.docs';
@@ -27,6 +28,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   AVATAR_DOCS,
   BADGE_DOCS,
   BUTTON_DOCS,
+  CARD_DOCS,
   CHOICE_DOCS,
   DIVIDER_DOCS,
   FIELD_DOCS,
