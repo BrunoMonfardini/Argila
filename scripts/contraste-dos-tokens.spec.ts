@@ -67,6 +67,12 @@ const PAIRS: ContrastPair[] = [
   { foreground: '--arg-color-primary', background: '--arg-color-surface', minimum: NON_TEXT },
   { foreground: '--arg-color-surface', background: '--arg-color-text-muted', minimum: NON_TEXT },
   { foreground: '--arg-color-surface', background: '--arg-color-primary', minimum: NON_TEXT },
+  // Progress Bar: o preenchimento contra o trilho mostra quanto falta
+  {
+    foreground: '--arg-color-primary',
+    background: '--arg-color-surface-sunken',
+    minimum: NON_TEXT,
+  },
   // Anel de foco (indicador, não texto)
   { foreground: '--arg-color-focus', background: '--arg-color-background', minimum: NON_TEXT },
   { foreground: '--arg-color-focus', background: '--arg-color-surface', minimum: NON_TEXT },

@@ -1,0 +1,85 @@
+/*
+ * Tokens de componente (camada 3), ex.: <progress arg-progress style="--arg-progress-fill: var(--arg-color-success)">.
+ * O <progress> é estilizado pelos pseudo-elementos de cada motor: -webkit- (Chrome, Safari) e -moz- (Firefox).
+ */
+:host {
+  --arg-progress-height: 0.5rem;
+  --arg-progress-track: var(--arg-color-surface-sunken);
+  --arg-progress-fill: var(--arg-color-primary);
+  --arg-progress-radius: var(--arg-radius-full);
+  --arg-progress-duration: var(--arg-loading-shimmer-duration);
+
+  appearance: none;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--arg-progress-height);
+  margin: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--arg-progress-radius);
+  background-color: var(--arg-progress-track);
+  color: var(--arg-progress-fill);
+}
+
+:host(.arg-progress--sm) {
+  --arg-progress-height: 0.25rem;
+}
+
+/* Determinada */
+:host::-webkit-progress-bar {
+  background: transparent;
+}
+
+:host::-webkit-progress-value {
+  border-radius: var(--arg-progress-radius);
+  background: var(--arg-progress-fill);
+  transition: inline-size var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+:host::-moz-progress-bar {
+  border-radius: var(--arg-progress-radius);
+  background: var(--arg-progress-fill);
+}
+
+/* Indeterminada: um trecho do preenchimento corre da esquerda para a direita */
+:host(:indeterminate) {
+  background-image: linear-gradient(var(--arg-progress-fill), var(--arg-progress-fill));
+  background-repeat: no-repeat;
+  background-size: 40% 100%;
+  /* ease-in-out: o trecho atravessa a barra num ritmo uniforme, sem sumir na borda */
+  animation: arg-progress-slide var(--arg-progress-duration) ease-in-out infinite;
+}
+
+:host(:indeterminate)::-moz-progress-bar {
+  background: transparent;
+}
+
+/* Com a imagem de 40%, -66.7% e 166.7% deixam o trecho logo fora de cada borda */
+@keyframes arg-progress-slide {
+  from {
+    background-position: -66.7% 0;
+  }
+
+  to {
+    background-position: 166.7% 0;
+  }
+}
+
+/* Mais lento, mas não parado: o usuário ainda precisa perceber que há progresso */
+@media (prefers-reduced-motion: reduce) {
+  :host(:indeterminate) {
+    animation-duration: calc(var(--arg-progress-duration) * 3);
+  }
+}
+
+/* Em alto contraste o fundo seria apagado: trilho com borda e preenchimento em cor do sistema */
+@media (forced-colors: active) {
+  :host {
+    --arg-progress-track: Canvas;
+    --arg-progress-fill: Highlight;
+
+    forced-color-adjust: none;
+    border: 1px solid CanvasText;
+  }
+}
