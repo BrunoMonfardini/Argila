@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ArgInput, ArgTextarea } from '../../input/input';
+import { ArgSelect } from '../../select/select';
 import { ARG_FIELD } from '../field';
 
 @Component({
   selector: 'doc-field-basic-example',
-  imports: [ARG_FIELD, ArgInput, ArgTextarea],
+  imports: [ARG_FIELD, ArgInput, ArgSelect, ArgTextarea],
   template: `
     <form>
       <arg-field label="Nome do pet" required>
@@ -14,7 +15,7 @@ import { ARG_FIELD } from '../field';
         <input arg-input name="telefone" type="tel" autocomplete="tel" />
       </arg-field>
       <arg-field label="Espécie">
-        <select argFieldControl name="especie">
+        <select arg-select name="especie">
           <option>Cachorro</option>
           <option>Gato</option>
           <option>Outro</option>

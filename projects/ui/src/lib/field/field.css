@@ -4,8 +4,6 @@
  */
 .arg-field {
   --arg-field-gap: var(--arg-space-1);
-  --arg-field-control-height: 2.5rem;
-  --arg-field-control-border: var(--arg-color-border-strong);
 
   display: grid;
   gap: var(--arg-field-gap);
@@ -38,33 +36,4 @@
 .arg-field .arg-field__error {
   color: var(--arg-color-danger);
   font-weight: var(--arg-font-weight-medium);
-}
-
-.arg-field.arg-field--invalid {
-  --arg-field-control-border: var(--arg-color-danger);
-}
-
-/*
- * Estilo provisório do <select> nativo dentro do campo, até o arg-select
- * (onda 1, W1-07). Input e textarea usam arg-input e arg-textarea.
- */
-.arg-field .arg-field__control > select {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: var(--arg-field-control-height);
-  padding: 0 var(--arg-space-3);
-  border: 1px solid var(--arg-field-control-border);
-  border-radius: var(--arg-radius-control);
-  background: var(--arg-color-surface);
-  color: var(--arg-color-text);
-  font: inherit;
-}
-
-.arg-field .arg-field__control > select:focus-visible {
-  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
-  outline-offset: var(--arg-focus-ring-offset);
-}
-
-.arg-field.arg-field--invalid .arg-field__control > select {
-  border-width: 2px;
 }

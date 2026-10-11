@@ -1,0 +1,33 @@
+/*
+ * Mesmo visual do arg-input (control.css), com a seta desenhada em CSS:
+ * dois gradientes formam o "v", na cor do texto secundário. Em forced-colors,
+ * onde o navegador apaga fundos, volta à seta nativa.
+ */
+:host {
+  --arg-select-arrow: var(--arg-color-text-muted);
+  --arg-select-arrow-size: 0.375rem;
+
+  padding-inline-end: calc(var(--arg-input-padding-inline) * 2 + var(--arg-select-arrow-size) * 2);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--arg-select-arrow) 50%),
+    linear-gradient(135deg, var(--arg-select-arrow) 50%, transparent 50%);
+  background-repeat: no-repeat;
+  background-size: var(--arg-select-arrow-size) var(--arg-select-arrow-size);
+  background-position:
+    calc(100% - var(--arg-input-padding-inline) - var(--arg-select-arrow-size)) 50%,
+    calc(100% - var(--arg-input-padding-inline)) 50%;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Desabilitado mantém a seta, mais apagada */
+:host(:disabled) {
+  --arg-select-arrow: var(--arg-color-text-disabled);
+}
+
+@media (forced-colors: active) {
+  :host {
+    padding-inline-end: var(--arg-input-padding-inline);
+    appearance: auto;
+  }
+}
