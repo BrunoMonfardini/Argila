@@ -13,7 +13,7 @@ import {
 import { ArgIdGenerator } from '../internal/unique-id';
 import { ArgConfirmDialog, ArgConfirmOptions } from './confirm-dialog';
 import { ArgDialogContainer } from './dialog-container';
-import { ARG_DIALOG_DATA, ArgDialogConfig, ArgDialogRef } from './dialog-ref';
+import { ARG_DIALOG_DATA, ArgDialogConfig, ArgDialogLayout, ArgDialogRef } from './dialog-ref';
 
 export { ARG_DIALOG_DATA, ArgDialogRef } from './dialog-ref';
 export { ArgDialogDescription, ArgDialogTitle } from './dialog-title';
@@ -51,10 +51,14 @@ export class ArgDialog {
   private readonly ids = inject(ArgIdGenerator);
   private readonly open_ = new Map<ArgDialogRef<unknown>, OpenDialog>();
 
-  /** Abre `component` num diálogo modal. */
+  /**
+   * Abre `component` num diálogo modal. `layout` é interno: o `ArgDrawer`
+   * usa o mesmo serviço para abrir gavetas.
+   */
   open<C, D = unknown, R = unknown>(
     component: Type<C>,
     config: ArgDialogConfig<D> = {},
+    layout: ArgDialogLayout = 'dialog',
   ): ArgDialogRef<R> {
     const ref = new ArgDialogRef<R>(this.ids.next('arg-dialog'), (r, result) =>
       this.close(r, result),
@@ -67,6 +71,7 @@ export class ArgDialog {
     });
     const dialog = container.instance;
     dialog.size.set(config.size ?? 'md');
+    dialog.layout.set(layout);
     dialog.role.set(config.role ?? 'dialog');
     dialog.label.set(config.label ?? null);
     dialog.titleId.set(ref.titleId);

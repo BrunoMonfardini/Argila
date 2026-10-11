@@ -7,6 +7,7 @@ import { CARD_DOCS } from '../../../ui/src/lib/card/card.docs';
 import { CHOICE_DOCS } from '../../../ui/src/lib/choice/choice.docs';
 import { DIALOG_DOCS } from '../../../ui/src/lib/dialog/dialog.docs';
 import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
+import { DRAWER_DOCS } from '../../../ui/src/lib/drawer/drawer.docs';
 import { EMPTY_STATE_DOCS } from '../../../ui/src/lib/empty-state/empty-state.docs';
 import { FIELD_DOCS } from '../../../ui/src/lib/field/field.docs';
 import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
@@ -38,6 +39,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   CHOICE_DOCS,
   DIALOG_DOCS,
   DIVIDER_DOCS,
+  DRAWER_DOCS,
   EMPTY_STATE_DOCS,
   FIELD_DOCS,
   ICON_DOCS,

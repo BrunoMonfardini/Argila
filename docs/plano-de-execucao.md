@@ -16,15 +16,15 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 _Atualizado em 07/10/2026._
 
-| Marco | Situação                                                                                                                                                                     |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                   |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                              |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                           |
-| M5    | **Ondas 1 e 2 prontas** (W1-01 a W1-07: base de formulários; W2-01 a W2-06: exibição e feedback). **Onda 3 em andamento:** W3-01 (Dialog) feito. **Próximo:** W3-02 (Drawer) |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                            |
+| Marco | Situação                                                                                                                                                                                        |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                      |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                 |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                   |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                   |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                              |
+| M5    | **Ondas 1 e 2 prontas** (W1-01 a W1-07: base de formulários; W2-01 a W2-06: exibição e feedback). **Onda 3 em andamento:** W3-01 (Dialog) e W3-02 (Drawer) feitos. **Próximo:** W3-03 (Popover) |
+| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                               |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -190,7 +190,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | ✓   | ID    | Componente | Pronto quando, além do checklist                                             | Est. |
 | --- | ----- | ---------- | ---------------------------------------------------------------------------- | ---- |
 | [x] | W3-01 | Dialog     | Aberto por serviço; foco preso; devolve o foco ao fechar; confirmação pronta | 3    |
-| [ ] | W3-02 | Drawer     | Lateral no desktop, de baixo no celular                                      | 2    |
+| [x] | W3-02 | Drawer     | Lateral no desktop, de baixo no celular                                      | 2    |
 | [ ] | W3-03 | Popover    | Posicionado junto ao gatilho, sem sair da tela                               | 2    |
 | [ ] | W3-04 | Menu       | Setas, Home/End, busca por letra, Esc                                        | 3    |
 | [ ] | W3-05 | Toast      | Fila; pausa no hover e no foco; anunciado pelo leitor de tela                | 3    |
