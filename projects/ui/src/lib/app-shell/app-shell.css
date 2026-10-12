@@ -1,0 +1,155 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-app-shell style="--arg-app-shell-nav-width: 18rem">.
+ * A faixa de cima do cabeçalho usa a cor da marca (ArgTheme.setBrand).
+ */
+:host {
+  --arg-app-shell-height: 100dvh;
+  --arg-app-shell-nav-width: 16rem;
+  --arg-app-shell-header-height: 3.5rem;
+  --arg-app-shell-header-bg: var(--arg-color-surface);
+  --arg-app-shell-nav-bg: var(--arg-color-surface);
+  --arg-app-shell-brand-accent: var(--arg-color-primary);
+
+  position: relative;
+  display: grid;
+  grid-template:
+    'header header' auto
+    'nav main' minmax(0, 1fr)
+    / var(--arg-app-shell-nav-width) minmax(0, 1fr);
+  height: var(--arg-app-shell-height);
+  overflow: hidden;
+  background: var(--arg-color-background);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-body);
+}
+
+:host(.arg-app-shell--compact) {
+  grid-template:
+    'header' auto
+    'main' minmax(0, 1fr)
+    / minmax(0, 1fr);
+}
+
+/* "Pular para o conteúdo": fora da tela até receber o foco */
+.arg-app-shell__skip {
+  position: absolute;
+  inset-block-start: var(--arg-space-2);
+  inset-inline-start: var(--arg-space-2);
+  z-index: var(--arg-z-sticky);
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface-raised);
+  color: var(--arg-color-text-link);
+  box-shadow: var(--arg-shadow-md);
+  transform: translateY(-200%);
+}
+
+.arg-app-shell__skip:focus {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+  transform: none;
+}
+
+.arg-app-shell__header {
+  display: flex;
+  grid-area: header;
+  align-items: center;
+  gap: var(--arg-space-3);
+  min-height: var(--arg-app-shell-header-height);
+  padding-inline: var(--arg-space-4);
+  border-block-start: 3px solid var(--arg-app-shell-brand-accent);
+  border-block-end: 1px solid var(--arg-color-border);
+  background: var(--arg-app-shell-header-bg);
+}
+
+.arg-app-shell__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-2);
+  min-width: 0;
+  color: inherit;
+  font-size: var(--arg-font-size-body-lg);
+  font-weight: var(--arg-font-weight-heading);
+  text-decoration: none;
+}
+
+a.arg-app-shell__brand:focus-visible {
+  border-radius: var(--arg-radius-control);
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.arg-app-shell__logo {
+  flex-shrink: 0;
+  width: auto;
+  height: 2rem;
+}
+
+.arg-app-shell__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arg-app-shell__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--arg-space-2);
+  margin-inline-start: auto;
+}
+
+.arg-app-shell__nav {
+  grid-area: nav;
+  overflow-y: auto;
+  padding: var(--arg-space-3);
+  border-inline-end: 1px solid var(--arg-color-border);
+  background: var(--arg-app-shell-nav-bg);
+}
+
+/* Compacto: o menu vira gaveta à esquerda, na camada de topo (popover="auto") */
+:host(.arg-app-shell--compact) .arg-app-shell__nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  box-sizing: border-box;
+  width: min(18rem, 100vw - var(--arg-space-12));
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  border-inline-end: 1px solid var(--arg-color-border);
+  box-shadow: var(--arg-shadow-lg);
+  color: inherit;
+}
+
+:host(.arg-app-shell--compact) .arg-app-shell__nav:popover-open {
+  animation: arg-app-shell-nav-in var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+:host(.arg-app-shell--compact) .arg-app-shell__nav::backdrop {
+  background: var(--arg-color-overlay);
+}
+
+.arg-app-shell__main {
+  grid-area: main;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* O foco vai ao <main> pelo "pular para o conteúdo"; o anel ali só atrapalharia */
+.arg-app-shell__main:focus {
+  outline: none;
+}
+
+@keyframes arg-app-shell-nav-in {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@media (forced-colors: active) {
+  .arg-app-shell__header {
+    border-block-start-color: CanvasText;
+  }
+}

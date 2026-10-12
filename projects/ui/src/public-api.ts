@@ -3,6 +3,7 @@
  */
 
 export * from './lib/alert/alert';
+export * from './lib/app-shell/app-shell';
 export * from './lib/avatar/avatar';
 export * from './lib/badge/badge';
 export * from './lib/button/button';

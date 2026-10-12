@@ -56,7 +56,15 @@
   --arg-color-text: light-dark(var(--arg-core-neutral-900), var(--arg-core-neutral-50));
   --arg-color-text-muted: light-dark(var(--arg-core-neutral-600), var(--arg-core-neutral-400));
   --arg-color-text-disabled: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-600));
-  --arg-color-text-link: var(--arg-color-primary);
+  /*
+   * No escuro, o link clareia um pouco (10% de branco): a cor da marca pura
+   * fica abaixo de 4.5:1 sobre surface-raised (diálogos, popovers, menus).
+   * A marca do tenant continua valendo.
+   */
+  --arg-color-text-link: light-dark(
+    var(--arg-color-primary),
+    color-mix(in oklab, var(--arg-color-primary) 90%, var(--arg-core-neutral-0))
+  );
 
   /* Bordas */
   --arg-color-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));

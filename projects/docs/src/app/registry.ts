@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { ALERT_DOCS } from '../../../ui/src/lib/alert/alert.docs';
+import { APP_SHELL_DOCS } from '../../../ui/src/lib/app-shell/app-shell.docs';
 import { AVATAR_DOCS } from '../../../ui/src/lib/avatar/avatar.docs';
 import { BADGE_DOCS } from '../../../ui/src/lib/badge/badge.docs';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
@@ -35,6 +36,7 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
   ALERT_DOCS,
+  APP_SHELL_DOCS,
   AVATAR_DOCS,
   BADGE_DOCS,
   BUTTON_DOCS,
