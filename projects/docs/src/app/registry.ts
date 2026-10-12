@@ -3,6 +3,7 @@ import { ALERT_DOCS } from '../../../ui/src/lib/alert/alert.docs';
 import { APP_SHELL_DOCS } from '../../../ui/src/lib/app-shell/app-shell.docs';
 import { AVATAR_DOCS } from '../../../ui/src/lib/avatar/avatar.docs';
 import { BADGE_DOCS } from '../../../ui/src/lib/badge/badge.docs';
+import { BREADCRUMB_DOCS } from '../../../ui/src/lib/breadcrumb/breadcrumb.docs';
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
 import { CARD_DOCS } from '../../../ui/src/lib/card/card.docs';
 import { CHOICE_DOCS } from '../../../ui/src/lib/choice/choice.docs';
@@ -40,6 +41,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   APP_SHELL_DOCS,
   AVATAR_DOCS,
   BADGE_DOCS,
+  BREADCRUMB_DOCS,
   BUTTON_DOCS,
   CARD_DOCS,
   CHOICE_DOCS,

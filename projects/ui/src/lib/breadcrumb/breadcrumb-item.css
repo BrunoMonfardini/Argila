@@ -1,0 +1,21 @@
+/*
+ * Item da trilha. O separador vem antes de cada item, menos do primeiro, com
+ * texto alternativo vazio: o leitor de tela não o lê (a lista já diz a ordem).
+ */
+:host {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  color: var(--arg-color-text-muted);
+}
+
+:host(:not(:first-child))::before {
+  content: var(--arg-breadcrumb-separator) / '';
+  margin-inline: var(--arg-space-2);
+  color: var(--arg-color-text-muted);
+}
+
+:host(.arg-breadcrumb__item--current) {
+  color: var(--arg-color-text);
+  font-weight: var(--arg-font-weight-medium);
+}
