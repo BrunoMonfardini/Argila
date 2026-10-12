@@ -16,15 +16,15 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 _Atualizado em 07/10/2026._
 
-| Marco | Situação                                                                                                                                                                                      |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                    |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                               |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                 |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                 |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                            |
-| M5    | **Ondas 1, 2 e 3 prontas** (W1: base de formulários; W2: exibição e feedback; W3: camadas). **Onda 4 em andamento:** W4-01 (App Shell) e W4-02 (Tabs) feitos. **Próximo:** W4-03 (Breadcrumb) |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                             |
+| Marco | Situação                                                                                                                                                                                                          |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                                        |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                                   |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                                     |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                                     |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                                |
+| M5    | **Ondas 1, 2 e 3 prontas** (W1: base de formulários; W2: exibição e feedback; W3: camadas). **Onda 4 em andamento:** W4-01 (App Shell), W4-02 (Tabs) e W4-03 (Breadcrumb) feitos. **Próximo:** W4-04 (Pagination) |
+| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                                                 |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -201,7 +201,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | --- | ----- | ---------- | ------------------------------------------------------------------- | ---- |
 | [x] | W4-01 | App Shell  | Marca do tenant no cabeçalho; menu lateral vira gaveta no celular   | 4    |
 | [x] | W4-02 | Tabs       | Setas entre abas; painel ligado à aba                               | 2    |
-| [ ] | W4-03 | Breadcrumb | Item atual com `aria-current`                                       | 1    |
+| [x] | W4-03 | Breadcrumb | Item atual com `aria-current`                                       | 1    |
 | [ ] | W4-04 | Pagination | Total de páginas, anterior e próxima, página atual anunciada        | 1,5  |
 | [ ] | W4-05 | Stepper    | Etapas feita, atual e pendente distinguíveis sem depender só de cor | 1,5  |
 

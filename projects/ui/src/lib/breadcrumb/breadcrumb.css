@@ -1,0 +1,21 @@
+/*
+ * Trilha. Tokens de componente (camada 3), ex.: <nav arg-breadcrumb style="--arg-breadcrumb-separator: '›'">.
+ * O separador fica nos itens (breadcrumb-item.css).
+ */
+:host {
+  --arg-breadcrumb-separator: '/';
+
+  display: block;
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-body);
+}
+
+.arg-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
