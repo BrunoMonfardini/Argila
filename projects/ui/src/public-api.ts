@@ -24,6 +24,7 @@ export * from './lib/input/input';
 export * from './lib/link/link';
 export * from './lib/list/list';
 export * from './lib/menu/menu';
+export * from './lib/pagination/pagination';
 export * from './lib/popover/popover';
 export * from './lib/progress-bar/progress-bar';
 export * from './lib/select/select';

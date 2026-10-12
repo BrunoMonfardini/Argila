@@ -1,0 +1,40 @@
+<ol class="arg-pagination__list">
+  <li>
+    <button
+      type="button"
+      class="arg-pagination__step"
+      [attr.aria-disabled]="isFirst() || null"
+      (click)="go(current() - 1)"
+    >
+      {{ previousText() }}
+    </button>
+  </li>
+  @for (item of items(); track $index) {
+    <li class="arg-pagination__page">
+      @if (item === 'gap') {
+        <span class="arg-pagination__gap" aria-hidden="true">…</span>
+      } @else {
+        <button
+          type="button"
+          class="arg-pagination__number"
+          [attr.aria-label]="'Página ' + item"
+          [attr.aria-current]="item === current() ? 'page' : null"
+          (click)="go(item)"
+        >
+          {{ item }}
+        </button>
+      }
+    </li>
+  }
+  <li>
+    <button
+      type="button"
+      class="arg-pagination__step"
+      [attr.aria-disabled]="isLast() || null"
+      (click)="go(current() + 1)"
+    >
+      {{ nextText() }}
+    </button>
+  </li>
+</ol>
+<p class="arg-pagination__status">{{ status() }}</p>
