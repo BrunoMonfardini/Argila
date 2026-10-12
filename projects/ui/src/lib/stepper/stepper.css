@@ -1,0 +1,157 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-stepper style="--arg-stepper-marker-size: 2rem">.
+ * Feita, atual e pendente mudam de forma (✓, preenchido, contorno) e de peso
+ * do texto, além da cor.
+ */
+:host {
+  --arg-stepper-marker-size: 1.75rem;
+  --arg-stepper-accent: var(--arg-color-primary);
+  --arg-stepper-on-accent: var(--arg-color-on-primary);
+  /* text-muted: passa de 3:1 sobre a superfície em todos os temas (border-strong não) */
+  --arg-stepper-line: var(--arg-color-text-muted);
+
+  display: block;
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-control);
+}
+
+.arg-stepper__list {
+  display: flex;
+  gap: var(--arg-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arg-stepper__step {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--arg-space-2);
+  min-width: 0;
+}
+
+/* Linha entre as etapas: cheia depois de uma etapa feita, tracejada antes das pendentes */
+.arg-stepper__step:not(:last-child)::after {
+  content: '';
+  flex: 1;
+  min-width: var(--arg-space-4);
+  border-block-start: 2px dashed var(--arg-stepper-line);
+}
+
+.arg-stepper__step--done:not(:last-child)::after {
+  border-block-start-style: solid;
+  border-block-start-color: var(--arg-stepper-accent);
+}
+
+.arg-stepper__body {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-2);
+  min-width: 0;
+  margin: 0;
+  padding: var(--arg-space-1);
+  border: 0;
+  border-radius: var(--arg-radius-control);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+}
+
+.arg-stepper__body--button {
+  cursor: pointer;
+}
+
+.arg-stepper__body--button:hover .arg-stepper__label {
+  text-decoration: underline;
+}
+
+.arg-stepper__body--button:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.arg-stepper__marker {
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: var(--arg-stepper-marker-size);
+  height: var(--arg-stepper-marker-size);
+  box-sizing: border-box;
+  border: 2px solid var(--arg-stepper-line);
+  border-radius: var(--arg-radius-full);
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.arg-stepper__label {
+  overflow: hidden;
+  color: var(--arg-color-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Feita: ✓ sobre a cor da marca */
+.arg-stepper__step--done .arg-stepper__marker {
+  border-color: var(--arg-stepper-accent);
+  background: var(--arg-stepper-accent);
+  color: var(--arg-stepper-on-accent);
+}
+
+.arg-stepper__step--done .arg-stepper__label {
+  color: var(--arg-color-text);
+}
+
+/* Atual: marcador com anel (contorno grosso e número), rótulo em negrito */
+.arg-stepper__step--current .arg-stepper__marker {
+  border-width: 3px;
+  border-color: var(--arg-stepper-accent);
+  color: var(--arg-color-text);
+}
+
+.arg-stepper__step--current .arg-stepper__label {
+  color: var(--arg-color-text);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+/* Vertical: uma etapa por linha, com a linha de ligação descendo */
+:host(.arg-stepper--vertical) .arg-stepper__list {
+  flex-direction: column;
+  gap: 0;
+}
+
+:host(.arg-stepper--vertical) .arg-stepper__step {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+:host(.arg-stepper--vertical) .arg-stepper__step:not(:last-child)::after {
+  flex: none;
+  min-width: 0;
+  height: var(--arg-space-4);
+  margin-inline-start: calc(var(--arg-space-1) + var(--arg-stepper-marker-size) / 2 - 1px);
+  border-block-start: 0;
+  border-inline-start: 2px dashed var(--arg-stepper-line);
+}
+
+:host(.arg-stepper--vertical) .arg-stepper__step--done:not(:last-child)::after {
+  border-inline-start-style: solid;
+  border-inline-start-color: var(--arg-stepper-accent);
+}
+
+@media (forced-colors: active) {
+  .arg-stepper__step--done .arg-stepper__marker {
+    border-color: CanvasText;
+    background: CanvasText;
+    color: Canvas;
+  }
+
+  .arg-stepper__step--current .arg-stepper__marker {
+    border-color: Highlight;
+  }
+}
