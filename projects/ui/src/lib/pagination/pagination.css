@@ -1,0 +1,107 @@
+/*
+ * Tokens de componente (camada 3), ex.: <nav arg-pagination style="--arg-pagination-size: 2rem">.
+ */
+:host {
+  --arg-pagination-size: 2.5rem;
+  --arg-pagination-current-bg: var(--arg-color-primary);
+  --arg-pagination-current-fg: var(--arg-color-on-primary);
+  --arg-pagination-hover-bg: color-mix(in oklab, var(--arg-color-text) 6%, transparent);
+
+  /*
+   * O modo celular usa a largura da própria paginação (container query). Com a
+   * contenção, a largura não pode vir do conteúdo: dentro de flex ou grid,
+   * ela cairia a zero. Por isso ocupa a linha toda.
+   */
+  container-type: inline-size;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--arg-space-2) var(--arg-space-4);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--arg-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arg-pagination__step,
+.arg-pagination__number {
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--arg-pagination-size);
+  min-height: var(--arg-pagination-size);
+  margin: 0;
+  padding: 0 var(--arg-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--arg-radius-control);
+  background: transparent;
+  color: var(--arg-color-text);
+  font: inherit;
+  font-weight: var(--arg-font-weight-medium);
+  cursor: pointer;
+}
+
+.arg-pagination__number {
+  padding: 0 var(--arg-space-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.arg-pagination__step:hover,
+.arg-pagination__number:hover {
+  background: var(--arg-pagination-hover-bg);
+}
+
+/* Página atual: preenchida e em negrito, não só por cor */
+.arg-pagination__number[aria-current='page'] {
+  background: var(--arg-pagination-current-bg);
+  color: var(--arg-pagination-current-fg);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+.arg-pagination__step[aria-disabled='true'] {
+  background: transparent;
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.arg-pagination__step:focus-visible,
+.arg-pagination__number:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.arg-pagination__gap {
+  display: inline-grid;
+  place-items: center;
+  min-width: var(--arg-pagination-size);
+  color: var(--arg-color-text-muted);
+}
+
+.arg-pagination__status {
+  margin: 0;
+  color: var(--arg-color-text-muted);
+}
+
+/* Celular: só Anterior, Próxima e "Página 3 de 12" */
+@container (width < 32rem) {
+  .arg-pagination__page {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .arg-pagination__number[aria-current='page'] {
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+}

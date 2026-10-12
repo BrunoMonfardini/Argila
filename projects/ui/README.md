@@ -77,6 +77,7 @@ export class Exemplo {}
 | App Shell          | `<arg-app-shell brandName="Clínica Patas" [brandLogo]="logo"><nav arg-app-shell-nav aria-label="Principal">…</nav><router-outlet /></arg-app-shell>`; abaixo de 768 px o menu vira gaveta                                                                     |
 | Abas               | `<arg-tabs label="Ficha do pet" [(selected)]="aba"><arg-tab label="Dados">…</arg-tab><arg-tab label="Vacinas">…</arg-tab></arg-tabs>`; setas, Home/End; importe `ARG_TABS`                                                                                    |
 | Trilha             | `<nav arg-breadcrumb><li arg-breadcrumb-item><a arg-link variant="muted" routerLink="/clientes">Clientes</a></li><li arg-breadcrumb-item current>Thor</li></nav>`; importe `ARG_BREADCRUMB`                                                                   |
+| Paginação          | `<nav arg-pagination [total]="paginas()" [(page)]="pagina"></nav>`; anterior, próxima, números com reticências e "Página 3 de 12" anunciado                                                                                                                   |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
