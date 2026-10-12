@@ -1,0 +1,75 @@
+/*
+ * Lista de abas. Tokens de componente (camada 3), ex.:
+ * <arg-tabs style="--arg-tabs-indicator: var(--arg-color-text)">.
+ * O painel (arg-tab) tem o próprio estilo, em tab.css.
+ */
+:host {
+  --arg-tabs-indicator: var(--arg-color-primary);
+  --arg-tabs-border: var(--arg-color-border);
+  --arg-tabs-gap: var(--arg-space-4);
+
+  display: block;
+  font-family: var(--arg-font-family);
+}
+
+.arg-tabs__list {
+  display: flex;
+  gap: var(--arg-space-1);
+  margin-block-end: var(--arg-tabs-gap);
+  overflow-x: auto;
+  border-block-end: 1px solid var(--arg-tabs-border);
+  scrollbar-width: thin;
+}
+
+.arg-tabs__tab {
+  position: relative;
+  flex-shrink: 0;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border: 0;
+  border-radius: var(--arg-radius-control) var(--arg-radius-control) 0 0;
+  background: transparent;
+  color: var(--arg-color-text-muted);
+  font: inherit;
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+.arg-tabs__tab:hover {
+  color: var(--arg-color-text);
+}
+
+/* Aba aberta: texto em destaque e barra embaixo (não depende só da cor) */
+.arg-tabs__tab[aria-selected='true'] {
+  color: var(--arg-color-text);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-tabs__tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset: auto var(--arg-space-2) -1px;
+  height: 3px;
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-tabs-indicator);
+}
+
+.arg-tabs__tab:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: calc(var(--arg-focus-ring-width) * -1);
+}
+
+.arg-tabs__tab[aria-disabled='true'] {
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .arg-tabs__tab[aria-selected='true']::after {
+    background: Highlight;
+  }
+}
