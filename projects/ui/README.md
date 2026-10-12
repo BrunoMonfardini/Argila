@@ -75,6 +75,7 @@ export class Exemplo {}
 | Menu               | `<button arg-button [argMenuTrigger]="acoes">Ações</button><arg-menu #acoes><button arg-menu-item (click)="editar()">Editar</button></arg-menu>`; setas, Home/End, busca por letra e Esc; importe `ARG_MENU`                                                  |
 | Toast              | `inject(ArgToast).show('Agendamento salvo', { tone: 'success' })`; com `action: { label: 'Desfazer', run }`; fila de 3, pausa no hover e no foco, anunciado pelo leitor de tela                                                                               |
 | App Shell          | `<arg-app-shell brandName="Clínica Patas" [brandLogo]="logo"><nav arg-app-shell-nav aria-label="Principal">…</nav><router-outlet /></arg-app-shell>`; abaixo de 768 px o menu vira gaveta                                                                     |
+| Abas               | `<arg-tabs label="Ficha do pet" [(selected)]="aba"><arg-tab label="Dados">…</arg-tab><arg-tab label="Vacinas">…</arg-tab></arg-tabs>`; setas, Home/End; importe `ARG_TABS`                                                                                    |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:

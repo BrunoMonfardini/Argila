@@ -28,6 +28,7 @@ export * from './lib/progress-bar/progress-bar';
 export * from './lib/select/select';
 export * from './lib/skeleton/skeleton';
 export * from './lib/spinner/spinner';
+export * from './lib/tabs/tabs';
 export * from './lib/tag/tag';
 export * from './lib/theme/theme';
 export * from './lib/toast/toast';

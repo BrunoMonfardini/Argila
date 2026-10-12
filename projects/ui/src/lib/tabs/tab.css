@@ -1,0 +1,14 @@
+/* Painel de uma aba: focável (o Tab vai da aba para o painel), com anel de foco */
+:host {
+  display: block;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+:host(:focus-visible) {
+  border-radius: var(--arg-radius-control);
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
