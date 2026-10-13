@@ -14,6 +14,7 @@ import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
 import { DRAWER_DOCS } from '../../../ui/src/lib/drawer/drawer.docs';
 import { EMPTY_STATE_DOCS } from '../../../ui/src/lib/empty-state/empty-state.docs';
 import { FIELD_DOCS } from '../../../ui/src/lib/field/field.docs';
+import { FILE_UPLOAD_DOCS } from '../../../ui/src/lib/file-upload/file-upload.docs';
 import { ICON_DOCS } from '../../../ui/src/lib/icon/icon.docs';
 import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.docs';
 import { INPUT_DOCS } from '../../../ui/src/lib/input/input.docs';
@@ -58,6 +59,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   DRAWER_DOCS,
   EMPTY_STATE_DOCS,
   FIELD_DOCS,
+  FILE_UPLOAD_DOCS,
   ICON_DOCS,
   ICON_BUTTON_DOCS,
   INPUT_DOCS,

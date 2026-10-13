@@ -77,6 +77,12 @@ const PAIRS: ContrastPair[] = [
     background: '--arg-color-surface-sunken',
     minimum: NON_TEXT,
   },
+  // File Upload: textos da área de soltar com o fundo de "arrastando"
+  ...['--arg-color-text', '--arg-color-text-muted', '--arg-color-text-link'].map((foreground) => ({
+    foreground,
+    background: '--arg-color-primary-subtle',
+    minimum: TEXT,
+  })),
   // Anel de foco (indicador, não texto)
   { foreground: '--arg-color-focus', background: '--arg-color-background', minimum: NON_TEXT },
   { foreground: '--arg-color-focus', background: '--arg-color-surface', minimum: NON_TEXT },
