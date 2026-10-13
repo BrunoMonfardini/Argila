@@ -71,3 +71,21 @@ if (!supportsAnchor(this.document.defaultView)) {
   placeBeside(this.trigger, this.panel, 'bottom', 'start');
 }
 ```
+
+## `ArgValueControlBase<T>`: campos com valor próprio
+
+Para campos sobre `<input>` cujo valor no formulário não é o texto digitado (`arg-currency` guarda centavos, `arg-mask` guarda só os dígitos). Faz a parte comum da integração com formulários: `ControlValueAccessor` (mudança, tocado e desabilitado), a input `disabled` e o evento `touch` no blur, para os formulários de signals.
+
+O campo declara o próprio `value` (`model()`) e `writeValue`, registra-se como `NG_VALUE_ACCESSOR` e chama `notifyChange(valor)` quando a pessoa altera o valor:
+
+```ts
+export class ArgCurrencyInput extends ArgValueControlBase<number | null> {
+  readonly value = model<number | null>(null);
+  writeValue(value: number | null): void {
+    this.value.set(value);
+  }
+  protected onInput(): void {
+    /* … */ this.notifyChange(cents);
+  }
+}
+```

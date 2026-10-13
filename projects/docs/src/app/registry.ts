@@ -18,6 +18,7 @@ import { ICON_BUTTON_DOCS } from '../../../ui/src/lib/icon-button/icon-button.do
 import { INPUT_DOCS } from '../../../ui/src/lib/input/input.docs';
 import { LINK_DOCS } from '../../../ui/src/lib/link/link.docs';
 import { LIST_DOCS } from '../../../ui/src/lib/list/list.docs';
+import { MASKED_INPUT_DOCS } from '../../../ui/src/lib/masked-input/masked-input.docs';
 import { MENU_DOCS } from '../../../ui/src/lib/menu/menu.docs';
 import { PAGINATION_DOCS } from '../../../ui/src/lib/pagination/pagination.docs';
 import { POPOVER_DOCS } from '../../../ui/src/lib/popover/popover.docs';
@@ -59,6 +60,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   INPUT_DOCS,
   LINK_DOCS,
   LIST_DOCS,
+  MASKED_INPUT_DOCS,
   MENU_DOCS,
   PAGINATION_DOCS,
   POPOVER_DOCS,
