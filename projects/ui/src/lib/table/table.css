@@ -1,0 +1,146 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-table style="--arg-table-row-height: 3.5rem">.
+ * Ordenado e selecionado não dependem só da cor: seta no título e caixa marcada.
+ */
+:host {
+  --arg-table-row-height: 3rem;
+  --arg-table-header-bg: var(--arg-color-surface-sunken);
+  --arg-table-selected-bg: var(--arg-color-primary-subtle);
+
+  /*
+   * Dentro de grid ou flex, um item não encolhe abaixo do conteúdo (min-width:
+   * auto): a tabela larga esticaria a página. Assim ela cabe e rola por dentro.
+   */
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+/* Celular: a tabela rola de lado dentro da área, sem quebrar a página */
+.arg-table__scroll {
+  overflow-x: auto;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+}
+
+.arg-table__scroll:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.arg-table__table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--arg-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.arg-table__caption {
+  padding: var(--arg-space-3) var(--arg-space-4);
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-strong);
+  text-align: start;
+}
+
+th,
+td {
+  height: var(--arg-table-row-height);
+  padding: var(--arg-space-2) var(--arg-space-4);
+  border-block-end: 1px solid var(--arg-color-border);
+  text-align: start;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+th {
+  background: var(--arg-table-header-bg);
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+tbody tr:last-child td {
+  border-block-end: 0;
+}
+
+tbody tr:hover {
+  background: color-mix(in oklab, var(--arg-color-text) 4%, transparent);
+}
+
+.arg-table__row--selected,
+.arg-table__row--selected:hover {
+  background: var(--arg-table-selected-bg);
+}
+
+.arg-table__cell--end {
+  text-align: end;
+}
+
+/* Título ordenável: botão do tamanho do título, com a seta da direção */
+.arg-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-1);
+  margin: calc(var(--arg-space-1) * -1) calc(var(--arg-space-2) * -1);
+  padding: var(--arg-space-1) var(--arg-space-2);
+  border: 0;
+  border-radius: var(--arg-radius-control);
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+
+.arg-table__sort:hover {
+  color: var(--arg-color-text);
+}
+
+.arg-table__sort:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: 0;
+}
+
+th[aria-sort='ascending'],
+th[aria-sort='descending'] {
+  color: var(--arg-color-text);
+}
+
+.arg-table__arrow {
+  font-size: var(--arg-font-size-body-sm);
+  font-variant-emoji: text;
+}
+
+.arg-table__select {
+  width: 1%;
+  padding-inline-end: 0;
+}
+
+.arg-table__checkbox {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: var(--arg-color-primary);
+  cursor: pointer;
+}
+
+.arg-table__empty {
+  height: auto;
+  padding: var(--arg-space-8) var(--arg-space-4);
+  color: var(--arg-color-text-muted);
+  text-align: center;
+  white-space: normal;
+}
+
+@media (forced-colors: active) {
+  .arg-table__row--selected {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}

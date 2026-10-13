@@ -30,6 +30,7 @@ import { SELECT_DOCS } from '../../../ui/src/lib/select/select.docs';
 import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
 import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
 import { STEPPER_DOCS } from '../../../ui/src/lib/stepper/stepper.docs';
+import { TABLE_DOCS } from '../../../ui/src/lib/table/table.docs';
 import { TABS_DOCS } from '../../../ui/src/lib/tabs/tabs.docs';
 import { TAG_DOCS } from '../../../ui/src/lib/tag/tag.docs';
 import { TIME_SLOTS_DOCS } from '../../../ui/src/lib/time-slots/time-slots.docs';
@@ -76,6 +77,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   SKELETON_DOCS,
   SPINNER_DOCS,
   STEPPER_DOCS,
+  TABLE_DOCS,
   TABS_DOCS,
   TAG_DOCS,
   TIME_SLOTS_DOCS,

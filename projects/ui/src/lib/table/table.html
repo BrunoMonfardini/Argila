@@ -1,0 +1,96 @@
+<!-- Área de rolagem: no celular a tabela rola de lado. Focável e com nome,
+     para rolar também pelo teclado (setas). -->
+<div class="arg-table__scroll" role="region" tabindex="0" [attr.aria-labelledby]="captionId">
+  <table class="arg-table__table" [attr.aria-busy]="loading() || null">
+    <caption class="arg-table__caption" [class.arg-sr-only]="hideCaption()" [id]="captionId">
+      {{
+        caption()
+      }}
+      @if (loading()) {
+        <span class="arg-sr-only">(carregando…)</span>
+      }
+    </caption>
+    <thead>
+      <tr>
+        @if (selectable()) {
+          <th class="arg-table__select" scope="col">
+            <input
+              type="checkbox"
+              class="arg-table__checkbox"
+              aria-label="Selecionar todas as linhas"
+              [checked]="allSelected()"
+              [indeterminate]="someSelected()"
+              [disabled]="loading() || !rows().length"
+              (change)="toggleAll()"
+            />
+          </th>
+        }
+        @for (column of columns(); track column.key) {
+          <th
+            scope="col"
+            [class.arg-table__cell--end]="column.align === 'end'"
+            [attr.aria-sort]="ariaSort(column)"
+          >
+            @if (column.sortable) {
+              <button type="button" class="arg-table__sort" (click)="toggleSort(column)">
+                {{ column.label }}
+                <span class="arg-table__arrow" aria-hidden="true">{{ arrow(column) }}</span>
+              </button>
+            } @else {
+              {{ column.label }}
+            }
+          </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @if (loading()) {
+        @for (placeholder of placeholders; track placeholder) {
+          <tr aria-hidden="true">
+            @for (slot of slots(); track slot) {
+              <td><arg-skeleton width="80%" /></td>
+            }
+          </tr>
+        }
+      } @else {
+        @for (row of view(); track keyOf(row)) {
+          <tr [class.arg-table__row--selected]="isSelected(row)">
+            @if (selectable()) {
+              <td class="arg-table__select">
+                <input
+                  type="checkbox"
+                  class="arg-table__checkbox"
+                  [attr.aria-label]="'Selecionar ' + rowName(row)"
+                  [checked]="isSelected(row)"
+                  (change)="toggleRow(row)"
+                />
+              </td>
+            }
+            @for (column of columns(); track column.key) {
+              <td [class.arg-table__cell--end]="column.align === 'end'">
+                @if (templates().get(column.key); as template) {
+                  <ng-container
+                    [ngTemplateOutlet]="template"
+                    [ngTemplateOutletContext]="{ $implicit: row }"
+                  />
+                } @else {
+                  {{ text(row, column) }}
+                }
+              </td>
+            }
+          </tr>
+        } @empty {
+          <tr>
+            <td class="arg-table__empty" [attr.colspan]="span()">
+              @if (customEmpty()) {
+                <ng-content select="[argTableEmpty]" />
+              } @else {
+                {{ emptyText() }}
+              }
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>
