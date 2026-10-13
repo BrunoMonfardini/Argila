@@ -14,17 +14,17 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 ## Onde estamos
 
-_Atualizado em 07/10/2026._
+_Atualizado em 13/10/2026._
 
-| Marco | Situação                                                                                                                                                                                                             |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                                           |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                                      |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                                        |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                                        |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                                   |
-| M5    | **Ondas 1 a 5 prontas** (W1: base de formulários; W2: exibição e feedback; W3: camadas; W4: navegação; W5: domínio dos produtos). **Onda 6 em andamento:** W6-01 (Table) feito. **Próximo:** W6-02 (Calendar/Agenda) |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                                                    |
+| Marco | Situação                                                                                                                              |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                            |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                       |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                         |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                         |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                    |
+| M5    | **Pronto** (ondas 1 a 6: base de formulários, exibição e feedback, camadas, navegação, domínio dos produtos e dados). **Próximo:** M6 |
+| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                     |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -221,7 +221,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | ✓   | ID    | Componente        | Pronto quando, além do checklist                                               | Est. |
 | --- | ----- | ----------------- | ------------------------------------------------------------------------------ | ---- |
 | [x] | W6-01 | Table             | Ordenação, seleção de linhas, estados vazio e carregando, rolagem no celular   | 6    |
-| [ ] | W6-02 | Calendar (Agenda) | Visão de dia e semana; agendamentos posicionados por horário; teclado completo | 10   |
+| [x] | W6-02 | Calendar (Agenda) | Visão de dia e semana; agendamentos posicionados por horário; teclado completo | 10   |
 
 ---
 

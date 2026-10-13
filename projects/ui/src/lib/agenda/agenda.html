@@ -1,0 +1,101 @@
+<div class="arg-agenda__toolbar">
+  <div class="arg-agenda__nav">
+    <button arg-button variant="secondary" size="sm" (click)="goToday()">Hoje</button>
+    <button
+      arg-icon-button
+      icon="chevron-left"
+      size="sm"
+      [label]="view() === 'week' ? 'Semana anterior' : 'Dia anterior'"
+      (click)="move(-1)"
+    ></button>
+    <button
+      arg-icon-button
+      icon="chevron-right"
+      size="sm"
+      [label]="view() === 'week' ? 'Próxima semana' : 'Próximo dia'"
+      (click)="move(1)"
+    ></button>
+    <h2 class="arg-agenda__range" [id]="headingId" aria-live="polite">{{ range() }}</h2>
+  </div>
+  <div class="arg-agenda__views" role="group" aria-label="Visão">
+    <button
+      arg-button
+      size="sm"
+      [variant]="view() === 'day' ? 'primary' : 'secondary'"
+      [attr.aria-pressed]="view() === 'day'"
+      (click)="setView('day')"
+    >
+      Dia
+    </button>
+    <button
+      arg-button
+      size="sm"
+      [variant]="view() === 'week' ? 'primary' : 'secondary'"
+      [attr.aria-pressed]="view() === 'week'"
+      (click)="setView('week')"
+    >
+      Semana
+    </button>
+  </div>
+</div>
+
+<!-- Na semana, a grade rola de lado no celular; as células focadas entram na vista sozinhas -->
+<div class="arg-agenda__scroll">
+  <div
+    class="arg-agenda__grid"
+    role="grid"
+    [attr.aria-labelledby]="headingId"
+    [class.arg-agenda__grid--week]="view() === 'week'"
+    [style.--arg-agenda-days]="days().length"
+  >
+    <div class="arg-agenda__row arg-agenda__row--head" role="row">
+      <div class="arg-agenda__corner" role="columnheader">
+        <span class="arg-sr-only">Horário</span>
+      </div>
+      @for (day of days(); track day) {
+        <div
+          class="arg-agenda__day"
+          role="columnheader"
+          [class.arg-agenda__day--today]="day === today"
+          [attr.aria-current]="day === today ? 'date' : null"
+        >
+          <span class="arg-agenda__weekday">{{ weekdayOf(day) }}</span>
+          <span class="arg-agenda__number">{{ dayNumber(day) }}</span>
+        </div>
+      }
+    </div>
+    @for (row of rows(); track row.time) {
+      <div class="arg-agenda__row" role="row">
+        <div class="arg-agenda__time" role="rowheader">{{ row.time }}</div>
+        @for (cell of row.cells; track cell.day) {
+          <div
+            class="arg-agenda__cell"
+            role="gridcell"
+            [class.arg-agenda__cell--today]="cell.day === today"
+            [attr.data-cell]="cell.day + '|' + cell.slot"
+            [attr.aria-label]="cell.label"
+            [attr.tabindex]="isActive(cell) ? 0 : -1"
+            (keydown)="onKeydown($event, cell)"
+          >
+            @for (placed of cell.starting; track placed.event.id) {
+              <div
+                class="arg-agenda__event"
+                aria-hidden="true"
+                [class]="'arg-agenda__event--' + (placed.event.tone ?? 'primary')"
+                [attr.data-event-id]="placed.event.id"
+                [style.--arg-agenda-span]="placed.span"
+                [style.--arg-agenda-lane]="placed.lane"
+                [style.--arg-agenda-lanes]="placed.lanes"
+              >
+                <span class="arg-agenda__title">{{ placed.event.title }}</span>
+                @if (placed.event.description) {
+                  <span class="arg-agenda__description">{{ placed.event.description }}</span>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

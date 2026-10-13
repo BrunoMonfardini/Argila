@@ -1,0 +1,205 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-agenda style="--arg-agenda-slot: 3rem">.
+ * Cada agendamento começa na célula do seu horário e cobre as seguintes
+ * (altura = horários x --arg-agenda-slot); os simultâneos dividem a largura.
+ */
+:host {
+  --arg-agenda-slot: 2.5rem;
+  --arg-agenda-time: 4rem;
+  --arg-agenda-day-min: 7rem;
+  --arg-agenda-line: var(--arg-color-border);
+
+  display: grid;
+  gap: var(--arg-space-3);
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-agenda__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--arg-space-2);
+}
+
+.arg-agenda__nav,
+.arg-agenda__views {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--arg-space-2);
+}
+
+.arg-agenda__range {
+  margin: 0 0 0 var(--arg-space-2);
+  font-size: var(--arg-font-size-body-lg);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-agenda__scroll {
+  min-width: 0;
+  overflow-x: auto;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+}
+
+.arg-agenda__grid {
+  display: grid;
+  grid-template-columns: var(--arg-agenda-time) repeat(var(--arg-agenda-days), minmax(0, 1fr));
+}
+
+.arg-agenda__grid--week {
+  min-width: calc(var(--arg-agenda-time) + 7 * var(--arg-agenda-day-min));
+}
+
+/* As linhas somem do leiaute: as células entram direto na grade */
+.arg-agenda__row {
+  display: contents;
+}
+
+.arg-agenda__corner,
+.arg-agenda__day {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: var(--arg-space-2);
+  border-block-end: 1px solid var(--arg-agenda-line);
+  background: var(--arg-color-surface-sunken);
+}
+
+.arg-agenda__day {
+  display: grid;
+  justify-items: center;
+  color: var(--arg-color-text-muted);
+}
+
+.arg-agenda__weekday {
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-agenda__number {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--arg-radius-full);
+  color: var(--arg-color-text);
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+/* Hoje: o número fica num círculo preenchido, não só de outra cor */
+.arg-agenda__day--today .arg-agenda__number {
+  background: var(--arg-color-primary);
+  color: var(--arg-color-on-primary);
+}
+
+.arg-agenda__time {
+  height: var(--arg-agenda-slot);
+  padding-inline: var(--arg-space-2);
+  border-block-end: 1px solid var(--arg-agenda-line);
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  padding-block-start: var(--arg-space-1);
+  box-sizing: border-box;
+}
+
+.arg-agenda__cell {
+  position: relative;
+  box-sizing: border-box;
+  height: var(--arg-agenda-slot);
+  border-block-end: 1px solid var(--arg-agenda-line);
+  border-inline-start: 1px solid var(--arg-agenda-line);
+  cursor: pointer;
+}
+
+.arg-agenda__cell:hover {
+  background: color-mix(in oklab, var(--arg-color-text) 4%, transparent);
+}
+
+.arg-agenda__cell--today {
+  background: color-mix(in oklab, var(--arg-color-primary) 4%, transparent);
+}
+
+.arg-agenda__cell:focus-visible {
+  z-index: 3;
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: calc(var(--arg-focus-ring-width) * -1);
+}
+
+/* Agendamento: cobre os horários que ocupa, na sua faixa */
+.arg-agenda__event {
+  --arg-agenda-accent: var(--arg-color-primary);
+  --arg-agenda-event-bg: var(--arg-color-primary-subtle);
+
+  position: absolute;
+  inset-block-start: 1px;
+  inset-inline-start: calc(var(--arg-agenda-lane) / var(--arg-agenda-lanes) * 100% + 2px);
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  box-sizing: border-box;
+  width: calc(100% / var(--arg-agenda-lanes) - 4px);
+  height: calc(var(--arg-agenda-span) * var(--arg-agenda-slot) - 3px);
+  padding: var(--arg-space-1) var(--arg-space-2);
+  overflow: hidden;
+  border-inline-start: 3px solid var(--arg-agenda-accent);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-agenda-event-bg);
+  color: var(--arg-color-text);
+  font-size: var(--arg-font-size-caption);
+  line-height: var(--arg-line-height-control);
+}
+
+.arg-agenda__event--info {
+  --arg-agenda-accent: var(--arg-color-info);
+  --arg-agenda-event-bg: var(--arg-color-info-subtle);
+}
+
+.arg-agenda__event--success {
+  --arg-agenda-accent: var(--arg-color-success);
+  --arg-agenda-event-bg: var(--arg-color-success-subtle);
+}
+
+.arg-agenda__event--warning {
+  --arg-agenda-accent: var(--arg-color-warning);
+  --arg-agenda-event-bg: var(--arg-color-warning-subtle);
+}
+
+.arg-agenda__event--danger {
+  --arg-agenda-accent: var(--arg-color-danger);
+  --arg-agenda-event-bg: var(--arg-color-danger-subtle);
+}
+
+.arg-agenda__title {
+  overflow: hidden;
+  font-weight: var(--arg-font-weight-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arg-agenda__description {
+  overflow: hidden;
+  color: var(--arg-color-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (forced-colors: active) {
+  .arg-agenda__event {
+    border: 1px solid CanvasText;
+    border-inline-start-width: 3px;
+  }
+
+  .arg-agenda__day--today .arg-agenda__number {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
