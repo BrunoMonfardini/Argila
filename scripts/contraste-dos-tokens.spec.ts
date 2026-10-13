@@ -83,6 +83,8 @@ const PAIRS: ContrastPair[] = [
     background: '--arg-color-primary-subtle',
     minimum: TEXT,
   })),
+  // Table: título das colunas sobre o cabeçalho rebaixado
+  { foreground: '--arg-color-text-muted', background: '--arg-color-surface-sunken', minimum: TEXT },
   // Anel de foco (indicador, não texto)
   { foreground: '--arg-color-focus', background: '--arg-color-background', minimum: NON_TEXT },
   { foreground: '--arg-color-focus', background: '--arg-color-surface', minimum: NON_TEXT },
