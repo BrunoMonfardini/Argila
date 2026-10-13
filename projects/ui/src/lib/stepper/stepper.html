@@ -1,0 +1,44 @@
+<ol class="arg-stepper__list" [attr.aria-label]="label()">
+  @for (step of items(); track step.index) {
+    <li
+      class="arg-stepper__step"
+      [class]="'arg-stepper__step--' + step.state"
+      [attr.aria-current]="step.state === 'current' ? 'step' : null"
+    >
+      @if (navigable() && step.state === 'done') {
+        <button
+          type="button"
+          class="arg-stepper__body arg-stepper__body--button"
+          (click)="stepSelect.emit(step.index)"
+        >
+          <ng-container
+            [ngTemplateOutlet]="content"
+            [ngTemplateOutletContext]="{ $implicit: step }"
+          />
+        </button>
+      } @else {
+        <span class="arg-stepper__body">
+          <ng-container
+            [ngTemplateOutlet]="content"
+            [ngTemplateOutletContext]="{ $implicit: step }"
+          />
+        </span>
+      }
+    </li>
+  }
+</ol>
+
+<ng-template #content let-step>
+  <span class="arg-stepper__marker" aria-hidden="true">
+    @if (step.state === 'done') {
+      <arg-icon name="check" size="sm" />
+    } @else {
+      {{ step.index + 1 }}
+    }
+  </span>
+  <!-- Rótulo e estado em spans separados: sem espaço antes da vírgula, mesmo com o template formatado -->
+  <span class="arg-stepper__label">
+    <span>{{ step.label }}</span>
+    <span class="arg-sr-only">, {{ step.stateText }}</span>
+  </span>
+</ng-template>

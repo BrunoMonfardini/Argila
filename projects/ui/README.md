@@ -78,6 +78,7 @@ export class Exemplo {}
 | Abas               | `<arg-tabs label="Ficha do pet" [(selected)]="aba"><arg-tab label="Dados">…</arg-tab><arg-tab label="Vacinas">…</arg-tab></arg-tabs>`; setas, Home/End; importe `ARG_TABS`                                                                                    |
 | Trilha             | `<nav arg-breadcrumb><li arg-breadcrumb-item><a arg-link variant="muted" routerLink="/clientes">Clientes</a></li><li arg-breadcrumb-item current>Thor</li></nav>`; importe `ARG_BREADCRUMB`                                                                   |
 | Paginação          | `<nav arg-pagination [total]="paginas()" [(page)]="pagina"></nav>`; anterior, próxima, números com reticências e "Página 3 de 12" anunciado                                                                                                                   |
+| Etapas             | `<arg-stepper [steps]="['Serviço', 'Horário', 'Pagamento']" [current]="1" />`; feita, atual e pendente pela forma e pelo texto; `navigable` para voltar                                                                                                       |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:

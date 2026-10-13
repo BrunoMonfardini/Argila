@@ -24,6 +24,7 @@ import { PROGRESS_BAR_DOCS } from '../../../ui/src/lib/progress-bar/progress-bar
 import { SELECT_DOCS } from '../../../ui/src/lib/select/select.docs';
 import { SKELETON_DOCS } from '../../../ui/src/lib/skeleton/skeleton.docs';
 import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
+import { STEPPER_DOCS } from '../../../ui/src/lib/stepper/stepper.docs';
 import { TABS_DOCS } from '../../../ui/src/lib/tabs/tabs.docs';
 import { TAG_DOCS } from '../../../ui/src/lib/tag/tag.docs';
 import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
@@ -63,6 +64,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   SELECT_DOCS,
   SKELETON_DOCS,
   SPINNER_DOCS,
+  STEPPER_DOCS,
   TABS_DOCS,
   TAG_DOCS,
   TOAST_DOCS,
