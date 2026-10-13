@@ -1,0 +1,56 @@
+/*
+ * O botão fica sobre o fim do campo: vem logo depois do <input> (que ocupa a
+ * linha toda) e sobe a altura dele com margem negativa.
+ */
+:host {
+  /* Mesma altura padrão do arg-input (--arg-input-height é do próprio campo) */
+  --arg-date-toggle-height: 2.5rem;
+
+  display: flex;
+  justify-content: flex-end;
+  height: var(--arg-date-toggle-height);
+  margin-block-start: calc(var(--arg-date-toggle-height) * -1);
+  padding-inline-end: var(--arg-space-1);
+  pointer-events: none;
+}
+
+.arg-date-toggle__button {
+  align-self: center;
+  pointer-events: auto;
+}
+
+/* Calendário: modal, junto do campo pelo anchor CSS; sem suporte, no centro */
+.arg-date-toggle__dialog {
+  margin: 0;
+  padding: var(--arg-space-3);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-lg);
+  background: var(--arg-color-surface-raised);
+  color: var(--arg-color-text);
+}
+
+.arg-date-toggle__dialog::backdrop {
+  background: transparent;
+}
+
+@supports (position-area: bottom) {
+  .arg-date-toggle__dialog {
+    inset: auto;
+    position-area: bottom span-left;
+    position-try-fallbacks: flip-block;
+    margin-block: var(--arg-space-1);
+  }
+}
+
+@supports not (position-area: bottom) {
+  .arg-date-toggle__dialog {
+    margin: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .arg-date-toggle__dialog {
+    border-color: CanvasText;
+  }
+}
