@@ -19,7 +19,7 @@ _Atualizado em 13/10/2026._
 | Marco | Situação                                                                                                                                                                                              |
 | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                            |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                       |
+| M1    | **Pronto** (PR-04 a PR-07): fonte do sistema, padrão e componente de ícones, e os 44 ícones do primeiro lote (desenhados para revisão do time)                                                        |
 | M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                         |
 | M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                         |
 | M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                    |
@@ -35,7 +35,7 @@ _Atualizado em 13/10/2026._
 
 **Pendências conhecidas:**
 
-- Só existem 4 ícones (`plus`, `x`, `check` e `external-link`, este desenhado junto do Link, para revisão do time); o botão "Menu" do catálogo fica sem ícone até o `menu` ser desenhado.
+- Os 44 ícones do primeiro lote foram desenhados no padrão da seção 1.2, sem partir de conjuntos de terceiros, e esperam a revisão do time (D2 previa uma pessoa do time desenhando). Trocar um desenho é só substituir o SVG e rodar `pnpm icons`.
 - Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma. Em D3, Vercel: o link fixo <https://argila-catalogo.vercel.app> passa a funcionar depois do OPS-03.
 - PR-04 a PR-13 foram entregues juntos num único PR, com um commit por item.
 - O PR-15 foi feito antes do DES-01 (desenho dos ícones), por decisão do time: remover o Storybook não depende dos ícones.
@@ -114,8 +114,8 @@ Precisam de resposta antes do marco indicado. Sem elas, o plano segue a opção 
 | [x] | PR-04  | `feat(tokens): usa a fonte do sistema` (remove `Inter` do `--arg-core-font-sans`)                                           | M0            | Nenhuma referência a `Inter` no repositório                                         | 0,5  |
 | [x] | PR-05  | `feat(icons): padrão de desenho e gerador de ícones` (`scripts/gerar-icones.ts`, testes, 3 ícones de exemplo)               | M0            | SVG fora do padrão é rejeitado com mensagem clara; testes do gerador com 80%+       | 2    |
 | [x] | PR-06  | `feat(icon): componente arg-icon e provideArgIcons`                                                                         | PR-05         | `<arg-icon name="plus" />` renderiza; nome inválido não compila; tamanhos por token | 2    |
-| [ ] | DES-01 | **Fora do código:** desenhar o primeiro lote (cerca de 40 ícones, lista na [seção 1.2](design-system-proprio.md#12-ícones)) | PR-05, D2     | Todos os SVGs passam no gerador                                                     | D2   |
-| [ ] | PR-07  | `feat(icons): primeiro lote de ícones`                                                                                      | PR-06, DES-01 | Os ~40 ícones exportados e aparecendo no catálogo                                   | 0,5  |
+| [x] | DES-01 | **Fora do código:** desenhar o primeiro lote (cerca de 40 ícones, lista na [seção 1.2](design-system-proprio.md#12-ícones)) | PR-05, D2     | Todos os SVGs passam no gerador                                                     | D2   |
+| [x] | PR-07  | `feat(icons): primeiro lote de ícones`                                                                                      | PR-06, DES-01 | Os ~40 ícones exportados e aparecendo no catálogo                                   | 0,5  |
 
 ---
 
