@@ -16,15 +16,15 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 _Atualizado em 07/10/2026._
 
-| Marco | Situação                                                                                                                                                                                                                                                                                                                    |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                                                                                                                                                  |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                                                                                                                                             |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                                                                                                                                               |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                                                                                                                                               |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                                                                                                                                          |
-| M5    | **Ondas 1 a 4 prontas** (W1: base de formulários; W2: exibição e feedback; W3: camadas; W4: navegação). **Onda 5 em andamento** (na ordem da tabela, padrão da D4): W5-01 (Currency Input), W5-02 (Masked Input), W5-03 (Date Picker), W5-04 (Time Slot Picker) e W5-05 (File Upload) feitos. **Próximo:** W5-06 (Combobox) |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                                                                                                                                                           |
+| Marco | Situação                                                                                                                                                                            |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                          |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                     |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                       |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                       |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                  |
+| M5    | **Ondas 1 a 5 prontas** (W1: base de formulários; W2: exibição e feedback; W3: camadas; W4: navegação; W5: domínio dos produtos). **Próximo:** onda 6, começando pelo W6-01 (Table) |
+| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                                                                   |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -214,7 +214,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | [x] | W5-03 | Date Picker      | Calendário navegável por teclado; datas bloqueadas; digitação direta da data | 5    |
 | [x] | W5-04 | Time Slot Picker | Horários livres e ocupados; navegável por setas; estado de carregamento      | 4    |
 | [x] | W5-05 | File Upload      | Arrastar e soltar; prévia de imagem; progresso; erro por tamanho e tipo      | 5    |
-| [ ] | W5-06 | Combobox         | Segue o padrão do ARIA APG; busca assíncrona com carregando e vazio          | 6    |
+| [x] | W5-06 | Combobox         | Segue o padrão do ARIA APG; busca assíncrona com carregando e vazio          | 6    |
 
 ### Onda 6: dados complexos (16 dias)
 

@@ -10,6 +10,7 @@ export * from './lib/breadcrumb/breadcrumb';
 export * from './lib/button/button';
 export * from './lib/card/card';
 export * from './lib/choice/choice';
+export * from './lib/combobox/combobox';
 export * from './lib/currency-input/currency-input';
 export * from './lib/date-picker/date-input';
 export * from './lib/dialog/dialog';

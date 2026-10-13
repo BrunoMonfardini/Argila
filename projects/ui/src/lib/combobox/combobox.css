@@ -1,0 +1,95 @@
+/*
+ * Painel da lista. O popover nativo vem com inset: 0 e margin: auto; o anchor
+ * CSS o põe embaixo do campo, com a mesma largura dele.
+ * Opção ativa (setas): fundo e barra à esquerda; escolhida: negrito e ✓.
+ */
+:host {
+  --arg-combobox-max-height: 18rem;
+
+  position: fixed;
+  inset: auto;
+  box-sizing: border-box;
+  min-width: 12rem;
+  max-height: var(--arg-combobox-max-height);
+  margin: 0;
+  padding: var(--arg-space-1);
+  overflow-y: auto;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-md);
+  background: var(--arg-color-surface-raised);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+@supports (position-area: bottom) {
+  :host {
+    width: anchor-size(width);
+    position-area: bottom span-right;
+    position-try-fallbacks: flip-block;
+    margin-block: var(--arg-space-1);
+  }
+}
+
+.arg-combobox__status {
+  display: flex;
+  align-items: center;
+  gap: var(--arg-space-2);
+  margin: 0;
+  padding: var(--arg-space-2) var(--arg-space-3);
+  color: var(--arg-color-text-muted);
+}
+
+.arg-combobox__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arg-combobox__list:empty {
+  display: none;
+}
+
+.arg-combobox__option {
+  display: grid;
+  gap: 0.125rem;
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border-inline-start: 3px solid transparent;
+  border-radius: var(--arg-radius-control);
+  cursor: pointer;
+}
+
+.arg-combobox__option:hover {
+  background: color-mix(in oklab, var(--arg-color-text) 6%, transparent);
+}
+
+.arg-combobox__option--active {
+  border-inline-start-color: var(--arg-color-focus);
+  background: color-mix(in oklab, var(--arg-color-text) 9%, transparent);
+}
+
+.arg-combobox__option[aria-selected='true'] .arg-combobox__label {
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-combobox__option[aria-selected='true'] .arg-combobox__label::after {
+  content: ' ✓' / '';
+  color: var(--arg-color-primary);
+}
+
+.arg-combobox__description {
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+
+  .arg-combobox__option--active {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}
