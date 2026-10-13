@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, DOCUMENT, inject, signal } from '@angular/core';
-import { ArgButton, ArgColorScheme, ArgTheme } from '@brunomonfardini/ui';
+import { ArgButton, ArgColorScheme, ArgSelect, ArgTheme } from '@brunomonfardini/ui';
 import { readPreference, writePreference } from './preferences';
 
 interface Option<T extends string> {
@@ -34,7 +34,7 @@ const BRAND_KEY = 'argila-docs:marca';
  */
 @Component({
   selector: 'doc-theme-bar',
-  imports: [ArgButton],
+  imports: [ArgButton, ArgSelect],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './theme-bar.html',
   styleUrl: './theme-bar.css',

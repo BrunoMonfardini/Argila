@@ -1,5 +1,6 @@
 :host {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--arg-space-6);
 }
 
@@ -40,15 +41,17 @@ a.doc-sidebar__link--active {
   color: var(--arg-color-text-muted);
 }
 
-/* Campo nativo provisório: o Input do Argila chega na onda 1 */
 .doc-sidebar__search input {
-  min-height: 2.25rem;
-  padding: 0 var(--arg-space-3);
-  border: 1px solid var(--arg-color-border-strong);
-  border-radius: var(--arg-radius-control);
-  background: var(--arg-color-surface);
-  color: var(--arg-color-text);
-  font: inherit;
+  --arg-input-height: 2.25rem;
+
+  min-width: 0;
+  font-size: inherit;
+}
+
+/* Nomes longos quebram a linha em vez de sumir: fontes largas (temas pixelados) não cabem */
+.arg-list [arg-list-title] {
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .doc-sidebar__empty {
