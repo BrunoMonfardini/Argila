@@ -112,6 +112,30 @@ describe('ArgAgenda', () => {
     expect(focused()).toBe('2026-10-13|0');
   });
 
+  it('começa no primeiro horário que ainda não passou, dentro da grade', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    try {
+      vi.setSystemTime(new Date(2026, 9, 13, 9, 40));
+      const { root } = await setup();
+      const tabbable = () =>
+        Array.from(root.querySelectorAll<HTMLElement>('[role="gridcell"]'))
+          .filter((c) => c.tabIndex === 0)
+          .map((c) => c.dataset['cell']);
+      expect(tabbable()).toEqual(['2026-10-13|3']);
+
+      // Depois do expediente da grade (que termina às 12:00): o último horário
+      vi.setSystemTime(new Date(2026, 9, 13, 18, 0));
+      const late = await setup();
+      expect(
+        Array.from(late.root.querySelectorAll<HTMLElement>('[role="gridcell"]'))
+          .filter((c) => c.tabIndex === 0)
+          .map((c) => c.dataset['cell']),
+      ).toEqual(['2026-10-13|7']);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('Home/End vão aos dias das pontas; com Ctrl, aos horários das pontas', async () => {
     const { cell, press, focused } = await setup();
     cell('2026-10-13', 2).click();

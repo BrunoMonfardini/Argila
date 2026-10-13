@@ -5,13 +5,11 @@ import {
   Injector,
   afterNextRender,
   computed,
-  effect,
   inject,
   input,
   model,
   output,
   signal,
-  untracked,
 } from '@angular/core';
 import { ArgButton } from '../button/button';
 import { IsoDate, addDays, dayLabel, todayIso, weekdayNames } from '../date-picker/dates';
@@ -97,8 +95,24 @@ export class ArgAgenda {
   protected readonly days = computed(() => visibleDays(this.date(), this.view()));
   protected readonly slots = computed(() => timeSlots(this.start(), this.end(), this.step()));
   protected readonly range = computed(() => rangeLabel(this.days()));
-  /** Célula com o foco (roving): só ela entra no Tab. */
-  private readonly active = signal<{ day: IsoDate; slot: number }>({ day: todayIso(), slot: 0 });
+  /** Última célula escolhida pela pessoa; `null` até ela navegar. */
+  private readonly cursor = signal<{ day: IsoDate; slot: number } | null>(null);
+  /**
+   * Célula com o foco (roving): só ela entra no Tab. Sempre existe na grade
+   * mostrada: começa no dia escolhido e no primeiro horário que ainda não passou.
+   */
+  private readonly active = computed(() => {
+    const days = this.days();
+    const cursor = this.cursor();
+    const day =
+      cursor && days.includes(cursor.day)
+        ? cursor.day
+        : days.includes(this.date())
+          ? this.date()
+          : days[0];
+    const slot = Math.min(cursor?.slot ?? this.firstSlotFromNow(), this.slots().length - 1);
+    return { day, slot };
+  });
 
   private readonly placedByDay = computed(() => {
     const map = new Map<IsoDate, ArgPlacedEvent[]>();
@@ -120,15 +134,6 @@ export class ArgAgenda {
 
   constructor() {
     inject(ArgIconRegistry).register([argIconChevronLeft, argIconChevronRight]);
-    // Começa no dia escolhido e no primeiro horário que ainda não passou
-    effect(() => {
-      const date = this.date();
-      untracked(() => {
-        if (!this.days().includes(this.active().day))
-          this.active.set({ day: date, slot: this.active().slot });
-      });
-    });
-    this.active.set({ day: this.date(), slot: this.firstSlotFromNow() });
   }
 
   protected isActive(cell: Cell): boolean {
@@ -150,14 +155,15 @@ export class ArgAgenda {
 
   protected goToday(): void {
     this.date.set(this.today);
-    this.active.update((active) => ({ ...active, day: this.today }));
+    this.cursor.set({ day: this.today, slot: this.active().slot });
   }
 
   /** ‹ e ›: um dia ou uma semana. */
   protected move(direction: number): void {
     const days = this.view() === 'week' ? 7 * direction : direction;
     this.date.update((date) => addDays(date, days));
-    this.active.update((active) => ({ ...active, day: addDays(active.day, days) }));
+    const { day, slot } = this.active();
+    this.cursor.set({ day: addDays(day, days), slot });
   }
 
   protected onKeydown(event: KeyboardEvent, cell: Cell): void {
@@ -203,7 +209,7 @@ export class ArgAgenda {
     event.preventDefault();
     // Saiu da semana (ou do dia) mostrada: a grade acompanha
     if (!days.includes(day)) this.date.set(day);
-    this.active.set({ day, slot });
+    this.cursor.set({ day, slot });
     this.focusActive();
   }
 
@@ -219,7 +225,7 @@ export class ArgAgenda {
     if (!cellKey) return;
     const [day, slot] = cellKey.split('|');
     const cell = this.cell(day, Number(slot), this.slots()[Number(slot)]);
-    this.active.set({ day, slot: Number(slot) });
+    this.cursor.set({ day, slot: Number(slot) });
     this.activate(cell);
   }
 
