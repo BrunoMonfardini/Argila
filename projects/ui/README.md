@@ -86,6 +86,7 @@ export class Exemplo {}
 | Arquivos           | `<arg-file-upload label="Fotos" accept="image/*,.pdf" [maxSize]="5 * 1024 * 1024" multiple [uploader]="enviar" [formControl]="arquivos" />`: arrastar e soltar, prévia, recusa com motivo e progresso                                                         |
 | Sugestões          | `<input arg-combobox [options]="servicos" [formControl]="servico" />` ou `[search]="buscarTutores"`: padrão combobox do APG, carregando e vazio                                                                                                               |
 | Tabela             | `<arg-table caption="Pets" [columns]="colunas" [rows]="pets()" rowKey="id" selectable [(selected)]="ids" [(sort)]="ordem" [loading]="carregando()" />`; importe `ARG_TABLE`                                                                                   |
+| Agenda             | `<arg-agenda [events]="agendamentos()" [(date)]="dia" [(view)]="visao" start="08:00" end="19:00" (eventSelect)="abrir($event)" (slotSelect)="novo($event)" />`: dia e semana, simultâneos lado a lado, teclado completo                                       |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
