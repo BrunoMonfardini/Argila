@@ -41,17 +41,16 @@ a.doc-sidebar__link--active {
   color: var(--arg-color-text-muted);
 }
 
+/* A busca não define a largura da barra: quem define são os nomes das páginas */
+.doc-sidebar__search {
+  contain: inline-size;
+}
+
 .doc-sidebar__search input {
   --arg-input-height: 2.25rem;
 
   min-width: 0;
   font-size: inherit;
-}
-
-/* Nomes longos quebram a linha em vez de sumir: fontes largas (temas pixelados) não cabem */
-.arg-list [arg-list-title] {
-  white-space: normal;
-  overflow-wrap: anywhere;
 }
 
 .doc-sidebar__empty {
