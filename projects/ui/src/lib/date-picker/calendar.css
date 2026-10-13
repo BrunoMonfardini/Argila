@@ -1,0 +1,92 @@
+/*
+ * Grade de um mês. Escolhida, hoje e bloqueada não dependem só da cor:
+ * escolhida é preenchida, hoje tem contorno, bloqueada é riscada.
+ */
+:host {
+  --arg-calendar-cell: 2.5rem;
+
+  display: block;
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--arg-space-2);
+  margin-block-end: var(--arg-space-2);
+}
+
+.arg-calendar__month {
+  margin: 0;
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+/* "outubro de 2026" → "Outubro de 2026" */
+.arg-calendar__month::first-letter {
+  text-transform: uppercase;
+}
+
+.arg-calendar__grid {
+  border-collapse: collapse;
+}
+
+.arg-calendar__grid th {
+  width: var(--arg-calendar-cell);
+  height: 2rem;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-calendar__day {
+  width: var(--arg-calendar-cell);
+  height: var(--arg-calendar-cell);
+  border-radius: var(--arg-radius-full);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  cursor: pointer;
+}
+
+.arg-calendar__day:hover {
+  background: color-mix(in oklab, var(--arg-color-text) 6%, transparent);
+}
+
+.arg-calendar__day:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: calc(var(--arg-focus-ring-width) * -1);
+}
+
+.arg-calendar__day[aria-current='date'] {
+  box-shadow: inset 0 0 0 1px var(--arg-color-text);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-calendar__day[aria-selected='true'] {
+  background: var(--arg-color-primary);
+  color: var(--arg-color-on-primary);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+.arg-calendar__day--blocked {
+  color: var(--arg-color-text-disabled);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.arg-calendar__day--blocked:hover {
+  background: none;
+}
+
+@media (forced-colors: active) {
+  .arg-calendar__day[aria-selected='true'] {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .arg-calendar__day[aria-current='date'] {
+    box-shadow: inset 0 0 0 1px CanvasText;
+  }
+}

@@ -1,0 +1,52 @@
+<div class="arg-calendar__header">
+  <button
+    arg-icon-button
+    icon="chevron-left"
+    size="sm"
+    label="Mês anterior"
+    (click)="moveMonths(-1)"
+  ></button>
+  <h2 class="arg-calendar__month" [id]="headingId" aria-live="polite">{{ month() }}</h2>
+  <button
+    arg-icon-button
+    icon="chevron-right"
+    size="sm"
+    label="Próximo mês"
+    (click)="moveMonths(1)"
+  ></button>
+</div>
+<table class="arg-calendar__grid" role="grid" [attr.aria-labelledby]="headingId">
+  <thead>
+    <tr>
+      @for (name of weekdays; track $index) {
+        <th scope="col" [attr.abbr]="name.long">{{ name.short }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (week of weeks(); track $index) {
+      <tr>
+        @for (cell of week; track $index) {
+          @if (cell) {
+            <td
+              class="arg-calendar__day"
+              [class.arg-calendar__day--blocked]="cell.blocked"
+              [attr.data-date]="cell.iso"
+              [attr.tabindex]="cell.iso === focus() ? 0 : -1"
+              [attr.aria-label]="cell.label"
+              [attr.aria-selected]="cell.iso === value()"
+              [attr.aria-current]="cell.iso === today ? 'date' : null"
+              [attr.aria-disabled]="cell.blocked || null"
+              (click)="pick(cell.iso)"
+              (keydown)="onKeydown($event, cell.iso)"
+            >
+              {{ cell.day }}
+            </td>
+          } @else {
+            <td class="arg-calendar__empty"></td>
+          }
+        }
+      </tr>
+    }
+  </tbody>
+</table>
