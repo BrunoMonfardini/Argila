@@ -16,15 +16,15 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 _Atualizado em 13/10/2026._
 
-| Marco | Situação                                                                                                                              |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                            |
-| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                       |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                         |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                         |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                    |
-| M5    | **Pronto** (ondas 1 a 6: base de formulários, exibição e feedback, camadas, navegação, domínio dos produtos e dados). **Próximo:** M6 |
-| M6    | Pode começar a qualquer momento; depende da decisão D3 (onde hospedar o catálogo)                                                     |
+| Marco | Situação                                                                                                                                                                                              |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                            |
+| M1    | **Código pronto** (PR-04 a PR-06). Faltam DES-01 (desenhar os ~40 ícones) e PR-07 (exportá-los)                                                                                                       |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                         |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                         |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                    |
+| M5    | **Pronto** (ondas 1 a 6: base de formulários, exibição e feedback, camadas, navegação, domínio dos produtos e dados). **Próximo:** M6                                                                 |
+| M6    | **Código pronto** (PR-20): o workflow `catalogo.yml` publica na Vercel (D3 seguiu a opção padrão). Falta OPS-03 (criar o projeto `argila-catalogo` na Vercel e os 3 secrets; passo a passo no README) |
 
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
@@ -36,7 +36,7 @@ _Atualizado em 13/10/2026._
 **Pendências conhecidas:**
 
 - Só existem 4 ícones (`plus`, `x`, `check` e `external-link`, este desenhado junto do Link, para revisão do time); o botão "Menu" do catálogo fica sem ícone até o `menu` ser desenhado.
-- Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma.
+- Decisões D1 a D4 sem resposta: o trabalho segue a opção padrão de cada uma. Em D3, Vercel: o link fixo <https://argila-catalogo.vercel.app> passa a funcionar depois do OPS-03.
 - PR-04 a PR-13 foram entregues juntos num único PR, com um commit por item.
 - O PR-15 foi feito antes do DES-01 (desenho dos ícones), por decisão do time: remover o Storybook não depende dos ícones.
 - D1 seguiu a opção padrão: sem `axe-core`. As verificações próprias (`projects/ui/src/testing/a11y.ts`) rodam nos testes de cada componente, em cada exemplo e em cada página do catálogo.
@@ -227,9 +227,10 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 
 ## M6: catálogo publicado
 
-| ✓   | ID    | Item                                                                       | Depende de | Pronto quando                                                        | Est. |
-| --- | ----- | -------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------- | ---- |
-| [ ] | PR-20 | `ci: publica o catálogo a cada merge na main` (no destino escolhido em D3) | M3, D3     | Link fixo no README; recarregar qualquer página do catálogo funciona | 1    |
+| ✓   | ID     | Item                                                                                                                                                         | Depende de | Pronto quando                                                        | Est. |
+| --- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | -------------------------------------------------------------------- | ---- |
+| [x] | PR-20  | `ci: publica o catálogo a cada merge na main` (no destino escolhido em D3)                                                                                   | M3, D3     | Link fixo no README; recarregar qualquer página do catálogo funciona | 1    |
+| [ ] | OPS-03 | **Fora do código:** criar o projeto `argila-catalogo` na Vercel e os secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID` e `VERCEL_PROJECT_ID` (passo a passo no README) | PR-20      | O workflow Catálogo publica e o link do README abre                  | 0,5  |
 
 Pode ser feito logo depois do M3, sem esperar o M4 e o M5: o catálogo publicado ganha cada componente novo automaticamente.
 
