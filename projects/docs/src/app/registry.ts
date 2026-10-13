@@ -7,6 +7,7 @@ import { BREADCRUMB_DOCS } from '../../../ui/src/lib/breadcrumb/breadcrumb.docs'
 import { BUTTON_DOCS } from '../../../ui/src/lib/button/button.docs';
 import { CARD_DOCS } from '../../../ui/src/lib/card/card.docs';
 import { CHOICE_DOCS } from '../../../ui/src/lib/choice/choice.docs';
+import { CURRENCY_INPUT_DOCS } from '../../../ui/src/lib/currency-input/currency-input.docs';
 import { DIALOG_DOCS } from '../../../ui/src/lib/dialog/dialog.docs';
 import { DIVIDER_DOCS } from '../../../ui/src/lib/divider/divider.docs';
 import { DRAWER_DOCS } from '../../../ui/src/lib/drawer/drawer.docs';
@@ -47,6 +48,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   BUTTON_DOCS,
   CARD_DOCS,
   CHOICE_DOCS,
+  CURRENCY_INPUT_DOCS,
   DIALOG_DOCS,
   DIVIDER_DOCS,
   DRAWER_DOCS,
