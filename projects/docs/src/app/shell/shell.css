@@ -44,9 +44,14 @@
   margin-inline-start: auto;
 }
 
+/*
+ * A barra lateral acompanha o nome mais longo no tema atual (fontes largas,
+ * como as pixeladas, pedem mais espaço), entre 16rem e 22rem: sem quebrar
+ * linha e sem rolagem para o lado.
+ */
 .doc-shell__body {
   display: grid;
-  grid-template-columns: 16rem minmax(0, 1fr);
+  grid-template-columns: fit-content(22rem) minmax(0, 1fr);
 }
 
 .doc-shell__nav {
@@ -55,6 +60,8 @@
   align-self: start;
   min-height: calc(100dvh - 4rem);
   max-height: calc(100dvh - 4rem);
+  min-width: 16rem;
+  scrollbar-gutter: stable;
   overflow-x: hidden;
   overflow-y: auto;
   padding: var(--arg-space-6) var(--arg-space-3);
