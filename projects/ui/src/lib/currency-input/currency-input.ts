@@ -1,19 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
-  booleanAttribute,
-  computed,
   effect,
   forwardRef,
-  inject,
   input,
   model,
-  output,
-  signal,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ArgFieldControl } from '../field/field';
+import { ArgValueControlBase } from '../internal/value-control';
 
 /** Até 13 dígitos (R$ 99.999.999.999,99): seguro como inteiro em JavaScript. */
 const MAX_DIGITS = 13;
@@ -65,29 +60,17 @@ export function parseCents(text: string): number | null {
     inputmode: 'numeric',
     autocomplete: 'off',
     '[attr.placeholder]': 'placeholder()',
-    '[disabled]': 'isDisabled()',
     '(input)': 'onInput()',
-    '(blur)': 'onBlur()',
   },
 })
-export class ArgCurrencyInput implements ControlValueAccessor {
+export class ArgCurrencyInput extends ArgValueControlBase<number | null> {
   /** Valor em centavos (inteiro); `null` quando vazio. */
   readonly value = model<number | null>(null);
-  /** Desabilita o campo. Com Reactive Forms, use `formControl.disable()`. */
-  readonly disabled = input(false, { transform: booleanAttribute });
   /** Texto de exemplo com o campo vazio. */
   readonly placeholder = input('R$ 0,00');
-  /** Avisa que a pessoa saiu do campo (formulários de signals marcam como tocado). */
-  readonly touch = output<void>();
-
-  private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
-  private readonly disabledByForm = signal(false);
-  protected readonly isDisabled = computed(() => this.disabled() || this.disabledByForm());
-
-  private onChange: (value: number | null) => void = () => undefined;
-  private onTouched: () => void = () => undefined;
 
   constructor() {
+    super();
     // Valor vindo de fora (formulário ou [value]): mostra formatado
     effect(() => this.render(this.value()));
   }
@@ -99,28 +82,11 @@ export class ArgCurrencyInput implements ControlValueAccessor {
     // O cursor fica sempre no fim: os dígitos entram pela direita
     const end = this.element.value.length;
     this.element.setSelectionRange(end, end);
-    this.onChange(cents);
-  }
-
-  protected onBlur(): void {
-    this.onTouched();
-    this.touch.emit();
+    this.notifyChange(cents);
   }
 
   writeValue(value: number | null): void {
     this.value.set(Number.isInteger(value) ? value : null);
-  }
-
-  registerOnChange(fn: (value: number | null) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(disabled: boolean): void {
-    this.disabledByForm.set(disabled);
   }
 
   private render(cents: number | null): void {

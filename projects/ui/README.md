@@ -80,6 +80,7 @@ export class Exemplo {}
 | Paginação          | `<nav arg-pagination [total]="paginas()" [(page)]="pagina"></nav>`; anterior, próxima, números com reticências e "Página 3 de 12" anunciado                                                                                                                   |
 | Etapas             | `<arg-stepper [steps]="['Serviço', 'Horário', 'Pagamento']" [current]="1" />`; feita, atual e pendente pela forma e pelo texto; `navigable` para voltar                                                                                                       |
 | Valor em R$        | `<input arg-currency [formControl]="preco" />`: dígitos entram pela direita; o formulário recebe centavos (inteiro); `formatCents(8990)` → "R$ 89,90"                                                                                                         |
+| Máscara            | `<input arg-mask="cpf" [formControl]="cpf" />` (também `cnpj`, alfanumérico, `cep` e `phone`): o formulário recebe só os dígitos; Reactive Forms já valida os dígitos verificadores; `isValidCpf`… para signals                                               |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
