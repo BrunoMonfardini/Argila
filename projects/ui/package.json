@@ -1,6 +1,6 @@
 {
   "name": "@brunomonfardini/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design system Argila: componentes Angular acessíveis e temas por cliente via design tokens.",
   "repository": {
     "type": "git",
