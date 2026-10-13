@@ -1,0 +1,91 @@
+<label class="arg-file-upload__zone" [for]="inputId">
+  <arg-icon class="arg-file-upload__icon" name="upload" size="lg" />
+  <span class="arg-file-upload__title" [id]="titleId">{{ label() }}</span>
+  <span class="arg-file-upload__text">
+    Arraste aqui ou
+    <span class="arg-file-upload__link">{{
+      multiple() ? 'escolha os arquivos' : 'escolha um arquivo'
+    }}</span>
+  </span>
+  @if (hint()) {
+    <span class="arg-file-upload__hint" [id]="hintId">{{ hint() }}</span>
+  }
+</label>
+<input
+  #file
+  type="file"
+  class="arg-sr-only"
+  [id]="inputId"
+  [attr.accept]="accept() || null"
+  [multiple]="multiple()"
+  [disabled]="isDisabled()"
+  [attr.aria-labelledby]="titleId"
+  [attr.aria-describedby]="hint() ? hintId : null"
+  (change)="onPick($event)"
+  (blur)="onBlur()"
+/>
+@if (entries().length) {
+  <ul class="arg-file-upload__list" [attr.aria-label]="'Arquivos de ' + label()">
+    @for (entry of entries(); track entry.id) {
+      <li
+        class="arg-file-upload__item"
+        [class.arg-file-upload__item--error]="
+          entry.status === 'invalid' || entry.status === 'error'
+        "
+      >
+        @if (entry.preview) {
+          <img class="arg-file-upload__thumb" [src]="entry.preview" alt="" />
+        } @else {
+          <span class="arg-file-upload__thumb arg-file-upload__thumb--file" aria-hidden="true">{{
+            entry.extension
+          }}</span>
+        }
+        <div class="arg-file-upload__info">
+          <span class="arg-file-upload__name">{{ entry.file.name }}</span>
+          <!-- Separa o nome do estado para o leitor de tela: "thor.jpg, 1 KB" -->
+          <span class="arg-sr-only">, </span>
+          @switch (entry.status) {
+            @case ('uploading') {
+              <progress
+                arg-progress
+                size="sm"
+                [label]="'Enviando ' + entry.file.name"
+                [value]="entry.progress"
+              ></progress>
+            }
+            @case ('done') {
+              <span class="arg-file-upload__meta arg-file-upload__meta--done">
+                <arg-icon name="check" size="sm" /> Enviado · {{ entry.size }}
+              </span>
+            }
+            @case ('invalid') {
+              <span class="arg-file-upload__meta arg-file-upload__meta--error">{{
+                entry.error
+              }}</span>
+            }
+            @case ('error') {
+              <span class="arg-file-upload__meta arg-file-upload__meta--error">{{
+                entry.error
+              }}</span>
+            }
+            @default {
+              <span class="arg-file-upload__meta">{{ entry.size }}</span>
+            }
+          }
+        </div>
+        @if (entry.status === 'error') {
+          <button arg-button variant="tertiary" size="sm" (click)="retry(entry)">
+            Tentar de novo
+          </button>
+        }
+        <button
+          arg-icon-button
+          icon="x"
+          size="sm"
+          [label]="'Remover ' + entry.file.name"
+          (click)="remove(entry)"
+        ></button>
+      </li>
+    }
+  </ul>
+}

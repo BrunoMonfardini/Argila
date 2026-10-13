@@ -1,0 +1,148 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-file-upload style="--arg-file-upload-thumb: 3rem">.
+ * Arrastando por cima, a área muda a borda (de tracejada para contínua) e o
+ * fundo, não só a cor.
+ */
+:host {
+  --arg-file-upload-thumb: 2.5rem;
+
+  display: grid;
+  gap: var(--arg-space-3);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-file-upload__zone {
+  display: grid;
+  justify-items: center;
+  gap: var(--arg-space-1);
+  padding: var(--arg-space-6) var(--arg-space-4);
+  border: 2px dashed var(--arg-color-text-muted);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color var(--arg-motion-fast) var(--arg-motion-easing),
+    border-color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+.arg-file-upload__zone:hover,
+:host(.arg-file-upload--dragging) .arg-file-upload__zone {
+  border-color: var(--arg-color-primary);
+  background: var(--arg-color-primary-subtle);
+}
+
+:host(.arg-file-upload--dragging) .arg-file-upload__zone {
+  border-style: solid;
+}
+
+/* O <input> fica oculto: o anel de foco vai para a área inteira */
+:host:has(input:focus-visible) .arg-file-upload__zone {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.arg-file-upload__icon {
+  color: var(--arg-color-primary);
+}
+
+.arg-file-upload__title {
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-file-upload__text,
+.arg-file-upload__hint {
+  color: var(--arg-color-text-muted);
+}
+
+.arg-file-upload__link {
+  color: var(--arg-color-text-link);
+  font-weight: var(--arg-font-weight-medium);
+  text-decoration: underline;
+}
+
+:host([disabled]) .arg-file-upload__zone {
+  border-color: var(--arg-color-disabled-border);
+  background: transparent;
+  color: var(--arg-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.arg-file-upload__list {
+  display: grid;
+  gap: var(--arg-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.arg-file-upload__item {
+  display: flex;
+  align-items: center;
+  gap: var(--arg-space-3);
+  padding: var(--arg-space-2) var(--arg-space-2) var(--arg-space-2) var(--arg-space-3);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface);
+}
+
+.arg-file-upload__item--error {
+  border-color: var(--arg-color-danger);
+}
+
+.arg-file-upload__thumb {
+  flex-shrink: 0;
+  width: var(--arg-file-upload-thumb);
+  height: var(--arg-file-upload-thumb);
+  border-radius: var(--arg-radius-control);
+  object-fit: cover;
+}
+
+.arg-file-upload__thumb--file {
+  display: grid;
+  place-items: center;
+  background: var(--arg-color-surface-sunken);
+  color: var(--arg-color-text);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-file-upload__info {
+  display: grid;
+  flex: 1;
+  gap: var(--arg-space-1);
+  min-width: 0;
+}
+
+.arg-file-upload__name {
+  overflow: hidden;
+  font-weight: var(--arg-font-weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arg-file-upload__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-1);
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+}
+
+.arg-file-upload__meta--done {
+  color: var(--arg-color-success);
+}
+
+.arg-file-upload__meta--error {
+  color: var(--arg-color-danger);
+}
+
+@media (forced-colors: active) {
+  .arg-file-upload__zone,
+  .arg-file-upload__item {
+    border-color: CanvasText;
+  }
+}

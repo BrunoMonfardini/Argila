@@ -17,6 +17,7 @@ export * from './lib/divider/divider';
 export * from './lib/drawer/drawer';
 export * from './lib/empty-state/empty-state';
 export * from './lib/field/field';
+export * from './lib/file-upload/file-upload';
 export * from './lib/icon/icon';
 export * from './lib/icon/icon-def';
 export * from './lib/icon/icon-registry';
