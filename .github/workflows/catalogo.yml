@@ -1,0 +1,68 @@
+name: Catálogo
+
+# Publica o catálogo (dist/docs/browser) na Vercel a cada merge na main.
+# Precisa dos secrets VERCEL_TOKEN, VERCEL_ORG_ID e VERCEL_PROJECT_ID
+# (veja "Catálogo publicado" no README); sem eles, só avisa e termina.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Publicações em fila, nunca canceladas no meio
+concurrency:
+  group: catalogo
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  configured:
+    name: configured
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      ok: ${{ steps.check.outputs.ok }}
+    steps:
+      - id: check
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Catálogo não publicado. Faltam os secrets VERCEL_TOKEN, VERCEL_ORG_ID e VERCEL_PROJECT_ID."
+          fi
+
+  publish:
+    name: publish
+    needs: configured
+    if: needs.configured.outputs.ok == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: catalogo
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:docs
+      # Sobe os arquivos já gerados: a Vercel não compila nada. O vercel.json
+      # (de projects/docs/public) faz qualquer rota recarregada abrir o catálogo.
+      - name: Publica na Vercel
+        id: deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          url=$(pnpm dlx vercel@60.1.3 deploy dist/docs/browser --prod --yes --token "$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Catálogo publicado em $url" >> "$GITHUB_STEP_SUMMARY"

@@ -4,6 +4,8 @@ Design system em Angular compartilhado entre todos os nossos produtos. Component
 
 Publicado como `@brunomonfardini/ui`. Documentação de uso para produtos: [projects/ui/README.md](projects/ui/README.md).
 
+**Catálogo publicado:** <https://argila-catalogo.vercel.app>, atualizado a cada merge na `main` (veja [Catálogo publicado](#catálogo-publicado)).
+
 Este repositório segue o [padrão de pipeline e qualidade de código](docs/padrao-de-pipeline.md), comum a todos os projetos da empresa: testes unitários obrigatórios, DRY, main protegida e a mesma esteira de CI.
 
 ## Comandos no Git Bash
@@ -255,6 +257,20 @@ Configuração única no GitHub:
 
 - Secret `RELEASE_TOKEN`: token com permissão de `contents` e `pull-requests` no Argila. Sem ele o PR de versão é aberto com o `GITHUB_TOKEN`, que não dispara o CI, e o ruleset bloqueia o merge.
 - Depois da primeira publicação, na página do pacote (Package settings → Manage Actions access), dê acesso de leitura a cada repositório de produto.
+
+## Catálogo publicado
+
+O workflow `catalogo.yml` gera o catálogo (`pnpm build:docs`) a cada merge na `main` e o publica na Vercel em <https://argila-catalogo.vercel.app>. A Vercel só recebe os arquivos prontos, sem compilar nada. O `projects/docs/public/vercel.json` faz qualquer rota (ex.: `/componentes/agenda`) abrir o catálogo, então recarregar a página ou abrir um link direto funciona.
+
+Configuração única (até lá, o workflow só avisa que não publicou):
+
+1. Na Vercel, crie um projeto vazio chamado `argila-catalogo`. Pode ser em **Add New → Project**, sem importar o repositório, ou rodando `npx vercel@60.1.3 link` numa pasta vazia. Em **Settings → Build and Deployment**, deixe o Framework Preset como **Other** e o Build Command vazio.
+2. Em **Account Settings → Tokens**, crie um token só para este uso.
+3. No GitHub, em **Settings → Secrets and variables → Actions** do Argila, crie três secrets:
+   - `VERCEL_TOKEN`: o token do passo 2;
+   - `VERCEL_ORG_ID`: o Team ID, em **Team Settings → General** (ou o ID da sua conta pessoal);
+   - `VERCEL_PROJECT_ID`: o Project ID, em **Project Settings → General**.
+4. Rode o workflow uma vez em **Actions → Catálogo → Run workflow**, ou faça um merge na `main`.
 
 ## Próximos passos
 
