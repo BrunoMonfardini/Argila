@@ -190,6 +190,12 @@ export function accessibleName(element: Element): string {
   const fromLabels = labelsOf(element).trim();
   if (fromLabels) return fromLabels.replace(/\s+/g, ' ');
 
+  // HTML-AAM: o nome do <fieldset> é a primeira <legend> filha
+  if (element.localName === 'fieldset') {
+    const legend = Array.from(element.children).find((child) => child.localName === 'legend');
+    const text = legend ? textOf(legend).replace(/s+/g, ' ').trim() : '';
+    if (text) return text;
+  }
   if (element.localName === 'img') return element.getAttribute('alt')?.trim() ?? '';
   const role = roleOf(element);
   if (role && NAME_FROM_CONTENT.has(role)) {

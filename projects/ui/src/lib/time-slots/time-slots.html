@@ -1,0 +1,31 @@
+<legend class="arg-time-slots__legend">{{ label() }}</legend>
+@if (loading()) {
+  <p class="arg-sr-only">Carregando horários…</p>
+  <div class="arg-time-slots__grid" aria-hidden="true">
+    @for (placeholder of placeholders; track placeholder) {
+      <arg-skeleton shape="rect" height="var(--arg-time-slots-height)" />
+    }
+  </div>
+} @else if (!slots().length || !free()) {
+  <p class="arg-time-slots__empty">{{ emptyText() }}</p>
+} @else {
+  <div class="arg-time-slots__grid">
+    @for (slot of slots(); track slot.time) {
+      <label class="arg-time-slots__slot" [class.arg-time-slots__slot--busy]="!slot.available">
+        <input
+          type="radio"
+          class="arg-time-slots__radio arg-sr-only"
+          [name]="name"
+          [value]="slot.time"
+          [checked]="slot.time === value()"
+          [disabled]="!slot.available"
+          (change)="choose(slot.time)"
+        />
+        <span>{{ slot.time }}</span>
+        @if (!slot.available) {
+          <span class="arg-sr-only">, ocupado</span>
+        }
+      </label>
+    }
+  </div>
+}

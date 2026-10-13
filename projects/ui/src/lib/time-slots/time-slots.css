@@ -1,0 +1,92 @@
+/*
+ * Tokens de componente (camada 3), ex.: <fieldset arg-time-slots style="--arg-time-slots-min: 5rem">.
+ * Livre, escolhido e ocupado não dependem só da cor: escolhido é preenchido,
+ * ocupado é riscado e tracejado.
+ */
+:host {
+  --arg-time-slots-min: 4.5rem;
+  --arg-time-slots-height: 2.5rem;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-time-slots__legend {
+  margin-block-end: var(--arg-space-2);
+  padding: 0;
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.arg-time-slots__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--arg-time-slots-min), 1fr));
+  gap: var(--arg-space-2);
+}
+
+.arg-time-slots__slot {
+  display: grid;
+  place-items: center;
+  min-height: var(--arg-time-slots-height);
+  /* text-muted: contorno do horário livre com 3:1 sobre a superfície (border-strong não passa) */
+  border: 1px solid var(--arg-color-text-muted);
+  border-radius: var(--arg-radius-control);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--arg-font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--arg-motion-fast) var(--arg-motion-easing);
+}
+
+.arg-time-slots__slot:hover {
+  border-color: var(--arg-color-primary);
+}
+
+/* Escolhido: preenchido e em negrito */
+.arg-time-slots__slot:has(:checked) {
+  border-color: var(--arg-color-primary);
+  background: var(--arg-color-primary);
+  color: var(--arg-color-on-primary);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+/* O rádio fica oculto: o anel de foco vai para o horário inteiro */
+.arg-time-slots__slot:has(:focus-visible) {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+/* Ocupado: riscado, borda tracejada e sem clique */
+.arg-time-slots__slot--busy {
+  border-style: dashed;
+  border-color: var(--arg-color-border);
+  background: transparent;
+  color: var(--arg-color-text-disabled);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.arg-time-slots__slot--busy:hover {
+  border-color: var(--arg-color-border);
+}
+
+.arg-time-slots__empty {
+  margin: 0;
+  color: var(--arg-color-text-muted);
+}
+
+:host([disabled]) .arg-time-slots__slot {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .arg-time-slots__slot:has(:checked) {
+    background: Highlight;
+    color: HighlightText;
+  }
+}

@@ -37,5 +37,6 @@ export * from './lib/stepper/stepper';
 export * from './lib/tabs/tabs';
 export * from './lib/tag/tag';
 export * from './lib/theme/theme';
+export * from './lib/time-slots/time-slots';
 export * from './lib/toast/toast';
 export * from './lib/tooltip/tooltip';
