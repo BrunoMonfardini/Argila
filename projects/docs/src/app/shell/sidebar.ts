@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
-import { ARG_LIST } from '@brunomonfardini/ui';
+import { ARG_LIST, ArgInput } from '@brunomonfardini/ui';
 import { DocNavSection, filterNavigation } from './navigation';
 
 /** Barra lateral do catálogo, montada com a lista do próprio Argila, com busca. */
 @Component({
   selector: 'doc-sidebar',
-  imports: [ARG_LIST, RouterLink, RouterLinkActive],
+  imports: [ARG_LIST, ArgInput, RouterLink, RouterLinkActive],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',

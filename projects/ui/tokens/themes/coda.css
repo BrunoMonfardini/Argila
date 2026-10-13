@@ -26,4 +26,14 @@
   --arg-border-width-control: 2px;
 
   --arg-font-family: 'Silkscreen', ui-monospace, Consolas, monospace;
+
+  /* A Silkscreen é bem mais larga que a fonte do sistema: um degrau menor em cada tamanho */
+  --arg-font-size-caption: 0.6875rem;
+  --arg-font-size-body-sm: 0.75rem;
+  --arg-font-size-body: 0.875rem;
+  --arg-font-size-body-lg: 1rem;
+  --arg-font-size-heading-sm: 1.125rem;
+  --arg-font-size-heading-md: 1.375rem;
+  --arg-font-size-heading-lg: 1.75rem;
+  --arg-font-size-display: 2.25rem;
 }

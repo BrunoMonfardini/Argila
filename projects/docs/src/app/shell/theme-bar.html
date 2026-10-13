@@ -15,7 +15,7 @@
 
 <label class="doc-theme-bar__brand">
   <span>Marca</span>
-  <select [value]="brand()" (change)="selectBrand($event)">
+  <select arg-select [value]="brand()" (change)="selectBrand($event)">
     @for (option of brands; track option.value) {
       <option [value]="option.value">{{ option.label }}</option>
     }

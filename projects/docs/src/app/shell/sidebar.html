@@ -1,9 +1,10 @@
 <div class="doc-sidebar__search" role="search">
   <label for="busca-catalogo">Buscar</label>
   <input
+    arg-input
     id="busca-catalogo"
     type="search"
-    placeholder="Componente ou padrão"
+    placeholder="Ex.: Button"
     autocomplete="off"
     [value]="query()"
     (input)="search($event)"

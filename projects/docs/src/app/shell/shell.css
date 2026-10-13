@@ -55,6 +55,7 @@
   align-self: start;
   min-height: calc(100dvh - 4rem);
   max-height: calc(100dvh - 4rem);
+  overflow-x: hidden;
   overflow-y: auto;
   padding: var(--arg-space-6) var(--arg-space-3);
   border-inline-end: 1px solid var(--arg-color-border);
