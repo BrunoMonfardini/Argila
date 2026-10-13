@@ -30,6 +30,7 @@ import { SPINNER_DOCS } from '../../../ui/src/lib/spinner/spinner.docs';
 import { STEPPER_DOCS } from '../../../ui/src/lib/stepper/stepper.docs';
 import { TABS_DOCS } from '../../../ui/src/lib/tabs/tabs.docs';
 import { TAG_DOCS } from '../../../ui/src/lib/tag/tag.docs';
+import { TIME_SLOTS_DOCS } from '../../../ui/src/lib/time-slots/time-slots.docs';
 import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
 import { TOOLTIP_DOCS } from '../../../ui/src/lib/tooltip/tooltip.docs';
 import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
@@ -73,6 +74,7 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   STEPPER_DOCS,
   TABS_DOCS,
   TAG_DOCS,
+  TIME_SLOTS_DOCS,
   TOAST_DOCS,
   TOOLTIP_DOCS,
   LIST_LOADING_DOCS,
