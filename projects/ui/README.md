@@ -84,6 +84,7 @@ export class Exemplo {}
 | Data               | `<input arg-date [formControl]="data" [min]="hoje" [blocked]="domingo" />`: digitação em dd/mm/aaaa ou calendário por teclado; o formulário recebe ISO                                                                                                        |
 | Horários           | `<fieldset arg-time-slots label="Horário" [slots]="horarios()" [loading]="carregando()" [formControl]="horario"></fieldset>`: livres e ocupados, setas, carregando                                                                                            |
 | Arquivos           | `<arg-file-upload label="Fotos" accept="image/*,.pdf" [maxSize]="5 * 1024 * 1024" multiple [uploader]="enviar" [formControl]="arquivos" />`: arrastar e soltar, prévia, recusa com motivo e progresso                                                         |
+| Sugestões          | `<input arg-combobox [options]="servicos" [formControl]="servico" />` ou `[search]="buscarTutores"`: padrão combobox do APG, carregando e vazio                                                                                                               |
 
 O `arg-icon-button` fica vazio no template (o nome vem do `label`). Se o produto usa o
 `templateAccessibility` do angular-eslint, avise a regra de conteúdo:
