@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ArgTheme } from './theme';
+import { ARG_STYLES, ArgStyle, ArgTheme } from './theme';
 
 describe('ArgTheme', () => {
   let theme: ArgTheme;
@@ -13,6 +13,8 @@ describe('ArgTheme', () => {
     theme.clearBrand();
     theme.clearSurfaceOpacity();
     root.removeAttribute('data-arg-theme');
+    root.removeAttribute('data-arg-style');
+    root.removeAttribute('data-arg-palette');
   });
 
   it('define o modo de cor no <html>', () => {
@@ -57,5 +59,58 @@ describe('ArgTheme', () => {
     theme.clearSurfaceOpacity();
     expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
     expect(theme.surfaceOpacity()).toBeUndefined();
+  });
+
+  it('começa no estilo Argila com a paleta nativa', () => {
+    expect(theme.style()).toBe('argila');
+    expect(theme.palette()).toBe('nativa');
+  });
+
+  it('lê estilo e paleta já presentes no <html>, ignorando valores desconhecidos', () => {
+    root.setAttribute('data-arg-style', 'coda');
+    root.setAttribute('data-arg-palette', 'nao-existe');
+    TestBed.resetTestingModule();
+
+    const fresh = TestBed.inject(ArgTheme);
+
+    expect(fresh.style()).toBe('coda');
+    expect(fresh.palette()).toBe('nativa');
+  });
+
+  it('aplica estilo e paleta como atributos no <html>', () => {
+    theme.setStyle('windows-xp');
+    theme.setPalette('terrosa');
+
+    expect(root.getAttribute('data-arg-style')).toBe('windows-xp');
+    expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
+    expect(theme.style()).toBe('windows-xp');
+    expect(theme.palette()).toBe('terrosa');
+  });
+
+  describe('estilo com um modo só', () => {
+    const styles = ARG_STYLES as Record<ArgStyle, { schemes: readonly ('light' | 'dark')[] }>;
+    let original: readonly ('light' | 'dark')[];
+
+    beforeEach(() => {
+      original = styles.coda.schemes;
+      styles.coda = { schemes: ['dark'] };
+    });
+
+    afterEach(() => {
+      styles.coda = { schemes: original };
+    });
+
+    it('troca o modo para o do estilo e recusa os outros', () => {
+      theme.setColorScheme('light');
+      theme.setStyle('coda');
+
+      expect(theme.schemes()).toEqual(['dark']);
+      expect(theme.colorScheme()).toBe('dark');
+
+      theme.setColorScheme('light');
+      expect(root.getAttribute('data-arg-theme')).toBe('dark');
+      theme.setColorScheme('auto');
+      expect(theme.colorScheme()).toBe('dark');
+    });
   });
 });

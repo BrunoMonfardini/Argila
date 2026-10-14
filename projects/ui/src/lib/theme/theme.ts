@@ -1,6 +1,37 @@
-import { DOCUMENT, Injectable, inject, signal } from '@angular/core';
+import { DOCUMENT, Injectable, computed, inject, signal } from '@angular/core';
 
 export type ArgColorScheme = 'light' | 'dark' | 'auto';
+
+/** Estilo: a forma (raio, borda, sombra, fonte), em `tokens/styles/`. */
+export type ArgStyle = 'argila' | 'molde' | 'coda' | 'transparente' | 'windows-xp';
+
+/** Paleta: as cores, em `tokens/palettes/`. `nativa` é a paleta própria do estilo. */
+export type ArgPalette = 'nativa' | 'terrosa';
+
+export interface ArgStyleInfo {
+  /** Modos de cor que o estilo suporta; o primeiro é o padrão. */
+  schemes: readonly Exclude<ArgColorScheme, 'auto'>[];
+}
+
+export const ARG_STYLES: Readonly<Record<ArgStyle, ArgStyleInfo>> = {
+  argila: { schemes: ['light', 'dark'] },
+  molde: { schemes: ['light', 'dark'] },
+  coda: { schemes: ['light', 'dark'] },
+  transparente: { schemes: ['light', 'dark'] },
+  'windows-xp': { schemes: ['light', 'dark'] },
+};
+
+export const ARG_PALETTES: readonly ArgPalette[] = ['nativa', 'terrosa'];
+
+function readStyle(root: HTMLElement): ArgStyle {
+  const value = root.getAttribute('data-arg-style');
+  return value !== null && Object.hasOwn(ARG_STYLES, value) ? (value as ArgStyle) : 'argila';
+}
+
+function readPalette(root: HTMLElement): ArgPalette {
+  const value = root.getAttribute('data-arg-palette') as ArgPalette;
+  return ARG_PALETTES.includes(value) ? value : 'nativa';
+}
 
 /**
  * Personalização de um produto ou tenant. Cada campo sobrescreve um token
@@ -46,8 +77,9 @@ const BRAND_TOKENS: Record<keyof ArgBrand, string> = {
 export const ARG_MIN_SURFACE_OPACITY = 0.4;
 
 /**
- * Aplica tema em tempo de execução no <html>: modo claro/escuro e a marca do
- * tenant (ex.: carregada da tabela `tenants` após o login).
+ * Aplica tema em tempo de execução no <html>: estilo, paleta, modo
+ * claro/escuro, transparência e a marca do tenant (ex.: carregada da tabela
+ * `tenants` após o login).
  */
 @Injectable({ providedIn: 'root' })
 export class ArgTheme {
@@ -58,9 +90,37 @@ export class ArgTheme {
   );
   readonly colorScheme = this._colorScheme.asReadonly();
 
+  private readonly _style = signal(readStyle(this.root));
+  readonly style = this._style.asReadonly();
+  /** Modos de cor que o estilo atual suporta. */
+  readonly schemes = computed(() => ARG_STYLES[this._style()].schemes);
+
+  private readonly _palette = signal(readPalette(this.root));
+  readonly palette = this._palette.asReadonly();
+
+  /**
+   * Muda o modo de cor. Um modo que o estilo atual não suporta vira o modo
+   * padrão do estilo; `auto` só vale quando o estilo tem claro e escuro.
+   */
   setColorScheme(scheme: ArgColorScheme): void {
-    this.root.setAttribute('data-arg-theme', scheme);
-    this._colorScheme.set(scheme);
+    const supported = this.schemes();
+    const fits = scheme === 'auto' ? supported.length > 1 : supported.includes(scheme);
+    const value = fits ? scheme : supported[0];
+    this.root.setAttribute('data-arg-theme', value);
+    this._colorScheme.set(value);
+  }
+
+  /** Troca o estilo, mantendo a paleta; ajusta o modo se o estilo não o suportar. */
+  setStyle(style: ArgStyle): void {
+    this.root.setAttribute('data-arg-style', style);
+    this._style.set(style);
+    this.setColorScheme(this._colorScheme());
+  }
+
+  /** Troca a paleta; `nativa` volta às cores próprias do estilo. */
+  setPalette(palette: ArgPalette): void {
+    this.root.setAttribute('data-arg-palette', palette);
+    this._palette.set(palette);
   }
 
   /** Substitui a marca atual; campos omitidos voltam ao padrão do Argila. */
