@@ -1,23 +1,12 @@
 /*
- * Tema Windows XP (visual clássico): cinza de janela, azul-marinho da barra de
- * título, cantos retos, botões em alto-relevo e campos rebaixados.
+ * Estilo Windows XP (visual clássico): cantos retos, botões em alto-relevo,
+ * campos rebaixados e Tahoma. As cores (cinza de janela e azul-marinho da
+ * barra de título) ficam na paleta nativa, em palettes/nativas/windows-xp.css.
+ *
+ * O relevo usa tons de cinza próprios: faz parte da forma, não da paleta.
  */
+:root[data-arg-style='windows-xp'],
 :root[data-arg-brand='windows-xp'] {
-  --arg-color-primary: light-dark(#000080, #8fa8ff);
-  --arg-color-on-primary: light-dark(#ffffff, #000000);
-
-  --arg-color-background: light-dark(#c0c0c0, #262626);
-  --arg-color-surface: light-dark(#ece9d8, #333333);
-  --arg-color-surface-raised: light-dark(#ffffff, #404040);
-  --arg-color-surface-sunken: light-dark(#ffffff, #1a1a1a);
-
-  --arg-color-text: light-dark(#000000, #ffffff);
-  --arg-color-text-muted: light-dark(#3d3d3d, #c8c8c8);
-
-  --arg-color-border: light-dark(#808080, #5a5a5a);
-  --arg-color-border-strong: light-dark(#404040, #9a9a9a);
-  --arg-color-focus: light-dark(#000000, #ffffff);
-
   --arg-radius-control: var(--arg-core-radius-0);
   --arg-radius-container: var(--arg-core-radius-0);
 
