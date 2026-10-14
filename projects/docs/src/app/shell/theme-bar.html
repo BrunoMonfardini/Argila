@@ -6,6 +6,7 @@
       size="sm"
       [variant]="scheme() === option.value ? 'secondary' : 'tertiary'"
       [attr.aria-pressed]="scheme() === option.value"
+      [disabled]="!supports(option.value)"
       (click)="selectScheme(option.value)"
     >
       {{ option.label }}
@@ -13,11 +14,33 @@
   }
 </div>
 
-<label class="doc-theme-bar__brand">
-  <span>Marca</span>
-  <select arg-select [value]="brand()" (change)="selectBrand($event)">
-    @for (option of brands; track option.value) {
+<label class="doc-theme-bar__field">
+  <span>Estilo</span>
+  <select arg-select [value]="style()" (change)="selectStyle($event)">
+    @for (option of styles; track option.value) {
       <option [value]="option.value">{{ option.label }}</option>
     }
   </select>
+</label>
+
+<label class="doc-theme-bar__field">
+  <span>Paleta</span>
+  <select arg-select [value]="palette()" (change)="selectPalette($event)">
+    @for (option of palettes; track option.value) {
+      <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+</label>
+
+<label class="doc-theme-bar__field">
+  <span>Opacidade</span>
+  <input
+    type="range"
+    [min]="minOpacity"
+    max="100"
+    step="5"
+    [value]="opacity()"
+    [attr.aria-valuetext]="opacity() + '%'"
+    (input)="selectOpacity($event)"
+  />
 </label>
