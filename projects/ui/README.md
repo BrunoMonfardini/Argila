@@ -128,9 +128,37 @@ Exemplos vivos, playground e padrões combinados (carregamento, vazio) no catál
 
 Modo de cor, no `<html>`: `data-arg-theme="light" | "dark" | "auto"`.
 
-Estilo e paleta, no `<html>`: `data-arg-style` (forma: raio, borda, sombra, fonte) e
-`data-arg-palette` (cor). Importe `tokens/temas.css` depois de `tokens/argila.css`. Sem
-`data-arg-palette`, cada estilo usa a própria paleta (a nativa).
+A aparência tem dois eixos independentes, também no `<html>`:
+
+| Eixo   | Atributo           | Define                            | Valores                                                          |
+| ------ | ------------------ | --------------------------------- | ---------------------------------------------------------------- |
+| Estilo | `data-arg-style`   | forma: raio, borda, sombra, fonte | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp` |
+| Paleta | `data-arg-palette` | cores                             | `nativa` (a do estilo, padrão), `terrosa`                        |
+
+Importe `tokens/temas.css` depois de `tokens/argila.css` (ou só os arquivos do estilo e da
+paleta que o produto usa, em `tokens/styles/` e `tokens/palettes/`). Sem `data-arg-palette`,
+cada estilo usa a própria paleta. O atributo antigo `data-arg-brand` continua funcionando
+para `example` (Molde), `coda`, `transparente` e `windows-xp`.
+
+```html
+<html data-arg-style="coda" data-arg-palette="terrosa" data-arg-theme="dark"></html>
+```
+
+Pelo Angular, com o `ArgTheme`:
+
+```ts
+const theme = inject(ArgTheme);
+theme.setStyle('windows-xp');
+theme.setPalette('terrosa');
+theme.setSurfaceOpacity(0.7); // superfícies translúcidas, de 0.4 a 1
+```
+
+Cada estilo declara os modos que suporta (`ARG_STYLES`); `theme.schemes()` diz quais valem
+agora, e `setColorScheme()` troca um modo não suportado pelo padrão do estilo.
+
+Superfícies translúcidas: `--arg-surface-opacity` (padrão 1; 0.6 no Transparente). Paletas e
+temas sobrescrevem as cores opacas `--arg-color-surface-solid`, `-raised-solid` e
+`-sunken-solid`; os componentes usam `--arg-color-surface`, já com a transparência.
 
 Marca do produto (fixa): crie um estilo e uma paleta próprios, sempre no `:root`. Copie
 `tokens/styles/molde.css` e `tokens/palettes/nativas/molde.css`.
@@ -143,8 +171,9 @@ theme.setBrand({ primary: tenant.primaryColor, onPrimary: '#fff', radiusControl:
 theme.setColorScheme('auto');
 ```
 
-Hover, pressed e fundos suaves são derivados da cor principal automaticamente.
-Garanta contraste de pelo menos 4.5:1 entre `primary` e `onPrimary`.
+`setBrand()` também aceita `secondary`, `accent` (com `onSecondary` e `onAccent`) e
+`fontFamilyHeading`. Hover, pressed e fundos suaves são derivados de cada cor automaticamente.
+Garanta contraste de pelo menos 4.5:1 entre cada cor e o texto por cima.
 
 ### Carregamento
 
