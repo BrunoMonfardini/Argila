@@ -92,6 +92,48 @@ export function mergeTokens(blocks: TokenBlocks[], selectors: string[]): Map<str
   return tokens;
 }
 
+/** Atributos do `<html>` numa combinação de tema, ex.: `{ 'data-arg-style': 'coda' }`. */
+export type RootAttributes = Record<string, string>;
+
+/**
+ * Diz se um seletor de tema vale para o `<html>` com estes atributos. Entende
+ * `:root`, `[atributo]`, `[atributo='valor']` e `:not(…)` desses dois; a
+ * vírgula separa alternativas. Outros seletores não casam.
+ */
+export function matchesRoot(selector: string, attributes: RootAttributes): boolean {
+  return selector.split(',').some((part) => matchesCompound(part.trim(), attributes));
+}
+
+function matchesCompound(compound: string, attributes: RootAttributes): boolean {
+  let rest = compound.startsWith(':root') ? compound.slice(':root'.length) : compound;
+  if (rest === compound && !rest.startsWith('[')) return false;
+  const condition = /^(:not\()?\[([\w-]+)(?:='([^']*)')?\]\)?/;
+  while (rest) {
+    const match = condition.exec(rest);
+    if (!match) return false;
+    const [whole, negated, name, value] = match;
+    const present = value === undefined ? name in attributes : attributes[name] === value;
+    if (negated ? present : !present) return false;
+    rest = rest.slice(whole.length);
+  }
+  return true;
+}
+
+/** Tokens do `<html>` com estes atributos: os blocos que casam, na ordem dos arquivos. */
+export function tokensForRoot(
+  files: TokenBlocks[],
+  attributes: RootAttributes,
+): Map<string, string> {
+  const tokens = new Map<string, string>();
+  for (const blocks of files) {
+    for (const [selector, declarations] of blocks) {
+      if (!matchesRoot(selector, attributes)) continue;
+      for (const [name, value] of declarations) tokens.set(name, value);
+    }
+  }
+  return tokens;
+}
+
 /** Divide os argumentos de uma função CSS nas vírgulas de nível superior. */
 function splitArgs(text: string): string[] {
   const args: string[] = [];

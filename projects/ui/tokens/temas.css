@@ -1,0 +1,9 @@
+/*
+ * Argila — todos os estilos e paletas.
+ *
+ * Inclua depois de argila.css para trocar a aparência só com atributos no
+ * <html>: data-arg-style (forma) e data-arg-palette (cor). Produtos que usam
+ * um estilo só podem importar apenas o arquivo dele e o da paleta.
+ */
+@import './styles/molde.css';
+@import './palettes/nativas/molde.css';

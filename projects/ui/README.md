@@ -128,8 +128,12 @@ Exemplos vivos, playground e padrões combinados (carregamento, vazio) no catál
 
 Modo de cor, no `<html>`: `data-arg-theme="light" | "dark" | "auto"`.
 
-Marca do produto (fixa): sobrescreva tokens semânticos em CSS, sempre no `:root`.
-Veja `tokens/themes/example-brand.css`.
+Estilo e paleta, no `<html>`: `data-arg-style` (forma: raio, borda, sombra, fonte) e
+`data-arg-palette` (cor). Importe `tokens/temas.css` depois de `tokens/argila.css`. Sem
+`data-arg-palette`, cada estilo usa a própria paleta (a nativa).
+
+Marca do produto (fixa): crie um estilo e uma paleta próprios, sempre no `:root`. Copie
+`tokens/styles/molde.css` e `tokens/palettes/nativas/molde.css`.
 
 Marca do tenant (vinda do banco, em tempo de execução):
 

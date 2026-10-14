@@ -205,7 +205,7 @@ No `angular.json`, adicione os tokens aos estilos globais do catálogo:
 "styles": [
   "projects/ui/tokens/argila.css",
   "projects/ui/tokens/base.css",
-  "projects/ui/tokens/themes/example-brand.css",
+  "projects/ui/tokens/temas.css",
   "projects/docs/src/styles.css"
 ]
 ```

@@ -6,10 +6,12 @@ import {
   contrastRatio,
   evaluateNumber,
   luminance,
+  matchesRoot,
   mergeTokens,
   mixOklab,
   parseTokenBlocks,
   resolveColor,
+  tokensForRoot,
 } from './contraste.ts';
 
 const WHITE = { r: 1, g: 1, b: 1 };
@@ -56,6 +58,43 @@ describe('mergeTokens', () => {
     const theme = parseTokenBlocks('.marca { --a: #333; }');
 
     const tokens = mergeTokens([base, theme], [':root', '.marca']);
+
+    expect(Object.fromEntries(tokens)).toEqual({ '--a': '#333', '--b': '#222' });
+  });
+});
+
+describe('matchesRoot', () => {
+  const coda = { 'data-arg-style': 'coda' };
+
+  it('casa :root, atributo presente, valor e negação', () => {
+    expect(matchesRoot(':root', {})).toBe(true);
+    expect(matchesRoot(":root[data-arg-style='coda']", coda)).toBe(true);
+    expect(matchesRoot(":root[data-arg-style='xp']", coda)).toBe(false);
+    expect(matchesRoot(":root[data-arg-style='coda']:not([data-arg-palette])", coda)).toBe(true);
+    expect(
+      matchesRoot(":root[data-arg-style='coda']:not([data-arg-palette])", {
+        ...coda,
+        'data-arg-palette': 'mono',
+      }),
+    ).toBe(false);
+    expect(matchesRoot("[data-arg-theme='dark']", coda)).toBe(false);
+  });
+
+  it('aceita alternativas separadas por vírgula e recusa outros seletores', () => {
+    const selector = ":root[data-arg-style='coda'],\n:root[data-arg-brand='coda']";
+    expect(matchesRoot(selector, { 'data-arg-brand': 'coda' })).toBe(true);
+    expect(matchesRoot('html', {})).toBe(false);
+    expect(matchesRoot(':root.marca', {})).toBe(false);
+  });
+});
+
+describe('tokensForRoot', () => {
+  it('junta os blocos que casam, na ordem dos arquivos', () => {
+    const base = parseTokenBlocks(':root { --a: #111; --b: #222; }');
+    const style = parseTokenBlocks(":root[data-arg-style='x'] { --a: #333; }");
+    const other = parseTokenBlocks(":root[data-arg-style='y'] { --b: #444; }");
+
+    const tokens = tokensForRoot([base, style, other], { 'data-arg-style': 'x' });
 
     expect(Object.fromEntries(tokens)).toEqual({ '--a': '#333', '--b': '#222' });
   });
