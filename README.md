@@ -122,7 +122,7 @@ Abra o PR no navegador:
 start "https://github.com/BrunoMonfardini/Argila/compare/feat/nome-da-mudanca?expand=1"
 ```
 
-O título do PR também segue Conventional Commits: no merge (squash) ele vira a mensagem do commit na `main`.
+Cada commit e o título do PR seguem Conventional Commits. O merge é por rebase: os commits entram na `main` como estão, então faça um commit por feature (veja o [padrão de pipeline](docs/padrao-de-pipeline.md#commits-e-título-do-pr)).
 
 ### 6. Verificar antes de abrir o PR
 

@@ -54,11 +54,27 @@ fix(agenda): impede dois atendimentos no mesmo horário
 chore(deps): atualiza angular para 22.3
 ```
 
-O merge é **squash**: o título do PR vira o único commit na `main`, então ele precisa descrever a mudança inteira.
+**Um commit por feature.** O commit é a unidade de versionamento: cada token novo, componente, variante, página ou correção entra no seu próprio commit, com a mensagem dizendo só aquilo. Um PR pode juntar várias features, mas não junta várias features num commit.
+
+- **Cada commit fica de pé sozinho:** compila, passa nos testes e traz junto o teste e a documentação da feature. Dá para voltar a qualquer commit da `main` ou reverter um só.
+- **Ajuste de revisão vai para o commit da feature**, não para um commit "corrige review" no fim: `git commit --fixup <hash>` e `git rebase --autosquash main` antes do merge.
+- **Exemplo**, num PR de temas:
+
+```text
+feat(tokens): eixo de estilo com data-arg-style
+feat(tokens): eixo de paleta com data-arg-palette
+feat(tokens): transparência das superfícies
+feat(theme): setStyle, setPalette e setSurfaceOpacity no ArgTheme
+refactor(tokens): CODA separado em estilo e paleta nativa
+test(tokens): contraste de todas as combinações de estilo e paleta
+docs: temas no README do pacote
+```
+
+O merge é **rebase**: os commits do PR entram na `main` como estão, um a um, e o histórico continua linear. O CI valida a mensagem de cada commit, e o título do PR descreve o conjunto.
 
 ### Pull request
 
-- Um assunto por PR. PR grande (acima de ~400 linhas alteradas, sem contar lockfile e gerados) deve ser quebrado.
+- Um assunto por PR, que pode ser grande quando os commits estão separados por feature. O tamanho é controlado no commit: um commit acima de ~400 linhas alteradas (sem contar lockfile e gerados) provavelmente junta mais de uma feature.
 - Preencha o template: o que muda, como testar, checklist.
 - Mínimo de **1 aprovação** de outra pessoa. O autor não aprova o próprio PR.
 - Toda conversa do review precisa estar resolvida antes do merge.
@@ -207,11 +223,11 @@ push na branch ──► PR para a main ──► GitHub Actions
                                         ├─ verify     (qualidade e build)
                                         └─ pr-checks  (regras de processo)
                                                 │
-                              ambos ✅ + 1 aprovação ──► squash merge ──► main ──► CD
+                              ambos ✅ + 1 aprovação ──► rebase merge ──► main ──► CD
 ```
 
 - **`verify`**: roda em todo PR e em todo push na `main`. Instala do lockfile, formata, linta, checa tipos, testa com cobertura, procura duplicação e faz o build.
-- **`pr-checks`**: roda só em PR. Valida o título (Conventional Commits) e, no design system, exige changeset quando o pacote muda.
+- **`pr-checks`**: roda só em PR. Valida o título e a mensagem de cada commit (Conventional Commits) e, no design system, exige changeset quando o pacote muda.
 
 Os nomes `verify` e `pr-checks` são fixos: o ruleset (seção 7) exige esses dois checks pelo nome.
 
@@ -283,6 +299,12 @@ jobs:
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: echo "$PR_TITLE" | pnpm exec commitlint
+      # O merge é rebase: cada commit do PR chega à main como está
+      - name: Cada commit segue Conventional Commits
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: pnpm exec commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
       # Só no design system:
       # - name: Mudança no pacote tem changeset
       #   if: github.actor != 'dependabot[bot]'
@@ -369,15 +391,15 @@ Breaking change só em versão **major**, com nota de migração no changeset. O
 
 A `main` é protegida por um **ruleset** no GitHub. O arquivo fica versionado em `.github/rulesets/main.json` e é importado pelo dono do repositório em **Settings → Rules → Rulesets → New ruleset → Import a ruleset**, depois que o CI tiver rodado pelo menos uma vez.
 
-| Regra                                      | Efeito                                                 |
-| ------------------------------------------ | ------------------------------------------------------ |
-| Pull request obrigatório                   | Ninguém faz push direto na `main`, nem administradores |
-| 1 aprovação, aprovação cai com novo push   | Código revisado é o código que entra                   |
-| Conversas resolvidas                       | Comentário de review não é ignorado                    |
-| Checks `verify` e `pr-checks` obrigatórios | CI vermelho bloqueia o merge                           |
-| Branch atualizada com a `main`             | O CI roda sobre o código que realmente vai entrar      |
-| Só squash, histórico linear                | Um commit por PR, fácil de ler e reverter              |
-| Sem force push, sem exclusão               | Histórico da `main` não é reescrito                    |
+| Regra                                      | Efeito                                                    |
+| ------------------------------------------ | --------------------------------------------------------- |
+| Pull request obrigatório                   | Ninguém faz push direto na `main`, nem administradores    |
+| 1 aprovação, aprovação cai com novo push   | Código revisado é o código que entra                      |
+| Conversas resolvidas                       | Comentário de review não é ignorado                       |
+| Checks `verify` e `pr-checks` obrigatórios | CI vermelho bloqueia o merge                              |
+| Branch atualizada com a `main`             | O CI roda sobre o código que realmente vai entrar         |
+| Só rebase, histórico linear                | Cada commit do PR chega à `main`, fácil de ler e reverter |
+| Sem force push, sem exclusão               | Histórico da `main` não é reescrito                       |
 
 ```json
 {
@@ -397,7 +419,7 @@ A `main` é protegida por um **ruleset** no GitHub. O arquivo fica versionado em
         "require_code_owner_review": false,
         "require_last_push_approval": false,
         "required_review_thread_resolution": true,
-        "allowed_merge_methods": ["squash"]
+        "allowed_merge_methods": ["rebase"]
       }
     },
     {
@@ -414,7 +436,7 @@ A `main` é protegida por um **ruleset** no GitHub. O arquivo fica versionado em
 
 Complementos no repositório:
 
-- **Settings → General → Pull Requests:** deixe marcado só "Allow squash merging" e marque "Automatically delete head branches".
+- **Settings → General → Pull Requests:** deixe marcado só "Allow rebase merging" e marque "Automatically delete head branches".
 - **`.github/dependabot.yml`:** atualização semanal de dependências npm (agrupadas por família) e mensal das actions.
 - **`.github/pull_request_template.md`:** seções "O que muda", "Como testar" e o checklist da seção 11.
 
@@ -525,7 +547,7 @@ Siga na ordem. O primeiro PR do repositório deve entregar todos os itens.
 ### No GitHub, depois do primeiro CI verde
 
 - [ ] Ruleset importado e ativo
-- [ ] Só squash merge; exclusão automática de branches
+- [ ] Só rebase merge; exclusão automática de branches
 - [ ] Environments criados, com aprovação manual em `production`
 - [ ] Segredos cadastrados nos Environments
 - [ ] Secret scanning e push protection ligados
@@ -545,7 +567,7 @@ Um PR só pode ser aprovado quando:
 - [ ] Nenhuma regra, tipo, validação ou estilo foi duplicado; o que já existia foi reaproveitado
 - [ ] Componentes visuais vêm do design system; nenhuma cor, espaçamento ou raio literal
 - [ ] `verify` e `pr-checks` verdes
-- [ ] Título do PR em Conventional Commits, descrevendo a mudança inteira
+- [ ] Título do PR e cada commit em Conventional Commits; um commit por feature, cada um passando nos testes
 - [ ] Migrations de banco (se houver) compatíveis com a versão anterior e com política de RLS
 - [ ] Sem segredo, `console.log`, código comentado ou `TODO` sem issue vinculada
 - [ ] Documentação atualizada quando a mudança altera como alguém usa o projeto (README, catálogo, changeset)
