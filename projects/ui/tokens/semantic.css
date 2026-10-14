@@ -45,6 +45,47 @@
     var(--arg-color-surface)
   );
 
+  /*
+   * Secundária: botão secundário, tag selecionada, aba ativa.
+   * Destaque: badge, progresso, passo atual, marcadores. Cada uma tem a cor
+   * do texto por cima (on-*) e os mesmos estados derivados da primária.
+   */
+  --arg-color-secondary: light-dark(var(--arg-core-clay-700), var(--arg-core-clay-200));
+  --arg-color-on-secondary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-secondary-hover: color-mix(
+    in oklab,
+    var(--arg-color-secondary),
+    var(--arg-color-shade) 12%
+  );
+  --arg-color-secondary-pressed: color-mix(
+    in oklab,
+    var(--arg-color-secondary),
+    var(--arg-color-shade) 22%
+  );
+  --arg-color-secondary-subtle: color-mix(
+    in oklab,
+    var(--arg-color-secondary) 12%,
+    var(--arg-color-surface)
+  );
+
+  --arg-color-accent: light-dark(var(--arg-core-terracotta-600), var(--arg-core-terracotta-400));
+  --arg-color-on-accent: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-accent-hover: color-mix(
+    in oklab,
+    var(--arg-color-accent),
+    var(--arg-color-shade) 12%
+  );
+  --arg-color-accent-pressed: color-mix(
+    in oklab,
+    var(--arg-color-accent),
+    var(--arg-color-shade) 22%
+  );
+  --arg-color-accent-subtle: color-mix(
+    in oklab,
+    var(--arg-color-accent) 12%,
+    var(--arg-color-surface)
+  );
+
   /* Superfícies */
   --arg-color-background: light-dark(var(--arg-core-neutral-50), var(--arg-core-neutral-950));
   --arg-color-surface: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));

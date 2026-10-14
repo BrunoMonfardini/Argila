@@ -50,6 +50,16 @@ const PAIRS: ContrastPair[] = [
   // Botões secundário e terciário: texto na cor da marca
   { foreground: '--arg-color-primary', background: '--arg-color-surface', minimum: TEXT },
   { foreground: '--arg-color-primary', background: '--arg-color-primary-subtle', minimum: TEXT },
+  // Secundária e destaque: texto por cima em todos os estados, e a cor como texto
+  ...['secondary', 'accent'].flatMap((role) => [
+    ...['', '-hover', '-pressed'].map((state) => ({
+      foreground: `--arg-color-on-${role}`,
+      background: `--arg-color-${role}${state}`,
+      minimum: TEXT,
+    })),
+    { foreground: `--arg-color-${role}`, background: '--arg-color-surface', minimum: TEXT },
+    { foreground: `--arg-color-${role}`, background: `--arg-color-${role}-subtle`, minimum: TEXT },
+  ]),
   // Botão de perigo em todos os estados
   { foreground: '--arg-color-on-danger', background: '--arg-color-danger', minimum: TEXT },
   { foreground: '--arg-color-on-danger', background: '--arg-color-danger-hover', minimum: TEXT },

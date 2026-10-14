@@ -11,6 +11,14 @@ export interface ArgBrand {
   primary?: string;
   /** Cor do texto sobre a cor principal. Garanta contraste mínimo de 4.5:1. */
   onPrimary?: string;
+  /** Cor secundária: botão secundário, tag selecionada, aba ativa. */
+  secondary?: string;
+  /** Cor do texto sobre a secundária. Garanta contraste mínimo de 4.5:1. */
+  onSecondary?: string;
+  /** Cor de destaque: badge, progresso, passo atual. */
+  accent?: string;
+  /** Cor do texto sobre o destaque. Garanta contraste mínimo de 4.5:1. */
+  onAccent?: string;
   /** Raio de botões e campos, ex.: '9999px' para formato pílula. */
   radiusControl?: string;
   /** Raio de cards, modais e outros contêineres. */
@@ -22,6 +30,10 @@ export interface ArgBrand {
 const BRAND_TOKENS: Record<keyof ArgBrand, string> = {
   primary: '--arg-color-primary',
   onPrimary: '--arg-color-on-primary',
+  secondary: '--arg-color-secondary',
+  onSecondary: '--arg-color-on-secondary',
+  accent: '--arg-color-accent',
+  onAccent: '--arg-color-on-accent',
   radiusControl: '--arg-radius-control',
   radiusContainer: '--arg-radius-container',
   fontFamily: '--arg-font-family',

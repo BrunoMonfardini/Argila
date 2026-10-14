@@ -17,6 +17,10 @@
   --arg-core-clay-800: #36190f;
   --arg-core-clay-900: #26150d;
 
+  /* Cor: terracota, o destaque da Terrosa */
+  --arg-core-terracotta-400: #e6ad80;
+  --arg-core-terracotta-600: #8a4b2a;
+
   /* Cor: neutros da Terrosa: off-white, bege e café */
   --arg-core-neutral-0: #fffcf8;
   --arg-core-neutral-50: #f4ede4;
