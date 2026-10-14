@@ -5,31 +5,31 @@
  * diretamente: eles passam pela camada semântica (semantic.css).
  */
 :root {
-  /* Cor: argila (marca padrão) */
-  --arg-core-clay-50: #fbf3ee;
-  --arg-core-clay-100: #f6e2d6;
-  --arg-core-clay-200: #edc3aa;
-  --arg-core-clay-300: #e19d77;
-  --arg-core-clay-400: #d27a4c;
-  --arg-core-clay-500: #c05f2f;
-  --arg-core-clay-600: #a24c24;
-  --arg-core-clay-700: #823c1f;
-  --arg-core-clay-800: #62301c;
-  --arg-core-clay-900: #432316;
+  /* Cor: argila, paleta Terrosa (marca padrão): tons de café */
+  --arg-core-clay-50: #f7f1ea;
+  --arg-core-clay-100: #ede2d4;
+  --arg-core-clay-200: #dcc8b1;
+  --arg-core-clay-300: #c7ad91;
+  --arg-core-clay-400: #ab8d6f;
+  --arg-core-clay-500: #896448;
+  --arg-core-clay-600: #5d3721;
+  --arg-core-clay-700: #482616;
+  --arg-core-clay-800: #36190f;
+  --arg-core-clay-900: #26150d;
 
-  /* Cor: neutros (cinza quente) */
-  --arg-core-neutral-0: #ffffff;
-  --arg-core-neutral-50: #faf9f7;
-  --arg-core-neutral-100: #f2f0ed;
-  --arg-core-neutral-200: #e4e0db;
-  --arg-core-neutral-300: #cdc7c0;
-  --arg-core-neutral-400: #a8a098;
-  --arg-core-neutral-500: #827a72;
-  --arg-core-neutral-600: #635c55;
-  --arg-core-neutral-700: #4a4540;
-  --arg-core-neutral-800: #312d2a;
-  --arg-core-neutral-900: #1e1b19;
-  --arg-core-neutral-950: #141211;
+  /* Cor: neutros da Terrosa: off-white, bege e café */
+  --arg-core-neutral-0: #fffcf8;
+  --arg-core-neutral-50: #f4ede4;
+  --arg-core-neutral-100: #ebe2d6;
+  --arg-core-neutral-200: #ddcfbe;
+  --arg-core-neutral-300: #c6b39d;
+  --arg-core-neutral-400: #b39a80;
+  --arg-core-neutral-500: #896448;
+  --arg-core-neutral-600: #6b4c35;
+  --arg-core-neutral-700: #5d3721;
+  --arg-core-neutral-800: #482616;
+  --arg-core-neutral-900: #33200f;
+  --arg-core-neutral-950: #26150d;
 
   /* Cor: feedback */
   --arg-core-blue-50: #eef4fd;

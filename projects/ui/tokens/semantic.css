@@ -27,7 +27,7 @@
   --arg-color-shade: light-dark(#000, #fff);
 
   /* Marca */
-  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-400));
+  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-300));
   --arg-color-on-primary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
   --arg-color-primary-hover: color-mix(
     in oklab,
