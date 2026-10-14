@@ -7,7 +7,7 @@ interface Option<T extends string> {
   label: string;
 }
 
-export type DocBrand = 'argila' | 'example' | 'coda' | 'transparente' | 'arcade' | 'windows-xp';
+export type DocBrand = 'argila' | 'example' | 'coda' | 'transparente' | 'windows-xp';
 
 const SCHEMES: Option<ArgColorScheme>[] = [
   { value: 'light', label: 'Claro' },
@@ -15,13 +15,12 @@ const SCHEMES: Option<ArgColorScheme>[] = [
   { value: 'auto', label: 'Automático' },
 ];
 
-/** Marcas de exemplo: cada uma é um arquivo em projects/ui/tokens/themes/. */
+/** Estilos com a paleta nativa, pelo atributo antigo data-arg-brand. */
 const BRANDS: Option<DocBrand>[] = [
   { value: 'argila', label: 'Argila (padrão)' },
   { value: 'example', label: 'Exemplo' },
   { value: 'coda', label: 'CODA' },
   { value: 'transparente', label: 'Transparente' },
-  { value: 'arcade', label: 'Arcade' },
   { value: 'windows-xp', label: 'Windows XP' },
 ];
 

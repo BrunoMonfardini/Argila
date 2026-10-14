@@ -2,7 +2,7 @@
  * Argila — tokens semânticos (camada 2)
  *
  * Nomeados pelo USO, não pelo valor. É esta camada que componentes consomem e
- * que cada produto/tenant sobrescreve (ver themes/ e ArgTheme).
+ * que cada estilo, paleta e produto sobrescreve (ver styles/, palettes/ e ArgTheme).
  *
  * Claro/escuro: cores usam light-dark(), então o modo é decidido por
  * `color-scheme`. Controle pelo atributo `data-arg-theme` no <html>:
@@ -190,7 +190,7 @@
   --arg-radius-container: var(--arg-core-radius-3);
   --arg-radius-full: var(--arg-core-radius-full);
 
-  /* Contorno de botões e campos: temas de contorno grosso (ex.: arcade) aumentam */
+  /* Contorno de botões e campos: estilos de contorno grosso (ex.: CODA) aumentam */
   --arg-border-width-control: 1px;
 
   /* Tipografia */

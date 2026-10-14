@@ -130,9 +130,7 @@ const palettes = themeFiles('palettes');
 const files = [
   parseTokenBlocks(css('primitives.css')),
   parseTokenBlocks(css('semantic.css')),
-  ...[...styles, ...palettes, ...themeFiles('palettes/nativas'), ...themeFiles('themes')].map(
-    (file) => file.blocks,
-  ),
+  ...[...styles, ...palettes, ...themeFiles('palettes/nativas')].map((file) => file.blocks),
 ];
 
 /** Argila é o estilo padrão e a Terrosa a paleta padrão: nenhum dos dois tem arquivo. */
