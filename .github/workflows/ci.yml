@@ -60,11 +60,17 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      # O merge é squash: o título do PR vira a mensagem do commit na main
+      # O título entra por variável de ambiente, nunca interpolado no comando
       - name: Título do PR segue Conventional Commits
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: echo "$PR_TITLE" | pnpm exec commitlint
+      # O merge é rebase: cada commit do PR chega à main como está
+      - name: Cada commit segue Conventional Commits
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: pnpm exec commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
       # O PR de versão (changeset-release/main) existe justamente para consumir os changesets
       - name: Mudança no pacote tem changeset
         if: github.actor != 'dependabot[bot]' && github.head_ref != 'changeset-release/main'
