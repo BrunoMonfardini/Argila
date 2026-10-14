@@ -86,11 +86,40 @@
     var(--arg-color-surface)
   );
 
-  /* Superfícies */
+  /*
+   * Superfícies. Paletas definem as cores *-solid; a superfície usada pelos
+   * componentes aplica a transparência (--arg-surface-opacity, de 0.4 a 1).
+   * Abaixo de 0.4 o texto pode perder contraste com o que está atrás.
+   */
   --arg-color-background: light-dark(var(--arg-core-neutral-50), var(--arg-core-neutral-950));
-  --arg-color-surface: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
-  --arg-color-surface-raised: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-800));
-  --arg-color-surface-sunken: light-dark(var(--arg-core-neutral-100), var(--arg-core-neutral-950));
+  --arg-color-surface-solid: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
+  --arg-color-surface-raised-solid: light-dark(
+    var(--arg-core-neutral-0),
+    var(--arg-core-neutral-800)
+  );
+  --arg-color-surface-sunken-solid: light-dark(
+    var(--arg-core-neutral-100),
+    var(--arg-core-neutral-950)
+  );
+  --arg-surface-opacity: 1;
+  --arg-surface-alpha: calc(clamp(0.4, var(--arg-surface-opacity), 1) * 100%);
+  /* Desfoque do que está atrás: 0 quando opaca, 16px na opacidade mínima */
+  --arg-surface-blur: calc((1 - clamp(0.4, var(--arg-surface-opacity), 1)) / 0.6 * 16px);
+  --arg-color-surface: color-mix(
+    in oklab,
+    var(--arg-color-surface-solid) var(--arg-surface-alpha),
+    transparent
+  );
+  --arg-color-surface-raised: color-mix(
+    in oklab,
+    var(--arg-color-surface-raised-solid) var(--arg-surface-alpha),
+    transparent
+  );
+  --arg-color-surface-sunken: color-mix(
+    in oklab,
+    var(--arg-color-surface-sunken-solid) var(--arg-surface-alpha),
+    transparent
+  );
   --arg-color-overlay: rgb(20 18 17 / 0.56);
 
   /* Texto */

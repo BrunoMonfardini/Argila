@@ -77,10 +77,14 @@ const PAIRS: ContrastPair[] = [
   // Switch: trilho desligado e ligado contra a superfície, e o botão contra o trilho
   { foreground: '--arg-color-text-muted', background: '--arg-color-surface', minimum: NON_TEXT },
   { foreground: '--arg-color-primary', background: '--arg-color-surface', minimum: NON_TEXT },
-  { foreground: '--arg-color-surface', background: '--arg-color-text-muted', minimum: NON_TEXT },
-  { foreground: '--arg-color-surface', background: '--arg-color-primary', minimum: NON_TEXT },
-  // Tooltip: balão invertido, texto da superfície sobre a cor do texto
-  { foreground: '--arg-color-surface', background: '--arg-color-text', minimum: TEXT },
+  {
+    foreground: '--arg-color-surface-solid',
+    background: '--arg-color-text-muted',
+    minimum: NON_TEXT,
+  },
+  { foreground: '--arg-color-surface-solid', background: '--arg-color-primary', minimum: NON_TEXT },
+  // Tooltip: balão invertido, texto da superfície (sempre opaca) sobre a cor do texto
+  { foreground: '--arg-color-surface-solid', background: '--arg-color-text', minimum: TEXT },
   // Progress Bar: o preenchimento contra o trilho mostra quanto falta
   {
     foreground: '--arg-color-primary',
@@ -115,13 +119,19 @@ for (const file of readdirSync(resolve(TOKENS, 'themes')).filter((f) => f.endsWi
   }
 }
 
+/** Transparência mínima das superfícies: o pior caso para o texto sobre elas. */
+const MIN_OPACITY = '0.4';
+
 describe('contraste dos tokens', () => {
   for (const [brand, tokens] of Object.entries(BRANDS)) {
+    const translucent = new Map(tokens).set('--arg-surface-opacity', MIN_OPACITY);
     for (const scheme of SCHEMES) {
-      it(`${brand}, tema ${scheme === 'light' ? 'claro' : 'escuro'}: todos os pares no mínimo`, () => {
-        const failures = contrastFailures(checkContrast(tokens, PAIRS, scheme));
-
-        expect(failures).toEqual([]);
+      const mode = scheme === 'light' ? 'claro' : 'escuro';
+      it(`${brand}, tema ${mode}: todos os pares no mínimo`, () => {
+        expect(contrastFailures(checkContrast(tokens, PAIRS, scheme))).toEqual([]);
+      });
+      it(`${brand}, tema ${mode}, superfícies a ${MIN_OPACITY}: todos os pares no mínimo`, () => {
+        expect(contrastFailures(checkContrast(translucent, PAIRS, scheme))).toEqual([]);
       });
     }
   }

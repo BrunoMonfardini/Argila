@@ -11,6 +11,7 @@ describe('ArgTheme', () => {
 
   afterEach(() => {
     theme.clearBrand();
+    theme.clearSurfaceOpacity();
     root.removeAttribute('data-arg-theme');
   });
 
@@ -38,5 +39,23 @@ describe('ArgTheme', () => {
     theme.setBrand({ primary: '#2e8b57' });
     expect(root.style.getPropertyValue('--arg-color-primary')).toBe('#2e8b57');
     expect(root.style.getPropertyValue('--arg-radius-control')).toBe('');
+  });
+
+  it('aplica a opacidade das superfícies dentro da faixa permitida', () => {
+    theme.setSurfaceOpacity(0.6);
+    expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('0.6');
+    expect(theme.surfaceOpacity()).toBe(0.6);
+
+    theme.setSurfaceOpacity(0.1);
+    expect(theme.surfaceOpacity()).toBe(0.4);
+    theme.setSurfaceOpacity(3);
+    expect(theme.surfaceOpacity()).toBe(1);
+  });
+
+  it('volta à opacidade do estilo', () => {
+    theme.setSurfaceOpacity(0.6);
+    theme.clearSurfaceOpacity();
+    expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
+    expect(theme.surfaceOpacity()).toBeUndefined();
   });
 });

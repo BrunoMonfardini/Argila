@@ -42,6 +42,9 @@ const BRAND_TOKENS: Record<keyof ArgBrand, string> = {
   fontFamilyHeading: '--arg-font-family-heading',
 };
 
+/** Opacidade mínima das superfícies: abaixo dela o texto pode perder contraste. */
+export const ARG_MIN_SURFACE_OPACITY = 0.4;
+
 /**
  * Aplica tema em tempo de execução no <html>: modo claro/escuro e a marca do
  * tenant (ex.: carregada da tabela `tenants` após o login).
@@ -74,5 +77,25 @@ export class ArgTheme {
 
   clearBrand(): void {
     this.setBrand({});
+  }
+
+  private readonly _surfaceOpacity = signal<number | undefined>(undefined);
+  /** Opacidade escolhida; `undefined` quando vale a do estilo (1 na maioria). */
+  readonly surfaceOpacity = this._surfaceOpacity.asReadonly();
+
+  /**
+   * Opacidade de cards, diálogos, campos e demais superfícies, de 0.4 a 1.
+   * Valores fora da faixa são presos aos limites.
+   */
+  setSurfaceOpacity(opacity: number): void {
+    const value = Math.min(1, Math.max(ARG_MIN_SURFACE_OPACITY, opacity));
+    this.root.style.setProperty('--arg-surface-opacity', String(value));
+    this._surfaceOpacity.set(value);
+  }
+
+  /** Volta à opacidade definida pelo estilo. */
+  clearSurfaceOpacity(): void {
+    this.root.style.removeProperty('--arg-surface-opacity');
+    this._surfaceOpacity.set(undefined);
   }
 }

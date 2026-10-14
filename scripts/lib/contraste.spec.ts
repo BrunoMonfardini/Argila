@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   checkContrast,
+  composite,
   contrastFailures,
   contrastRatio,
+  evaluateNumber,
   luminance,
   mergeTokens,
   mixOklab,
@@ -72,6 +74,29 @@ describe('resolveColor', () => {
     expect(resolveColor('#fff', tokens, 'light')).toEqual(WHITE);
     expect(hex(resolveColor('#a24c24', tokens, 'light'))).toBe('#a24c24');
     expect(hex(resolveColor('rgb(20 18 17 / 0.56)', tokens, 'light'))).toBe('#141211');
+    expect(resolveColor('rgb(20 18 17 / 0.56)', tokens, 'light').a).toBe(0.56);
+    expect(resolveColor('rgb(20 18 17 / 40%)', tokens, 'light').a).toBe(0.4);
+    expect(resolveColor('transparent', tokens, 'light').a).toBe(0);
+  });
+
+  it('mistura com transparent e peso em calc()', () => {
+    const vidro = new Map([['--opacidade', '0.6']]);
+    const cor = resolveColor(
+      'color-mix(in oklab, #fff calc(clamp(0.4, var(--opacidade), 1) * 100%), transparent)',
+      vidro,
+      'light',
+    );
+
+    expect(hex(cor)).toBe('#ffffff');
+    expect(cor.a).toBeCloseTo(0.6, 5);
+
+    const porToken = new Map([['--peso', 'calc(var(--opacidade) * 100%)'], ...vidro]);
+    const viaToken = resolveColor(
+      'color-mix(in oklab, #fff var(--peso), transparent)',
+      porToken,
+      'light',
+    );
+    expect(viaToken.a).toBeCloseTo(0.6, 5);
   });
 
   it('segue var() e usa o valor reserva quando o token não existe', () => {
@@ -106,10 +131,41 @@ describe('resolveColor', () => {
   });
 });
 
+describe('evaluateNumber', () => {
+  const tokens = new Map([['--x', '0.2']]);
+
+  it('resolve var(), clamp(), multiplicação, divisão e porcentagem', () => {
+    expect(evaluateNumber('calc(var(--x) * 100%)', tokens)).toBeCloseTo(0.2, 5);
+    expect(evaluateNumber('clamp(0.4, var(--x), 1)', tokens)).toBe(0.4);
+    expect(evaluateNumber('calc(clamp(0.4, 0.9, 1) / 2)', tokens)).toBeCloseTo(0.45, 5);
+    expect(evaluateNumber('12%', tokens)).toBeCloseTo(0.12, 5);
+    expect(evaluateNumber('calc(calc(var(--x) * 2) * 100%)', tokens)).toBeCloseTo(0.4, 5);
+  });
+
+  it('explica o que não consegue calcular', () => {
+    expect(() => evaluateNumber('calc(var(--nada) * 2)', tokens)).toThrow('--nada');
+    expect(() => evaluateNumber('calc(1 + 2)', tokens)).toThrow('expressão não suportada');
+  });
+});
+
 describe('mixOklab', () => {
   it('peso 1 devolve a primeira cor e peso 0 a segunda', () => {
     expect(hex(mixOklab(BLACK, WHITE, 1))).toBe('#000000');
     expect(hex(mixOklab(BLACK, WHITE, 0))).toBe('#ffffff');
+  });
+
+  it('com transparente, mantém a cor e reduz a opacidade', () => {
+    const meio = mixOklab(WHITE, { ...BLACK, a: 0 }, 0.5);
+
+    expect(hex(meio)).toBe('#ffffff');
+    expect(meio.a).toBeCloseTo(0.5, 5);
+  });
+});
+
+describe('composite', () => {
+  it('pinta a cor translúcida sobre a base; opaca não muda', () => {
+    expect(hex(composite({ ...WHITE, a: 0.5 }, BLACK))).toBe('#808080');
+    expect(composite(WHITE, BLACK)).toEqual(WHITE);
   });
 });
 
@@ -135,5 +191,18 @@ describe('checkContrast e contrastFailures', () => {
 
     const [failure] = contrastFailures(checkContrast(tokens, pairs, 'dark'));
     expect(failure).toMatch(/^dark: --texto sobre --fundo = 1\.\d+:1 \(mínimo 4\.5:1\)$/);
+  });
+
+  it('compõe o fundo translúcido sobre o fundo da página', () => {
+    const vidro = new Map([
+      ['--texto', '#777'],
+      ['--fundo', 'rgb(255 255 255 / 0.1)'],
+      ['--pagina', '#000'],
+    ]);
+
+    const [result] = checkContrast(vidro, pairs, 'light', '--pagina');
+
+    // Branco a 10% sobre preto fica quase preto: o cinza contrasta pouco
+    expect(result.ratio).toBeLessThan(4.5);
   });
 });

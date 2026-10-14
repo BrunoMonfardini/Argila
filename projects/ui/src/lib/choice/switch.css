@@ -9,7 +9,7 @@
   --arg-switch-width: 2.75rem;
   --arg-switch-off: var(--arg-color-text-muted);
   --arg-switch-on: var(--arg-color-primary);
-  --arg-switch-thumb: var(--arg-color-surface);
+  --arg-switch-thumb: var(--arg-color-surface-solid);
   --arg-switch-inset: 3px;
 
   flex-shrink: 0;
