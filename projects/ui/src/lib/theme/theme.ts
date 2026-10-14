@@ -25,6 +25,8 @@ export interface ArgBrand {
   radiusContainer?: string;
   /** Família tipográfica. A fonte precisa ser carregada pelo produto. */
   fontFamily?: string;
+  /** Família tipográfica dos títulos; sem ela, os títulos usam `fontFamily`. */
+  fontFamilyHeading?: string;
 }
 
 const BRAND_TOKENS: Record<keyof ArgBrand, string> = {
@@ -37,6 +39,7 @@ const BRAND_TOKENS: Record<keyof ArgBrand, string> = {
   radiusControl: '--arg-radius-control',
   radiusContainer: '--arg-radius-container',
   fontFamily: '--arg-font-family',
+  fontFamilyHeading: '--arg-font-family-heading',
 };
 
 /**

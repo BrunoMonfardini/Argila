@@ -54,6 +54,7 @@
 }
 
 .arg-card [arg-card-title] {
+  font-family: var(--arg-font-family-heading);
   margin: 0;
   font-size: var(--arg-font-size-body-lg);
   font-weight: var(--arg-font-weight-strong);

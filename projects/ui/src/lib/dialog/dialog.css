@@ -58,6 +58,7 @@
 }
 
 .arg-dialog .arg-dialog__title {
+  font-family: var(--arg-font-family-heading);
   margin: 0;
   font-size: var(--arg-font-size-heading-sm);
   font-weight: var(--arg-font-weight-heading);

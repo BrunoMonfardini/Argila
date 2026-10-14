@@ -166,6 +166,8 @@
 
   /* Tipografia */
   --arg-font-family: var(--arg-core-font-sans);
+  /* Títulos: estilos com fonte de display trocam só esta; o padrão é a do corpo */
+  --arg-font-family-heading: var(--arg-font-family);
   --arg-font-family-mono: var(--arg-core-font-mono);
 
   --arg-font-size-caption: var(--arg-core-font-size-12);
