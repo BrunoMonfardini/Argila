@@ -1,0 +1,25 @@
+/*
+ * Paleta nativa do CODA: rosa e amarelo sobre grafite.
+ */
+:root[data-arg-style='coda']:not([data-arg-palette]),
+:root[data-arg-style='coda'][data-arg-palette='nativa'],
+:root[data-arg-brand='coda'] {
+  --arg-color-primary: light-dark(#b0205f, #f27aae);
+  --arg-color-on-primary: light-dark(#ffffff, #1c1c1c);
+  --arg-color-secondary: light-dark(#3a3a3a, #e0e0e0);
+  --arg-color-on-secondary: light-dark(#ffffff, #1c1c1c);
+  --arg-color-accent: light-dark(#6b5e00, #f5ec3a);
+  --arg-color-on-accent: light-dark(#ffffff, #1c1c1c);
+
+  --arg-color-background: light-dark(#fff5fa, #1c1c1c);
+  --arg-color-surface-solid: light-dark(#ffffff, #222222);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #2a2a2a);
+  --arg-color-surface-sunken-solid: light-dark(#fbe7f0, #161616);
+
+  --arg-color-text: light-dark(#1c1c1c, #ffffff);
+  --arg-color-text-muted: light-dark(#5c4a53, #b8b8b8);
+
+  --arg-color-border: light-dark(#e8a3c4, #6e2f4e);
+  --arg-color-border-strong: light-dark(#b0205f, #e8559c);
+  --arg-color-focus: light-dark(#6b5e00, #f5ec3a);
+}

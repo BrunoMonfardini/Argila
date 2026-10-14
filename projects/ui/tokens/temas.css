@@ -7,3 +7,5 @@
  */
 @import './styles/molde.css';
 @import './palettes/nativas/molde.css';
+@import './styles/coda.css';
+@import './palettes/nativas/coda.css';
