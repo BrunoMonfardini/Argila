@@ -2,6 +2,19 @@
 
 _Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que conferir antes de seguir para o PR-2 do [plano de estilos e paletas](plano-estilos-paletas-e-catalogo.md). Marque cada item quando tiver conferido.
 
+## Situação
+
+_Atualizado em 15/10/2026._
+
+| O quê                                                                 | Situação                                                                                                                               |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| PR-1, estilos e paletas (#68)                                         | Mergeado na `main`                                                                                                                     |
+| Regras de commit (`chore/merge-por-rebase`)                           | Branch no GitHub, PR a abrir. Mergear por rebase antes dos próximos                                                                    |
+| Checkup dos temas (`fix/checkup-de-temas`)                            | Branch no GitHub, PR a abrir. Já tem: correção da barra de tema, testes de estrutura, teste da barra e o `npm run checkup`             |
+| Checkup completo (5 estilos × 2 paletas × 2 modos × todas as páginas) | Em andamento (~40 min). Amostra rodada sem problemas: Argila e Transparente, claro e escuro, páginas Date Picker, Button e Icon Button |
+| Testes neste branch                                                   | Rodaram só os testes novos, o da barra de tema, o lint e a checagem de tipos dos scripts. Suíte completa e build ainda não             |
+| Painéis translúcidos do Transparente                                  | Conhecido, correção depois do resultado do checkup (seção 5)                                                                           |
+
 ## 1. Verificações automáticas
 
 Rodam sozinhas; só confirme que passam.
