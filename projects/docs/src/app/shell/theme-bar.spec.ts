@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { ARG_STYLES, ArgStyle, ArgTheme } from '@brunomonfardini/ui';
+import { ARG_PALETTES, ARG_STYLES, ArgStyle, ArgTheme } from '@brunomonfardini/ui';
 import { DocThemeBar } from './theme-bar';
 
 describe('DocThemeBar', () => {
@@ -67,6 +67,27 @@ describe('DocThemeBar', () => {
     expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
     expect(localStorage.getItem('argila-docs:estilo')).toBe('coda');
     expect(localStorage.getItem('argila-docs:paleta')).toBe('terrosa');
+  });
+
+  it('oferece todos os estilos e paletas do ArgTheme, e cada um se aplica pela interface', async () => {
+    const { fixture, select } = await setup();
+    const values = (control: HTMLSelectElement) => Array.from(control.options, (o) => o.value);
+
+    expect(values(select('Estilo'))).toEqual(Object.keys(ARG_STYLES));
+    expect(values(select('Paleta'))).toEqual([...ARG_PALETTES]);
+
+    for (const style of Object.keys(ARG_STYLES)) {
+      for (const palette of ARG_PALETTES) {
+        choose(select('Estilo'), style);
+        choose(select('Paleta'), palette);
+        await fixture.whenStable();
+
+        expect(root.getAttribute('data-arg-style')).toBe(style);
+        expect(root.getAttribute('data-arg-palette')).toBe(palette);
+        expect(select('Estilo').value).toBe(style);
+        expect(select('Paleta').value).toBe(palette);
+      }
+    }
   });
 
   it('ajusta a opacidade das superfícies e volta à do estilo ao trocar de estilo', async () => {
