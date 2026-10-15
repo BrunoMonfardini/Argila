@@ -110,10 +110,13 @@ describe('DocThemeBar', () => {
     localStorage.setItem('argila-docs:paleta', 'terrosa');
     localStorage.setItem('argila-docs:opacidade', '80');
 
-    await setup();
+    const { select } = await setup();
 
     expect(root.getAttribute('data-arg-theme')).toBe('auto');
     expect(root.getAttribute('data-arg-style')).toBe('windows-xp');
+    // O seletor mostra o que está aplicado, não a primeira opção
+    expect(select('Estilo').value).toBe('windows-xp');
+    expect(select('Paleta').value).toBe('terrosa');
     expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
     expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('0.8');
 
