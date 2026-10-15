@@ -4,7 +4,7 @@
  */
 :host {
   --arg-tooltip-bg: var(--arg-color-text);
-  --arg-tooltip-fg: var(--arg-color-surface);
+  --arg-tooltip-fg: var(--arg-color-surface-solid);
   --arg-tooltip-radius: var(--arg-radius-control);
   --arg-tooltip-gap: var(--arg-space-2);
   --arg-tooltip-max-width: 16rem;

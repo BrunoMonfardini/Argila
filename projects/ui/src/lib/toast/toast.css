@@ -72,6 +72,7 @@
 }
 
 .arg-toast__title {
+  font-family: var(--arg-font-family-heading);
   font-weight: var(--arg-font-weight-strong);
 }
 

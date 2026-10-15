@@ -2,7 +2,7 @@
  * Argila — tokens semânticos (camada 2)
  *
  * Nomeados pelo USO, não pelo valor. É esta camada que componentes consomem e
- * que cada produto/tenant sobrescreve (ver themes/ e ArgTheme).
+ * que cada estilo, paleta e produto sobrescreve (ver styles/, palettes/ e ArgTheme).
  *
  * Claro/escuro: cores usam light-dark(), então o modo é decidido por
  * `color-scheme`. Controle pelo atributo `data-arg-theme` no <html>:
@@ -27,7 +27,7 @@
   --arg-color-shade: light-dark(#000, #fff);
 
   /* Marca */
-  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-400));
+  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-300));
   --arg-color-on-primary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
   --arg-color-primary-hover: color-mix(
     in oklab,
@@ -45,11 +45,81 @@
     var(--arg-color-surface)
   );
 
-  /* Superfícies */
+  /*
+   * Secundária: botão secundário, tag selecionada, aba ativa.
+   * Destaque: badge, progresso, passo atual, marcadores. Cada uma tem a cor
+   * do texto por cima (on-*) e os mesmos estados derivados da primária.
+   */
+  --arg-color-secondary: light-dark(var(--arg-core-clay-700), var(--arg-core-clay-200));
+  --arg-color-on-secondary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-secondary-hover: color-mix(
+    in oklab,
+    var(--arg-color-secondary),
+    var(--arg-color-shade) 12%
+  );
+  --arg-color-secondary-pressed: color-mix(
+    in oklab,
+    var(--arg-color-secondary),
+    var(--arg-color-shade) 22%
+  );
+  --arg-color-secondary-subtle: color-mix(
+    in oklab,
+    var(--arg-color-secondary) 12%,
+    var(--arg-color-surface)
+  );
+
+  --arg-color-accent: light-dark(var(--arg-core-terracotta-600), var(--arg-core-terracotta-400));
+  --arg-color-on-accent: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-accent-hover: color-mix(
+    in oklab,
+    var(--arg-color-accent),
+    var(--arg-color-shade) 12%
+  );
+  --arg-color-accent-pressed: color-mix(
+    in oklab,
+    var(--arg-color-accent),
+    var(--arg-color-shade) 22%
+  );
+  --arg-color-accent-subtle: color-mix(
+    in oklab,
+    var(--arg-color-accent) 12%,
+    var(--arg-color-surface)
+  );
+
+  /*
+   * Superfícies. Paletas definem as cores *-solid; a superfície usada pelos
+   * componentes aplica a transparência (--arg-surface-opacity, de 0.4 a 1).
+   * Abaixo de 0.4 o texto pode perder contraste com o que está atrás.
+   */
   --arg-color-background: light-dark(var(--arg-core-neutral-50), var(--arg-core-neutral-950));
-  --arg-color-surface: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
-  --arg-color-surface-raised: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-800));
-  --arg-color-surface-sunken: light-dark(var(--arg-core-neutral-100), var(--arg-core-neutral-950));
+  --arg-color-surface-solid: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
+  --arg-color-surface-raised-solid: light-dark(
+    var(--arg-core-neutral-0),
+    var(--arg-core-neutral-800)
+  );
+  --arg-color-surface-sunken-solid: light-dark(
+    var(--arg-core-neutral-100),
+    var(--arg-core-neutral-950)
+  );
+  --arg-surface-opacity: 1;
+  --arg-surface-alpha: calc(clamp(0.4, var(--arg-surface-opacity), 1) * 100%);
+  /* Desfoque do que está atrás: 0 quando opaca, 16px na opacidade mínima */
+  --arg-surface-blur: calc((1 - clamp(0.4, var(--arg-surface-opacity), 1)) / 0.6 * 16px);
+  --arg-color-surface: color-mix(
+    in oklab,
+    var(--arg-color-surface-solid) var(--arg-surface-alpha),
+    transparent
+  );
+  --arg-color-surface-raised: color-mix(
+    in oklab,
+    var(--arg-color-surface-raised-solid) var(--arg-surface-alpha),
+    transparent
+  );
+  --arg-color-surface-sunken: color-mix(
+    in oklab,
+    var(--arg-color-surface-sunken-solid) var(--arg-surface-alpha),
+    transparent
+  );
   --arg-color-overlay: rgb(20 18 17 / 0.56);
 
   /* Texto */
@@ -120,11 +190,13 @@
   --arg-radius-container: var(--arg-core-radius-3);
   --arg-radius-full: var(--arg-core-radius-full);
 
-  /* Contorno de botões e campos: temas de contorno grosso (ex.: arcade) aumentam */
+  /* Contorno de botões e campos: estilos de contorno grosso (ex.: CODA) aumentam */
   --arg-border-width-control: 1px;
 
   /* Tipografia */
   --arg-font-family: var(--arg-core-font-sans);
+  /* Títulos: estilos com fonte de display trocam só esta; o padrão é a do corpo */
+  --arg-font-family-heading: var(--arg-font-family);
   --arg-font-family-mono: var(--arg-core-font-mono);
 
   --arg-font-size-caption: var(--arg-core-font-size-12);

@@ -10,7 +10,7 @@
   gap: var(--arg-space-1);
 }
 
-.doc-theme-bar__brand {
+.doc-theme-bar__field {
   display: flex;
   gap: var(--arg-space-2);
   align-items: center;
@@ -18,10 +18,15 @@
   font-size: var(--arg-font-size-body-sm);
 }
 
-.doc-theme-bar__brand select {
+.doc-theme-bar__field select {
   --arg-input-height: 2rem;
   --arg-input-padding-block: 0;
 
   width: auto;
   font-size: inherit;
+}
+
+.doc-theme-bar__field input[type='range'] {
+  width: 6rem;
+  accent-color: var(--arg-color-primary);
 }
