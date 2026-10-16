@@ -1,5 +1,20 @@
 # @brunomonfardini/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- b66e81a: `ArgTheme.setStyle()` e `setPalette()`, com os sinais `style()`, `palette()` e `schemes()` (modos de cor que o estilo suporta). Estilos podem suportar um modo só: `setColorScheme()` passa a trocar um modo não suportado pelo modo padrão do estilo. Novos tipos `ArgStyle` e `ArgPalette` e as constantes `ARG_STYLES` e `ARG_PALETTES`.
+- e21ed81: CODA separado em estilo (`tokens/styles/coda.css`) e paleta nativa (`tokens/palettes/nativas/coda.css`), com secundária grafite e destaque amarelo. Dá para usar o estilo CODA com outra paleta. `data-arg-brand="coda"` continua funcionando; `tokens/themes/coda.css` foi removido.
+- eafb571: Aparência em dois eixos independentes, no `<html>`: `data-arg-style` (forma) e `data-arg-palette` (cor). Sem `data-arg-palette`, vale a paleta nativa do estilo. Novo `tokens/temas.css` com todos os estilos e paletas. O tema "Exemplo" vira o estilo **Molde** (`tokens/styles/molde.css` + `tokens/palettes/nativas/molde.css`); `data-arg-brand="example"` continua funcionando. `tokens/themes/example-brand.css` foi removido.
+- 9d326dc: Novo token `--arg-font-family-heading` para títulos (padrão: a mesma fonte do corpo), usado em Dialog, Card, Empty State, Alert, Toast, na marca do App Shell e nos `h1`–`h6` do `base.css`. O `ArgTheme.setBrand()` aceita `fontFamilyHeading`.
+- e21ccf3: Paleta padrão ajustada para a Terrosa: tons de café, bege e off-white. A primária é marrom no modo claro e bege no escuro. Os nomes dos tokens não mudam; só os valores de `--arg-core-clay-*` e `--arg-core-neutral-*`.
+- 564e6bc: Tema Arcade removido (`tokens/themes/arcade.css` e `data-arg-brand="arcade"`), sem substituto: não estava em uso. A pasta `tokens/themes/` deixa de existir; estilos e paletas ficam em `tokens/styles/` e `tokens/palettes/`.
+- 4faa281: Novas cores de marca: secundária (`--arg-color-secondary`) e destaque (`--arg-color-accent`), cada uma com `on-*`, `-hover`, `-pressed` e `-subtle`. O `ArgTheme.setBrand()` aceita `secondary`, `onSecondary`, `accent` e `onAccent`.
+- 5d328a4: Transparência das superfícies: `--arg-surface-opacity` (de 0.4 a 1, padrão 1) deixa `--arg-color-surface`, `-raised` e `-sunken` translúcidas. As cores opacas ficam em `--arg-color-surface-solid`, `-raised-solid` e `-sunken-solid`, que é o que paletas e temas devem sobrescrever. Novo `--arg-surface-blur`, de 0 a 16px conforme a opacidade. `ArgTheme.setSurfaceOpacity()` e `clearSurfaceOpacity()`. Tooltip e Switch usam a superfície opaca.
+- 601f003: Transparente separado em estilo (`tokens/styles/transparente.css`) e paleta nativa (`tokens/palettes/nativas/transparente.css`). A transparência agora vem de `--arg-surface-opacity: 0.6` (ajustável com `ArgTheme.setSurfaceOpacity()`), e as superfícies da paleta são opacas. `data-arg-brand="transparente"` continua funcionando; `tokens/themes/transparente.css` foi removido.
+- 22cbacb: Windows XP separado em estilo (`tokens/styles/windows-xp.css`) e paleta nativa (`tokens/palettes/nativas/windows-xp.css`), com secundária, destaque e cores de feedback mais escuras no modo claro. `data-arg-brand="windows-xp"` continua funcionando; `tokens/themes/windows-xp.css` foi removido.
+
 ## 0.2.0
 
 ### Minor Changes
