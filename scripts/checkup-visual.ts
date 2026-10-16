@@ -111,12 +111,27 @@ socket.onmessage = (event) => {
 };
 await new Promise((done) => (socket.onopen = done));
 
+/** Tempo máximo de cada comando ao Chrome: uma página travada não pode parar o checkup. */
+const TIMEOUT = 30_000;
+
+function withTimeout<T>(promise: Promise<T>, label: string): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, fail) => {
+    timer = setTimeout(
+      () => fail(new Error(`${label} não respondeu em ${TIMEOUT / 1000}s`)),
+      TIMEOUT,
+    );
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
 function send(method: string, params: Record<string, unknown> = {}): Promise<Message> {
-  return new Promise((done) => {
-    const id = ++nextId;
+  const id = ++nextId;
+  const answer = new Promise<Message>((done) => {
     pending.set(id, done);
     socket.send(JSON.stringify({ id, method, params }));
   });
+  return withTimeout(answer, method).finally(() => pending.delete(id));
 }
 
 function nextEvent(method: string): Promise<Message> {
@@ -140,7 +155,7 @@ async function evaluate<T>(expression: string): Promise<T> {
 async function load(url: string): Promise<void> {
   const loaded = nextEvent('Page.loadEventFired');
   await send('Page.navigate', { url });
-  await loaded;
+  await withTimeout(loaded, `carregar ${url}`);
   await sleep(1500);
 }
 
@@ -237,29 +252,44 @@ for (const combo of combos) {
   }
   for (const page of pages) {
     errors = [];
-    await visit(page);
-    const audit = await evaluate<ReturnType<typeof auditPage>>(`(${auditPage.toString()})()`);
-    for (const error of errors)
-      issues.push({ page, combination: name, kind: 'erro', detail: error });
-    if (audit.overflow > 0) {
+    try {
+      await checkPage(page, name);
+    } catch (error) {
+      // Registra e segue: recarrega o catálogo, que lembra o tema escolhido
       issues.push({
         page,
         combination: name,
-        kind: 'rolagem',
-        detail: `${audit.overflow}px a mais na largura`,
+        kind: 'erro',
+        detail: `travou: ${(error as Error).message}`,
       });
+      await load(`${base}/`);
     }
-    for (const low of audit.lowContrast) {
-      issues.push({
-        page,
-        combination: name,
-        kind: 'contraste',
-        detail: `${low.element} "${low.text}": ${low.color} sobre ${low.background} = ${low.ratio}:1 (mínimo ${low.minimum}:1)`,
-      });
-    }
-    await screenshot(join(output, name, `${pageFile(page)}.png`));
   }
   console.log(`${name}: ${pages.length} página(s)`);
+}
+
+/** Visita, audita e fotografa uma página na combinação atual. */
+async function checkPage(page: string, name: string): Promise<void> {
+  await visit(page);
+  const audit = await evaluate<ReturnType<typeof auditPage>>(`(${auditPage.toString()})()`);
+  for (const error of errors) issues.push({ page, combination: name, kind: 'erro', detail: error });
+  if (audit.overflow > 0) {
+    issues.push({
+      page,
+      combination: name,
+      kind: 'rolagem',
+      detail: `${audit.overflow}px a mais na largura`,
+    });
+  }
+  for (const low of audit.lowContrast) {
+    issues.push({
+      page,
+      combination: name,
+      kind: 'contraste',
+      detail: `${low.element} "${low.text}": ${low.color} sobre ${low.background} = ${low.ratio}:1 (mínimo ${low.minimum}:1)`,
+    });
+  }
+  await screenshot(join(output, name, `${pageFile(page)}.png`));
 }
 
 writeFileSync(join(output, 'relatorio.html'), reportHtml(pages, combos, issues));
