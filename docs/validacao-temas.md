@@ -4,16 +4,17 @@ _Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que co
 
 ## Situação
 
-_Atualizado em 15/10/2026._
+_Atualizado em 16/10/2026._
 
-| O quê                                                                 | Situação                                                                                                                               |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| PR-1, estilos e paletas (#68)                                         | Mergeado na `main`                                                                                                                     |
-| Regras de commit (`chore/merge-por-rebase`)                           | Branch no GitHub, PR a abrir. Mergear por rebase antes dos próximos                                                                    |
-| Checkup dos temas (`fix/checkup-de-temas`)                            | Branch no GitHub, PR a abrir. Já tem: correção da barra de tema, testes de estrutura, teste da barra e o `npm run checkup`             |
-| Checkup completo (5 estilos × 2 paletas × 2 modos × todas as páginas) | Em andamento (~40 min). Amostra rodada sem problemas: Argila e Transparente, claro e escuro, páginas Date Picker, Button e Icon Button |
-| Testes neste branch                                                   | Rodaram só os testes novos, o da barra de tema, o lint e a checagem de tipos dos scripts. Suíte completa e build ainda não             |
-| Painéis translúcidos do Transparente                                  | Conhecido, correção depois do resultado do checkup (seção 5)                                                                           |
+| O quê                                       | Situação                                                                                                                                                                                                                                                    |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR-1, estilos e paletas (#68)               | Mergeado; publicado como `0.3.0` (#70)                                                                                                                                                                                                                      |
+| Regras de commit (`chore/merge-por-rebase`) | Branch atualizado sobre a `main`, PR a abrir. Mergear por rebase antes dos próximos                                                                                                                                                                         |
+| Checkup dos temas (`fix/checkup-de-temas`)  | Branch atualizado sobre a `main`, PR a abrir. Já tem: correção da barra de tema, testes de estrutura, teste da barra, `npm run checkup` com tempo limite por página e esta lista                                                                            |
+| Checkup completo                            | **A refazer.** A primeira rodada travou na 15ª de 20 combinações (o computador suspendeu) e não gerou relatório. Rodadas parciais (Argila e Transparente, claro e escuro, Date Picker, Button, Icon Button, Agenda, Alert, App Shell) não acharam problemas |
+| Painéis translúcidos do Transparente        | Conhecido, correção depois do checkup completo (seção 5)                                                                                                                                                                                                    |
+
+**Para continuar em outro computador:** `git fetch`, `git switch fix/checkup-de-temas`, `pnpm install`; com `npm run dev` aberto, rode `npm run checkup` com o computador sem suspender (~40 min).
 
 ## 1. Verificações automáticas
 
