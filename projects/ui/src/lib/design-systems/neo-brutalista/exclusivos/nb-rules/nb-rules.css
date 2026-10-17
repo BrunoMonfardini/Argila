@@ -1,0 +1,31 @@
+/*
+ * Tokens de componente (camada 3), ex.: <aside arg-nb-rules style="--arg-nb-rules-bg: var(--arg-color-surface-solid)">.
+ */
+:host {
+  --arg-nb-rules-bg: var(--arg-color-surface);
+  --arg-nb-rules-fg: var(--arg-color-text);
+
+  display: block;
+  padding: var(--arg-space-4) var(--arg-space-5);
+  border: 3px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-3);
+  background: var(--arg-nb-rules-bg);
+  color: var(--arg-nb-rules-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body-sm);
+  text-transform: uppercase;
+}
+
+.arg-nb-rules__title {
+  margin: 0 0 var(--arg-space-2);
+  font-family: var(--arg-font-family-heading);
+  font-size: var(--arg-font-size-body);
+  line-height: var(--arg-line-height-heading);
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+}
