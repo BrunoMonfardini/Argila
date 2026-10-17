@@ -40,7 +40,8 @@ export const neoBrutalista = {
     ],
     fora: [],
   },
-  exclusivos: [],
+  exclusivos: ['nb-sticker', 'nb-rules'],
+  prefixo: 'nb',
   regras: [
     'Um único botão primário por tela',
     'Foco sempre visível',

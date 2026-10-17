@@ -40,6 +40,8 @@ export * from './lib/stepper/stepper';
 export * from './lib/table/table';
 export * from './lib/tabs/tabs';
 export * from './lib/tag/tag';
+export * from './lib/design-systems/neo-brutalista/exclusivos/nb-sticker/nb-sticker';
+export * from './lib/design-systems/neo-brutalista/exclusivos/nb-rules/nb-rules';
 export * from './lib/theme/theme';
 export * from './lib/theme/segments';
 export * from './lib/theme/provide-argila';

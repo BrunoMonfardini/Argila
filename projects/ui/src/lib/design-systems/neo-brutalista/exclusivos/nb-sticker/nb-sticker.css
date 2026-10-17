@@ -1,0 +1,46 @@
+/*
+ * Tokens de componente (camada 3), ex.: <span arg-nb-sticker style="--arg-nb-sticker-angle: 6deg">.
+ */
+:host {
+  --arg-nb-sticker-bg: var(--arg-color-primary-soft);
+  --arg-nb-sticker-fg: var(--arg-color-on-primary-soft);
+  --arg-nb-sticker-angle: 0deg;
+
+  display: inline-block;
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border: 3px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-control);
+  box-shadow: var(--arg-shadow-2);
+  background: var(--arg-nb-sticker-bg);
+  color: var(--arg-nb-sticker-fg);
+  font-family: var(--arg-font-family-heading);
+  font-size: var(--arg-font-size-body-sm);
+  line-height: var(--arg-line-height-heading);
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(var(--arg-nb-sticker-angle));
+}
+
+:host(.arg-nb-sticker--accent) {
+  --arg-nb-sticker-bg: var(--arg-color-accent);
+  --arg-nb-sticker-fg: var(--arg-color-on-accent);
+}
+
+:host(.arg-nb-sticker--neutral) {
+  --arg-nb-sticker-bg: var(--arg-color-surface-solid);
+  --arg-nb-sticker-fg: var(--arg-color-text);
+}
+
+:host(.arg-nb-sticker--tilt-left) {
+  --arg-nb-sticker-angle: -4deg;
+}
+
+:host(.arg-nb-sticker--tilt-right) {
+  --arg-nb-sticker-angle: 4deg;
+}
+
+@media (forced-colors: active) {
+  :host {
+    border-color: CanvasText;
+  }
+}
