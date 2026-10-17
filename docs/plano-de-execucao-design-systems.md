@@ -177,14 +177,16 @@ Referência: [transparente.jpg](referencias/transparente.jpg). É uma renderiza�
 
 ## E5: DS Neo-brutalista
 
+Sai em dois PRs: **E5a** manifesto, forma, paleta Papel CMY, paleta Pastel e pele (NB-01, NB-02, NB-04) e **E5b** os exclusivos (NB-03). As capturas lado a lado (NB-05) ficam para uma conferência com a referência no PR, que hoje não dá para anexar pelo `gh`.
+
 Referência: [neo-brutalista.jpg](referencias/neo-brutalista.jpg).
 
 | ✓   | ID    | Item                                                                                                                                         | Depende de | Pronto quando                                                                                             | Est. |
 | --- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- | ---- |
-| [ ] | NB-01 | `feat(neo-brutalista): manifesto, forma, tipografia e paleta Papel CMY` (contorno de 3px, sombra dura, escala de espaçamento, Archivo Black) | E3         | Escala de títulos 96/64/48/32 e espaçamentos 4–96 como na referência                                      | 1    |
-| [ ] | NB-02 | `feat(neo-brutalista): núcleo mínimo e curados da matriz` (Avatar, Breadcrumb, List, Pagination, Stepper, Table)                             | NB-01      | Botões, inputs, controles, abas, steps, paginação, tabela, toasts, modal e empty state como na referência | 1,5  |
+| [x] | NB-01 | `feat(neo-brutalista): manifesto, forma, tipografia e paleta Papel CMY` (contorno de 3px, sombra dura, escala de espaçamento, Archivo Black) | E3         | Escala de títulos 96/64/48/32 e espaçamentos 4–96 como na referência                                      | 1    |
+| [x] | NB-02 | `feat(neo-brutalista): núcleo mínimo e curados da matriz` (Avatar, Breadcrumb, List, Pagination, Stepper, Table)                             | NB-01      | Botões, inputs, controles, abas, steps, paginação, tabela, toasts, modal e empty state como na referência | 1,5  |
 | [ ] | NB-03 | `feat(neo-brutalista): exclusivos arg-nb-sticker e arg-nb-rules`                                                                             | NB-01      | Selo inclinado legível por leitor de tela; caixa de regras com as regras do manifesto                     | 0,75 |
-| [ ] | NB-04 | Modo escuro: testar, decidir e registrar                                                                                                     | NB-02      | Escuro aprovado, ou o manifesto declara só claro e o motivo vai para a especificação                      | 0,25 |
+| [x] | NB-04 | Modo escuro: testar, decidir e registrar                                                                                                     | NB-02      | Escuro aprovado, ou o manifesto declara só claro e o motivo vai para a especificação                      | 0,25 |
 | [ ] | NB-05 | `docs(neo-brutalista): capturas lado a lado com a referência`                                                                                | NB-04      | Capturas anexadas ao PR; regras de uso na página do DS                                                    | 0,5  |
 
 ## E6: DS Punk
