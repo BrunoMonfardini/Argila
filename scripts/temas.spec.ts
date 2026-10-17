@@ -3,6 +3,7 @@ import { relative, resolve } from 'node:path';
 import { describe, expect, it } from '@jest/globals';
 import { DESIGN_SYSTEMS_TOKENS, designSystemIds, loadDesignSystems } from './lib/design-systems.ts';
 import { cssImports, declaredTokens, requiredTokens, topLevelSelectors } from './lib/temas.ts';
+import { ARG_SHARED_PALETTES } from '../projects/ui/src/lib/design-systems/palettes.ts';
 
 /**
  * Estrutura dos temas: cada design system tem manifesto, forma e paleta
@@ -45,16 +46,24 @@ describe('manifestos', () => {
     expect(folders).toEqual(withFiles.map((ds) => ds.id).sort());
   });
 
-  it('toda paleta aceita existe: a nativa, a Terrosa (padrão) ou um arquivo de palettes/', () => {
-    const shared = sharedPalettes.map((file) => relative(resolve(TOKENS, 'palettes'), file));
+  it('toda paleta aceita é a nativa ou uma paleta registrada em palettes.ts', () => {
     const missing = designSystems.flatMap((ds) =>
       ds.paletas
-        .filter((palette) => palette !== 'nativa' && palette !== 'terrosa')
-        .filter((palette) => !shared.includes(`${palette}.css`))
+        .filter((palette) => palette !== 'nativa' && !Object.hasOwn(ARG_SHARED_PALETTES, palette))
         .map((palette) => `${ds.id}: ${palette}`),
     );
 
     expect(missing).toEqual([]);
+  });
+
+  it('cada arquivo de tokens/palettes/ está registrado, e cada paleta registrada com arquivo o tem', () => {
+    const files = sharedPalettes.map((file) => relative(resolve(TOKENS, 'palettes'), file)).sort();
+    const registered = Object.entries(ARG_SHARED_PALETTES)
+      .filter(([, info]) => info.arquivo)
+      .map(([id]) => `${id}.css`)
+      .sort();
+
+    expect(files).toEqual(registered);
   });
 });
 
