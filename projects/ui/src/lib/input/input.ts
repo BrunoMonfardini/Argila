@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, ViewEncapsulation } from '@angular/core';
 import { ArgFieldControl } from '../field/field';
 
 /**
@@ -43,3 +43,38 @@ export class ArgInput {}
   host: { class: 'arg-input arg-textarea' },
 })
 export class ArgTextarea {}
+
+/**
+ * Junta um campo e um botão de ação no fim, numa peça só: buscar, adicionar,
+ * limpar. O botão é um `arg-icon-button` com `argInputAction`, com nome
+ * próprio (o `label`) e na ordem do Tab, depois do campo.
+ *
+ * ```html
+ * <arg-field label="Adicionar serviço">
+ *   <arg-input-group>
+ *     <input arg-input [formControl]="servico" />
+ *     <button arg-icon-button argInputAction icon="plus" label="Adicionar"></button>
+ *   </arg-input-group>
+ * </arg-field>
+ * ```
+ */
+@Component({
+  selector: 'arg-input-group',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content />',
+  styleUrl: './input-group.css',
+  // O CSS junta o campo e o botão projetados: todo seletor fica sob .arg-input-group
+  encapsulation: ViewEncapsulation.None,
+  host: { class: 'arg-input-group' },
+})
+export class ArgInputGroup {}
+
+/** Marca o botão de ação de um `arg-input-group`, que se encosta no fim do campo. */
+@Directive({
+  selector: '[argInputAction]',
+  host: { class: 'arg-input-action' },
+})
+export class ArgInputAction {}
+
+/** O agrupador e a ação, para importar de uma vez: `imports: [ARG_INPUT_GROUP]`. */
+export const ARG_INPUT_GROUP = [ArgInputGroup, ArgInputAction] as const;
