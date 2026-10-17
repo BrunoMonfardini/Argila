@@ -4,15 +4,16 @@ _Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que co
 
 ## Situação
 
-_Atualizado em 16/10/2026._
+_Atualizado em 17/10/2026._
 
-| O quê                                       | Situação                                                                                                                                                                                                                                                    |
-| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR-1, estilos e paletas (#68)               | Mergeado; publicado como `0.3.0` (#70)                                                                                                                                                                                                                      |
-| Regras de commit (`chore/merge-por-rebase`) | Branch atualizado sobre a `main`, PR a abrir. Mergear por rebase antes dos próximos                                                                                                                                                                         |
-| Checkup dos temas (`fix/checkup-de-temas`)  | Branch atualizado sobre a `main`, PR a abrir. Já tem: correção da barra de tema, testes de estrutura, teste da barra, `npm run checkup` com tempo limite por página e esta lista                                                                            |
-| Checkup completo                            | **A refazer.** A primeira rodada travou na 15ª de 20 combinações (o computador suspendeu) e não gerou relatório. Rodadas parciais (Argila e Transparente, claro e escuro, Date Picker, Button, Icon Button, Agenda, Alert, App Shell) não acharam problemas |
-| Painéis translúcidos do Transparente        | Conhecido, correção depois do checkup completo (seção 5)                                                                                                                                                                                                    |
+| O quê                                       | Situação                                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR-1, estilos e paletas (#68)               | Mergeado; publicado como `0.3.0` (#70)                                                                                                                                                                                                                                                                                                        |
+| Regras de commit (`chore/merge-por-rebase`) | Mergeado (#69)                                                                                                                                                                                                                                                                                                                                |
+| Checkup dos temas (`fix/checkup-de-temas`)  | Mergeado (#71)                                                                                                                                                                                                                                                                                                                                |
+| Checkup completo                            | **Feito em 17/10**: 42 páginas × 20 combinações em 14 min. 0 erros, 0 rolagem, 0 falhas na barra de tema. Os 60 alertas de contraste eram 3 falsos positivos repetidos (rótulos de controles desabilitados e texto só para leitor de tela, isentos pelo WCAG 1.4.3); o checkup passou a ignorá-los e a nova rodada nas páginas afetadas deu 0 |
+| Painéis translúcidos do Transparente        | **Corrigido** em `fix/paineis-do-transparente`: painéis no mínimo 80% opacos e com desfoque                                                                                                                                                                                                                                                   |
+| Conferência visual (seções 2 a 4)           | **Falta**: precisa de uma pessoa olhando a barra de tema e os componentes no `npm run dev`                                                                                                                                                                                                                                                    |
 
 **Para continuar em outro computador:** `git fetch`, `git switch fix/checkup-de-temas`, `pnpm install`; com `npm run dev` aberto, rode `npm run checkup` com o computador sem suspender (~40 min).
 
@@ -20,16 +21,16 @@ _Atualizado em 16/10/2026._
 
 Rodam sozinhas; só confirme que passam.
 
-- [ ] `npm run format:check`
-- [ ] `npm run lint`
-- [ ] `npm run typecheck`
-- [ ] `npm run test`. Atenção: nesta máquina, testes do catálogo (`registry.spec.ts`, `shell.spec.ts`) às vezes estouram o limite de 5 s. Se falharem só por tempo, rode de novo e confira no CI.
-- [ ] `npm run dup:check`
-- [ ] `npm run build` e `npm run build:docs`
-- [ ] `npm run manifest:check`
-- [ ] `npm run checkup` com o catálogo aberto: abrir `checkup/relatorio.html` e conferir
-  - [ ] Nenhum erro de console, rolagem horizontal ou falha na barra de tema
-  - [ ] Cada problema de contraste listado foi olhado (real ou falso positivo)
+- [x] `npm run format:check`
+- [x] `npm run lint`
+- [x] `npm run typecheck`
+- [x] `npm run test`. Atenção: nesta máquina, testes do catálogo (`registry.spec.ts`, `shell.spec.ts`) às vezes estouram o limite de 5 s. Se falharem só por tempo, rode de novo e confira no CI.
+- [x] `npm run dup:check`
+- [x] `npm run build` e `npm run build:docs`
+- [x] `npm run manifest:check`
+- [x] `npm run checkup` com o catálogo aberto: abrir `checkup/relatorio.html` e conferir
+  - [x] Nenhum erro de console, rolagem horizontal ou falha na barra de tema
+  - [x] Cada problema de contraste listado foi olhado (real ou falso positivo)
   - [ ] A grade de capturas, página por página, comparando as colunas
 
 ## 2. Barra de tema do catálogo
@@ -62,12 +63,12 @@ Para cada estilo (Argila, Molde, CODA, Transparente, Windows XP), em claro e esc
 
 ## 5. Problemas conhecidos, a corrigir
 
-- [ ] **Transparente:** painéis sobre o conteúdo (calendário, diálogos, menus) estão tão translúcidos quanto os cards (60%) e sem desfoque, então o texto de trás aparece. Correção prevista: superfícies elevadas mais opacas (80% no Transparente) e desfoque atrás dos painéis.
-- [ ] `--arg-surface-blur` existe, mas nenhum componente usa ainda (vidro fosco do PR-2).
+- [x] **Transparente:** painéis sobre o conteúdo (calendário, diálogos, menus) estão tão translúcidos quanto os cards (60%) e sem desfoque, então o texto de trás aparece. Correção prevista: superfícies elevadas mais opacas (80% no Transparente) e desfoque atrás dos painéis.
+- [x] `--arg-surface-blur` existe, e agora os painéis sobre o conteúdo usam (vidro fosco do PR-2).
 - [ ] As cores de feedback (info, sucesso, aviso, erro) ainda não foram ajustadas para a Terrosa (o plano previa tons dessaturados).
 
 ## 6. Processo
 
-- [ ] PR `chore/merge-por-rebase` mergeado **por rebase**, antes dos próximos.
+- [x] PR `chore/merge-por-rebase` mergeado **por rebase**, antes dos próximos.
 - [ ] Ruleset da `main` importado no GitHub (Settings → Rules → Rulesets → Import, arquivo `.github/rulesets/main.json`), para valer o merge só por rebase.
 - [ ] GitHub CLI instalado (`winget install GitHub.cli`, depois `gh auth login`), para os PRs serem abertos pelo terminal.
