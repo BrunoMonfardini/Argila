@@ -1,0 +1,16 @@
+/* Campos: vidro em pílula, com aro claro (a área de texto fica com cantos de cartão). */
+
+:root[data-arg-style='transparente'] .arg-input:not(.arg-textarea, .arg-select) {
+  --arg-input-bg: var(--arg-color-surface);
+  --arg-input-border: transparent;
+  --arg-input-height: 3rem;
+  --arg-input-padding-inline: var(--arg-space-5);
+  backdrop-filter: blur(var(--arg-surface-blur));
+}
+
+:root[data-arg-style='transparente'] .arg-textarea {
+  --arg-input-bg: var(--arg-color-surface);
+  --arg-input-border: transparent;
+  --arg-input-radius: var(--arg-radius-container);
+  backdrop-filter: blur(var(--arg-surface-blur));
+}

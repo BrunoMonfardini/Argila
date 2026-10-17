@@ -1,0 +1,6 @@
+/* Alerta: cantos de cartão; os tons continuam vindo do componente. */
+
+:root[data-arg-style='transparente'] .arg-alert {
+  --arg-alert-radius: var(--arg-radius-container);
+  --arg-alert-padding: var(--arg-space-4) var(--arg-space-5);
+}

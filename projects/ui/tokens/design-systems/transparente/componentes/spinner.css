@@ -1,0 +1,5 @@
+/* Spinner: na cor da marca. */
+
+:root[data-arg-style='transparente'] .arg-spinner {
+  --arg-spinner-color: var(--arg-color-primary);
+}

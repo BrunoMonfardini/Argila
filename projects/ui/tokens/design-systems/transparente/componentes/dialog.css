@@ -1,0 +1,6 @@
+/* Diálogo: placa de vidro no nível mais alto, com aro e brilho. */
+
+:root[data-arg-style='transparente'] .arg-dialog {
+  --arg-dialog-shadow:
+    var(--arg-shadow-5), inset 0 1px 0 var(--arg-glass-shine), inset 0 0 0 3px var(--arg-glass-rim);
+}

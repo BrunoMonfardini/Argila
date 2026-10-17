@@ -623,7 +623,10 @@ export const ARG_ALLOWED_COLORS: Readonly<
   "transparente": {
     "nativa": {
       "primary": [
+        "cobre",
+        "caramelo",
         "terracota",
+        "oliva",
         "musgo",
         "petroleo",
         "ardosia",
@@ -634,7 +637,10 @@ export const ARG_ALLOWED_COLORS: Readonly<
         "lavanda"
       ],
       "secondary": [
+        "cobre",
+        "caramelo",
         "terracota",
+        "oliva",
         "musgo",
         "petroleo",
         "ardosia",
@@ -646,7 +652,10 @@ export const ARG_ALLOWED_COLORS: Readonly<
         "lavanda"
       ],
       "accent": [
+        "cobre",
+        "caramelo",
         "terracota",
+        "oliva",
         "musgo",
         "petroleo",
         "ardosia",

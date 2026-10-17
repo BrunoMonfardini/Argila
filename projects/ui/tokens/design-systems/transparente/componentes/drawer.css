@@ -1,0 +1,5 @@
+/* Gaveta: o vidro do diálogo, ancorado na borda da tela. */
+
+:root[data-arg-style='transparente'] .arg-drawer {
+  --arg-dialog-shadow: var(--arg-shadow-5), inset 0 0 0 3px var(--arg-glass-rim);
+}

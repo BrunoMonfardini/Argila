@@ -1,0 +1,5 @@
+/* Divisor: o aro claro do vidro. */
+
+:root[data-arg-style='transparente'] .arg-divider {
+  --arg-divider-color: var(--arg-glass-rim);
+}

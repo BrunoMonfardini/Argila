@@ -1,0 +1,6 @@
+/* Abas: indicador na cor da marca. */
+
+:root[data-arg-style='transparente'] arg-tabs {
+  --arg-tabs-indicator: var(--arg-color-primary);
+  --arg-tabs-border: var(--arg-glass-rim);
+}

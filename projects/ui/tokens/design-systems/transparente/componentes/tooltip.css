@@ -1,0 +1,5 @@
+/* Tooltip: cantos arredondados. */
+
+:root[data-arg-style='transparente'] arg-tooltip-panel {
+  --arg-tooltip-radius: 0.75rem;
+}

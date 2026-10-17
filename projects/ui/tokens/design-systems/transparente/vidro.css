@@ -1,0 +1,29 @@
+/*
+ * Borda iridescente do vidro (o arco-íris discreto nas quinas da referência),
+ * nas peças principais: botões (menos o terciário e o desabilitado) e cartões.
+ * Um gradiente cônico recortado por máscara só na borda; fixo, não acompanha
+ * o ângulo de visão. Some com prefers-reduced-transparency e forced-colors
+ * (--arg-glass-iridescence, na forma).
+ */
+:root[data-arg-style='transparente']
+  .arg-button:not(.arg-button--tertiary, [disabled], [aria-disabled='true'])::before,
+:root[data-arg-style='transparente'] .arg-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 210deg,
+    rgb(255 170 205 / 0.75),
+    rgb(255 214 150 / 0.75),
+    rgb(150 232 255 / 0.75),
+    rgb(176 184 255 / 0.75),
+    rgb(255 170 205 / 0.75)
+  );
+  opacity: var(--arg-glass-iridescence);
+  pointer-events: none;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}

@@ -1,0 +1,6 @@
+/* Toast: vidro em elevação de painel. */
+
+:root[data-arg-style='transparente'] arg-toast-stack {
+  --arg-toast-radius: var(--arg-radius-container);
+  --arg-toast-shadow: var(--arg-shadow-4), inset 0 1px 0 var(--arg-glass-shine);
+}
