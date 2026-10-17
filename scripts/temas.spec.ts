@@ -76,13 +76,19 @@ describe('manifestos', () => {
 });
 
 describe('temas.css', () => {
-  it('importa o index.css de cada design system (menos o padrão) e as paletas compartilhadas', () => {
+  it('importa o index.css de cada design system (menos o padrão), as paletas e as cores de marca', () => {
     const imported = cssImports(read('projects/ui/tokens/temas.css')).map((path) =>
       resolve(TOKENS, path),
     );
-    const expected = [...withFiles.map((ds) => indexFile(ds.id)), ...sharedPalettes];
+    const expected = [
+      ...withFiles.map((ds) => indexFile(ds.id)),
+      ...sharedPalettes,
+      resolve(TOKENS, 'colors.css'),
+    ];
 
     expect([...imported].sort()).toEqual([...expected].sort());
+    // As cores de marca vêm por último: empatam em força com as paletas nativas e vencem pela ordem
+    expect(imported.at(-1)).toBe(resolve(TOKENS, 'colors.css'));
   });
 
   it('o argila.css traz os tokens e o design system padrão, nessa ordem', () => {

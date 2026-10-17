@@ -1,6 +1,14 @@
 import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
-import { ARG_DESIGN_SYSTEMS, ARG_PALETTES, ARG_STYLES, ArgTheme } from './theme';
+import {
+  ARG_ALLOWED_COLORS,
+  ARG_BRAND_COLORS,
+  ARG_DESIGN_SYSTEMS,
+  ARG_PALETTES,
+  ARG_STYLES,
+  ArgBrandColor,
+  ArgTheme,
+} from './theme';
 
 describe('ArgTheme', () => {
   let theme: ArgTheme;
@@ -11,11 +19,13 @@ describe('ArgTheme', () => {
   });
 
   afterEach(() => {
+    theme.clearColors();
     theme.clearBrand();
     theme.clearSurfaceOpacity();
     root.removeAttribute('data-arg-theme');
     root.removeAttribute('data-arg-style');
     root.removeAttribute('data-arg-palette');
+    for (const role of ['primary', 'secondary', 'accent']) root.removeAttribute(`data-arg-${role}`);
   });
 
   it('define o modo de cor no <html>', () => {
@@ -163,6 +173,76 @@ describe('ArgTheme', () => {
 
       expect(theme.surfaceOpacity()).toBeUndefined();
       expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
+    });
+  });
+
+  describe('cores de marca da lista fixa', () => {
+    let warn: jest.SpiedFunction<typeof console.warn>;
+
+    beforeEach(() => {
+      warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+    });
+
+    afterEach(() => jest.restoreAllMocks());
+
+    it('aplica as cores permitidas como atributos no <html>', () => {
+      theme.setColors({ primary: 'cobre', accent: 'mostarda' });
+
+      expect(root.getAttribute('data-arg-primary')).toBe('cobre');
+      expect(root.getAttribute('data-arg-accent')).toBe('mostarda');
+      expect(root.hasAttribute('data-arg-secondary')).toBe(false);
+      expect(theme.colors()).toEqual({ primary: 'cobre', accent: 'mostarda' });
+    });
+
+    it('as permitidas vêm da matriz gerada para o design system e a paleta', () => {
+      theme.setStyle('windows-xp');
+
+      expect(theme.allowedColors()).toEqual(ARG_ALLOWED_COLORS['windows-xp']['nativa']);
+    });
+
+    it('ignora, com aviso, uma cor que não passa no contraste na combinação atual', () => {
+      theme.setStyle('windows-xp');
+      const blocked = (Object.keys(ARG_BRAND_COLORS) as ArgBrandColor[]).find(
+        (color) => !theme.allowedColors().primary.includes(color),
+      )!;
+
+      theme.setColors({ primary: blocked });
+
+      expect(root.hasAttribute('data-arg-primary')).toBe(false);
+      expect(theme.colors()).toEqual({});
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining(`a cor "${blocked}"`));
+    });
+
+    it('ao trocar de design system, tira a cor que deixou de passar', () => {
+      theme.setStyle('windows-xp');
+      const allowed = theme.allowedColors().primary;
+      const color = ARG_ALLOWED_COLORS['argila']['nativa'].primary.find(
+        (candidate) => !allowed.includes(candidate),
+      )!;
+      theme.setStyle('argila');
+      theme.setColors({ primary: color });
+
+      theme.setStyle('windows-xp');
+
+      expect(theme.colors()).toEqual({});
+      expect(root.hasAttribute('data-arg-primary')).toBe(false);
+    });
+
+    it('lê as cores já presentes no <html>, ignorando nomes desconhecidos', () => {
+      root.setAttribute('data-arg-primary', 'cobre');
+      root.setAttribute('data-arg-accent', 'roxo-neon');
+      TestBed.resetTestingModule();
+
+      expect(TestBed.inject(ArgTheme).colors()).toEqual({ primary: 'cobre' });
+    });
+
+    it('clearColors volta às cores da paleta', () => {
+      theme.setColors({ primary: 'cobre' });
+
+      theme.clearColors();
+
+      expect(root.hasAttribute('data-arg-primary')).toBe(false);
+      expect(theme.colors()).toEqual({});
     });
   });
 
