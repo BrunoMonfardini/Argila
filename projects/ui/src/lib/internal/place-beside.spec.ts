@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { placeBeside, supportsAnchor } from './place-beside';
 
 describe('placeBeside', () => {
@@ -6,8 +7,8 @@ describe('placeBeside', () => {
 
   /** Gatilho e painel com medidas fixas, numa janela de 400 × 300. */
   function measure(anchor: Partial<DOMRect>, box = { width: 100, height: 50 }) {
-    vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(400);
-    vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(300);
+    jest.replaceProperty(window, 'innerWidth', 400);
+    jest.replaceProperty(window, 'innerHeight', 300);
     const rect = { left: 0, top: 0, width: 40, height: 20, ...anchor };
     trigger.getBoundingClientRect = () =>
       ({ ...rect, right: rect.left + rect.width, bottom: rect.top + rect.height }) as DOMRect;
@@ -23,7 +24,7 @@ describe('placeBeside', () => {
   afterEach(() => {
     trigger.remove();
     panel.remove();
-    vi.restoreAllMocks();
+    jest.restoreAllMocks();
   });
 
   it('põe embaixo, centralizado no gatilho', () => {
