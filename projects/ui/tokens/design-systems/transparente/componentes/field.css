@@ -1,0 +1,5 @@
+/* Field: um pouco mais de ar entre rótulo, campo e ajuda. */
+
+:root[data-arg-style='transparente'] arg-field {
+  --arg-field-gap: var(--arg-space-2);
+}

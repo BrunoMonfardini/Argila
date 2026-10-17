@@ -1,0 +1,5 @@
+/* Botão de ícone: quadrado de vidro com cantos de 16px. */
+
+:root[data-arg-style='transparente'] .arg-icon-button {
+  --arg-button-radius: 1rem;
+}

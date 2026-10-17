@@ -1,28 +1,32 @@
 /*
- * Paleta nativa do Transparente: cinza claro com laranja como cor da marca.
- * As superfícies são opacas aqui; o estilo aplica a transparência.
+ * Paleta Vidro, nativa do Transparente (referência: docs/referencias/transparente.jpg):
+ * fundo cinza-claro, laranja de marca, azul de destaque e verde-água para o
+ * que está ligado. As superfícies são opacas aqui; a forma aplica a transparência.
  */
 :root[data-arg-style='transparente']:not([data-arg-palette]),
 :root[data-arg-style='transparente'][data-arg-palette='nativa'],
 :root[data-arg-brand='transparente'] {
-  --arg-color-primary: light-dark(#a8390b, #fb8c4c);
-  --arg-color-on-primary: light-dark(#ffffff, #1e2128);
+  --arg-color-primary: light-dark(#a53611, #ff9a62);
+  --arg-color-on-primary: light-dark(#ffffff, #2a1206);
   --arg-color-primary-soft: light-dark(#fbd2b8, #5c3016);
   --arg-color-on-primary-soft: light-dark(#3a1606, #ffe9da);
   --arg-color-secondary: light-dark(#2f3542, #eef0f4);
   --arg-color-on-secondary: light-dark(#ffffff, #1e2128);
-  --arg-color-accent: light-dark(#0b5e64, #6fd6dc);
-  --arg-color-on-accent: light-dark(#ffffff, #1e2128);
+  --arg-color-accent: light-dark(#1d5fd0, #8ab8ff);
+  --arg-color-on-accent: light-dark(#ffffff, #0b1d3d);
 
-  --arg-color-background: light-dark(#e6e9ee, #1e2128);
-  --arg-color-surface-solid: light-dark(#ffffff, #2c303a);
-  --arg-color-surface-raised-solid: light-dark(#ffffff, #343944);
-  --arg-color-surface-sunken-solid: light-dark(#f0f2f6, #1e2128);
+  --arg-color-background: light-dark(#eceef1, #14161a);
+  --arg-color-surface-solid: light-dark(#ffffff, #2a2d33);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #33363d);
+  --arg-color-surface-sunken-solid: light-dark(#f2f4f7, #14161a);
 
-  --arg-color-text: light-dark(#2f3542, #eef0f4);
+  --arg-color-text: light-dark(#2b2f36, #eef0f4);
   --arg-color-text-muted: light-dark(#596172, #aab1bf);
 
   --arg-color-border: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.08));
   --arg-color-border-strong: light-dark(#b8c0cc, #4a5160);
   --arg-color-focus: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
+
+  /* Ligado e marcado: o verde-água da referência */
+  --arg-color-success: light-dark(#167a5a, #5fd9b0);
 }

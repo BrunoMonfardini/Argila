@@ -1,0 +1,5 @@
+/* Menu: o vidro do Popover; o item em foco ganha um véu da cor da marca. */
+
+:root[data-arg-style='transparente'] arg-menu {
+  --arg-menu-item-bg-hover: color-mix(in oklab, var(--arg-color-primary) 10%, transparent);
+}

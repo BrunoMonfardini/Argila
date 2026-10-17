@@ -1,0 +1,18 @@
+/* Cartões: placas de vidro grosso, sem contorno, com desfoque (a borda iridescente vem de vidro.css). */
+
+:root[data-arg-style='transparente'] .arg-card:not(.arg-card--elevated) {
+  --arg-card-border: transparent;
+  --arg-card-shadow: var(--arg-shadow-control);
+  --arg-card-shadow-hover: var(--arg-shadow-control), var(--arg-shadow-3);
+}
+
+:root[data-arg-style='transparente'] .arg-card.arg-card--elevated {
+  --arg-card-border: transparent;
+  --arg-card-shadow: var(--arg-shadow-control), var(--arg-shadow-3);
+  --arg-card-shadow-hover: var(--arg-shadow-control), var(--arg-shadow-4);
+}
+
+:root[data-arg-style='transparente'] .arg-card {
+  position: relative;
+  backdrop-filter: blur(var(--arg-surface-blur));
+}

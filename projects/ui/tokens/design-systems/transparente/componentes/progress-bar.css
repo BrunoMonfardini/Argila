@@ -1,0 +1,5 @@
+/* Barra de progresso: trilho de vidro mais alto, em pílula. */
+
+:root[data-arg-style='transparente'] .arg-progress:not(.arg-progress--sm) {
+  --arg-progress-height: 0.75rem;
+}

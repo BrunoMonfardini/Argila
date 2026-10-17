@@ -1,0 +1,7 @@
+/* Tag: pílula de vidro com aro (os chips ligados e desabilitados vêm do componente). */
+
+:root[data-arg-style='transparente'] .arg-tag:not(.arg-tag--selected, .arg-tag--disabled) {
+  --arg-tag-bg: var(--arg-color-surface);
+  --arg-tag-border: var(--arg-glass-rim);
+  backdrop-filter: blur(var(--arg-surface-blur));
+}

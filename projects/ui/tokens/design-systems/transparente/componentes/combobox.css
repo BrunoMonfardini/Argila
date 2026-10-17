@@ -1,0 +1,8 @@
+/* Combobox: o campo é o vidro do Input; a lista ganha cantos de cartão e elevação de painel. */
+
+:root[data-arg-style='transparente'] .arg-combobox__panel {
+  border-color: var(--arg-glass-rim);
+  box-shadow:
+    var(--arg-shadow-4),
+    inset 0 1px 0 var(--arg-glass-shine);
+}

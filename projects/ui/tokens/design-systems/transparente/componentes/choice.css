@@ -1,0 +1,9 @@
+/* Marcados e ligados em verde-água (a cor de sucesso da paleta), como na referência. */
+
+:root[data-arg-style='transparente'] :is(.arg-checkbox, .arg-radio) {
+  --arg-choice-accent: var(--arg-color-success);
+}
+
+:root[data-arg-style='transparente'] .arg-switch {
+  --arg-switch-on: var(--arg-color-success);
+}

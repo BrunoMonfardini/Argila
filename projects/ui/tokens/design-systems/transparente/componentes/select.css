@@ -1,0 +1,9 @@
+/* Select: o mesmo vidro em pílula do Input. */
+
+:root[data-arg-style='transparente'] .arg-select {
+  --arg-input-bg: var(--arg-color-surface);
+  --arg-input-border: transparent;
+  --arg-input-height: 3rem;
+  --arg-input-padding-inline: var(--arg-space-5);
+  backdrop-filter: blur(var(--arg-surface-blur));
+}

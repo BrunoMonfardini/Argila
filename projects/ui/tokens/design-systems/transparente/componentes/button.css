@@ -1,0 +1,48 @@
+/* Botões de vidro: a primária em gradiente da cor da marca com faixa de brilho; a secundária, vidro; o hover acende um reflexo colorido (a borda iridescente vem de vidro.css). */
+
+:root[data-arg-style='transparente']
+  .arg-button:not(
+    .arg-button--secondary,
+    .arg-button--tertiary,
+    .arg-button--danger,
+    [disabled],
+    [aria-disabled='true']
+  ) {
+  --arg-button-bg: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--arg-color-primary), #fff 8%),
+    var(--arg-color-primary)
+  );
+  --arg-button-bg-hover: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--arg-color-primary), #fff 4%),
+    color-mix(in oklab, var(--arg-color-primary), #000 6%)
+  );
+}
+
+:root[data-arg-style='transparente'] .arg-button.arg-button--secondary {
+  --arg-button-bg: var(--arg-color-surface);
+  --arg-button-border: transparent;
+  backdrop-filter: blur(var(--arg-surface-blur));
+}
+
+:root[data-arg-style='transparente'] .arg-button:not(.arg-button--tertiary) {
+  --arg-button-height: 3rem;
+  --arg-button-padding-inline: var(--arg-space-6);
+}
+
+:root[data-arg-style='transparente'] .arg-button.arg-button--sm:not(.arg-button--tertiary) {
+  --arg-button-height: 2.25rem;
+  --arg-button-padding-inline: var(--arg-space-4);
+}
+
+:root[data-arg-style='transparente'] .arg-button.arg-button--lg:not(.arg-button--tertiary) {
+  --arg-button-height: 3.5rem;
+}
+
+:root[data-arg-style='transparente']
+  .arg-button:not(.arg-button--tertiary, [disabled], [aria-disabled='true']):hover {
+  --arg-button-shadow:
+    var(--arg-shadow-control),
+    0 8px 20px color-mix(in oklab, var(--arg-color-primary) 30%, transparent);
+}
