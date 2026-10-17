@@ -77,6 +77,69 @@ describe('ArgTag', () => {
     expect(first.textContent?.trim()).toBe('Gatos');
   });
 
+  describe('selectable', () => {
+    @Component({
+      imports: [ArgTag],
+      template: `
+        <ul aria-label="Filtros">
+          <li><arg-tag selectable [(selected)]="on">Vacinados</arg-tag></li>
+          <li><arg-tag selectable disabled>Internados</arg-tag></li>
+        </ul>
+      `,
+    })
+    class Chips {
+      readonly on = signal(false);
+    }
+
+    async function chips() {
+      const fixture = TestBed.createComponent(Chips);
+      await fixture.whenStable();
+      const root: HTMLElement = fixture.nativeElement;
+      const [toggle, blocked] = Array.from(
+        root.querySelectorAll<HTMLButtonElement>('.arg-tag__toggle'),
+      );
+      return { fixture, root, toggle, blocked, tag: root.querySelector('arg-tag')! };
+    }
+
+    it('o texto vira um botão de alternância com o nome da tag', async () => {
+      const { toggle } = await chips();
+
+      expect(toggle.getAttribute('aria-pressed')).toBe('false');
+      expect(accessibleName(toggle)).toBe('Vacinados');
+    });
+
+    it('o clique liga e desliga, com ✓ e [(selected)]', async () => {
+      const { fixture, toggle, tag } = await chips();
+
+      toggle.click();
+      await fixture.whenStable();
+
+      expect(fixture.componentInstance.on()).toBe(true);
+      expect(toggle.getAttribute('aria-pressed')).toBe('true');
+      expect(tag.classList).toContain('arg-tag--selected');
+      expect(toggle.querySelector('arg-icon')).not.toBeNull();
+
+      toggle.click();
+      await fixture.whenStable();
+      expect(fixture.componentInstance.on()).toBe(false);
+      expect(toggle.querySelector('arg-icon')).toBeNull();
+    });
+
+    it('desabilitado, o botão fica desabilitado e não liga', async () => {
+      const { blocked } = await chips();
+
+      expect(blocked.disabled).toBe(true);
+    });
+
+    it('não tem violações de acessibilidade', async () => {
+      const { root, fixture, toggle } = await chips();
+      toggle.click();
+      await fixture.whenStable();
+
+      expect(a11yViolations(root)).toEqual([]);
+    });
+  });
+
   it('não tem violações de acessibilidade', async () => {
     const { root } = await setup();
 
