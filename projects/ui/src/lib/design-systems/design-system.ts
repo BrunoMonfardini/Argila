@@ -11,6 +11,13 @@ import type { ArgPaletteName } from './palettes';
 
 export type ArgSchemeName = 'light' | 'dark';
 
+/**
+ * O design system padrão: vale sem `data-arg-style`. O CSS dele usa a raiz
+ * `:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))`,
+ * que exclui os temas antigos de `data-arg-brand`.
+ */
+export const ARG_DEFAULT_STYLE = 'argila';
+
 /** Os componentes do núcleo: uma pasta em `src/lib/` cada. */
 export const ARG_COMPONENTS = [
   'agenda',

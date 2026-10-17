@@ -1,5 +1,5 @@
 import { DOCUMENT, Injectable, computed, inject, isDevMode, signal } from '@angular/core';
-import type { ArgDesignSystem } from '../design-systems/design-system';
+import { ARG_DEFAULT_STYLE, type ArgDesignSystem } from '../design-systems/design-system';
 export {
   ARG_SHARED_PALETTES,
   type ArgPaletteName,
@@ -12,6 +12,7 @@ export type { ArgPalette, ArgPaletteOf, ArgStyle } from '../design-systems/desig
 export { ARG_DESIGN_SYSTEMS } from '../design-systems/design-systems';
 export {
   ARG_COMPONENTS,
+  ARG_DEFAULT_STYLE,
   ARG_CORE_MINIMUM,
   type ArgComponentName,
   type ArgDesignSystem,
@@ -45,7 +46,7 @@ function readStyle(root: HTMLElement): ArgStyle {
   const value = root.getAttribute('data-arg-style');
   return value !== null && Object.hasOwn(ARG_DESIGN_SYSTEMS, value)
     ? (value as ArgStyle)
-    : 'argila';
+    : ARG_DEFAULT_STYLE;
 }
 
 function readPalette(root: HTMLElement, style: ArgStyle): ArgPalette {

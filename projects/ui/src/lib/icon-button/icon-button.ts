@@ -24,6 +24,8 @@ import { ArgSpinner } from '../spinner/spinner';
   `,
   styleUrls: ['../button/button.css', './icon-button.css'],
   host: {
+    // Somada à `arg-button` da base: gancho estável para a pele dos design systems
+    class: 'arg-icon-button',
     '[attr.aria-label]': 'label()',
   },
 })
