@@ -487,78 +487,68 @@ O manifesto é **a única fonte** de: tipos do `ArgTheme` e dos segmentos, matri
 
 ### 6.1 Por que e o que muda
 
-O Vitest roda hoje pelo `ng test` (builder `@angular/build:unit-test`) e por um `vitest.config.ts` nos scripts. Com o Jest, **um único executor** cobre ui, docs e scripts, com uma configuração na raiz.
+O Vitest rodava pelo `ng test` (builder `@angular/build:unit-test`) e por um `vitest.config.ts` nos scripts. Com o Jest, **um único executor** cobre ui, docs e scripts, com uma configuração na raiz e um relatório só.
 
-| Antes                                           | Depois                                                                               |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `ng test ui`, `ng test docs`, `vitest run`      | `jest` com três `projects`: `ui`, `docs`, `scripts`                                  |
-| `@vitest/coverage-v8`, `vitest`                 | `jest`, `jest-preset-angular`, `jest-environment-jsdom`, `jest-junit`, `@types/jest` |
-| target `test` no `angular.json`                 | removido; o Angular continua só com `build`, `serve` e `lint`                        |
-| `vi.fn`, `vi.spyOn`, `vi.useFakeTimers`…        | `jest.fn`, `jest.spyOn`, `jest.useFakeTimers`… (87 specs; troca mecânica)            |
-| `import { describe, it, expect } from 'vitest'` | globais do Jest (tipos via `@types/jest`)                                            |
+| Antes                                           | Depois                                                                                                           |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ng test ui`, `ng test docs`, `vitest run`      | `jest` com três `projects`: `ui`, `docs`, `scripts`                                                              |
+| `@vitest/coverage-v8`, `vitest`                 | `jest`, `jest-preset-angular`, `jest-environment-jsdom`, `ts-jest`, `jest-junit`, `@jest/globals`, `@types/jest` |
+| target `test` no `angular.json`                 | removido; o Angular continua só com `build`, `serve` e `lint`                                                    |
+| `vi.fn`, `vi.spyOn`, `vi.useFakeTimers`…        | `jest.fn`, `jest.spyOn`, `jest.useFakeTimers`…, com `import { jest } from '@jest/globals'`                       |
+| `import { describe, it, expect } from 'vitest'` | globais do Jest nos specs do Angular; `@jest/globals` nos scripts                                                |
 
-O Angular 22 é zoneless: o setup usa `setupZonelessTestEnv()` do `jest-preset-angular`.
+**Tudo roda como ESM.** Os scripts usam `import.meta.dirname` e imports com `.ts`, e o Angular é publicado em ESM. Por isso o Jest roda com `node --experimental-vm-modules`, os projetos do Angular usam o preset ESM do `jest-preset-angular` (`createEsmPreset`) e o objeto `jest` é importado de `@jest/globals` (em ESM ele não é global). O Angular 22 é zoneless: o `jest.setup.ts` chama `setupZonelessTestEnv()`.
+
+Diferenças de API encontradas na migração, para quem escrever testes novos:
+
+- `expect(valor, 'mensagem')` não existe no Jest: para saber qual item falhou num laço, junte os que falharam numa lista e compare com `[]`.
+- `jest.useFakeTimers({ toFake: ['Date'] })` não existe: use `doNotFake` com tudo o que **não** deve ser falso.
+- No jsdom do Jest, `window.innerWidth` é uma propriedade simples: use `jest.replaceProperty`, não `jest.spyOn(…, 'get')`.
+- O ambiente de um arquivo vem do comentário `/** @jest-environment jsdom */`.
+- `jest.fn()` importado de `@jest/globals` precisa da assinatura para os `mock…Value`: `jest.fn<(texto: string) => Promise<void>>()`.
 
 ### 6.2 Configuração
 
-```ts
-// jest.config.ts (raiz)
-import type { Config } from 'jest';
+`jest.config.mjs` na raiz (o Jest lê `.mjs` sem precisar de `ts-node`):
 
-const comum = { preset: 'jest-preset-angular', setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'] };
+| Parte         | Valor                                                                                                                                          |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ui` e `docs` | `createEsmPreset({ tsconfig: projects/<p>/tsconfig.spec.json })`, jsdom, `@brunomonfardini/ui` apontando para `public-api.ts`, `jest.setup.ts` |
+| `scripts`     | ambiente `node`, `ts-jest` com `useESM` e `scripts/tsconfig.jest.json`                                                                         |
+| Cobertura     | provedor `v8` (o mesmo do Vitest), sempre ligada; `ui/src`, `docs/src` e `scripts/lib`, sem specs, `public-api.ts`, `main.ts` e fixtures       |
+| Limites       | 80% de linhas, branches, funções e statements no total                                                                                         |
+| Relatórios    | `text-summary`, `html`, `json-summary` e `lcov` em `coverage/`; JUnit em `reports/junit.xml`, com "describe › teste" em cada caso              |
+| Tempo limite  | 30 s por teste (o primeiro teste do gerador de manifesto monta um programa TypeScript inteiro)                                                 |
 
-export default {
-  projects: [
-    { ...comum, displayName: 'ui', roots: ['<rootDir>/projects/ui'], testEnvironment: 'jsdom' },
-    { ...comum, displayName: 'docs', roots: ['<rootDir>/projects/docs'], testEnvironment: 'jsdom' },
-    {
-      displayName: 'scripts',
-      roots: ['<rootDir>/scripts'],
-      testEnvironment: 'node',
-      transform: { '^.+\\.ts$': 'ts-jest' },
-    },
-  ],
-  collectCoverage: true,
-  coveragePathIgnorePatterns: ['public-api.ts', 'main.ts', '/__fixtures__/', '\\.docs\\.ts$'],
-  coverageReporters: ['text-summary', 'html', 'json-summary', 'lcov'],
-  coverageThreshold: {
-    global: { lines: 80, branches: 80, functions: 80, statements: 80 },
-    './projects/ui/src/lib/theme/': { lines: 95, branches: 90 },
-    './projects/ui/design-systems/': { lines: 90, branches: 85 },
-  },
-  reporters: ['default', ['jest-junit', { outputDirectory: 'reports', outputName: 'junit.xml' }]],
-  testTimeout: 30000,
-} satisfies Config;
-```
-
-O `ArgTheme` e os manifestos têm limite maior porque são a base de todos os DS.
+Os limites maiores para o `ArgTheme` (95%) e para `design-systems/` (90%) entram no `coverageThreshold` junto com essas pastas, no E2.
 
 ### 6.3 Scripts
 
 | Script                                   | O que faz                                                                                                                 |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `test`                                   | `pnpm manifest && jest --ci`: tudo, uma vez, com cobertura e limites                                                      |
-| `test:watch`                             | `jest --watch`: só o que mudou desde o último commit                                                                      |
-| `test:ui` / `test:docs` / `test:scripts` | `jest --selectProjects <projeto>`                                                                                         |
-| `test:coverage`                          | `jest --coverage` e abre `coverage/lcov-report/index.html`                                                                |
+| `test`                                   | `pnpm manifest` e `test:jest --ci`: tudo, uma vez, com cobertura e limites                                                |
+| `test:jest`                              | `node --experimental-vm-modules node_modules/jest/bin/jest.js`: o Jest em ESM, base dos outros                            |
+| `test:watch`                             | modo watch, só o que mudou desde o último commit, sem cobertura                                                           |
+| `test:ui` / `test:docs` / `test:scripts` | `--selectProjects <projeto>`                                                                                              |
+| `test:coverage`                          | cobertura com a tabela por arquivo no terminal e o HTML em `coverage/index.html`                                          |
 | `test:report`                            | `node scripts/relatorio-de-testes.ts`: lê `reports/junit.xml` e `coverage/coverage-summary.json` e imprime o resumo (6.4) |
-| `arch:check`                             | `depcruise projects` com a configuração de 5.4                                                                            |
+| `arch:check`                             | `depcruise projects` com a configuração de 5.4 (entra no E2)                                                              |
 
-No `lint-staged`, os `*.ts` alterados rodam `jest --bail --findRelatedTests --passWithNoTests`, para o commit não esperar a suíte inteira.
+No `lint-staged`, os `*.ts` alterados passam por ESLint, Prettier e `jest --bail --findRelatedTests --passWithNoTests`, nessa ordem, para o commit não esperar a suíte inteira.
 
 ### 6.4 Monitoramento dos testes
 
-| O que                              | Como                                                                                                                                                                                                                          |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Resumo em todo PR**              | o job `verify` roda `pnpm test:report >> $GITHUB_STEP_SUMMARY`: total, passaram, falharam, pulados, duração, cobertura por projeto                                                                                            |
-| **Cobertura comparada com a main** | a cada push na `main`, o `coverage-summary.json` vira artefato `cobertura-main`. No PR, o relatório baixa esse artefato e mostra a diferença por projeto. **Queda de mais de 0,5 ponto** em qualquer projeto falha o `verify` |
-| **Testes lentos**                  | o relatório lista os 10 testes mais lentos do `junit.xml`. Teste acima de **2s** gera aviso no PR (`::warning`)                                                                                                               |
-| **Testes pulados**                 | `it.skip` e `it.todo` aparecem no resumo; `it.only` é bloqueado pelo ESLint (`jest/no-focused-tests`)                                                                                                                         |
-| **Testes instáveis**               | proibido `jest.retryTimes`. Teste que falha e passa na reexecução manual vira issue com o rótulo `teste-instável` e é corrigido antes do próximo PR do autor                                                                  |
-| **Artefatos**                      | `reports/junit.xml` e `coverage/` sobem como artefatos do job por 14 dias                                                                                                                                                     |
-| **Histórico**                      | o relatório da `main` acrescenta uma linha a `reports/historico.csv` no artefato `cobertura-main` (data, commit, testes, duração, cobertura), para ver tendência                                                              |
+| O que                              | Como                                                                                                                                                                                                                                                      |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Resumo em todo PR**              | o job `verify` roda `pnpm test:report >> $GITHUB_STEP_SUMMARY`: total, passaram, falharam (com nome), pulados (com nome), duração, cobertura por projeto e os 10 mais lentos. Roda mesmo quando um teste falha                                            |
+| **Cobertura comparada com a main** | a cada push na `main`, o `coverage-summary.json` vai para o cache `cobertura-main-<commit>`. O PR restaura o cache mais recente da `main` e mostra a diferença de linhas por projeto. **Queda de mais de 0,5 ponto** em qualquer projeto falha o `verify` |
+| **Testes lentos**                  | teste acima de **2 s** ganha ⚠️ no resumo e um aviso no PR (`::warning`)                                                                                                                                                                                  |
+| **Testes pulados**                 | `it.skip` e `it.todo` aparecem no resumo; `it.only` é bloqueado pelo ESLint (`jest/no-focused-tests`)                                                                                                                                                     |
+| **Testes instáveis**               | proibido `jest.retryTimes`. Teste que falha e passa na reexecução manual vira issue com o rótulo `teste-instável` e é corrigido antes do próximo PR do autor                                                                                              |
+| **Artefatos**                      | `reports/` e `coverage/` sobem como artefato `testes` por 14 dias, em todo PR e push                                                                                                                                                                      |
+| **Histórico**                      | na `main`, o relatório acrescenta uma linha a `historico.csv` (data, commit, testes, falhas, duração, cobertura de linhas por projeto), guardado junto da cobertura no cache e publicado como artefato `cobertura-main` por 90 dias                       |
 
-Regras de escrita de teste continuam as da seção 3.1 do [padrão de pipeline](padrao-de-pipeline.md), agora com Jest. O ESLint ganha `eslint-plugin-jest` (`recommended` + `no-focused-tests` + `no-disabled-tests` como aviso).
+Regras de escrita de teste continuam as da seção 3.1 do [padrão de pipeline](padrao-de-pipeline.md), agora com Jest. O ESLint ganha `eslint-plugin-jest` (`recommended` + `no-focused-tests` como erro + `no-disabled-tests` como aviso).
 
 ### 6.5 Testes específicos dos DS
 
@@ -587,7 +577,7 @@ Os PRs, os itens de cada um, as estimativas e o andamento estão no [plano de ex
 
 - **Mudança visual do padrão:** todo produto sem tema próprio passa a ver o Argila com a Massinha na `0.4.0`. O changelog explica como manter o visual anterior (`data-arg-style="molde"` + `data-arg-palette="nativa"`) ou usar o café (`data-arg-palette="terrosa"`).
 - **Windows XP muda de paleta:** produtos que usam o estilo veem o azul `#0078D7` no lugar do azul-marinho. Entra no changelog.
-- **Jest com Angular:** o Jest não é o executor oficial do Angular 22; a integração depende do `jest-preset-angular`. Se ele atrasar uma versão do Angular, a atualização do Angular espera. A suíte também tende a ficar mais lenta que no Vitest: o CI usa cache do Jest e `--maxWorkers=50%`; se passar de 5 minutos, divide-se o job por projeto.
+- **Jest com Angular:** o Jest não é o executor oficial do Angular 22; a integração depende do `jest-preset-angular` (a 17 aceita Angular de 20 a 22). Se ele atrasar uma versão do Angular, a atualização do Angular espera. O modo ESM do Jest (`--experimental-vm-modules`) ainda é marcado como experimental pelo Node. Na migração, a suíte inteira levou cerca de 75 s localmente; se o CI passar de 5 minutos, divide-se o job por projeto.
 - **Matriz de componentes por DS:** um componente herdado pode ficar feio num DS. O aviso no catálogo deixa isso visível, e o produto escolhe curar ou não usar.
 - **Neo-brutalista escuro e Punk claro** podem não ficar bons. Nesse caso o DS fica com um modo só (D7), e o marco do DS registra o motivo aqui.
 - **Referências visuais:** as imagens de `docs/referencias/` são de terceiros e servem só de consulta interna. Elas **não entram** no pacote `@argila/ui` nem no catálogo publicado, e nenhuma marca, texto ou ilustração delas é copiado para componentes, exemplos ou ícones: só a organização e a linguagem visual. Se o repositório for público, a decisão de mantê-las versionadas fica registrada no plano de execução (decisão E-D6).

@@ -190,36 +190,39 @@ Configuração do jscpd (`.jscpd.json` na raiz):
 }
 ```
 
-Testes e cobertura com Jest (`jest.config.ts` na raiz; um `project` por app ou pacote). Projetos Angular usam o preset `jest-preset-angular` e não têm target `test` no `angular.json`:
+Testes e cobertura com Jest (`jest.config.mjs` na raiz; um `project` por app ou pacote). Projetos Angular usam o preset ESM do `jest-preset-angular` e não têm target `test` no `angular.json`. O Jest roda com `node --experimental-vm-modules` (script `test:jest`), porque o Angular e os scripts Node são ESM:
 
-```ts
+```js
+import presets from 'jest-preset-angular/presets/index.js';
+
 export default {
   projects: [
     {
+      ...presets.createEsmPreset({ tsconfig: '<rootDir>/apps/web/tsconfig.spec.json' }),
       displayName: 'web',
-      preset: 'jest-preset-angular',
-      roots: ['<rootDir>/apps/web'],
-      testEnvironment: 'jsdom',
+      roots: ['<rootDir>/apps/web/src'],
+      setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'], // setupZonelessTestEnv()
     },
     {
       displayName: 'api',
-      preset: 'ts-jest',
-      roots: ['<rootDir>/apps/api'],
       testEnvironment: 'node',
+      roots: ['<rootDir>/apps/api/src'],
+      extensionsToTreatAsEsm: ['.ts'],
+      transform: { '^.+\\.ts$': ['ts-jest', { useESM: true }] },
     },
   ],
   collectCoverage: true,
-  coveragePathIgnorePatterns: ['public-api.ts', 'index.ts', '\\.config\\.'],
+  coverageProvider: 'v8',
   coverageReporters: ['text-summary', 'html', 'json-summary', 'lcov'],
   coverageThreshold: { global: { lines: 80, branches: 80, functions: 80, statements: 80 } },
   reporters: ['default', ['jest-junit', { outputDirectory: 'reports', outputName: 'junit.xml' }]],
-} satisfies Config;
+};
 ```
 
 Monitoramento dos testes, igual em todos os repositórios:
 
 - O `verify` publica o resumo (total, falhas, pulados, duração, cobertura por projeto e os 10 testes mais lentos) no `$GITHUB_STEP_SUMMARY`, a partir de `reports/junit.xml` e `coverage/coverage-summary.json`.
-- A cobertura do PR é comparada com a da `main` (artefato `cobertura-main`); queda de mais de 0,5 ponto em qualquer projeto falha o `verify`.
+- A cobertura do PR é comparada com a da `main` (cache `cobertura-main-<commit>`, gravado a cada push na `main`); queda de mais de 0,5 ponto em qualquer projeto falha o `verify`. A `main` também guarda um `historico.csv` com a tendência.
 - `reports/` e `coverage/` sobem como artefatos por 14 dias.
 - `it.only` é bloqueado pelo `eslint-plugin-jest`; `jest.retryTimes` é proibido (teste instável vira issue `teste-instável`).
 
