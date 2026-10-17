@@ -96,7 +96,7 @@ O merge é **rebase**: os commits do PR entram na `main` como estão, um a um, e
 | O que não precisa de teste | Tipos e interfaces, constantes, configuração, código gerado, arquivos só de reexportação (`public-api.ts`, `index.ts`) |
 | Bug corrigido              | Começa com um teste que reproduz o bug e falha; a correção faz ele passar                                              |
 | Cobertura mínima           | **80% de linhas e de branches**, verificada no CI. Abaixo disso o check `verify` falha                                 |
-| Ferramenta                 | Vitest em todos os projetos (Angular via `ng test`, que usa Vitest)                                                    |
+| Ferramenta                 | Jest em todos os projetos (Angular via `jest-preset-angular`), com relatório JUnit e resumo no PR (seção 4)            |
 
 Como escrever:
 
@@ -190,26 +190,40 @@ Configuração do jscpd (`.jscpd.json` na raiz):
 }
 ```
 
-Limite de cobertura em projetos Angular (`angular.json`, target `test`; requer `@vitest/coverage-v8`):
-
-```json
-"options": {
-  "coverage": true,
-  "coverageExclude": ["**/public-api.ts"],
-  "coverageReporters": ["text-summary", "html"],
-  "coverageThresholds": { "lines": 80, "branches": 80, "functions": 80, "statements": 80 }
-}
-```
-
-Limite de cobertura em projetos sem Angular (`vitest.config.ts`):
+Testes e cobertura com Jest (`jest.config.ts` na raiz; um `project` por app ou pacote). Projetos Angular usam o preset `jest-preset-angular` e não têm target `test` no `angular.json`:
 
 ```ts
-coverage: {
-  provider: 'v8',
-  thresholds: { lines: 80, branches: 80, functions: 80, statements: 80 },
-  exclude: ['**/public-api.ts', '**/index.ts', '**/*.config.*'],
-}
+export default {
+  projects: [
+    {
+      displayName: 'web',
+      preset: 'jest-preset-angular',
+      roots: ['<rootDir>/apps/web'],
+      testEnvironment: 'jsdom',
+    },
+    {
+      displayName: 'api',
+      preset: 'ts-jest',
+      roots: ['<rootDir>/apps/api'],
+      testEnvironment: 'node',
+    },
+  ],
+  collectCoverage: true,
+  coveragePathIgnorePatterns: ['public-api.ts', 'index.ts', '\\.config\\.'],
+  coverageReporters: ['text-summary', 'html', 'json-summary', 'lcov'],
+  coverageThreshold: { global: { lines: 80, branches: 80, functions: 80, statements: 80 } },
+  reporters: ['default', ['jest-junit', { outputDirectory: 'reports', outputName: 'junit.xml' }]],
+} satisfies Config;
 ```
+
+Monitoramento dos testes, igual em todos os repositórios:
+
+- O `verify` publica o resumo (total, falhas, pulados, duração, cobertura por projeto e os 10 testes mais lentos) no `$GITHUB_STEP_SUMMARY`, a partir de `reports/junit.xml` e `coverage/coverage-summary.json`.
+- A cobertura do PR é comparada com a da `main` (artefato `cobertura-main`); queda de mais de 0,5 ponto em qualquer projeto falha o `verify`.
+- `reports/` e `coverage/` sobem como artefatos por 14 dias.
+- `it.only` é bloqueado pelo `eslint-plugin-jest`; `jest.retryTimes` é proibido (teste instável vira issue `teste-instável`).
+
+O Argila é a referência: veja a seção 6 do [plano de design systems](plano-estilos-paletas-e-catalogo.md#6-testes-com-jest).
 
 No Angular, o `lint` também recebe `"maxWarnings": 0` nas opções do target `lint` do `angular.json`.
 
@@ -532,7 +546,7 @@ Siga na ordem. O primeiro PR do repositório deve entregar todos os itens.
 
 - [ ] TypeScript com `strict: true`
 - [ ] ESLint com a configuração compartilhada e `--max-warnings 0`
-- [ ] Vitest com limite de cobertura de 80% (seção 4)
+- [ ] Jest com limite de cobertura de 80%, relatório JUnit e resumo no PR (seção 4)
 - [ ] `.jscpd.json` com limite de 3% (seção 4)
 - [ ] Todos os scripts da seção 4 funcionando localmente
 
