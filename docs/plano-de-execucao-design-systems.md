@@ -17,13 +17,14 @@ Ao final deste plano, o Argila tem **seis design systems distintos** (Argila, Ne
 
 _Atualizado em 17/10/2026._
 
-| Marco  | Situação                                                                                                                                                                                            |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR-1   | **Pronto**: motor de temas (#68), publicado como `0.3.0` (#70)                                                                                                                                      |
-| E0     | **Em review** no #73 (`fix/paineis-do-transparente`): painéis opacos e com desfoque, checkup completo sem problemas. Falta a conferência visual das seções 2 a 4 da [validação](validacao-temas.md) |
-| E1     | **Pronto** (#74): 700 testes no Jest, resumo e cobertura comparada com a main no CI. A troca do `actions/cache` para a v6 ficou no #75                                                              |
-| E2     | **Em review** em `refactor/design-systems`: manifestos, CSS em `tokens/design-systems/`, `ArgTheme` respeitando o manifesto, regras de arquitetura no CI                                            |
-| E3–E12 | A fazer. Decisões E-D1 a E-D6 respondidas                                                                                                                                                           |
+| Marco  | Situação                                                                                                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PR-1   | **Pronto**: motor de temas (#68), publicado como `0.3.0` (#70)                                                                                                                                         |
+| E0     | **Pronto** (#71, #73): barra de tema, checkup completo sem problemas, painéis do Transparente opacos e com desfoque. Falta só a conferência visual das seções 2 a 4 da [validação](validacao-temas.md) |
+| E1     | **Pronto** (#74): 700 testes no Jest, resumo e cobertura comparada com a main no CI. A troca do `actions/cache` para a v6 ficou no #75                                                                 |
+| E2     | **Pronto** (#77, #79): manifestos, CSS em `tokens/design-systems/`, regras de arquitetura no CI, registro de paletas                                                                                   |
+| E3     | **Em andamento**: E3a (paletas) em review                                                                                                                                                              |
+| E4–E12 | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 
@@ -142,18 +143,20 @@ Especificação: [seção 5](plano-estilos-paletas-e-catalogo.md#5-padrão-de-ar
 
 ## E3: DS Argila, paletas, cores e segmentos
 
+O E3 sai em três PRs, para cada um ficar revisável: **E3a** paletas (AR-01, PA-01), **E3b** forma do Argila (AR-02 a AR-05) e **E3c** cores e segmentos (CO-01, SG-01).
+
 Referência: [argila.jpg](referencias/argila.jpg). Ficha: [3.4](plano-estilos-paletas-e-catalogo.md#34-ficha-de-cada-ds).
 
-| ✓   | ID    | Item                                                                                                                                      | Depende de | Pronto quando                                                                                   | Est. |
-| --- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------- | ---- |
-| [ ] | AR-01 | `feat(tokens): paleta Massinha como padrão do Argila`                                                                                     | E2         | Sem atributo nenhum, o Argila aparece em menta e quase branco, como na referência; contraste AA | 0,5  |
-| [ ] | AR-02 | `feat(argila): forma de massinha` (pílula, raio de 20px, sombra difusa + realce interno, campos rebaixados, foco com brilho menta)        | AR-01      | Lado a lado com a referência: botões, busca, chips, alertas e card com a mesma forma            | 1,5  |
-| [ ] | AR-03 | `feat(argila): 5 níveis de elevação`                                                                                                      | AR-02      | `--arg-shadow-1` a `-5` documentados e visíveis como na pilha da referência                     | 0,5  |
-| [ ] | AR-04 | `feat(tabs,tag): abas segmentadas e chips selecionáveis` (variantes da 4.7)                                                               | AR-02      | `variant="segmented"` e `selectable` funcionam em todos os DS; teclado e ARIA testados          | 1    |
-| [ ] | AR-05 | `feat(argila): núcleo mínimo curado`                                                                                                      | AR-02      | Os 19 componentes do núcleo mínimo com pele própria e teste no Argila                           | 1    |
-| [ ] | PA-01 | `feat(tokens): paletas compartilhadas` (Terrosa com feedback dessaturado, Oceano, Floresta, Pastel, Viva, Preto e branco, Alto contraste) | E2         | Cada paleta passa no contraste em todos os DS que a aceitam (AAA no Alto contraste)             | 0,5  |
-| [ ] | CO-01 | `feat(theme): lista fixa de cores e setColors` (`colors.css`, `cores-permitidas.json` gerado pelo teste)                                  | PA-01      | Cor que falha num par DS × paleta não aparece nem compila nesse par                             | 0,5  |
-| [ ] | SG-01 | `feat(theme): segmentos` (`provideArgila`, `setSegment`, `pnpm argila:segmentos`)                                                         | CO-01      | Os três segmentos de exemplo aplicam tudo de uma vez; o CSS gerado dá o mesmo resultado         | 0,5  |
+| ✓   | ID    | Item                                                                                                                                                                                                                                                    | Depende de | Pronto quando                                                                                   | Est. |
+| --- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------- | ---- |
+| [x] | AR-01 | `feat(tokens): paleta Massinha como padrão do Argila`                                                                                                                                                                                                   | E2         | Sem atributo nenhum, o Argila aparece em menta e quase branco, como na referência; contraste AA | 0,5  |
+| [ ] | AR-02 | `feat(argila): forma de massinha` (pílula, raio de 20px, sombra difusa + realce interno, campos rebaixados, foco com brilho menta)                                                                                                                      | AR-01      | Lado a lado com a referência: botões, busca, chips, alertas e card com a mesma forma            | 1,5  |
+| [ ] | AR-03 | `feat(argila): 5 níveis de elevação`                                                                                                                                                                                                                    | AR-02      | `--arg-shadow-1` a `-5` documentados e visíveis como na pilha da referência                     | 0,5  |
+| [ ] | AR-04 | `feat(tabs,tag): abas segmentadas e chips selecionáveis` (variantes da 4.7)                                                                                                                                                                             | AR-02      | `variant="segmented"` e `selectable` funcionam em todos os DS; teclado e ARIA testados          | 1    |
+| [ ] | AR-05 | `feat(argila): núcleo mínimo curado`                                                                                                                                                                                                                    | AR-02      | Os 19 componentes do núcleo mínimo com pele própria e teste no Argila                           | 1    |
+| [x] | PA-01 | `feat(tokens): paletas compartilhadas` (Terrosa vira arquivo; Oceano, Floresta, Viva, Preto e branco, Alto contraste em AAA). A Pastel entra no E5, com o Neo-brutalista, que é o único que a aceita; o feedback dessaturado da Terrosa fica para o E3b | E2         | Cada paleta passa no contraste em todos os DS que a aceitam (AAA no Alto contraste)             | 0,5  |
+| [ ] | CO-01 | `feat(theme): lista fixa de cores e setColors` (`colors.css`, `cores-permitidas.json` gerado pelo teste)                                                                                                                                                | PA-01      | Cor que falha num par DS × paleta não aparece nem compila nesse par                             | 0,5  |
+| [ ] | SG-01 | `feat(theme): segmentos` (`provideArgila`, `setSegment`, `pnpm argila:segmentos`)                                                                                                                                                                       | CO-01      | Os três segmentos de exemplo aplicam tudo de uma vez; o CSS gerado dá o mesmo resultado         | 0,5  |
 
 O E3 abre a `0.4.0` (changeset minor) e o changelog explica como manter o visual anterior.
 

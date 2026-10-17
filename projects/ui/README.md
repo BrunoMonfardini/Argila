@@ -130,14 +130,19 @@ Modo de cor, no `<html>`: `data-arg-theme="light" | "dark" | "auto"`.
 
 A aparência vem de um **design system** (DS) e de uma **paleta** aceita por ele, também no `<html>`:
 
-| Eixo          | Atributo           | Define                             | Valores                                                          |
-| ------------- | ------------------ | ---------------------------------- | ---------------------------------------------------------------- |
-| Design system | `data-arg-style`   | forma: raio, borda, sombra, fonte  | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp` |
-| Paleta        | `data-arg-palette` | cores, só entre as que o DS aceita | `nativa` (a do DS, padrão), `terrosa`                            |
+| Eixo          | Atributo           | Define                             | Valores                                                                                       |
+| ------------- | ------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------- |
+| Design system | `data-arg-style`   | forma: raio, borda, sombra, fonte  | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp`                              |
+| Paleta        | `data-arg-palette` | cores, só entre as que o DS aceita | `nativa` (a do DS, padrão), `terrosa`, `oceano`, `floresta`, `mono`, `alto-contraste`, `viva` |
 
 Cada DS tem um manifesto (`ARG_DESIGN_SYSTEMS`) com os modos de cor, as paletas que aceita
 e se aceita transparência. O CSS de cada um fica em `tokens/design-systems/<ds>/`:
 `forma.css` e `paletas/nativa.css`.
+
+A paleta padrão do Argila é a **Massinha** (menta sobre superfícies quase brancas): são os
+próprios tokens semânticos, então vale mesmo sem `temas.css`. As paletas compartilhadas
+(`ARG_SHARED_PALETTES`) ficam em `tokens/palettes/` e chegam com o `temas.css`. Para manter o
+visual café de antes da 0.6, use `data-arg-palette="terrosa"`.
 
 Importe `tokens/temas.css` depois de `tokens/argila.css` (ou só a forma e a paleta do DS que o
 produto usa). Sem `data-arg-palette`, cada DS usa a própria paleta. Os caminhos antigos
