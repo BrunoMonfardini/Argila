@@ -134,6 +134,7 @@ npm run lint
 npm run typecheck
 npm run test
 npm run dup:check
+npm run arch:check
 npm run build
 npm run build:docs
 npm run manifest:check
@@ -150,6 +151,7 @@ npm run changeset -- status --since=origin/main
 | `npm run test:ui`        | Só os testes da biblioteca (também `test:docs` e `test:scripts`)                                     |
 | `npm run test:report`    | Resumo do último `test`: totais, cobertura por projeto e os 10 testes mais lentos                    |
 | `npm run dup:check`      | Detecta código duplicado (jscpd); falha acima de 3%                                                  |
+| `npm run arch:check`     | Regras de dependência entre as camadas (dependency-cruiser)                                          |
 | `npm run build`          | Gera o pacote em `dist/ui`                                                                           |
 | `npm run dev`            | Abre o catálogo em <http://localhost:4200>                                                           |
 | `npm run build:docs`     | Gera o catálogo estático em `dist/docs/browser`                                                      |
