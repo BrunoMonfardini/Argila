@@ -8,3 +8,4 @@ Estilos viram **design systems** com manifesto. `ARG_DESIGN_SYSTEMS` traz, para 
 - **CODA e Windows XP não aceitam mais transparência**: `setSurfaceOpacity()` é ignorado neles.
 - O CSS de cada design system mudou de lugar: `tokens/design-systems/<ds>/forma.css` e `tokens/design-systems/<ds>/paletas/nativa.css`. Os caminhos antigos (`tokens/styles/<ds>.css` e `tokens/palettes/nativas/<ds>.css`) continuam funcionando e serão removidos numa versão major.
 - `ARG_STYLES` fica obsoleto: use `ARG_DESIGN_SYSTEMS[ds].modos`.
+- `ARG_SHARED_PALETTES` registra as paletas compartilhadas (nome e se tem arquivo em `tokens/palettes/`). Uma paleta nova entra com o CSS, uma entrada no registro e o id nos manifestos que a aceitam.
