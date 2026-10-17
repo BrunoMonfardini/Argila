@@ -21,6 +21,8 @@
     "format:check": "prettier --check .",
     "icons": "node scripts/gerar-icones.ts",
     "icons:check": "node scripts/gerar-icones.ts --check",
+    "colors": "node scripts/gerar-cores.ts",
+    "colors:check": "node scripts/gerar-cores.ts --check",
     "checkup": "node scripts/checkup-visual.ts",
     "dev": "pnpm manifest && ng serve docs --open",
     "manifest": "node scripts/gerar-manifesto.ts",

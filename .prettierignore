@@ -4,3 +4,5 @@ coverage
 projects/ui/src/lib/icon/icons.generated.ts
 reports
 cobertura-main
+projects/ui/src/lib/design-systems/colors.generated.ts
+projects/ui/tokens/colors.css
