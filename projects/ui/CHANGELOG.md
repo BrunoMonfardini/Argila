@@ -1,5 +1,55 @@
 # @brunomonfardini/ui
 
+## 0.6.0
+
+### Minor Changes
+
+- 651ebcf: Variantes vindas da referência do Argila, em todos os design systems:
+
+  - `arg-tabs` ganha `variant="segmented"`: trilho rebaixado em pílula, com a aba aberta em relevo. O teclado e o ARIA não mudam.
+  - `arg-tag` ganha `selectable` com `[(selected)]` (chip de filtro): o texto vira um botão de alternância com `aria-pressed` e, ligado, mostra um ✓ no preenchimento suave da marca. Também ganha `disabled`.
+
+- 975f265: **O Argila ganha a forma "de massinha"** da referência: controles em pílula, cartões com cantos de 20px e sem contorno, volume com sombra difusa e realce de luz, campos rebaixados, botão primário no preenchimento suave da marca com brilho no hover. Vale para todo produto sem `data-arg-style` (o Argila é o padrão).
+
+  - Cinco níveis de elevação: `--arg-shadow-1` a `--arg-shadow-5`. No padrão eles reaproveitam `sm`, `md` e `lg`; o Argila define os cinco.
+  - O CSS do Argila fica em `tokens/design-systems/argila/` (forma e pele de 19 componentes) e chega pelo `argila.css`. Cada design system ganhou um `index.css`; o `temas.css` importa os índices.
+  - Para manter o visual plano de antes, use `data-arg-style="molde"`.
+  - O `arg-icon-button` ganha a classe `arg-icon-button` no elemento.
+
+- 370f39f: **Cores de marca da lista fixa.** `ARG_BRAND_COLORS` traz 16 cores (cobre, caramelo, terracota, oliva, musgo, petróleo, ardósia, anil, ameixa, vinho, coral, mostarda, grafite, areia, menta e lavanda) para a primária, a secundária e o destaque.
+
+  - `ArgTheme.setColors({ primary, secondary, accent })` só aplica as que passam no contraste no design system e na paleta atuais (`allowedColors()`, de `ARG_ALLOWED_COLORS`), avisa das outras em desenvolvimento e revalida ao trocar de design system ou paleta. `clearColors()` volta às cores da paleta.
+  - Sem Angular: `data-arg-primary`, `data-arg-secondary` e `data-arg-accent` no `<html>`, com o `temas.css` (que traz o `tokens/colors.css` por último).
+  - `setBrand()` com cor livre continua funcionando.
+
+- f463649: **Novo design system: Neo-brutalista** (`data-arg-style="neo-brutalista"`), como na referência: papel bege, contorno preto de 3px, cantos retos, sombra dura deslocada, blocos de cor chapada com texto preto, caixa alta nos botões, alvo de 44px e foco sempre visível. Títulos em Archivo Black e corpo em Archivo, carregados pelo produto (Google Fonts).
+
+  - Paleta nativa Papel CMY e as paletas Pastel (nova, compartilhada), Preto e branco e Alto contraste. Claro e escuro (papel grafite com contorno off-white). Sem transparência.
+  - Pele própria para o núcleo mínimo e para Avatar, Breadcrumb, List, Pagination, Stepper e Table.
+
+- cd8f5d5: **O Transparente vira vidro espesso**, como na referência: superfícies translúcidas com desfoque, aro claro, brilho no topo, borda iridescente nos botões e cartões, botões em pílula de 48px (56px no grande) e o primário em gradiente.
+
+  - Paleta Vidro: fundo cinza-claro, laranja de marca, azul de destaque e verde-água para o que está ligado (checkbox, radio e switch).
+  - Pele própria para o núcleo mínimo e para Combobox, Drawer, Menu e Popover.
+  - Alternativas: sem `backdrop-filter` o vidro fica 85% opaco; com `prefers-reduced-transparency`, opaco e sem iridescência; em `forced-colors`, sem iridescência.
+
+- 82a1854: `arg-input-group` junta um campo e um botão de ação no fim (`argInputAction`, num `arg-icon-button`), numa peça só: buscar, adicionar, limpar. O botão mantém nome próprio e a ordem do Tab. Importe com `ARG_INPUT_GROUP`.
+- ea06469: **A paleta padrão passa a ser a Massinha**: menta sobre superfícies quase brancas, a nativa do Argila. Todo produto sem paleta própria muda de aparência. Para manter o visual café de antes, use `data-arg-palette="terrosa"`.
+
+  - A Terrosa vira uma paleta compartilhada, em `tokens/palettes/terrosa.css` (chega com o `temas.css`).
+  - Paletas compartilhadas novas: `oceano`, `floresta`, `mono` (preto e branco), `alto-contraste` (texto em AAA) e `viva`. Cada design system aceita algumas: Argila (Terrosa, Oceano, Floresta, Preto e branco, Alto contraste), Transparente (Oceano, Terrosa, Preto e branco), CODA (Viva, Preto e branco, Alto contraste), Windows XP (Alto contraste) e Molde (Terrosa).
+  - **CODA e Windows XP deixam de aceitar a Terrosa**: o `ArgTheme` troca para a paleta nativa, com aviso em desenvolvimento.
+  - Token novo `--arg-color-primary-soft` (com `--arg-color-on-primary-soft`): o preenchimento suave da marca, definido por toda paleta.
+  - Os tons de desabilitado do CODA, do Transparente e do Windows XP passam de bege para cinza neutro.
+  - O Molde (base interna para criar design systems) troca os neutros bege por cinza.
+
+- e64fa3e: **Segmentos**: combinações nomeadas de aparência, declaradas uma vez pelo app.
+
+  - `provideArgila({ segments, defaultSegment })` declara os segmentos e aplica o padrão ao iniciar.
+  - `ArgTheme.setSegment(nome)` aplica de uma vez design system, paleta, cores, modo e transparência, e marca `data-arg-segment`; `segment()` diz qual está aplicado.
+  - O tipo `ArgSegment` recusa paleta que o design system não aceita.
+  - `argSegmentAttributes(segmento)` devolve os atributos do `<html>`, para quem não usa o `ArgTheme`.
+
 ## 0.5.0
 
 ### Minor Changes
