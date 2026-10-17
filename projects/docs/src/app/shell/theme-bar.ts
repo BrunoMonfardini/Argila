@@ -70,9 +70,9 @@ export class DocThemeBar {
 
   protected readonly schemes = SCHEMES;
   protected readonly styles = STYLES;
-  /** Só as paletas que o design system atual aceita. */
+  /** Só as paletas que o design system atual aceita, na ordem do manifesto (a primeira é a padrão). */
   protected readonly palettes = computed(() =>
-    PALETTES.filter((option) => this.theme.palettes().includes(option.value)),
+    this.theme.palettes().map((value) => PALETTES.find((option) => option.value === value)!),
   );
   protected readonly acceptsTransparency = this.theme.acceptsTransparency;
   protected readonly minOpacity = MIN_OPACITY;
