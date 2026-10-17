@@ -15,7 +15,7 @@
  * sobreposições confundem a medida).
  */
 import { spawn } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -27,9 +27,8 @@ import {
   combinations,
   pageFile,
   reportHtml,
-  styleSchemes,
 } from './lib/checkup.ts';
-import { arrayItems } from './lib/temas.ts';
+import { loadDesignSystems } from './lib/design-systems.ts';
 
 const { values: options } = parseArgs({
   options: {
@@ -43,15 +42,11 @@ const { values: options } = parseArgs({
 const list = (value?: string) => value?.split(',').map((item) => item.trim());
 
 const ROOT = resolve(import.meta.dirname, '..');
-const theme = readFileSync(resolve(ROOT, 'projects/ui/src/lib/theme/theme.ts'), 'utf8');
 const onlyStyles = list(options.estilos);
-const styles = Object.fromEntries(
-  Object.entries(styleSchemes(theme)).filter(
-    ([style]) => !onlyStyles || onlyStyles.includes(style),
-  ),
+const designSystems = (await loadDesignSystems(ROOT)).filter(
+  (ds) => !onlyStyles || onlyStyles.includes(ds.id),
 );
-const palettes = list(options.paletas) ?? arrayItems(theme, 'ARG_PALETTES');
-const combos = combinations(styles, palettes);
+const combos = combinations(designSystems, list(options.paletas));
 const output = resolve(ROOT, options.saida);
 
 const CHROME_PATHS = [

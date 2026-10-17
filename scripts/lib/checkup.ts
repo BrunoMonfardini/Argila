@@ -14,26 +14,25 @@ export interface Combination {
   scheme: Scheme;
 }
 
-/** Estilos e os modos de cada um, lidos de `ARG_STYLES` no código do `ArgTheme`. */
-export function styleSchemes(source: string): Record<string, Scheme[]> {
-  const body = /export const ARG_STYLES\b[^=]*=\s*\{([\s\S]*?)\n\};/.exec(source);
-  if (!body) throw new Error('ARG_STYLES não encontrado');
-  const styles: Record<string, Scheme[]> = {};
-  for (const [, name, schemes] of body[1].matchAll(
-    /^\s*'?([\w-]+)'?\s*:\s*\{\s*schemes:\s*\[([^\]]*)\]/gm,
-  )) {
-    styles[name] = [...schemes.matchAll(/'(light|dark)'/g)].map((match) => match[1] as Scheme);
-  }
-  return styles;
+/** O que o checkup precisa de cada manifesto de design system. */
+export interface DesignSystemModes {
+  id: string;
+  modos: readonly Scheme[];
+  paletas: readonly string[];
 }
 
-/** Toda combinação de estilo × paleta × modo suportado pelo estilo. */
+/**
+ * Toda combinação de design system × paleta aceita × modo suportado. Com
+ * `onlyPalettes`, só as paletas da lista que o design system aceita.
+ */
 export function combinations(
-  styles: Record<string, readonly Scheme[]>,
-  palettes: readonly string[],
+  designSystems: readonly DesignSystemModes[],
+  onlyPalettes?: readonly string[],
 ): Combination[] {
-  return Object.entries(styles).flatMap(([style, schemes]) =>
-    palettes.flatMap((palette) => schemes.map((scheme) => ({ style, palette, scheme }))),
+  return designSystems.flatMap(({ id: style, modos, paletas }) =>
+    paletas
+      .filter((palette) => !onlyPalettes || onlyPalettes.includes(palette))
+      .flatMap((palette) => modos.map((scheme) => ({ style, palette, scheme }))),
   );
 }
 
