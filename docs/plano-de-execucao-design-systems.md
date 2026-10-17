@@ -143,7 +143,7 @@ Especificação: [seção 5](plano-estilos-paletas-e-catalogo.md#5-padrão-de-ar
 
 ## E3: DS Argila, paletas, cores e segmentos
 
-O E3 sai em quatro PRs, para cada um ficar revisável: **E3a** paletas (AR-01, PA-01), **E3b-1** forma, elevação e pele do núcleo mínimo (AR-02, AR-03, AR-05), **E3b-2** abas segmentadas e chips (AR-04) e **E3c** cores e segmentos (CO-01, SG-01).
+O E3 sai em cinco PRs, para cada um ficar revisável: **E3a** paletas (AR-01, PA-01), **E3b-1** forma, elevação e pele do núcleo mínimo (AR-02, AR-03, AR-05), **E3b-2** abas segmentadas e chips (AR-04), **E3c-1** cores de marca (CO-01) e **E3c-2** segmentos (SG-01).
 
 Referência: [argila.jpg](referencias/argila.jpg). Ficha: [3.4](plano-estilos-paletas-e-catalogo.md#34-ficha-de-cada-ds).
 
@@ -155,7 +155,7 @@ Referência: [argila.jpg](referencias/argila.jpg). Ficha: [3.4](plano-estilos-pa
 | [x] | AR-04 | `feat(tabs,tag): abas segmentadas e chips selecionáveis` (variantes da 4.7)                                                                                                                                                                             | AR-02      | `variant="segmented"` e `selectable` funcionam em todos os DS; teclado e ARIA testados          | 1    |
 | [x] | AR-05 | `feat(argila): núcleo mínimo curado`                                                                                                                                                                                                                    | AR-02      | Os 19 componentes do núcleo mínimo com pele própria e teste no Argila                           | 1    |
 | [x] | PA-01 | `feat(tokens): paletas compartilhadas` (Terrosa vira arquivo; Oceano, Floresta, Viva, Preto e branco, Alto contraste em AAA). A Pastel entra no E5, com o Neo-brutalista, que é o único que a aceita; o feedback dessaturado da Terrosa fica para o E3b | E2         | Cada paleta passa no contraste em todos os DS que a aceitam (AAA no Alto contraste)             | 0,5  |
-| [ ] | CO-01 | `feat(theme): lista fixa de cores e setColors` (`colors.css`, `cores-permitidas.json` gerado pelo teste)                                                                                                                                                | PA-01      | Cor que falha num par DS × paleta não aparece nem compila nesse par                             | 0,5  |
+| [x] | CO-01 | `feat(theme): lista fixa de cores e setColors` (`colors.css` e `colors.generated.ts` gerados por `pnpm colors`, conferidos no CI)                                                                                                                       | PA-01      | Cor que falha num par DS × paleta não aparece nem compila nesse par                             | 0,5  |
 | [ ] | SG-01 | `feat(theme): segmentos` (`provideArgila`, `setSegment`, `pnpm argila:segmentos`)                                                                                                                                                                       | CO-01      | Os três segmentos de exemplo aplicam tudo de uma vez; o CSS gerado dá o mesmo resultado         | 0,5  |
 
 O E3 abre a `0.4.0` (changeset minor) e o changelog explica como manter o visual anterior.

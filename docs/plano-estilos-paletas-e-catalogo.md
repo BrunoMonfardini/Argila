@@ -268,9 +268,12 @@ Os componentes que não aparecem na matriz são **herdados** em todos os DS. A m
 
 ### 3.7 Cores de marca (D6)
 
-`colors.css` traz a lista fixa de cerca de 16 cores (cobre, caramelo, terracota, oliva, musgo, petróleo, ardósia, anil, ameixa, vinho, coral, mostarda, grafite, areia, menta e lavanda), cada uma com valor claro e escuro, `on-…`, `hover`, `pressed` e `subtle`.
+A lista fixa tem 16 cores (cobre, caramelo, terracota, oliva, musgo, petróleo, ardósia, anil, ameixa, vinho, coral, mostarda, grafite, areia, menta e lavanda), registradas em `src/lib/design-systems/colors.ts` (`ARG_BRAND_COLORS`) com valor claro e escuro e o texto por cima de cada um. `hover`, `pressed` e `subtle` continuam derivados nos tokens semânticos; na primária, o preenchimento suave acompanha a cor.
 
-**Toda combinação DS × paleta aceita × cor × modo é testada no CI.** A lista de cores permitidas para cada par é gerada pelo teste (`cores-permitidas.json`) e usada pelo TypeScript e pelo catálogo. `setBrand({ primary: '#hex' })` continua por compatibilidade, com o aviso de que o contraste vira responsabilidade do produto.
+- **Fonte única e gerador.** `pnpm colors` (`scripts/gerar-cores.ts`) gera, a partir do registro, o `tokens/colors.css` e o `colors.generated.ts` (`ARG_ALLOWED_COLORS`): para cada DS × paleta aceita × papel, as cores com as quais **todos os pares do teste de contraste passam**, em cada modo do DS e com as superfícies a 40% (AAA no texto da Alto contraste). `pnpm colors:check` roda no CI e falha se algo estiver desatualizado; o teste de contraste confere de novo cada cor permitida.
+- **Precedência.** O seletor `:root[data-arg-primary][data-arg-primary='cobre']` tem a força das paletas nativas (0,3,0), e o `colors.css` vem por último no `temas.css`: a cor de marca vence a paleta.
+- **No Angular**, `setColors({ primary, secondary, accent })` só aplica as cores permitidas no par atual (`allowedColors()`), avisa das outras em desenvolvimento e revalida ao trocar de DS ou paleta. Sem Angular, os atributos `data-arg-primary`, `-secondary` e `-accent`.
+- `setBrand({ primary: '#hex' })` continua por compatibilidade, com o aviso de que o contraste vira responsabilidade do produto.
 
 ### 3.8 Segmentos (D9)
 

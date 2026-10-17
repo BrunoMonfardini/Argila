@@ -181,7 +181,19 @@ temas sobrescrevem as cores opacas `--arg-color-surface-solid`, `-raised-solid` 
 Marca do produto (fixa): crie um DS próprio a partir do Molde. Copie a pasta
 `tokens/design-systems/molde/` (forma e paleta, sempre no `:root`).
 
-Marca do tenant (vinda do banco, em tempo de execução):
+Cores de marca da lista fixa (`ARG_BRAND_COLORS`: cobre, caramelo, terracota, petróleo, anil,
+menta…), só entre as que passam no contraste no design system e na paleta atuais:
+
+```ts
+theme.setColors({ primary: 'cobre', accent: 'mostarda' });
+theme.allowedColors(); // { primary: [...], secondary: [...], accent: [...] }
+```
+
+Sem Angular: `data-arg-primary="cobre"` (e `-secondary`, `-accent`) no `<html>`, com o `temas.css`
+importado. Uma cor fora da lista do par é ignorada pelo `ArgTheme`, com aviso.
+
+Marca do tenant com cor livre (vinda do banco, em tempo de execução; o contraste fica por conta
+do produto):
 
 ```ts
 const theme = inject(ArgTheme);
