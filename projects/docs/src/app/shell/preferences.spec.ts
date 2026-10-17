@@ -1,10 +1,11 @@
+import { jest } from '@jest/globals';
 import { readPreference, writePreference } from './preferences';
 
 describe('preferências do catálogo', () => {
   const options = [{ value: 'a' }, { value: 'b' }] as const;
 
   afterEach(() => {
-    vi.restoreAllMocks();
+    jest.restoreAllMocks();
     localStorage.clear();
   });
 
@@ -17,10 +18,10 @@ describe('preferências do catálogo', () => {
   });
 
   it('segue sem erro quando o armazenamento está bloqueado', () => {
-    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+    jest.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('bloqueado');
     });
-    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+    jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new Error('bloqueado');
     });
 

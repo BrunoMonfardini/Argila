@@ -1,12 +1,13 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { FileUploadPetExample } from '../../../ui/src/lib/file-upload/examples/file-upload-pet.example';
 
 /** O exemplo do File Upload envia (simulado), mostra o erro e conta os arquivos. */
 describe('exemplo do File Upload', () => {
-  afterEach(() => vi.useRealTimers());
+  afterEach(() => jest.useRealTimers());
 
   it('envia, falha o arquivo "erro" e conta os arquivos do formulário', async () => {
-    vi.useFakeTimers();
+    jest.useFakeTimers();
     const fixture = TestBed.createComponent(FileUploadPetExample);
     fixture.detectChanges();
     const root: HTMLElement = fixture.nativeElement;
@@ -20,7 +21,7 @@ describe('exemplo do File Upload', () => {
     fixture.detectChanges();
     expect(root.querySelectorAll('progress')).toHaveLength(2);
 
-    await vi.advanceTimersByTimeAsync(1000);
+    await jest.advanceTimersByTimeAsync(1000);
     fixture.detectChanges();
     const items = Array.from(root.querySelectorAll('.arg-file-upload__item'));
     expect(items[0].textContent).toContain('Enviado');
