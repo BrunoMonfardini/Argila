@@ -277,21 +277,21 @@ A lista fixa tem 16 cores (cobre, caramelo, terracota, oliva, musgo, petróleo, 
 
 ### 3.8 Segmentos (D9)
 
-Os tipos são gerados a partir dos manifestos: o TypeScript recusa paleta que o DS não aceita e cor que não passou no par.
+O app declara os segmentos uma vez, com `provideArgila`. O tipo `ArgSegment` é uma união por design system: o TypeScript recusa paleta que o DS não aceita. As cores são da lista fixa; uma cor que não passa no par é ignorada pelo `ArgTheme`, com aviso.
 
 ```ts
 provideArgila({
   segments: {
-    essencial: { style: 'argila' }, // paleta nativa: Massinha
+    essencial: { style: 'argila' }, // paleta padrão: Massinha
     premium: {
       style: 'argila',
       palette: 'terrosa',
       scheme: 'dark',
       colors: { accent: 'caramelo' },
     },
-    vibrante: { style: 'punk', palette: 'viva', colors: { primary: 'coral' } },
-    // erro de tipo: o Punk não aceita a paleta Terrosa
-    // errado: { style: 'punk', palette: 'terrosa' },
+    vibrante: { style: 'coda', palette: 'viva', colors: { primary: 'coral' } },
+    // erro de tipo: o Windows XP não aceita a Terrosa
+    // errado: { style: 'windows-xp', palette: 'terrosa' },
   },
   defaultSegment: 'essencial',
 });
@@ -299,7 +299,9 @@ provideArgila({
 inject(ArgTheme).setSegment('premium');
 ```
 
-Uso só com CSS: `pnpm argila:segmentos` gera `[data-arg-segment='premium'] { … }` a partir do mesmo objeto, com a mesma validação.
+`setSegment` aplica de uma vez o design system, a paleta (ou a padrão dele), as cores, o modo e a transparência, e marca `data-arg-segment` no `<html>`. Quando o segmento fixa o modo (`scheme: 'dark'`), o seletor de modo do produto pode ficar escondido.
+
+**Sem Angular**, um segmento é só um conjunto de atributos no `<html>`: `argSegmentAttributes(segmento)` os devolve (para HTML estático ou renderização no servidor). O gerador de CSS por segmento (`pnpm argila:segmentos`) previsto antes não foi feito: ele copiaria os tokens de cada combinação num seletor novo, sem ganho sobre os atributos.
 
 ### 3.9 Transparência (D8)
 

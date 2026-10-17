@@ -181,6 +181,29 @@ temas sobrescrevem as cores opacas `--arg-color-surface-solid`, `-raised-solid` 
 Marca do produto (fixa): crie um DS próprio a partir do Molde. Copie a pasta
 `tokens/design-systems/molde/` (forma e paleta, sempre no `:root`).
 
+Segmentos: o app declara combinações nomeadas e troca entre elas de uma vez. O tipo recusa
+paleta que o design system não aceita:
+
+```ts
+// app.config.ts
+provideArgila({
+  segments: {
+    essencial: { style: 'argila' },
+    premium: {
+      style: 'argila',
+      palette: 'terrosa',
+      scheme: 'dark',
+      colors: { accent: 'caramelo' },
+    },
+  },
+  defaultSegment: 'essencial',
+});
+
+inject(ArgTheme).setSegment('premium');
+```
+
+Sem Angular, `argSegmentAttributes(segmento)` devolve os atributos do `<html>` do segmento.
+
 Cores de marca da lista fixa (`ARG_BRAND_COLORS`: cobre, caramelo, terracota, petróleo, anil,
 menta…), só entre as que passam no contraste no design system e na paleta atuais:
 
