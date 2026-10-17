@@ -191,14 +191,16 @@ Referência: [neo-brutalista.jpg](referencias/neo-brutalista.jpg).
 
 ## E6: DS Punk
 
+Sai em dois PRs: **E6a** manifesto, forma, paleta Néon e pele (PK-01, PK-02, PK-04: só escuro) e **E6b** os exclusivos (PK-03).
+
 Referência: [punk.jpg](referencias/punk.jpg).
 
 | ✓   | ID    | Item                                                                                                                                | Depende de | Pronto quando                                                                               | Est. |
 | --- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- | ---- |
-| [ ] | PK-01 | `feat(punk): manifesto, forma, tipografia e paleta Néon` (fundo preto, cards chapados com raio de 24px, pílulas brancas, Unbounded) | E3         | Tela de entrada e home de exemplo com a mesma forma da referência                           | 1    |
-| [ ] | PK-02 | `feat(punk): núcleo mínimo e curados da matriz` (Agenda, Avatar, Date Picker, Drawer, List, Table, Time Slots)                      | PK-01      | Calendário em faixa, chips, listas com chevron, conversas e notificações como na referência | 1,5  |
+| [x] | PK-01 | `feat(punk): manifesto, forma, tipografia e paleta Néon` (fundo preto, cards chapados com raio de 24px, pílulas brancas, Unbounded) | E3         | Tela de entrada e home de exemplo com a mesma forma da referência                           | 1    |
+| [x] | PK-02 | `feat(punk): núcleo mínimo e curados da matriz` (Agenda, Avatar, Date Picker, Drawer, List, Table, Time Slots)                      | PK-01      | Calendário em faixa, chips, listas com chevron, conversas e notificações como na referência | 1,5  |
 | [ ] | PK-03 | `feat(punk): exclusivos arg-punk-stat-card, arg-punk-dot-track e arg-punk-burst`                                                    | PK-01      | Trilha de pontos acessível como `progressbar`; estrela só decorativa (`aria-hidden`)        | 1    |
-| [ ] | PK-04 | Modo claro: testar, decidir e registrar                                                                                             | PK-02      | Claro aprovado, ou o manifesto declara só escuro e o motivo vai para a especificação        | 0,25 |
+| [x] | PK-04 | Modo claro: testar, decidir e registrar                                                                                             | PK-02      | Claro aprovado, ou o manifesto declara só escuro e o motivo vai para a especificação        | 0,25 |
 | [ ] | PK-05 | `docs(punk): capturas lado a lado com a referência`                                                                                 | PK-04      | Capturas anexadas ao PR; regras de uso na página do DS                                      | 0,25 |
 
 ## E7: DS Windows XP
