@@ -1,36 +1,55 @@
-import { DOCUMENT, Injectable, computed, inject, signal } from '@angular/core';
+import { DOCUMENT, Injectable, computed, inject, isDevMode, signal } from '@angular/core';
+import type { ArgDesignSystem } from '../design-systems/design-system';
+import { ARG_DESIGN_SYSTEMS, ArgPalette, ArgStyle } from '../design-systems/design-systems';
+
+export type { ArgPalette, ArgPaletteOf, ArgStyle } from '../design-systems/design-systems';
+export { ARG_DESIGN_SYSTEMS } from '../design-systems/design-systems';
+export {
+  ARG_COMPONENTS,
+  ARG_CORE_MINIMUM,
+  type ArgComponentName,
+  type ArgDesignSystem,
+  type ArgSchemeName,
+} from '../design-systems/design-system';
 
 export type ArgColorScheme = 'light' | 'dark' | 'auto';
-
-/** Estilo: a forma (raio, borda, sombra, fonte), em `tokens/styles/`. */
-export type ArgStyle = 'argila' | 'molde' | 'coda' | 'transparente' | 'windows-xp';
-
-/** Paleta: as cores, em `tokens/palettes/`. `nativa` é a paleta própria do estilo. */
-export type ArgPalette = 'nativa' | 'terrosa';
 
 export interface ArgStyleInfo {
   /** Modos de cor que o estilo suporta; o primeiro é o padrão. */
   schemes: readonly Exclude<ArgColorScheme, 'auto'>[];
 }
 
-export const ARG_STYLES: Readonly<Record<ArgStyle, ArgStyleInfo>> = {
-  argila: { schemes: ['light', 'dark'] },
-  molde: { schemes: ['light', 'dark'] },
-  coda: { schemes: ['light', 'dark'] },
-  transparente: { schemes: ['light', 'dark'] },
-  'windows-xp': { schemes: ['light', 'dark'] },
-};
+const STYLE_NAMES = Object.keys(ARG_DESIGN_SYSTEMS) as ArgStyle[];
 
-export const ARG_PALETTES: readonly ArgPalette[] = ['nativa', 'terrosa'];
+const styleInfo = {} as Record<ArgStyle, ArgStyleInfo>;
+for (const style of STYLE_NAMES) styleInfo[style] = { schemes: ARG_DESIGN_SYSTEMS[style].modos };
+
+/** @deprecated Use `ARG_DESIGN_SYSTEMS[estilo].modos`. */
+export const ARG_STYLES: Readonly<Record<ArgStyle, ArgStyleInfo>> = styleInfo;
+
+/** Todas as paletas que algum design system aceita. */
+export const ARG_PALETTES: readonly ArgPalette[] = [
+  ...new Set(STYLE_NAMES.flatMap((style) => ARG_DESIGN_SYSTEMS[style].paletas)),
+];
+
+/** Lido a cada uso: os testes podem trocar um manifesto. */
+const designSystem = (style: ArgStyle): ArgDesignSystem => ARG_DESIGN_SYSTEMS[style];
 
 function readStyle(root: HTMLElement): ArgStyle {
   const value = root.getAttribute('data-arg-style');
-  return value !== null && Object.hasOwn(ARG_STYLES, value) ? (value as ArgStyle) : 'argila';
+  return value !== null && Object.hasOwn(ARG_DESIGN_SYSTEMS, value)
+    ? (value as ArgStyle)
+    : 'argila';
 }
 
-function readPalette(root: HTMLElement): ArgPalette {
-  const value = root.getAttribute('data-arg-palette') as ArgPalette;
-  return ARG_PALETTES.includes(value) ? value : 'nativa';
+function readPalette(root: HTMLElement, style: ArgStyle): ArgPalette {
+  const value = root.getAttribute('data-arg-palette');
+  const accepted = designSystem(style).paletas;
+  return (value !== null && accepted.includes(value) ? value : accepted[0]) as ArgPalette;
+}
+
+function warn(message: string): void {
+  if (isDevMode()) console.warn(`[Argila] ${message}`);
 }
 
 /**
@@ -92,10 +111,16 @@ export class ArgTheme {
 
   private readonly _style = signal(readStyle(this.root));
   readonly style = this._style.asReadonly();
-  /** Modos de cor que o estilo atual suporta. */
-  readonly schemes = computed(() => ARG_STYLES[this._style()].schemes);
+  /** Manifesto do design system atual. */
+  readonly designSystem = computed(() => designSystem(this._style()));
+  /** Modos de cor que o design system atual suporta. */
+  readonly schemes = computed(() => this.designSystem().modos);
+  /** Paletas que o design system atual aceita; a primeira é a padrão. */
+  readonly palettes = computed(() => this.designSystem().paletas as readonly ArgPalette[]);
+  /** O design system atual aceita o controle de transparência? */
+  readonly acceptsTransparency = computed(() => this.designSystem().transparencia);
 
-  private readonly _palette = signal(readPalette(this.root));
+  private readonly _palette = signal(readPalette(this.root, this._style()));
   readonly palette = this._palette.asReadonly();
 
   /**
@@ -110,17 +135,40 @@ export class ArgTheme {
     this._colorScheme.set(value);
   }
 
-  /** Troca o estilo, mantendo a paleta; ajusta o modo se o estilo não o suportar. */
+  /**
+   * Troca o design system. O que ele não aceita volta ao padrão dele, com
+   * aviso em desenvolvimento: a paleta, o modo de cor e a transparência.
+   */
   setStyle(style: ArgStyle): void {
     this.root.setAttribute('data-arg-style', style);
     this._style.set(style);
     this.setColorScheme(this._colorScheme());
+    if (!this.palettes().includes(this._palette())) {
+      warn(`o design system "${style}" não aceita a paleta "${this._palette()}"; voltou à padrão.`);
+      this.setPalette(this.palettes()[0]);
+    }
+    if (!this.acceptsTransparency() && this._surfaceOpacity() !== undefined) {
+      warn(
+        `o design system "${style}" não aceita transparência; as superfícies voltaram a opacas.`,
+      );
+      this.clearSurfaceOpacity();
+    }
   }
 
-  /** Troca a paleta; `nativa` volta às cores próprias do estilo. */
+  /**
+   * Troca a paleta; `nativa` volta às cores próprias do design system. Uma
+   * paleta que o design system atual não aceita vira a padrão dele.
+   */
   setPalette(palette: ArgPalette): void {
-    this.root.setAttribute('data-arg-palette', palette);
-    this._palette.set(palette);
+    const accepted = this.palettes();
+    const value = accepted.includes(palette) ? palette : accepted[0];
+    if (value !== palette) {
+      warn(
+        `o design system "${this._style()}" não aceita a paleta "${palette}"; usando "${value}".`,
+      );
+    }
+    this.root.setAttribute('data-arg-palette', value);
+    this._palette.set(value);
   }
 
   /** Substitui a marca atual; campos omitidos voltam ao padrão do Argila. */
@@ -145,9 +193,14 @@ export class ArgTheme {
 
   /**
    * Opacidade de cards, diálogos, campos e demais superfícies, de 0.4 a 1.
-   * Valores fora da faixa são presos aos limites.
+   * Valores fora da faixa são presos aos limites. Ignorada (com aviso em
+   * desenvolvimento) quando o design system não aceita transparência.
    */
   setSurfaceOpacity(opacity: number): void {
+    if (!this.acceptsTransparency()) {
+      warn(`o design system "${this._style()}" não aceita transparência.`);
+      return;
+    }
     const value = Math.min(1, Math.max(ARG_MIN_SURFACE_OPACITY, opacity));
     this.root.style.setProperty('--arg-surface-opacity', String(value));
     this._surfaceOpacity.set(value);

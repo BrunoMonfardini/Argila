@@ -29,7 +29,7 @@
 <label class="doc-theme-bar__field">
   <span>Paleta</span>
   <select arg-select (change)="selectPalette($event)">
-    @for (option of palettes; track option.value) {
+    @for (option of palettes(); track option.value) {
       <option [value]="option.value" [selected]="option.value === palette()">
         {{ option.label }}
       </option>
@@ -37,7 +37,10 @@
   </select>
 </label>
 
-<label class="doc-theme-bar__field">
+<label
+  class="doc-theme-bar__field"
+  [title]="acceptsTransparency() ? '' : 'Este estilo não aceita transparência'"
+>
   <span>Opacidade</span>
   <input
     type="range"
@@ -45,6 +48,7 @@
     max="100"
     step="5"
     [value]="opacity()"
+    [disabled]="!acceptsTransparency()"
     [attr.aria-valuetext]="opacity() + '%'"
     (input)="selectOpacity($event)"
   />
