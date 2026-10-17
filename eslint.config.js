@@ -3,6 +3,7 @@ const eslint = require('@eslint/js');
 const { defineConfig } = require('eslint/config');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
+const jest = require('eslint-plugin-jest');
 
 module.exports = defineConfig([
   {
@@ -42,6 +43,16 @@ module.exports = defineConfig([
         'error',
         { type: ['element', 'attribute'], prefix: 'doc', style: 'kebab-case' },
       ],
+    },
+  },
+  {
+    files: ['**/*.spec.ts'],
+    ...jest.configs['flat/recommended'],
+    rules: {
+      ...jest.configs['flat/recommended'].rules,
+      // it.only esquecido roda só um teste no CI e esconde o resto
+      'jest/no-focused-tests': 'error',
+      'jest/no-disabled-tests': 'warn',
     },
   },
   {
