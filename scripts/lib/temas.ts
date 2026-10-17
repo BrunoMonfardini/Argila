@@ -1,7 +1,7 @@
 /**
  * Leitura estrutural dos arquivos de tema: o que cada CSS importa, declara e
- * usa. Serve aos testes que garantem que estilos, paletas, o `temas.css` e o
- * `ArgTheme` contam a mesma história.
+ * usa. Serve aos testes que garantem que os design systems, as paletas e o
+ * `temas.css` contam a mesma história.
  */
 
 function withoutComments(css: string): string {
@@ -48,18 +48,4 @@ export function topLevelSelectors(css: string): string[] {
     }
   }
   return selectors;
-}
-
-/** Chaves de um objeto literal exportado em TypeScript: `export const NOME = { a: …, 'b-c': … }`. */
-export function objectKeys(source: string, name: string): string[] {
-  const body = new RegExp(`export const ${name}\\b[^=]*=\\s*\\{([\\s\\S]*?)\\n\\};`).exec(source);
-  if (!body) throw new Error(`objeto não encontrado: ${name}`);
-  return [...body[1].matchAll(/^\s*'?([\w-]+)'?\s*:/gm)].map((match) => match[1]);
-}
-
-/** Itens de um array literal de strings exportado: `export const NOME = ['a', 'b']`. */
-export function arrayItems(source: string, name: string): string[] {
-  const body = new RegExp(`export const ${name}\\b[^=]*=\\s*\\[([^\\]]*)\\]`).exec(source);
-  if (!body) throw new Error(`array não encontrado: ${name}`);
-  return [...body[1].matchAll(/'([^']+)'/g)].map((match) => match[1]);
 }
