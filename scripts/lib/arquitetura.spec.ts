@@ -57,6 +57,14 @@ describe('skinViolations', () => {
     ]);
   });
 
+  it('aceita a raiz informada, como a do design system padrão', () => {
+    const root = ":root:is([data-arg-style='nb'], :not([data-arg-style]))";
+    const padrao = skin('button', `${root} .arg-button { --a: 1; }`);
+
+    expect(skinViolations(ds(), [padrao], root)).toEqual([]);
+    expect(skinViolations(ds(), [padrao])).toHaveLength(1);
+  });
+
   it('acusa seletor que vale fora do design system', () => {
     const leak = skin(
       'button',

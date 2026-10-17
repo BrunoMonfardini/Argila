@@ -37,4 +37,13 @@ describe('topLevelSelectors', () => {
 
     expect(topLevelSelectors(css)).toEqual([":root[data-a='x']", ":root[data-b='x']", '.y']);
   });
+
+  it('não separa as vírgulas de dentro de :is() e :not()', () => {
+    const css = `:root:is([data-a='x'], :not([data-a], [data-b])) .c, .d:not(.e, .f) { --a: 1; }`;
+
+    expect(topLevelSelectors(css)).toEqual([
+      ":root:is([data-a='x'], :not([data-a], [data-b])) .c",
+      '.d:not(.e, .f)',
+    ]);
+  });
 });
