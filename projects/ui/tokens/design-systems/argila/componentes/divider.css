@@ -1,0 +1,5 @@
+/* Divisor: a borda clara do Argila. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-divider {
+  --arg-divider-color: var(--arg-color-border);
+}

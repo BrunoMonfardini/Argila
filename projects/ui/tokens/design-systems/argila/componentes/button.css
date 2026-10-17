@@ -1,0 +1,43 @@
+/* Botões: a primária é o preenchimento suave (menta) com texto escuro, e o hover acende um brilho. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-button:not(
+    .arg-button--secondary,
+    .arg-button--tertiary,
+    .arg-button--danger,
+    [disabled],
+    [aria-disabled='true']
+  ) {
+  --arg-button-bg: var(--arg-color-primary-soft);
+  --arg-button-bg-hover: color-mix(
+    in oklab,
+    var(--arg-color-primary-soft),
+    var(--arg-color-shade) 6%
+  );
+  --arg-button-bg-pressed: color-mix(
+    in oklab,
+    var(--arg-color-primary-soft),
+    var(--arg-color-shade) 12%
+  );
+  --arg-button-fg: var(--arg-color-on-primary-soft);
+}
+
+/* Secundária: pílula de superfície com volume, sem contorno */
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-button.arg-button--secondary {
+  --arg-button-bg: var(--arg-color-surface-raised);
+  --arg-button-border: transparent;
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-button:not(.arg-button--tertiary, [disabled], [aria-disabled='true']):hover {
+  --arg-button-shadow:
+    var(--arg-shadow-control),
+    0 0 0 4px color-mix(in oklab, var(--arg-color-primary-soft) 55%, transparent);
+}
+
+/* Desabilitado: plano, sem volume */
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-button:is([disabled], [aria-disabled='true']) {
+  --arg-button-shadow: none;
+}

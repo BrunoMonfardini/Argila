@@ -1,0 +1,5 @@
+/* Spinner: na cor da marca. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-spinner {
+  --arg-spinner-color: var(--arg-color-primary);
+}

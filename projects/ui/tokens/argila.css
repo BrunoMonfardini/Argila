@@ -1,6 +1,9 @@
 /*
  * Argila — ponto de entrada dos tokens.
  * Inclua uma vez na aplicação (angular.json → "styles") antes dos estilos do produto.
+ * Traz o design system padrão (Argila, com a paleta Massinha); os outros e as
+ * paletas compartilhadas vêm do temas.css.
  */
 @import './primitives.css';
 @import './semantic.css';
+@import './design-systems/argila/index.css';

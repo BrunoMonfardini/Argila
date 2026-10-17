@@ -1,0 +1,5 @@
+/* Field: um pouco mais de ar entre rótulo, campo e ajuda. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) arg-field {
+  --arg-field-gap: var(--arg-space-2);
+}

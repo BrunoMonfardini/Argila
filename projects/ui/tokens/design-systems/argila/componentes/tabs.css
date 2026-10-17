@@ -1,0 +1,6 @@
+/* Abas: o indicador da aba ativa na cor da marca e sem linha de base pesada. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) arg-tabs {
+  --arg-tabs-indicator: var(--arg-color-primary);
+  --arg-tabs-border: var(--arg-color-border);
+}

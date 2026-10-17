@@ -1,0 +1,14 @@
+/* Campos de texto: rebaixados, sem contorno, em pílula (a área de texto fica com cantos de cartão). */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-input:not(.arg-textarea, .arg-select) {
+  --arg-input-bg: var(--arg-color-surface-sunken);
+  --arg-input-border: transparent;
+  --arg-input-padding-inline: var(--arg-space-4);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-textarea {
+  --arg-input-bg: var(--arg-color-surface-sunken);
+  --arg-input-border: transparent;
+  --arg-input-radius: var(--arg-radius-container);
+}

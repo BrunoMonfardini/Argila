@@ -1,0 +1,31 @@
+/*
+ * Forma do Argila, o design system padrão: 3D macio "de massinha". Controles
+ * em pílula, cartões com cantos de 20px, volume com sombra difusa embaixo e
+ * realce claro em cima, campos rebaixados. Referência: docs/referencias/argila.jpg.
+ *
+ * Vale com data-arg-style="argila" e sem data-arg-style (o padrão), mas não
+ * nos temas antigos de data-arg-brand, que trazem a própria forma.
+ */
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) {
+  --arg-radius-control: var(--arg-core-radius-full);
+  --arg-radius-container: 1.25rem;
+
+  /* Volume: sombra difusa e realce de luz no topo. No escuro, a sombra some no fundo e o realce faz o volume */
+  --arg-shadow-color: light-dark(rgb(31 38 34 / 0.1), rgb(0 0 0 / 0.55));
+  --arg-shadow-highlight: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.07));
+  --arg-shadow-1: 0 1px 2px var(--arg-shadow-color), 0 2px 6px var(--arg-shadow-color);
+  --arg-shadow-2: 0 2px 4px var(--arg-shadow-color), 0 6px 14px var(--arg-shadow-color);
+  --arg-shadow-3: 0 4px 8px var(--arg-shadow-color), 0 10px 24px var(--arg-shadow-color);
+  --arg-shadow-4: 0 6px 12px var(--arg-shadow-color), 0 16px 36px var(--arg-shadow-color);
+  --arg-shadow-5: 0 10px 20px var(--arg-shadow-color), 0 24px 56px var(--arg-shadow-color);
+  --arg-shadow-sm: var(--arg-shadow-1);
+  --arg-shadow-md: var(--arg-shadow-3);
+  --arg-shadow-lg: var(--arg-shadow-4);
+  --arg-shadow-control: var(--arg-shadow-1), inset 0 1px 0 var(--arg-shadow-highlight);
+  /* Campo rebaixado: sombra por dentro em cima, realce embaixo */
+  --arg-shadow-field:
+    inset 0 2px 5px var(--arg-shadow-color), inset 0 -1px 0 var(--arg-shadow-highlight);
+
+  /* Foco: anel afastado, para o brilho não encostar no volume */
+  --arg-focus-ring-offset: 3px;
+}

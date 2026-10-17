@@ -1,0 +1,5 @@
+/* Badge: pílula. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-badge {
+  --arg-badge-radius: var(--arg-radius-full);
+}
