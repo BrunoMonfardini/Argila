@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ArgIcon, ArgIconSize } from './icon';
@@ -73,7 +74,7 @@ describe('ArgIcon', () => {
   });
 
   it('avisa no console e não desenha nada quando o ícone não foi registrado', async () => {
-    const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const error = jest.spyOn(console, 'error').mockImplementation(() => undefined);
     const { fixture, host, svg } = await setup();
 
     host.name.set('x');

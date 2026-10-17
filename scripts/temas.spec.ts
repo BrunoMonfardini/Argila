@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from '@jest/globals';
 import {
   arrayItems,
   cssImports,
@@ -94,7 +94,7 @@ describe.each(styleFiles.map((file) => [relative(TOKENS, file), file]))('estilo 
 
   it('tem paleta nativa, que vale sem data-arg-palette ou com "nativa"', () => {
     const native = nativeFiles.find((candidate) => name(candidate) === style);
-    expect(native, `falta palettes/nativas/${style}.css`).toBeDefined();
+    expect(nativeFiles.map(name)).toContain(style);
 
     const selectors = topLevelSelectors(readFileSync(native!, 'utf8'));
     expect(selectors).toContain(`:root[data-arg-style='${style}']:not([data-arg-palette])`);

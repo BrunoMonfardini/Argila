@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -45,7 +46,7 @@ function controlledUploader() {
 
 describe('ArgFileUpload', () => {
   async function setup() {
-    const announce = vi
+    const announce = jest
       .spyOn(TestBed.inject(ArgAnnouncer), 'announce')
       .mockImplementation(() => undefined);
     const fixture = TestBed.createComponent(Host);
@@ -75,7 +76,7 @@ describe('ArgFileUpload', () => {
     };
   }
 
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => jest.restoreAllMocks());
 
   it('o input nativo tem o título como nome e a dica como descrição', async () => {
     const { input, root } = await setup();

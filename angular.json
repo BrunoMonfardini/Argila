@@ -25,21 +25,6 @@
           },
           "defaultConfiguration": "production"
         },
-        "test": {
-          "builder": "@angular/build:unit-test",
-          "options": {
-            "tsConfig": "projects/ui/tsconfig.spec.json",
-            "coverage": true,
-            "coverageExclude": ["**/public-api.ts"],
-            "coverageReporters": ["text-summary", "html"],
-            "coverageThresholds": {
-              "lines": 80,
-              "branches": 80,
-              "functions": 80,
-              "statements": 80
-            }
-          }
-        },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
@@ -109,21 +94,6 @@
             }
           },
           "defaultConfiguration": "development"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test",
-          "options": {
-            "tsConfig": "projects/docs/tsconfig.spec.json",
-            "coverage": true,
-            "coverageExclude": ["**/public-api.ts", "**/main.ts", "**/ui/src/lib/*/*.ts"],
-            "coverageReporters": ["text-summary", "html"],
-            "coverageThresholds": {
-              "lines": 80,
-              "branches": 80,
-              "functions": 80,
-              "statements": 80
-            }
-          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",

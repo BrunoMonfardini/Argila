@@ -20,7 +20,8 @@ describe('acessibilidade do catálogo', () => {
     await fixture.whenStable();
 
     const root: HTMLElement = fixture.nativeElement;
-    expect(root.querySelector('main h1'), 'a página não renderizou').not.toBeNull();
+    // Sem o título, a página não renderizou e "sem violações" não diria nada
+    expect(root.querySelector('main h1')).not.toBeNull();
     expect(a11yViolations(root)).toEqual([]);
   });
 });

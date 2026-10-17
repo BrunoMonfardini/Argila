@@ -1,5 +1,7 @@
-// @vitest-environment jsdom
-import { afterEach, describe, expect, it } from 'vitest';
+/**
+ * @jest-environment jsdom
+ */
+import { afterEach, describe, expect, it } from '@jest/globals';
 import {
   auditPage,
   combinationName,

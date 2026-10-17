@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { a11yViolations, accessibleName } from '../../testing/a11y';
@@ -113,9 +114,27 @@ describe('ArgAgenda', () => {
   });
 
   it('começa no primeiro horário que ainda não passou, dentro da grade', async () => {
-    vi.useFakeTimers({ toFake: ['Date'] });
+    // Só o relógio é falso: o Angular continua com os timers reais para estabilizar
+    jest.useFakeTimers({
+      doNotFake: [
+        'hrtime',
+        'nextTick',
+        'performance',
+        'queueMicrotask',
+        'requestAnimationFrame',
+        'cancelAnimationFrame',
+        'requestIdleCallback',
+        'cancelIdleCallback',
+        'setImmediate',
+        'clearImmediate',
+        'setInterval',
+        'clearInterval',
+        'setTimeout',
+        'clearTimeout',
+      ],
+    });
     try {
-      vi.setSystemTime(new Date(2026, 9, 13, 9, 40));
+      jest.setSystemTime(new Date(2026, 9, 13, 9, 40));
       const { root } = await setup();
       const tabbable = () =>
         Array.from(root.querySelectorAll<HTMLElement>('[role="gridcell"]'))
@@ -124,7 +143,7 @@ describe('ArgAgenda', () => {
       expect(tabbable()).toEqual(['2026-10-13|3']);
 
       // Depois do expediente da grade (que termina às 12:00): o último horário
-      vi.setSystemTime(new Date(2026, 9, 13, 18, 0));
+      jest.setSystemTime(new Date(2026, 9, 13, 18, 0));
       const late = await setup();
       expect(
         Array.from(late.root.querySelectorAll<HTMLElement>('[role="gridcell"]'))
@@ -132,7 +151,7 @@ describe('ArgAgenda', () => {
           .map((c) => c.dataset['cell']),
       ).toEqual(['2026-10-13|7']);
     } finally {
-      vi.useRealTimers();
+      jest.useRealTimers();
     }
   });
 

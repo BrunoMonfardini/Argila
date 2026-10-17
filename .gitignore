@@ -48,3 +48,7 @@ Thumbs.db
 
 # Checkup visual: capturas e relatório gerados por scripts/checkup-visual.ts
 /checkup
+
+# Relatórios dos testes (JUnit)
+/reports
+/cobertura-main

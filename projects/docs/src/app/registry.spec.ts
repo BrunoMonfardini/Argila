@@ -15,6 +15,24 @@ const PATTERN: DocPage = {
   examples: [{ name: 'Lista', component: Empty }],
 };
 
+/**
+ * Renderiza cada exemplo de cada página e devolve os nomes ("página: exemplo")
+ * em que `check` deu verdadeiro.
+ */
+function renderAll(check: (root: HTMLElement, name: string) => boolean): string[] {
+  const failed: string[] = [];
+  for (const page of ALL_DOC_PAGES) {
+    for (const example of page.examples) {
+      const fixture = TestBed.createComponent(example.component);
+      fixture.detectChanges();
+      const name = `${page.slug}: ${example.name}`;
+      if (check(fixture.nativeElement, name)) failed.push(name);
+      fixture.destroy();
+    }
+  }
+  return failed;
+}
+
 describe('registro do catálogo', () => {
   it('monta o caminho sem acento a partir da categoria', () => {
     expect(categoryPath('Padrões')).toBe('padroes');
@@ -33,34 +51,32 @@ describe('registro do catálogo', () => {
   });
 
   it('não repete nome de exemplo dentro de uma página', () => {
-    for (const page of ALL_DOC_PAGES) {
+    const repeated = ALL_DOC_PAGES.filter((page) => {
       const names = page.examples.map((example) => example.name);
-      expect(new Set(names).size, page.slug).toBe(names.length);
-    }
+      return new Set(names).size !== names.length;
+    }).map((page) => page.slug);
+
+    expect(repeated).toEqual([]);
   });
 
   it('renderiza todos os exemplos de todas as páginas', () => {
     TestBed.configureTestingModule({ providers: [provideArgIcons(argIconsAll)] });
-    for (const page of ALL_DOC_PAGES) {
-      for (const example of page.examples) {
-        const fixture = TestBed.createComponent(example.component);
-        fixture.detectChanges();
-        const root: HTMLElement = fixture.nativeElement;
-        expect(root.children.length, `${page.slug}: ${example.name}`).toBeGreaterThan(0);
-        fixture.destroy();
-      }
-    }
+
+    const empty = renderAll((root) => root.children.length === 0);
+
+    expect(empty).toEqual([]);
   });
 
   it('nenhum exemplo tem violação de acessibilidade', () => {
     TestBed.configureTestingModule({ providers: [provideArgIcons(argIconsAll)] });
-    for (const page of ALL_DOC_PAGES) {
-      for (const example of page.examples) {
-        const fixture = TestBed.createComponent(example.component);
-        fixture.detectChanges();
-        expect(a11yViolations(fixture.nativeElement), `${page.slug}: ${example.name}`).toEqual([]);
-        fixture.destroy();
-      }
-    }
+    const violations: Record<string, unknown[]> = {};
+
+    renderAll((root, name) => {
+      const found = a11yViolations(root);
+      if (found.length) violations[name] = found;
+      return false;
+    });
+
+    expect(violations).toEqual({});
   });
 });

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { a11yViolations } from '../../testing/a11y';
 import { ArgAnnouncer } from '../internal/announcer';
@@ -5,20 +6,20 @@ import { ArgToast } from './toast';
 
 describe('ArgToast', () => {
   let toast: ArgToast;
-  let announce: ReturnType<typeof vi.spyOn>;
+  let announce: ReturnType<typeof jest.spyOn>;
 
   beforeEach(() => {
-    vi.useFakeTimers();
+    jest.useFakeTimers();
     toast = TestBed.inject(ArgToast);
-    announce = vi
+    announce = jest
       .spyOn(TestBed.inject(ArgAnnouncer), 'announce')
       .mockImplementation(() => undefined);
   });
 
   afterEach(() => {
     toast.dismissAll();
-    vi.useRealTimers();
-    vi.restoreAllMocks();
+    jest.useRealTimers();
+    jest.restoreAllMocks();
   });
 
   const stack = () => document.querySelector<HTMLElement>('arg-toast-stack')!;
@@ -59,7 +60,7 @@ describe('ArgToast', () => {
     );
 
     // Os três saem depois de 5 s; um aviso novo, bem depois, é anunciado sozinho
-    vi.advanceTimersByTime(6000);
+    jest.advanceTimersByTime(6000);
     toast.show('Outro');
     expect(announce).toHaveBeenLastCalledWith('Outro', 'polite');
   });
@@ -76,18 +77,18 @@ describe('ArgToast', () => {
       action: { label: 'Desfazer', run: () => undefined },
     });
 
-    vi.advanceTimersByTime(5000);
+    jest.advanceTimersByTime(5000);
     expect(await plain.dismissed).toBe('timeout');
     expect(messages()).toEqual(['Removido']);
 
-    vi.advanceTimersByTime(3000);
+    jest.advanceTimersByTime(3000);
     expect(await withAction.dismissed).toBe('timeout');
     expect(messages()).toEqual([]);
   });
 
   it('duration 0 fica até fechar', () => {
     toast.show('Erro', { duration: 0 });
-    vi.advanceTimersByTime(60_000);
+    jest.advanceTimersByTime(60_000);
     expect(messages()).toEqual(['Erro']);
   });
 
@@ -96,7 +97,7 @@ describe('ArgToast', () => {
     expect(messages()).toEqual(['1', '2', '3']);
     expect(announce).toHaveBeenCalledTimes(3);
 
-    vi.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(1000);
     refs[1].dismiss();
     expect(messages()).toEqual(['1', '3', '4']);
     expect(announce).toHaveBeenLastCalledWith('4', 'polite');
@@ -113,16 +114,16 @@ describe('ArgToast', () => {
 
   it('pausa com o mouse em cima e continua de onde parou', () => {
     toast.show('Salvo');
-    vi.advanceTimersByTime(3000);
+    jest.advanceTimersByTime(3000);
 
     stack().dispatchEvent(new MouseEvent('mouseenter'));
-    vi.advanceTimersByTime(10_000);
+    jest.advanceTimersByTime(10_000);
     expect(messages()).toEqual(['Salvo']);
 
     stack().dispatchEvent(new MouseEvent('mouseleave'));
-    vi.advanceTimersByTime(1999);
+    jest.advanceTimersByTime(1999);
     expect(messages()).toEqual(['Salvo']);
-    vi.advanceTimersByTime(1);
+    jest.advanceTimersByTime(1);
     expect(messages()).toEqual([]);
   });
 
@@ -131,22 +132,22 @@ describe('ArgToast', () => {
     const close = button('Fechar notificação');
 
     close.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
-    vi.advanceTimersByTime(20_000);
+    jest.advanceTimersByTime(20_000);
     expect(messages()).toEqual(['Removido']);
 
     close.dispatchEvent(
       new FocusEvent('focusout', { bubbles: true, relatedTarget: button('Desfazer') }),
     );
-    vi.advanceTimersByTime(20_000);
+    jest.advanceTimersByTime(20_000);
     expect(messages()).toEqual(['Removido']);
 
     close.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }));
-    vi.advanceTimersByTime(8000);
+    jest.advanceTimersByTime(8000);
     expect(messages()).toEqual([]);
   });
 
   it('a ação roda, fecha o aviso e informa o motivo', async () => {
-    const run = vi.fn();
+    const run = jest.fn();
     const ref = toast.show('Removido', { action: { label: 'Desfazer', run } });
 
     button('Desfazer').click();

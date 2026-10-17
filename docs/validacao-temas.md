@@ -1,6 +1,6 @@
 # Validação dos temas
 
-_Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que conferir antes de seguir para o PR-2 do [plano de estilos e paletas](plano-estilos-paletas-e-catalogo.md). Marque cada item quando tiver conferido.
+_Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que conferir no marco E0 do [plano de execução dos design systems](plano-de-execucao-design-systems.md#e0-checkup-dos-temas), antes do E1. Marque cada item quando tiver conferido.
 
 ## Situação
 

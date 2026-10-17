@@ -1,9 +1,10 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { ArgAnnouncer } from './announcer';
 
 describe('ArgAnnouncer', () => {
-  beforeEach(() => vi.useFakeTimers());
-  afterEach(() => vi.useRealTimers());
+  beforeEach(() => jest.useFakeTimers());
+  afterEach(() => jest.useRealTimers());
 
   function regions() {
     return Array.from(document.querySelectorAll<HTMLElement>('.arg-announcer'));
@@ -26,14 +27,14 @@ describe('ArgAnnouncer', () => {
   it('escreve a mensagem depois de limpar, para repetir o mesmo aviso', () => {
     const announcer = TestBed.inject(ArgAnnouncer);
     announcer.announce('Salvo');
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
     const [region] = regions();
     expect(region.textContent).toBe('Salvo');
 
     announcer.announce('Salvo');
 
     expect(region.textContent).toBe('');
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
     expect(region.textContent).toBe('Salvo');
   });
 
@@ -42,7 +43,7 @@ describe('ArgAnnouncer', () => {
 
     announcer.announce('Primeira');
     announcer.announce('Segunda');
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
 
     expect(regions()[0].textContent).toBe('Segunda');
   });
@@ -52,7 +53,7 @@ describe('ArgAnnouncer', () => {
 
     announcer.announce('Horário indisponível', 'assertive');
     announcer.announce('Outro erro', 'assertive');
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
 
     const [region] = regions();
     expect(regions()).toHaveLength(1);
@@ -64,11 +65,11 @@ describe('ArgAnnouncer', () => {
   it('limpa as mensagens pendentes e as já escritas', () => {
     const announcer = TestBed.inject(ArgAnnouncer);
     announcer.announce('Escrita');
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
     announcer.announce('Pendente', 'assertive');
 
     announcer.clear();
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
 
     expect(regions().map((region) => region.textContent)).toEqual(['', '']);
   });
