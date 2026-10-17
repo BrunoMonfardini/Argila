@@ -35,7 +35,7 @@ jobs:
       - run: pnpm manifest:check
       # Cobertura e histórico da main: o PR compara com ela, a main acrescenta ao histórico
       - name: Cobertura da main
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: cobertura-main
           key: cobertura-main-${{ github.event.pull_request.base.sha || github.sha }}
@@ -62,7 +62,7 @@ jobs:
         run: cp coverage/coverage-summary.json cobertura-main/
       - name: Cobertura da main para os próximos PRs
         if: github.event_name == 'push'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: cobertura-main
           key: cobertura-main-${{ github.sha }}
