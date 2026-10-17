@@ -52,6 +52,12 @@ const PAIRS: ContrastPair[] = [
     background: '--arg-color-primary-pressed',
     minimum: TEXT,
   },
+  // Preenchimento suave da marca (botões, chips e alertas "de massinha")
+  {
+    foreground: '--arg-color-on-primary-soft',
+    background: '--arg-color-primary-soft',
+    minimum: TEXT,
+  },
   // Botões secundário e terciário: texto na cor da marca
   { foreground: '--arg-color-primary', background: '--arg-color-surface', minimum: TEXT },
   { foreground: '--arg-color-primary', background: '--arg-color-primary-subtle', minimum: TEXT },
@@ -153,6 +159,37 @@ const DEFAULT = 'estilo argila, paleta nativa';
 
 /** Transparência mínima das superfícies: o pior caso para o texto sobre elas. */
 const MIN_OPACITY = '0.4';
+
+/** Alto contraste: texto de leitura em AAA (7:1), não só AA. */
+const AAA = 7;
+const READING_PAIRS: ContrastPair[] = [
+  ...['background', 'surface', 'surface-raised', 'surface-sunken'].flatMap((bg) =>
+    ['--arg-color-text', '--arg-color-text-muted', '--arg-color-text-link'].map((foreground) => ({
+      foreground,
+      background: `--arg-color-${bg}`,
+      minimum: AAA,
+    })),
+  ),
+];
+
+describe('contraste AAA na paleta Alto contraste', () => {
+  const highContrast = Object.entries(COMBINATIONS).filter(
+    ([, attributes]) => attributes['data-arg-palette'] === 'alto-contraste',
+  );
+
+  it('alguma combinação usa a paleta', () => {
+    expect(highContrast.length).toBeGreaterThan(0);
+  });
+
+  for (const [combination, attributes] of highContrast) {
+    const tokens = tokensForRoot(files, attributes);
+    for (const scheme of SCHEMES) {
+      it(`${combination}, tema ${scheme === 'light' ? 'claro' : 'escuro'}: texto em 7:1`, () => {
+        expect(contrastFailures(checkContrast(tokens, READING_PAIRS, scheme))).toEqual([]);
+      });
+    }
+  }
+});
 
 describe('contraste dos tokens', () => {
   for (const [combination, attributes] of Object.entries(COMBINATIONS)) {

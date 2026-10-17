@@ -129,6 +129,18 @@ describe.each(withFiles.map((ds) => [ds.id]))('design system %s', (id) => {
   });
 });
 
+/** O que toda paleta define: sem isso, a cor vazaria da Massinha (o padrão) para outra marca. */
+const PALETTE_TOKENS = [
+  '--arg-color-primary',
+  '--arg-color-on-primary',
+  '--arg-color-primary-soft',
+  '--arg-color-on-primary-soft',
+  '--arg-color-secondary',
+  '--arg-color-on-secondary',
+  '--arg-color-accent',
+  '--arg-color-on-accent',
+];
+
 describe.each(
   [...sharedPalettes, ...withFiles.map((ds) => nativeFile(ds.id))].map((file) => [
     relative(TOKENS, file),
@@ -139,6 +151,11 @@ describe.each(
     const css = readFileSync(file, 'utf8');
     const shape = [...declaredTokens(css)].filter((token) => !token.startsWith('--arg-color-'));
     expect(shape).toEqual([]);
+  });
+
+  it('define as cores de marca, inclusive o preenchimento suave', () => {
+    const declared = declaredTokens(readFileSync(file, 'utf8'));
+    expect(PALETTE_TOKENS.filter((token) => !declared.has(token))).toEqual([]);
   });
 });
 
