@@ -14,6 +14,7 @@ import {
   type ArgBrandRole,
 } from '../design-systems/colors';
 import { ARG_ALLOWED_COLORS } from '../design-systems/colors.generated';
+import { ARG_SEGMENTS } from './segments';
 
 export {
   ARG_BRAND_COLORS,
@@ -159,6 +160,11 @@ export class ArgTheme {
 
   private readonly _palette = signal(readPalette(this.root, this._style()));
 
+  private readonly segments = inject(ARG_SEGMENTS);
+  private readonly _segment = signal(this.root.getAttribute('data-arg-segment') ?? undefined);
+  /** Segmento aplicado por último com `setSegment`. */
+  readonly segment = this._segment.asReadonly();
+
   private readonly _colors = signal<ArgColors>(readColors(this.root));
   /** Cores de marca aplicadas, por papel. */
   readonly colors = this._colors.asReadonly();
@@ -252,6 +258,30 @@ export class ArgTheme {
   /** Volta às cores da paleta. */
   clearColors(): void {
     this.setColors({});
+  }
+
+  /**
+   * Aplica de uma vez um segmento declarado em `provideArgila`: design
+   * system, paleta (ou a padrão dele), cores, modo e transparência. Um nome
+   * que não foi declarado é ignorado, com aviso em desenvolvimento.
+   */
+  setSegment(name: string): void {
+    const segment = this.segments[name];
+    if (!segment) {
+      warn(`o segmento "${name}" não foi declarado em provideArgila.`);
+      return;
+    }
+    // Direto, sem o setStyle: a paleta e as cores anteriores vão ser trocadas de qualquer jeito
+    this.clearColors();
+    this.root.setAttribute('data-arg-style', segment.style);
+    this._style.set(segment.style);
+    this.setPalette((segment.palette ?? this.palettes()[0]) as ArgPalette);
+    this.setColorScheme(segment.scheme ?? this._colorScheme());
+    if (segment.surfaceOpacity === undefined) this.clearSurfaceOpacity();
+    else this.setSurfaceOpacity(segment.surfaceOpacity);
+    this.setColors(segment.colors ?? {});
+    this.root.setAttribute('data-arg-segment', name);
+    this._segment.set(name);
   }
 
   /** Substitui a marca atual; campos omitidos voltam ao padrão do Argila. */
