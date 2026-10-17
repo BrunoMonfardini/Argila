@@ -38,6 +38,8 @@ import { TIME_SLOTS_DOCS } from '../../../ui/src/lib/time-slots/time-slots.docs'
 import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
 import { TOOLTIP_DOCS } from '../../../ui/src/lib/tooltip/tooltip.docs';
 import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
+import { NB_STICKER_DOCS } from '../../../ui/src/lib/design-systems/neo-brutalista/exclusivos/nb-sticker/nb-sticker.docs';
+import { NB_RULES_DOCS } from '../../../ui/src/lib/design-systems/neo-brutalista/exclusivos/nb-rules/nb-rules.docs';
 import type { DocCategory, DocPage } from '../../../ui/src/docs/doc-page';
 
 export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-page';
@@ -47,6 +49,8 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  * e acrescente aqui. O CI confere que nenhum componente exportado ficou de fora.
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
+  NB_RULES_DOCS,
+  NB_STICKER_DOCS,
   AGENDA_DOCS,
   ALERT_DOCS,
   APP_SHELL_DOCS,
