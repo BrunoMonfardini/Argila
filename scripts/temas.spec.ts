@@ -113,6 +113,38 @@ describe.each([...paletteFiles, ...nativeFiles].map((file) => [relative(TOKENS, 
   },
 );
 
+describe('painéis sobre o conteúdo', () => {
+  it('toda regra com fundo surface-raised desfoca o que está atrás', () => {
+    const rules = cssFiles(resolve(ROOT, 'projects/ui/src/lib')).flatMap((file) => {
+      const css = readFileSync(file, 'utf8');
+      // O fundo pode vir direto do token ou de um token do componente apontando para ele
+      const raised = [
+        '--arg-color-surface-raised',
+        ...[...css.matchAll(/(--arg-[\w-]+):\s*var\(--arg-color-surface-raised\);/g)].map(
+          ([, token]) => token,
+        ),
+      ];
+      return [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+        .filter(([, , body]) =>
+          [...body.matchAll(/(?:^|;)\s*background:\s*var\((--[\w-]+)\)/g)].some(([, token]) =>
+            raised.includes(token),
+          ),
+        )
+        .map(([, selector, body]) => ({
+          rule: `${relative(ROOT, file).replace(/\\/g, '/')} ${selector.replace(/\/\*[\s\S]*?\*\//g, '').trim()}`,
+          body,
+        }));
+    });
+
+    const withoutBlur = rules
+      .filter(({ body }) => !body.includes('backdrop-filter: blur(var(--arg-surface-blur))'))
+      .map(({ rule }) => rule);
+
+    expect(rules.length).toBeGreaterThan(0);
+    expect(withoutBlur).toEqual([]);
+  });
+});
+
 describe('tokens dos componentes', () => {
   it('todo token lido sem valor reserva está definido em algum lugar', () => {
     const files = [

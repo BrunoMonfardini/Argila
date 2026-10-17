@@ -5,6 +5,7 @@ import {
   checkContrast,
   contrastFailures,
   parseTokenBlocks,
+  resolveColor,
   tokensForRoot,
   type ColorScheme,
   type ContrastPair,
@@ -180,6 +181,17 @@ describe('contraste dos tokens', () => {
       });
     }
   }
+
+  it('painéis sobre o conteúdo ficam no mínimo 80% opacos, mesmo com as superfícies a 0.4', () => {
+    const tokens = tokensForRoot(files, { 'data-arg-style': 'transparente' });
+    tokens.set('--arg-surface-opacity', MIN_OPACITY);
+
+    const raised = resolveColor('var(--arg-color-surface-raised)', tokens, 'light');
+    const surface = resolveColor('var(--arg-color-surface)', tokens, 'light');
+
+    expect(raised.a).toBeCloseTo(0.8);
+    expect(surface.a).toBeCloseTo(0.4);
+  });
 
   it('falha quando o texto sobre a cor primária perde contraste', () => {
     const broken = tokensForRoot(files, COMBINATIONS[DEFAULT]);
