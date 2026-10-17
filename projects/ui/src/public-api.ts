@@ -41,6 +41,8 @@ export * from './lib/table/table';
 export * from './lib/tabs/tabs';
 export * from './lib/tag/tag';
 export * from './lib/theme/theme';
+export * from './lib/theme/segments';
+export * from './lib/theme/provide-argila';
 export * from './lib/time-slots/time-slots';
 export * from './lib/toast/toast';
 export * from './lib/tooltip/tooltip';
