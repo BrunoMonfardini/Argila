@@ -1,0 +1,24 @@
+/*
+ * Paleta Alto contraste: preto, branco, azul e amarelo puros; bordas sempre visíveis.
+ * Compartilhada: vale em qualquer design system que a aceite (lista `paletas`
+ * do manifesto), com data-arg-palette="alto-contraste".
+ */
+:root[data-arg-palette='alto-contraste'] {
+  --arg-color-primary: light-dark(#0033cc, #ffe600);
+  --arg-color-on-primary: light-dark(#ffffff, #000000);
+  --arg-color-primary-soft: light-dark(#dde6ff, #2e2a00);
+  --arg-color-on-primary-soft: light-dark(#000000, #ffffff);
+  --arg-color-secondary: light-dark(#000000, #ffffff);
+  --arg-color-on-secondary: light-dark(#ffffff, #000000);
+  --arg-color-accent: light-dark(#7a0000, #66ccff);
+  --arg-color-on-accent: light-dark(#ffffff, #000000);
+  --arg-color-background: light-dark(#ffffff, #000000);
+  --arg-color-surface-solid: light-dark(#ffffff, #000000);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #000000);
+  --arg-color-surface-sunken-solid: light-dark(#f0f0f0, #111111);
+  --arg-color-text: light-dark(#000000, #ffffff);
+  --arg-color-text-muted: light-dark(#2b2b2b, #e0e0e0);
+  --arg-color-border: light-dark(#000000, #ffffff);
+  --arg-color-border-strong: light-dark(#000000, #ffffff);
+  --arg-color-focus: light-dark(#0033cc, #ffe600);
+}

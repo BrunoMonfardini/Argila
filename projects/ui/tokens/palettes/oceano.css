@@ -1,0 +1,24 @@
+/*
+ * Paleta Oceano: azul-petróleo, areia e coral.
+ * Compartilhada: vale em qualquer design system que a aceite (lista `paletas`
+ * do manifesto), com data-arg-palette="oceano".
+ */
+:root[data-arg-palette='oceano'] {
+  --arg-color-primary: light-dark(#0b5e6b, #6fc7d3);
+  --arg-color-on-primary: light-dark(#ffffff, #062227);
+  --arg-color-primary-soft: light-dark(#b9e3e8, #1d4d55);
+  --arg-color-on-primary-soft: light-dark(#062a30, #e2f6f8);
+  --arg-color-secondary: light-dark(#3e5560, #c3d3da);
+  --arg-color-on-secondary: light-dark(#ffffff, #0f1c21);
+  --arg-color-accent: light-dark(#a8432f, #f4a08e);
+  --arg-color-on-accent: light-dark(#ffffff, #2b0f09);
+  --arg-color-background: light-dark(#f4f1ea, #0e1a1e);
+  --arg-color-surface-solid: light-dark(#fffdf8, #15252b);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #1c2f36);
+  --arg-color-surface-sunken-solid: light-dark(#ece6da, #0a1417);
+  --arg-color-text: light-dark(#13262c, #e9f1f3);
+  --arg-color-text-muted: light-dark(#475a61, #9fb3ba);
+  --arg-color-border: light-dark(#ddd5c6, #2b4048);
+  --arg-color-border-strong: light-dark(#9aa3a0, #557079);
+  --arg-color-focus: light-dark(#0b6e7d, #7fd3de);
+}

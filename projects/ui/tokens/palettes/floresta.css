@@ -1,0 +1,24 @@
+/*
+ * Paleta Floresta: verde-musgo, oliva e madeira.
+ * Compartilhada: vale em qualquer design system que a aceite (lista `paletas`
+ * do manifesto), com data-arg-palette="floresta".
+ */
+:root[data-arg-palette='floresta'] {
+  --arg-color-primary: light-dark(#3f6b2a, #a8d08d);
+  --arg-color-on-primary: light-dark(#ffffff, #16260d);
+  --arg-color-primary-soft: light-dark(#cfe3bf, #34512a);
+  --arg-color-on-primary-soft: light-dark(#16260d, #eef6e7);
+  --arg-color-secondary: light-dark(#5c5a2e, #d5d29e);
+  --arg-color-on-secondary: light-dark(#ffffff, #1e1d0a);
+  --arg-color-accent: light-dark(#7a4a24, #e0b48c);
+  --arg-color-on-accent: light-dark(#ffffff, #2a1808);
+  --arg-color-background: light-dark(#f2f2ea, #121710);
+  --arg-color-surface-solid: light-dark(#fbfbf6, #1a2117);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #222b1e);
+  --arg-color-surface-sunken-solid: light-dark(#e7e8dc, #0d110b);
+  --arg-color-text: light-dark(#1e241a, #ecefe7);
+  --arg-color-text-muted: light-dark(#4e5646, #a8b19f);
+  --arg-color-border: light-dark(#d9dbcb, #323c2c);
+  --arg-color-border-strong: light-dark(#9da290, #5c6853);
+  --arg-color-focus: light-dark(#4c7f33, #b4da98);
+}

@@ -56,18 +56,20 @@ describe('DocThemeBar', () => {
   });
 
   it('aplica estilo e paleta no <html> e lembra as escolhas', async () => {
-    const { select } = await setup();
+    const { fixture, select } = await setup();
 
     expect(root.getAttribute('data-arg-style')).toBe('argila');
     expect(root.getAttribute('data-arg-palette')).toBe('nativa');
 
     choose(select('Estilo'), 'coda');
-    choose(select('Paleta'), 'terrosa');
+    // A lista de paletas muda com o estilo: a Viva só aparece no CODA
+    await fixture.whenStable();
+    choose(select('Paleta'), 'viva');
 
     expect(root.getAttribute('data-arg-style')).toBe('coda');
-    expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
+    expect(root.getAttribute('data-arg-palette')).toBe('viva');
     expect(localStorage.getItem('argila-docs:estilo')).toBe('coda');
-    expect(localStorage.getItem('argila-docs:paleta')).toBe('terrosa');
+    expect(localStorage.getItem('argila-docs:paleta')).toBe('viva');
   });
 
   it('oferece cada design system e só as paletas que ele aceita, e cada uma se aplica', async () => {

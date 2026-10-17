@@ -7,7 +7,7 @@ export const transparente = {
   referencia: 'transparente.jpg',
   modos: ['light', 'dark'],
   transparencia: true,
-  paletas: ['nativa', 'terrosa'],
+  paletas: ['nativa', 'oceano', 'terrosa', 'mono'],
   componentes: { curados: [], fora: [] },
   exclusivos: [],
   regras: [

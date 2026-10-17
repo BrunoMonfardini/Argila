@@ -1,0 +1,39 @@
+/*
+ * Paleta Terrosa: café, bege e off-white. Era o padrão do Argila até a 0.4;
+ * agora é uma paleta compartilhada, escolhida com data-arg-palette="terrosa".
+ *
+ * Uma paleta só define COR, sempre no :root, porque os estados derivados
+ * (hover, pressed, subtle) são calculados lá.
+ */
+:root[data-arg-palette='terrosa'] {
+  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-300));
+  --arg-color-on-primary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-primary-soft: light-dark(var(--arg-core-clay-200), var(--arg-core-clay-700));
+  --arg-color-on-primary-soft: light-dark(var(--arg-core-clay-900), var(--arg-core-clay-50));
+  --arg-color-secondary: light-dark(var(--arg-core-clay-700), var(--arg-core-clay-200));
+  --arg-color-on-secondary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-accent: light-dark(var(--arg-core-terracotta-600), var(--arg-core-terracotta-400));
+  --arg-color-on-accent: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+
+  --arg-color-background: light-dark(var(--arg-core-neutral-50), var(--arg-core-neutral-950));
+  --arg-color-surface-solid: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
+  --arg-color-surface-raised-solid: light-dark(
+    var(--arg-core-neutral-0),
+    var(--arg-core-neutral-800)
+  );
+  --arg-color-surface-sunken-solid: light-dark(
+    var(--arg-core-neutral-100),
+    var(--arg-core-neutral-950)
+  );
+
+  --arg-color-text: light-dark(var(--arg-core-neutral-900), var(--arg-core-neutral-50));
+  --arg-color-text-muted: light-dark(var(--arg-core-neutral-600), var(--arg-core-neutral-400));
+  --arg-color-text-disabled: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-600));
+
+  --arg-color-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));
+  --arg-color-border-strong: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-500));
+  --arg-color-focus: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
+
+  --arg-color-disabled-bg: light-dark(var(--arg-core-neutral-100), var(--arg-core-neutral-800));
+  --arg-color-disabled-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));
+}

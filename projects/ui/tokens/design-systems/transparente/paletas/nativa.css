@@ -7,6 +7,8 @@
 :root[data-arg-brand='transparente'] {
   --arg-color-primary: light-dark(#a8390b, #fb8c4c);
   --arg-color-on-primary: light-dark(#ffffff, #1e2128);
+  --arg-color-primary-soft: light-dark(#fbd2b8, #5c3016);
+  --arg-color-on-primary-soft: light-dark(#3a1606, #ffe9da);
   --arg-color-secondary: light-dark(#2f3542, #eef0f4);
   --arg-color-on-secondary: light-dark(#ffffff, #1e2128);
   --arg-color-accent: light-dark(#0b5e64, #6fd6dc);
@@ -22,4 +24,5 @@
 
   --arg-color-border: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.08));
   --arg-color-border-strong: light-dark(#b8c0cc, #4a5160);
+  --arg-color-focus: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
 }

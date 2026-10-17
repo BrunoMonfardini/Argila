@@ -1,0 +1,24 @@
+/*
+ * Paleta Viva: saturada, com magenta, ciano e amarelo.
+ * Compartilhada: vale em qualquer design system que a aceite (lista `paletas`
+ * do manifesto), com data-arg-palette="viva".
+ */
+:root[data-arg-palette='viva'] {
+  --arg-color-primary: light-dark(#b0007a, #ff7ad9);
+  --arg-color-on-primary: light-dark(#ffffff, #2a0020);
+  --arg-color-primary-soft: light-dark(#ffc6ec, #5c1748);
+  --arg-color-on-primary-soft: light-dark(#3d002b, #ffe8f7);
+  --arg-color-secondary: light-dark(#006c80, #4fe0f5);
+  --arg-color-on-secondary: light-dark(#ffffff, #00242b);
+  --arg-color-accent: light-dark(#7a5a00, #ffe14d);
+  --arg-color-on-accent: light-dark(#ffffff, #2a2000);
+  --arg-color-background: light-dark(#fff8fd, #12081a);
+  --arg-color-surface-solid: light-dark(#ffffff, #1c1026);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #26173a);
+  --arg-color-surface-sunken-solid: light-dark(#f6eaf4, #0d0512);
+  --arg-color-text: light-dark(#1c0f1e, #f9eef8);
+  --arg-color-text-muted: light-dark(#584459, #c2aec4);
+  --arg-color-border: light-dark(#ebd3e6, #3d2b47);
+  --arg-color-border-strong: light-dark(#a98da6, #6e5875);
+  --arg-color-focus: light-dark(#b0007a, #ff7ad9);
+}

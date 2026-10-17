@@ -6,6 +6,8 @@
 :root[data-arg-brand='windows-xp'] {
   --arg-color-primary: light-dark(#000080, #8fa8ff);
   --arg-color-on-primary: light-dark(#ffffff, #000000);
+  --arg-color-primary-soft: light-dark(#c7d0f5, #2a3570);
+  --arg-color-on-primary-soft: light-dark(#000033, #e3e8ff);
   --arg-color-secondary: light-dark(#404040, #d4d0c8);
   --arg-color-on-secondary: light-dark(#ffffff, #000000);
   --arg-color-accent: light-dark(#7a1f1f, #ffb4a8);

@@ -1,0 +1,24 @@
+/*
+ * Paleta Preto e branco: só neutros. A primária é preta no claro e branca no escuro.
+ * Compartilhada: vale em qualquer design system que a aceite (lista `paletas`
+ * do manifesto), com data-arg-palette="mono".
+ */
+:root[data-arg-palette='mono'] {
+  --arg-color-primary: light-dark(#111111, #f2f2f2);
+  --arg-color-on-primary: light-dark(#ffffff, #111111);
+  --arg-color-primary-soft: light-dark(#e0e0e0, #3a3a3a);
+  --arg-color-on-primary-soft: light-dark(#111111, #f2f2f2);
+  --arg-color-secondary: light-dark(#444444, #cccccc);
+  --arg-color-on-secondary: light-dark(#ffffff, #111111);
+  --arg-color-accent: light-dark(#2b2b2b, #e0e0e0);
+  --arg-color-on-accent: light-dark(#ffffff, #111111);
+  --arg-color-background: light-dark(#f5f5f5, #0d0d0d);
+  --arg-color-surface-solid: light-dark(#ffffff, #171717);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #202020);
+  --arg-color-surface-sunken-solid: light-dark(#ebebeb, #0a0a0a);
+  --arg-color-text: light-dark(#111111, #f2f2f2);
+  --arg-color-text-muted: light-dark(#555555, #ababab);
+  --arg-color-border: light-dark(#d6d6d6, #333333);
+  --arg-color-border-strong: light-dark(#8a8a8a, #6b6b6b);
+  --arg-color-focus: light-dark(#111111, #f2f2f2);
+}

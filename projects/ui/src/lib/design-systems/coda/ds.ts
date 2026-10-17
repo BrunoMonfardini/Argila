@@ -6,7 +6,7 @@ export const coda = {
   nome: 'CODA',
   modos: ['light', 'dark'],
   transparencia: false,
-  paletas: ['nativa', 'terrosa'],
+  paletas: ['nativa', 'viva', 'mono', 'alto-contraste'],
   fontes: { corpo: 'Silkscreen' },
   componentes: { curados: [], fora: [] },
   exclusivos: [],

@@ -6,6 +6,8 @@
 :root[data-arg-brand='coda'] {
   --arg-color-primary: light-dark(#b0205f, #f27aae);
   --arg-color-on-primary: light-dark(#ffffff, #1c1c1c);
+  --arg-color-primary-soft: light-dark(#f8c9dd, #5a2340);
+  --arg-color-on-primary-soft: light-dark(#3a0d22, #fde7f1);
   --arg-color-secondary: light-dark(#3a3a3a, #e0e0e0);
   --arg-color-on-secondary: light-dark(#ffffff, #1c1c1c);
   --arg-color-accent: light-dark(#6b5e00, #f5ec3a);

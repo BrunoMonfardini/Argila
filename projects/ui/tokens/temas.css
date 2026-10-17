@@ -1,5 +1,5 @@
 /*
- * Argila — todos os design systems e as suas paletas.
+ * Argila — todos os design systems e as paletas compartilhadas.
  *
  * Inclua depois de argila.css para trocar a aparência só com atributos no
  * <html>: data-arg-style (o design system) e data-arg-palette (a paleta).
@@ -14,3 +14,11 @@
 @import './design-systems/transparente/paletas/nativa.css';
 @import './design-systems/windows-xp/forma.css';
 @import './design-systems/windows-xp/paletas/nativa.css';
+
+/* Paletas compartilhadas: valem em qualquer design system que as aceite */
+@import './palettes/terrosa.css';
+@import './palettes/oceano.css';
+@import './palettes/floresta.css';
+@import './palettes/mono.css';
+@import './palettes/alto-contraste.css';
+@import './palettes/viva.css';

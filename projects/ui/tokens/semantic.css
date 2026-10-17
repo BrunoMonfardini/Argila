@@ -2,7 +2,12 @@
  * Argila — tokens semânticos (camada 2)
  *
  * Nomeados pelo USO, não pelo valor. É esta camada que componentes consomem e
- * que cada estilo, paleta e produto sobrescreve (ver styles/, palettes/ e ArgTheme).
+ * que cada design system, paleta e produto sobrescreve (ver design-systems/,
+ * palettes/ e ArgTheme).
+ *
+ * As cores padrão são a paleta Massinha, a nativa do Argila (o DS padrão):
+ * menta sobre superfícies quase brancas. A Terrosa, padrão até a 0.4, fica em
+ * palettes/terrosa.css.
  *
  * Claro/escuro: cores usam light-dark(), então o modo é decidido por
  * `color-scheme`. Controle pelo atributo `data-arg-theme` no <html>:
@@ -27,8 +32,14 @@
   --arg-color-shade: light-dark(#000, #fff);
 
   /* Marca */
-  --arg-color-primary: light-dark(var(--arg-core-clay-600), var(--arg-core-clay-300));
-  --arg-color-on-primary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-primary: light-dark(#1d7357, #7fdcb8);
+  --arg-color-on-primary: light-dark(#ffffff, #0b2a20);
+  /*
+   * Preenchimento suave da marca (botões, chips e alertas "de massinha"): a cor
+   * pastel da referência, que não serve como texto. O texto por cima é on-*.
+   */
+  --arg-color-primary-soft: light-dark(#9fe3c7, #2a5c4b);
+  --arg-color-on-primary-soft: light-dark(#14322a, #e6fbf2);
   --arg-color-primary-hover: color-mix(
     in oklab,
     var(--arg-color-primary),
@@ -50,8 +61,8 @@
    * Destaque: badge, progresso, passo atual, marcadores. Cada uma tem a cor
    * do texto por cima (on-*) e os mesmos estados derivados da primária.
    */
-  --arg-color-secondary: light-dark(var(--arg-core-clay-700), var(--arg-core-clay-200));
-  --arg-color-on-secondary: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-secondary: light-dark(#475550, #c6d3ce);
+  --arg-color-on-secondary: light-dark(#ffffff, #14201c);
   --arg-color-secondary-hover: color-mix(
     in oklab,
     var(--arg-color-secondary),
@@ -68,8 +79,8 @@
     var(--arg-color-surface)
   );
 
-  --arg-color-accent: light-dark(var(--arg-core-terracotta-600), var(--arg-core-terracotta-400));
-  --arg-color-on-accent: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-950));
+  --arg-color-accent: light-dark(#9b3d5b, #f2a7be);
+  --arg-color-on-accent: light-dark(#ffffff, #2a0f18);
   --arg-color-accent-hover: color-mix(
     in oklab,
     var(--arg-color-accent),
@@ -91,16 +102,10 @@
    * componentes aplica a transparência (--arg-surface-opacity, de 0.4 a 1).
    * Abaixo de 0.4 o texto pode perder contraste com o que está atrás.
    */
-  --arg-color-background: light-dark(var(--arg-core-neutral-50), var(--arg-core-neutral-950));
-  --arg-color-surface-solid: light-dark(var(--arg-core-neutral-0), var(--arg-core-neutral-900));
-  --arg-color-surface-raised-solid: light-dark(
-    var(--arg-core-neutral-0),
-    var(--arg-core-neutral-800)
-  );
-  --arg-color-surface-sunken-solid: light-dark(
-    var(--arg-core-neutral-100),
-    var(--arg-core-neutral-950)
-  );
+  --arg-color-background: light-dark(#f2f2ef, #161917);
+  --arg-color-surface-solid: light-dark(#fffffe, #1f2421);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #272d29);
+  --arg-color-surface-sunken-solid: light-dark(#e9eae5, #121513);
   --arg-surface-opacity: 1;
   --arg-surface-alpha: calc(clamp(0.4, var(--arg-surface-opacity), 1) * 100%);
   /*
@@ -128,9 +133,9 @@
   --arg-color-overlay: rgb(20 18 17 / 0.56);
 
   /* Texto */
-  --arg-color-text: light-dark(var(--arg-core-neutral-900), var(--arg-core-neutral-50));
-  --arg-color-text-muted: light-dark(var(--arg-core-neutral-600), var(--arg-core-neutral-400));
-  --arg-color-text-disabled: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-600));
+  --arg-color-text: light-dark(#1f2622, #eef2ef);
+  --arg-color-text-muted: light-dark(#525c57, #a9b4ae);
+  --arg-color-text-disabled: light-dark(#a5ada8, #5b655f);
   /*
    * No escuro, o link clareia um pouco (10% de branco): a cor da marca pura
    * fica abaixo de 4.5:1 sobre surface-raised (diálogos, popovers, menus).
@@ -142,13 +147,14 @@
   );
 
   /* Bordas */
-  --arg-color-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));
-  --arg-color-border-strong: light-dark(var(--arg-core-neutral-400), var(--arg-core-neutral-500));
-  --arg-color-focus: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
+  --arg-color-border: light-dark(#e5e5e0, #343c37);
+  --arg-color-border-strong: light-dark(#a5ada8, #5b655f);
+  /* Anel de foco menta: escuro no claro, para ter 3:1 contra o fundo */
+  --arg-color-focus: light-dark(#1e8f6c, #7fe0c0);
 
   /* Desabilitado */
-  --arg-color-disabled-bg: light-dark(var(--arg-core-neutral-100), var(--arg-core-neutral-800));
-  --arg-color-disabled-border: light-dark(var(--arg-core-neutral-200), var(--arg-core-neutral-700));
+  --arg-color-disabled-bg: light-dark(#ecece8, #262b28);
+  --arg-color-disabled-border: light-dark(#e0e1dc, #343c37);
 
   /* Feedback: base (texto/ícone), subtle (fundo), on (texto sobre a base) */
   --arg-color-info: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
