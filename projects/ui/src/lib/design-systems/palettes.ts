@@ -22,6 +22,7 @@ export const ARG_SHARED_PALETTES = {
   mono: { nome: 'Preto e branco', arquivo: true },
   'alto-contraste': { nome: 'Alto contraste', arquivo: true },
   viva: { nome: 'Viva', arquivo: true },
+  pastel: { nome: 'Pastel', arquivo: true },
 } as const satisfies Record<string, ArgSharedPaletteInfo>;
 
 export type ArgSharedPalette = keyof typeof ARG_SHARED_PALETTES;

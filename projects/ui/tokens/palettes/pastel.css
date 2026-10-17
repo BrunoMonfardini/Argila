@@ -1,0 +1,24 @@
+/*
+ * Paleta Pastel: menta, lavanda e pêssego sobre superfícies quase brancas.
+ * Compartilhada: vale em qualquer design system que a aceite (lista `paletas`
+ * do manifesto), com data-arg-palette="pastel".
+ */
+:root[data-arg-palette='pastel'] {
+  --arg-color-primary: light-dark(#2a6b58, #9fe3c7);
+  --arg-color-on-primary: light-dark(#ffffff, #0f2a21);
+  --arg-color-primary-soft: light-dark(#bfe8d8, #2c5548);
+  --arg-color-on-primary-soft: light-dark(#0f2a21, #e8faf2);
+  --arg-color-secondary: light-dark(#5b4a9e, #c9bdf2);
+  --arg-color-on-secondary: light-dark(#ffffff, #1c1438);
+  --arg-color-accent: light-dark(#8e4421, #f7b998);
+  --arg-color-on-accent: light-dark(#ffffff, #2e1408);
+  --arg-color-background: light-dark(#fbf8f4, #1b1a1f);
+  --arg-color-surface-solid: light-dark(#ffffff, #24232a);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #2d2c33);
+  --arg-color-surface-sunken-solid: light-dark(#f2eee8, #141317);
+  --arg-color-text: light-dark(#2a2730, #f3f0f6);
+  --arg-color-text-muted: light-dark(#57525f, #b6b0bd);
+  --arg-color-border: light-dark(#e6e0d8, #3b3842);
+  --arg-color-border-strong: light-dark(#a49cad, #6c6676);
+  --arg-color-focus: light-dark(#2a6b58, #9fe3c7);
+}
