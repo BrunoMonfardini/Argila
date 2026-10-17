@@ -135,9 +135,13 @@ A aparência vem de um **design system** (DS) e de uma **paleta** aceita por ele
 | Design system | `data-arg-style`   | forma: raio, borda, sombra, fonte  | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp`                              |
 | Paleta        | `data-arg-palette` | cores, só entre as que o DS aceita | `nativa` (a do DS, padrão), `terrosa`, `oceano`, `floresta`, `mono`, `alto-contraste`, `viva` |
 
+O Argila, o padrão, tem forma "de massinha" (pílulas, volume, campos rebaixados) e vem no
+próprio `argila.css`; para o visual plano de antes, use `data-arg-style="molde"`.
+
 Cada DS tem um manifesto (`ARG_DESIGN_SYSTEMS`) com os modos de cor, as paletas que aceita
-e se aceita transparência. O CSS de cada um fica em `tokens/design-systems/<ds>/`:
-`forma.css` e `paletas/nativa.css`.
+e se aceita transparência. O CSS de cada um fica em `tokens/design-systems/<ds>/`: `forma.css`,
+`paletas/nativa.css`, a pele dos componentes curados em `componentes/` e um `index.css` que
+junta tudo.
 
 A paleta padrão do Argila é a **Massinha** (menta sobre superfícies quase brancas): são os
 próprios tokens semânticos, então vale mesmo sem `temas.css`. As paletas compartilhadas

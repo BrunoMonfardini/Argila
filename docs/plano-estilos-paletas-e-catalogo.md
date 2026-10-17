@@ -415,6 +415,8 @@ Uma camada só depende das que estão **acima** dela. A exceção são os **excl
 
 ### 5.2 Pastas
 
+O DS padrão (Argila) usa a raiz `:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))`: vale com o atributo e sem estilo nenhum, mas não nos temas antigos. O `index.css` dele vem no `argila.css`, então o visual padrão não depende do `temas.css`. As peles miram a classe estável do componente (`.arg-button`, `.arg-card`…), que vale também quando ele é criado sem o atributo do seletor (`createComponent`), e não redefinem tokens que as variantes usam.
+
 Cada DS se divide em duas pastas com o mesmo nome: o **CSS** fica em `tokens/` (o empacotamento copia os `.css` dali para o pacote) e o **TypeScript** fica em `src/lib/` (o compilador só enxerga `src/`).
 
 ```
@@ -429,6 +431,7 @@ projects/ui/
         <paleta>.css                ajustes opcionais numa paleta compartilhada
       componentes/
         button.css  input.css …     pele dos componentes curados, um arquivo por curado
+      index.css                     junta forma, paletas e peles; o temas.css importa os índices
     styles/  palettes/nativas/      caminhos antigos, só reencaminham (removidos numa major)
     themes/                         só compatibilidade com data-arg-brand
   src/
