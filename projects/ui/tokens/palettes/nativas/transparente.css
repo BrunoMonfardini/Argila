@@ -1,25 +1,5 @@
 /*
- * Paleta nativa do Transparente: cinza claro com laranja como cor da marca.
- * As superfícies são opacas aqui; o estilo aplica a transparência.
+ * Caminho antigo, mantido por compatibilidade: a paleta agora fica em
+ * design-systems/transparente/paletas/nativa.css. Será removido numa versão major.
  */
-:root[data-arg-style='transparente']:not([data-arg-palette]),
-:root[data-arg-style='transparente'][data-arg-palette='nativa'],
-:root[data-arg-brand='transparente'] {
-  --arg-color-primary: light-dark(#a8390b, #fb8c4c);
-  --arg-color-on-primary: light-dark(#ffffff, #1e2128);
-  --arg-color-secondary: light-dark(#2f3542, #eef0f4);
-  --arg-color-on-secondary: light-dark(#ffffff, #1e2128);
-  --arg-color-accent: light-dark(#0b5e64, #6fd6dc);
-  --arg-color-on-accent: light-dark(#ffffff, #1e2128);
-
-  --arg-color-background: light-dark(#e6e9ee, #1e2128);
-  --arg-color-surface-solid: light-dark(#ffffff, #2c303a);
-  --arg-color-surface-raised-solid: light-dark(#ffffff, #343944);
-  --arg-color-surface-sunken-solid: light-dark(#f0f2f6, #1e2128);
-
-  --arg-color-text: light-dark(#2f3542, #eef0f4);
-  --arg-color-text-muted: light-dark(#596172, #aab1bf);
-
-  --arg-color-border: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.08));
-  --arg-color-border-strong: light-dark(#b8c0cc, #4a5160);
-}
+@import '../../design-systems/transparente/paletas/nativa.css';

@@ -1,31 +1,5 @@
 /*
- * Paleta nativa do Windows XP: cinza de janela e azul-marinho.
+ * Caminho antigo, mantido por compatibilidade: a paleta agora fica em
+ * design-systems/windows-xp/paletas/nativa.css. Será removido numa versão major.
  */
-:root[data-arg-style='windows-xp']:not([data-arg-palette]),
-:root[data-arg-style='windows-xp'][data-arg-palette='nativa'],
-:root[data-arg-brand='windows-xp'] {
-  --arg-color-primary: light-dark(#000080, #8fa8ff);
-  --arg-color-on-primary: light-dark(#ffffff, #000000);
-  --arg-color-secondary: light-dark(#404040, #d4d0c8);
-  --arg-color-on-secondary: light-dark(#ffffff, #000000);
-  --arg-color-accent: light-dark(#7a1f1f, #ffb4a8);
-  --arg-color-on-accent: light-dark(#ffffff, #000000);
-
-  --arg-color-background: light-dark(#c0c0c0, #262626);
-  --arg-color-surface-solid: light-dark(#ece9d8, #333333);
-  --arg-color-surface-raised-solid: light-dark(#ffffff, #404040);
-  --arg-color-surface-sunken-solid: light-dark(#ffffff, #1a1a1a);
-
-  --arg-color-text: light-dark(#000000, #ffffff);
-  --arg-color-text-muted: light-dark(#3d3d3d, #c8c8c8);
-
-  --arg-color-border: light-dark(#808080, #5a5a5a);
-  --arg-color-border-strong: light-dark(#404040, #9a9a9a);
-  --arg-color-focus: light-dark(#000000, #ffffff);
-
-  /* Feedback mais escuro no claro: o fundo cinza tira contraste das cores padrão */
-  --arg-color-info: light-dark(var(--arg-core-blue-700), var(--arg-core-blue-300));
-  --arg-color-success: light-dark(var(--arg-core-green-700), var(--arg-core-green-300));
-  --arg-color-warning: light-dark(#6a4605, var(--arg-core-yellow-300));
-  --arg-color-danger: light-dark(var(--arg-core-red-700), var(--arg-core-red-300));
-}
+@import '../../design-systems/windows-xp/paletas/nativa.css';

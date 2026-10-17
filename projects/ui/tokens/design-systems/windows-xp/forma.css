@@ -1,0 +1,24 @@
+/*
+ * Estilo Windows XP (visual clássico): cantos retos, botões em alto-relevo,
+ * campos rebaixados e Tahoma. As cores (cinza de janela e azul-marinho da
+ * barra de título) ficam na paleta nativa, em paletas/nativa.css.
+ *
+ * O relevo usa tons de cinza próprios: faz parte da forma, não da paleta.
+ */
+:root[data-arg-style='windows-xp'],
+:root[data-arg-brand='windows-xp'] {
+  --arg-radius-control: var(--arg-core-radius-0);
+  --arg-radius-container: var(--arg-core-radius-0);
+
+  --arg-shadow-color: light-dark(rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.7));
+  --arg-shadow-sm: 1px 1px 0 var(--arg-shadow-color);
+  --arg-shadow-md: 2px 2px 0 var(--arg-shadow-color);
+  --arg-shadow-lg: 3px 3px 0 var(--arg-shadow-color);
+  --arg-shadow-control:
+    inset -1px -1px light-dark(#404040, #000000), inset 1px 1px light-dark(#ffffff, #6a6a6a),
+    inset -2px -2px light-dark(#808080, #1a1a1a), inset 2px 2px light-dark(#dfdfdf, #4a4a4a);
+  --arg-shadow-field:
+    inset 1px 1px light-dark(#808080, #000000), inset 2px 2px light-dark(#404040, #111111);
+
+  --arg-font-family: Tahoma, 'MS Sans Serif', 'Segoe UI', Geneva, sans-serif;
+}
