@@ -238,6 +238,15 @@
   --arg-shadow-sm: 0 1px 2px var(--arg-shadow-color);
   --arg-shadow-md: 0 4px 12px var(--arg-shadow-color);
   --arg-shadow-lg: 0 12px 32px var(--arg-shadow-color);
+  /*
+   * Cinco níveis de elevação, do cartão apoiado (1) ao diálogo (5). O padrão
+   * reaproveita sm/md/lg; design systems com volume (o Argila) definem os cinco.
+   */
+  --arg-shadow-1: var(--arg-shadow-sm);
+  --arg-shadow-2: var(--arg-shadow-md);
+  --arg-shadow-3: var(--arg-shadow-md);
+  --arg-shadow-4: var(--arg-shadow-lg);
+  --arg-shadow-5: var(--arg-shadow-lg);
   /* Relevo de botões e de campos de texto; o padrão é plano */
   --arg-shadow-control: none;
   --arg-shadow-field: none;
