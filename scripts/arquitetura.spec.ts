@@ -10,6 +10,7 @@ import {
   DESIGN_SYSTEMS_SOURCE,
   DESIGN_SYSTEMS_TOKENS,
   loadDesignSystems,
+  rootSelector,
 } from './lib/design-systems.ts';
 
 /**
@@ -67,7 +68,15 @@ describe.each(designSystems.map((ds) => [ds.id, ds] as const))('design system %s
   it('pele: um arquivo por componente curado, preso ao design system', () => {
     const skins = files(resolve(ROOT, DESIGN_SYSTEMS_TOKENS, id, 'componentes'), '.css');
 
-    expect(skinViolations(ds, skins)).toEqual([]);
+    expect(skinViolations(ds, skins, rootSelector(id))).toEqual([]);
+  });
+
+  it('quem cura algum componente cura todo o núcleo mínimo', () => {
+    const missing = ds.componentes.curados.length
+      ? ARG_CORE_MINIMUM.filter((name) => !ds.componentes.curados.includes(name))
+      : [];
+
+    expect(missing).toEqual([]);
   });
 
   it('exclusivos: prefixo, pasta e seletor', () => {

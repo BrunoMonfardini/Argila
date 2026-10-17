@@ -1,13 +1,20 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { describe, expect, it } from '@jest/globals';
-import { DESIGN_SYSTEMS_TOKENS, designSystemIds, loadDesignSystems } from './lib/design-systems.ts';
+import {
+  DESIGN_SYSTEMS_TOKENS,
+  designSystemIds,
+  loadDesignSystems,
+  rootSelector,
+} from './lib/design-systems.ts';
+import { ARG_DEFAULT_STYLE } from '../projects/ui/src/lib/design-systems/design-system.ts';
 import { cssImports, declaredTokens, requiredTokens, topLevelSelectors } from './lib/temas.ts';
 import { ARG_SHARED_PALETTES } from '../projects/ui/src/lib/design-systems/palettes.ts';
 
 /**
- * Estrutura dos temas: cada design system tem manifesto, forma e paleta
- * nativa, e está no `temas.css`; formas só mudam forma, paletas só mudam cor,
+ * Estrutura dos temas: cada design system tem manifesto, forma, paleta nativa
+ * (o padrão usa os tokens semânticos) e um index.css que junta tudo, ligado ao
+ * `argila.css` (o padrão) ou ao `temas.css`; formas só mudam forma, paletas só mudam cor,
  * e todo token que um componente lê está definido. Um design system esquecido
  * em um desses lugares "não muda nada" na tela; aqui falha.
  */
@@ -25,9 +32,10 @@ function cssFiles(dir: string, recursive = true): string[] {
 }
 
 const designSystems = await loadDesignSystems(ROOT);
-/** O Argila é o padrão: a forma e a paleta dele são os próprios tokens semânticos. */
-const withFiles = designSystems.filter((ds) => ds.id !== 'argila');
+/** O padrão (Argila) não tem paleta nativa em arquivo: ela são os próprios tokens semânticos. */
+const withFiles = designSystems.filter((ds) => ds.id !== ARG_DEFAULT_STYLE);
 const formFile = (id: string) => resolve(DS_TOKENS, id, 'forma.css');
+const indexFile = (id: string) => resolve(DS_TOKENS, id, 'index.css');
 const nativeFile = (id: string) => resolve(DS_TOKENS, id, 'paletas/nativa.css');
 /** Paletas compartilhadas: os arquivos soltos em tokens/palettes/. */
 const sharedPalettes = cssFiles(resolve(TOKENS, 'palettes'), false);
@@ -37,13 +45,13 @@ describe('manifestos', () => {
     expect(designSystems.map((ds) => ds.id)).toEqual(designSystemIds(ROOT));
   });
 
-  it('o CSS de cada design system tem manifesto, e todo manifesto (menos o Argila) tem CSS', () => {
+  it('o CSS de cada design system tem manifesto, e todo manifesto tem CSS', () => {
     const folders = readdirSync(DS_TOKENS, { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
       .map((entry) => entry.name)
       .sort();
 
-    expect(folders).toEqual(withFiles.map((ds) => ds.id).sort());
+    expect(folders).toEqual(designSystems.map((ds) => ds.id).sort());
   });
 
   it('toda paleta aceita é a nativa ou uma paleta registrada em palettes.ts', () => {
@@ -68,16 +76,25 @@ describe('manifestos', () => {
 });
 
 describe('temas.css', () => {
-  it('importa a forma e a paleta nativa de cada design system e as paletas compartilhadas', () => {
+  it('importa o index.css de cada design system (menos o padrão) e as paletas compartilhadas', () => {
     const imported = cssImports(read('projects/ui/tokens/temas.css')).map((path) =>
       resolve(TOKENS, path),
     );
-    const expected = [
-      ...withFiles.flatMap((ds) => [formFile(ds.id), nativeFile(ds.id)]),
-      ...sharedPalettes,
-    ];
+    const expected = [...withFiles.map((ds) => indexFile(ds.id)), ...sharedPalettes];
 
     expect([...imported].sort()).toEqual([...expected].sort());
+  });
+
+  it('o argila.css traz os tokens e o design system padrão, nessa ordem', () => {
+    const imported = cssImports(read('projects/ui/tokens/argila.css')).map((path) =>
+      resolve(TOKENS, path),
+    );
+
+    expect(imported).toEqual([
+      resolve(TOKENS, 'primitives.css'),
+      resolve(TOKENS, 'semantic.css'),
+      indexFile(ARG_DEFAULT_STYLE),
+    ]);
   });
 
   it('é carregado pelo catálogo, depois dos tokens base', () => {
@@ -110,11 +127,22 @@ describe('caminhos antigos (styles/ e palettes/nativas/)', () => {
   );
 });
 
-describe.each(withFiles.map((ds) => [ds.id]))('design system %s', (id) => {
+describe.each(designSystems.map((ds) => [ds.id]))('design system %s', (id) => {
   const form = readFileSync(formFile(id), 'utf8');
 
-  it('a forma vale pelo data-arg-style com o id', () => {
-    expect(topLevelSelectors(form)).toContain(`:root[data-arg-style='${id}']`);
+  it('a forma vale pela raiz do design system', () => {
+    expect(topLevelSelectors(form)).toContain(rootSelector(id));
+  });
+
+  it('o index.css importa a forma, as paletas e as peles da pasta, e nada mais', () => {
+    const folder = resolve(DS_TOKENS, id);
+    const imported = cssImports(readFileSync(indexFile(id), 'utf8')).map((path) =>
+      resolve(folder, path),
+    );
+    const expected = cssFiles(folder).filter((file) => file !== indexFile(id));
+
+    expect([...imported].sort()).toEqual([...expected].sort());
+    expect(imported[0]).toBe(formFile(id));
   });
 
   it('a forma só muda forma: nenhuma cor da paleta', () => {
@@ -123,6 +151,7 @@ describe.each(withFiles.map((ds) => [ds.id]))('design system %s', (id) => {
   });
 
   it('a paleta nativa vale sem data-arg-palette ou com "nativa"', () => {
+    if (id === ARG_DEFAULT_STYLE) return; // a Massinha são os próprios tokens semânticos
     const selectors = topLevelSelectors(readFileSync(nativeFile(id), 'utf8'));
     expect(selectors).toContain(`:root[data-arg-style='${id}']:not([data-arg-palette])`);
     expect(selectors).toContain(`:root[data-arg-style='${id}'][data-arg-palette='nativa']`);
