@@ -1,0 +1,54 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-punk-dot-track style="--arg-punk-dot-track-bg: …">.
+ */
+:host {
+  --arg-punk-dot-track-bg: var(--arg-color-text);
+  --arg-punk-dot-track-dot: color-mix(in oklab, var(--arg-color-background) 35%, transparent);
+  --arg-punk-dot-track-done: var(--arg-color-background);
+  --arg-punk-dot-track-knob: var(--arg-color-background);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.75rem;
+  padding: 0 var(--arg-space-3);
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-punk-dot-track-bg);
+}
+
+.arg-punk-dot-track__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-punk-dot-track-dot);
+}
+
+.arg-punk-dot-track__dot--done {
+  background: var(--arg-punk-dot-track-done);
+}
+
+/* A alça anda de uma ponta à outra dentro da pílula, centrada na posição do progresso */
+.arg-punk-dot-track__knob {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: calc(0.875rem + (100% - 1.75rem) * var(--arg-punk-dot-track-progress, 0));
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 3px solid var(--arg-punk-dot-track-bg);
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-punk-dot-track-knob);
+  translate: -50% -50%;
+  transition: inset-inline-start var(--arg-motion-base) var(--arg-motion-easing);
+}
+
+@media (forced-colors: active) {
+  :host {
+    border: 1px solid CanvasText;
+  }
+
+  .arg-punk-dot-track__dot--done,
+  .arg-punk-dot-track__knob {
+    background: Highlight;
+  }
+}

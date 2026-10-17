@@ -1,0 +1,60 @@
+/*
+ * Tokens de componente (camada 3), ex.: <article arg-punk-stat-card style="--arg-punk-stat-card-bg: …">.
+ */
+:host {
+  --arg-punk-stat-card-bg: var(--arg-color-primary);
+  --arg-punk-stat-card-fg: var(--arg-color-on-primary);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--arg-space-1);
+  padding: var(--arg-space-4) var(--arg-space-5);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-punk-stat-card-bg);
+  color: var(--arg-punk-stat-card-fg);
+  font-family: var(--arg-font-family);
+}
+
+:host(.arg-punk-stat-card--yellow) {
+  --arg-punk-stat-card-bg: var(--arg-color-secondary);
+  --arg-punk-stat-card-fg: var(--arg-color-on-secondary);
+}
+
+:host(.arg-punk-stat-card--green) {
+  --arg-punk-stat-card-bg: var(--arg-color-accent);
+  --arg-punk-stat-card-fg: var(--arg-color-on-accent);
+}
+
+:host(.arg-punk-stat-card--blue) {
+  --arg-punk-stat-card-bg: var(--arg-color-info);
+  --arg-punk-stat-card-fg: var(--arg-color-on-info);
+}
+
+.arg-punk-stat-card__label {
+  margin: 0;
+  font-family: var(--arg-font-family-heading);
+  font-size: var(--arg-font-size-body);
+  font-weight: var(--arg-font-weight-heading);
+}
+
+.arg-punk-stat-card__value {
+  margin: 0;
+  font-family: var(--arg-font-family-heading);
+  font-size: var(--arg-font-size-heading-lg);
+  font-weight: var(--arg-font-weight-heading);
+  line-height: var(--arg-line-height-heading);
+}
+
+.arg-punk-stat-card__detail {
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.arg-punk-stat-card__detail:empty {
+  display: none;
+}
+
+@media (forced-colors: active) {
+  :host {
+    border: 1px solid CanvasText;
+  }
+}

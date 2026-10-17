@@ -1,0 +1,29 @@
+/*
+ * Tokens de componente (camada 3), ex.: <arg-punk-burst style="--arg-punk-burst-size: 12rem">.
+ */
+:host {
+  --arg-punk-burst-size: 6rem;
+  --arg-punk-burst-color: var(--arg-color-primary);
+
+  display: inline-block;
+  width: var(--arg-punk-burst-size);
+  height: var(--arg-punk-burst-size);
+  color: var(--arg-punk-burst-color);
+}
+
+:host(.arg-punk-burst--ink) {
+  --arg-punk-burst-color: var(--arg-color-text);
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+@media (forced-colors: active) {
+  svg {
+    fill: CanvasText;
+  }
+}
