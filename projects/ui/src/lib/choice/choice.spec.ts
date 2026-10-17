@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -67,7 +68,7 @@ class NamedGroup {}
 
 describe('controles de escolha', () => {
   async function setup() {
-    const announce = vi.fn();
+    const announce = jest.fn();
     TestBed.configureTestingModule({
       providers: [{ provide: ArgAnnouncer, useValue: { announce } }],
     });

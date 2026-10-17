@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { DocCode } from './code';
@@ -11,7 +12,7 @@ class Host {
 }
 
 describe('DocCode', () => {
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => jest.restoreAllMocks());
 
   async function setup() {
     const fixture = TestBed.createComponent(Host);
@@ -36,9 +37,9 @@ describe('DocCode', () => {
   });
 
   it('copia o código e avisa por alguns segundos', async () => {
-    const writeText = vi.fn().mockResolvedValue(undefined);
+    const writeText = jest.fn<(text: string) => Promise<void>>().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
-    const timeout = vi.spyOn(globalThis, 'setTimeout');
+    const timeout = jest.spyOn(globalThis, 'setTimeout');
     const { fixture, root, copy } = await setup();
 
     copy.click();

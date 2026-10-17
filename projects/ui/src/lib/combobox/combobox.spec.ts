@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -47,7 +48,7 @@ class Host {
 
 describe('ArgCombobox', () => {
   async function setup() {
-    const announce = vi
+    const announce = jest
       .spyOn(TestBed.inject(ArgAnnouncer), 'announce')
       .mockImplementation(() => undefined);
     const fixture = TestBed.createComponent(Host);
@@ -91,7 +92,7 @@ describe('ArgCombobox', () => {
     };
   }
 
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => jest.restoreAllMocks());
 
   it('tem os papéis e as ligações do combobox', async () => {
     const { local, listOf } = await setup();

@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from '@jest/globals';
 import { parseIcon } from './lib/icones.ts';
 
 const root = resolve(import.meta.dirname, '..');
@@ -24,11 +24,21 @@ describe('primeiro lote de ícones', () => {
 
   it('cada ícone da lista tem o seu SVG e passa no padrão', () => {
     const files = new Set(readdirSync(iconsDir));
-    for (const name of firstBatch()) {
-      expect(files.has(`${name}.svg`), `${name}.svg`).toBe(true);
-      const svg = readFileSync(resolve(iconsDir, `${name}.svg`), 'utf8');
-      expect(() => parseIcon({ name, svg }), name).not.toThrow();
-    }
+    const missing = firstBatch().filter((name) => !files.has(`${name}.svg`));
+    const invalid = firstBatch()
+      .filter((name) => files.has(`${name}.svg`))
+      .filter((name) => {
+        const svg = readFileSync(resolve(iconsDir, `${name}.svg`), 'utf8');
+        try {
+          parseIcon({ name, svg });
+          return false;
+        } catch {
+          return true;
+        }
+      });
+
+    expect(missing).toEqual([]);
+    expect(invalid).toEqual([]);
   });
 
   it('cada ícone da lista está no código gerado', () => {

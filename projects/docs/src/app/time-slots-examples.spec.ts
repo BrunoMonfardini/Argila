@@ -1,9 +1,10 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { TimeSlotsBookingExample } from '../../../ui/src/lib/time-slots/examples/time-slots-booking.example';
 
 /** O exemplo do Time Slot Picker carrega os horários de cada dia e guarda a escolha. */
 describe('exemplo do Time Slot Picker', () => {
-  afterEach(() => vi.useRealTimers());
+  afterEach(() => jest.useRealTimers());
 
   it('escolher, trocar de dia (carregando) e o dia sem horários livres', async () => {
     const fixture = TestBed.createComponent(TimeSlotsBookingExample);
@@ -24,18 +25,18 @@ describe('exemplo do Time Slot Picker', () => {
     await fixture.whenStable();
     expect(shown()).toBe(free.value);
 
-    vi.useFakeTimers();
+    jest.useFakeTimers();
     day('Amanhã').click();
     fixture.detectChanges();
     expect(group.getAttribute('aria-busy')).toBe('true');
     expect(shown()).toBe('null');
-    vi.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(1000);
     fixture.detectChanges();
     expect(group.hasAttribute('aria-busy')).toBe(false);
     expect(radios().length).toBe(12);
 
     day('Quinta-feira').click();
-    vi.advanceTimersByTime(1000);
+    jest.advanceTimersByTime(1000);
     fixture.detectChanges();
     expect(group.textContent).toContain('Nenhum horário livre neste dia.');
   });

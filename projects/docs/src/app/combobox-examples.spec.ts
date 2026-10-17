@@ -1,12 +1,13 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { ComboboxSearchExample } from '../../../ui/src/lib/combobox/examples/combobox-search.example';
 
 /** O exemplo do Combobox escolhe da lista local e da busca simulada. */
 describe('exemplo do Combobox', () => {
-  afterEach(() => vi.useRealTimers());
+  afterEach(() => jest.useRealTimers());
 
   it('escolhe um serviço e um tutor buscado', async () => {
-    vi.useFakeTimers();
+    jest.useFakeTimers();
     const fixture = TestBed.createComponent(ComboboxSearchExample);
     fixture.detectChanges();
     const root: HTMLElement = fixture.nativeElement;
@@ -16,12 +17,12 @@ describe('exemplo do Combobox', () => {
       input.value = text;
       input.dispatchEvent(new Event('input'));
       // 250 ms de espera entre teclas + 600 ms da busca simulada
-      await vi.advanceTimersByTimeAsync(1000);
+      await jest.advanceTimersByTimeAsync(1000);
       fixture.detectChanges();
     };
     const press = async (input: HTMLInputElement, key: string) => {
       input.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true }));
-      await vi.advanceTimersByTimeAsync(0);
+      await jest.advanceTimersByTimeAsync(0);
       fixture.detectChanges();
     };
     const values = () => Array.from(root.querySelectorAll('code')).map((c) => c.textContent);

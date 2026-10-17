@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { a11yViolations } from '../../testing/a11y';
@@ -22,7 +23,7 @@ class Host {
 
 describe('ArgTooltip', () => {
   afterEach(() => {
-    vi.useRealTimers();
+    jest.useRealTimers();
   });
 
   async function setup() {
@@ -72,40 +73,40 @@ describe('ArgTooltip', () => {
 
   it('abre no hover depois da espera, e o mouse pode ir até o balão', async () => {
     const { trigger, panel, isOpen } = await setup();
-    vi.useFakeTimers();
+    jest.useFakeTimers();
 
     trigger.dispatchEvent(new MouseEvent('mouseenter'));
-    vi.advanceTimersByTime(299);
+    jest.advanceTimersByTime(299);
     expect(isOpen(panel)).toBe(false);
-    vi.advanceTimersByTime(1);
+    jest.advanceTimersByTime(1);
     expect(isOpen(panel)).toBe(true);
 
     // Sai do gatilho e entra no balão antes de fechar: continua aberto
     trigger.dispatchEvent(new MouseEvent('mouseleave'));
     panel.dispatchEvent(new MouseEvent('mouseenter'));
-    vi.advanceTimersByTime(500);
+    jest.advanceTimersByTime(500);
     expect(isOpen(panel)).toBe(true);
 
     panel.dispatchEvent(new MouseEvent('mouseleave'));
-    vi.advanceTimersByTime(100);
+    jest.advanceTimersByTime(100);
     expect(isOpen(panel)).toBe(false);
   });
 
   it('passar o mouse rápido não abre', async () => {
     const { trigger, panel, isOpen } = await setup();
-    vi.useFakeTimers();
+    jest.useFakeTimers();
 
     trigger.dispatchEvent(new MouseEvent('mouseenter'));
-    vi.advanceTimersByTime(150);
+    jest.advanceTimersByTime(150);
     trigger.dispatchEvent(new MouseEvent('mouseleave'));
-    vi.advanceTimersByTime(500);
+    jest.advanceTimersByTime(500);
 
     expect(isOpen(panel)).toBe(false);
   });
 
   it('Esc fecha sem tirar o foco e não chega a quem está por baixo', async () => {
     const { trigger, panel, isOpen } = await setup();
-    const below = vi.fn();
+    const below = jest.fn();
     document.addEventListener('keydown', below);
     trigger.focus();
     trigger.dispatchEvent(new FocusEvent('focusin'));
@@ -122,7 +123,7 @@ describe('ArgTooltip', () => {
 
   it('com o tooltip fechado, Esc segue para os outros', async () => {
     await setup();
-    const below = vi.fn();
+    const below = jest.fn();
     document.addEventListener('keydown', below);
 
     document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));

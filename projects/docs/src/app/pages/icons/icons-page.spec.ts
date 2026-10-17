@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { argIconsAll, provideArgIcons } from '@brunomonfardini/ui';
 import { IconsPage } from './icons-page';
@@ -42,7 +43,7 @@ describe('IconsPage', () => {
   });
 
   it('copia o código do ícone e anuncia', async () => {
-    const writeText = vi.fn().mockResolvedValue(undefined);
+    const writeText = jest.fn<(text: string) => Promise<void>>().mockResolvedValue(undefined);
     Object.defineProperty(navigator, 'clipboard', { value: { writeText }, configurable: true });
     const { fixture, tiles, status } = await setup();
     const plus = tiles().find((t) => t.textContent?.includes('plus'))!;

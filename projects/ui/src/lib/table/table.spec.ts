@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { a11yViolations, accessibleName } from '../../testing/a11y';
@@ -72,7 +73,7 @@ class Host {
 
 describe('ArgTable', () => {
   async function setup() {
-    const announce = vi
+    const announce = jest
       .spyOn(TestBed.inject(ArgAnnouncer), 'announce')
       .mockImplementation(() => undefined);
     const fixture = TestBed.createComponent(Host);
@@ -107,7 +108,7 @@ describe('ArgTable', () => {
     };
   }
 
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => jest.restoreAllMocks());
 
   it('é uma tabela nativa com legenda, títulos de coluna e as linhas', async () => {
     const { root, names } = await setup();

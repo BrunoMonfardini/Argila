@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -45,7 +46,7 @@ function choose(select: HTMLSelectElement, value: string): void {
 describe('ArgSelect', () => {
   async function setup() {
     TestBed.configureTestingModule({
-      providers: [{ provide: ArgAnnouncer, useValue: { announce: vi.fn() } }],
+      providers: [{ provide: ArgAnnouncer, useValue: { announce: jest.fn() } }],
     });
     const fixture = TestBed.createComponent(Host);
     await fixture.whenStable();

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Component, inject } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { a11yViolations, accessibleName } from '../../testing/a11y';
@@ -41,7 +42,7 @@ describe('ArgDialog', () => {
   afterEach(() => {
     TestBed.inject(ArgDialog).closeAll();
     opener.remove();
-    vi.restoreAllMocks();
+    jest.restoreAllMocks();
   });
 
   const dialogs = () =>
@@ -122,7 +123,7 @@ describe('ArgDialog', () => {
   });
 
   it('label dá nome sem título; sem nenhum dos dois, avisa em desenvolvimento', () => {
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
 
     service().open(UntitledDialog, { label: 'Detalhes' });
     expect(accessibleName(dialogs()[0])).toBe('Detalhes');
