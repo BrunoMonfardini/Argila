@@ -3,7 +3,14 @@
   "minLines": 10,
   "minTokens": 50,
   "pattern": "**/*.{ts,html,css,scss}",
-  "ignore": ["**/node_modules/**", "**/dist/**", "**/coverage/**", "**/*.spec.ts"],
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/coverage/**",
+    "**/*.spec.ts",
+    "**/*.generated.ts",
+    "projects/ui/tokens/colors.css"
+  ],
   "reporters": ["console"],
   "exitCode": 1
 }

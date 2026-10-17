@@ -1,0 +1,280 @@
+/*
+ * Gerado por scripts/gerar-cores.ts a partir de ARG_BRAND_COLORS
+ * (src/lib/design-systems/colors.ts). Não edite: rode `pnpm colors`.
+ *
+ * Cada cor vale num papel pelo atributo no <html>: data-arg-primary,
+ * data-arg-secondary ou data-arg-accent. O atributo repetido no seletor dá a
+ * mesma força das paletas nativas (0,3,0); este arquivo vem por último no
+ * temas.css, então a cor de marca vence a paleta.
+ */
+:root[data-arg-primary][data-arg-primary='cobre'] {
+  --arg-color-primary: light-dark(#9a4f24, #f0b48a);
+  --arg-color-on-primary: light-dark(#ffffff, #2b1407);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#9a4f24, #f0b48a) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='cobre'] {
+  --arg-color-secondary: light-dark(#9a4f24, #f0b48a);
+  --arg-color-on-secondary: light-dark(#ffffff, #2b1407);
+}
+
+:root[data-arg-accent][data-arg-accent='cobre'] {
+  --arg-color-accent: light-dark(#9a4f24, #f0b48a);
+  --arg-color-on-accent: light-dark(#ffffff, #2b1407);
+}
+
+:root[data-arg-primary][data-arg-primary='caramelo'] {
+  --arg-color-primary: light-dark(#8a5a1c, #e8c08a);
+  --arg-color-on-primary: light-dark(#ffffff, #2a1a06);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#8a5a1c, #e8c08a) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='caramelo'] {
+  --arg-color-secondary: light-dark(#8a5a1c, #e8c08a);
+  --arg-color-on-secondary: light-dark(#ffffff, #2a1a06);
+}
+
+:root[data-arg-accent][data-arg-accent='caramelo'] {
+  --arg-color-accent: light-dark(#8a5a1c, #e8c08a);
+  --arg-color-on-accent: light-dark(#ffffff, #2a1a06);
+}
+
+:root[data-arg-primary][data-arg-primary='terracota'] {
+  --arg-color-primary: light-dark(#a3432a, #f2a58e);
+  --arg-color-on-primary: light-dark(#ffffff, #2e0f07);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#a3432a, #f2a58e) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='terracota'] {
+  --arg-color-secondary: light-dark(#a3432a, #f2a58e);
+  --arg-color-on-secondary: light-dark(#ffffff, #2e0f07);
+}
+
+:root[data-arg-accent][data-arg-accent='terracota'] {
+  --arg-color-accent: light-dark(#a3432a, #f2a58e);
+  --arg-color-on-accent: light-dark(#ffffff, #2e0f07);
+}
+
+:root[data-arg-primary][data-arg-primary='oliva'] {
+  --arg-color-primary: light-dark(#5c6b1f, #c8d48a);
+  --arg-color-on-primary: light-dark(#ffffff, #1c2206);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#5c6b1f, #c8d48a) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='oliva'] {
+  --arg-color-secondary: light-dark(#5c6b1f, #c8d48a);
+  --arg-color-on-secondary: light-dark(#ffffff, #1c2206);
+}
+
+:root[data-arg-accent][data-arg-accent='oliva'] {
+  --arg-color-accent: light-dark(#5c6b1f, #c8d48a);
+  --arg-color-on-accent: light-dark(#ffffff, #1c2206);
+}
+
+:root[data-arg-primary][data-arg-primary='musgo'] {
+  --arg-color-primary: light-dark(#3f6b3a, #a9d6a2);
+  --arg-color-on-primary: light-dark(#ffffff, #10240e);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#3f6b3a, #a9d6a2) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='musgo'] {
+  --arg-color-secondary: light-dark(#3f6b3a, #a9d6a2);
+  --arg-color-on-secondary: light-dark(#ffffff, #10240e);
+}
+
+:root[data-arg-accent][data-arg-accent='musgo'] {
+  --arg-color-accent: light-dark(#3f6b3a, #a9d6a2);
+  --arg-color-on-accent: light-dark(#ffffff, #10240e);
+}
+
+:root[data-arg-primary][data-arg-primary='petroleo'] {
+  --arg-color-primary: light-dark(#0b5e6b, #7fd0dc);
+  --arg-color-on-primary: light-dark(#ffffff, #052329);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#0b5e6b, #7fd0dc) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='petroleo'] {
+  --arg-color-secondary: light-dark(#0b5e6b, #7fd0dc);
+  --arg-color-on-secondary: light-dark(#ffffff, #052329);
+}
+
+:root[data-arg-accent][data-arg-accent='petroleo'] {
+  --arg-color-accent: light-dark(#0b5e6b, #7fd0dc);
+  --arg-color-on-accent: light-dark(#ffffff, #052329);
+}
+
+:root[data-arg-primary][data-arg-primary='ardosia'] {
+  --arg-color-primary: light-dark(#4a5a6a, #c2cfdb);
+  --arg-color-on-primary: light-dark(#ffffff, #141c24);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#4a5a6a, #c2cfdb) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='ardosia'] {
+  --arg-color-secondary: light-dark(#4a5a6a, #c2cfdb);
+  --arg-color-on-secondary: light-dark(#ffffff, #141c24);
+}
+
+:root[data-arg-accent][data-arg-accent='ardosia'] {
+  --arg-color-accent: light-dark(#4a5a6a, #c2cfdb);
+  --arg-color-on-accent: light-dark(#ffffff, #141c24);
+}
+
+:root[data-arg-primary][data-arg-primary='anil'] {
+  --arg-color-primary: light-dark(#3346a8, #a9b6f5);
+  --arg-color-on-primary: light-dark(#ffffff, #0d1438);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#3346a8, #a9b6f5) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='anil'] {
+  --arg-color-secondary: light-dark(#3346a8, #a9b6f5);
+  --arg-color-on-secondary: light-dark(#ffffff, #0d1438);
+}
+
+:root[data-arg-accent][data-arg-accent='anil'] {
+  --arg-color-accent: light-dark(#3346a8, #a9b6f5);
+  --arg-color-on-accent: light-dark(#ffffff, #0d1438);
+}
+
+:root[data-arg-primary][data-arg-primary='ameixa'] {
+  --arg-color-primary: light-dark(#6e2d6a, #e0a8dc);
+  --arg-color-on-primary: light-dark(#ffffff, #2a0a28);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#6e2d6a, #e0a8dc) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='ameixa'] {
+  --arg-color-secondary: light-dark(#6e2d6a, #e0a8dc);
+  --arg-color-on-secondary: light-dark(#ffffff, #2a0a28);
+}
+
+:root[data-arg-accent][data-arg-accent='ameixa'] {
+  --arg-color-accent: light-dark(#6e2d6a, #e0a8dc);
+  --arg-color-on-accent: light-dark(#ffffff, #2a0a28);
+}
+
+:root[data-arg-primary][data-arg-primary='vinho'] {
+  --arg-color-primary: light-dark(#8a1f3d, #f2a0b6);
+  --arg-color-on-primary: light-dark(#ffffff, #2e0612);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#8a1f3d, #f2a0b6) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='vinho'] {
+  --arg-color-secondary: light-dark(#8a1f3d, #f2a0b6);
+  --arg-color-on-secondary: light-dark(#ffffff, #2e0612);
+}
+
+:root[data-arg-accent][data-arg-accent='vinho'] {
+  --arg-color-accent: light-dark(#8a1f3d, #f2a0b6);
+  --arg-color-on-accent: light-dark(#ffffff, #2e0612);
+}
+
+:root[data-arg-primary][data-arg-primary='coral'] {
+  --arg-color-primary: light-dark(#b03f3a, #f7a59c);
+  --arg-color-on-primary: light-dark(#ffffff, #330d0a);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#b03f3a, #f7a59c) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='coral'] {
+  --arg-color-secondary: light-dark(#b03f3a, #f7a59c);
+  --arg-color-on-secondary: light-dark(#ffffff, #330d0a);
+}
+
+:root[data-arg-accent][data-arg-accent='coral'] {
+  --arg-color-accent: light-dark(#b03f3a, #f7a59c);
+  --arg-color-on-accent: light-dark(#ffffff, #330d0a);
+}
+
+:root[data-arg-primary][data-arg-primary='mostarda'] {
+  --arg-color-primary: light-dark(#7a5c00, #f0d060);
+  --arg-color-on-primary: light-dark(#ffffff, #2a2000);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#7a5c00, #f0d060) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='mostarda'] {
+  --arg-color-secondary: light-dark(#7a5c00, #f0d060);
+  --arg-color-on-secondary: light-dark(#ffffff, #2a2000);
+}
+
+:root[data-arg-accent][data-arg-accent='mostarda'] {
+  --arg-color-accent: light-dark(#7a5c00, #f0d060);
+  --arg-color-on-accent: light-dark(#ffffff, #2a2000);
+}
+
+:root[data-arg-primary][data-arg-primary='grafite'] {
+  --arg-color-primary: light-dark(#333333, #d0d0d0);
+  --arg-color-on-primary: light-dark(#ffffff, #111111);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#333333, #d0d0d0) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='grafite'] {
+  --arg-color-secondary: light-dark(#333333, #d0d0d0);
+  --arg-color-on-secondary: light-dark(#ffffff, #111111);
+}
+
+:root[data-arg-accent][data-arg-accent='grafite'] {
+  --arg-color-accent: light-dark(#333333, #d0d0d0);
+  --arg-color-on-accent: light-dark(#ffffff, #111111);
+}
+
+:root[data-arg-primary][data-arg-primary='areia'] {
+  --arg-color-primary: light-dark(#7a6548, #e2d2b6);
+  --arg-color-on-primary: light-dark(#ffffff, #2a2014);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#7a6548, #e2d2b6) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='areia'] {
+  --arg-color-secondary: light-dark(#7a6548, #e2d2b6);
+  --arg-color-on-secondary: light-dark(#ffffff, #2a2014);
+}
+
+:root[data-arg-accent][data-arg-accent='areia'] {
+  --arg-color-accent: light-dark(#7a6548, #e2d2b6);
+  --arg-color-on-accent: light-dark(#ffffff, #2a2014);
+}
+
+:root[data-arg-primary][data-arg-primary='menta'] {
+  --arg-color-primary: light-dark(#1d7357, #8fe0c0);
+  --arg-color-on-primary: light-dark(#ffffff, #0b2a20);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#1d7357, #8fe0c0) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='menta'] {
+  --arg-color-secondary: light-dark(#1d7357, #8fe0c0);
+  --arg-color-on-secondary: light-dark(#ffffff, #0b2a20);
+}
+
+:root[data-arg-accent][data-arg-accent='menta'] {
+  --arg-color-accent: light-dark(#1d7357, #8fe0c0);
+  --arg-color-on-accent: light-dark(#ffffff, #0b2a20);
+}
+
+:root[data-arg-primary][data-arg-primary='lavanda'] {
+  --arg-color-primary: light-dark(#5d4aa0, #c9bdf2);
+  --arg-color-on-primary: light-dark(#ffffff, #1c1438);
+  --arg-color-primary-soft: color-mix(in oklab, light-dark(#5d4aa0, #c9bdf2) 28%, var(--arg-color-surface-solid));
+  --arg-color-on-primary-soft: var(--arg-color-text);
+}
+
+:root[data-arg-secondary][data-arg-secondary='lavanda'] {
+  --arg-color-secondary: light-dark(#5d4aa0, #c9bdf2);
+  --arg-color-on-secondary: light-dark(#ffffff, #1c1438);
+}
+
+:root[data-arg-accent][data-arg-accent='lavanda'] {
+  --arg-color-accent: light-dark(#5d4aa0, #c9bdf2);
+  --arg-color-on-accent: light-dark(#ffffff, #1c1438);
+}

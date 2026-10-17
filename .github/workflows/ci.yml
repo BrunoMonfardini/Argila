@@ -32,6 +32,7 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm icons:check
+      - run: pnpm colors:check
       - run: pnpm manifest:check
       # Cobertura e histórico da main: o PR compara com ela, a main acrescenta ao histórico
       - name: Cobertura da main
