@@ -2,31 +2,16 @@
  * @jest-environment jsdom
  */
 import { afterEach, describe, expect, it } from '@jest/globals';
-import {
-  auditPage,
-  combinationName,
-  combinations,
-  pageFile,
-  reportHtml,
-  styleSchemes,
-} from './checkup.ts';
-
-describe('styleSchemes', () => {
-  it('lê os estilos e os modos de ARG_STYLES', () => {
-    const source = `
-export const ARG_STYLES: Readonly<Record<ArgStyle, ArgStyleInfo>> = {
-  argila: { schemes: ['light', 'dark'] },
-  'windows-xp': { schemes: ['dark'] },
-};`;
-
-    expect(styleSchemes(source)).toEqual({ argila: ['light', 'dark'], 'windows-xp': ['dark'] });
-    expect(() => styleSchemes('')).toThrow('ARG_STYLES não encontrado');
-  });
-});
+import { auditPage, combinationName, combinations, pageFile, reportHtml } from './checkup.ts';
 
 describe('combinations e combinationName', () => {
-  it('cruza estilo, paleta e só os modos que o estilo suporta', () => {
-    const combos = combinations({ a: ['light', 'dark'], b: ['dark'] }, ['nativa', 'terrosa']);
+  const designSystems = [
+    { id: 'a', modos: ['light', 'dark'] as const, paletas: ['nativa', 'terrosa'] },
+    { id: 'b', modos: ['dark'] as const, paletas: ['nativa', 'oceano'] },
+  ];
+
+  it('cruza design system, só as paletas que ele aceita e só os modos que ele suporta', () => {
+    const combos = combinations(designSystems);
 
     expect(combos.map(combinationName)).toEqual([
       'a-nativa-claro',
@@ -34,8 +19,14 @@ describe('combinations e combinationName', () => {
       'a-terrosa-claro',
       'a-terrosa-escuro',
       'b-nativa-escuro',
-      'b-terrosa-escuro',
+      'b-oceano-escuro',
     ]);
+  });
+
+  it('filtra as paletas, sem incluir as que o design system não aceita', () => {
+    const combos = combinations(designSystems, ['oceano']);
+
+    expect(combos.map(combinationName)).toEqual(['b-oceano-escuro']);
   });
 });
 
@@ -98,7 +89,7 @@ describe('auditPage', () => {
 
 describe('reportHtml', () => {
   it('lista os problemas e monta a grade página × combinação, escapando o texto', () => {
-    const combos = combinations({ argila: ['light'] }, ['nativa']);
+    const combos = combinations([{ id: 'argila', modos: ['light'], paletas: ['nativa'] }]);
     const html = reportHtml(['/componentes/button'], combos, [
       {
         page: '/componentes/button',

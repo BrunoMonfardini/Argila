@@ -1,46 +1,72 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { describe, expect, it } from '@jest/globals';
-import {
-  arrayItems,
-  cssImports,
-  declaredTokens,
-  objectKeys,
-  requiredTokens,
-  topLevelSelectors,
-} from './lib/temas.ts';
+import { DESIGN_SYSTEMS_TOKENS, designSystemIds, loadDesignSystems } from './lib/design-systems.ts';
+import { cssImports, declaredTokens, requiredTokens, topLevelSelectors } from './lib/temas.ts';
 
 /**
- * Estrutura dos temas: cada estilo e paleta existe nos três lugares que o
- * produto usa (arquivo, `temas.css` e `ArgTheme`), estilos só mudam forma,
- * paletas só mudam cor, e todo token que um componente lê está definido.
- * Um estilo esquecido em um desses lugares "não muda nada" na tela; aqui falha.
+ * Estrutura dos temas: cada design system tem manifesto, forma e paleta
+ * nativa, e está no `temas.css`; formas só mudam forma, paletas só mudam cor,
+ * e todo token que um componente lê está definido. Um design system esquecido
+ * em um desses lugares "não muda nada" na tela; aqui falha.
  */
 
 const ROOT = resolve(import.meta.dirname, '..');
 const TOKENS = resolve(ROOT, 'projects/ui/tokens');
+const DS_TOKENS = resolve(ROOT, DESIGN_SYSTEMS_TOKENS);
 const read = (path: string) => readFileSync(resolve(ROOT, path), 'utf8');
 
-function cssFiles(dir: string): string[] {
-  return readdirSync(dir, { recursive: true, encoding: 'utf8' })
+function cssFiles(dir: string, recursive = true): string[] {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir, { recursive, encoding: 'utf8' })
     .filter((file) => file.endsWith('.css'))
     .map((file) => resolve(dir, file));
 }
 
-const name = (file: string) => file.replace(/\\/g, '/').split('/').pop()!.slice(0, -'.css'.length);
-const styleFiles = cssFiles(resolve(TOKENS, 'styles'));
-const nativeFiles = cssFiles(resolve(TOKENS, 'palettes/nativas'));
-const paletteFiles = cssFiles(resolve(TOKENS, 'palettes')).filter(
-  (file) => !nativeFiles.includes(file),
-);
-const theme = read('projects/ui/src/lib/theme/theme.ts');
+const designSystems = await loadDesignSystems(ROOT);
+/** O Argila é o padrão: a forma e a paleta dele são os próprios tokens semânticos. */
+const withFiles = designSystems.filter((ds) => ds.id !== 'argila');
+const formFile = (id: string) => resolve(DS_TOKENS, id, 'forma.css');
+const nativeFile = (id: string) => resolve(DS_TOKENS, id, 'paletas/nativa.css');
+/** Paletas compartilhadas: os arquivos soltos em tokens/palettes/. */
+const sharedPalettes = cssFiles(resolve(TOKENS, 'palettes'), false);
+
+describe('manifestos', () => {
+  it('cada pasta de design-systems/ tem um manifesto com o id da pasta', () => {
+    expect(designSystems.map((ds) => ds.id)).toEqual(designSystemIds(ROOT));
+  });
+
+  it('o CSS de cada design system tem manifesto, e todo manifesto (menos o Argila) tem CSS', () => {
+    const folders = readdirSync(DS_TOKENS, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort();
+
+    expect(folders).toEqual(withFiles.map((ds) => ds.id).sort());
+  });
+
+  it('toda paleta aceita existe: a nativa, a Terrosa (padrão) ou um arquivo de palettes/', () => {
+    const shared = sharedPalettes.map((file) => relative(resolve(TOKENS, 'palettes'), file));
+    const missing = designSystems.flatMap((ds) =>
+      ds.paletas
+        .filter((palette) => palette !== 'nativa' && palette !== 'terrosa')
+        .filter((palette) => !shared.includes(`${palette}.css`))
+        .map((palette) => `${ds.id}: ${palette}`),
+    );
+
+    expect(missing).toEqual([]);
+  });
+});
 
 describe('temas.css', () => {
-  it('importa cada estilo e cada paleta, e nada que não exista', () => {
+  it('importa a forma e a paleta nativa de cada design system e as paletas compartilhadas', () => {
     const imported = cssImports(read('projects/ui/tokens/temas.css')).map((path) =>
       resolve(TOKENS, path),
     );
-    const expected = [...styleFiles, ...paletteFiles, ...nativeFiles];
+    const expected = [
+      ...withFiles.flatMap((ds) => [formFile(ds.id), nativeFile(ds.id)]),
+      ...sharedPalettes,
+    ];
 
     expect([...imported].sort()).toEqual([...expected].sort());
   });
@@ -55,63 +81,57 @@ describe('temas.css', () => {
   });
 });
 
-describe('ArgTheme', () => {
-  it('ARG_STYLES lista o Argila e cada arquivo de styles/', () => {
-    expect(objectKeys(theme, 'ARG_STYLES').sort()).toEqual(
-      ['argila', ...styleFiles.map(name)].sort(),
-    );
-  });
+describe('caminhos antigos (styles/ e palettes/nativas/)', () => {
+  const shims = [
+    ...cssFiles(resolve(TOKENS, 'styles')),
+    ...cssFiles(resolve(TOKENS, 'palettes/nativas')),
+  ];
 
-  it('ARG_PALETTES lista nativa, terrosa e cada arquivo de palettes/', () => {
-    expect(arrayItems(theme, 'ARG_PALETTES').sort()).toEqual(
-      ['nativa', 'terrosa', ...paletteFiles.map(name)].sort(),
-    );
-  });
+  it.each(shims.map((file) => [relative(TOKENS, file), file]))(
+    '%s só reencaminha para o arquivo novo, que existe',
+    (_, file) => {
+      const css = readFileSync(file, 'utf8');
+      const imports = cssImports(css).map((path) => resolve(file, '..', path));
 
-  it('os tipos ArgStyle e ArgPalette batem com as listas', () => {
-    const union = (type: string) =>
-      [...new RegExp(`export type ${type} =([^;]+);`).exec(theme)![1].matchAll(/'([^']+)'/g)]
-        .map((match) => match[1])
-        .sort();
-
-    expect(union('ArgStyle')).toEqual(objectKeys(theme, 'ARG_STYLES').sort());
-    expect(union('ArgPalette')).toEqual(arrayItems(theme, 'ARG_PALETTES').sort());
-  });
+      expect(imports).toHaveLength(1);
+      expect(existsSync(imports[0])).toBe(true);
+      expect(relative(DS_TOKENS, imports[0]).startsWith('..')).toBe(false);
+      expect([...declaredTokens(css)]).toEqual([]);
+    },
+  );
 });
 
-describe.each(styleFiles.map((file) => [relative(TOKENS, file), file]))('estilo %s', (_, file) => {
-  const css = readFileSync(file, 'utf8');
-  const style = name(file);
+describe.each(withFiles.map((ds) => [ds.id]))('design system %s', (id) => {
+  const form = readFileSync(formFile(id), 'utf8');
 
-  it('vale pelo data-arg-style com o nome do arquivo', () => {
-    expect(topLevelSelectors(css)).toContain(`:root[data-arg-style='${style}']`);
+  it('a forma vale pelo data-arg-style com o id', () => {
+    expect(topLevelSelectors(form)).toContain(`:root[data-arg-style='${id}']`);
   });
 
-  it('só muda forma: nenhuma cor da paleta', () => {
-    const colors = [...declaredTokens(css)].filter((token) => token.startsWith('--arg-color-'));
+  it('a forma só muda forma: nenhuma cor da paleta', () => {
+    const colors = [...declaredTokens(form)].filter((token) => token.startsWith('--arg-color-'));
     expect(colors).toEqual([]);
   });
 
-  it('tem paleta nativa, que vale sem data-arg-palette ou com "nativa"', () => {
-    const native = nativeFiles.find((candidate) => name(candidate) === style);
-    expect(nativeFiles.map(name)).toContain(style);
-
-    const selectors = topLevelSelectors(readFileSync(native!, 'utf8'));
-    expect(selectors).toContain(`:root[data-arg-style='${style}']:not([data-arg-palette])`);
-    expect(selectors).toContain(`:root[data-arg-style='${style}'][data-arg-palette='nativa']`);
+  it('a paleta nativa vale sem data-arg-palette ou com "nativa"', () => {
+    const selectors = topLevelSelectors(readFileSync(nativeFile(id), 'utf8'));
+    expect(selectors).toContain(`:root[data-arg-style='${id}']:not([data-arg-palette])`);
+    expect(selectors).toContain(`:root[data-arg-style='${id}'][data-arg-palette='nativa']`);
   });
 });
 
-describe.each([...paletteFiles, ...nativeFiles].map((file) => [relative(TOKENS, file), file]))(
-  'paleta %s',
-  (_, file) => {
-    it('só muda cor: nenhum token de forma', () => {
-      const css = readFileSync(file, 'utf8');
-      const shape = [...declaredTokens(css)].filter((token) => !token.startsWith('--arg-color-'));
-      expect(shape).toEqual([]);
-    });
-  },
-);
+describe.each(
+  [...sharedPalettes, ...withFiles.map((ds) => nativeFile(ds.id))].map((file) => [
+    relative(TOKENS, file),
+    file,
+  ]),
+)('paleta %s', (_, file) => {
+  it('só muda cor: nenhum token de forma', () => {
+    const css = readFileSync(file, 'utf8');
+    const shape = [...declaredTokens(css)].filter((token) => !token.startsWith('--arg-color-'));
+    expect(shape).toEqual([]);
+  });
+});
 
 describe('tokens dos componentes', () => {
   it('todo token lido sem valor reserva está definido em algum lugar', () => {
