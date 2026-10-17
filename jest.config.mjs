@@ -59,6 +59,9 @@ export default {
   coverageReporters: ['text-summary', 'html', 'json-summary', 'lcov'],
   coverageThreshold: {
     global: { lines: 80, branches: 80, functions: 80, statements: 80 },
+    // A base de todos os design systems: o tema e os manifestos
+    './projects/ui/src/lib/theme/': { lines: 95, branches: 90 },
+    './projects/ui/src/lib/design-systems/': { lines: 90, branches: 85 },
   },
   reporters: [
     'default',

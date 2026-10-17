@@ -74,6 +74,7 @@ jobs:
           path: cobertura-main
           retention-days: 90
       - run: pnpm dup:check
+      - run: pnpm arch:check
       - run: pnpm build
       - run: pnpm build:docs
       - name: Publica o catálogo para o review
