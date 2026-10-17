@@ -171,6 +171,8 @@ async function applyTheme(combo: Combination): Promise<string[]> {
       .find((l) => l.querySelector('span')?.textContent === label)?.querySelector('select');
     const choose = (select, value) => { select.value = value; select.dispatchEvent(new Event('change')); };
     choose(field('Estilo'), ${JSON.stringify(combo.style)});
+    // A lista de paletas muda com o estilo: espera ela ser redesenhada
+    await new Promise((done) => setTimeout(done, 100));
     choose(field('Paleta'), ${JSON.stringify(combo.palette)});
     const label = ${JSON.stringify(combo.scheme === 'light' ? 'Claro' : 'Escuro')};
     [...bar.querySelectorAll('button')].find((b) => b.textContent.trim() === label).click();
