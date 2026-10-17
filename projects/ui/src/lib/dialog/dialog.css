@@ -22,6 +22,7 @@
   border-radius: var(--arg-dialog-radius);
   box-shadow: var(--arg-dialog-shadow);
   background: var(--arg-dialog-bg);
+  backdrop-filter: blur(var(--arg-surface-blur));
   color: var(--arg-dialog-fg);
   font-family: var(--arg-font-family);
   font-size: var(--arg-font-size-body);

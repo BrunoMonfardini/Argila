@@ -25,6 +25,7 @@
   border-radius: var(--arg-popover-radius);
   box-shadow: var(--arg-popover-shadow);
   background: var(--arg-popover-bg);
+  backdrop-filter: blur(var(--arg-surface-blur));
   color: var(--arg-popover-fg);
   font-family: var(--arg-font-family);
   font-size: var(--arg-font-size-body-sm);
