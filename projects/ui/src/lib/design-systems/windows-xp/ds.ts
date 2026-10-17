@@ -7,7 +7,7 @@ export const windowsXp = {
   referencia: 'windows-xp.jpg',
   modos: ['light', 'dark'],
   transparencia: false,
-  paletas: ['nativa', 'terrosa'],
+  paletas: ['nativa', 'alto-contraste'],
   componentes: { curados: [], fora: [] },
   exclusivos: [],
   regras: ['Uma só cor de destaque', 'Nada de sombra pesada', 'Bordas sempre de 1px'],

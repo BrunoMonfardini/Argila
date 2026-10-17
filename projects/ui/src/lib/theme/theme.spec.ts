@@ -80,18 +80,19 @@ describe('ArgTheme', () => {
 
   it('aplica estilo e paleta como atributos no <html>', () => {
     theme.setStyle('windows-xp');
-    theme.setPalette('terrosa');
+    theme.setPalette('alto-contraste');
 
     expect(root.getAttribute('data-arg-style')).toBe('windows-xp');
-    expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
+    expect(root.getAttribute('data-arg-palette')).toBe('alto-contraste');
     expect(theme.style()).toBe('windows-xp');
-    expect(theme.palette()).toBe('terrosa');
+    expect(theme.palette()).toBe('alto-contraste');
   });
 
   it('ARG_STYLES e ARG_PALETTES vêm dos manifestos', () => {
     expect(Object.keys(ARG_STYLES)).toEqual(Object.keys(ARG_DESIGN_SYSTEMS));
     expect(ARG_STYLES['windows-xp'].schemes).toEqual(ARG_DESIGN_SYSTEMS['windows-xp'].modos);
-    expect(ARG_PALETTES).toEqual(['nativa', 'terrosa']);
+    const accepted = Object.values(ARG_DESIGN_SYSTEMS).flatMap((ds) => [...ds.paletas]);
+    expect([...ARG_PALETTES].sort()).toEqual([...new Set(accepted)].sort());
   });
 
   describe('o que o design system não aceita', () => {
