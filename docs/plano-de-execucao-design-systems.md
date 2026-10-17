@@ -162,16 +162,18 @@ O E3 abre a `0.4.0` (changeset minor) e o changelog explica como manter o visual
 
 ## E4: DS Transparente
 
+Sai em dois PRs: **E4a** forma, paleta Vidro, iridescência, alternativas e pele (TR-01 a TR-04, TR-06) e **E4b** o campo com ação acoplada (TR-05), que mexe no Input.
+
 Referência: [transparente.jpg](referencias/transparente.jpg). É uma renderização 3D: a ficha diz o que o CSS imita e o que fica de fora.
 
 | ✓   | ID    | Item                                                                                                                                                                               | Depende de | Pronto quando                                                                                      | Est. |
 | --- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------- | ---- |
-| [ ] | TR-01 | `feat(transparente): paleta Vidro e forma de vidro espesso` (pílulas de 56px, raios de 16 e 24px, aro claro, brilho especular, sombra com reflexo colorido, botões em gradiente)   | E3         | Botões, busca, select, switch, abas, toast, card e popover com a mesma forma da referência         | 1    |
-| [ ] | TR-02 | `feat(transparente): borda iridescente e alternativas` (`::before` com `conic-gradient` e `mask`; sem `backdrop-filter`, com `prefers-reduced-transparency` e com `forced-colors`) | TR-01      | As três alternativas testadas: vidro vira superfície opaca com borda simples, sem perder contraste | 0,75 |
-| [ ] | TR-03 | `feat(transparente): painéis sobre o conteúdo e modo escuro` (Dialog, Popover, Menu e Toast presos em 80% abaixo de 50%; vidro fumê testado e decidido)                            | TR-01      | Texto de trás nunca aparece; escuro aprovado, ou o manifesto declara só claro com o motivo         | 0,5  |
-| [ ] | TR-04 | `feat(transparente): núcleo mínimo e curados da matriz` (Combobox, Drawer, Menu, Popover)                                                                                          | TR-01      | Os 19 do núcleo e os 4 da matriz com pele e teste no Transparente                                  | 1    |
+| [x] | TR-01 | `feat(transparente): paleta Vidro e forma de vidro espesso` (pílulas de 56px, raios de 16 e 24px, aro claro, brilho especular, sombra com reflexo colorido, botões em gradiente)   | E3         | Botões, busca, select, switch, abas, toast, card e popover com a mesma forma da referência         | 1    |
+| [x] | TR-02 | `feat(transparente): borda iridescente e alternativas` (`::before` com `conic-gradient` e `mask`; sem `backdrop-filter`, com `prefers-reduced-transparency` e com `forced-colors`) | TR-01      | As três alternativas testadas: vidro vira superfície opaca com borda simples, sem perder contraste | 0,75 |
+| [x] | TR-03 | `feat(transparente): painéis sobre o conteúdo e modo escuro` (Dialog, Popover, Menu e Toast presos em 80% abaixo de 50%; vidro fumê testado e decidido)                            | TR-01      | Texto de trás nunca aparece; escuro aprovado, ou o manifesto declara só claro com o motivo         | 0,5  |
+| [x] | TR-04 | `feat(transparente): núcleo mínimo e curados da matriz` (Combobox, Drawer, Menu, Popover)                                                                                          | TR-01      | Os 19 do núcleo e os 4 da matriz com pele e teste no Transparente                                  | 1    |
 | [ ] | TR-05 | `feat(input): ação acoplada` (`argInputAction`, como o **+** da busca da referência)                                                                                               | TR-01      | Funciona em todos os DS; o botão tem nome acessível e entra na ordem de foco                       | 0,5  |
-| [ ] | TR-06 | `docs(transparente): capturas lado a lado com a referência`                                                                                                                        | TR-03      | Capturas anexadas ao PR; regras de uso e limites do CSS na página do DS                            | 0,25 |
+| [x] | TR-06 | `docs(transparente): capturas lado a lado com a referência`                                                                                                                        | TR-03      | Capturas anexadas ao PR; regras de uso e limites do CSS na página do DS                            | 0,25 |
 
 ## E5: DS Neo-brutalista
 
