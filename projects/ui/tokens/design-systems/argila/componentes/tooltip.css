@@ -1,0 +1,5 @@
+/* Tooltip: cantos arredondados. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) arg-tooltip-panel {
+  --arg-tooltip-radius: 0.75rem;
+}

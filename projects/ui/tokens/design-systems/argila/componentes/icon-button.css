@@ -1,0 +1,6 @@
+/* Botão de ícone: as cores vêm da pele do Button; aqui só o volume. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-icon-button:not(.arg-button--tertiary, [disabled], [aria-disabled='true']) {
+  --arg-button-shadow: var(--arg-shadow-control);
+}

@@ -1,0 +1,6 @@
+/* Barra de progresso: trilho rebaixado, mais alto, em pílula. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-progress:not(.arg-progress--sm) {
+  --arg-progress-height: 0.75rem;
+}

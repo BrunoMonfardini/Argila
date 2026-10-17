@@ -1,19 +1,15 @@
 /*
- * Argila — todos os design systems e as paletas compartilhadas.
+ * Argila — os design systems além do padrão e as paletas compartilhadas.
  *
  * Inclua depois de argila.css para trocar a aparência só com atributos no
  * <html>: data-arg-style (o design system) e data-arg-palette (a paleta).
- * Produtos que usam um design system só podem importar apenas a forma e a
- * paleta dele, em design-systems/<nome>/.
+ * Produtos que usam um design system só podem importar apenas o index.css
+ * dele, em design-systems/<nome>/.
  */
-@import './design-systems/molde/forma.css';
-@import './design-systems/molde/paletas/nativa.css';
-@import './design-systems/coda/forma.css';
-@import './design-systems/coda/paletas/nativa.css';
-@import './design-systems/transparente/forma.css';
-@import './design-systems/transparente/paletas/nativa.css';
-@import './design-systems/windows-xp/forma.css';
-@import './design-systems/windows-xp/paletas/nativa.css';
+@import './design-systems/molde/index.css';
+@import './design-systems/coda/index.css';
+@import './design-systems/transparente/index.css';
+@import './design-systems/windows-xp/index.css';
 
 /* Paletas compartilhadas: valem em qualquer design system que as aceite */
 @import './palettes/terrosa.css';

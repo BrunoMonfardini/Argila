@@ -1,0 +1,10 @@
+/* Checkbox, radio e switch: marcados na cor da marca; o switch ligado é a pílula de marca. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  :is(.arg-checkbox, .arg-radio) {
+  --arg-choice-accent: var(--arg-color-primary);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-switch {
+  --arg-switch-on: var(--arg-color-primary);
+}

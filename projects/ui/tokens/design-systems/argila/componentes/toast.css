@@ -1,0 +1,6 @@
+/* Toast: cantos de cartão e elevação de painel. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) arg-toast-stack {
+  --arg-toast-radius: var(--arg-radius-container);
+  --arg-toast-shadow: var(--arg-shadow-4);
+}

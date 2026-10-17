@@ -1,0 +1,5 @@
+/* Link: sublinhado um pouco mais afastado do texto. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-link {
+  --arg-link-underline-offset: 0.25em;
+}

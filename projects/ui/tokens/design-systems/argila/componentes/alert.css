@@ -1,0 +1,6 @@
+/* Alerta: cantos de cartão e mais ar; os tons continuam vindo do componente. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-alert {
+  --arg-alert-radius: var(--arg-radius-container);
+  --arg-alert-padding: var(--arg-space-4) var(--arg-space-5);
+}

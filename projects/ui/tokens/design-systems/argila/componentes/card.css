@@ -1,0 +1,15 @@
+/* Cartões: sem contorno, apoiados no volume (nível 1, ou 2 quando elevados). */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-card:not(.arg-card--elevated) {
+  --arg-card-border: transparent;
+  --arg-card-shadow: var(--arg-shadow-1);
+  --arg-card-shadow-hover: var(--arg-shadow-2);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-card.arg-card--elevated {
+  --arg-card-border: transparent;
+  --arg-card-shadow: var(--arg-shadow-2);
+  --arg-card-shadow-hover: var(--arg-shadow-3);
+}

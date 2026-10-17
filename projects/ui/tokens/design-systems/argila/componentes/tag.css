@@ -1,0 +1,7 @@
+/* Tag: pílula de superfície com volume, como os chips da referência. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-tag {
+  --arg-tag-bg: var(--arg-color-surface-raised);
+  --arg-tag-border: transparent;
+  box-shadow: var(--arg-shadow-1);
+}

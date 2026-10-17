@@ -1,0 +1,5 @@
+/* Diálogo: o nível mais alto de elevação. */
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-dialog {
+  --arg-dialog-shadow: var(--arg-shadow-5);
+}
