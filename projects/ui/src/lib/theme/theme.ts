@@ -7,6 +7,25 @@ export {
   type ArgSharedPaletteInfo,
 } from '../design-systems/palettes';
 import { ARG_DESIGN_SYSTEMS, ArgPalette, ArgStyle } from '../design-systems/design-systems';
+import {
+  ARG_BRAND_COLORS,
+  ARG_BRAND_ROLES,
+  type ArgBrandColor,
+  type ArgBrandRole,
+} from '../design-systems/colors';
+import { ARG_ALLOWED_COLORS } from '../design-systems/colors.generated';
+
+export {
+  ARG_BRAND_COLORS,
+  ARG_BRAND_ROLES,
+  type ArgBrandColor,
+  type ArgBrandColorInfo,
+  type ArgBrandRole,
+} from '../design-systems/colors';
+export { ARG_ALLOWED_COLORS } from '../design-systems/colors.generated';
+
+/** Cores de marca da lista fixa, por papel: `{ primary: 'cobre', accent: 'mostarda' }`. */
+export type ArgColors = Partial<Record<ArgBrandRole, ArgBrandColor>>;
 
 export type { ArgPalette, ArgPaletteOf, ArgStyle } from '../design-systems/design-systems';
 export { ARG_DESIGN_SYSTEMS } from '../design-systems/design-systems';
@@ -53,6 +72,17 @@ function readPalette(root: HTMLElement, style: ArgStyle): ArgPalette {
   const value = root.getAttribute('data-arg-palette');
   const accepted: readonly string[] = designSystem(style).paletas;
   return (value !== null && accepted.includes(value) ? value : accepted[0]) as ArgPalette;
+}
+
+function readColors(root: HTMLElement): ArgColors {
+  const colors: ArgColors = {};
+  for (const role of ARG_BRAND_ROLES) {
+    const value = root.getAttribute(`data-arg-${role}`);
+    if (value !== null && Object.hasOwn(ARG_BRAND_COLORS, value)) {
+      colors[role] = value as ArgBrandColor;
+    }
+  }
+  return colors;
 }
 
 function warn(message: string): void {
@@ -128,6 +158,19 @@ export class ArgTheme {
   readonly acceptsTransparency = computed(() => this.designSystem().transparencia);
 
   private readonly _palette = signal(readPalette(this.root, this._style()));
+
+  private readonly _colors = signal<ArgColors>(readColors(this.root));
+  /** Cores de marca aplicadas, por papel. */
+  readonly colors = this._colors.asReadonly();
+  /** Cores da lista fixa que passam no contraste no design system e na paleta atuais. */
+  readonly allowedColors = computed(
+    (): Readonly<Record<ArgBrandRole, readonly ArgBrandColor[]>> =>
+      ARG_ALLOWED_COLORS[this._style()]?.[this._palette()] ?? {
+        primary: [],
+        secondary: [],
+        accent: [],
+      },
+  );
   readonly palette = this._palette.asReadonly();
 
   /**
@@ -154,6 +197,8 @@ export class ArgTheme {
       warn(`o design system "${style}" não aceita a paleta "${this._palette()}"; voltou à padrão.`);
       this.setPalette(this.palettes()[0]);
     }
+    // A paleta pode não ter mudado: as cores ainda precisam valer no design system novo
+    this.setColors(this._colors());
     if (!this.acceptsTransparency() && this._surfaceOpacity() !== undefined) {
       warn(
         `o design system "${style}" não aceita transparência; as superfícies voltaram a opacas.`,
@@ -176,6 +221,37 @@ export class ArgTheme {
     }
     this.root.setAttribute('data-arg-palette', value);
     this._palette.set(value);
+    this.setColors(this._colors());
+  }
+
+  /**
+   * Aplica cores de marca da lista fixa (`ARG_BRAND_COLORS`) à primária, à
+   * secundária e ao destaque. Só valem as que passam no contraste no design
+   * system e na paleta atuais (`allowedColors()`); as outras são ignoradas,
+   * com aviso em desenvolvimento. Papéis omitidos voltam à cor da paleta.
+   */
+  setColors(colors: ArgColors): void {
+    const applied: ArgColors = {};
+    for (const role of ARG_BRAND_ROLES) {
+      const color = colors[role];
+      if (color && !this.allowedColors()[role].includes(color)) {
+        warn(
+          `a cor "${color}" não passa no contraste como ${role} em "${this._style()}" com a paleta "${this._palette()}"; usando a da paleta.`,
+        );
+      }
+      if (color && this.allowedColors()[role].includes(color)) {
+        this.root.setAttribute(`data-arg-${role}`, color);
+        applied[role] = color;
+      } else {
+        this.root.removeAttribute(`data-arg-${role}`);
+      }
+    }
+    this._colors.set(applied);
+  }
+
+  /** Volta às cores da paleta. */
+  clearColors(): void {
+    this.setColors({});
   }
 
   /** Substitui a marca atual; campos omitidos voltam ao padrão do Argila. */
