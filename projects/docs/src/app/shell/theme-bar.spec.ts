@@ -1,5 +1,6 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
-import { ARG_PALETTES, ARG_STYLES, ArgStyle, ArgTheme } from '@brunomonfardini/ui';
+import { ARG_DESIGN_SYSTEMS, ArgStyle, ArgTheme } from '@brunomonfardini/ui';
 import { DocThemeBar } from './theme-bar';
 
 describe('DocThemeBar', () => {
@@ -69,16 +70,18 @@ describe('DocThemeBar', () => {
     expect(localStorage.getItem('argila-docs:paleta')).toBe('terrosa');
   });
 
-  it('oferece todos os estilos e paletas do ArgTheme, e cada um se aplica pela interface', async () => {
+  it('oferece cada design system e só as paletas que ele aceita, e cada uma se aplica', async () => {
     const { fixture, select } = await setup();
     const values = (control: HTMLSelectElement) => Array.from(control.options, (o) => o.value);
 
-    expect(values(select('Estilo'))).toEqual(Object.keys(ARG_STYLES));
-    expect(values(select('Paleta'))).toEqual([...ARG_PALETTES]);
+    expect(values(select('Estilo'))).toEqual(Object.keys(ARG_DESIGN_SYSTEMS));
 
-    for (const style of Object.keys(ARG_STYLES)) {
-      for (const palette of ARG_PALETTES) {
-        choose(select('Estilo'), style);
+    for (const style of Object.keys(ARG_DESIGN_SYSTEMS) as ArgStyle[]) {
+      choose(select('Estilo'), style);
+      await fixture.whenStable();
+      expect(values(select('Paleta'))).toEqual([...ARG_DESIGN_SYSTEMS[style].paletas]);
+
+      for (const palette of ARG_DESIGN_SYSTEMS[style].paletas) {
         choose(select('Paleta'), palette);
         await fixture.whenStable();
 
@@ -106,37 +109,49 @@ describe('DocThemeBar', () => {
     expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
   });
 
+  it('desabilita a opacidade, com o motivo, no estilo que não aceita transparência', async () => {
+    const { fixture, select, range } = await setup();
+
+    choose(select('Estilo'), 'windows-xp');
+    await fixture.whenStable();
+
+    expect(range().disabled).toBe(true);
+    expect(range().closest('label')!.title).toBe('Este estilo não aceita transparência');
+
+    choose(select('Estilo'), 'transparente');
+    await fixture.whenStable();
+    expect(range().disabled).toBe(false);
+  });
+
   it('desabilita os modos que o estilo não suporta', async () => {
-    const styles = ARG_STYLES as Record<ArgStyle, { schemes: readonly ('light' | 'dark')[] }>;
-    const original = styles.coda.schemes;
-    styles.coda = { schemes: ['dark'] };
-    try {
-      const { fixture, select, button } = await setup();
+    jest.replaceProperty(ARG_DESIGN_SYSTEMS, 'coda', {
+      ...ARG_DESIGN_SYSTEMS.coda,
+      modos: ['dark'],
+    } as never);
+    const { fixture, select, button } = await setup();
 
-      choose(select('Estilo'), 'coda');
-      await fixture.whenStable();
+    choose(select('Estilo'), 'coda');
+    await fixture.whenStable();
 
-      expect(root.getAttribute('data-arg-theme')).toBe('dark');
-      expect(button('Claro').disabled).toBe(true);
-      expect(button('Automático').disabled).toBe(true);
-      expect(button('Escuro').disabled).toBe(false);
-    } finally {
-      styles.coda = { schemes: original };
-    }
+    expect(root.getAttribute('data-arg-theme')).toBe('dark');
+    expect(button('Claro').disabled).toBe(true);
+    expect(button('Automático').disabled).toBe(true);
+    expect(button('Escuro').disabled).toBe(false);
+    jest.restoreAllMocks();
   });
 
   it('restaura as escolhas salvas e ignora valores desconhecidos', async () => {
     localStorage.setItem('argila-docs:tema', 'auto');
-    localStorage.setItem('argila-docs:estilo', 'windows-xp');
+    localStorage.setItem('argila-docs:estilo', 'transparente');
     localStorage.setItem('argila-docs:paleta', 'terrosa');
     localStorage.setItem('argila-docs:opacidade', '80');
 
     const { select } = await setup();
 
     expect(root.getAttribute('data-arg-theme')).toBe('auto');
-    expect(root.getAttribute('data-arg-style')).toBe('windows-xp');
+    expect(root.getAttribute('data-arg-style')).toBe('transparente');
     // O seletor mostra o que está aplicado, não a primeira opção
-    expect(select('Estilo').value).toBe('windows-xp');
+    expect(select('Estilo').value).toBe('transparente');
     expect(select('Paleta').value).toBe('terrosa');
     expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
     expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('0.8');
