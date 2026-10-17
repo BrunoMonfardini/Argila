@@ -1,6 +1,6 @@
 # Validação dos temas
 
-_Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que conferir antes de seguir para o PR-2 do [plano de estilos e paletas](plano-estilos-paletas-e-catalogo.md). Marque cada item quando tiver conferido.
+_Criado em 15/10/2026, depois do PR de estilos e paletas (#68)._ Lista do que conferir no marco E0 do [plano de execução dos design systems](plano-de-execucao-design-systems.md#e0-checkup-dos-temas), antes do E1. Marque cada item quando tiver conferido.
 
 ## Situação
 
@@ -63,7 +63,7 @@ Para cada estilo (Argila, Molde, CODA, Transparente, Windows XP), em claro e esc
 ## 5. Problemas conhecidos, a corrigir
 
 - [ ] **Transparente:** painéis sobre o conteúdo (calendário, diálogos, menus) estão tão translúcidos quanto os cards (60%) e sem desfoque, então o texto de trás aparece. Correção prevista: superfícies elevadas mais opacas (80% no Transparente) e desfoque atrás dos painéis.
-- [ ] `--arg-surface-blur` existe, mas nenhum componente usa ainda (vidro fosco do PR-2).
+- [ ] `--arg-surface-blur` existe, mas nenhum componente usa ainda (vidro do marco E4).
 - [ ] As cores de feedback (info, sucesso, aviso, erro) ainda não foram ajustadas para a Terrosa (o plano previa tons dessaturados).
 
 ## 6. Processo

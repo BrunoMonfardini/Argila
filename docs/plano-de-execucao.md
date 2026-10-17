@@ -26,6 +26,8 @@ _Atualizado em 13/10/2026._
 | M5    | **Pronto** (ondas 1 a 6: base de formulários, exibição e feedback, camadas, navegação, domínio dos produtos e dados). **Próximo:** M6                                                                 |
 | M6    | **Código pronto** (PR-20): o workflow `catalogo.yml` publica na Vercel (D3 seguiu a opção padrão). Falta OPS-03 (criar o projeto `argila-catalogo` na Vercel e os 3 secrets; passo a passo no README) |
 
+**Próxima fase:** design systems distintos, testes com Jest e catálogo novo, no [plano de execução dos design systems](plano-de-execucao-design-systems.md).
+
 **O que já funciona no catálogo** (`npm run dev`, <http://localhost:4200>):
 
 - Barra de tema (claro, escuro, automático) e de marca, com o próprio `ArgTheme`; barra lateral com busca; menu no celular.
