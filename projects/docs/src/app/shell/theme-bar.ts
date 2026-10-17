@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, DOCUMENT, computed, inject } from '@angular/core';
 import {
+  ARG_DESIGN_SYSTEMS,
   ARG_MIN_SURFACE_OPACITY,
+  ARG_PALETTES,
   ArgButton,
   ArgColorScheme,
   ArgPalette,
@@ -21,19 +23,19 @@ const SCHEMES: Option<ArgColorScheme>[] = [
   { value: 'auto', label: 'Automático' },
 ];
 
-/** Cada estilo é um arquivo em projects/ui/tokens/styles/ (o Argila é o padrão, sem arquivo). */
-const STYLES: Option<ArgStyle>[] = [
-  { value: 'argila', label: 'Argila (padrão)' },
-  { value: 'molde', label: 'Molde' },
-  { value: 'coda', label: 'CODA' },
-  { value: 'transparente', label: 'Transparente' },
-  { value: 'windows-xp', label: 'Windows XP' },
-];
+/** Um por manifesto de design system; o Argila é o padrão. */
+const STYLES: Option<ArgStyle>[] = Object.values(ARG_DESIGN_SYSTEMS).map((ds) => ({
+  value: ds.id,
+  label: ds.id === 'argila' ? `${ds.nome} (padrão)` : ds.nome,
+}));
 
-const PALETTES: Option<ArgPalette>[] = [
-  { value: 'nativa', label: 'Nativa do estilo' },
-  { value: 'terrosa', label: 'Terrosa' },
-];
+const PALETTE_LABELS: Record<string, string> = { nativa: 'Nativa do estilo', terrosa: 'Terrosa' };
+
+/** Todas as paletas, para validar o que estava salvo; a barra mostra só as do estilo. */
+const PALETTES: Option<ArgPalette>[] = ARG_PALETTES.map((value) => ({
+  value,
+  label: PALETTE_LABELS[value] ?? value,
+}));
 
 /** Opacidade das superfícies em %, do mínimo seguro até opaca, de 5 em 5. */
 const MIN_OPACITY = ARG_MIN_SURFACE_OPACITY * 100;
@@ -63,7 +65,11 @@ export class DocThemeBar {
 
   protected readonly schemes = SCHEMES;
   protected readonly styles = STYLES;
-  protected readonly palettes = PALETTES;
+  /** Só as paletas que o design system atual aceita. */
+  protected readonly palettes = computed(() =>
+    PALETTES.filter((option) => this.theme.palettes().includes(option.value)),
+  );
+  protected readonly acceptsTransparency = this.theme.acceptsTransparency;
   protected readonly minOpacity = MIN_OPACITY;
   protected readonly scheme = this.theme.colorScheme;
   protected readonly style = this.theme.style;
@@ -85,7 +91,7 @@ export class DocThemeBar {
       this.theme.setColorScheme(scheme);
     }
     const opacity = readPreference(OPACITY_KEY, OPACITIES);
-    if (opacity) {
+    if (opacity && this.theme.acceptsTransparency()) {
       this.theme.setSurfaceOpacity(Number(opacity) / 100);
     }
   }
