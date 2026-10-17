@@ -64,7 +64,7 @@ Para cada estilo (Argila, Molde, CODA, Transparente, Windows XP), em claro e esc
 ## 5. Problemas conhecidos, a corrigir
 
 - [x] **Transparente:** painéis sobre o conteúdo (calendário, diálogos, menus) estão tão translúcidos quanto os cards (60%) e sem desfoque, então o texto de trás aparece. Correção prevista: superfícies elevadas mais opacas (80% no Transparente) e desfoque atrás dos painéis.
-- [x] `--arg-surface-blur` existe, e agora os painéis sobre o conteúdo usam (vidro fosco do PR-2).
+- [x] `--arg-surface-blur` existe, e agora os painéis sobre o conteúdo usam; o vidro completo vem no marco E4.
 - [ ] As cores de feedback (info, sucesso, aviso, erro) ainda não foram ajustadas para a Terrosa (o plano previa tons dessaturados).
 
 ## 6. Processo
