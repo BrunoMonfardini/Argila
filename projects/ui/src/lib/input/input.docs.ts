@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { InputActionExample } from './examples/input-action.example';
 import { InputReactiveExample } from './examples/input-reactive.example';
 import { InputSignalsExample } from './examples/input-signals.example';
 import { InputStatesExample } from './examples/input-states.example';
@@ -14,6 +15,12 @@ export const INPUT_DOCS: DocPage = {
   component: ArgInput,
   playground: false,
   examples: [
+    {
+      name: 'Com ação acoplada',
+      description:
+        'Com `arg-input-group`, o botão de ação (`argInputAction`) encosta no fim do campo, numa peça só.',
+      component: InputActionExample,
+    },
     {
       name: 'Estados',
       description:
