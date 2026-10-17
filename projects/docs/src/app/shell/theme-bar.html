@@ -14,20 +14,25 @@
   }
 </div>
 
+<!-- [selected] em cada opção: o [value] do <select> chega antes das opções existirem -->
 <label class="doc-theme-bar__field">
   <span>Estilo</span>
-  <select arg-select [value]="style()" (change)="selectStyle($event)">
+  <select arg-select (change)="selectStyle($event)">
     @for (option of styles; track option.value) {
-      <option [value]="option.value">{{ option.label }}</option>
+      <option [value]="option.value" [selected]="option.value === style()">
+        {{ option.label }}
+      </option>
     }
   </select>
 </label>
 
 <label class="doc-theme-bar__field">
   <span>Paleta</span>
-  <select arg-select [value]="palette()" (change)="selectPalette($event)">
+  <select arg-select (change)="selectPalette($event)">
     @for (option of palettes; track option.value) {
-      <option [value]="option.value">{{ option.label }}</option>
+      <option [value]="option.value" [selected]="option.value === palette()">
+        {{ option.label }}
+      </option>
     }
   </select>
 </label>

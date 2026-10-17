@@ -45,3 +45,6 @@ Thumbs.db
 
 # Manifesto do catálogo: gerado do código por scripts/gerar-manifesto.ts
 /projects/docs/src/generated
+
+# Checkup visual: capturas e relatório gerados por scripts/checkup-visual.ts
+/checkup

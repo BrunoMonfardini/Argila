@@ -154,6 +154,27 @@ npm run changeset -- status --since=origin/main
 | `npm run manifest:check` | Confere que todo componente exportado tem página e JSDoc nas inputs |
 | `npm run changeset -- …` | Confere se a branch tem changeset quando o pacote mudou             |
 
+**Mudou token, estilo, paleta ou o visual de um componente?** Rode também o checkup visual,
+com o catálogo aberto (`npm run dev`) num segundo terminal. Ele não roda no CI porque precisa
+do Chrome:
+
+```bash
+npm run checkup
+```
+
+Percorre cada página do catálogo em cada estilo × paleta × modo, escolhendo o tema pela barra do
+topo como uma pessoa faria, e procura erros no console, rolagem horizontal, falhas na barra de
+tema e texto com pouco contraste. Gera `checkup/relatorio.html` com os problemas e as capturas
+lado a lado (páginas nas linhas, combinações nas colunas). O ciclo completo leva uns 40 minutos;
+para olhar só uma parte:
+
+```bash
+npm run checkup -- --estilos coda,transparente --paletas nativa --paginas date-picker,dialog
+```
+
+Outro endereço (ex.: porta 4201): `--url http://localhost:4201`. Se o Chrome não for achado,
+informe o caminho em `CHROME_PATH`.
+
 Corrigir a formatação de todos os arquivos:
 
 ```bash
