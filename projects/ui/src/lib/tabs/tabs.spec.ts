@@ -1,12 +1,17 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { a11yViolations, accessibleName } from '../../testing/a11y';
-import { ARG_TABS, ArgTabsActivation } from './tabs';
+import { ARG_TABS, ArgTabsActivation, ArgTabsVariant } from './tabs';
 
 @Component({
   imports: [ARG_TABS],
   template: `
-    <arg-tabs label="Ficha do pet" [(selected)]="selected" [activation]="activation()">
+    <arg-tabs
+      label="Ficha do pet"
+      [(selected)]="selected"
+      [activation]="activation()"
+      [variant]="variant()"
+    >
       <arg-tab label="Dados" value="dados">Golden retriever</arg-tab>
       <arg-tab label="Vacinas">Antirrábica em dia</arg-tab>
       <arg-tab label="Financeiro" disabled>Sem permissão</arg-tab>
@@ -17,6 +22,7 @@ import { ARG_TABS, ArgTabsActivation } from './tabs';
 class Host {
   readonly selected = signal<string | undefined>(undefined);
   readonly activation = signal<ArgTabsActivation>('automatic');
+  readonly variant = signal<ArgTabsVariant>('underline');
 }
 
 describe('ArgTabs', () => {
@@ -128,6 +134,20 @@ describe('ArgTabs', () => {
 
     tabs[1].click();
     expect(host.selected()).toBe('Vacinas');
+  });
+
+  it('segmented: troca só a aparência, com o mesmo teclado e ARIA', async () => {
+    const { root, tabs, press, visible, set } = await setup();
+    const host = root.querySelector('arg-tabs')!;
+    expect(host.classList).not.toContain('arg-tabs--segmented');
+
+    await set((h) => h.variant.set('segmented'));
+    await press(tabs[0], 'ArrowRight');
+
+    expect(host.classList).toContain('arg-tabs--segmented');
+    expect(tabs[1].getAttribute('aria-selected')).toBe('true');
+    expect(visible()).toEqual(['Antirrábica em dia']);
+    expect(a11yViolations(root)).toEqual([]);
   });
 
   it('não tem violações de acessibilidade', async () => {

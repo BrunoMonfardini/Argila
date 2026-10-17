@@ -17,6 +17,9 @@ import { injectUniqueId } from '../internal/unique-id';
 
 export type ArgTabsActivation = 'automatic' | 'manual';
 
+/** `underline`: barra embaixo da aba aberta. `segmented`: trilho em pílula, aba aberta em relevo. */
+export type ArgTabsVariant = 'underline' | 'segmented';
+
 /**
  * Uma aba e o seu painel. O conteúdo é o painel (`role="tabpanel"`); o
  * botão da aba é desenhado pelo `arg-tabs`.
@@ -74,7 +77,7 @@ export class ArgTab {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './tabs.html',
   styleUrl: './tabs.css',
-  host: { class: 'arg-tabs' },
+  host: { class: 'arg-tabs', '[class.arg-tabs--segmented]': 'variant() === "segmented"' },
 })
 export class ArgTabs {
   /** Nome da lista de abas para leitores de tela: "Ficha do pet". */
@@ -83,6 +86,11 @@ export class ArgTabs {
   readonly selected = model<string | undefined>(undefined);
   /** `automatic`: a aba abre ao receber o foco. `manual`: só com Enter, Espaço ou clique. */
   readonly activation = input<ArgTabsActivation>('automatic');
+  /**
+   * Aparência: `underline` (barra embaixo da aba aberta) ou `segmented` (trilho
+   * em pílula, com a aba aberta em relevo), para alternar poucas visões curtas.
+   */
+  readonly variant = input<ArgTabsVariant>('underline');
 
   protected readonly tabs = contentChildren(ArgTab);
   private readonly buttons = viewChildren<ElementRef<HTMLButtonElement>>('tab');
