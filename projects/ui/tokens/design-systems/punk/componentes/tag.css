@@ -1,0 +1,6 @@
+/* Tag: pílula de contorno; ligada, o chip fica rosa (vem do componente). */
+
+:root[data-arg-style='punk'] .arg-tag:not(.arg-tag--selected, .arg-tag--disabled) {
+  --arg-tag-bg: transparent;
+  --arg-tag-border: var(--arg-color-text);
+}

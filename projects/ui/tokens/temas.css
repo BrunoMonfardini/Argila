@@ -11,6 +11,7 @@
 @import './design-systems/transparente/index.css';
 @import './design-systems/windows-xp/index.css';
 @import './design-systems/neo-brutalista/index.css';
+@import './design-systems/punk/index.css';
 
 /* Paletas compartilhadas: valem em qualquer design system que as aceite */
 @import './palettes/terrosa.css';

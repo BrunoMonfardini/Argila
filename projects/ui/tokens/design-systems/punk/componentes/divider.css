@@ -1,0 +1,5 @@
+/* Divisor: cinza do contorno. */
+
+:root[data-arg-style='punk'] .arg-divider {
+  --arg-divider-color: var(--arg-color-border);
+}

@@ -1,0 +1,8 @@
+/* Cartões: superfície escura de cantos grandes, sem sombra; os cards coloridos são o arg-punk-stat-card. */
+
+:root[data-arg-style='punk'] .arg-card {
+  --arg-card-border: var(--arg-color-border);
+  --arg-card-border-hover: var(--arg-color-border-strong);
+  --arg-card-shadow: none;
+  --arg-card-shadow-hover: none;
+}

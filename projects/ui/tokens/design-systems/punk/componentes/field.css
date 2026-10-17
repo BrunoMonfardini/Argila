@@ -1,0 +1,5 @@
+/* Field: rótulo e campo um pouco mais afastados. */
+
+:root[data-arg-style='punk'] arg-field {
+  --arg-field-gap: var(--arg-space-2);
+}

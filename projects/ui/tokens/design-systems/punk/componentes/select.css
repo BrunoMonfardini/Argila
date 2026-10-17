@@ -1,0 +1,5 @@
+/* Select: a pílula escura do Input. */
+
+:root[data-arg-style='punk'] .arg-select {
+  --arg-input-height: 2.75rem;
+}

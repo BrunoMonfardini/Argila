@@ -1,0 +1,26 @@
+/*
+ * Forma do Punk (referência: docs/referencias/punk.jpg): plana, sem sombra,
+ * com pílulas e cards de cantos grandes (24px). Títulos pesados em Unbounded,
+ * carregada pelo produto (Google Fonts); o corpo é a sans do sistema.
+ */
+:root[data-arg-style='punk'] {
+  color-scheme: dark;
+
+  --arg-radius-control: var(--arg-core-radius-full);
+  --arg-radius-container: 1.5rem;
+
+  --arg-shadow-color: rgb(0 0 0 / 0.6);
+  --arg-shadow-1: none;
+  --arg-shadow-2: none;
+  --arg-shadow-3: 0 12px 32px var(--arg-shadow-color);
+  --arg-shadow-4: 0 16px 40px var(--arg-shadow-color);
+  --arg-shadow-5: 0 24px 56px var(--arg-shadow-color);
+  --arg-shadow-sm: none;
+  --arg-shadow-md: var(--arg-shadow-3);
+  --arg-shadow-lg: var(--arg-shadow-4);
+  --arg-shadow-control: none;
+  --arg-shadow-field: none;
+
+  --arg-font-family-heading: 'Unbounded', system-ui, sans-serif;
+  --arg-font-weight-heading: 800;
+}

@@ -1,0 +1,36 @@
+/*
+ * Paleta Néon, nativa do Punk (referência: docs/referencias/punk.jpg): fundo
+ * preto absoluto e cards de cor chapada em rosa, amarelo, verde e azul. As
+ * quatro cores são claras: o texto sobre elas é sempre preto. O Punk só tem o
+ * modo escuro, então os valores não usam light-dark().
+ */
+:root[data-arg-style='punk']:not([data-arg-palette]),
+:root[data-arg-style='punk'][data-arg-palette='nativa'] {
+  --arg-color-primary: #f06bb8;
+  --arg-color-on-primary: #000000;
+  --arg-color-primary-soft: #f06bb8;
+  --arg-color-on-primary-soft: #000000;
+  --arg-color-secondary: #edf040;
+  --arg-color-on-secondary: #000000;
+  --arg-color-accent: #3fe36b;
+  --arg-color-on-accent: #000000;
+
+  --arg-color-background: #000000;
+  --arg-color-surface-solid: #111111;
+  --arg-color-surface-raised-solid: #1a1a1a;
+  --arg-color-surface-sunken-solid: #050505;
+
+  --arg-color-text: #ffffff;
+  --arg-color-text-muted: #b3b3b3;
+  --arg-color-text-disabled: #6b6b6b;
+
+  --arg-color-border: #2a2a2a;
+  --arg-color-border-strong: #5a5a5a;
+  --arg-color-focus: #ffffff;
+  --arg-color-disabled-bg: #1a1a1a;
+  --arg-color-disabled-border: #2a2a2a;
+
+  --arg-color-info: #4c8dff;
+  --arg-color-success: #3fe36b;
+  --arg-color-warning: #edf040;
+}

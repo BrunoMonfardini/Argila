@@ -1,0 +1,5 @@
+/* Abas: indicador branco sobre o preto. */
+
+:root[data-arg-style='punk'] arg-tabs {
+  --arg-tabs-indicator: var(--arg-color-text);
+}

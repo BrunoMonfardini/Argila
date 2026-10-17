@@ -1,0 +1,5 @@
+/* Horários: pílulas mais altas. */
+
+:root[data-arg-style='punk'] .arg-time-slots {
+  --arg-time-slots-height: 2.75rem;
+}

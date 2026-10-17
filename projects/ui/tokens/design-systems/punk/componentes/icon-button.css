@@ -1,0 +1,5 @@
+/* Botão de ícone: o círculo do Button. */
+
+:root[data-arg-style='punk'] .arg-icon-button {
+  --arg-button-height: 2.75rem;
+}

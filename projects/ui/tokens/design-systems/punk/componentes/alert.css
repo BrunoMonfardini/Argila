@@ -1,0 +1,5 @@
+/* Alerta: cantos de cartão. */
+
+:root[data-arg-style='punk'] .arg-alert {
+  --arg-alert-radius: var(--arg-radius-container);
+}
