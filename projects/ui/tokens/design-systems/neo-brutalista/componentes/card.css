@@ -1,0 +1,17 @@
+/* Cartões: caixa de contorno grosso com sombra dura. */
+
+:root[data-arg-style='neo-brutalista'] .arg-card {
+  --arg-card-border: var(--arg-color-border);
+  --arg-card-border-hover: var(--arg-color-border);
+  border-width: 3px;
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-card:not(.arg-card--elevated) {
+  --arg-card-shadow: var(--arg-shadow-2);
+  --arg-card-shadow-hover: var(--arg-shadow-3);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-card.arg-card--elevated {
+  --arg-card-shadow: var(--arg-shadow-3);
+  --arg-card-shadow-hover: var(--arg-shadow-4);
+}

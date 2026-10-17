@@ -1,0 +1,6 @@
+/* Diálogo: caixa de contorno grosso no nível mais alto da sombra dura. */
+
+:root[data-arg-style='neo-brutalista'] .arg-dialog {
+  --arg-dialog-shadow: var(--arg-shadow-5);
+  border: 3px solid var(--arg-color-border);
+}

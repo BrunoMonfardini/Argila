@@ -1,0 +1,12 @@
+/* Estado vazio: caixa de contorno grosso e cheio (não tracejado), ícone em bloco ciano. */
+
+:root[data-arg-style='neo-brutalista'] .arg-empty-state {
+  --arg-empty-state-border: var(--arg-color-border);
+  --arg-empty-state-icon-bg: var(--arg-color-primary-soft);
+  --arg-empty-state-icon-fg: var(--arg-color-on-primary-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-empty-state.arg-empty-state--bordered {
+  border: 3px solid var(--arg-color-border);
+  box-shadow: var(--arg-shadow-2);
+}

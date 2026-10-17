@@ -1,0 +1,7 @@
+/* Campos: contorno grosso, fundo de papel branco, sem relevo. */
+
+:root[data-arg-style='neo-brutalista'] .arg-input {
+  --arg-input-bg: var(--arg-color-surface);
+  --arg-input-border: var(--arg-color-border);
+  --arg-input-height: 2.75rem;
+}

@@ -1,0 +1,7 @@
+/* Tag: etiqueta retangular com contorno grosso. */
+
+:root[data-arg-style='neo-brutalista'] .arg-tag {
+  --arg-tag-radius: 0.25rem;
+  --arg-tag-border: var(--arg-color-border);
+  border-width: 2px;
+}

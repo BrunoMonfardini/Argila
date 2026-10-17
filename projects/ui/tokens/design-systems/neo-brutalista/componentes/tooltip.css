@@ -1,0 +1,5 @@
+/* Tooltip: caixa preta de cantos retos. */
+
+:root[data-arg-style='neo-brutalista'] arg-tooltip-panel {
+  --arg-tooltip-radius: 0.25rem;
+}

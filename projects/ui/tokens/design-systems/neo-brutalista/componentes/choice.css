@@ -1,0 +1,10 @@
+/* Checkbox, radio e switch: marcados em tinta preta, maiores (alvo de 44px na linha). */
+
+:root[data-arg-style='neo-brutalista'] :is(.arg-checkbox, .arg-radio) {
+  --arg-choice-accent: var(--arg-color-text);
+  --arg-choice-size: 1.375rem;
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-switch {
+  --arg-switch-on: var(--arg-color-primary);
+}

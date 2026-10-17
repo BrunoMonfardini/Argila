@@ -1,0 +1,6 @@
+/* Breadcrumb: caixa alta e corpo de legenda, como 'HOME > SECTION > CURRENT PAGE'. */
+
+:root[data-arg-style='neo-brutalista'] nav.arg-breadcrumb {
+  font-size: var(--arg-font-size-caption);
+  text-transform: uppercase;
+}

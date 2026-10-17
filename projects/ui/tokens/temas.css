@@ -10,6 +10,7 @@
 @import './design-systems/coda/index.css';
 @import './design-systems/transparente/index.css';
 @import './design-systems/windows-xp/index.css';
+@import './design-systems/neo-brutalista/index.css';
 
 /* Paletas compartilhadas: valem em qualquer design system que as aceite */
 @import './palettes/terrosa.css';
@@ -18,6 +19,7 @@
 @import './palettes/mono.css';
 @import './palettes/alto-contraste.css';
 @import './palettes/viva.css';
+@import './palettes/pastel.css';
 
 /* Cores de marca (lista fixa): por último, para vencer as paletas */
 @import './colors.css';

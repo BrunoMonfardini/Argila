@@ -1,0 +1,16 @@
+/* Paginação: blocos quadrados com contorno; a página atual é o bloco ciano. */
+
+:root[data-arg-style='neo-brutalista'] .arg-pagination {
+  --arg-pagination-current-bg: var(--arg-color-primary-soft);
+  --arg-pagination-current-fg: var(--arg-color-on-primary-soft);
+  --arg-pagination-size: 2.75rem;
+}
+
+:root[data-arg-style='neo-brutalista']
+  .arg-pagination
+  :is(.arg-pagination__step, .arg-pagination__number) {
+  border: 3px solid var(--arg-color-border);
+  border-radius: 0.25rem;
+  box-shadow: var(--arg-shadow-1);
+  text-transform: uppercase;
+}

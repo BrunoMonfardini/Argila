@@ -1,0 +1,11 @@
+/* Lista: itens separados por linha grossa, com contorno quando bordada. */
+
+:root[data-arg-style='neo-brutalista'] .arg-list {
+  --arg-list-divider: var(--arg-color-border);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-list.arg-list--bordered {
+  border-width: 3px;
+  border-color: var(--arg-color-border);
+  box-shadow: var(--arg-shadow-2);
+}

@@ -1,0 +1,10 @@
+/* Barra de progresso: trilho alto com contorno, cantos retos. */
+
+:root[data-arg-style='neo-brutalista'] .arg-progress {
+  --arg-progress-radius: 0;
+  border: 3px solid var(--arg-color-border);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-progress:not(.arg-progress--sm) {
+  --arg-progress-height: 1rem;
+}
