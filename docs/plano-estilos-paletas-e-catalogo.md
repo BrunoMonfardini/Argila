@@ -399,7 +399,7 @@ Padrões e templates usam só componentes do **núcleo mínimo**, para funcionar
         ↓
 2. tokens/semantic.css            nomes semânticos com valor padrão (o contrato)
         ↓
-3. design-systems/<ds>/           valores dos tokens, paletas, peles, exclusivos, manifesto
+3. design systems                 manifesto, forma, paletas, peles e exclusivos de cada DS
         ↓
 4. src/lib/<componente>/          núcleo: comportamento + a11y, estilizado só por tokens semânticos
         ↓
@@ -412,72 +412,92 @@ Uma camada só depende das que estão **acima** dela. A exceção são os **excl
 
 ### 5.2 Pastas
 
+Cada DS se divide em duas pastas com o mesmo nome: o **CSS** fica em `tokens/` (o empacotamento copia os `.css` dali para o pacote) e o **TypeScript** fica em `src/lib/` (o compilador só enxerga `src/`).
+
 ```
 projects/ui/
   tokens/
-    primitives.css  semantic.css  base.css  colors.css
-    palettes/                       paletas compartilhadas (terrosa, oceano, floresta, pastel, viva, mono, alto-contraste)
-    themes/                         só compatibilidade com data-arg-brand
-  design-systems/
-    argila/  neo-brutalista/  punk/  windows-xp/  transparente/  molde/  coda/
-      ds.ts                         manifesto (5.3)
-      ds.spec.ts                    testes do manifesto e da pele
+    primitives.css  semantic.css  base.css  colors.css  temas.css
+    palettes/                       paletas compartilhadas (oceano, floresta, pastel, viva, mono, alto-contraste)
+    design-systems/<ds>/            o CSS de cada DS (o Argila, padrão, não tem: os tokens semânticos são dele)
       forma.css                     raio, borda, sombra, espaçamento, tipografia
       paletas/
         nativa.css                  a paleta da imagem de referência
         <paleta>.css                ajustes opcionais numa paleta compartilhada
       componentes/
-        button.css  input.css …     pele dos componentes curados
-      exclusivos/
-        <componente>/               mesma estrutura de um componente do núcleo
-      fontes.md                     o link do Google Fonts que o produto carrega
+        button.css  input.css …     pele dos componentes curados, um arquivo por curado
+    styles/  palettes/nativas/      caminhos antigos, só reencaminham (removidos numa major)
+    themes/                         só compatibilidade com data-arg-brand
   src/
+    lib/design-systems/
+      design-system.ts              tipo do manifesto, ARG_COMPONENTS e o núcleo mínimo
+      design-systems.ts             ARG_DESIGN_SYSTEMS e os tipos ArgStyle, ArgPalette, ArgPaletteOf
+      <ds>/
+        ds.ts                       manifesto (5.3)
+        exclusivos/<prefixo>-<nome>/  mesma estrutura de um componente do núcleo
     lib/<componente>/               núcleo, como hoje: <c>.ts, <c>.html, <c>.css, <c>.spec.ts, <c>.docs.ts, examples/
     lib/theme/
     testing/                        a11y, contraste, utilitários de teste
 ```
 
-`tokens/styles/` e `tokens/palettes/nativas/`, criados no PR-1, são movidos para `design-systems/` no marco E2 do plano de execução, com o mesmo conteúdo.
+As fontes que cada DS precisa ficam no manifesto (`fontes`), não num arquivo à parte.
 
 ### 5.3 Manifesto do DS
 
 ```ts
-export const neoBrutalista = defineDesignSystem({
+import type { ArgDesignSystem } from '../design-system';
+
+export const neoBrutalista = {
   id: 'neo-brutalista',
   nome: 'Neo-brutalista',
-  referencia: 'Neo-Brutalist Design System',
+  referencia: 'neo-brutalista.jpg',
   modos: ['light', 'dark'],
   transparencia: false,
-  paletas: { nativa: 'papel-cmy', aceitas: ['pastel', 'mono', 'alto-contraste'] },
+  paletas: ['nativa', 'pastel', 'mono', 'alto-contraste'], // a primeira é a padrão
   fontes: { titulo: 'Archivo Black', corpo: 'Archivo' },
   componentes: {
-    curados: [...NUCLEO_MINIMO, 'avatar', 'breadcrumb', 'list', 'pagination', 'stepper', 'table'],
+    curados: [
+      ...ARG_CORE_MINIMUM,
+      'avatar',
+      'breadcrumb',
+      'list',
+      'pagination',
+      'stepper',
+      'table',
+    ],
     fora: [],
   },
   exclusivos: ['nb-sticker', 'nb-rules'],
+  prefixo: 'nb',
   regras: ['Um único botão primário por tela', 'Foco sempre visível', 'Alvo mínimo de 44px'],
-});
+} as const satisfies ArgDesignSystem;
 ```
 
-O manifesto é **a única fonte** de: tipos do `ArgTheme` e dos segmentos, matriz do teste de contraste, filtros da barra de tema, navegação do catálogo e página "Design systems". Nada disso é escrito à mão em outro lugar (DRY, seção 3.2 do padrão de pipeline).
+- `as const satisfies` no lugar de uma função `defineDesignSystem`: o TypeScript confere o formato e mantém os valores literais, de onde saem os tipos (`ArgPaletteOf<'neo-brutalista'>` é `'nativa' | 'pastel' | …`).
+- O manifesto **só importa tipos**. Assim ele roda no Node sem compilação, e os scripts (contraste, checkup, geradores) leem a mesma fonte que o `ArgTheme` (`scripts/lib/design-systems.ts`).
+
+O manifesto é **a única fonte** de: tipos do `ArgTheme` e dos segmentos, matriz do teste de contraste, combinações do checkup, opções da barra de tema, navegação do catálogo e página "Design systems". Nada disso é escrito à mão em outro lugar (DRY, seção 3.2 do padrão de pipeline).
 
 ### 5.4 Regras de dependência
 
-| Regra                                                                                                             | Como é verificada                                          |
-| ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| O CSS do núcleo (`src/lib/**/*.css`) não cita nome de DS nem valor literal de cor                                 | teste `arquitetura.spec.ts` (lê os arquivos)               |
-| A pele de um DS só usa seletores com `:root[data-arg-style='<ds>']` e só toca componentes que ele declara curados | teste `arquitetura.spec.ts`                                |
-| Um DS não importa arquivo de outro DS                                                                             | `dependency-cruiser` (`pnpm arch:check`)                   |
-| O núcleo não importa nada de `design-systems/`                                                                    | `dependency-cruiser`                                       |
-| Exclusivo usa o prefixo do seu DS (`arg-nb-`, `arg-punk-`, `arg-xp-`)                                             | regra do `angular-eslint` (`component-selector`) por pasta |
-| Todo componente curado tem teste de pele e entrada na matriz de contraste                                         | `arquitetura.spec.ts` cruza o manifesto com os arquivos    |
-| O catálogo só importa de `@argila/ui` (API pública)                                                               | `dependency-cruiser`                                       |
+| Regra                                                                                                                               | Como é verificada                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| O núcleo não importa nada de `design-systems/` (só o `ArgTheme` lê os manifestos)                                                   | `dependency-cruiser` (`pnpm arch:check`)                                             |
+| Um DS não importa arquivo de outro DS                                                                                               | `dependency-cruiser`                                                                 |
+| Um DS não importa o `ArgTheme` (o tema lê os DS, nunca o contrário)                                                                 | `dependency-cruiser`                                                                 |
+| O catálogo importa a API pública, as páginas (`*.docs.ts`), os exemplos e os utilitários de teste, nunca o interior dos componentes | `dependency-cruiser`                                                                 |
+| A biblioteca não importa o catálogo; nenhum arquivo importa um `.spec.ts`; sem ciclos (os só de tipos são aceitos)                  | `dependency-cruiser`                                                                 |
+| O CSS do núcleo (`src/lib/**/*.css`) não tem cor literal nem seletor de DS (`data-arg-style`, `-palette`, `-brand`)                 | `arquitetura.spec.ts`                                                                |
+| Pele: um `componentes/<nome>.css` por componente curado, nenhum a mais, todo seletor em `:root[data-arg-style='<ds>']`              | `arquitetura.spec.ts`                                                                |
+| Exclusivo: nome com o `prefixo` do manifesto, pasta em `exclusivos/` e seletor `arg-<nome>`                                         | `arquitetura.spec.ts` (o prefixo fica só no manifesto, sem regra repetida no ESLint) |
+| `ARG_COMPONENTS` lista exatamente as pastas de componente de `src/lib/`                                                             | `arquitetura.spec.ts`                                                                |
+| Cada pasta de DS tem manifesto com o id da pasta; o CSS existe para cada manifesto; toda paleta aceita existe                       | `temas.spec.ts`                                                                      |
 
-`pnpm arch:check` entra no `verify` do CI e no contrato de scripts.
+Cada regra de arquivo é uma função pura em `scripts/lib/arquitetura.ts`, testada com casos que a violam; `pnpm arch:check` roda no `verify` do CI.
 
 ### 5.5 Como criar um DS novo
 
-1. Copiar `design-systems/molde/` com o nome novo.
+1. Copiar `tokens/design-systems/molde/` e `src/lib/design-systems/molde/` com o nome novo, e registrar o manifesto em `design-systems.ts`.
 2. Preencher o manifesto e a ficha (formato da 3.4) na página "Design systems".
 3. Ajustar `forma.css` e `paletas/nativa.css` até passar no teste de contraste.
 4. Curar o núcleo mínimo (pele + teste) antes de qualquer exclusivo.
@@ -520,7 +540,7 @@ Diferenças de API encontradas na migração, para quem escrever testes novos:
 | Relatórios    | `text-summary`, `html`, `json-summary` e `lcov` em `coverage/`; JUnit em `reports/junit.xml`, com "describe › teste" em cada caso              |
 | Tempo limite  | 30 s por teste (o primeiro teste do gerador de manifesto monta um programa TypeScript inteiro)                                                 |
 
-Os limites maiores para o `ArgTheme` (95%) e para `design-systems/` (90%) entram no `coverageThreshold` junto com essas pastas, no E2.
+Os limites maiores para o `ArgTheme` (95%) e para `src/lib/design-systems/` (90%) estão no `coverageThreshold`.
 
 ### 6.3 Scripts
 
