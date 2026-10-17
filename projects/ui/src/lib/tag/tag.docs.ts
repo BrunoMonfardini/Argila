@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { TagChipsExample } from './examples/tag-chips.example';
 import { TagFiltersExample } from './examples/tag-filters.example';
 import { ArgTag } from './tag';
 
@@ -7,11 +8,18 @@ export const TAG_DOCS: DocPage = {
   title: 'Tag',
   category: 'Componentes',
   summary:
-    'Item de uma seleção ou filtro, que pode ser removido: filtros aplicados, serviços escolhidos, etiquetas de um cliente.',
+    'Item de uma seleção ou filtro, que pode ser removido ou ligado e desligado (chip de filtro): filtros aplicados, serviços escolhidos, etiquetas de um cliente.',
   component: ArgTag,
   playgroundContent: 'Gatos',
   playgroundInputs: { removable: true },
-  examples: [{ name: 'Filtros removíveis', component: TagFiltersExample }],
+  examples: [
+    { name: 'Filtros removíveis', component: TagFiltersExample },
+    {
+      name: 'Chips de filtro',
+      description: 'Com `selectable`, a tag liga e desliga um filtro; ligada, ganha o ✓.',
+      component: TagChipsExample,
+    },
+  ],
   guidelines: {
     do: [
       'Ponha as tags numa lista (`<ul>`) com nome, ex.: "Filtros aplicados".',
@@ -27,5 +35,6 @@ export const TAG_DOCS: DocPage = {
     'O botão de remover é um `<button>` focável: Enter e Espaço acionam, e Delete e Backspace também removem.',
     'O nome do botão junta o verbo e o texto da tag: o leitor de tela lê "Remover Gatos", não só "x".',
     'O ícone é decorativo; em alto contraste a tag mantém a borda.',
+    'Com `selectable`, o texto é um `<button>` com `aria-pressed`: o leitor de tela anuncia "pressionado" ou "não pressionado", e o ✓ mostra o estado sem depender da cor.',
   ],
 };
