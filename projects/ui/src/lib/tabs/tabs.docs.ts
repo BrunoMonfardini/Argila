@@ -1,6 +1,7 @@
 import { DocPage } from '../../docs/doc-page';
 import { TabsManualExample } from './examples/tabs-manual.example';
 import { TabsPetExample } from './examples/tabs-pet.example';
+import { TabsSegmentedExample } from './examples/tabs-segmented.example';
 import { ArgTabs } from './tabs';
 
 export const TABS_DOCS: DocPage = {
@@ -19,6 +20,12 @@ export const TABS_DOCS: DocPage = {
         'Para painéis que demoram a carregar: as setas não abrem a aba, só Enter, Espaço ou clique.',
       component: TabsManualExample,
     },
+    {
+      name: 'Segmentadas',
+      description:
+        'Trilho em pílula com a aba aberta em relevo, para alternar poucas visões curtas, como período ou formato.',
+      component: TabsSegmentedExample,
+    },
   ],
   guidelines: {
     do: [
@@ -36,6 +43,6 @@ export const TABS_DOCS: DocPage = {
     'A lista tem `role="tablist"` e nome (`label`); cada aba tem `role="tab"`, `aria-selected` e `aria-controls`; cada painel tem `role="tabpanel"` e `aria-labelledby` apontando para a aba.',
     'A lista é um único ponto de Tab (na aba aberta). Setas para a esquerda e para a direita trocam de aba, dando a volta; Home e End vão às pontas; abas desabilitadas são puladas.',
     'O painel recebe o foco pelo Tab, para quem lê com o teclado.',
-    'A aba aberta tem texto em destaque e uma barra embaixo: não depende só da cor.',
+    'A aba aberta tem texto em destaque e uma barra embaixo (ou, na `segmented`, fundo em relevo): não depende só da cor.',
   ],
 };
