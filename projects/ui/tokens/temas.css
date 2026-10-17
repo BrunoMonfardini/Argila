@@ -1,15 +1,16 @@
 /*
- * Argila — todos os estilos e paletas.
+ * Argila — todos os design systems e as suas paletas.
  *
  * Inclua depois de argila.css para trocar a aparência só com atributos no
- * <html>: data-arg-style (forma) e data-arg-palette (cor). Produtos que usam
- * um estilo só podem importar apenas o arquivo dele e o da paleta.
+ * <html>: data-arg-style (o design system) e data-arg-palette (a paleta).
+ * Produtos que usam um design system só podem importar apenas a forma e a
+ * paleta dele, em design-systems/<nome>/.
  */
-@import './styles/molde.css';
-@import './palettes/nativas/molde.css';
-@import './styles/coda.css';
-@import './palettes/nativas/coda.css';
-@import './styles/transparente.css';
-@import './palettes/nativas/transparente.css';
-@import './styles/windows-xp.css';
-@import './palettes/nativas/windows-xp.css';
+@import './design-systems/molde/forma.css';
+@import './design-systems/molde/paletas/nativa.css';
+@import './design-systems/coda/forma.css';
+@import './design-systems/coda/paletas/nativa.css';
+@import './design-systems/transparente/forma.css';
+@import './design-systems/transparente/paletas/nativa.css';
+@import './design-systems/windows-xp/forma.css';
+@import './design-systems/windows-xp/paletas/nativa.css';

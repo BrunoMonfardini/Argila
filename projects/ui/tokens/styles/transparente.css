@@ -1,23 +1,5 @@
 /*
- * Estilo Transparente: superfícies translúcidas, relevo suave (neumórfico)
- * e controles em pílula. As cores (cinza claro e laranja) ficam na paleta
- * nativa, em palettes/nativas/transparente.css.
- *
- * A transparência vem de --arg-surface-opacity, que o produto pode ajustar
- * (ArgTheme.setSurfaceOpacity); o mínimo de 0.4 preserva o contraste.
+ * Caminho antigo, mantido por compatibilidade: o estilo agora fica em
+ * design-systems/transparente/forma.css. Será removido numa versão major.
  */
-:root[data-arg-style='transparente'],
-:root[data-arg-brand='transparente'] {
-  --arg-surface-opacity: 0.6;
-
-  --arg-radius-control: var(--arg-core-radius-full);
-  --arg-radius-container: 1.5rem;
-
-  --arg-shadow-color: light-dark(rgb(163 177 198 / 0.55), rgb(0 0 0 / 0.55));
-  --arg-shadow-control:
-    5px 5px 12px var(--arg-shadow-color),
-    -5px -5px 12px light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.05));
-  --arg-shadow-field:
-    inset 3px 3px 6px var(--arg-shadow-color),
-    inset -3px -3px 6px light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.04));
-}
+@import '../design-systems/transparente/forma.css';

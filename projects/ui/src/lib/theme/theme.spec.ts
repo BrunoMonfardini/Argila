@@ -1,5 +1,6 @@
+import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
-import { ARG_STYLES, ArgStyle, ArgTheme } from './theme';
+import { ARG_DESIGN_SYSTEMS, ARG_PALETTES, ARG_STYLES, ArgTheme } from './theme';
 
 describe('ArgTheme', () => {
   let theme: ArgTheme;
@@ -87,18 +88,92 @@ describe('ArgTheme', () => {
     expect(theme.palette()).toBe('terrosa');
   });
 
-  describe('estilo com um modo só', () => {
-    const styles = ARG_STYLES as Record<ArgStyle, { schemes: readonly ('light' | 'dark')[] }>;
-    let original: readonly ('light' | 'dark')[];
+  it('ARG_STYLES e ARG_PALETTES vêm dos manifestos', () => {
+    expect(Object.keys(ARG_STYLES)).toEqual(Object.keys(ARG_DESIGN_SYSTEMS));
+    expect(ARG_STYLES['windows-xp'].schemes).toEqual(ARG_DESIGN_SYSTEMS['windows-xp'].modos);
+    expect(ARG_PALETTES).toEqual(['nativa', 'terrosa']);
+  });
+
+  describe('o que o design system não aceita', () => {
+    let warn: jest.SpiedFunction<typeof console.warn>;
 
     beforeEach(() => {
-      original = styles.coda.schemes;
-      styles.coda = { schemes: ['dark'] };
+      warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
     });
 
-    afterEach(() => {
-      styles.coda = { schemes: original };
+    afterEach(() => jest.restoreAllMocks());
+
+    it('troca para a paleta padrão do design system novo e avisa', () => {
+      jest.replaceProperty(ARG_DESIGN_SYSTEMS, 'coda', {
+        ...ARG_DESIGN_SYSTEMS.coda,
+        paletas: ['nativa'],
+      } as never);
+      theme.setPalette('terrosa');
+
+      theme.setStyle('coda');
+
+      expect(theme.palette()).toBe('nativa');
+      expect(root.getAttribute('data-arg-palette')).toBe('nativa');
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('não aceita a paleta "terrosa"'));
     });
+
+    it('recusa uma paleta que o design system atual não aceita', () => {
+      jest.replaceProperty(ARG_DESIGN_SYSTEMS, 'coda', {
+        ...ARG_DESIGN_SYSTEMS.coda,
+        paletas: ['nativa'],
+      } as never);
+      theme.setStyle('coda');
+
+      theme.setPalette('terrosa');
+
+      expect(theme.palette()).toBe('nativa');
+      expect(theme.palettes()).toEqual(['nativa']);
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('usando "nativa"'));
+    });
+
+    it('ao ler o <html>, troca uma paleta não aceita pela padrão', () => {
+      jest.replaceProperty(ARG_DESIGN_SYSTEMS, 'coda', {
+        ...ARG_DESIGN_SYSTEMS.coda,
+        paletas: ['nativa'],
+      } as never);
+      root.setAttribute('data-arg-style', 'coda');
+      root.setAttribute('data-arg-palette', 'terrosa');
+      TestBed.resetTestingModule();
+
+      expect(TestBed.inject(ArgTheme).palette()).toBe('nativa');
+    });
+
+    it('sem transparência no design system, ignora a opacidade e avisa', () => {
+      theme.setStyle('windows-xp');
+
+      theme.setSurfaceOpacity(0.6);
+
+      expect(theme.acceptsTransparency()).toBe(false);
+      expect(theme.surfaceOpacity()).toBeUndefined();
+      expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('não aceita transparência'));
+    });
+
+    it('ao trocar para um design system sem transparência, volta as superfícies a opacas', () => {
+      theme.setStyle('transparente');
+      theme.setSurfaceOpacity(0.6);
+
+      theme.setStyle('coda');
+
+      expect(theme.surfaceOpacity()).toBeUndefined();
+      expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
+    });
+  });
+
+  describe('estilo com um modo só', () => {
+    beforeEach(() => {
+      jest.replaceProperty(ARG_DESIGN_SYSTEMS, 'coda', {
+        ...ARG_DESIGN_SYSTEMS.coda,
+        modos: ['dark'],
+      } as never);
+    });
+
+    afterEach(() => jest.restoreAllMocks());
 
     it('troca o modo para o do estilo e recusa os outros', () => {
       theme.setColorScheme('light');

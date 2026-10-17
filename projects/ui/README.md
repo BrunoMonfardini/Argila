@@ -128,17 +128,22 @@ Exemplos vivos, playground e padrões combinados (carregamento, vazio) no catál
 
 Modo de cor, no `<html>`: `data-arg-theme="light" | "dark" | "auto"`.
 
-A aparência tem dois eixos independentes, também no `<html>`:
+A aparência vem de um **design system** (DS) e de uma **paleta** aceita por ele, também no `<html>`:
 
-| Eixo   | Atributo           | Define                            | Valores                                                          |
-| ------ | ------------------ | --------------------------------- | ---------------------------------------------------------------- |
-| Estilo | `data-arg-style`   | forma: raio, borda, sombra, fonte | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp` |
-| Paleta | `data-arg-palette` | cores                             | `nativa` (a do estilo, padrão), `terrosa`                        |
+| Eixo          | Atributo           | Define                             | Valores                                                          |
+| ------------- | ------------------ | ---------------------------------- | ---------------------------------------------------------------- |
+| Design system | `data-arg-style`   | forma: raio, borda, sombra, fonte  | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp` |
+| Paleta        | `data-arg-palette` | cores, só entre as que o DS aceita | `nativa` (a do DS, padrão), `terrosa`                            |
 
-Importe `tokens/temas.css` depois de `tokens/argila.css` (ou só os arquivos do estilo e da
-paleta que o produto usa, em `tokens/styles/` e `tokens/palettes/`). Sem `data-arg-palette`,
-cada estilo usa a própria paleta. O atributo antigo `data-arg-brand` continua funcionando
-para `example` (Molde), `coda`, `transparente` e `windows-xp`.
+Cada DS tem um manifesto (`ARG_DESIGN_SYSTEMS`) com os modos de cor, as paletas que aceita
+e se aceita transparência. O CSS de cada um fica em `tokens/design-systems/<ds>/`:
+`forma.css` e `paletas/nativa.css`.
+
+Importe `tokens/temas.css` depois de `tokens/argila.css` (ou só a forma e a paleta do DS que o
+produto usa). Sem `data-arg-palette`, cada DS usa a própria paleta. Os caminhos antigos
+`tokens/styles/<ds>.css` e `tokens/palettes/nativas/<ds>.css` continuam funcionando e serão
+removidos numa versão major. O atributo antigo `data-arg-brand` continua funcionando para
+`example` (Molde), `coda`, `transparente` e `windows-xp`.
 
 ```html
 <html data-arg-style="coda" data-arg-palette="terrosa" data-arg-theme="dark"></html>
@@ -153,15 +158,19 @@ theme.setPalette('terrosa');
 theme.setSurfaceOpacity(0.7); // superfícies translúcidas, de 0.4 a 1
 ```
 
-Cada estilo declara os modos que suporta (`ARG_STYLES`); `theme.schemes()` diz quais valem
-agora, e `setColorScheme()` troca um modo não suportado pelo padrão do estilo.
+O `ArgTheme` respeita o manifesto do DS atual: `theme.schemes()`, `theme.palettes()` e
+`theme.acceptsTransparency()` dizem o que vale agora. Ao trocar de DS, o que ele não aceita
+volta ao padrão dele, com aviso no console em modo de desenvolvimento: um modo de cor não
+suportado, uma paleta não aceita e a transparência (CODA e Windows XP não aceitam).
+`setPalette()` com uma paleta não aceita usa a padrão, e `setSurfaceOpacity()` num DS sem
+transparência é ignorado.
 
 Superfícies translúcidas: `--arg-surface-opacity` (padrão 1; 0.6 no Transparente). Paletas e
 temas sobrescrevem as cores opacas `--arg-color-surface-solid`, `-raised-solid` e
 `-sunken-solid`; os componentes usam `--arg-color-surface`, já com a transparência.
 
-Marca do produto (fixa): crie um estilo e uma paleta próprios, sempre no `:root`. Copie
-`tokens/styles/molde.css` e `tokens/palettes/nativas/molde.css`.
+Marca do produto (fixa): crie um DS próprio a partir do Molde. Copie a pasta
+`tokens/design-systems/molde/` (forma e paleta, sempre no `:root`).
 
 Marca do tenant (vinda do banco, em tempo de execução):
 

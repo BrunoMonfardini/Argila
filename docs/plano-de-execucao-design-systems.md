@@ -17,12 +17,13 @@ Ao final deste plano, o Argila tem **seis design systems distintos** (Argila, Ne
 
 _Atualizado em 17/10/2026._
 
-| Marco  | Situação                                                                                                                                                                                                                                                  |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR-1   | **Pronto**: motor de temas (#68), publicado como `0.3.0` (#70)                                                                                                                                                                                            |
-| E0     | **Em review**: PR #71 mergeado (barra de tema, testes, checkup); o resto em `fix/paineis-do-transparente` (painéis opacos e com desfoque, checkup completo sem problemas). Falta a conferência visual das seções 2 a 4 da [validação](validacao-temas.md) |
-| E1     | **Em review** em `chore/testes-com-jest`: 700 testes no Jest, resumo e cobertura comparada com a main no CI                                                                                                                                               |
-| E2–E12 | A fazer. Decisões E-D1 a E-D6 respondidas                                                                                                                                                                                                                 |
+| Marco  | Situação                                                                                                                                                                                            |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR-1   | **Pronto**: motor de temas (#68), publicado como `0.3.0` (#70)                                                                                                                                      |
+| E0     | **Em review** no #73 (`fix/paineis-do-transparente`): painéis opacos e com desfoque, checkup completo sem problemas. Falta a conferência visual das seções 2 a 4 da [validação](validacao-temas.md) |
+| E1     | **Pronto** (#74): 700 testes no Jest, resumo e cobertura comparada com a main no CI. A troca do `actions/cache` para a v6 ficou no #75                                                              |
+| E2     | **Em review** em `refactor/design-systems`: manifestos, CSS em `tokens/design-systems/`, `ArgTheme` respeitando o manifesto, regras de arquitetura no CI                                            |
+| E3–E12 | A fazer. Decisões E-D1 a E-D6 respondidas                                                                                                                                                           |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 
@@ -124,16 +125,18 @@ Especificação: [seção 6](plano-estilos-paletas-e-catalogo.md#6-testes-com-je
 
 ## E2: arquitetura dos design systems
 
+Os manifestos cobrem os 5 DS que já têm CSS (Argila, Molde, CODA, Transparente e Windows XP). Neo-brutalista e Punk ganham o deles nos marcos E5 e E6, junto com o CSS. As paletas aceitas continuam `nativa` e `terrosa` em todos: as listas da especificação (3.6) entram no E3, com as paletas compartilhadas.
+
 Especificação: [seção 5](plano-estilos-paletas-e-catalogo.md#5-padrão-de-arquitetura) e [3.6](plano-estilos-paletas-e-catalogo.md#36-paletas-por-ds-d19).
 
-| ✓   | ID   | Item                                                                                                                                                                          | Depende de | Pronto quando                                                                                 | Est. |
-| --- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- | ---- |
-| [ ] | A-01 | `feat(theme): defineDesignSystem e tipos gerados dos manifestos` (`DesignSystemId`, paletas aceitas por DS, núcleo mínimo)                                                    | E1         | Paleta não aceita num segmento não compila; testes do `defineDesignSystem` com 95%+           | 1    |
-| [ ] | A-02 | `refactor(tokens): pastas design-systems/` (move `styles/` e `palettes/nativas/` para `design-systems/<ds>/forma.css` e `paletas/nativa.css`; manifestos dos 6 DS e do Molde) | A-01       | Nenhuma mudança visual no `pnpm checkup`; pacote publicado com os mesmos seletores            | 1    |
-| [ ] | A-03 | `feat(theme): ArgTheme respeita o manifesto` (paleta, cores, modo e transparência que o DS não aceita voltam ao padrão, com aviso em desenvolvimento)                         | A-01       | Trocar de Argila com Terrosa para Punk aplica a paleta Néon e avisa no console                | 0,5  |
-| [ ] | A-04 | `test(tokens): contraste só nas combinações aceitas`                                                                                                                          | A-02       | A matriz vem dos manifestos; aceitar uma paleta nova num DS entra no teste sem mexer no teste | 0,5  |
-| [ ] | A-05 | `ci: regras de arquitetura` (`dependency-cruiser`, `pnpm arch:check`, `arquitetura.spec.ts`, prefixo de seletor por pasta no ESLint)                                          | A-02       | Cada regra da 5.4 tem um caso que a viola e faz o CI falhar                                   | 0,75 |
-| [ ] | A-06 | `docs: arquitetura e como criar um DS`                                                                                                                                        | A-05       | README e catálogo explicam as camadas; o passo a passo da 5.5 funciona copiando o Molde       | 0,25 |
+| ✓   | ID   | Item                                                                                                                                                                                       | Depende de | Pronto quando                                                                                 | Est. |
+| --- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------- | ---- |
+| [x] | A-01 | `feat(theme): manifestos dos design systems` (`ArgDesignSystem` com `as const satisfies`, `ArgStyle`, `ArgPaletteOf`, `ARG_COMPONENTS`, núcleo mínimo)                                     | E1         | Paleta não aceita num segmento não compila; testes do `defineDesignSystem` com 95%+           | 1    |
+| [x] | A-02 | `refactor(tokens): pastas design-systems/` (move `styles/` e `palettes/nativas/` para `design-systems/<ds>/forma.css` e `paletas/nativa.css`; caminhos antigos reencaminham para os novos) | A-01       | Nenhuma mudança visual no `pnpm checkup`; pacote publicado com os mesmos seletores            | 1    |
+| [x] | A-03 | `feat(theme): ArgTheme respeita o manifesto` (paleta, cores, modo e transparência que o DS não aceita voltam ao padrão, com aviso em desenvolvimento)                                      | A-01       | Trocar de Argila com Terrosa para Punk aplica a paleta Néon e avisa no console                | 0,5  |
+| [x] | A-04 | `test(tokens): contraste só nas combinações aceitas`                                                                                                                                       | A-02       | A matriz vem dos manifestos; aceitar uma paleta nova num DS entra no teste sem mexer no teste | 0,5  |
+| [x] | A-05 | `ci: regras de arquitetura` (`dependency-cruiser`, `pnpm arch:check`, `arquitetura.spec.ts`; o prefixo dos exclusivos é conferido pelo teste, a partir do manifesto)                       | A-02       | Cada regra da 5.4 tem um caso que a viola e faz o CI falhar                                   | 0,75 |
+| [x] | A-06 | `docs: arquitetura e como criar um DS`                                                                                                                                                     | A-05       | README e catálogo explicam as camadas; o passo a passo da 5.5 funciona copiando o Molde       | 0,25 |
 
 ---
 
@@ -171,25 +174,25 @@ Referência: [transparente.jpg](referencias/transparente.jpg). É uma renderiza�
 
 Referência: [neo-brutalista.jpg](referencias/neo-brutalista.jpg).
 
-| ✓   | ID    | Item                                                                                                                              | Depende de | Pronto quando                                                                                             | Est. |
-| --- | ----- | --------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- | ---- |
-| [ ] | NB-01 | `feat(neo-brutalista): forma, tipografia e paleta Papel CMY` (contorno de 3px, sombra dura, escala de espaçamento, Archivo Black) | E3         | Escala de títulos 96/64/48/32 e espaçamentos 4–96 como na referência                                      | 1    |
-| [ ] | NB-02 | `feat(neo-brutalista): núcleo mínimo e curados da matriz` (Avatar, Breadcrumb, List, Pagination, Stepper, Table)                  | NB-01      | Botões, inputs, controles, abas, steps, paginação, tabela, toasts, modal e empty state como na referência | 1,5  |
-| [ ] | NB-03 | `feat(neo-brutalista): exclusivos arg-nb-sticker e arg-nb-rules`                                                                  | NB-01      | Selo inclinado legível por leitor de tela; caixa de regras com as regras do manifesto                     | 0,75 |
-| [ ] | NB-04 | Modo escuro: testar, decidir e registrar                                                                                          | NB-02      | Escuro aprovado, ou o manifesto declara só claro e o motivo vai para a especificação                      | 0,25 |
-| [ ] | NB-05 | `docs(neo-brutalista): capturas lado a lado com a referência`                                                                     | NB-04      | Capturas anexadas ao PR; regras de uso na página do DS                                                    | 0,5  |
+| ✓   | ID    | Item                                                                                                                                         | Depende de | Pronto quando                                                                                             | Est. |
+| --- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------- | ---- |
+| [ ] | NB-01 | `feat(neo-brutalista): manifesto, forma, tipografia e paleta Papel CMY` (contorno de 3px, sombra dura, escala de espaçamento, Archivo Black) | E3         | Escala de títulos 96/64/48/32 e espaçamentos 4–96 como na referência                                      | 1    |
+| [ ] | NB-02 | `feat(neo-brutalista): núcleo mínimo e curados da matriz` (Avatar, Breadcrumb, List, Pagination, Stepper, Table)                             | NB-01      | Botões, inputs, controles, abas, steps, paginação, tabela, toasts, modal e empty state como na referência | 1,5  |
+| [ ] | NB-03 | `feat(neo-brutalista): exclusivos arg-nb-sticker e arg-nb-rules`                                                                             | NB-01      | Selo inclinado legível por leitor de tela; caixa de regras com as regras do manifesto                     | 0,75 |
+| [ ] | NB-04 | Modo escuro: testar, decidir e registrar                                                                                                     | NB-02      | Escuro aprovado, ou o manifesto declara só claro e o motivo vai para a especificação                      | 0,25 |
+| [ ] | NB-05 | `docs(neo-brutalista): capturas lado a lado com a referência`                                                                                | NB-04      | Capturas anexadas ao PR; regras de uso na página do DS                                                    | 0,5  |
 
 ## E6: DS Punk
 
 Referência: [punk.jpg](referencias/punk.jpg).
 
-| ✓   | ID    | Item                                                                                                                     | Depende de | Pronto quando                                                                               | Est. |
-| --- | ----- | ------------------------------------------------------------------------------------------------------------------------ | ---------- | ------------------------------------------------------------------------------------------- | ---- |
-| [ ] | PK-01 | `feat(punk): forma, tipografia e paleta Néon` (fundo preto, cards chapados com raio de 24px, pílulas brancas, Unbounded) | E3         | Tela de entrada e home de exemplo com a mesma forma da referência                           | 1    |
-| [ ] | PK-02 | `feat(punk): núcleo mínimo e curados da matriz` (Agenda, Avatar, Date Picker, Drawer, List, Table, Time Slots)           | PK-01      | Calendário em faixa, chips, listas com chevron, conversas e notificações como na referência | 1,5  |
-| [ ] | PK-03 | `feat(punk): exclusivos arg-punk-stat-card, arg-punk-dot-track e arg-punk-burst`                                         | PK-01      | Trilha de pontos acessível como `progressbar`; estrela só decorativa (`aria-hidden`)        | 1    |
-| [ ] | PK-04 | Modo claro: testar, decidir e registrar                                                                                  | PK-02      | Claro aprovado, ou o manifesto declara só escuro e o motivo vai para a especificação        | 0,25 |
-| [ ] | PK-05 | `docs(punk): capturas lado a lado com a referência`                                                                      | PK-04      | Capturas anexadas ao PR; regras de uso na página do DS                                      | 0,25 |
+| ✓   | ID    | Item                                                                                                                                | Depende de | Pronto quando                                                                               | Est. |
+| --- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- | ---- |
+| [ ] | PK-01 | `feat(punk): manifesto, forma, tipografia e paleta Néon` (fundo preto, cards chapados com raio de 24px, pílulas brancas, Unbounded) | E3         | Tela de entrada e home de exemplo com a mesma forma da referência                           | 1    |
+| [ ] | PK-02 | `feat(punk): núcleo mínimo e curados da matriz` (Agenda, Avatar, Date Picker, Drawer, List, Table, Time Slots)                      | PK-01      | Calendário em faixa, chips, listas com chevron, conversas e notificações como na referência | 1,5  |
+| [ ] | PK-03 | `feat(punk): exclusivos arg-punk-stat-card, arg-punk-dot-track e arg-punk-burst`                                                    | PK-01      | Trilha de pontos acessível como `progressbar`; estrela só decorativa (`aria-hidden`)        | 1    |
+| [ ] | PK-04 | Modo claro: testar, decidir e registrar                                                                                             | PK-02      | Claro aprovado, ou o manifesto declara só escuro e o motivo vai para a especificação        | 0,25 |
+| [ ] | PK-05 | `docs(punk): capturas lado a lado com a referência`                                                                                 | PK-04      | Capturas anexadas ao PR; regras de uso na página do DS                                      | 0,25 |
 
 ## E7: DS Windows XP
 

@@ -1,17 +1,5 @@
 /*
- * Paleta nativa do Molde: azul de marca sobre os neutros da Terrosa. Vale
- * quando o estilo é Molde e nenhuma paleta foi escolhida (ou `nativa`).
- *
- * Uma paleta só define COR, sempre no :root, porque os estados derivados
- * (hover, pressed, subtle) são calculados lá.
+ * Caminho antigo, mantido por compatibilidade: a paleta agora fica em
+ * design-systems/molde/paletas/nativa.css. Será removido numa versão major.
  */
-:root[data-arg-style='molde']:not([data-arg-palette]),
-:root[data-arg-style='molde'][data-arg-palette='nativa'],
-:root[data-arg-brand='example'] {
-  --arg-color-primary: light-dark(#1d4f91, #8fb3ee);
-  --arg-color-on-primary: light-dark(#ffffff, #0e1a2b);
-  --arg-color-secondary: light-dark(#334155, #cbd5e1);
-  --arg-color-on-secondary: light-dark(#ffffff, #0f172a);
-  --arg-color-accent: light-dark(#0b5e58, #5eead4);
-  --arg-color-on-accent: light-dark(#ffffff, #042f2e);
-}
+@import '../../design-systems/molde/paletas/nativa.css';
