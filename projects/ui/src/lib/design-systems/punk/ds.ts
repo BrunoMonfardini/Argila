@@ -42,7 +42,8 @@ export const punk = {
     ],
     fora: ['breadcrumb', 'pagination'],
   },
-  exclusivos: [],
+  exclusivos: ['punk-stat-card', 'punk-dot-track', 'punk-burst'],
+  prefixo: 'punk',
   regras: [
     'Texto sobre card colorido sempre preto',
     'No máximo três cores de card por tela',
