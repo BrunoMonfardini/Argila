@@ -12,6 +12,7 @@ import {
   type RootAttributes,
   type TokenBlocks,
 } from './lib/contraste.ts';
+import { loadDesignSystems, rootAttributes } from './lib/design-systems.ts';
 
 /**
  * Contraste dos tokens semânticos do Argila, em claro e escuro, em toda
@@ -110,34 +111,23 @@ const PAIRS: ContrastPair[] = [
 
 const SCHEMES: ColorScheme[] = ['light', 'dark'];
 
-interface ThemeFile {
-  name: string;
-  blocks: TokenBlocks;
-}
-
-/** Cada `.css` de uma pasta de tokens: arquivo novo entra no teste sozinho. */
-function themeFiles(dir: string): ThemeFile[] {
+/** Cada `.css` de uma pasta de tokens, inclusive subpastas: arquivo novo entra no teste sozinho. */
+function tokenFiles(dir: string, recursive: boolean): TokenBlocks[] {
   if (!existsSync(resolve(TOKENS, dir))) return [];
-  return readdirSync(resolve(TOKENS, dir))
+  return readdirSync(resolve(TOKENS, dir), { recursive, encoding: 'utf8' })
     .filter((file) => file.endsWith('.css'))
-    .map((file) => ({
-      name: file.slice(0, -'.css'.length),
-      blocks: parseTokenBlocks(css(`${dir}/${file}`)),
-    }));
+    .map((file) => parseTokenBlocks(css(`${dir}/${file}`)));
 }
 
-const styles = themeFiles('styles');
-const palettes = themeFiles('palettes');
 const files = [
   parseTokenBlocks(css('primitives.css')),
   parseTokenBlocks(css('semantic.css')),
-  ...[...styles, ...palettes, ...themeFiles('palettes/nativas')].map((file) => file.blocks),
+  ...tokenFiles('design-systems', true),
+  ...tokenFiles('palettes', false),
 ];
 
-/** Argila é o estilo padrão e a Terrosa a paleta padrão: nenhum dos dois tem arquivo. */
-const STYLE_NAMES = ['argila', ...styles.map((file) => file.name)];
-/** `undefined`: sem `data-arg-palette`, vale a paleta nativa do estilo. */
-const PALETTE_NAMES = [undefined, 'terrosa', ...palettes.map((file) => file.name)];
+/** Só as combinações que o manifesto de cada design system aceita. */
+const designSystems = await loadDesignSystems(resolve(import.meta.dirname, '..'));
 /** Temas antigos, ainda aceitos: cada `data-arg-brand` citado nos arquivos. */
 const BRAND_NAMES = [
   ...new Set(
@@ -150,12 +140,9 @@ const BRAND_NAMES = [
 ];
 
 const COMBINATIONS: Record<string, RootAttributes> = {};
-for (const style of STYLE_NAMES) {
-  for (const palette of PALETTE_NAMES) {
-    COMBINATIONS[`estilo ${style}, paleta ${palette ?? 'nativa'}`] = {
-      'data-arg-style': style,
-      ...(palette ? { 'data-arg-palette': palette } : {}),
-    };
+for (const ds of designSystems) {
+  for (const palette of ds.paletas) {
+    COMBINATIONS[`estilo ${ds.id}, paleta ${palette}`] = rootAttributes(ds.id, palette);
   }
 }
 for (const brand of BRAND_NAMES) {
