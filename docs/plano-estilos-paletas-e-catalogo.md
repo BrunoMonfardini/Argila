@@ -261,7 +261,9 @@ Os componentes que não aparecem na matriz são **herdados** em todos os DS. A m
 
 - As paletas compartilhadas (Terrosa, Oceano, Floresta, Pastel, Viva, Preto e branco, Alto contraste) moram em `tokens/palettes/`. O DS pode **ajustar** uma paleta compartilhada no arquivo dele (`design-systems/<ds>/paletas/<paleta>.css`), sem copiar a paleta inteira.
 - **Para criar uma paleta compartilhada:** o CSS em `tokens/palettes/<id>.css`, uma entrada em `src/lib/design-systems/palettes.ts` (nome e se tem arquivo) e o id na lista `paletas` de cada manifesto que a aceitar. O teste de contraste, o checkup, os tipos (`ArgPalette`) e a barra de tema do catálogo passam a cobri-la sozinhos; um id que não está no registro não compila.
-- A **paleta padrão do Argila passa a ser a Massinha**, da imagem de referência. Quem quiser o visual café escreve `data-arg-palette="terrosa"`.
+- A **paleta padrão do Argila passa a ser a Massinha**, da imagem de referência. Ela é o próprio padrão dos tokens semânticos (vale sem `temas.css`); a Terrosa virou `tokens/palettes/terrosa.css`. Quem quiser o visual café escreve `data-arg-palette="terrosa"`.
+- **Preenchimento suave da marca:** toda cor de marca também serve de texto, então precisa de 4,5:1 sobre branco, e um pastel como o menta da referência nunca passaria. O token `--arg-color-primary-soft` (com `--arg-color-on-primary-soft`) é o preenchimento de botões, chips e alertas suaves; toda paleta o define, e o par entra no teste de contraste.
+- A **Alto contraste** é testada em AAA (7:1) para texto, texto secundário e link sobre fundos e superfícies.
 - O teste de contraste roda **só nas combinações aceitas** (cerca de 26 pares DS × paleta, em vez de 56).
 
 ### 3.7 Cores de marca (D6)
