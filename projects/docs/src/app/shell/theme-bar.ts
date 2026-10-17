@@ -3,6 +3,7 @@ import {
   ARG_DESIGN_SYSTEMS,
   ARG_MIN_SURFACE_OPACITY,
   ARG_PALETTES,
+  ARG_SHARED_PALETTES,
   ArgButton,
   ArgColorScheme,
   ArgPalette,
@@ -29,12 +30,16 @@ const STYLES: Option<ArgStyle>[] = Object.values(ARG_DESIGN_SYSTEMS).map((ds) =>
   label: ds.id === 'argila' ? `${ds.nome} (padrão)` : ds.nome,
 }));
 
-const PALETTE_LABELS: Record<string, string> = { nativa: 'Nativa do estilo', terrosa: 'Terrosa' };
+/** Nome de cada paleta: a nativa do estilo e as compartilhadas, do registro do pacote. */
+const PALETTE_LABELS: Record<ArgPalette, string> = {
+  nativa: 'Nativa do estilo',
+  ...Object.fromEntries(Object.entries(ARG_SHARED_PALETTES).map(([id, info]) => [id, info.nome])),
+} as Record<ArgPalette, string>;
 
 /** Todas as paletas, para validar o que estava salvo; a barra mostra só as do estilo. */
 const PALETTES: Option<ArgPalette>[] = ARG_PALETTES.map((value) => ({
   value,
-  label: PALETTE_LABELS[value] ?? value,
+  label: PALETTE_LABELS[value],
 }));
 
 /** Opacidade das superfícies em %, do mínimo seguro até opaca, de 5 em 5. */
