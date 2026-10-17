@@ -1,12 +1,5 @@
 /*
- * Estilo Molde: o ponto de partida neutro de onde um produto tira o seu
- * próprio estilo. Controles em pílula, contêineres arredondados, sem relevo.
- *
- * Um estilo só define FORMA (raio, borda, sombra, fonte); as cores vêm da
- * paleta (palettes/). Copie este arquivo para criar o estilo de um produto.
- * `data-arg-brand='example'` é o nome antigo, aceito por compatibilidade.
+ * Caminho antigo, mantido por compatibilidade: o estilo agora fica em
+ * design-systems/molde/forma.css. Será removido numa versão major.
  */
-:root[data-arg-style='molde'],
-:root[data-arg-brand='example'] {
-  --arg-radius-control: var(--arg-core-radius-full);
-}
+@import '../design-systems/molde/forma.css';

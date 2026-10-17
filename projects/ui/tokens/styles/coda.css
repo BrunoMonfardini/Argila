@@ -1,26 +1,5 @@
 /*
- * Estilo CODA (Semana da Computação e Dados da UFABC): contornos de 2px e
- * fonte pixelada. As cores (rosa e amarelo sobre grafite) ficam na paleta
- * nativa, em palettes/nativas/coda.css.
- *
- * A fonte Silkscreen precisa ser carregada pelo produto (o catálogo carrega
- * pelo Google Fonts em index.html); sem ela, cai na monoespaçada do sistema.
+ * Caminho antigo, mantido por compatibilidade: o estilo agora fica em
+ * design-systems/coda/forma.css. Será removido numa versão major.
  */
-:root[data-arg-style='coda'],
-:root[data-arg-brand='coda'] {
-  --arg-radius-control: var(--arg-core-radius-2);
-  --arg-radius-container: var(--arg-core-radius-3);
-  --arg-border-width-control: 2px;
-
-  --arg-font-family: 'Silkscreen', ui-monospace, Consolas, monospace;
-
-  /* A Silkscreen é bem mais larga que a fonte do sistema: um degrau menor em cada tamanho */
-  --arg-font-size-caption: 0.6875rem;
-  --arg-font-size-body-sm: 0.75rem;
-  --arg-font-size-body: 0.875rem;
-  --arg-font-size-body-lg: 1rem;
-  --arg-font-size-heading-sm: 1.125rem;
-  --arg-font-size-heading-md: 1.375rem;
-  --arg-font-size-heading-lg: 1.75rem;
-  --arg-font-size-display: 2.25rem;
-}
+@import '../design-systems/coda/forma.css';

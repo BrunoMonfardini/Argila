@@ -1,0 +1,14 @@
+/*
+ * Estilo Molde: o ponto de partida neutro de onde um produto tira o seu
+ * próprio estilo. Controles em pílula, contêineres arredondados, sem relevo.
+ *
+ * A forma de um design system só define FORMA (raio, borda, sombra, fonte);
+ * as cores vêm da paleta (paletas/ ao lado, ou tokens/palettes/). Para criar
+ * um design system novo, copie esta pasta e o manifesto em
+ * src/lib/design-systems/molde/.
+ * `data-arg-brand='example'` é o nome antigo, aceito por compatibilidade.
+ */
+:root[data-arg-style='molde'],
+:root[data-arg-brand='example'] {
+  --arg-radius-control: var(--arg-core-radius-full);
+}
