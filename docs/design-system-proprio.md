@@ -33,25 +33,25 @@ O que fica é a **infraestrutura** sobre a qual qualquer projeto roda. Ela não 
 | ----------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------- |
 | **Design system**             | Tokens, ícones, fonte, componentes, temas, catálogo, documentação       | **Construímos tudo.** Zero objetos de terceiros |
 | **Base da plataforma**        | Angular, TypeScript, Node, navegador (HTML, CSS, `<dialog>`, `popover`) | Usamos. É a fundação, não o design system       |
-| **Ferramentas de engenharia** | pnpm, Vitest, ESLint, Prettier, ng-packagr, GitHub Actions              | Usamos. Não aparecem para quem consome o pacote |
+| **Ferramentas de engenharia** | pnpm, Jest, ESLint, Prettier, ng-packagr, GitHub Actions                | Usamos. Não aparecem para quem consome o pacote |
 
 ### Inventário de terceiros: o que sai e o que fica
 
 Todas as dependências do repositório hoje, e o destino de cada uma:
 
-| Dependência                                                                              | Para que serve hoje                           | Destino                                                                           |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------- |
-| `storybook`, `@storybook/angular-vite`, `@storybook/addon-docs`, `@storybook/addon-a11y` | Catálogo de componentes                       | **Sai** na fase 3, substituído pelo catálogo próprio                              |
-| `vite`, `@analogjs/vite-plugin-angular`                                                  | Compilação do Storybook                       | **Sai** na fase 3 (o catálogo usa o compilador do próprio Angular)                |
-| `@angular-devkit/architect`, `@angular-devkit/core`, `@angular/animations`               | Exigidos só pelo Storybook                    | **Sai** na fase 3                                                                 |
-| Fonte Inter (citada no token `--arg-core-font-sans`)                                     | Tipografia                                    | **Sai** na fase 1, trocada pela fonte do sistema                                  |
-| `@angular/*`, `rxjs`, `tslib`, `typescript`                                              | Plataforma                                    | Fica (base)                                                                       |
-| `@angular/build`, `@angular/cli`, `@angular/compiler-cli`, `ng-packagr`                  | Compilar e empacotar                          | Fica (base)                                                                       |
-| `vitest`, `@vitest/coverage-v8`, `jsdom`                                                 | Testes e cobertura                            | Fica (ferramenta)                                                                 |
-| `eslint`, `@eslint/js`, `typescript-eslint`, `angular-eslint`, `@angular-eslint/builder` | Lint                                          | Fica (ferramenta)                                                                 |
-| `prettier`, `jscpd`                                                                      | Formatação e detecção de duplicação           | Fica (ferramenta)                                                                 |
-| `husky`, `lint-staged`, `@commitlint/*`, `@changesets/cli`, `@types/node`                | Hooks, padrão de commit, versionamento, tipos | Fica (ferramenta)                                                                 |
-| `axe-core` (hoje dentro do addon a11y)                                                   | Verificação automática de acessibilidade      | **Decisão D1** (seção 5.2): sai com o Storybook; voltar só nos testes é uma opção |
+| Dependência                                                                               | Para que serve hoje                           | Destino                                                                           |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------- |
+| `storybook`, `@storybook/angular-vite`, `@storybook/addon-docs`, `@storybook/addon-a11y`  | Catálogo de componentes                       | **Sai** na fase 3, substituído pelo catálogo próprio                              |
+| `vite`, `@analogjs/vite-plugin-angular`                                                   | Compilação do Storybook                       | **Sai** na fase 3 (o catálogo usa o compilador do próprio Angular)                |
+| `@angular-devkit/architect`, `@angular-devkit/core`, `@angular/animations`                | Exigidos só pelo Storybook                    | **Sai** na fase 3                                                                 |
+| Fonte Inter (citada no token `--arg-core-font-sans`)                                      | Tipografia                                    | **Sai** na fase 1, trocada pela fonte do sistema                                  |
+| `@angular/*`, `rxjs`, `tslib`, `typescript`                                               | Plataforma                                    | Fica (base)                                                                       |
+| `@angular/build`, `@angular/cli`, `@angular/compiler-cli`, `ng-packagr`                   | Compilar e empacotar                          | Fica (base)                                                                       |
+| `jest`, `jest-preset-angular`, `jest-environment-jsdom`, `ts-jest`, `jest-junit`, `jsdom` | Testes, cobertura e relatório JUnit           | Fica (ferramenta)                                                                 |
+| `eslint`, `@eslint/js`, `typescript-eslint`, `angular-eslint`, `@angular-eslint/builder`  | Lint                                          | Fica (ferramenta)                                                                 |
+| `prettier`, `jscpd`                                                                       | Formatação e detecção de duplicação           | Fica (ferramenta)                                                                 |
+| `husky`, `lint-staged`, `@commitlint/*`, `@changesets/cli`, `@types/node`                 | Hooks, padrão de commit, versionamento, tipos | Fica (ferramenta)                                                                 |
+| `axe-core` (hoje dentro do addon a11y)                                                    | Verificação automática de acessibilidade      | **Decisão D1** (seção 5.2): sai com o Storybook; voltar só nos testes é uma opção |
 
 Consequências práticas:
 

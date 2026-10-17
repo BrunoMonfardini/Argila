@@ -140,19 +140,22 @@ npm run manifest:check
 npm run changeset -- status --since=origin/main
 ```
 
-| Comando                  | O que faz                                                           |
-| ------------------------ | ------------------------------------------------------------------- |
-| `npm run format:check`   | Verifica a formatação (Prettier)                                    |
-| `npm run lint`           | ESLint sem avisos, incluindo regras de acessibilidade nos templates |
-| `npm run typecheck`      | Checagem de tipos da biblioteca, do catálogo, dos testes e scripts  |
-| `npm run test`           | Testes unitários (Vitest) com cobertura; falha abaixo de 80%        |
-| `npm run dup:check`      | Detecta código duplicado (jscpd); falha acima de 3%                 |
-| `npm run build`          | Gera o pacote em `dist/ui`                                          |
-| `npm run dev`            | Abre o catálogo em <http://localhost:4200>                          |
-| `npm run build:docs`     | Gera o catálogo estático em `dist/docs/browser`                     |
-| `npm run icons`          | Valida os SVGs de `projects/ui/icons` e gera o código dos ícones    |
-| `npm run manifest:check` | Confere que todo componente exportado tem página e JSDoc nas inputs |
-| `npm run changeset -- …` | Confere se a branch tem changeset quando o pacote mudou             |
+| Comando                  | O que faz                                                                                            |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `npm run format:check`   | Verifica a formatação (Prettier)                                                                     |
+| `npm run lint`           | ESLint sem avisos, incluindo regras de acessibilidade nos templates                                  |
+| `npm run typecheck`      | Checagem de tipos da biblioteca, do catálogo, dos testes e scripts                                   |
+| `npm run test`           | Testes unitários (Jest) da biblioteca, do catálogo e dos scripts, com cobertura; falha abaixo de 80% |
+| `npm run test:watch`     | Testes em modo watch, só o que mudou                                                                 |
+| `npm run test:ui`        | Só os testes da biblioteca (também `test:docs` e `test:scripts`)                                     |
+| `npm run test:report`    | Resumo do último `test`: totais, cobertura por projeto e os 10 testes mais lentos                    |
+| `npm run dup:check`      | Detecta código duplicado (jscpd); falha acima de 3%                                                  |
+| `npm run build`          | Gera o pacote em `dist/ui`                                                                           |
+| `npm run dev`            | Abre o catálogo em <http://localhost:4200>                                                           |
+| `npm run build:docs`     | Gera o catálogo estático em `dist/docs/browser`                                                      |
+| `npm run icons`          | Valida os SVGs de `projects/ui/icons` e gera o código dos ícones                                     |
+| `npm run manifest:check` | Confere que todo componente exportado tem página e JSDoc nas inputs                                  |
+| `npm run changeset -- …` | Confere se a branch tem changeset quando o pacote mudou                                              |
 
 **Mudou token, estilo, paleta ou o visual de um componente?** Rode também o checkup visual,
 com o catálogo aberto (`npm run dev`) num segundo terminal. Ele não roda no CI porque precisa
@@ -184,8 +187,10 @@ npm run format
 Abrir o relatório de cobertura dos testes (depois de `npm run test`):
 
 ```bash
-start coverage/ui/index.html
+start coverage/index.html
 ```
+
+O `npm run test` também gera `reports/junit.xml`. No CI, o resumo dos testes aparece em cada PR, com a cobertura comparada à da `main`: queda de mais de 0,5 ponto em algum projeto falha o `verify`, e teste acima de 2 s gera aviso.
 
 Recompilar o pacote a cada alteração, para testar num produto local:
 
