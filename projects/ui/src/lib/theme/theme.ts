@@ -1,5 +1,11 @@
 import { DOCUMENT, Injectable, computed, inject, isDevMode, signal } from '@angular/core';
 import type { ArgDesignSystem } from '../design-systems/design-system';
+export {
+  ARG_SHARED_PALETTES,
+  type ArgPaletteName,
+  type ArgSharedPalette,
+  type ArgSharedPaletteInfo,
+} from '../design-systems/palettes';
 import { ARG_DESIGN_SYSTEMS, ArgPalette, ArgStyle } from '../design-systems/design-systems';
 
 export type { ArgPalette, ArgPaletteOf, ArgStyle } from '../design-systems/design-systems';
@@ -44,7 +50,7 @@ function readStyle(root: HTMLElement): ArgStyle {
 
 function readPalette(root: HTMLElement, style: ArgStyle): ArgPalette {
   const value = root.getAttribute('data-arg-palette');
-  const accepted = designSystem(style).paletas;
+  const accepted: readonly string[] = designSystem(style).paletas;
   return (value !== null && accepted.includes(value) ? value : accepted[0]) as ArgPalette;
 }
 

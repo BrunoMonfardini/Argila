@@ -7,6 +7,8 @@
  * `tokens/design-systems/<id>/` (o CSS). Um DS nunca importa outro DS.
  */
 
+import type { ArgPaletteName } from './palettes';
+
 export type ArgSchemeName = 'light' | 'dark';
 
 /** Os componentes do núcleo: uma pasta em `src/lib/` cada. */
@@ -88,9 +90,9 @@ export interface ArgDesignSystem {
   readonly transparencia: boolean;
   /**
    * Paletas aceitas; a primeira é a padrão. `nativa` é a paleta do próprio
-   * DS (`paletas/nativa.css`); as outras são compartilhadas (`tokens/palettes/`).
+   * DS (`paletas/nativa.css`); as outras são compartilhadas (`palettes.ts`).
    */
-  readonly paletas: readonly [string, ...string[]];
+  readonly paletas: readonly [ArgPaletteName, ...ArgPaletteName[]];
   /** Fontes que o produto precisa carregar (Google Fonts). */
   readonly fontes?: { readonly titulo?: string; readonly corpo?: string };
   readonly componentes: {
