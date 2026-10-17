@@ -1,0 +1,26 @@
+/* Botões: a primária é a pílula branca com texto preto; a secundária, pílula de contorno branco. */
+
+:root[data-arg-style='punk']
+  .arg-button:not(
+    .arg-button--secondary,
+    .arg-button--tertiary,
+    .arg-button--danger,
+    [disabled],
+    [aria-disabled='true']
+  ) {
+  --arg-button-bg: var(--arg-color-text);
+  --arg-button-bg-hover: color-mix(in oklab, var(--arg-color-text), #000 12%);
+  --arg-button-bg-pressed: color-mix(in oklab, var(--arg-color-text), #000 22%);
+  --arg-button-fg: var(--arg-color-background);
+}
+
+:root[data-arg-style='punk'] .arg-button.arg-button--secondary {
+  --arg-button-fg: var(--arg-color-text);
+  --arg-button-border: var(--arg-color-text);
+  --arg-button-bg-hover: color-mix(in oklab, var(--arg-color-text) 12%, transparent);
+}
+
+:root[data-arg-style='punk'] .arg-button:not(.arg-button--tertiary) {
+  --arg-button-height: 2.75rem;
+  --arg-button-padding-inline: var(--arg-space-6);
+}

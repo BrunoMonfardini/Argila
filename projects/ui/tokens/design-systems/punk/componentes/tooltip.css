@@ -1,0 +1,5 @@
+/* Tooltip: balão claro sobre o preto, de cantos arredondados. */
+
+:root[data-arg-style='punk'] arg-tooltip-panel {
+  --arg-tooltip-radius: 0.75rem;
+}

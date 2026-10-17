@@ -1,0 +1,5 @@
+/* Link: sublinhado mais afastado do texto. */
+
+:root[data-arg-style='punk'] .arg-link {
+  --arg-link-underline-offset: 0.25em;
+}

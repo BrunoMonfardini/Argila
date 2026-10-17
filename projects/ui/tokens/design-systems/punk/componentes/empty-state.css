@@ -1,0 +1,6 @@
+/* Estado vazio: ícone num disco rosa. */
+
+:root[data-arg-style='punk'] .arg-empty-state {
+  --arg-empty-state-icon-bg: var(--arg-color-primary-soft);
+  --arg-empty-state-icon-fg: var(--arg-color-on-primary-soft);
+}

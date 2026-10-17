@@ -1,0 +1,5 @@
+/* Gaveta: o diálogo ancorado, com contorno na borda de dentro. */
+
+:root[data-arg-style='punk'] .arg-drawer {
+  --arg-dialog-shadow: none;
+}

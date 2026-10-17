@@ -1,0 +1,12 @@
+/* Campos: pílula escura com contorno cinza. */
+
+:root[data-arg-style='punk'] .arg-input {
+  --arg-input-bg: var(--arg-color-surface);
+  --arg-input-border: var(--arg-color-border-strong);
+  --arg-input-height: 2.75rem;
+  --arg-input-padding-inline: var(--arg-space-5);
+}
+
+:root[data-arg-style='punk'] .arg-textarea {
+  --arg-input-radius: var(--arg-radius-container);
+}

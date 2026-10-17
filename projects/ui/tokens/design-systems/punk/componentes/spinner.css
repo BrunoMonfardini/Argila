@@ -1,0 +1,5 @@
+/* Spinner: rosa. */
+
+:root[data-arg-style='punk'] .arg-spinner {
+  --arg-spinner-color: var(--arg-color-primary);
+}

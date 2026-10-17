@@ -1,0 +1,5 @@
+/* Tabela: compacta, com cabeçalho discreto. */
+
+:root[data-arg-style='punk'] arg-table {
+  --arg-table-row-height: 2.5rem;
+}

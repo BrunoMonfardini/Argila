@@ -1,0 +1,6 @@
+/* Avatar: círculo com as iniciais em rosa. */
+
+:root[data-arg-style='punk'] arg-avatar {
+  --arg-avatar-bg: var(--arg-color-primary-soft);
+  --arg-avatar-fg: var(--arg-color-on-primary-soft);
+}

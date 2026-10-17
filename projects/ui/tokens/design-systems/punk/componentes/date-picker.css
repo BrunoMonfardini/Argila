@@ -1,0 +1,5 @@
+/* Calendário: o dia escolhido em rosa (vem da marca) e células maiores. */
+
+:root[data-arg-style='punk'] .arg-calendar {
+  --arg-calendar-cell: 2.75rem;
+}

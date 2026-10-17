@@ -1,0 +1,5 @@
+/* Barra de progresso: trilho em pílula, preenchimento rosa. */
+
+:root[data-arg-style='punk'] .arg-progress:not(.arg-progress--sm) {
+  --arg-progress-height: 0.625rem;
+}

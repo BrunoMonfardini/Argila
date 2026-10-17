@@ -1,0 +1,9 @@
+/* Marcados e ligados em rosa. */
+
+:root[data-arg-style='punk'] :is(.arg-checkbox, .arg-radio) {
+  --arg-choice-accent: var(--arg-color-primary);
+}
+
+:root[data-arg-style='punk'] .arg-switch {
+  --arg-switch-on: var(--arg-color-primary);
+}

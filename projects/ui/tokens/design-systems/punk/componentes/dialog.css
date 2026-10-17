@@ -1,0 +1,5 @@
+/* Diálogo: superfície escura com contorno cinza. */
+
+:root[data-arg-style='punk'] .arg-dialog {
+  border: 1px solid var(--arg-color-border-strong);
+}

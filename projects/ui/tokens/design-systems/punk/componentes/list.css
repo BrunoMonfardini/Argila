@@ -1,0 +1,11 @@
+/* Lista: linhas de contorno cinza e cantos arredondados, como as listas de conversas da referência. */
+
+:root[data-arg-style='punk'] .arg-list {
+  --arg-list-divider: transparent;
+  --arg-list-gap: var(--arg-space-2);
+}
+
+:root[data-arg-style='punk'] .arg-list .arg-list__item {
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: 1rem;
+}

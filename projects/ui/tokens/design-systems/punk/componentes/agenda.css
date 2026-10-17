@@ -1,0 +1,6 @@
+/* Agenda: eventos nos cards rosa, como os encontros do dia da referência. */
+
+:root[data-arg-style='punk'] .arg-agenda {
+  --arg-agenda-accent: var(--arg-color-primary);
+  --arg-agenda-event-bg: var(--arg-color-primary-soft);
+}

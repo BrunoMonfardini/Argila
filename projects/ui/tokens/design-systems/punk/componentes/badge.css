@@ -1,0 +1,5 @@
+/* Badge: pílula. */
+
+:root[data-arg-style='punk'] .arg-badge {
+  --arg-badge-radius: var(--arg-radius-full);
+}
