@@ -41,6 +41,7 @@
   padding: var(--arg-space-2) var(--arg-space-3);
   border-radius: var(--arg-radius-control);
   background: var(--arg-color-surface-raised);
+  backdrop-filter: blur(var(--arg-surface-blur));
   color: var(--arg-color-text-link);
   box-shadow: var(--arg-shadow-md);
   transform: translateY(-200%);

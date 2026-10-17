@@ -103,6 +103,11 @@
   );
   --arg-surface-opacity: 1;
   --arg-surface-alpha: calc(clamp(0.4, var(--arg-surface-opacity), 1) * 100%);
+  /*
+   * Painéis sobre o conteúdo (diálogos, popovers, menus, toasts) nunca ficam
+   * abaixo de 80%: atrás deles há texto, que apareceria através do painel.
+   */
+  --arg-surface-raised-alpha: calc(clamp(0.8, var(--arg-surface-opacity), 1) * 100%);
   /* Desfoque do que está atrás: 0 quando opaca, 16px na opacidade mínima */
   --arg-surface-blur: calc((1 - clamp(0.4, var(--arg-surface-opacity), 1)) / 0.6 * 16px);
   --arg-color-surface: color-mix(
@@ -112,7 +117,7 @@
   );
   --arg-color-surface-raised: color-mix(
     in oklab,
-    var(--arg-color-surface-raised-solid) var(--arg-surface-alpha),
+    var(--arg-color-surface-raised-solid) var(--arg-surface-raised-alpha),
     transparent
   );
   --arg-color-surface-sunken: color-mix(

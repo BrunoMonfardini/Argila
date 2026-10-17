@@ -147,12 +147,20 @@ export function auditPage(): Audit {
     if (element.closest(':disabled, [aria-disabled="true"], [aria-hidden="true"], [hidden]')) {
       continue;
     }
+    // Rótulo de um controle desabilitado: inativo, isento de contraste (WCAG 1.4.3)
+    if (element.closest('label')?.control?.matches(':disabled')) continue;
     // checkVisibility() é do navegador; o jsdom dos testes não tem layout e considera visível
     const visible =
       typeof element.checkVisibility !== 'function' ||
       element.checkVisibility({ opacityProperty: true, visibilityProperty: true });
     if (!visible) continue;
     const style = getComputedStyle(element);
+    // Texto só para leitor de tela (arg-sr-only): recortado em 1px, ninguém vê
+    const clipped =
+      style.overflow === 'hidden' &&
+      Number.parseFloat(style.width) <= 1 &&
+      Number.parseFloat(style.height) <= 1;
+    if (clipped) continue;
     const background = backgroundOf(element);
     const foreground = toRgba(style.color);
     if (!background || !foreground) continue;

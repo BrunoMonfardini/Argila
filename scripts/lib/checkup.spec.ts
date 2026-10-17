@@ -86,6 +86,21 @@ describe('auditPage', () => {
     expect(auditPage().lowContrast).toEqual([]);
   });
 
+  it('ignora rótulos de controles desabilitados e texto só para leitor de tela', () => {
+    const gray = 'color: rgb(220, 220, 220)';
+    document.body.innerHTML = `
+      <div style="background-color: rgb(255, 255, 255)">
+        <label style="${gray}"><input type="checkbox" disabled />Em breve</label>
+        <label style="${gray}"><input type="radio" disabled /><span>08:00</span></label>
+        <span style="${gray}; position: absolute; width: 1px; height: 1px; overflow: hidden">, ocupado</span>
+        <label style="${gray}"><input type="checkbox" />Ativo</label>
+      </div>`;
+
+    const texts = auditPage().lowContrast.map((entry) => entry.text);
+
+    expect(texts).toEqual(['Ativo']);
+  });
+
   it('ignora fundos com imagem, que não dá para medir', () => {
     document.body.innerHTML = `
       <div style="background-image: linear-gradient(red, blue)">

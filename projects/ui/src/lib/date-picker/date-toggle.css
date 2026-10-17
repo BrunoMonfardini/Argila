@@ -27,6 +27,7 @@
   border-radius: var(--arg-radius-container);
   box-shadow: var(--arg-shadow-lg);
   background: var(--arg-color-surface-raised);
+  backdrop-filter: blur(var(--arg-surface-blur));
   color: var(--arg-color-text);
 }
 
