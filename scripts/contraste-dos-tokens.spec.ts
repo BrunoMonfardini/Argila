@@ -59,13 +59,17 @@ const BRAND_NAMES = [
 ];
 
 const COMBINATIONS: Record<string, RootAttributes> = {};
+/** Modos de cada combinação: os que o design system declara (os temas antigos, os dois). */
+const MODES: Record<string, readonly ColorScheme[]> = {};
 for (const ds of designSystems) {
   for (const palette of ds.paletas) {
     COMBINATIONS[`estilo ${ds.id}, paleta ${palette}`] = rootAttributes(ds.id, palette);
+    MODES[`estilo ${ds.id}, paleta ${palette}`] = ds.modos;
   }
 }
 for (const brand of BRAND_NAMES) {
   COMBINATIONS[`data-arg-brand="${brand}"`] = { 'data-arg-brand': brand };
+  MODES[`data-arg-brand="${brand}"`] = SCHEMES;
 }
 
 const DEFAULT = 'estilo argila, paleta nativa';
@@ -125,7 +129,7 @@ describe('contraste AAA na paleta Alto contraste', () => {
 
   for (const [combination, attributes] of highContrast) {
     const tokens = tokensForRoot(files, attributes);
-    for (const scheme of SCHEMES) {
+    for (const scheme of MODES[combination]) {
       it(`${combination}, tema ${scheme === 'light' ? 'claro' : 'escuro'}: texto em 7:1`, () => {
         expect(contrastFailures(checkContrast(tokens, READING_PAIRS, scheme))).toEqual([]);
       });
@@ -137,7 +141,7 @@ describe('contraste dos tokens', () => {
   for (const [combination, attributes] of Object.entries(COMBINATIONS)) {
     const tokens = tokensForRoot(files, attributes);
     const translucent = new Map(tokens).set('--arg-surface-opacity', MIN_OPACITY);
-    for (const scheme of SCHEMES) {
+    for (const scheme of MODES[combination]) {
       const mode = scheme === 'light' ? 'claro' : 'escuro';
       it(`${combination}, tema ${mode}: todos os pares no mínimo`, () => {
         expect(contrastFailures(checkContrast(tokens, PAIRS, scheme))).toEqual([]);
