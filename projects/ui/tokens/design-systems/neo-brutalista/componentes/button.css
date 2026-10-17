@@ -1,0 +1,42 @@
+/* Botões: blocos com contorno grosso e sombra dura; a primária é o bloco ciano com texto preto. Ao apertar, o botão afunda na sombra. */
+
+/*
+ * jscpd:ignore-start: a mesma escolha da pele do Argila (primária no preenchimento
+ * suave), de propósito: um design system nunca reaproveita o CSS de outro, e cada
+ * um vai mudar o próprio botão por motivos diferentes.
+ */
+:root[data-arg-style='neo-brutalista']
+  .arg-button:not(
+    .arg-button--secondary,
+    .arg-button--tertiary,
+    .arg-button--danger,
+    [disabled],
+    [aria-disabled='true']
+  ) {
+  --arg-button-bg: var(--arg-color-primary-soft);
+  --arg-button-bg-hover: color-mix(in oklab, var(--arg-color-primary-soft), #000 8%);
+  --arg-button-bg-pressed: color-mix(in oklab, var(--arg-color-primary-soft), #000 14%);
+  --arg-button-fg: var(--arg-color-on-primary-soft);
+}
+/* jscpd:ignore-end */
+
+:root[data-arg-style='neo-brutalista'] .arg-button:not(.arg-button--tertiary) {
+  --arg-button-height: 2.75rem;
+  --arg-button-border: var(--arg-color-border);
+  text-transform: uppercase;
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-button.arg-button--secondary {
+  --arg-button-bg: var(--arg-color-surface);
+  --arg-button-fg: var(--arg-color-text);
+}
+
+:root[data-arg-style='neo-brutalista']
+  .arg-button:not(.arg-button--tertiary, [disabled], [aria-disabled='true']):active {
+  --arg-button-shadow: none;
+  transform: translate(4px, 4px);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-button:is([disabled], [aria-disabled='true']) {
+  --arg-button-shadow: none;
+}

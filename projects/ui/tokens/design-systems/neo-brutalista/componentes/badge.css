@@ -1,0 +1,7 @@
+/* Badge: etiqueta retangular com contorno, em caixa alta. */
+
+:root[data-arg-style='neo-brutalista'] .arg-badge {
+  --arg-badge-radius: 0.25rem;
+  border: 2px solid var(--arg-color-border);
+  text-transform: uppercase;
+}

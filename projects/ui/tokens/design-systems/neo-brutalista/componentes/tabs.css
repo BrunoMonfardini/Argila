@@ -1,0 +1,10 @@
+/* Abas: contorno grosso embaixo e indicador em tinta preta. */
+
+:root[data-arg-style='neo-brutalista'] arg-tabs {
+  --arg-tabs-indicator: var(--arg-color-text);
+  --arg-tabs-border: var(--arg-color-border);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-tabs .arg-tabs__tab {
+  text-transform: uppercase;
+}

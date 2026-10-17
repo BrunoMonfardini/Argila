@@ -1,0 +1,6 @@
+/* Spinner: em tinta preta. */
+
+:root[data-arg-style='neo-brutalista'] .arg-spinner {
+  --arg-spinner-color: var(--arg-color-text);
+  --arg-spinner-thickness: 3px;
+}

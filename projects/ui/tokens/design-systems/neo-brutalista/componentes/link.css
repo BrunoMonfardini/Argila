@@ -1,0 +1,5 @@
+/* Link: sublinhado grosso. */
+
+:root[data-arg-style='neo-brutalista'] .arg-link {
+  text-decoration-thickness: 2px;
+}

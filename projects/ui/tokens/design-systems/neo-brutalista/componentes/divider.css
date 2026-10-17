@@ -1,0 +1,6 @@
+/* Divisor: linha grossa de tinta preta. */
+
+:root[data-arg-style='neo-brutalista'] .arg-divider {
+  --arg-divider-color: var(--arg-color-border);
+  --arg-divider-thickness: 3px;
+}

@@ -1,0 +1,5 @@
+/* Botão de ícone: o mesmo bloco, quadrado. */
+
+:root[data-arg-style='neo-brutalista'] .arg-icon-button {
+  --arg-button-height: 2.75rem;
+}

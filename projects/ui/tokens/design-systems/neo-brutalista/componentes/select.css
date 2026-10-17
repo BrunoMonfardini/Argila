@@ -1,0 +1,5 @@
+/* Select: o mesmo campo de contorno grosso. */
+
+:root[data-arg-style='neo-brutalista'] .arg-select {
+  --arg-input-height: 2.75rem;
+}

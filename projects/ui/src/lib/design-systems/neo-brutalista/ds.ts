@@ -1,0 +1,50 @@
+import type { ArgDesignSystem } from '../design-system';
+
+/** Neo-brutalista: traço preto grosso, cantos retos, sombra dura e blocos de cor chapada. */
+export const neoBrutalista = {
+  id: 'neo-brutalista',
+  nome: 'Neo-brutalista',
+  referencia: 'neo-brutalista.jpg',
+  modos: ['light', 'dark'],
+  transparencia: false,
+  paletas: ['nativa', 'pastel', 'mono', 'alto-contraste'],
+  fontes: { titulo: 'Archivo Black', corpo: 'Archivo' },
+  componentes: {
+    // O núcleo mínimo e os curados da matriz (3.5): o manifesto só importa tipos, por isso a lista
+    curados: [
+      'alert',
+      'avatar',
+      'badge',
+      'breadcrumb',
+      'button',
+      'card',
+      'choice',
+      'dialog',
+      'divider',
+      'empty-state',
+      'field',
+      'icon-button',
+      'input',
+      'link',
+      'list',
+      'pagination',
+      'progress-bar',
+      'select',
+      'spinner',
+      'stepper',
+      'table',
+      'tabs',
+      'tag',
+      'toast',
+      'tooltip',
+    ],
+    fora: [],
+  },
+  exclusivos: [],
+  regras: [
+    'Um único botão primário por tela',
+    'Foco sempre visível',
+    'Alvo mínimo de 44px',
+    'Texto sobre bloco colorido sempre preto',
+  ],
+} as const satisfies ArgDesignSystem;

@@ -1,0 +1,11 @@
+/* Tabela: caixa de contorno grosso com sombra dura; cabeçalho em caixa alta. */
+
+:root[data-arg-style='neo-brutalista'] arg-table .arg-table__scroll {
+  border: 3px solid var(--arg-color-border);
+  border-radius: 0.25rem;
+  box-shadow: var(--arg-shadow-2);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-table .arg-table__table th {
+  text-transform: uppercase;
+}

@@ -1,0 +1,30 @@
+/*
+ * Paleta Papel CMY, nativa do Neo-brutalista (referência:
+ * docs/referencias/neo-brutalista.jpg): papel bege, tinta preta e blocos de
+ * ciano, magenta e amarelo. O ciano da referência não chega a 4,5:1 como
+ * texto: ele é o preenchimento (primary-soft, com texto preto) e a primária
+ * de texto é um ciano escuro.
+ */
+:root[data-arg-style='neo-brutalista']:not([data-arg-palette]),
+:root[data-arg-style='neo-brutalista'][data-arg-palette='nativa'] {
+  --arg-color-primary: light-dark(#006a70, #5ee6ec);
+  --arg-color-on-primary: light-dark(#ffffff, #000000);
+  --arg-color-primary-soft: light-dark(#00c2cb, #00a3aa);
+  --arg-color-on-primary-soft: light-dark(#000000, #000000);
+  --arg-color-secondary: light-dark(#000000, #f5f5dc);
+  --arg-color-on-secondary: light-dark(#ffd700, #000000);
+  --arg-color-accent: light-dark(#a3008f, #ff7af5);
+  --arg-color-on-accent: light-dark(#ffffff, #000000);
+
+  --arg-color-background: light-dark(#f5f5dc, #1c1c1a);
+  --arg-color-surface-solid: light-dark(#ffffff, #262624);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #30302d);
+  --arg-color-surface-sunken-solid: light-dark(#ecead0, #141413);
+
+  --arg-color-text: light-dark(#000000, #f5f5dc);
+  --arg-color-text-muted: light-dark(#3a3a36, #d0ccb4);
+
+  --arg-color-border: light-dark(#000000, #f2efe4);
+  --arg-color-border-strong: light-dark(#000000, #f2efe4);
+  --arg-color-focus: light-dark(#000000, #ffd700);
+}

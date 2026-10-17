@@ -1,0 +1,8 @@
+/* Avatar: quadrado com contorno grosso, como o da referência. */
+
+:root[data-arg-style='neo-brutalista'] arg-avatar {
+  --arg-avatar-radius: 0.25rem;
+  --arg-avatar-bg: var(--arg-color-primary-soft);
+  --arg-avatar-fg: var(--arg-color-on-primary-soft);
+  border: 2px solid var(--arg-color-border);
+}

@@ -1,6 +1,7 @@
 import { argila } from './argila/ds';
 import { coda } from './coda/ds';
 import { molde } from './molde/ds';
+import { neoBrutalista } from './neo-brutalista/ds';
 import { transparente } from './transparente/ds';
 import { windowsXp } from './windows-xp/ds';
 
@@ -11,6 +12,7 @@ export const ARG_DESIGN_SYSTEMS = {
   coda,
   transparente,
   'windows-xp': windowsXp,
+  'neo-brutalista': neoBrutalista,
 } as const;
 
 /** Design system (antes "estilo"): o valor de `data-arg-style`. */

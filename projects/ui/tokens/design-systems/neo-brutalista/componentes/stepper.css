@@ -1,0 +1,6 @@
+/* Stepper: marcadores maiores, com o passo atual no bloco de destaque. */
+
+:root[data-arg-style='neo-brutalista'] arg-stepper {
+  --arg-stepper-marker-size: 2.25rem;
+  --arg-stepper-line: var(--arg-color-border);
+}

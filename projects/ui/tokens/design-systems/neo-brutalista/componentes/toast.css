@@ -1,0 +1,10 @@
+/* Toast: caixa de contorno grosso com sombra dura. */
+
+:root[data-arg-style='neo-brutalista'] arg-toast-stack {
+  --arg-toast-shadow: var(--arg-shadow-3);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-toast-stack .arg-toast {
+  border-width: 3px;
+  border-color: var(--arg-color-border);
+}
