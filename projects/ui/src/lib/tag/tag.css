@@ -26,6 +26,60 @@
   padding-inline-end: var(--arg-space-1);
 }
 
+/*
+ * Chip de filtro: o botão ocupa a tag inteira. Ligado, ganha o preenchimento
+ * suave da marca e um ✓ (não depende só da cor).
+ */
+:host(.arg-tag--selectable) {
+  padding-inline-start: 0;
+}
+
+:host(.arg-tag--selectable:not(.arg-tag--removable)) {
+  padding-inline-end: 0;
+}
+
+.arg-tag__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--arg-space-1);
+  align-self: stretch;
+  margin: 0;
+  padding: 0 var(--arg-space-3);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.arg-tag__toggle:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--arg-color-text) 6%, transparent);
+}
+
+.arg-tag__toggle:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: 1px;
+}
+
+:host(.arg-tag--selected) {
+  --arg-tag-bg: var(--arg-color-primary-soft);
+  --arg-tag-fg: var(--arg-color-on-primary-soft);
+  --arg-tag-border: transparent;
+}
+
+:host(.arg-tag--disabled) {
+  --arg-tag-bg: var(--arg-color-disabled-bg);
+  --arg-tag-fg: var(--arg-color-text-disabled);
+  --arg-tag-border: var(--arg-color-disabled-border);
+}
+
+.arg-tag__toggle:disabled,
+.arg-tag__remove:disabled {
+  color: inherit;
+  cursor: not-allowed;
+}
+
 .arg-tag__remove {
   display: inline-grid;
   place-items: center;
@@ -52,5 +106,9 @@
 @media (forced-colors: active) {
   :host {
     border-color: CanvasText;
+  }
+
+  :host(.arg-tag--selected) {
+    outline: 2px solid Highlight;
   }
 }

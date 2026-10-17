@@ -1,9 +1,26 @@
-<span class="arg-tag__text" [id]="textId"><ng-content /></span>
+<ng-template #content><ng-content /></ng-template>
+@if (selectable()) {
+  <button
+    type="button"
+    class="arg-tag__toggle"
+    [attr.aria-pressed]="selected()"
+    [disabled]="disabled()"
+    (click)="toggle()"
+  >
+    @if (selected()) {
+      <arg-icon name="check" size="sm" />
+    }
+    <span class="arg-tag__text" [id]="textId"><ng-container [ngTemplateOutlet]="content" /></span>
+  </button>
+} @else {
+  <span class="arg-tag__text" [id]="textId"><ng-container [ngTemplateOutlet]="content" /></span>
+}
 @if (removable()) {
   <button
     type="button"
     class="arg-tag__remove"
     [attr.aria-labelledby]="removeTextId + ' ' + textId"
+    [disabled]="disabled()"
     (click)="removed.emit()"
     (keydown)="onKeydown($event)"
   >
