@@ -1,0 +1,29 @@
+/*
+ * Campo com ação acoplada. Sem encapsulamento (ver ArgInputGroup): todo
+ * seletor começa em .arg-input-group. O botão encosta no campo, sem raio na
+ * junção, e a borda dos dois vira uma só.
+ */
+.arg-input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.arg-input-group > .arg-input {
+  flex: 1;
+  min-width: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.arg-input-group > .arg-input-action {
+  height: auto;
+  margin-inline-start: calc(var(--arg-border-width-control) * -1);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+/* O foco de cada peça fica por cima da outra, sem ser cortado pela junção */
+.arg-input-group > :focus-visible {
+  z-index: 1;
+}

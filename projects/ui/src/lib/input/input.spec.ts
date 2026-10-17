@@ -6,7 +6,10 @@ import { FormField, form } from '@angular/forms/signals';
 import { a11yViolations, accessibleName } from '../../testing/a11y';
 import { ARG_FIELD } from '../field/field';
 import { ArgAnnouncer } from '../internal/announcer';
-import { ArgInput, ArgTextarea } from './input';
+import { ArgInput, ArgTextarea, ARG_INPUT_GROUP } from './input';
+import { ArgIconButton } from '../icon-button/icon-button';
+import { provideArgIcons } from '../icon/icon-registry';
+import { argIconPlus } from '../icon/icons.generated';
 
 @Component({
   imports: [ARG_FIELD, ArgInput, ArgTextarea, ReactiveFormsModule, FormField],
@@ -139,6 +142,55 @@ describe('ArgInput e ArgTextarea', () => {
 
     host.error.set('Informe o nome.');
     await fixture.whenStable();
+    expect(a11yViolations(root)).toEqual([]);
+  });
+});
+
+describe('ArgInputGroup', () => {
+  @Component({
+    imports: [ArgInput, ArgIconButton, ARG_INPUT_GROUP],
+    template: `
+      <label for="servico">Serviço</label>
+      <arg-input-group>
+        <input arg-input id="servico" />
+        <button arg-icon-button argInputAction icon="plus" label="Adicionar"></button>
+      </arg-input-group>
+    `,
+  })
+  class Host {}
+
+  async function setup() {
+    TestBed.configureTestingModule({ providers: [provideArgIcons([argIconPlus])] });
+    const fixture = TestBed.createComponent(Host);
+    await fixture.whenStable();
+    const root: HTMLElement = fixture.nativeElement;
+    return {
+      root,
+      group: root.querySelector('arg-input-group')!,
+      input: root.querySelector('input')!,
+      action: root.querySelector('button')!,
+    };
+  }
+
+  it('junta o campo e o botão de ação, nessa ordem', async () => {
+    const { group, input, action } = await setup();
+
+    expect(group.classList).toContain('arg-input-group');
+    expect(action.classList).toContain('arg-input-action');
+    expect([...group.children]).toEqual([input, action]);
+  });
+
+  it('o botão tem nome próprio e entra no Tab depois do campo', async () => {
+    const { action, input } = await setup();
+
+    expect(accessibleName(action)).toBe('Adicionar');
+    expect(action.tabIndex).toBe(0);
+    expect(input.compareDocumentPosition(action) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it('não tem violações de acessibilidade', async () => {
+    const { root } = await setup();
+
     expect(a11yViolations(root)).toEqual([]);
   });
 });
