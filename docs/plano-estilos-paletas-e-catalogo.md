@@ -260,6 +260,7 @@ Os componentes que não aparecem na matriz são **herdados** em todos os DS. A m
 | CODA           | **CODA**        | Viva, Preto e branco, Alto contraste                      |
 
 - As paletas compartilhadas (Terrosa, Oceano, Floresta, Pastel, Viva, Preto e branco, Alto contraste) moram em `tokens/palettes/`. O DS pode **ajustar** uma paleta compartilhada no arquivo dele (`design-systems/<ds>/paletas/<paleta>.css`), sem copiar a paleta inteira.
+- **Para criar uma paleta compartilhada:** o CSS em `tokens/palettes/<id>.css`, uma entrada em `src/lib/design-systems/palettes.ts` (nome e se tem arquivo) e o id na lista `paletas` de cada manifesto que a aceitar. O teste de contraste, o checkup, os tipos (`ArgPalette`) e a barra de tema do catálogo passam a cobri-la sozinhos; um id que não está no registro não compila.
 - A **paleta padrão do Argila passa a ser a Massinha**, da imagem de referência. Quem quiser o visual café escreve `data-arg-palette="terrosa"`.
 - O teste de contraste roda **só nas combinações aceitas** (cerca de 26 pares DS × paleta, em vez de 56).
 
@@ -431,6 +432,7 @@ projects/ui/
   src/
     lib/design-systems/
       design-system.ts              tipo do manifesto, ARG_COMPONENTS e o núcleo mínimo
+      palettes.ts                   registro das paletas compartilhadas (nome, se tem arquivo)
       design-systems.ts             ARG_DESIGN_SYSTEMS e os tipos ArgStyle, ArgPalette, ArgPaletteOf
       <ds>/
         ds.ts                       manifesto (5.3)
