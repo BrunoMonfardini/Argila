@@ -44,7 +44,11 @@ export function coreCssViolations(files: readonly SourceFile[]): string[] {
  * Pele dos componentes curados (`componentes/<nome>.css`): um arquivo por
  * curado, nenhum a mais, e todo seletor preso ao próprio design system.
  */
-export function skinViolations(ds: DesignSystemRules, skins: readonly SourceFile[]): string[] {
+export function skinViolations(
+  ds: DesignSystemRules,
+  skins: readonly SourceFile[],
+  root = `:root[data-arg-style='${ds.id}']`,
+): string[] {
   const name = (path: string) =>
     path
       .replace(/\\/g, '/')
@@ -52,7 +56,6 @@ export function skinViolations(ds: DesignSystemRules, skins: readonly SourceFile
       .pop()!
       .replace(/\.css$/, '');
   const names = skins.map((skin) => name(skin.path));
-  const root = `:root[data-arg-style='${ds.id}']`;
   return [
     ...ds.componentes.curados
       .filter((component) => !names.includes(component))

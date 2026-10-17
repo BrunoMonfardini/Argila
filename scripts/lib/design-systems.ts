@@ -6,7 +6,10 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import type { ArgDesignSystem } from '../../projects/ui/src/lib/design-systems/design-system.ts';
+import {
+  ARG_DEFAULT_STYLE,
+  type ArgDesignSystem,
+} from '../../projects/ui/src/lib/design-systems/design-system.ts';
 
 export type { ArgDesignSystem };
 
@@ -37,6 +40,16 @@ export async function loadDesignSystems(root: string): Promise<ArgDesignSystem[]
       return exported[0] as ArgDesignSystem;
     }),
   );
+}
+
+/**
+ * Raiz do CSS de um design system. O padrão também vale sem `data-arg-style`,
+ * mas não nos temas antigos (`data-arg-brand`), que trazem a própria forma.
+ */
+export function rootSelector(id: string): string {
+  return id === ARG_DEFAULT_STYLE
+    ? `:root:is([data-arg-style='${id}'], :not([data-arg-style], [data-arg-brand]))`
+    : `:root[data-arg-style='${id}']`;
 }
 
 /** Atributos do `<html>` de uma combinação: `nativa` é o padrão, sem `data-arg-palette`. */

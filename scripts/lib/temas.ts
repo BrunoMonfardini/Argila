@@ -27,6 +27,23 @@ export function requiredTokens(css: string): Set<string> {
   );
 }
 
+/** Separa uma lista de seletores nas vírgulas de fora de parênteses (`:is(a, b)` fica inteiro). */
+function splitSelectorList(list: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] === '(') depth++;
+    else if (list[i] === ')') depth--;
+    else if (list[i] === ',' && depth === 0) {
+      parts.push(list.slice(start, i).trim());
+      start = i + 1;
+    }
+  }
+  parts.push(list.slice(start).trim());
+  return parts;
+}
+
 /** Seletores de nível superior de um CSS, cada alternativa da vírgula separada. */
 export function topLevelSelectors(css: string): string[] {
   const source = withoutComments(css);
@@ -38,7 +55,7 @@ export function topLevelSelectors(css: string): string[] {
       if (depth === 0) {
         const selector = source.slice(start, i).trim();
         if (!selector.startsWith('@')) {
-          selectors.push(...selector.split(',').map((part) => part.trim()));
+          selectors.push(...splitSelectorList(selector));
         }
       }
       depth++;
