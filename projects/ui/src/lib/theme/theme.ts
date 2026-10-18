@@ -34,6 +34,7 @@ export {
   ARG_COMPONENTS,
   ARG_DEFAULT_STYLE,
   ARG_CORE_MINIMUM,
+  curatedComponents,
   type ArgComponentName,
   type ArgDesignSystem,
   type ArgSchemeName,
