@@ -353,7 +353,7 @@ Tudo fica salvo no navegador e na URL. Um link com combinação inválida cai no
 Campos novos no `DocPage`, todos opcionais:
 
 ```ts
-category: 'Fundação' | 'Componentes' | 'Padrões' | 'Templates' | 'Design systems';
+category: 'Guias' | 'Fundação' | 'Componentes' | 'Padrões' | 'Templates' | 'Design systems'; // Guias: Como começar, Acessibilidade, Ajuda
 group?: string;
 designSystem?: DesignSystemId; // só nos exclusivos
 whenToUse?: string[];
