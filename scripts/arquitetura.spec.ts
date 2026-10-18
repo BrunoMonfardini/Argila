@@ -4,6 +4,7 @@ import { describe, expect, it } from '@jest/globals';
 import {
   ARG_COMPONENTS,
   ARG_CORE_MINIMUM,
+  curatedComponents,
 } from '../projects/ui/src/lib/design-systems/design-system.ts';
 import { coreCssViolations, exclusiveViolations, skinViolations } from './lib/arquitetura.ts';
 import {
@@ -68,15 +69,21 @@ describe.each(designSystems.map((ds) => [ds.id, ds] as const))('design system %s
   it('pele: um arquivo por componente curado, preso ao design system', () => {
     const skins = files(resolve(ROOT, DESIGN_SYSTEMS_TOKENS, id, 'componentes'), '.css');
 
-    expect(skinViolations(ds, skins, rootSelector(id))).toEqual([]);
+    const rules = { ...ds, componentes: { ...ds.componentes, curados: curatedComponents(ds) } };
+
+    expect(skinViolations(rules, skins, rootSelector(id))).toEqual([]);
   });
 
-  it('quem cura algum componente cura todo o núcleo mínimo', () => {
-    const missing = ds.componentes.curados.length
-      ? ARG_CORE_MINIMUM.filter((name) => !ds.componentes.curados.includes(name))
-      : [];
+  it('quem cura algum componente cura todo o núcleo mínimo (nucleoMinimo)', () => {
+    expect(ds.componentes.curados.length === 0 || ds.componentes.nucleoMinimo === true).toBe(true);
+  });
 
-    expect(missing).toEqual([]);
+  it('curatedComponents junta o núcleo mínimo (quando declarado) e os extras, sem repetir', () => {
+    const curated = curatedComponents(ds);
+    const core = ds.componentes.nucleoMinimo ? ARG_CORE_MINIMUM : [];
+
+    expect(new Set(curated).size).toBe(curated.length);
+    expect(core.filter((name) => !curated.includes(name))).toEqual([]);
   });
 
   it('exclusivos: prefixo, pasta e seletor', () => {
