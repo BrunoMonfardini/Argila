@@ -1,44 +1,35 @@
 import { DocPage } from '../docs/doc-page';
 import {
-  ListLoadingEmptyExample,
-  ListLoadingExample,
-  ListLoadingHeldExample,
-} from './examples/list-loading.example';
+  LoadingBlockExample,
+  LoadingProgressExample,
+  LoadingSaveExample,
+} from './examples/loading.example';
 
-export const LIST_LOADING_DOCS: DocPage = {
-  slug: 'carregamento-de-lista',
-  title: 'Carregamento de lista',
+export const LOADING_PATTERN_DOCS: DocPage = {
+  slug: 'carregamentos',
+  title: 'Carregamentos',
   category: 'Padrões',
-  summary:
-    'Como combinar Skeleton, Spinner e List numa tela que busca dados: skeleton no primeiro carregamento, spinner no botão ao recarregar e estado vazio quando não há nada.',
+  summary: 'Como mostrar que algo está carregando, do tamanho certo para a espera.',
+  pattern: {
+    problem:
+      'Esperar sem saber o que está acontecendo parece erro, e um aviso grande demais trava a tela inteira por uma espera pequena.',
+    solution:
+      'O aviso fica onde está a espera: no botão que salvou, no bloco que carrega ou, com duração conhecida, numa barra com quanto falta. Todo carregamento tem nome, para o leitor de tela.',
+  },
   examples: [
-    {
-      name: 'Primeiro carregamento',
-      description: 'Recarregue a página para ver de novo; depois, use o botão Recarregar.',
-      component: ListLoadingExample,
-    },
-    { name: 'Vazio', component: ListLoadingEmptyExample },
-    {
-      name: 'Sempre carregando',
-      description: 'Fica em skeleton, para inspecionar o layout do placeholder.',
-      component: ListLoadingHeldExample,
-    },
+    { name: 'Salvar no botão', component: LoadingSaveExample },
+    { name: 'Bloco carregando', component: LoadingBlockExample },
+    { name: 'Duração conhecida', component: LoadingProgressExample },
   ],
   guidelines: {
     do: [
-      'Skeleton no primeiro carregamento de conteúdo com forma conhecida (listas, cards).',
-      'Spinner no botão (`loading`) para ações do usuário que atualizam o que já está na tela.',
-      'Spinner solto quando o carregamento não tem forma previsível.',
-      'Empty State (`arg-empty-state`) quando a busca volta vazia: diga o que falta e ofereça a ação que resolve.',
+      'Use `loading` no botão da ação: ele bloqueia o clique repetido e mantém a largura.',
+      'Dê nome ao spinner e à barra (`label`).',
     ],
     dont: [
-      'Não mostre indicador em esperas abaixo de ~300 ms.',
-      'Não troque a lista por skeleton ao recarregar: o conteúdo atual fica na tela.',
+      'Não bloqueie a tela inteira por uma ação pequena.',
+      'Não use barra de progresso sem saber o quanto falta.',
     ],
   },
-  accessibility: [
-    'A lista em skeleton tem `aria-busy="true"` e `aria-label="Carregando pedidos"`; as linhas falsas ficam ocultas.',
-    'Ao recarregar, a lista recebe `aria-busy` e o botão anuncia o carregamento.',
-    'O estado vazio tem um título de verdade (`<h5>` aqui, abaixo do `<h4>` da seção), achado por quem navega por títulos.',
-  ],
+  related: ['button', 'spinner', 'progress-bar', 'card'],
 };

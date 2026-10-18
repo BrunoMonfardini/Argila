@@ -50,6 +50,8 @@ export const routes: Routes = [
   { path: 'ferramentas/montar-tema', component: ThemeBuilderPage, title: 'Montar tema · Argila' },
   // Endereços antigos, de antes de "Fundamentos" virar "Fundação"
   { path: 'fundamentos/:slug', redirectTo: 'fundacao/:slug' },
+  // O antigo "Carregamento de lista" virou o padrão Carregamentos
+  { path: 'padroes/carregamento-de-lista', redirectTo: 'padroes/carregamentos' },
   { path: ':categoria/:slug', component: ComponentPage, title: pageTitle },
   { path: ':categoria/:slug/:aba', component: ComponentPage, title: pageTitle },
   { path: '**', redirectTo: '' },
