@@ -236,6 +236,15 @@ describe('DocShell', () => {
     expect(alert()).toBeNull();
   });
 
+  it('o endereço antigo do Carregamento de lista leva ao padrão Carregamentos', async () => {
+    const { fixture } = await setup();
+
+    await TestBed.inject(Router).navigateByUrl('/padroes/carregamento-de-lista');
+    await fixture.whenStable();
+
+    expect(TestBed.inject(Router).url).toBe('/padroes/carregamentos');
+  });
+
   it('o endereço antigo de Fundamentos leva à Fundação', async () => {
     const { fixture } = await setup();
 
