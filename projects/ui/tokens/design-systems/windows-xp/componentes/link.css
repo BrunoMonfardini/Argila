@@ -1,0 +1,5 @@
+/* Link: sublinhado sempre visível, como nos sistemas antigos. */
+
+:root[data-arg-style='windows-xp'] .arg-link {
+  --arg-link-underline-offset: 0.15em;
+}

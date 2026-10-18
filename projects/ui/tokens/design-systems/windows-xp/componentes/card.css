@@ -1,0 +1,7 @@
+/* Cartões: painel de janela com borda de 1px, sem sombra pesada. */
+
+:root[data-arg-style='windows-xp'] .arg-card {
+  --arg-card-border: var(--arg-color-border);
+  --arg-card-shadow: none;
+  --arg-card-shadow-hover: var(--arg-shadow-1);
+}

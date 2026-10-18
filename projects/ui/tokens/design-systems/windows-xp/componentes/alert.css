@@ -1,0 +1,5 @@
+/* Alerta: painel de 1px de cantos quase retos. */
+
+:root[data-arg-style='windows-xp'] .arg-alert {
+  --arg-alert-radius: 0.125rem;
+}

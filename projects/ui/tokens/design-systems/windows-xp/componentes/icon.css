@@ -1,0 +1,7 @@
+/* Ícones em pixel: traço quadrado, sem suavização, como a grade de 16px e 24px da referência. */
+
+:root[data-arg-style='windows-xp'] .arg-icon svg {
+  shape-rendering: crispEdges;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}

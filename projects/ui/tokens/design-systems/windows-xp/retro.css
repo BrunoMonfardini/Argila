@@ -1,0 +1,18 @@
+/*
+ * Fundo da tela com linhas de varredura finas, como o monitor da referência.
+ * Só no <html>: as janelas e os cartões ficam lisos por cima. Some em
+ * forced-colors e com prefers-reduced-transparency.
+ */
+:root[data-arg-style='windows-xp'] {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    light-dark(rgb(0 0 0 / 0.035), rgb(255 255 255 / 0.03)) 3px 4px
+  );
+}
+
+@media (forced-colors: active), (prefers-reduced-transparency: reduce) {
+  :root[data-arg-style='windows-xp'] {
+    background-image: none;
+  }
+}

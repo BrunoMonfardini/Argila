@@ -1,0 +1,6 @@
+/* Toast: cantos quase retos; o balão da referência é o arg-xp-balloon. */
+
+:root[data-arg-style='windows-xp'] arg-toast-stack {
+  --arg-toast-radius: 0.125rem;
+  --arg-toast-shadow: var(--arg-shadow-2);
+}

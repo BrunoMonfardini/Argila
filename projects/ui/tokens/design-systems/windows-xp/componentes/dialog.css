@@ -1,0 +1,6 @@
+/* Diálogo: janela com borda de 1px e sombra curta. */
+
+:root[data-arg-style='windows-xp'] .arg-dialog {
+  --arg-dialog-shadow: var(--arg-shadow-3);
+  border: 1px solid var(--arg-color-border-strong);
+}

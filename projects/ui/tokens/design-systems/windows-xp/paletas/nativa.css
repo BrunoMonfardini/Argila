@@ -1,33 +1,36 @@
 /*
- * Paleta nativa do Windows XP: cinza de janela e azul-marinho.
+ * Paleta Retro, nativa do Windows XP (referência: docs/referencias/windows-xp.jpg,
+ * "Retro-OS UI Kit"): cinza e branco de janela, azul de destaque e vermelho.
+ * O azul #0078D7 e o vermelho #E81123 da referência não chegam a 4,5:1 sobre o
+ * cinza claro: a marca usa tons um pouco mais fechados. Uma só cor de destaque.
  */
 :root[data-arg-style='windows-xp']:not([data-arg-palette]),
 :root[data-arg-style='windows-xp'][data-arg-palette='nativa'],
 :root[data-arg-brand='windows-xp'] {
-  --arg-color-primary: light-dark(#000080, #8fa8ff);
-  --arg-color-on-primary: light-dark(#ffffff, #000000);
-  --arg-color-primary-soft: light-dark(#c7d0f5, #2a3570);
-  --arg-color-on-primary-soft: light-dark(#000033, #e3e8ff);
-  --arg-color-secondary: light-dark(#404040, #d4d0c8);
+  --arg-color-primary: light-dark(#0062b0, #4cc2ff);
+  --arg-color-on-primary: light-dark(#ffffff, #001b33);
+  --arg-color-primary-soft: light-dark(#cce4f7, #0b3a5e);
+  --arg-color-on-primary-soft: light-dark(#001b33, #e3f2ff);
+  --arg-color-secondary: light-dark(#3d3d3d, #e0e0e0);
   --arg-color-on-secondary: light-dark(#ffffff, #000000);
-  --arg-color-accent: light-dark(#7a1f1f, #ffb4a8);
-  --arg-color-on-accent: light-dark(#ffffff, #000000);
+  --arg-color-accent: light-dark(#b80f1c, #ff99a4);
+  --arg-color-on-accent: light-dark(#ffffff, #2b0006);
 
-  --arg-color-background: light-dark(#c0c0c0, #262626);
-  --arg-color-surface-solid: light-dark(#ece9d8, #333333);
-  --arg-color-surface-raised-solid: light-dark(#ffffff, #404040);
-  --arg-color-surface-sunken-solid: light-dark(#ffffff, #1a1a1a);
+  --arg-color-background: light-dark(#f0f0f0, #1e1e1e);
+  --arg-color-surface-solid: light-dark(#ffffff, #2b2b2b);
+  --arg-color-surface-raised-solid: light-dark(#ffffff, #333333);
+  --arg-color-surface-sunken-solid: light-dark(#e4e4e4, #141414);
 
   --arg-color-text: light-dark(#000000, #ffffff);
   --arg-color-text-muted: light-dark(#3d3d3d, #c8c8c8);
 
-  --arg-color-border: light-dark(#808080, #5a5a5a);
-  --arg-color-border-strong: light-dark(#404040, #9a9a9a);
-  --arg-color-focus: light-dark(#000000, #ffffff);
+  --arg-color-border: light-dark(#a0a0a0, #5a5a5a);
+  --arg-color-border-strong: light-dark(#6e6e6e, #8a8a8a);
+  --arg-color-focus: light-dark(#0062b0, #4cc2ff);
 
   /* Feedback mais escuro no claro: o fundo cinza tira contraste das cores padrão */
   --arg-color-info: light-dark(var(--arg-core-blue-700), var(--arg-core-blue-300));
   --arg-color-success: light-dark(var(--arg-core-green-700), var(--arg-core-green-300));
   --arg-color-warning: light-dark(#6a4605, var(--arg-core-yellow-300));
-  --arg-color-danger: light-dark(var(--arg-core-red-700), var(--arg-core-red-300));
+  --arg-color-danger: light-dark(#b80f1c, var(--arg-core-red-300));
 }
