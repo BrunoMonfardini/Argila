@@ -1,9 +1,14 @@
 import { ChangeDetectionStrategy, Component, DOCUMENT, computed, inject } from '@angular/core';
 import {
+  ARG_BRAND_COLORS,
+  ARG_BRAND_ROLES,
   ARG_DESIGN_SYSTEMS,
   ARG_MIN_SURFACE_OPACITY,
   ARG_PALETTES,
+  ARG_SEGMENTS,
   ARG_SHARED_PALETTES,
+  ArgBrandColor,
+  ArgBrandRole,
   ArgButton,
   ArgColorScheme,
   ArgPalette,
@@ -11,8 +16,8 @@ import {
   ArgStyle,
   ArgTheme,
 } from '@brunomonfardini/ui';
-import { readPreference, writePreference } from './preferences';
-import { DocThemeChoices, OPACITY_KEY, PALETTE_KEY, SCHEME_KEY, STYLE_KEY } from './theme-choices';
+import { DOC_SEGMENT_LABELS } from '../segments';
+import { DocThemeChoices } from './theme-choices';
 
 interface Option<T extends string> {
   value: T;
@@ -37,21 +42,24 @@ const PALETTE_LABELS: Record<ArgPalette, string> = {
   ...Object.fromEntries(Object.entries(ARG_SHARED_PALETTES).map(([id, info]) => [id, info.nome])),
 } as Record<ArgPalette, string>;
 
-/** Todas as paletas, para validar o que estava salvo; a barra mostra só as do estilo. */
 const PALETTES: Option<ArgPalette>[] = ARG_PALETTES.map((value) => ({
   value,
   label: PALETTE_LABELS[value],
 }));
 
-/** Opacidade das superfícies em %, do mínimo seguro até opaca, de 5 em 5. */
+const ROLES: Option<ArgBrandRole>[] = [
+  { value: 'primary', label: 'Primária' },
+  { value: 'secondary', label: 'Secundária' },
+  { value: 'accent', label: 'Destaque' },
+];
+
+/** Opacidade mínima em %: abaixo dela o texto perde contraste. */
 const MIN_OPACITY = ARG_MIN_SURFACE_OPACITY * 100;
-const OPACITIES = Array.from({ length: (100 - MIN_OPACITY) / 5 + 1 }, (_, i) => ({
-  value: String(MIN_OPACITY + i * 5),
-}));
 
 /**
- * Modo de cor, estilo, paleta e transparência do catálogo, pelo próprio
- * `ArgTheme`, o mesmo código dos produtos; as escolhas ficam salvas no navegador.
+ * Barra de tema do catálogo: design system, paleta, cores, modo,
+ * transparência e segmento de exemplo. Só oferece o que o DS escolhido
+ * aceita; as escolhas ficam no navegador e na URL (`DocThemeChoices`).
  */
 @Component({
   selector: 'doc-theme-bar',
@@ -67,15 +75,36 @@ export class DocThemeBar {
 
   protected readonly schemes = SCHEMES;
   protected readonly styles = STYLES;
+  protected readonly roles = ROLES;
   /** Só as paletas que o design system atual aceita, na ordem do manifesto (a primeira é a padrão). */
   protected readonly palettes = computed(() =>
     this.theme.palettes().map((value) => PALETTES.find((option) => option.value === value)!),
   );
+  /** Por papel, só as cores da lista fixa que passam no contraste no DS e na paleta atuais. */
+  protected readonly colorOptions = computed(() => {
+    const allowed = this.theme.allowedColors();
+    return Object.fromEntries(
+      ARG_BRAND_ROLES.map((role) => [
+        role,
+        allowed[role].map((value) => ({ value, label: ARG_BRAND_COLORS[value].nome })),
+      ]),
+    ) as Record<ArgBrandRole, Option<ArgBrandColor>[]>;
+  });
+  /** Segmentos declarados com `provideArgila`; sem nenhum, o campo some. */
+  protected readonly segments: Option<string>[] = Object.keys(inject(ARG_SEGMENTS)).map(
+    (value) => ({
+      value,
+      label: DOC_SEGMENT_LABELS[value as keyof typeof DOC_SEGMENT_LABELS] ?? value,
+    }),
+  );
+  protected readonly segment = this.choices.segment;
+  protected readonly colors = this.theme.colors;
   protected readonly acceptsTransparency = this.theme.acceptsTransparency;
   protected readonly minOpacity = MIN_OPACITY;
   protected readonly scheme = this.theme.colorScheme;
   protected readonly style = this.theme.style;
   protected readonly palette = this.theme.palette;
+  protected readonly singleScheme = computed(() => this.theme.schemes().length === 1);
   /** Opacidade em %: a escolhida, ou a que o estilo define no CSS (1 na maioria). */
   protected readonly opacity = computed(() => {
     const chosen = this.theme.surfaceOpacity();
@@ -86,16 +115,7 @@ export class DocThemeBar {
   });
 
   constructor() {
-    this.theme.setStyle(readPreference(STYLE_KEY, STYLES) ?? 'argila');
-    this.theme.setPalette(readPreference(PALETTE_KEY, PALETTES) ?? 'nativa');
-    const scheme = readPreference(SCHEME_KEY, SCHEMES);
-    if (scheme) {
-      this.theme.setColorScheme(scheme);
-    }
-    const opacity = readPreference(OPACITY_KEY, OPACITIES);
-    if (opacity && this.theme.acceptsTransparency()) {
-      this.theme.setSurfaceOpacity(Number(opacity) / 100);
-    }
+    this.choices.restore();
   }
 
   /** O estilo atual tem este modo? `auto` precisa de claro e escuro. */
@@ -105,24 +125,30 @@ export class DocThemeBar {
   }
 
   protected selectScheme(scheme: ArgColorScheme): void {
-    this.theme.setColorScheme(scheme);
-    writePreference(SCHEME_KEY, scheme);
+    this.choices.selectScheme(scheme);
   }
 
-  /** Troca o estilo e volta à transparência dele. */
   protected selectStyle(event: Event): void {
-    this.choices.selectStyle((event.target as HTMLSelectElement).value as ArgStyle);
+    this.choices.selectStyle(value(event) as ArgStyle);
   }
 
   protected selectPalette(event: Event): void {
-    const palette = (event.target as HTMLSelectElement).value as ArgPalette;
-    this.theme.setPalette(palette);
-    writePreference(PALETTE_KEY, palette);
+    this.choices.selectPalette(value(event) as ArgPalette);
+  }
+
+  protected selectColor(role: ArgBrandRole, event: Event): void {
+    this.choices.selectColor(role, (value(event) || undefined) as ArgBrandColor | undefined);
   }
 
   protected selectOpacity(event: Event): void {
-    const percent = (event.target as HTMLInputElement).value;
-    this.theme.setSurfaceOpacity(Number(percent) / 100);
-    writePreference(OPACITY_KEY, percent);
+    this.choices.selectOpacity(Number(value(event)) / 100);
   }
+
+  protected selectSegment(event: Event): void {
+    this.choices.selectSegment(value(event));
+  }
+}
+
+function value(event: Event): string {
+  return (event.target as HTMLSelectElement | HTMLInputElement).value;
 }

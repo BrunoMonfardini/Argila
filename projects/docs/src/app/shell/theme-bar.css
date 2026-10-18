@@ -30,3 +30,45 @@
   width: 6rem;
   accent-color: var(--arg-color-primary);
 }
+
+/* Cores: um painel que abre por cima, para não alargar a barra */
+.doc-theme-bar__colors {
+  position: relative;
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-theme-bar__colors summary {
+  padding: var(--arg-space-1) var(--arg-space-2);
+  border-radius: var(--arg-radius-control);
+  cursor: pointer;
+}
+
+.doc-theme-bar__colors summary:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-color-focus);
+  outline-offset: var(--arg-focus-ring-offset);
+}
+
+.doc-theme-bar__colors-panel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--arg-space-2));
+  inset-inline-end: 0;
+  z-index: var(--arg-z-dropdown);
+  display: grid;
+  gap: var(--arg-space-3);
+  width: max-content;
+  max-width: min(20rem, 90vw);
+  padding: var(--arg-space-4);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-md);
+  background: var(--arg-color-surface);
+}
+
+.doc-theme-bar__colors-panel p {
+  margin: 0;
+}
+
+.doc-theme-bar__colors-panel .doc-theme-bar__field {
+  justify-content: space-between;
+}

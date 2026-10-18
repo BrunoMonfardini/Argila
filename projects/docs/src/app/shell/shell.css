@@ -65,6 +65,16 @@
   padding: var(--arg-space-8) var(--arg-space-8) var(--arg-space-16);
 }
 
+.doc-shell__notice {
+  max-width: 60rem;
+  margin-block-end: var(--arg-space-6);
+}
+
+.doc-shell__notice ul {
+  margin: 0;
+  padding-inline-start: var(--arg-space-5);
+}
+
 .doc-shell__main:focus {
   outline: none;
 }

@@ -1,4 +1,9 @@
-<div class="doc-theme-bar__group" role="group" aria-label="Modo de cor">
+<div
+  class="doc-theme-bar__group"
+  role="group"
+  aria-label="Modo de cor"
+  [title]="singleScheme() ? 'Este design system tem um modo só' : ''"
+>
   @for (option of schemes; track option.value) {
     <button
       arg-button
@@ -37,6 +42,26 @@
   </select>
 </label>
 
+<details class="doc-theme-bar__colors">
+  <summary>Cores</summary>
+  <div class="doc-theme-bar__colors-panel">
+    <p>Só as cores que passam no contraste neste design system e nesta paleta.</p>
+    @for (role of roles; track role.value) {
+      <label class="doc-theme-bar__field">
+        <span>{{ role.label }}</span>
+        <select arg-select (change)="selectColor(role.value, $event)">
+          <option value="" [selected]="!colors()[role.value]">Da paleta</option>
+          @for (option of colorOptions()[role.value]; track option.value) {
+            <option [value]="option.value" [selected]="option.value === colors()[role.value]">
+              {{ option.label }}
+            </option>
+          }
+        </select>
+      </label>
+    }
+  </div>
+</details>
+
 <label
   class="doc-theme-bar__field"
   [title]="acceptsTransparency() ? '' : 'Este estilo não aceita transparência'"
@@ -53,3 +78,17 @@
     (input)="selectOpacity($event)"
   />
 </label>
+
+@if (segments.length) {
+  <label class="doc-theme-bar__field">
+    <span>Segmento</span>
+    <select arg-select (change)="selectSegment($event)">
+      <option value="" [selected]="!segment()">Nenhum</option>
+      @for (option of segments; track option.value) {
+        <option [value]="option.value" [selected]="option.value === segment()">
+          {{ option.label }}
+        </option>
+      }
+    </select>
+  </label>
+}
