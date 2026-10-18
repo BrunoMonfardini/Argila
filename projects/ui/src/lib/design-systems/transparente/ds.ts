@@ -4,6 +4,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const transparente = {
   id: 'transparente',
   nome: 'Transparente',
+  linguagem:
+    'Vidro espesso: superfícies translúcidas com desfoque, aro claro, brilho no topo e borda iridescente.',
   referencia: 'transparente.jpg',
   modos: ['light', 'dark'],
   transparencia: true,

@@ -89,6 +89,8 @@ export interface ArgDesignSystem {
   /** Igual ao nome da pasta e ao valor de `data-arg-style`. */
   readonly id: string;
   readonly nome: string;
+  /** A linguagem visual em uma frase: o que o catálogo mostra no topo da página do DS. */
+  readonly linguagem: string;
   /** Imagem de referência em `docs/referencias/`, quando houver. */
   readonly referencia?: string;
   /** Modos de cor aceitos; o primeiro é o padrão. */

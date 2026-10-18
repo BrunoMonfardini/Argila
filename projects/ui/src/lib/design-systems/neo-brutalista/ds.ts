@@ -4,6 +4,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const neoBrutalista = {
   id: 'neo-brutalista',
   nome: 'Neo-brutalista',
+  linguagem:
+    '"Bold. Loud. Systematic. Usable.": traço preto grosso, cantos retos, sombra dura deslocada e blocos de cor chapada com texto preto.',
   referencia: 'neo-brutalista.jpg',
   modos: ['light', 'dark'],
   transparencia: false,
