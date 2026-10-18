@@ -43,6 +43,8 @@ import { NB_RULES_DOCS } from '../../../ui/src/lib/design-systems/neo-brutalista
 import { PUNK_STAT_CARD_DOCS } from '../../../ui/src/lib/design-systems/punk/exclusivos/punk-stat-card/punk-stat-card.docs';
 import { PUNK_DOT_TRACK_DOCS } from '../../../ui/src/lib/design-systems/punk/exclusivos/punk-dot-track/punk-dot-track.docs';
 import { PUNK_BURST_DOCS } from '../../../ui/src/lib/design-systems/punk/exclusivos/punk-burst/punk-burst.docs';
+import { XP_WINDOW_DOCS } from '../../../ui/src/lib/design-systems/windows-xp/exclusivos/xp-window/xp-window.docs';
+import { XP_BALLOON_DOCS } from '../../../ui/src/lib/design-systems/windows-xp/exclusivos/xp-balloon/xp-balloon.docs';
 import type { DocCategory, DocPage } from '../../../ui/src/docs/doc-page';
 
 export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-page';
@@ -52,6 +54,8 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  * e acrescente aqui. O CI confere que nenhum componente exportado ficou de fora.
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
+  XP_BALLOON_DOCS,
+  XP_WINDOW_DOCS,
   PUNK_BURST_DOCS,
   PUNK_DOT_TRACK_DOCS,
   PUNK_STAT_CARD_DOCS,
