@@ -38,6 +38,7 @@ describe('DocShell', () => {
   afterEach(() => {
     document.body.replaceChildren();
     TestBed.inject(ArgTheme).setStyle('argila');
+    localStorage.clear();
   });
 
   it('tem link para pular ao conteúdo, navegação nomeada e conteúdo principal', async () => {
@@ -209,6 +210,19 @@ describe('DocShell', () => {
     await open('Componentes');
 
     expect(nav.querySelector('a[aria-current="page"]')?.textContent?.trim()).toBe('Button');
+  });
+
+  it('link com escolha de tema inválida mostra o aviso, que dá para fechar', async () => {
+    history.replaceState(null, '', '/?ds=punk&paleta=terrosa');
+    const { fixture, root } = await setup();
+    history.replaceState(null, '', '/');
+    const alert = () => root.querySelector('.doc-shell__notice');
+
+    expect(alert()?.textContent).toContain('O Punk não aceita a paleta “terrosa”');
+
+    alert()!.querySelector<HTMLButtonElement>('button')!.click();
+    await fixture.whenStable();
+    expect(alert()).toBeNull();
   });
 
   it('o endereço antigo de Fundamentos leva à Fundação', async () => {
