@@ -20,6 +20,9 @@ export class DocThemeVersion {
         'data-arg-style',
         'data-arg-palette',
         'data-arg-brand',
+        'data-arg-primary',
+        'data-arg-secondary',
+        'data-arg-accent',
         'style',
       ],
     });

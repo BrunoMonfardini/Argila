@@ -1,5 +1,6 @@
 import { ArgIconName } from '@brunomonfardini/ui';
 import { PRODUCT_DESIGN_SYSTEMS } from '../availability';
+import { FOUNDATION_TOPICS } from '../pages/foundation/topics';
 import { DocCategory, DocPage, pagePath } from '../registry';
 
 export interface DocNavLink {
@@ -64,6 +65,19 @@ export const FOUNDATION_LINKS: DocNavLink[] = [
     path: '/fundacao/icones',
     summary: 'Os ícones desenhados pelo time, com busca e código para copiar.',
   },
+  ...FOUNDATION_TOPICS.map((topic) => ({
+    label: topic.title,
+    path: `/fundacao/${topic.slug}`,
+    summary: topic.summary,
+  })),
+];
+
+export const TOOL_LINKS: DocNavLink[] = [
+  {
+    label: 'Montar tema',
+    path: '/ferramentas/montar-tema',
+    summary: 'Escolha DS, paleta, cores, modo e transparência e copie o segmento ou o HTML.',
+  },
 ];
 
 /** Uma página por design system de produto, montada do manifesto. */
@@ -111,6 +125,7 @@ const SECTIONS: SectionSpec[] = [
   { id: 'componentes', title: 'Componentes', icon: 'layout', includes: inCategory('Componentes') },
   { id: 'padroes', title: 'Padrões', icon: 'sparkles', includes: inCategory('Padrões') },
   { id: 'templates', title: 'Templates', icon: 'copy', includes: inCategory('Templates') },
+  { id: 'ferramentas', title: 'Ferramentas', icon: 'wrench', links: TOOL_LINKS },
   { id: 'ajuda', title: 'Ajuda', icon: 'help-circle', includes: guide('ajuda') },
 ];
 

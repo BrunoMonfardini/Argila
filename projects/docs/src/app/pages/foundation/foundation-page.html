@@ -1,0 +1,102 @@
+@if (topic(); as topic) {
+  <p class="doc-page__category">Fundação</p>
+  <h1>{{ topic.title }}</h1>
+  <p class="doc-lead">{{ topic.summary }}</p>
+  <p class="doc-foundation__context" aria-live="polite">Valores de agora: {{ context() }}.</p>
+
+  @if (topic.sample === 'motion') {
+    <p>
+      <button arg-button type="button" variant="secondary" (click)="move()">
+        {{ moved() ? 'Voltar' : 'Ver o movimento' }}
+      </button>
+    </p>
+  }
+
+  <div class="doc-table" tabindex="0" role="region" [attr.aria-label]="'Tokens de ' + topic.title">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Amostra</th>
+          <th scope="col">Token</th>
+          <th scope="col">Definição</th>
+          <th scope="col">Valor agora</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.name) {
+          <tr>
+            <td class="doc-foundation__sample" aria-hidden="true">
+              @switch (topic.sample) {
+                @case ('color') {
+                  <span
+                    class="doc-foundation__swatch"
+                    [style.background]="'var(' + row.name + ')'"
+                  ></span>
+                }
+                @case ('type') {
+                  <span
+                    class="doc-foundation__type"
+                    [style.font-family]="
+                      row.name.includes('family') ? 'var(' + row.name + ')' : null
+                    "
+                    [style.font-size]="row.name.includes('size') ? 'var(' + row.name + ')' : null"
+                    [style.font-weight]="
+                      row.name.includes('weight') ? 'var(' + row.name + ')' : null
+                    "
+                    [style.line-height]="
+                      row.name.includes('line-height') ? 'var(' + row.name + ')' : null
+                    "
+                    >Argila</span
+                  >
+                }
+                @case ('space') {
+                  <span
+                    class="doc-foundation__space"
+                    [style.width]="'var(' + row.name + ')'"
+                  ></span>
+                }
+                @case ('shape') {
+                  <span
+                    class="doc-foundation__shape"
+                    [style.border-radius]="
+                      row.name.includes('radius') ? 'var(' + row.name + ')' : null
+                    "
+                    [style.box-shadow]="
+                      row.name.includes('shadow') ? 'var(' + row.name + ')' : null
+                    "
+                  ></span>
+                }
+                @case ('motion') {
+                  <span class="doc-foundation__track">
+                    <span
+                      class="doc-foundation__dot"
+                      [class.doc-foundation__dot--moved]="moved()"
+                      [style.transition-duration]="
+                        row.name.includes('easing') ? null : 'var(' + row.name + ')'
+                      "
+                      [style.transition-timing-function]="
+                        row.name.includes('easing') ? 'var(' + row.name + ')' : null
+                      "
+                    ></span>
+                  </span>
+                }
+              }
+            </td>
+            <th scope="row">
+              <code>{{ row.name }}</code>
+            </th>
+            <td>
+              <code>{{ row.value }}</code>
+            </td>
+            <td>
+              <code>{{ row.current }}</code>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <h1>Página não encontrada</h1>
+  <p>Não existe uma página da Fundação com esse endereço.</p>
+}

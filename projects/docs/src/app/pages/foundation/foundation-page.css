@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  max-width: 60rem;
+}
+
+.doc-foundation__context {
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-foundation__sample {
+  width: 7rem;
+}
+
+.doc-foundation__swatch {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--arg-color-border);
+  border-radius: 50%;
+}
+
+.doc-foundation__type {
+  display: block;
+  max-width: 7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.doc-foundation__space {
+  display: block;
+  max-width: 7rem;
+  height: 0.75rem;
+  background: var(--arg-color-primary);
+}
+
+.doc-foundation__shape {
+  display: block;
+  width: 4rem;
+  height: 2.5rem;
+  border: 1px solid var(--arg-color-border);
+  background: var(--arg-color-surface-raised);
+}
+
+.doc-foundation__track {
+  display: block;
+  position: relative;
+  width: 6rem;
+  height: 1rem;
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-color-surface-sunken);
+}
+
+.doc-foundation__dot {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--arg-color-primary);
+  transition-property: transform;
+  transition-duration: var(--arg-motion-base);
+  transition-timing-function: var(--arg-motion-easing);
+}
+
+.doc-foundation__dot--moved {
+  transform: translateX(5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doc-foundation__dot {
+    transition: none;
+  }
+}
