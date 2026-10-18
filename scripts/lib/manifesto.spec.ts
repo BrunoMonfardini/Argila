@@ -236,3 +236,34 @@ describe('registeredPages', () => {
     expect(registeredPages('sem registro').size).toBe(0);
   });
 });
+
+describe('buildManifest: "Atualizado em"', () => {
+  const docsFiles = [resolve(FIXTURES, 'sample.docs.ts')];
+
+  it('guarda a data do último commit do *.docs.ts, pelo caminho relativo', () => {
+    const asked: string[] = [];
+    const manifest = buildManifest({
+      root: ROOT,
+      docsFiles,
+      semanticCss: '',
+      lastCommit: (file) => {
+        asked.push(file);
+        return '2026-10-17T14:30:00-03:00';
+      },
+    });
+
+    expect(manifest.pages['Componentes/sample'].updatedAt).toBe('2026-10-17T14:30:00-03:00');
+    expect(asked).toContain('scripts/lib/__fixtures__/manifesto/sample.docs.ts');
+  });
+
+  it('sem data (fora do git), a página fica sem o campo', () => {
+    const manifest = buildManifest({
+      root: ROOT,
+      docsFiles,
+      semanticCss: '',
+      lastCommit: () => undefined,
+    });
+
+    expect(Object.keys(manifest.pages['Componentes/sample'])).not.toContain('updatedAt');
+  });
+});

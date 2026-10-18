@@ -85,6 +85,7 @@ describe('navegação do catálogo', () => {
     const sections = buildNavigation(pages);
 
     expect(sectionOf(sections, '/componentes/button?variant=primary#exemplos')).toBe('componentes');
+    expect(sectionOf(sections, '/componentes/button/codigo')).toBe('componentes');
     expect(sectionOf(sections, '/')).toBe('comeco');
     expect(sectionOf(sections, '/nao-existe')).toBeUndefined();
   });
