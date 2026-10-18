@@ -28,6 +28,22 @@
   </nav>
 
   <main id="conteudo" class="doc-shell__main" tabindex="-1">
+    @if (notice(); as problems) {
+      <div
+        arg-alert
+        tone="warning"
+        heading="O link pedia escolhas que não valem"
+        dismissible
+        class="doc-shell__notice"
+        (dismissed)="dismissNotice()"
+      >
+        <ul>
+          @for (problem of problems; track problem) {
+            <li>{{ problem }}</li>
+          }
+        </ul>
+      </div>
+    }
     <router-outlet />
   </main>
 </div>
