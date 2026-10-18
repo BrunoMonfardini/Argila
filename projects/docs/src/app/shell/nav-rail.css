@@ -56,7 +56,10 @@
 }
 
 .doc-rail__label {
-  overflow-wrap: anywhere;
+  max-width: 100%;
+  font-size: 0.6875rem;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 /* O painel abre ao lado da barra, por cima do conteúdo */

@@ -26,6 +26,8 @@ export interface ManifestOptions {
   semanticCss: string;
   /** Data do último commit de um arquivo (relativo à raiz), ou `undefined` fora do git. */
   lastCommit?: (file: string) => string | undefined;
+  /** Conteúdo do CHANGELOG.md do pacote, quando houver. */
+  changelog?: string;
 }
 
 export class ManifestError extends Error {
@@ -59,7 +61,9 @@ export function buildManifest(options: ManifestOptions): Manifest {
       pages[manifestKey(page.category, page.slug)] = updatedAt ? { ...page, updatedAt } : page;
     }
   }
-  return { pages, tokens: parseSemanticTokens(options.semanticCss) };
+  const manifest: Manifest = { pages, tokens: parseSemanticTokens(options.semanticCss) };
+  if (options.changelog !== undefined) manifest.changelog = options.changelog;
+  return manifest;
 }
 
 class ManifestReader {

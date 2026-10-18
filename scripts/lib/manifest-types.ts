@@ -58,6 +58,8 @@ export interface Manifest {
   /** Páginas por `<categoria>/<slug>`, ex.: `Componentes/button`. */
   pages: Record<string, ManifestPage>;
   tokens: ManifestToken[];
+  /** O `CHANGELOG.md` do pacote, para a página Atualizações. */
+  changelog?: string;
 }
 
 /** Chave da página no manifesto. */

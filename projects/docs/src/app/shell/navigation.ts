@@ -1,4 +1,5 @@
 import { ArgIconName } from '@brunomonfardini/ui';
+import { PRODUCT_DESIGN_SYSTEMS } from '../availability';
 import { DocCategory, DocPage, pagePath } from '../registry';
 
 export interface DocNavLink {
@@ -26,10 +27,16 @@ interface SectionSpec {
   id: string;
   title: string;
   icon: ArgIconName;
-  category?: DocCategory;
-  /** Páginas próprias do catálogo, que não vêm de um `*.docs.ts`; vêm primeiro. */
+  /** As páginas da seção. */
+  includes?: (page: DocPage) => boolean;
+  /** Páginas próprias do catálogo, que não vêm de um `*.docs.ts`: antes das outras. */
   links?: DocNavLink[];
+  /** Páginas próprias do catálogo que vêm depois das outras. */
+  after?: DocNavLink[];
 }
+
+const inCategory = (category: DocCategory) => (page: DocPage) => page.category === category;
+const guide = (slug: string) => (page: DocPage) => page.category === 'Guias' && page.slug === slug;
 
 /** Ordem das famílias de componentes; os exclusivos do DS vêm por último. */
 export const COMPONENT_GROUPS = [
@@ -59,19 +66,52 @@ export const FOUNDATION_LINKS: DocNavLink[] = [
   },
 ];
 
+/** Uma página por design system de produto, montada do manifesto. */
+export const DESIGN_SYSTEM_LINKS: DocNavLink[] = PRODUCT_DESIGN_SYSTEMS.map((ds) => ({
+  label: ds.nome,
+  path: `/design-systems/${ds.id}`,
+  summary: ds.linguagem,
+}));
+
+export const UPDATES_LINK: DocNavLink = {
+  label: 'Atualizações',
+  path: '/comeco/atualizacoes',
+  summary: 'O que mudou em cada versão do pacote.',
+};
+
 const SECTIONS: SectionSpec[] = [
-  { id: 'comeco', title: 'Começo', icon: 'rocket', links: [{ label: 'Início', path: '/' }] },
-  { id: 'design-systems', title: 'Design systems', icon: 'layers', category: 'Design systems' },
+  {
+    id: 'comeco',
+    title: 'Começo',
+    icon: 'rocket',
+    links: [{ label: 'Início', path: '/' }],
+    includes: guide('como-comecar'),
+    after: [UPDATES_LINK],
+  },
+  {
+    id: 'acessibilidade',
+    title: 'Acessibilidade',
+    icon: 'accessibility',
+    includes: guide('acessibilidade'),
+  },
+  {
+    id: 'design-systems',
+    title: 'Design systems',
+    icon: 'layers',
+    includes: inCategory('Design systems'),
+    after: DESIGN_SYSTEM_LINKS,
+  },
   {
     id: 'fundacao',
     title: 'Fundação',
     icon: 'book',
-    category: 'Fundação',
+    includes: inCategory('Fundação'),
     links: FOUNDATION_LINKS,
   },
-  { id: 'componentes', title: 'Componentes', icon: 'layout', category: 'Componentes' },
-  { id: 'padroes', title: 'Padrões', icon: 'sparkles', category: 'Padrões' },
-  { id: 'templates', title: 'Templates', icon: 'copy', category: 'Templates' },
+  { id: 'componentes', title: 'Componentes', icon: 'layout', includes: inCategory('Componentes') },
+  { id: 'padroes', title: 'Padrões', icon: 'sparkles', includes: inCategory('Padrões') },
+  { id: 'templates', title: 'Templates', icon: 'copy', includes: inCategory('Templates') },
+  { id: 'ajuda', title: 'Ajuda', icon: 'help-circle', includes: guide('ajuda') },
 ];
 
 /** "Sobre ..." abre a seção; o resto vai em ordem alfabética. */
@@ -84,15 +124,14 @@ function link(page: DocPage): DocNavLink {
   return { label: page.title, path: pagePath(page), summary: page.summary };
 }
 
-function groupsOf(pages: DocPage[]): DocNavGroup[] {
-  const loose = pages.filter((page) => !page.group).map(link);
-  const grouped = [...new Set(pages.map((page) => page.group).filter((g) => g !== undefined))]
+/** As famílias das páginas com `group`, na ordem fixa. */
+function familiesOf(pages: DocPage[]): DocNavGroup[] {
+  return [...new Set(pages.map((page) => page.group).filter((g) => g !== undefined))]
     .sort((a, b) => order(a) - order(b))
     .map((title) => ({
       title,
       links: pages.filter((page) => page.group === title).map(link),
     }));
-  return loose.length ? [{ links: loose }, ...grouped] : grouped;
 }
 
 /** Famílias conhecidas na ordem fixa; as desconhecidas, no fim. */
@@ -101,16 +140,17 @@ function order(group: string): number {
   return index === -1 ? COMPONENT_GROUPS.length : index;
 }
 
-/** Seções da barra de ícones, na ordem em que aparecem; seções vazias somem. */
+/**
+ * Seções da barra de ícones, na ordem em que aparecem; seções vazias somem.
+ * Em cada uma, os links soltos (os do catálogo e as páginas sem família)
+ * vêm antes das famílias.
+ */
 export function buildNavigation(pages: readonly DocPage[]): DocNavSection[] {
-  return SECTIONS.map(({ id, title, icon, category, links = [] }) => {
-    const own = category ? pages.filter((page) => page.category === category).sort(byTitle) : [];
-    const groups = groupsOf(own);
-    if (links.length) {
-      if (groups[0] && !groups[0].title) groups[0].links.unshift(...links);
-      else groups.unshift({ links: [...links] });
-    }
-    return { id, title, icon, groups };
+  return SECTIONS.map(({ id, title, icon, includes, links = [], after = [] }) => {
+    const own = includes ? pages.filter(includes).sort(byTitle) : [];
+    const loose = [...links, ...own.filter((page) => !page.group).map(link), ...after];
+    const families = familiesOf(own.filter((page) => page.group));
+    return { id, title, icon, groups: loose.length ? [{ links: loose }, ...families] : families };
   }).filter((section) => section.groups.length);
 }
 

@@ -1,0 +1,117 @@
+<article class="doc-ds">
+  <p class="doc-page__category">Design systems</p>
+  <h1>{{ ds().nome }}</h1>
+  <p class="doc-lead">{{ ds().linguagem }}</p>
+
+  @if (active()) {
+    <p class="doc-ds__active" role="status">É o design system aplicado ao catálogo agora.</p>
+  } @else {
+    <p>
+      <button arg-button type="button" variant="secondary" (click)="apply()">
+        Ver o catálogo no {{ ds().nome }}
+      </button>
+    </p>
+  }
+
+  <section aria-labelledby="ficha">
+    <h2 id="ficha">Ficha</h2>
+    <dl class="doc-ds__sheet">
+      <div>
+        <dt>Modos</dt>
+        <dd>{{ schemes() }}</dd>
+      </div>
+      <div>
+        <dt>Transparência</dt>
+        <dd>{{ ds().transparencia ? 'aceita' : 'não aceita' }}</dd>
+      </div>
+      <div>
+        <dt>Paletas aceitas</dt>
+        <dd>{{ palettes() }}</dd>
+      </div>
+      <div>
+        <dt>Tipografia</dt>
+        <dd>{{ fonts() }}</dd>
+      </div>
+      @if (ds().referencia) {
+        <div>
+          <dt>Referência</dt>
+          <dd>imagem para consulta do time, fora do catálogo publicado</dd>
+        </div>
+      }
+    </dl>
+  </section>
+
+  @if (ds().regras.length) {
+    <section aria-labelledby="regras">
+      <h2 id="regras">Regras de uso</h2>
+      <ul>
+        @for (rule of ds().regras; track rule) {
+          <li>{{ rule }}</li>
+        }
+      </ul>
+    </section>
+  }
+
+  <section aria-labelledby="tokens">
+    <h2 id="tokens">Tokens de forma</h2>
+    @if (tokens().length) {
+      <div class="doc-table" tabindex="0" role="region" aria-labelledby="tokens">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Token</th>
+              <th scope="col">O que é</th>
+              <th scope="col">Valor agora</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of tokens(); track item.token) {
+              <tr>
+                <th scope="row">
+                  <code>{{ item.token }}</code>
+                </th>
+                <td>{{ item.label }}</td>
+                <td>
+                  <code>{{ item.value }}</code>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p>Os valores aparecem com o {{ ds().nome }} aplicado ao catálogo.</p>
+    }
+  </section>
+
+  <section aria-labelledby="componentes">
+    <h2 id="componentes">Componentes</h2>
+    <p>{{ summary() }}</p>
+    <div class="doc-table" tabindex="0" role="region" aria-labelledby="componentes">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Componente</th>
+            <th scope="col">Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of components(); track row.name) {
+            <tr>
+              <th scope="row">
+                @if (row.path && row.status !== 'fora') {
+                  <a [routerLink]="row.path">{{ row.name }}</a>
+                } @else {
+                  {{ row.name }}
+                }
+              </th>
+              <td [class]="'doc-ds__status doc-ds__status--' + row.status">
+                {{ statusLabels[row.status] }}
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</article>

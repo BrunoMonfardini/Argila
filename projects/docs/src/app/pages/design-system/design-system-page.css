@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  max-width: 60rem;
+}
+
+.doc-ds {
+  display: grid;
+  gap: var(--arg-space-4);
+}
+
+.doc-ds__active {
+  color: var(--arg-color-text-muted);
+}
+
+.doc-ds__sheet {
+  display: grid;
+  gap: var(--arg-space-3);
+  margin: 0;
+}
+
+.doc-ds__sheet > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr;
+  gap: var(--arg-space-4);
+}
+
+.doc-ds__sheet dt {
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.doc-ds__sheet dd {
+  margin: 0;
+}
+
+.doc-ds__status--fora {
+  color: var(--arg-color-text-muted);
+}
+
+.doc-ds__status--exclusivo {
+  font-weight: var(--arg-font-weight-strong);
+}
+
+@media (max-width: 30rem) {
+  .doc-ds__sheet > div {
+    grid-template-columns: 1fr;
+    gap: var(--arg-space-1);
+  }
+}
