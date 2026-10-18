@@ -1,0 +1,52 @@
+:host {
+  display: block;
+}
+
+.doc-anatomy {
+  display: grid;
+  gap: var(--arg-space-4);
+  margin: 0;
+}
+
+/* Espaço em volta do exemplo para os marcadores, que ficam no canto de cada parte */
+.doc-anatomy__stage {
+  position: relative;
+  padding: var(--arg-space-8) var(--arg-space-6);
+  border: 1px dashed var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-background);
+}
+
+.doc-anatomy__marker {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--arg-color-surface);
+  border-radius: 50%;
+  background: var(--arg-color-accent);
+  color: var(--arg-color-on-accent);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-caption);
+  font-weight: var(--arg-font-weight-strong);
+  line-height: 1;
+  pointer-events: none;
+  translate: -50% -50%;
+}
+
+.doc-anatomy__legend {
+  display: grid;
+  gap: var(--arg-space-2);
+  margin: 0;
+  padding-inline-start: var(--arg-space-6);
+}
+
+@media (forced-colors: active) {
+  .doc-anatomy__marker {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+}

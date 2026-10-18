@@ -52,7 +52,12 @@ import { XP_WINDOW_DOCS } from '../../../ui/src/lib/design-systems/windows-xp/ex
 import { XP_BALLOON_DOCS } from '../../../ui/src/lib/design-systems/windows-xp/exclusivos/xp-balloon/xp-balloon.docs';
 import type { DocCategory, DocPage } from '../../../ui/src/docs/doc-page';
 
-export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-page';
+export type {
+  DocAnatomyPart,
+  DocCategory,
+  DocExample,
+  DocPage,
+} from '../../../ui/src/docs/doc-page';
 
 /**
  * Todas as páginas do catálogo. Componente novo: crie o `<componente>.docs.ts`

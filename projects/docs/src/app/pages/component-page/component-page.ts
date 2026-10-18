@@ -8,6 +8,7 @@ import { DOC_PAGES, DocPage, findPage } from '../../registry';
 import { DocPlayground } from '../../playground/playground';
 import { DocThemeChoices } from '../../shell/theme-choices';
 import { DocText } from '../../shared/text';
+import { DocAnatomy } from './anatomy';
 import { DocExampleFrame } from './example-frame';
 import { DocPropsTable } from './props-table';
 import { DocTab, DocTocEntry, pageTabs, tableOfContents } from './tabs';
@@ -43,6 +44,7 @@ export function formatUpdatedAt(iso: string): string {
   imports: [
     ArgAlert,
     ArgButton,
+    DocAnatomy,
     DocCode,
     DocExampleFrame,
     DocPlayground,
