@@ -17,21 +17,22 @@ Ao final deste plano, o Argila tem **seis design systems distintos** (Argila, Ne
 
 _Atualizado em 17/10/2026._
 
-| Marco   | Situação                                                                                                                                                                                               |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| PR-1    | **Pronto**: motor de temas (#68), publicado como `0.3.0` (#70)                                                                                                                                         |
-| E0      | **Pronto** (#71, #73): barra de tema, checkup completo sem problemas, painéis do Transparente opacos e com desfoque. Falta só a conferência visual das seções 2 a 4 da [validação](validacao-temas.md) |
-| E1      | **Pronto** (#74): 700 testes no Jest, resumo e cobertura comparada com a main no CI. A troca do `actions/cache` para a v6 ficou no #75                                                                 |
-| E2      | **Pronto** (#77, #79): manifestos, CSS em `tokens/design-systems/`, regras de arquitetura no CI, registro de paletas                                                                                   |
-| E3      | **Pronto** (#81, #83, #84, #85, #86): Massinha como paleta padrão, forma de massinha, abas segmentadas e chips, cores de marca e segmentos                                                             |
-| E4      | **Pronto** (#87, #88): vidro espesso e campo com ação acoplada                                                                                                                                         |
-| E5      | **Pronto** (#89, #90): Neo-brutalista e os exclusivos                                                                                                                                                  |
-| E6      | **Pronto** (#92, #93): Punk e os exclusivos                                                                                                                                                            |
-| E7      | **Pronto** (#94, #95): Windows XP e os exclusivos                                                                                                                                                      |
-| E8      | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
-| E9      | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
-| E10     | **Pronto** (#100, #101 e o E10c: anatomia dos 10 componentes)                                                                                                                                          |
-| E11–E12 | A fazer                                                                                                                                                                                                |
+| Marco | Situação                                                                                                                                                                                               |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PR-1  | **Pronto**: motor de temas (#68), publicado como `0.3.0` (#70)                                                                                                                                         |
+| E0    | **Pronto** (#71, #73): barra de tema, checkup completo sem problemas, painéis do Transparente opacos e com desfoque. Falta só a conferência visual das seções 2 a 4 da [validação](validacao-temas.md) |
+| E1    | **Pronto** (#74): 700 testes no Jest, resumo e cobertura comparada com a main no CI. A troca do `actions/cache` para a v6 ficou no #75                                                                 |
+| E2    | **Pronto** (#77, #79): manifestos, CSS em `tokens/design-systems/`, regras de arquitetura no CI, registro de paletas                                                                                   |
+| E3    | **Pronto** (#81, #83, #84, #85, #86): Massinha como paleta padrão, forma de massinha, abas segmentadas e chips, cores de marca e segmentos                                                             |
+| E4    | **Pronto** (#87, #88): vidro espesso e campo com ação acoplada                                                                                                                                         |
+| E5    | **Pronto** (#89, #90): Neo-brutalista e os exclusivos                                                                                                                                                  |
+| E6    | **Pronto** (#92, #93): Punk e os exclusivos                                                                                                                                                            |
+| E7    | **Pronto** (#94, #95): Windows XP e os exclusivos                                                                                                                                                      |
+| E8    | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
+| E9    | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
+| E10   | **Pronto** (#100, #101 e o E10c: anatomia dos 10 componentes)                                                                                                                                          |
+| E11   | **Em andamento**: E11a (paginação em pontos e gaveta de baixo; o stepper vertical já existia) em review                                                                                                |
+| E12   | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 
@@ -266,7 +267,7 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 | ✓   | ID   | Item                                                                                 | Depende de | Pronto quando                                                                            | Est. |
 | --- | ---- | ------------------------------------------------------------------------------------ | ---------- | ---------------------------------------------------------------------------------------- | ---- |
 | [ ] | T-01 | `docs: os 5 templates` (Empty State, Ending Screen, Error Message, Loaders, Receipt) | E9         | Cada template funciona nos 6 DS só com o núcleo mínimo                                   | 3,5  |
-| [ ] | T-02 | `feat: variantes da 4.7` (paginação em pontos, stepper vertical, drawer de baixo)    | E9         | Variantes testadas e com exemplos                                                        | 2    |
+| [x] | T-02 | `feat: variantes da 4.7` (paginação em pontos, stepper vertical, drawer de baixo)    | E9         | Variantes testadas e com exemplos                                                        | 2    |
 | [ ] | T-03 | `docs: padrões da leva 1` (8 páginas no formato fixo)                                | T-02       | Toda página segue Problema → Solução → Exemplo → Variações → Faça/não faça → Componentes | 3,5  |
 
 ## E12: padrões, leva 2

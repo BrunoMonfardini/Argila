@@ -392,7 +392,7 @@ Padrões e templates usam só componentes do **núcleo mínimo**, para funcionar
 | Pagination Dots          | `arg-pagination` com `variant="dots"`                                                                        |
 | Progress Steps / Tracker | `arg-stepper` com `orientation="vertical"`                                                                   |
 | Busca com ação acoplada  | `arg-input-group` com o campo e um botão `argInputAction` no fim, como o **+** da referência do Transparente |
-| Bottom Sheet             | `arg-drawer` com `position="bottom"`                                                                         |
+| Bottom Sheet             | `ArgDrawer.open(…, { side: 'bottom' })`                                                                      |
 | Abas segmentadas         | `arg-tabs` com `variant="segmented"` (referência Argila)                                                     |
 | Chips                    | `arg-tag` com `selectable` (referências Argila e Punk)                                                       |
 | Linha do tempo           | padrão "Linhas do tempo", montado com List                                                                   |
