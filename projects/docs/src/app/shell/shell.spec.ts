@@ -55,11 +55,13 @@ describe('DocShell', () => {
 
     expect(items.map((b) => b.textContent?.trim())).toEqual([
       'Começo',
+      'Acessibilidade',
       'Design systems',
       'Fundação',
       'Componentes',
       'Padrões',
       'Templates',
+      'Ajuda',
     ]);
     expect(items.filter((b) => !b.querySelector('arg-icon'))).toEqual([]);
     expect(items.filter((b) => b.getAttribute('aria-expanded') !== 'false')).toEqual([]);
@@ -88,7 +90,15 @@ describe('DocShell', () => {
     await open('Templates');
     expect(links()).toContain('Sobre templates');
     await open('Design systems');
-    expect(links()).toEqual(['Sobre design systems']);
+    expect(links()).toEqual([
+      'Sobre design systems',
+      'Argila',
+      'CODA',
+      'Transparente',
+      'Windows XP',
+      'Neo-brutalista',
+      'Punk',
+    ]);
     await open('Design systems');
     expect(nav.querySelector('.doc-panel')).toBeNull();
   });
