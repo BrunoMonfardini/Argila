@@ -437,6 +437,7 @@ projects/ui/
       componentes/
         button.css  input.css …     pele dos componentes curados, um arquivo por curado
       index.css                     junta forma, paletas e peles; o temas.css importa os índices
+                                    (listas mecânicas de @import, fora do jscpd: o temas.spec confere cada uma)
     styles/  palettes/nativas/      caminhos antigos, só reencaminham (removidos numa major)
     themes/                         só compatibilidade com data-arg-brand
   src/
@@ -468,15 +469,8 @@ export const neoBrutalista = {
   paletas: ['nativa', 'pastel', 'mono', 'alto-contraste'], // a primeira é a padrão
   fontes: { titulo: 'Archivo Black', corpo: 'Archivo' },
   componentes: {
-    curados: [
-      ...ARG_CORE_MINIMUM,
-      'avatar',
-      'breadcrumb',
-      'list',
-      'pagination',
-      'stepper',
-      'table',
-    ],
+    nucleoMinimo: true, // o núcleo mínimo inteiro; a lista completa sai de curatedComponents()
+    curados: ['avatar', 'breadcrumb', 'list', 'pagination', 'stepper', 'table'],
     fora: [],
   },
   exclusivos: ['nb-sticker', 'nb-rules'],
