@@ -37,7 +37,14 @@ import { TAG_DOCS } from '../../../ui/src/lib/tag/tag.docs';
 import { TIME_SLOTS_DOCS } from '../../../ui/src/lib/time-slots/time-slots.docs';
 import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
 import { TOOLTIP_DOCS } from '../../../ui/src/lib/tooltip/tooltip.docs';
-import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
+import { ABOUT_PATTERNS_DOCS } from '../../../ui/src/patterns/about.docs';
+import { COLOR_USAGE_PATTERN_DOCS } from '../../../ui/src/patterns/color-usage.docs';
+import { DATA_ENTRY_PATTERN_DOCS } from '../../../ui/src/patterns/data-entry.docs';
+import { DISCLOSURE_PATTERN_DOCS } from '../../../ui/src/patterns/disclosure.docs';
+import { FEEDBACK_PATTERN_DOCS } from '../../../ui/src/patterns/feedback.docs';
+import { LAYOUT_PATTERN_DOCS } from '../../../ui/src/patterns/layout.docs';
+import { LOADING_PATTERN_DOCS } from '../../../ui/src/patterns/loading.docs';
+import { NAVIGATION_PATTERN_DOCS } from '../../../ui/src/patterns/navigation.docs';
 import { EMPTY_STATE_TEMPLATE_DOCS } from '../../../ui/src/templates/empty-state.docs';
 import { ENDING_SCREEN_TEMPLATE_DOCS } from '../../../ui/src/templates/ending-screen.docs';
 import { ERROR_MESSAGE_TEMPLATE_DOCS } from '../../../ui/src/templates/error-message.docs';
@@ -124,7 +131,14 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   TIME_SLOTS_DOCS,
   TOAST_DOCS,
   TOOLTIP_DOCS,
-  LIST_LOADING_DOCS,
+  ABOUT_PATTERNS_DOCS,
+  LOADING_PATTERN_DOCS,
+  FEEDBACK_PATTERN_DOCS,
+  DATA_ENTRY_PATTERN_DOCS,
+  DISCLOSURE_PATTERN_DOCS,
+  NAVIGATION_PATTERN_DOCS,
+  LAYOUT_PATTERN_DOCS,
+  COLOR_USAGE_PATTERN_DOCS,
 ];
 
 export const DOC_PAGES = new InjectionToken<readonly DocPage[]>('DOC_PAGES', {
