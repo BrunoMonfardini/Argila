@@ -1,0 +1,100 @@
+/*
+ * Tokens de componente (camada 3), ex.: <section arg-xp-window style="--arg-xp-window-bar: var(--arg-color-accent)">.
+ */
+:host {
+  --arg-xp-window-bar: var(--arg-color-primary);
+  --arg-xp-window-on-bar: var(--arg-color-on-primary);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-2);
+  background: var(--arg-color-surface);
+  color: var(--arg-color-text);
+  font-family: var(--arg-font-family);
+}
+
+.arg-xp-window__bar {
+  display: flex;
+  gap: var(--arg-space-2);
+  align-items: center;
+  justify-content: space-between;
+  min-height: 2rem;
+  padding: var(--arg-space-1) var(--arg-space-1) var(--arg-space-1) var(--arg-space-3);
+  background: var(--arg-xp-window-bar);
+  color: var(--arg-xp-window-on-bar);
+}
+
+.arg-xp-window__title {
+  overflow: hidden;
+  font-family: var(--arg-font-family-heading);
+  font-size: var(--arg-font-size-body);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.arg-xp-window__controls {
+  display: flex;
+  gap: 2px;
+}
+
+.arg-xp-window__control {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: 0.125rem;
+  box-shadow: var(--arg-shadow-control);
+  background: var(--arg-color-surface-solid);
+  color: var(--arg-color-text);
+  cursor: pointer;
+}
+
+.arg-xp-window__control:focus-visible {
+  outline: var(--arg-focus-ring-width) solid var(--arg-xp-window-on-bar);
+  outline-offset: 1px;
+}
+
+/* Os desenhos dos botões, em traço quadrado: _ ☐ × */
+.arg-xp-window__glyph {
+  position: relative;
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+.arg-xp-window__control--minimize .arg-xp-window__glyph {
+  border-block-end: 2px solid currentColor;
+}
+
+.arg-xp-window__control--maximize .arg-xp-window__glyph {
+  border: 1px solid currentColor;
+  border-block-start-width: 3px;
+}
+
+.arg-xp-window__control--close .arg-xp-window__glyph::before,
+.arg-xp-window__control--close .arg-xp-window__glyph::after {
+  content: '';
+  position: absolute;
+  inset: 50% -1px auto;
+  height: 2px;
+  background: currentColor;
+  rotate: 45deg;
+}
+
+.arg-xp-window__control--close .arg-xp-window__glyph::after {
+  rotate: -45deg;
+}
+
+.arg-xp-window__body {
+  padding: var(--arg-space-4);
+}
+
+@media (forced-colors: active) {
+  .arg-xp-window__bar {
+    border-block-end: 1px solid CanvasText;
+  }
+}

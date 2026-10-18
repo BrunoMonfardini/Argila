@@ -45,6 +45,8 @@ export * from './lib/design-systems/neo-brutalista/exclusivos/nb-rules/nb-rules'
 export * from './lib/design-systems/punk/exclusivos/punk-stat-card/punk-stat-card';
 export * from './lib/design-systems/punk/exclusivos/punk-dot-track/punk-dot-track';
 export * from './lib/design-systems/punk/exclusivos/punk-burst/punk-burst';
+export * from './lib/design-systems/windows-xp/exclusivos/xp-window/xp-window';
+export * from './lib/design-systems/windows-xp/exclusivos/xp-balloon/xp-balloon';
 export * from './lib/theme/theme';
 export * from './lib/theme/segments';
 export * from './lib/theme/provide-argila';
