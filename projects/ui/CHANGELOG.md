@@ -1,5 +1,33 @@
 # @brunomonfardini/ui
 
+## 0.7.0
+
+### Minor Changes
+
+- bbaf085: `curatedComponents` na API pública: a lista completa dos componentes curados de um design system (o núcleo mínimo, quando declarado, e os extras).
+- 7269498: O CODA ganha pele própria para o núcleo mínimo: contorno de 2px, cantos pequenos e rótulos que quebram a linha em vez de estourar (a Silkscreen é larga).
+- 1279910: O manifesto de cada design system ganha `linguagem`: a linguagem visual em uma frase, mostrada no catálogo.
+- 4b36e2b: **Novo design system: Punk** (`data-arg-style="punk"`), como na referência: fundo preto, pílulas brancas com texto preto, cantos grandes, plano (sem sombra) e títulos em Unbounded (Google Fonts, carregada pelo produto).
+
+  - Paleta nativa Néon (rosa, amarelo, verde e azul sobre o preto) e as paletas Viva e Alto contraste.
+  - **Só modo escuro**: o `ArgTheme` fixa o escuro, e o teste de contraste e as cores de marca seguem os modos de cada manifesto.
+  - Pele própria para o núcleo mínimo e para Agenda, Avatar, Date Picker, Drawer, List, Table e Time Slots. Breadcrumb e Pagination ficam fora do Punk.
+
+- 3a04472: **O Windows XP segue o "Retro-OS UI Kit"**: paleta Retro (fundo cinza-claro, azul de destaque e vermelho, no lugar do azul-marinho), títulos em Pixelify Sans (Google Fonts, carregada pelo produto), fundo com linhas de varredura finas, raio de 4px, botões em relevo de 1px, abas em pasta e ícones de traço quadrado, sem suavização.
+
+  - Pele própria para o núcleo mínimo, o Menu (item em foco na faixa azul) e os ícones.
+  - Agenda, Drawer e Time Slots ficam fora do Windows XP.
+
+- 617ced0: Ícones novos para a navegação do catálogo: `book`, `rocket`, `layers`, `layout`, `wrench`, `help-circle`, `accessibility` e `sparkles`.
+- bee8f93: Exclusivos do Neo-brutalista: `arg-nb-sticker` (selo inclinado para regras e avisos curtos) e `arg-nb-rules` (caixa de regras de uso com título, um `<aside>` com nome acessível).
+- c234166: Exclusivos do Punk: `arg-punk-stat-card` (card de indicador em cor chapada), `arg-punk-dot-track` (trilha de pontos com alça, acessível como `progressbar`) e `arg-punk-burst` (estrela decorativa, escondida do leitor de tela).
+- 410fb5b: Variantes da referência:
+
+  - `arg-pagination` ganha `variant="dots"`: um ponto por página (o atual em pílula), cada um com o nome "Página 2", para carrosséis e passos com poucas páginas.
+  - `ArgDrawer.open(..., { side: 'bottom' })` sobe a gaveta de baixo em qualquer largura (bottom sheet).
+
+- b000275: Exclusivos do Windows XP: `arg-xp-window` (janela com barra de título e botões de minimizar, maximizar e fechar, com nome e eventos próprios) e `arg-xp-balloon` (balão de aviso com `role="status"`).
+
 ## 0.6.0
 
 ### Minor Changes
