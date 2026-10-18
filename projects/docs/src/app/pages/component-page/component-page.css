@@ -1,6 +1,158 @@
 :host {
   display: block;
-  max-width: 60rem;
+}
+
+/* Com o índice, duas colunas nas telas largas: o texto e "Nesta página" à direita */
+.doc-page {
+  display: grid;
+  grid-template-columns: minmax(0, 60rem);
+  gap: var(--arg-space-8);
+}
+
+@media (min-width: 80rem) {
+  .doc-page--with-toc {
+    grid-template-columns: minmax(0, 60rem) 14rem;
+  }
+}
+
+.doc-page__article {
+  display: grid;
+  gap: var(--arg-space-4);
+  align-content: start;
+  min-width: 0;
+}
+
+.doc-page__header > :last-child {
+  margin-block-end: 0;
+}
+
+.doc-page__updated {
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-page__switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-2);
+}
+
+/* "Disponível em": um item por design system de produto */
+.doc-page__availability {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-2);
+  align-items: baseline;
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-page__availability > span {
+  color: var(--arg-color-text-muted);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.doc-page__availability ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.doc-page__availability li + li {
+  margin: 0;
+}
+
+.doc-page__status {
+  padding: 0 var(--arg-space-2);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-control);
+}
+
+.doc-page__status--fora {
+  color: var(--arg-color-text-muted);
+  text-decoration: line-through;
+}
+
+/* Abas da página: links, porque cada aba tem o seu endereço */
+.doc-page__tabs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-1);
+  padding: 0;
+  border-block-end: 1px solid var(--arg-color-border);
+  list-style: none;
+}
+
+.doc-page__tabs li + li {
+  margin: 0;
+}
+
+.doc-page__tabs a {
+  display: inline-block;
+  margin-block-end: -1px;
+  padding: var(--arg-space-2) var(--arg-space-3);
+  border-block-end: 3px solid transparent;
+  color: var(--arg-color-text-muted);
+  text-decoration: none;
+}
+
+.doc-page__tabs a:hover {
+  color: var(--arg-color-text);
+}
+
+.doc-page__tabs a[aria-current='page'] {
+  border-block-end-color: var(--arg-color-primary);
+  color: var(--arg-color-text);
+  font-weight: var(--arg-font-weight-strong);
+}
+
+.doc-page__toc {
+  display: none;
+}
+
+@media (min-width: 80rem) {
+  .doc-page__toc {
+    position: sticky;
+    inset-block-start: 5rem;
+    display: block;
+    align-self: start;
+    font-size: var(--arg-font-size-body-sm);
+  }
+}
+
+.doc-page__toc h2 {
+  margin: 0 0 var(--arg-space-2);
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.doc-page__toc ul {
+  padding: 0;
+  list-style: none;
+}
+
+.doc-page__toc-sub {
+  padding-inline-start: var(--arg-space-3);
+}
+
+.doc-page__toc a {
+  color: var(--arg-color-text-muted);
+  text-decoration: none;
+}
+
+.doc-page__toc a:hover {
+  color: var(--arg-color-primary);
+  text-decoration: underline;
+}
+
+kbd {
+  padding: 0 var(--arg-space-1);
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-control);
+  font-family: var(--arg-font-family-mono);
 }
 
 .doc-page__guidelines {
