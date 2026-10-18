@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { ArgTheme } from '@brunomonfardini/ui';
 import { provideDocRouter } from '../../app.routes';
 import { DOC_MANIFEST, Manifest } from '../../manifest';
 import { DOC_PAGES, DocPage } from '../../registry';
+import { formatUpdatedAt } from './component-page';
 
 @Component({
   selector: 'doc-fake-example',
@@ -22,6 +24,17 @@ const FAKE: DocPage = {
   accessibility: ['Funciona no teclado'],
 };
 
+const AGENDA: DocPage = {
+  slug: 'agenda',
+  title: 'Agenda',
+  category: 'Componentes',
+  summary: 'Grade de horários.',
+  examples: [],
+  whenToUse: ['Marcar horários'],
+  whenNotToUse: ['Escolher uma data só'],
+  keyboard: [{ key: 'Setas', action: 'Movem entre os horários' }],
+};
+
 const MINIMAL: DocPage = {
   slug: 'minimo',
   title: 'Mínimo',
@@ -33,10 +46,17 @@ const MINIMAL: DocPage = {
 const MANIFEST: Manifest = {
   tokens: [],
   pages: {
+    'Componentes/agenda': {
+      slug: 'agenda',
+      category: 'Componentes',
+      file: 'projects/ui/src/lib/agenda/agenda.docs.ts',
+      examples: {},
+    },
     'Componentes/fake': {
       slug: 'fake',
       category: 'Componentes',
       file: 'fake.docs.ts',
+      updatedAt: '2026-10-17T17:30:00Z',
       examples: { Básico: "@Component({ template: '<button>Exemplo vivo</button>' })" },
       component: {
         className: 'ArgFake',
@@ -65,7 +85,7 @@ describe('ComponentPage', () => {
     TestBed.configureTestingModule({
       providers: [
         provideDocRouter(),
-        { provide: DOC_PAGES, useValue: [FAKE, MINIMAL] },
+        { provide: DOC_PAGES, useValue: [FAKE, AGENDA, MINIMAL] },
         { provide: DOC_MANIFEST, useValue: MANIFEST },
       ],
     });
@@ -73,16 +93,124 @@ describe('ComponentPage', () => {
     return { harness, root: harness.routeNativeElement! };
   }
 
-  it('mostra título, resumo, exemplos renderizados, uso e acessibilidade', async () => {
+  afterEach(() => TestBed.inject(ArgTheme).setStyle('argila'));
+
+  it('Visão geral: título, resumo, data e exemplos renderizados', async () => {
     const { root } = await open('/componentes/fake');
 
     expect(root.querySelector('h1')?.textContent).toBe('Fake');
     expect(root.querySelector('.doc-lead code')?.textContent).toBe('código');
+    expect(root.querySelector('.doc-page__updated')?.textContent?.trim()).toBe(
+      'Atualizado em 17/10/2026 às 14:30',
+    );
+    expect(root.querySelector('time')?.getAttribute('datetime')).toBe('2026-10-17T17:30:00Z');
     expect(root.querySelector('doc-fake-example button')?.textContent).toBe('Exemplo vivo');
     expect(root.textContent).toContain('Descrição do exemplo.');
-    expect(root.textContent).toContain('Faça isto');
-    expect(root.textContent).toContain('Não faça aquilo');
-    expect(root.textContent).toContain('Funciona no teclado');
+    expect(root.textContent).not.toContain('Faça isto');
+  });
+
+  it('formata a data no horário de Brasília', () => {
+    expect(formatUpdatedAt('2026-01-02T03:04:00Z')).toBe('02/01/2026 às 00:04');
+  });
+
+  it('as abas são links, com a aba ativa na URL', async () => {
+    const { harness } = await open('/componentes/fake');
+    // Com a aba na URL a rota é outra: a página é criada de novo
+    const root = () => harness.routeNativeElement!;
+    const tabs = () => Array.from(root().querySelectorAll<HTMLAnchorElement>('.doc-page__tabs a'));
+
+    expect(root().querySelector('.doc-page__tabs')?.getAttribute('aria-label')).toBe(
+      'Seções da página',
+    );
+    expect(tabs().map((a) => [a.textContent?.trim(), a.getAttribute('href')])).toEqual([
+      ['Visão geral', '/componentes/fake'],
+      ['Regras de uso', '/componentes/fake/uso'],
+      ['Código', '/componentes/fake/codigo'],
+      ['Acessibilidade', '/componentes/fake/acessibilidade'],
+    ]);
+    expect(tabs()[0].getAttribute('aria-current')).toBe('page');
+
+    await harness.navigateByUrl('/componentes/fake/uso');
+    expect(tabs()[1].getAttribute('aria-current')).toBe('page');
+    expect(tabs()[0].getAttribute('aria-current')).toBeNull();
+    expect(root().textContent).toContain('Faça isto');
+    expect(root().textContent).toContain('Não faça aquilo');
+    expect(root().querySelector('doc-fake-example')).toBeNull();
+
+    await harness.navigateByUrl('/componentes/fake/acessibilidade');
+    expect(root().textContent).toContain('Funciona no teclado');
+  });
+
+  it('aba que a página não tem é página não encontrada', async () => {
+    const { root } = await open('/padroes/minimo/codigo');
+
+    expect(root.querySelector('h1')?.textContent).toBe('Página não encontrada');
+  });
+
+  it('índice "Nesta página" com as seções da aba, linkando o título', async () => {
+    const { root } = await open('/componentes/fake');
+    const links = Array.from(root.querySelectorAll<HTMLAnchorElement>('.doc-page__toc a'));
+
+    expect(root.querySelector('.doc-page__toc')?.getAttribute('aria-labelledby')).toBe(
+      'nesta-pagina',
+    );
+    expect(links.map((a) => a.textContent?.trim())).toEqual(['Playground', 'Exemplos', 'Básico']);
+    expect(links[2].getAttribute('href')).toBe('/componentes/fake#exemplo-0');
+  });
+
+  it('quando usar, teclado e regras do DS escolhido', async () => {
+    const { harness, root } = await open('/componentes/agenda/uso');
+    TestBed.inject(ArgTheme).setStyle('punk');
+    await harness.fixture.whenStable();
+
+    expect(root.querySelector('#quando-usar')).not.toBeNull();
+    expect(root.textContent).toContain('Marcar horários');
+    expect(root.textContent).toContain('Escolher uma data só');
+    expect(root.querySelector('#regras-do-ds')?.textContent).toBe('Regras do Punk');
+
+    await harness.navigateByUrl('/componentes/agenda/acessibilidade');
+    expect(root.querySelector('#teclado ~ .doc-table kbd')?.textContent).toBe('Setas');
+  });
+
+  it('"Disponível em" com a situação em cada DS, e aviso nos herdados', async () => {
+    const { root } = await open('/componentes/agenda');
+    const items = Array.from(root.querySelectorAll('.doc-page__availability li'), (li) =>
+      li.textContent?.trim(),
+    );
+
+    expect(items).toContain('Punk: curado');
+    expect(items).toContain('Windows XP: fora');
+    expect(items).toContain('Argila: herdado, sem curadoria');
+    expect(root.querySelector('[arg-alert]')?.textContent).toContain('Sem curadoria no Argila');
+  });
+
+  it('fora do DS: aviso com os DS que o têm, e trocar mostra a página', async () => {
+    const { harness, root } = await open('/componentes/agenda');
+    const theme = TestBed.inject(ArgTheme);
+    theme.setStyle('windows-xp');
+    await harness.fixture.whenStable();
+
+    expect(root.textContent).toContain('Este componente não faz parte do Windows XP.');
+    expect(root.querySelector('.doc-page__tabs')).toBeNull();
+    const punk = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('.doc-page__switch button'),
+    ).find((b) => b.textContent?.trim() === 'Punk')!;
+
+    punk.click();
+    await harness.fixture.whenStable();
+
+    expect(theme.style()).toBe('punk');
+    expect(root.textContent).not.toContain('não faz parte');
+    expect(root.querySelector('.doc-page__tabs')).not.toBeNull();
+  });
+
+  it('página sem componente não mostra "Disponível em" nem abas', async () => {
+    const { root } = await open('/padroes/minimo');
+
+    expect(root.querySelector('.doc-page__availability')).toBeNull();
+    expect(root.querySelector('.doc-page__tabs')).toBeNull();
+    expect(root.querySelector('.doc-page__toc')).toBeNull();
+    expect(root.querySelector('.doc-page__updated')).toBeNull();
   });
 
   it('nomeia a área de cada exemplo pelo título', async () => {
@@ -118,7 +246,7 @@ describe('ComponentPage', () => {
   });
 
   it('mostra a tabela de propriedades com tipo, padrão, obrigatoriedade e descrição', async () => {
-    const { root } = await open('/componentes/fake');
+    const { root } = await open('/componentes/fake/codigo');
 
     const rows = Array.from(root.querySelectorAll('#propriedades ~ .doc-table tbody tr'));
     const cells = rows.map((row) => Array.from(row.children, (cell) => cell.textContent?.trim()));
@@ -131,7 +259,7 @@ describe('ComponentPage', () => {
   });
 
   it('lista os tokens do componente', async () => {
-    const { root } = await open('/componentes/fake');
+    const { root } = await open('/componentes/fake/codigo');
 
     const table = root.querySelector('#tokens-do-componente ~ .doc-table')!;
 

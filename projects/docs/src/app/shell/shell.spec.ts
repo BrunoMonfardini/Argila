@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { argIconsAll, provideArgIcons } from '@brunomonfardini/ui';
+import { ArgTheme, argIconsAll, provideArgIcons } from '@brunomonfardini/ui';
 import { provideDocRouter } from '../app.routes';
 import { DocShell } from './shell';
 
@@ -35,7 +35,10 @@ describe('DocShell', () => {
     };
   }
 
-  afterEach(() => document.body.replaceChildren());
+  afterEach(() => {
+    document.body.replaceChildren();
+    TestBed.inject(ArgTheme).setStyle('argila');
+  });
 
   it('tem link para pular ao conteúdo, navegação nomeada e conteúdo principal', async () => {
     const { root, nav } = await setup();
@@ -182,6 +185,30 @@ describe('DocShell', () => {
     expect(
       root.querySelectorAll('main .doc-example__preview button[arg-button]').length,
     ).toBeGreaterThan(4);
+  });
+
+  it('a navegação acompanha o DS: fora e exclusivos de outros somem', async () => {
+    const { fixture, open, links } = await setup();
+    await open('Componentes');
+    expect(links()).toContain('Agenda');
+    expect(links()).not.toContain('Janela (Windows XP)');
+
+    TestBed.inject(ArgTheme).setStyle('windows-xp');
+    await fixture.whenStable();
+
+    expect(links()).not.toContain('Agenda');
+    expect(links()).toContain('Janela (Windows XP)');
+    expect(links()).toContain('Button');
+  });
+
+  it('o link da página fica ativo também nas abas dela', async () => {
+    const { fixture, nav, open } = await setup();
+
+    await TestBed.inject(Router).navigateByUrl('/componentes/button/codigo');
+    await fixture.whenStable();
+    await open('Componentes');
+
+    expect(nav.querySelector('a[aria-current="page"]')?.textContent?.trim()).toBe('Button');
   });
 
   it('o endereço antigo de Fundamentos leva à Fundação', async () => {

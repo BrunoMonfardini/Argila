@@ -8,7 +8,15 @@ import { ALL_DOC_PAGES, pagePath } from './registry';
 
 /** O catálogo é o primeiro cliente do design system: as páginas inteiras passam nas verificações. */
 describe('acessibilidade do catálogo', () => {
-  const urls = ['/', '/fundacao/tokens', '/fundacao/icones', ...ALL_DOC_PAGES.map(pagePath)];
+  // As abas de uma página completa; as outras páginas, na Visão geral
+  const tabs = ['uso', 'codigo', 'acessibilidade'].map((tab) => `/componentes/button/${tab}`);
+  const urls = [
+    '/',
+    '/fundacao/tokens',
+    '/fundacao/icones',
+    ...ALL_DOC_PAGES.map(pagePath),
+    ...tabs,
+  ];
 
   it.each(urls)('%s não tem violações', async (url) => {
     TestBed.configureTestingModule({
