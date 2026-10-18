@@ -1,0 +1,5 @@
+/* Tooltip: cantos pequenos. */
+
+:root[data-arg-style='coda'] arg-tooltip-panel {
+  --arg-tooltip-radius: var(--arg-radius-control);
+}

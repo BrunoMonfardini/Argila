@@ -1,0 +1,10 @@
+/* Abas: indicador amarelo de destaque; o rótulo pode quebrar a linha. */
+
+:root[data-arg-style='coda'] arg-tabs {
+  --arg-tabs-indicator: var(--arg-color-accent);
+}
+
+:root[data-arg-style='coda'] arg-tabs .arg-tabs__tab {
+  white-space: normal;
+  text-align: center;
+}

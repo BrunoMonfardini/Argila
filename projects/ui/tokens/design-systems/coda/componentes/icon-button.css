@@ -1,0 +1,5 @@
+/* Botão de ícone: quadrado de cantos pequenos. */
+
+:root[data-arg-style='coda'] .arg-icon-button {
+  --arg-button-radius: var(--arg-radius-control);
+}

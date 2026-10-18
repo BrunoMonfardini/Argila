@@ -1,0 +1,8 @@
+/* Tag: cantos pequenos e contorno de 2px; o texto pode quebrar a linha. */
+
+:root[data-arg-style='coda'] .arg-tag {
+  --arg-tag-radius: var(--arg-radius-control);
+  --arg-tag-border: var(--arg-color-border-strong);
+  border-width: 2px;
+  white-space: normal;
+}

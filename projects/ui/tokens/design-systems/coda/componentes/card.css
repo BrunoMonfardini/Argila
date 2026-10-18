@@ -1,0 +1,8 @@
+/* Cartões: contorno de 2px rosa, sem sombra difusa. */
+
+:root[data-arg-style='coda'] .arg-card {
+  --arg-card-border: var(--arg-color-border-strong);
+  --arg-card-shadow: none;
+  --arg-card-shadow-hover: none;
+  border-width: 2px;
+}

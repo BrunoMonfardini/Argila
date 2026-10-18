@@ -1,0 +1,9 @@
+/* Marcados em rosa. */
+
+:root[data-arg-style='coda'] :is(.arg-checkbox, .arg-radio) {
+  --arg-choice-accent: var(--arg-color-primary);
+}
+
+:root[data-arg-style='coda'] .arg-switch {
+  --arg-switch-on: var(--arg-color-primary);
+}

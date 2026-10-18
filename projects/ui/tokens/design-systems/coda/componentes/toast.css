@@ -1,0 +1,5 @@
+/* Toast: contorno de 2px. */
+
+:root[data-arg-style='coda'] arg-toast-stack .arg-toast {
+  border-width: 2px;
+}

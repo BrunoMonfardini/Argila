@@ -1,0 +1,11 @@
+/* Botões: contorno de 2px, a primária em rosa; o rótulo quebra a linha em vez de estourar (a Silkscreen é larga). */
+
+:root[data-arg-style='coda'] .arg-button {
+  white-space: normal;
+  text-align: center;
+}
+
+:root[data-arg-style='coda'] .arg-button.arg-button--secondary {
+  --arg-button-border: var(--arg-color-border-strong);
+  --arg-button-fg: var(--arg-color-text);
+}

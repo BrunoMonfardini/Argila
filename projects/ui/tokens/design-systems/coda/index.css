@@ -1,3 +1,22 @@
-/* CODA: forma e paleta nativa. */
+/* CODA: forma, paleta nativa e pele dos componentes. */
 @import './forma.css';
 @import './paletas/nativa.css';
+@import './componentes/alert.css';
+@import './componentes/badge.css';
+@import './componentes/button.css';
+@import './componentes/card.css';
+@import './componentes/choice.css';
+@import './componentes/dialog.css';
+@import './componentes/divider.css';
+@import './componentes/empty-state.css';
+@import './componentes/field.css';
+@import './componentes/icon-button.css';
+@import './componentes/input.css';
+@import './componentes/link.css';
+@import './componentes/progress-bar.css';
+@import './componentes/select.css';
+@import './componentes/spinner.css';
+@import './componentes/tabs.css';
+@import './componentes/tag.css';
+@import './componentes/toast.css';
+@import './componentes/tooltip.css';
