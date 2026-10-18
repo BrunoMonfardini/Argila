@@ -8,7 +8,7 @@ import { ALL_DOC_PAGES, pagePath } from './registry';
 
 /** O catálogo é o primeiro cliente do design system: as páginas inteiras passam nas verificações. */
 describe('acessibilidade do catálogo', () => {
-  const urls = ['/', '/fundamentos/tokens', '/fundamentos/icones', ...ALL_DOC_PAGES.map(pagePath)];
+  const urls = ['/', '/fundacao/tokens', '/fundacao/icones', ...ALL_DOC_PAGES.map(pagePath)];
 
   it.each(urls)('%s não tem violações', async (url) => {
     TestBed.configureTestingModule({
