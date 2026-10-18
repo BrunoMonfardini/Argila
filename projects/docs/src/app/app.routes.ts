@@ -10,6 +10,9 @@ import {
 import { PRODUCT_DESIGN_SYSTEMS } from './availability';
 import { ComponentPage } from './pages/component-page/component-page';
 import { DesignSystemPage } from './pages/design-system/design-system-page';
+import { FoundationPage } from './pages/foundation/foundation-page';
+import { FOUNDATION_TOPICS } from './pages/foundation/topics';
+import { ThemeBuilderPage } from './pages/theme-builder/theme-builder-page';
 import { HomePage } from './pages/home/home';
 import { IconsPage } from './pages/icons/icons-page';
 import { TokensPage } from './pages/tokens/tokens-page';
@@ -38,6 +41,13 @@ export const routes: Routes = [
   })),
   { path: 'fundacao/tokens', component: TokensPage, title: 'Tokens · Argila' },
   { path: 'fundacao/icones', component: IconsPage, title: 'Ícones · Argila' },
+  ...FOUNDATION_TOPICS.map((topic) => ({
+    path: `fundacao/${topic.slug}`,
+    component: FoundationPage,
+    title: `${topic.title} · Argila`,
+    data: { slug: topic.slug },
+  })),
+  { path: 'ferramentas/montar-tema', component: ThemeBuilderPage, title: 'Montar tema · Argila' },
   // Endereços antigos, de antes de "Fundamentos" virar "Fundação"
   { path: 'fundamentos/:slug', redirectTo: 'fundacao/:slug' },
   { path: ':categoria/:slug', component: ComponentPage, title: pageTitle },
