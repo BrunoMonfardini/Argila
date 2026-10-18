@@ -13,6 +13,19 @@ import { FEEDBACK_PATTERN_DOCS } from './feedback.docs';
 import { LAYOUT_PATTERN_DOCS } from './layout.docs';
 import { LOADING_PATTERN_DOCS } from './loading.docs';
 import { NAVIGATION_PATTERN_DOCS } from './navigation.docs';
+import { PASSWORDS_PATTERN_DOCS } from './passwords.docs';
+import { RECEIPTS_PATTERN_DOCS } from './receipts.docs';
+import { TIMELINE_PATTERN_DOCS } from './timeline.docs';
+import { CONTEXTS_PATTERN_DOCS } from './contexts.docs';
+import { HELP_FINDABILITY_PATTERN_DOCS } from './help-findability.docs';
+import { SHOWCASE_PATTERN_DOCS } from './showcase.docs';
+import { HOME_PATTERN_DOCS } from './home.docs';
+import { HUB_MENU_PATTERN_DOCS } from './hub-menu.docs';
+import { EXPERIENCE_PATTERN_DOCS } from './experience.docs';
+import { AI_PRINCIPLES_PATTERN_DOCS } from './ai-principles.docs';
+import { PasswordCreateExample, passwordScore } from './examples/passwords.example';
+import { ContextFiltersExample } from './examples/contexts.example';
+import { ExperienceRatingExample } from './examples/experience.example';
 
 const PATTERNS = [
   LOADING_PATTERN_DOCS,
@@ -22,6 +35,16 @@ const PATTERNS = [
   NAVIGATION_PATTERN_DOCS,
   LAYOUT_PATTERN_DOCS,
   COLOR_USAGE_PATTERN_DOCS,
+  PASSWORDS_PATTERN_DOCS,
+  RECEIPTS_PATTERN_DOCS,
+  TIMELINE_PATTERN_DOCS,
+  CONTEXTS_PATTERN_DOCS,
+  HELP_FINDABILITY_PATTERN_DOCS,
+  SHOWCASE_PATTERN_DOCS,
+  HOME_PATTERN_DOCS,
+  HUB_MENU_PATTERN_DOCS,
+  EXPERIENCE_PATTERN_DOCS,
+  AI_PRINCIPLES_PATTERN_DOCS,
 ];
 
 const EXAMPLES = PATTERNS.flatMap((page) =>
@@ -107,5 +130,48 @@ describe('padrões', () => {
     expect(toggle.getAttribute('aria-expanded')).toBe('true');
     expect(toggle.textContent?.trim()).toBe('Mostrar menos');
     expect(root.querySelector<HTMLElement>('#mais-detalhes')!.hidden).toBe(false);
+  });
+
+  it('senha: a força conta as regras cumpridas', () => {
+    expect(passwordScore('')).toBe(0);
+    expect(passwordScore('abcdefgh')).toBe(1);
+    expect(passwordScore('Abcdefg1!')).toBe(4);
+  });
+
+  it('senha: o olho mostra e esconde, com o estado no botão', async () => {
+    const { fixture, root } = await render(PasswordCreateExample);
+    const input = root.querySelector('input')!;
+    const eye = root.querySelector<HTMLButtonElement>('button')!;
+    expect(input.type).toBe('password');
+
+    eye.click();
+    await fixture.whenStable();
+    expect(input.type).toBe('text');
+    expect(eye.getAttribute('aria-pressed')).toBe('true');
+
+    input.value = 'Abcdefg1!';
+    input.dispatchEvent(new Event('input'));
+    await fixture.whenStable();
+    expect(root.querySelector('progress')?.getAttribute('value')).toBe('4');
+  });
+
+  it('contexto: remover as tags volta para "sem filtros"', async () => {
+    const { fixture, root } = await render(ContextFiltersExample);
+
+    for (let i = 0; i < 3; i++) {
+      root.querySelector<HTMLButtonElement>('arg-tag button')!.click();
+      await fixture.whenStable();
+    }
+
+    expect(root.textContent).toContain('Sem filtros');
+  });
+
+  it('experiência: enviar agradece', async () => {
+    const { fixture, root } = await render(ExperienceRatingExample);
+
+    button(root, 'Enviar').click();
+    await fixture.whenStable();
+
+    expect(root.querySelector('[role="status"]')?.textContent).toContain('Obrigado');
   });
 });

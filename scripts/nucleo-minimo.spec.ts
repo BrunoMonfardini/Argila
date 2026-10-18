@@ -14,9 +14,9 @@ const PATTERNS = files('patterns');
 const FILES = [...TEMPLATES, ...PATTERNS];
 
 describe('templates e padrões', () => {
-  it('existem os cinco templates da 4.6 e os oito padrões da leva 1', () => {
+  it('existem os cinco templates da 4.6 e os 18 padrões das levas 1 e 2', () => {
     expect(TEMPLATES.filter((file) => file.endsWith('.docs.ts')).length).toBe(5);
-    expect(PATTERNS.filter((file) => file.endsWith('.docs.ts')).length).toBe(8);
+    expect(PATTERNS.filter((file) => file.endsWith('.docs.ts')).length).toBe(18);
   });
 
   it('acha os componentes importados', () => {
