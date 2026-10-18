@@ -1,15 +1,21 @@
 import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
-import { ARG_DESIGN_SYSTEMS, ArgStyle, ArgTheme } from '@brunomonfardini/ui';
+import { provideRouter } from '@angular/router';
+import { ARG_DESIGN_SYSTEMS, ArgStyle, ArgTheme, provideArgila } from '@brunomonfardini/ui';
+import { DOC_SEGMENTS } from '../segments';
 import { DocThemeBar } from './theme-bar';
 
 describe('DocThemeBar', () => {
   const root = document.documentElement;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideRouter([]), provideArgila({ segments: DOC_SEGMENTS })],
+    });
     localStorage.clear();
     root.removeAttribute('data-arg-style');
     root.removeAttribute('data-arg-palette');
+    for (const role of ['primary', 'secondary', 'accent']) root.removeAttribute(`data-arg-${role}`);
     root.style.removeProperty('--arg-surface-opacity');
     root.setAttribute('data-arg-theme', 'light');
   });
@@ -162,9 +168,54 @@ describe('DocThemeBar', () => {
     localStorage.setItem('argila-docs:estilo', 'arcade');
     root.setAttribute('data-arg-theme', 'light');
     TestBed.resetTestingModule();
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
     await setup();
 
     expect(root.getAttribute('data-arg-theme')).toBe('light');
     expect(root.getAttribute('data-arg-style')).toBe('argila');
+  });
+
+  it('oferece só as cores que passam no contraste e lembra a escolha', async () => {
+    const { fixture, select } = await setup();
+    const theme = TestBed.inject(ArgTheme);
+    const values = (control: HTMLSelectElement) => Array.from(control.options, (o) => o.value);
+
+    expect(values(select('Primária'))).toEqual(['', ...theme.allowedColors().primary]);
+
+    choose(select('Primária'), 'cobre');
+    await fixture.whenStable();
+    expect(root.getAttribute('data-arg-primary')).toBe('cobre');
+    expect(select('Primária').value).toBe('cobre');
+    expect(localStorage.getItem('argila-docs:cores')).toBe('primaria:cobre');
+
+    choose(select('Primária'), '');
+    await fixture.whenStable();
+    expect(root.hasAttribute('data-arg-primary')).toBe(false);
+    expect(localStorage.getItem('argila-docs:cores')).toBe('');
+  });
+
+  it('aplica um segmento de exemplo e esquece o nome ao mudar algo à mão', async () => {
+    const { fixture, select } = await setup();
+
+    expect(Array.from(select('Segmento').options, (o) => o.textContent?.trim())).toEqual([
+      'Nenhum',
+      'Essencial',
+      'Premium',
+      'Vibrante',
+    ]);
+
+    choose(select('Segmento'), 'premium');
+    await fixture.whenStable();
+    expect(root.getAttribute('data-arg-style')).toBe('argila');
+    expect(root.getAttribute('data-arg-palette')).toBe('terrosa');
+    expect(root.getAttribute('data-arg-theme')).toBe('dark');
+    expect(root.getAttribute('data-arg-primary')).toBe('cobre');
+    expect(select('Segmento').value).toBe('premium');
+    expect(localStorage.getItem('argila-docs:segmento')).toBe('premium');
+
+    choose(select('Paleta'), 'oceano');
+    await fixture.whenStable();
+    expect(select('Segmento').value).toBe('');
+    expect(localStorage.getItem('argila-docs:segmento')).toBe('');
   });
 });
