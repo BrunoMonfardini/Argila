@@ -29,7 +29,7 @@ _Atualizado em 17/10/2026._
 | E6      | **Pronto** (#92, #93): Punk e os exclusivos                                                                                                                                                            |
 | E7      | **Pronto** (#94, #95): Windows XP e os exclusivos                                                                                                                                                      |
 | E8      | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
-| E9      | **Em andamento**: E9a pronto (#97: barra de ícones com painel, famílias, Fundação, Design systems e Templates); E9b (catálogo filtrado pelo DS, abas na URL, índice e "Atualizado em") em review       |
+| E9      | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
 | E10–E12 | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
@@ -47,7 +47,7 @@ Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 | [ ] | E6    | `feat/ds-punk`             | DS Punk fiel à referência                                             | E3          | 4 d  |
 | [ ] | E7    | `feat/ds-windows-xp`       | DS Windows XP fiel à referência                                       | E3          | 3 d  |
 | [ ] | E8    | `feat/ds-coda`             | CODA como sexto DS, com núcleo mínimo curado                          | E3          | 2 d  |
-| [ ] | E9    | `feat/catalogo-estrutura`  | Navegação nova, catálogo filtrado pelo DS, páginas em abas            | E2          | 7 d  |
+| [x] | E9    | `feat/catalogo-estrutura`  | Navegação nova, catálogo filtrado pelo DS, páginas em abas            | E2          | 7 d  |
 | [ ] | E10   | `feat/catalogo-conteudo`   | Páginas dos DS, Como começar, Fundação, Montar tema, anatomia         | E4 a E8, E9 | 7 d  |
 | [ ] | E11   | `feat/templates-e-padroes` | 5 templates, padrões da leva 1, variantes                             | E9          | 9 d  |
 | [ ] | E12   | `feat/padroes-leva-2`      | Padrões da leva 2                                                     | E11         | 6 d  |
@@ -246,7 +246,7 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 | [x] | C-03 | `feat(docs): DocPage novo e famílias de componentes`                                                                            | E2         | Campos opcionais da 4.4; componentes agrupados nas 9 famílias                                   | 1    |
 | [x] | C-04 | `feat(docs): catálogo filtrado pelo DS` (fora some, herdado avisa, "Disponível em")                                             | C-03       | Trocar para Windows XP esconde a Agenda; abrir a URL dela mostra o aviso com os DS que a têm    | 1    |
 | [x] | C-05 | `feat(docs): páginas em abas, "Atualizado em" e índice`                                                                         | C-03       | Aba ativa na URL; data vem do último commit do `*.docs.ts`                                      | 1,5  |
-| [ ] | C-06 | `feat(docs): barra de tema por DS` (só opções aceitas; URL e navegador; link inválido cai no padrão)                            | C-04       | Escolher Punk mostra só Néon, Viva e Alto contraste; o link compartilhado reproduz a combinação | 1    |
+| [x] | C-06 | `feat(docs): barra de tema por DS` (só opções aceitas; URL e navegador; link inválido cai no padrão)                            | C-04       | Escolher Punk mostra só Néon, Viva e Alto contraste; o link compartilhado reproduz a combinação | 1    |
 | [x] | C-07 | `feat(docs): categorias Design systems e Templates`                                                                             | C-03       | As duas aparecem na navegação, ainda com páginas "Sobre"                                        | 0,5  |
 
 ## E10: conteúdo do catálogo
