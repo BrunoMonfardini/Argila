@@ -7,6 +7,7 @@
  * Em desenvolvimento, para regerar quando um componente muda:
  *   node --watch-path=projects/ui/src --watch-path=projects/ui/tokens scripts/gerar-manifesto.ts
  */
+import { execFileSync } from 'node:child_process';
 import { existsSync, globSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { buildManifest, checkCatalog } from './lib/manifesto.ts';
@@ -14,6 +15,24 @@ import { buildManifest, checkCatalog } from './lib/manifesto.ts';
 const root = process.cwd();
 const outFile = resolve(root, 'projects/docs/src/generated/manifest.json');
 const docsFiles = globSync('projects/ui/src/**/*.docs.ts').map((file) => resolve(root, file));
+
+/**
+ * Data do último commit do arquivo, para o "Atualizado em" das páginas. Num
+ * clone raso (o CI usa `fetch-depth: 0` para publicar) ou fora do git, a data
+ * pode faltar ou ser a do único commit baixado.
+ */
+function lastCommit(file: string): string | undefined {
+  try {
+    const date = execFileSync('git', ['log', '-1', '--format=%cI', '--', file], {
+      cwd: root,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+    return date || undefined;
+  } catch {
+    return undefined;
+  }
+}
 
 if (process.argv.includes('--check')) {
   const problems = checkCatalog({
@@ -35,6 +54,7 @@ if (process.argv.includes('--check')) {
   const manifest = buildManifest({
     root,
     docsFiles,
+    lastCommit,
     semanticCss: readFileSync(resolve(root, 'projects/ui/tokens/semantic.css'), 'utf8'),
   });
 

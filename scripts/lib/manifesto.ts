@@ -24,6 +24,8 @@ export interface ManifestOptions {
   docsFiles: string[];
   /** Conteúdo de tokens/semantic.css. */
   semanticCss: string;
+  /** Data do último commit de um arquivo (relativo à raiz), ou `undefined` fora do git. */
+  lastCommit?: (file: string) => string | undefined;
 }
 
 export class ManifestError extends Error {
@@ -53,7 +55,8 @@ export function buildManifest(options: ManifestOptions): Manifest {
       throw new ManifestError(file, 'arquivo não encontrado');
     }
     for (const page of reader.readDocsFile(source)) {
-      pages[manifestKey(page.category, page.slug)] = page;
+      const updatedAt = options.lastCommit?.(page.file);
+      pages[manifestKey(page.category, page.slug)] = updatedAt ? { ...page, updatedAt } : page;
     }
   }
   return { pages, tokens: parseSemanticTokens(options.semanticCss) };

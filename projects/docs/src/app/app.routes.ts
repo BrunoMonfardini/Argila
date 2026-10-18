@@ -30,6 +30,7 @@ export const routes: Routes = [
   // Endereços antigos, de antes de "Fundamentos" virar "Fundação"
   { path: 'fundamentos/:slug', redirectTo: 'fundacao/:slug' },
   { path: ':categoria/:slug', component: ComponentPage, title: pageTitle },
+  { path: ':categoria/:slug/:aba', component: ComponentPage, title: pageTitle },
   { path: '**', redirectTo: '' },
 ];
 

@@ -40,6 +40,8 @@ export interface ManifestPage {
   category: string;
   /** Arquivo `*.docs.ts`, relativo à raiz do repositório. */
   file: string;
+  /** Data do último commit do `*.docs.ts` (ISO 8601), para o "Atualizado em". */
+  updatedAt?: string;
   component?: ManifestComponent;
   /** Código-fonte de cada exemplo, pelo nome do exemplo. */
   examples: Record<string, string>;
