@@ -45,6 +45,16 @@ import { FEEDBACK_PATTERN_DOCS } from '../../../ui/src/patterns/feedback.docs';
 import { LAYOUT_PATTERN_DOCS } from '../../../ui/src/patterns/layout.docs';
 import { LOADING_PATTERN_DOCS } from '../../../ui/src/patterns/loading.docs';
 import { NAVIGATION_PATTERN_DOCS } from '../../../ui/src/patterns/navigation.docs';
+import { PASSWORDS_PATTERN_DOCS } from '../../../ui/src/patterns/passwords.docs';
+import { RECEIPTS_PATTERN_DOCS } from '../../../ui/src/patterns/receipts.docs';
+import { TIMELINE_PATTERN_DOCS } from '../../../ui/src/patterns/timeline.docs';
+import { CONTEXTS_PATTERN_DOCS } from '../../../ui/src/patterns/contexts.docs';
+import { HELP_FINDABILITY_PATTERN_DOCS } from '../../../ui/src/patterns/help-findability.docs';
+import { SHOWCASE_PATTERN_DOCS } from '../../../ui/src/patterns/showcase.docs';
+import { HOME_PATTERN_DOCS } from '../../../ui/src/patterns/home.docs';
+import { HUB_MENU_PATTERN_DOCS } from '../../../ui/src/patterns/hub-menu.docs';
+import { EXPERIENCE_PATTERN_DOCS } from '../../../ui/src/patterns/experience.docs';
+import { AI_PRINCIPLES_PATTERN_DOCS } from '../../../ui/src/patterns/ai-principles.docs';
 import { EMPTY_STATE_TEMPLATE_DOCS } from '../../../ui/src/templates/empty-state.docs';
 import { ENDING_SCREEN_TEMPLATE_DOCS } from '../../../ui/src/templates/ending-screen.docs';
 import { ERROR_MESSAGE_TEMPLATE_DOCS } from '../../../ui/src/templates/error-message.docs';
@@ -139,6 +149,16 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   NAVIGATION_PATTERN_DOCS,
   LAYOUT_PATTERN_DOCS,
   COLOR_USAGE_PATTERN_DOCS,
+  PASSWORDS_PATTERN_DOCS,
+  RECEIPTS_PATTERN_DOCS,
+  TIMELINE_PATTERN_DOCS,
+  CONTEXTS_PATTERN_DOCS,
+  HELP_FINDABILITY_PATTERN_DOCS,
+  SHOWCASE_PATTERN_DOCS,
+  HOME_PATTERN_DOCS,
+  HUB_MENU_PATTERN_DOCS,
+  EXPERIENCE_PATTERN_DOCS,
+  AI_PRINCIPLES_PATTERN_DOCS,
 ];
 
 export const DOC_PAGES = new InjectionToken<readonly DocPage[]>('DOC_PAGES', {
