@@ -31,7 +31,7 @@ _Atualizado em 17/10/2026._
 | E8    | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
 | E9    | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
 | E10   | **Pronto** (#100, #101 e o E10c: anatomia dos 10 componentes)                                                                                                                                          |
-| E11   | **Em andamento**: E11a pronto (#103: variantes da 4.7); E11b (os 5 templates) em review                                                                                                                |
+| E11   | **Pronto** (#103, #104 e o E11c: padrões da leva 1, com o "Carregamento de lista" virando Carregamentos)                                                                                               |
 | E12   | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
@@ -51,7 +51,7 @@ Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 | [ ] | E8    | `feat/ds-coda`             | CODA como sexto DS, com núcleo mínimo curado                          | E3          | 2 d  |
 | [x] | E9    | `feat/catalogo-estrutura`  | Navegação nova, catálogo filtrado pelo DS, páginas em abas            | E2          | 7 d  |
 | [x] | E10   | `feat/catalogo-conteudo`   | Páginas dos DS, Como começar, Fundação, Montar tema, anatomia         | E4 a E8, E9 | 7 d  |
-| [ ] | E11   | `feat/templates-e-padroes` | 5 templates, padrões da leva 1, variantes                             | E9          | 9 d  |
+| [x] | E11   | `feat/templates-e-padroes` | 5 templates, padrões da leva 1, variantes                             | E9          | 9 d  |
 | [ ] | E12   | `feat/padroes-leva-2`      | Padrões da leva 2                                                     | E11         | 6 d  |
 
 **Total:** cerca de 61 dias de trabalho de uma pessoa (perto de 3 meses). Depois do E2, há duas frentes: **DS** (E3, depois E4 a E8 em qualquer ordem ou em paralelo) e **catálogo** (E9, depois E11 e E12). Com duas pessoas, perto de 7 semanas.
@@ -268,7 +268,7 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 | --- | ---- | ------------------------------------------------------------------------------------ | ---------- | ---------------------------------------------------------------------------------------- | ---- |
 | [x] | T-01 | `docs: os 5 templates` (Empty State, Ending Screen, Error Message, Loaders, Receipt) | E9         | Cada template funciona nos 6 DS só com o núcleo mínimo                                   | 3,5  |
 | [x] | T-02 | `feat: variantes da 4.7` (paginação em pontos, stepper vertical, drawer de baixo)    | E9         | Variantes testadas e com exemplos                                                        | 2    |
-| [ ] | T-03 | `docs: padrões da leva 1` (8 páginas no formato fixo)                                | T-02       | Toda página segue Problema → Solução → Exemplo → Variações → Faça/não faça → Componentes | 3,5  |
+| [x] | T-03 | `docs: padrões da leva 1` (8 páginas no formato fixo)                                | T-02       | Toda página segue Problema → Solução → Exemplo → Variações → Faça/não faça → Componentes | 3,5  |
 
 ## E12: padrões, leva 2
 
