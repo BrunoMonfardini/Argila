@@ -44,7 +44,7 @@ module.exports = {
           '^projects/ui/src/public-api\\.ts$',
           '\\.docs\\.ts$',
           '/examples/',
-          '^projects/ui/src/(docs|patterns|testing)/',
+          '^projects/ui/src/(docs|patterns|templates|testing)/',
         ],
       },
     },
