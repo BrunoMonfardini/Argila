@@ -35,6 +35,8 @@ export function pageTabs(
   hasComponent: boolean,
   status: DocAvailability | undefined,
 ): DocTab[] {
+  // Padrões têm formato fixo numa página só: Problema → … → Componentes usados
+  if (page.pattern) return TABS.filter((tab) => tab.id === 'visao-geral');
   const has: Record<DocTabId, boolean> = {
     'visao-geral': true,
     uso: Boolean(page.guidelines || page.whenToUse?.length || page.whenNotToUse?.length || status),
@@ -60,7 +62,20 @@ export function tableOfContents(
   options: DocTocOptions,
 ): DocTocEntry[] {
   const entries: (DocTocEntry | false | undefined)[] = [];
-  if (tab === 'visao-geral') {
+  if (tab === 'visao-geral' && page.pattern) {
+    entries.push(
+      { id: 'problema', label: 'Problema', level: 2 },
+      { id: 'solucao', label: 'Solução', level: 2 },
+      page.examples.length > 0 && { id: 'exemplo', label: 'Exemplo', level: 2 },
+      page.examples.length > 1 && { id: 'variacoes', label: 'Variações', level: 2 },
+      page.guidelines && { id: 'uso', label: 'Faça e não faça', level: 2 },
+      Boolean(page.related?.length) && {
+        id: 'componentes-usados',
+        label: 'Componentes usados',
+        level: 2,
+      },
+    );
+  } else if (tab === 'visao-geral') {
     entries.push(
       ...(page.content ?? []).map((section, i): DocTocEntry => ({
         id: `secao-${i}`,

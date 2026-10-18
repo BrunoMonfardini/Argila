@@ -4,13 +4,14 @@ import { ARG_DESIGN_SYSTEMS, ArgAlert, ArgButton, ArgTheme } from '@brunomonfard
 import { DocAvailability, availabilityAcross, availabilityIn } from '../../availability';
 import { DocCode } from '../../code/code';
 import { DOC_MANIFEST, manifestPage } from '../../manifest';
-import { DOC_PAGES, DocPage, findPage } from '../../registry';
+import { DOC_PAGES, DocPage, findPage, pagePath } from '../../registry';
 import { DocPlayground } from '../../playground/playground';
 import { DocThemeChoices } from '../../shell/theme-choices';
 import { DocText } from '../../shared/text';
 import { DocAnatomy } from './anatomy';
 import { DocExampleFrame } from './example-frame';
 import { DocPropsTable } from './props-table';
+import { DocRules } from './rules';
 import { DocTab, DocTocEntry, pageTabs, tableOfContents } from './tabs';
 
 const STATUS_LABELS: Record<DocAvailability, string> = {
@@ -49,6 +50,7 @@ export function formatUpdatedAt(iso: string): string {
     DocExampleFrame,
     DocPlayground,
     DocPropsTable,
+    DocRules,
     DocText,
     RouterLink,
   ],
@@ -94,6 +96,14 @@ export class ComponentPage {
   /** Onde a página "fora" existe, para o aviso oferecer a troca. */
   protected readonly elsewhere = computed(() =>
     this.availability().filter((ds) => ds.status !== 'fora'),
+  );
+
+  /** "Componentes usados" de um padrão: as páginas de componente pelos slugs de `related`. */
+  protected readonly related = computed(() =>
+    (this.page()?.related ?? []).flatMap((slug) => {
+      const page = this.pages.find((p) => p.category === 'Componentes' && p.slug === slug);
+      return page ? [{ title: page.title, path: pagePath(page) }] : [];
+    }),
   );
 
   protected readonly tabs = computed(() => {

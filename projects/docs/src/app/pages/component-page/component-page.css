@@ -155,24 +155,6 @@ kbd {
   font-family: var(--arg-font-family-mono);
 }
 
-.doc-page__guidelines {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: var(--arg-space-4);
-}
-
-.doc-page__do,
-.doc-page__dont {
-  padding: var(--arg-space-4) var(--arg-space-5);
-  border-block-start: 4px solid var(--arg-color-success);
-  border-radius: var(--arg-radius-container);
-  background: var(--arg-color-surface);
-}
-
-.doc-page__dont {
-  border-block-start-color: var(--arg-color-danger);
-}
-
 ul {
   margin: 0;
   padding-inline-start: var(--arg-space-5);

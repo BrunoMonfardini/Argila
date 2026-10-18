@@ -73,43 +73,84 @@
 
         @switch (tab.id) {
           @case ('visao-geral') {
-            @for (section of page.content ?? []; track section.heading) {
-              <section [attr.aria-labelledby]="'secao-' + $index">
-                <h2 [id]="'secao-' + $index">{{ section.heading }}</h2>
-                @for (paragraph of section.body; track paragraph) {
-                  <p><doc-text [text]="paragraph" /></p>
-                }
-                @if (section.code; as code) {
-                  <doc-code [code]="code.code" [language]="code.language" [label]="code.label" />
-                }
+            @if (page.pattern; as pattern) {
+              <section aria-labelledby="problema">
+                <h2 id="problema">Problema</h2>
+                <p><doc-text [text]="pattern.problem" /></p>
               </section>
-            }
-
-            @if (
-              page.component && page.playground !== false && generated()?.component;
-              as component
-            ) {
-              <doc-playground [page]="page" [component]="component" />
-            }
-
-            @if (page.anatomy; as anatomy) {
-              <section aria-labelledby="anatomia">
-                <h2 id="anatomia">Anatomia</h2>
-                <doc-anatomy [anatomy]="anatomy" />
+              <section aria-labelledby="solucao">
+                <h2 id="solucao">Solução</h2>
+                <p><doc-text [text]="pattern.solution" /></p>
               </section>
-            }
-
-            @if (page.examples.length) {
-              <section aria-labelledby="exemplos">
-                <h2 id="exemplos">Exemplos</h2>
-                @for (example of page.examples; track example.name) {
-                  <doc-example-frame
-                    [example]="example"
-                    [headingId]="'exemplo-' + $index"
-                    [code]="generated()?.examples?.[example.name]"
-                  />
+              @for (example of page.examples; track example.name; let first = $first) {
+                @if (first) {
+                  <h2 id="exemplo">Exemplo</h2>
+                } @else if ($index === 1) {
+                  <h2 id="variacoes">Variações</h2>
                 }
-              </section>
+                <doc-example-frame
+                  [example]="example"
+                  [headingId]="'exemplo-' + $index"
+                  [code]="generated()?.examples?.[example.name]"
+                />
+              }
+              @if (page.guidelines; as guidelines) {
+                <section aria-labelledby="uso">
+                  <h2 id="uso">Faça e não faça</h2>
+                  <doc-rules [doRules]="guidelines.do" [dontRules]="guidelines.dont" />
+                </section>
+              }
+              @if (related().length) {
+                <section aria-labelledby="componentes-usados">
+                  <h2 id="componentes-usados">Componentes usados</h2>
+                  <ul class="doc-page__related">
+                    @for (item of related(); track item.path) {
+                      <li>
+                        <a [routerLink]="item.path">{{ item.title }}</a>
+                      </li>
+                    }
+                  </ul>
+                </section>
+              }
+            } @else {
+              @for (section of page.content ?? []; track section.heading) {
+                <section [attr.aria-labelledby]="'secao-' + $index">
+                  <h2 [id]="'secao-' + $index">{{ section.heading }}</h2>
+                  @for (paragraph of section.body; track paragraph) {
+                    <p><doc-text [text]="paragraph" /></p>
+                  }
+                  @if (section.code; as code) {
+                    <doc-code [code]="code.code" [language]="code.language" [label]="code.label" />
+                  }
+                </section>
+              }
+
+              @if (
+                page.component && page.playground !== false && generated()?.component;
+                as component
+              ) {
+                <doc-playground [page]="page" [component]="component" />
+              }
+
+              @if (page.anatomy; as anatomy) {
+                <section aria-labelledby="anatomia">
+                  <h2 id="anatomia">Anatomia</h2>
+                  <doc-anatomy [anatomy]="anatomy" />
+                </section>
+              }
+
+              @if (page.examples.length) {
+                <section aria-labelledby="exemplos">
+                  <h2 id="exemplos">Exemplos</h2>
+                  @for (example of page.examples; track example.name) {
+                    <doc-example-frame
+                      [example]="example"
+                      [headingId]="'exemplo-' + $index"
+                      [code]="generated()?.examples?.[example.name]"
+                    />
+                  }
+                </section>
+              }
             }
           }
 
@@ -117,52 +158,19 @@
             @if (page.whenToUse?.length || page.whenNotToUse?.length) {
               <section aria-labelledby="quando-usar">
                 <h2 id="quando-usar">Quando usar</h2>
-                <div class="doc-page__guidelines">
-                  @if (page.whenToUse?.length) {
-                    <div class="doc-page__do">
-                      <h3>Use para</h3>
-                      <ul>
-                        @for (rule of page.whenToUse; track rule) {
-                          <li><doc-text [text]="rule" /></li>
-                        }
-                      </ul>
-                    </div>
-                  }
-                  @if (page.whenNotToUse?.length) {
-                    <div class="doc-page__dont">
-                      <h3>Não use para</h3>
-                      <ul>
-                        @for (rule of page.whenNotToUse; track rule) {
-                          <li><doc-text [text]="rule" /></li>
-                        }
-                      </ul>
-                    </div>
-                  }
-                </div>
+                <doc-rules
+                  [doRules]="page.whenToUse ?? []"
+                  [dontRules]="page.whenNotToUse ?? []"
+                  doTitle="Use para"
+                  dontTitle="Não use para"
+                />
               </section>
             }
 
             @if (page.guidelines; as guidelines) {
               <section aria-labelledby="uso">
                 <h2 id="uso">Faça e não faça</h2>
-                <div class="doc-page__guidelines">
-                  <div class="doc-page__do">
-                    <h3>Faça</h3>
-                    <ul>
-                      @for (rule of guidelines.do; track rule) {
-                        <li><doc-text [text]="rule" /></li>
-                      }
-                    </ul>
-                  </div>
-                  <div class="doc-page__dont">
-                    <h3>Não faça</h3>
-                    <ul>
-                      @for (rule of guidelines.dont; track rule) {
-                        <li><doc-text [text]="rule" /></li>
-                      }
-                    </ul>
-                  </div>
-                </div>
+                <doc-rules [doRules]="guidelines.do" [dontRules]="guidelines.dont" />
               </section>
             }
 
