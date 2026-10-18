@@ -38,6 +38,11 @@ import { TIME_SLOTS_DOCS } from '../../../ui/src/lib/time-slots/time-slots.docs'
 import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
 import { TOOLTIP_DOCS } from '../../../ui/src/lib/tooltip/tooltip.docs';
 import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
+import { EMPTY_STATE_TEMPLATE_DOCS } from '../../../ui/src/templates/empty-state.docs';
+import { ENDING_SCREEN_TEMPLATE_DOCS } from '../../../ui/src/templates/ending-screen.docs';
+import { ERROR_MESSAGE_TEMPLATE_DOCS } from '../../../ui/src/templates/error-message.docs';
+import { LOADERS_TEMPLATE_DOCS } from '../../../ui/src/templates/loaders.docs';
+import { RECEIPT_TEMPLATE_DOCS } from '../../../ui/src/templates/receipt.docs';
 import { ABOUT_DESIGN_SYSTEMS_DOCS } from '../../../ui/src/docs/pages/about-design-systems.docs';
 import { ABOUT_TEMPLATES_DOCS } from '../../../ui/src/docs/pages/about-templates.docs';
 import { ACCESSIBILITY_DOCS } from '../../../ui/src/docs/pages/accessibility.docs';
@@ -69,6 +74,11 @@ export const ALL_DOC_PAGES: readonly DocPage[] = [
   HELP_DOCS,
   ABOUT_DESIGN_SYSTEMS_DOCS,
   ABOUT_TEMPLATES_DOCS,
+  EMPTY_STATE_TEMPLATE_DOCS,
+  ENDING_SCREEN_TEMPLATE_DOCS,
+  ERROR_MESSAGE_TEMPLATE_DOCS,
+  LOADERS_TEMPLATE_DOCS,
+  RECEIPT_TEMPLATE_DOCS,
   XP_BALLOON_DOCS,
   XP_WINDOW_DOCS,
   PUNK_BURST_DOCS,
