@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { EmptyStateAnatomyExample } from './examples/empty-state-anatomy.example';
 import { ArgEmptyState } from './empty-state';
 import { EmptyStateBasicExample } from './examples/empty-state-basic.example';
 import { EmptyStateSearchExample } from './examples/empty-state-search.example';
@@ -14,6 +15,31 @@ export const EMPTY_STATE_DOCS: DocPage = {
   hostElement: 'section',
   playgroundContent: 'Os pedidos feitos no balcão e no site aparecem aqui.',
   playgroundInputs: { heading: 'Nenhum pedido ainda', icon: 'plus', bordered: true },
+  anatomy: {
+    example: EmptyStateAnatomyExample,
+    parts: [
+      {
+        label: 'Ícone',
+        description: 'Opcional e decorativo; ilustra o assunto.',
+        selector: '.arg-empty-state__icon',
+      },
+      {
+        label: 'Título',
+        description: 'Diz o que está vazio, no nível de título que segue a página.',
+        selector: '.arg-empty-state__heading',
+      },
+      {
+        label: 'Texto',
+        description: 'Por que está vazio e o que vai aparecer ali.',
+        selector: '.arg-empty-state__text',
+      },
+      {
+        label: 'Ação',
+        description: 'Opcional (`arg-empty-state-action`): o primeiro passo para encher.',
+        selector: '.arg-empty-state__actions',
+      },
+    ],
+  },
   examples: [
     { name: 'Simples', component: EmptyStateBasicExample },
     {

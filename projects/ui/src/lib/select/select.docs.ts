@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { SelectAnatomyExample } from './examples/select-anatomy.example';
 import { SelectGroupsExample } from './examples/select-groups.example';
 import { SelectReactiveExample } from './examples/select-reactive.example';
 import { ArgSelect } from './select';
@@ -12,6 +13,26 @@ export const SELECT_DOCS: DocPage = {
     'Escolha de uma opção numa lista, sobre o `<select>` nativo: a lista aberta é a do sistema, o que no celular vira o seletor nativo. Use dentro de um `arg-field`.',
   component: ArgSelect,
   playground: false,
+  anatomy: {
+    example: SelectAnatomyExample,
+    parts: [
+      {
+        label: 'Rótulo',
+        description: 'Nomeia a escolha; sempre visível.',
+        selector: '.arg-field__label',
+      },
+      {
+        label: 'Ajuda',
+        description: 'Contexto curto sobre a escolha.',
+        selector: '.arg-field__hint',
+      },
+      {
+        label: 'Campo',
+        description: 'O `<select>` nativo: abre a lista do sistema, com teclado e leitor de tela.',
+        selector: 'select',
+      },
+    ],
+  },
   examples: [
     {
       name: 'Reactive Forms',

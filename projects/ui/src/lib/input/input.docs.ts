@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { InputAnatomyExample } from './examples/input-anatomy.example';
 import { InputActionExample } from './examples/input-action.example';
 import { InputReactiveExample } from './examples/input-reactive.example';
 import { InputSignalsExample } from './examples/input-signals.example';
@@ -15,6 +16,31 @@ export const INPUT_DOCS: DocPage = {
     'Campos de texto sobre o `<input>` e o `<textarea>` nativos. Use dentro de um `arg-field`, que dá o rótulo, a ajuda e o erro.',
   component: ArgInput,
   playground: false,
+  anatomy: {
+    example: InputAnatomyExample,
+    parts: [
+      {
+        label: 'Rótulo',
+        description: 'Sempre visível, ligado ao campo: o leitor de tela o anuncia no foco.',
+        selector: '.arg-field__label',
+      },
+      {
+        label: 'Ajuda',
+        description: 'Explica o formato ou o uso antes do erro acontecer.',
+        selector: '.arg-field__hint',
+      },
+      {
+        label: 'Campo',
+        description: 'Onde se digita; a borda muda no foco e no erro.',
+        selector: 'input',
+      },
+      {
+        label: 'Erro',
+        description: 'Diz o que fazer para corrigir; ligado ao campo por `aria-describedby`.',
+        selector: '.arg-field__error',
+      },
+    ],
+  },
   examples: [
     {
       name: 'Com ação acoplada',

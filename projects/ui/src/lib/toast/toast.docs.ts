@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { ToastAnatomyExample } from './examples/toast-anatomy.example';
 import { ToastBasicExample } from './examples/toast-basic.example';
 
 export const TOAST_DOCS: DocPage = {
@@ -8,6 +9,26 @@ export const TOAST_DOCS: DocPage = {
   group: 'Feedback',
   summary:
     'Aviso curto e passageiro no canto da tela, aberto pelo serviço `ArgToast`: "Agendamento salvo", "Lembrete enviado". Para confirmar o que acabou de acontecer, sem interromper a pessoa.',
+  anatomy: {
+    example: ToastAnatomyExample,
+    parts: [
+      {
+        label: 'Contêiner',
+        description: 'A faixa colorida mostra o tom; aparece no canto e some sozinho.',
+      },
+      { label: 'Ícone', description: 'Reforça o tom; decorativo.' },
+      { label: 'Título', description: 'Opcional; o que aconteceu.' },
+      { label: 'Mensagem', description: 'O detalhe, em uma linha.' },
+      {
+        label: 'Ação',
+        description: 'Opcional, como "Desfazer"; com ação, o toast fica mais tempo.',
+      },
+      {
+        label: 'Fechar',
+        description: 'Sempre presente; o toast pausa com o mouse ou o foco em cima.',
+      },
+    ],
+  },
   examples: [{ name: 'Uso', component: ToastBasicExample }],
   guidelines: {
     do: [

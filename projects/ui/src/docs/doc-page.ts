@@ -21,6 +21,11 @@ export interface DocExample {
 export interface DocAnatomyPart {
   label: string;
   description: string;
+  /**
+   * Para partes que o componente desenha por dentro (o rótulo do Field, a
+   * lista das abas): o seletor dentro do exemplo, no lugar de `data-anatomy`.
+   */
+  selector?: string;
 }
 
 /** Seção de texto de uma página sem componente, como "Sobre templates". */

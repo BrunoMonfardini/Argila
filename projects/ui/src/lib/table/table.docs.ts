@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { TableAnatomyExample } from './examples/table-anatomy.example';
 import { TablePetsExample } from './examples/table-pets.example';
 import { ArgTable } from './table';
 
@@ -12,6 +13,31 @@ export const TABLE_DOCS: DocPage = {
   component: ArgTable,
   // Colunas e linhas são listas: o exemplo mostra o componente
   playground: false,
+  anatomy: {
+    example: TableAnatomyExample,
+    parts: [
+      {
+        label: 'Legenda',
+        description: 'Nomeia a tabela; pode ficar só para o leitor de tela (`hideCaption`).',
+        selector: '.arg-table__caption',
+      },
+      {
+        label: 'Cabeçalho',
+        description: 'Título de cada coluna (`th scope="col"`).',
+        selector: 'thead th',
+      },
+      {
+        label: 'Ordenar',
+        description: 'Botão no título das colunas ordenáveis; o estado vai em `aria-sort`.',
+        selector: '.arg-table__sort',
+      },
+      {
+        label: 'Linha',
+        description: 'Um registro; com `selectable`, ganha a caixa de seleção.',
+        selector: 'tbody tr',
+      },
+    ],
+  },
   examples: [{ name: 'Pets da clínica', component: TablePetsExample }],
   guidelines: {
     do: [

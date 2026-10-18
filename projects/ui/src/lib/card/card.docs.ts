@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { CardAnatomyExample } from './examples/card-anatomy.example';
 import { ArgCard } from './card';
 import { CardBasicExample } from './examples/card-basic.example';
 import { CardClickableExample } from './examples/card-clickable.example';
@@ -13,6 +14,21 @@ export const CARD_DOCS: DocPage = {
     'Agrupa o resumo de uma coisa (cliente, pet, serviço) com áreas de cabeçalho, conteúdo e ações. Com `arg-card-link`, o card inteiro vira clicável. Importe tudo de uma vez com `ARG_CARD`.',
   component: ArgCard,
   playground: false,
+  anatomy: {
+    example: CardAnatomyExample,
+    parts: [
+      {
+        label: 'Contêiner',
+        description: 'A superfície que agrupa um assunto; raio e sombra vêm do design system.',
+      },
+      {
+        label: 'Título',
+        description: 'O assunto do card, num nível de título que segue a página.',
+      },
+      { label: 'Conteúdo', description: 'Texto curto ou dados do assunto.' },
+      { label: 'Ações', description: 'Botões no fim, do mais importante para o menos.' },
+    ],
+  },
   examples: [
     { name: 'Áreas', component: CardBasicExample },
     {
