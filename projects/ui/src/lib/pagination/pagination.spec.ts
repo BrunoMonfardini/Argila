@@ -135,4 +135,67 @@ describe('ArgPagination', () => {
     const { root } = await setup();
     expect(a11yViolations(root)).toEqual([]);
   });
+
+  describe('pontos', () => {
+    @Component({
+      imports: [ArgPagination],
+      template: `<nav
+        arg-pagination
+        variant="dots"
+        label="Passos"
+        [total]="4"
+        [(page)]="page"
+      ></nav>`,
+    })
+    class DotsHost {
+      readonly page = signal(2);
+    }
+
+    async function dots() {
+      const announce = jest
+        .spyOn(TestBed.inject(ArgAnnouncer), 'announce')
+        .mockImplementation(() => undefined);
+      const fixture = TestBed.createComponent(DotsHost);
+      await fixture.whenStable();
+      const root: HTMLElement = fixture.nativeElement;
+      return { fixture, root, announce, dots: () => Array.from(root.querySelectorAll('button')) };
+    }
+
+    it('um botão por página, com nome, e o atual com aria-current', async () => {
+      const { root, dots: buttons } = await dots();
+
+      expect(root.querySelector('nav')!.classList).toContain('arg-pagination--dots');
+      expect(buttons().map((b) => accessibleName(b))).toEqual([
+        'Página 1',
+        'Página 2',
+        'Página 3',
+        'Página 4',
+      ]);
+      expect(buttons().map((b) => b.getAttribute('aria-current'))).toEqual([
+        null,
+        'page',
+        null,
+        null,
+      ]);
+      expect(root.querySelector('.arg-pagination__status')!.classList).toContain('arg-sr-only');
+      expect(root.querySelector('.arg-pagination__step')).toBeNull();
+    });
+
+    it('clicar num ponto troca a página e anuncia a posição', async () => {
+      const { fixture, announce, dots: buttons } = await dots();
+
+      buttons()[3].click();
+      await fixture.whenStable();
+
+      expect(fixture.componentInstance.page()).toBe(4);
+      expect(buttons()[3].getAttribute('aria-current')).toBe('page');
+      expect(announce).toHaveBeenCalledWith('Página 4 de 4');
+    });
+
+    it('não tem violações de acessibilidade', async () => {
+      const { root } = await dots();
+
+      expect(a11yViolations(root)).toEqual([]);
+    });
+  });
 });

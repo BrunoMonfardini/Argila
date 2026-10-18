@@ -56,6 +56,15 @@ describe('ArgDrawer', () => {
     expect(element.classList).toContain('arg-dialog--sm');
   });
 
+  it('side bottom sobe de baixo em qualquer largura', () => {
+    open({ side: 'bottom' });
+    const element = drawer()!;
+
+    expect(element.classList).toContain('arg-drawer-bottom');
+    expect(element.classList).not.toContain('arg-drawer-end');
+    expect(accessibleName(element)).toBe('Filtros');
+  });
+
   it('o diálogo comum não ganha as classes de gaveta', () => {
     TestBed.inject(ArgDialog).open(FiltersDrawer);
     expect(document.querySelector('dialog.arg-dialog')!.classList).not.toContain('arg-drawer');
