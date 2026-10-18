@@ -6,6 +6,7 @@ export const MASKED_INPUT_DOCS: DocPage = {
   slug: 'masked-input',
   title: 'Masked Input',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Campo com máscara para CPF, CNPJ (inclusive o alfanumérico), CEP e telefone. Mostra o valor formatado e guarda só os caracteres que contam, com validação dos dígitos verificadores.',
   component: ArgMaskedInput,

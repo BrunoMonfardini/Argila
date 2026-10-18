@@ -6,6 +6,7 @@ export const DRAWER_DOCS: DocPage = {
   slug: 'drawer',
   title: 'Drawer',
   category: 'Componentes',
+  group: 'Camadas',
   summary:
     'Gaveta modal, aberta pelo serviço `ArgDrawer`: presa à lateral da tela no desktop e subindo de baixo no celular. Para filtros, detalhes de um item e menus de navegação. Usa as mesmas áreas e a mesma referência do Dialog.',
   examples: [

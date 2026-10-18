@@ -8,6 +8,7 @@ export const DIVIDER_DOCS: DocPage = {
   slug: 'divider',
   title: 'Divider',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
     'Linha que separa seções de conteúdo ou grupos de itens. Use pouco: espaço em branco costuma separar melhor que linhas.',
   component: ArgDivider,

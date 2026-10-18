@@ -6,6 +6,7 @@ export const MENU_DOCS: DocPage = {
   slug: 'menu',
   title: 'Menu',
   category: 'Componentes',
+  group: 'Camadas',
   summary:
     'Lista de ações junto de um botão: remarcar, duplicar, excluir. Segue o padrão "menu button" do ARIA APG. Importe tudo de uma vez com `ARG_MENU`.',
   component: ArgMenu,

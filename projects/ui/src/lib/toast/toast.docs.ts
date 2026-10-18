@@ -5,6 +5,7 @@ export const TOAST_DOCS: DocPage = {
   slug: 'toast',
   title: 'Toast',
   category: 'Componentes',
+  group: 'Feedback',
   summary:
     'Aviso curto e passageiro no canto da tela, aberto pelo serviço `ArgToast`: "Agendamento salvo", "Lembrete enviado". Para confirmar o que acabou de acontecer, sem interromper a pessoa.',
   examples: [{ name: 'Uso', component: ToastBasicExample }],

@@ -6,6 +6,7 @@ export const AGENDA_DOCS: DocPage = {
   slug: 'agenda',
   title: 'Agenda',
   category: 'Componentes',
+  group: 'Domínio',
   summary:
     'Calendário de dia e de semana com os agendamentos posicionados pelo horário, lado a lado quando simultâneos. Navegável por teclado, célula a célula.',
   component: ArgAgenda,

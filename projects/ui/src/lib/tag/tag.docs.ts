@@ -7,6 +7,7 @@ export const TAG_DOCS: DocPage = {
   slug: 'tag',
   title: 'Tag',
   category: 'Componentes',
+  group: 'Seleção',
   summary:
     'Item de uma seleção ou filtro, que pode ser removido ou ligado e desligado (chip de filtro): filtros aplicados, serviços escolhidos, etiquetas de um cliente.',
   component: ArgTag,

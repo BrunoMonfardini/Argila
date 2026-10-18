@@ -6,6 +6,8 @@ export const XP_WINDOW_DOCS: DocPage = {
   slug: 'xp-window',
   title: 'Janela (Windows XP)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'windows-xp',
   summary:
     'Exclusivo do Windows XP: painel com barra de título azul e os botões de minimizar, maximizar e fechar, como as janelas do "Retro-OS UI Kit".',
   component: ArgXpWindow,

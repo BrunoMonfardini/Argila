@@ -7,6 +7,7 @@ export const DIALOG_DOCS: DocPage = {
   slug: 'dialog',
   title: 'Dialog',
   category: 'Componentes',
+  group: 'Camadas',
   summary:
     'Janela modal sobre o `<dialog>` nativo, aberta pelo serviço `ArgDialog`: `open(Componente, { data })` devolve uma referência com o resultado em `closed`, e `confirm({ title, message })` é a confirmação pronta.',
   component: ArgDialogTitle,

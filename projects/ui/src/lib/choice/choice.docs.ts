@@ -9,6 +9,7 @@ export const CHOICE_DOCS: DocPage = {
   slug: 'checkbox-radio-switch',
   title: 'Checkbox, Radio e Switch',
   category: 'Componentes',
+  group: 'Seleção',
   summary:
     'Escolhas sobre os controles nativos: `arg-checkbox` (várias opções), `arg-radio` (uma opção) e `arg-switch` (liga/desliga na hora). Agrupe com `arg-choice-group` e rotule cada opção com `label[arg-choice]`; importe `ARG_CHOICE`.',
   component: ArgChoiceGroup,

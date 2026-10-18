@@ -6,6 +6,8 @@ export const NB_RULES_DOCS: DocPage = {
   slug: 'nb-rules',
   title: 'Caixa de regras (Neo-brutalista)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'neo-brutalista',
   summary:
     'Exclusivo do Neo-brutalista: caixa de contorno grosso com regras de uso curtas, como o "Usage rules" da referência.',
   component: ArgNbRules,

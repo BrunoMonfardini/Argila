@@ -10,6 +10,7 @@ export const INPUT_DOCS: DocPage = {
   slug: 'input',
   title: 'Input e Textarea',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Campos de texto sobre o `<input>` e o `<textarea>` nativos. Use dentro de um `arg-field`, que dá o rótulo, a ajuda e o erro.',
   component: ArgInput,

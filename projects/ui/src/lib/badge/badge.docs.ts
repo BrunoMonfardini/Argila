@@ -7,6 +7,7 @@ export const BADGE_DOCS: DocPage = {
   slug: 'badge',
   title: 'Badge',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
     'Rótulo curto de status ou categoria, só para leitura: "Confirmado", "Cancelado". Para filtros e seleções removíveis, use a Tag.',
   component: ArgBadge,

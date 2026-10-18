@@ -7,6 +7,7 @@ export const PROGRESS_BAR_DOCS: DocPage = {
   slug: 'progress-bar',
   title: 'Progress Bar',
   category: 'Componentes',
+  group: 'Feedback',
   summary:
     'Mostra o andamento de uma tarefa longa: envio de arquivos, importação, geração de relatório. Com `value`, mostra quanto falta; sem `value`, só que está em andamento. Para esperas curtas, use o Spinner.',
   component: ArgProgressBar,

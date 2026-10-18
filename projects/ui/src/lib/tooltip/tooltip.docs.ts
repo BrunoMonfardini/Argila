@@ -7,6 +7,7 @@ export const TOOLTIP_DOCS: DocPage = {
   slug: 'tooltip',
   title: 'Tooltip',
   category: 'Componentes',
+  group: 'Feedback',
   summary:
     'Texto curto que aparece ao lado de um elemento no foco e no hover: o nome de um botão de ícone, um atalho de teclado. Diretiva `argTooltip` em qualquer elemento focável.',
   component: ArgTooltip,

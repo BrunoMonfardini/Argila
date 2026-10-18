@@ -7,6 +7,7 @@ export const POPOVER_DOCS: DocPage = {
   slug: 'popover',
   title: 'Popover',
   category: 'Componentes',
+  group: 'Camadas',
   summary:
     'Painel com conteúdo livre junto de um botão: detalhes rápidos, ajuda, uma ação curta. Não bloqueia a página. Importe tudo de uma vez com `ARG_POPOVER`.',
   component: ArgPopover,

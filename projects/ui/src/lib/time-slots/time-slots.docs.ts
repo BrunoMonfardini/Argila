@@ -6,6 +6,7 @@ export const TIME_SLOTS_DOCS: DocPage = {
   slug: 'time-slots',
   title: 'Time Slot Picker',
   category: 'Componentes',
+  group: 'Domínio',
   summary:
     'Grade de horários livres e ocupados de um dia, o centro da agenda de vet e barbearia. Navegável por setas, com estado de carregamento enquanto busca os horários.',
   component: ArgTimeSlots,

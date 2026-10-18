@@ -6,6 +6,8 @@ export const NB_STICKER_DOCS: DocPage = {
   slug: 'nb-sticker',
   title: 'Sticker (Neo-brutalista)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'neo-brutalista',
   summary:
     'Exclusivo do Neo-brutalista: selo inclinado que destaca uma regra ou um aviso curto, como "Uma ação primária". Em outros design systems, use um Badge.',
   component: ArgNbSticker,

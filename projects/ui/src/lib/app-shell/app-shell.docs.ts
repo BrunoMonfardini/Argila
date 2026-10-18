@@ -6,6 +6,7 @@ export const APP_SHELL_DOCS: DocPage = {
   slug: 'app-shell',
   title: 'App Shell',
   category: 'Componentes',
+  group: 'Navegação',
   summary:
     'Estrutura da aplicação: cabeçalho com a marca do tenant, menu lateral e área principal. Em telas estreitas, o menu vira uma gaveta aberta pelo botão do cabeçalho. A cor da marca vem do `ArgTheme.setBrand`.',
   component: ArgAppShell,

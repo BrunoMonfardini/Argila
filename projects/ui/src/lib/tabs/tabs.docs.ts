@@ -8,6 +8,7 @@ export const TABS_DOCS: DocPage = {
   slug: 'tabs',
   title: 'Tabs',
   category: 'Componentes',
+  group: 'Navegação',
   summary:
     'Divide um conteúdo em seções do mesmo nível, uma visível por vez: dados, vacinas e histórico de um pet. Segue o padrão "tabs" do ARIA APG. Importe tudo de uma vez com `ARG_TABS`.',
   component: ArgTabs,

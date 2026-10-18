@@ -6,6 +6,7 @@ export const DATE_PICKER_DOCS: DocPage = {
   slug: 'date-picker',
   title: 'Date Picker',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Campo de data: digitação direta em "dd/mm/aaaa" ou escolha num calendário navegável por teclado, com limites e dias bloqueados. O formulário recebe a data em ISO (`2026-10-13`).',
   component: ArgDateInput,
