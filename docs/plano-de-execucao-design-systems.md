@@ -32,7 +32,8 @@ _Atualizado em 17/10/2026._
 | E9    | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
 | E10   | **Pronto** (#100, #101 e o E10c: anatomia dos 10 componentes)                                                                                                                                          |
 | E11   | **Pronto** (#103, #104 e o E11c: padrões da leva 1, com o "Carregamento de lista" virando Carregamentos)                                                                                               |
-| E12   | A fazer                                                                                                                                                                                                |
+| E12   | **Pronto**: os 10 padrões da leva 2                                                                                                                                                                    |
+| Falta | Conferência visual manual (seções 2 a 4 da validação) e as capturas anexadas aos PRs dos DS (CD-03 e equivalentes), que dependem do time                                                               |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 
@@ -52,7 +53,7 @@ Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 | [x] | E9    | `feat/catalogo-estrutura`  | Navegação nova, catálogo filtrado pelo DS, páginas em abas            | E2          | 7 d  |
 | [x] | E10   | `feat/catalogo-conteudo`   | Páginas dos DS, Como começar, Fundação, Montar tema, anatomia         | E4 a E8, E9 | 7 d  |
 | [x] | E11   | `feat/templates-e-padroes` | 5 templates, padrões da leva 1, variantes                             | E9          | 9 d  |
-| [ ] | E12   | `feat/padroes-leva-2`      | Padrões da leva 2                                                     | E11         | 6 d  |
+| [x] | E12   | `feat/padroes-leva-2`      | Padrões da leva 2                                                     | E11         | 6 d  |
 
 **Total:** cerca de 61 dias de trabalho de uma pessoa (perto de 3 meses). Depois do E2, há duas frentes: **DS** (E3, depois E4 a E8 em qualquer ordem ou em paralelo) e **catálogo** (E9, depois E11 e E12). Com duas pessoas, perto de 7 semanas.
 
@@ -274,7 +275,7 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 
 | ✓   | ID   | Item                                                   | Depende de | Pronto quando                        | Est. |
 | --- | ---- | ------------------------------------------------------ | ---------- | ------------------------------------ | ---- |
-| [ ] | P-01 | `docs: padrões da leva 2` (10 páginas no formato fixo) | E11        | As 10 páginas publicadas no catálogo | 6    |
+| [x] | P-01 | `docs: padrões da leva 2` (10 páginas no formato fixo) | E11        | As 10 páginas publicadas no catálogo | 6    |
 
 ---
 
