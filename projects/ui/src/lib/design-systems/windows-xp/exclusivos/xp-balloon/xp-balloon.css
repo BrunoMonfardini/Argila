@@ -1,0 +1,42 @@
+/*
+ * Tokens de componente (camada 3), ex.: <div arg-xp-balloon style="--arg-xp-balloon-bg: var(--arg-color-surface-solid)">.
+ */
+:host {
+  --arg-xp-balloon-bg: var(--arg-color-primary);
+  --arg-xp-balloon-fg: var(--arg-color-on-primary);
+
+  position: relative;
+  display: inline-block;
+  max-width: 22rem;
+  margin-block-end: 0.75rem;
+  padding: var(--arg-space-2) var(--arg-space-4);
+  border-radius: 0.5rem;
+  box-shadow: var(--arg-shadow-control), var(--arg-shadow-2);
+  background: var(--arg-xp-balloon-bg);
+  color: var(--arg-xp-balloon-fg);
+  font-family: var(--arg-font-family);
+  font-size: var(--arg-font-size-body);
+}
+
+/* A ponta do balão, embaixo */
+:host::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: var(--arg-space-4);
+  border: 0.5rem solid transparent;
+  border-block-start-color: var(--arg-xp-balloon-bg);
+  border-inline-start-color: var(--arg-xp-balloon-bg);
+}
+
+:host(.arg-xp-balloon--tail-end)::after {
+  inset-inline: auto var(--arg-space-4);
+  border-inline-start-color: transparent;
+  border-inline-end-color: var(--arg-xp-balloon-bg);
+}
+
+@media (forced-colors: active) {
+  :host {
+    border: 1px solid CanvasText;
+  }
+}

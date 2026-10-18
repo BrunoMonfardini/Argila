@@ -36,6 +36,7 @@ export const windowsXp = {
     ],
     fora: ['agenda', 'drawer', 'time-slots'],
   },
-  exclusivos: [],
+  exclusivos: ['xp-window', 'xp-balloon'],
+  prefixo: 'xp',
   regras: ['Uma só cor de destaque', 'Nada de sombra pesada', 'Bordas sempre de 1px'],
 } as const satisfies ArgDesignSystem;
