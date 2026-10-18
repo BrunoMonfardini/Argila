@@ -1,0 +1,70 @@
+<ul class="doc-rail" role="list">
+  @for (section of sections(); track section.id) {
+    <li>
+      <button
+        #trigger
+        type="button"
+        class="doc-rail__item"
+        [class.doc-rail__item--current]="current() === section.id"
+        [attr.aria-expanded]="open() === section.id"
+        [attr.aria-controls]="open() === section.id ? panelId : null"
+        (click)="toggle(section.id)"
+      >
+        <arg-icon [name]="section.icon" />
+        <span class="doc-rail__label">{{ section.title }}</span>
+      </button>
+    </li>
+  }
+</ul>
+
+@if (openSection(); as section) {
+  <div class="doc-panel" [id]="panelId" role="region" [attr.aria-label]="section.title">
+    <div class="doc-panel__search" role="search">
+      <label for="busca-catalogo">Buscar em todo o catálogo</label>
+      <input
+        #search
+        arg-input
+        id="busca-catalogo"
+        type="search"
+        placeholder="Ex.: Button"
+        autocomplete="off"
+        [value]="query()"
+        (input)="onSearch($event)"
+      />
+    </div>
+
+    @for (result of visible(); track result.id) {
+      <section class="doc-panel__section" [attr.aria-labelledby]="'nav-' + result.id">
+        <h2 class="doc-panel__title" [id]="'nav-' + result.id">{{ result.title }}</h2>
+        @for (group of result.groups; track $index) {
+          @if (group.title) {
+            <h3 class="doc-panel__group" [id]="'nav-' + result.id + '-' + $index">
+              {{ group.title }}
+            </h3>
+          }
+          <ul
+            arg-list
+            [attr.aria-labelledby]="group.title ? 'nav-' + result.id + '-' + $index : null"
+          >
+            @for (link of group.links; track link.path) {
+              <li arg-list-item>
+                <a
+                  arg-list-action
+                  [routerLink]="link.path"
+                  routerLinkActive="doc-panel__link--active"
+                  ariaCurrentWhenActive="page"
+                  [routerLinkActiveOptions]="activeOptions"
+                  (click)="follow()"
+                >
+                  <span arg-list-title>{{ link.label }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+      </section>
+    } @empty {
+      <p class="doc-panel__empty" role="status">Nada encontrado para "{{ query() }}".</p>
+    }
+  </div>
+}

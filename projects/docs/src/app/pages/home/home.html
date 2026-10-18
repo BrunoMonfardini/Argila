@@ -4,12 +4,13 @@
   o componente funcionando, os controles para testar variações e o código para copiar.
 </p>
 <p>
-  Use a barra no topo para trocar o <strong>modo</strong> (claro, escuro ou automático), o
+  Navegue pela barra de ícones à esquerda: cada ícone abre um painel com as páginas da seção e a
+  busca. Use a barra no topo para trocar o <strong>modo</strong> (claro, escuro ou automático), o
   <strong>estilo</strong> (forma), a <strong>paleta</strong> (cor) e a <strong>opacidade</strong>
   das superfícies: todos os componentes acompanham, porque só usam tokens.
 </p>
 
-@for (section of sections; track section.title) {
+@for (section of sections; track section.id) {
   <section [attr.aria-labelledby]="'inicio-' + $index">
     <h2 [id]="'inicio-' + $index">{{ section.title }}</h2>
     <ul class="doc-home__cards">
