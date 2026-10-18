@@ -41,15 +41,15 @@ Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 
 | ✓   | Marco | Branch                     | Entrega                                                               | Depende de  | Est. |
 | --- | ----- | -------------------------- | --------------------------------------------------------------------- | ----------- | ---- |
-| [ ] | E0    | `fix/checkup-de-temas`     | Barra de tema correta, checkup visual completo, painéis legíveis      | PR-1        | 2 d  |
-| [ ] | E1    | `chore/testes-com-jest`    | Jest no lugar do Vitest, com resumo e monitoramento dos testes no CI  | E0          | 3 d  |
-| [ ] | E2    | `refactor/design-systems`  | Pastas, manifestos e regras de arquitetura; paletas por DS            | E1          | 4 d  |
-| [ ] | E3    | `feat/ds-argila`           | DS Argila fiel à referência; paletas compartilhadas; cores; segmentos | E2          | 6 d  |
-| [ ] | E4    | `feat/ds-transparente`     | DS Transparente em vidro espesso, o mais perto possível da referência | E3          | 4 d  |
-| [ ] | E5    | `feat/ds-neo-brutalista`   | DS Neo-brutalista fiel à referência                                   | E3          | 4 d  |
-| [ ] | E6    | `feat/ds-punk`             | DS Punk fiel à referência                                             | E3          | 4 d  |
-| [ ] | E7    | `feat/ds-windows-xp`       | DS Windows XP fiel à referência                                       | E3          | 3 d  |
-| [ ] | E8    | `feat/ds-coda`             | CODA como sexto DS, com núcleo mínimo curado                          | E3          | 2 d  |
+| [x] | E0    | `fix/checkup-de-temas`     | Barra de tema correta, checkup visual completo, painéis legíveis      | PR-1        | 2 d  |
+| [x] | E1    | `chore/testes-com-jest`    | Jest no lugar do Vitest, com resumo e monitoramento dos testes no CI  | E0          | 3 d  |
+| [x] | E2    | `refactor/design-systems`  | Pastas, manifestos e regras de arquitetura; paletas por DS            | E1          | 4 d  |
+| [x] | E3    | `feat/ds-argila`           | DS Argila fiel à referência; paletas compartilhadas; cores; segmentos | E2          | 6 d  |
+| [x] | E4    | `feat/ds-transparente`     | DS Transparente em vidro espesso, o mais perto possível da referência | E3          | 4 d  |
+| [x] | E5    | `feat/ds-neo-brutalista`   | DS Neo-brutalista fiel à referência                                   | E3          | 4 d  |
+| [x] | E6    | `feat/ds-punk`             | DS Punk fiel à referência                                             | E3          | 4 d  |
+| [x] | E7    | `feat/ds-windows-xp`       | DS Windows XP fiel à referência                                       | E3          | 3 d  |
+| [x] | E8    | `feat/ds-coda`             | CODA como sexto DS, com núcleo mínimo curado                          | E3          | 2 d  |
 | [x] | E9    | `feat/catalogo-estrutura`  | Navegação nova, catálogo filtrado pelo DS, páginas em abas            | E2          | 7 d  |
 | [x] | E10   | `feat/catalogo-conteudo`   | Páginas dos DS, Como começar, Fundação, Montar tema, anatomia         | E4 a E8, E9 | 7 d  |
 | [x] | E11   | `feat/templates-e-padroes` | 5 templates, padrões da leva 1, variantes                             | E9          | 9 d  |
