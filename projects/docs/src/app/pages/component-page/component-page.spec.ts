@@ -35,6 +35,20 @@ const AGENDA: DocPage = {
   keyboard: [{ key: 'Setas', action: 'Movem entre os horários' }],
 };
 
+const PATTERN: DocPage = {
+  slug: 'padrao',
+  title: 'Padrão',
+  category: 'Padrões',
+  summary: 'Um padrão.',
+  pattern: { problem: 'O problema.', solution: 'A solução.' },
+  examples: [
+    { name: 'Principal', component: FakeExample },
+    { name: 'Outra', component: FakeExample },
+  ],
+  guidelines: { do: ['Faça'], dont: ['Evite'] },
+  related: ['fake', 'nao-existe'],
+};
+
 const MINIMAL: DocPage = {
   slug: 'minimo',
   title: 'Mínimo',
@@ -85,7 +99,7 @@ describe('ComponentPage', () => {
     TestBed.configureTestingModule({
       providers: [
         provideDocRouter(),
-        { provide: DOC_PAGES, useValue: [FAKE, AGENDA, MINIMAL] },
+        { provide: DOC_PAGES, useValue: [FAKE, AGENDA, PATTERN, MINIMAL] },
         { provide: DOC_MANIFEST, useValue: MANIFEST },
       ],
     });
@@ -287,5 +301,39 @@ describe('ComponentPage', () => {
 
     expect(root.querySelector('#propriedades')).toBeNull();
     expect(root.querySelector('.doc-example__toggle')).toBeNull();
+  });
+
+  it('padrão: formato fixo numa página só, com os componentes usados', async () => {
+    const { root } = await open('/padroes/padrao');
+    const headings = Array.from(root.querySelectorAll('article h2'), (h) => h.textContent?.trim());
+
+    expect(headings).toEqual([
+      'Problema',
+      'Solução',
+      'Exemplo',
+      'Variações',
+      'Faça e não faça',
+      'Componentes usados',
+    ]);
+    expect(root.querySelector('.doc-page__tabs')).toBeNull();
+    expect(
+      Array.from(root.querySelectorAll('.doc-page__related a'), (a) => a.getAttribute('href')),
+    ).toEqual(['/componentes/fake']);
+    expect(
+      Array.from(root.querySelectorAll('.doc-page__toc a'), (a) => a.textContent?.trim()),
+    ).toEqual([
+      'Problema',
+      'Solução',
+      'Exemplo',
+      'Variações',
+      'Faça e não faça',
+      'Componentes usados',
+    ]);
+  });
+
+  it('padrão não tem a aba de regras: o endereço dela não existe', async () => {
+    const { root } = await open('/padroes/padrao/uso');
+
+    expect(root.querySelector('h1')?.textContent).toBe('Página não encontrada');
   });
 });
