@@ -30,7 +30,7 @@ _Atualizado em 17/10/2026._
 | E7      | **Pronto** (#94, #95): Windows XP e os exclusivos                                                                                                                                                      |
 | E8      | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
 | E9      | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
-| E10     | **Em andamento**: E10a (páginas dos DS, Como começar, Acessibilidade, Atualizações e Ajuda) em review                                                                                                  |
+| E10     | **Em andamento**: E10a pronto (#100: páginas dos DS e guias); E10b (Fundação e Montar tema) em review                                                                                                  |
 | E11–E12 | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
@@ -256,9 +256,9 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 | --- | ---- | ---------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------ | ---- |
 | [x] | K-01 | `docs: páginas dos 6 design systems` (ficha da 3.4 gerada do manifesto, matriz de componentes) | E4 a E8, E9 | Mudar o manifesto muda a página, sem texto duplicado                                 | 1,5  |
 | [x] | K-02 | `docs: Como começar e Acessibilidade`                                                          | E9          | Seguir "Como começar" num projeto vazio chega ao primeiro componente com um segmento | 1    |
-| [ ] | K-03 | `docs: Fundação` (Cores, Tipografia, Espaçamento, Raio e elevação, Movimento)                  | E9          | Cada página mostra os valores do DS e da paleta escolhidos                           | 1,5  |
+| [x] | K-03 | `docs: Fundação` (Cores, Tipografia, Espaçamento, Raio e elevação, Movimento)                  | E9          | Cada página mostra os valores do DS e da paleta escolhidos                           | 1,5  |
 | [x] | K-04 | `docs: Atualizações e Ajuda`                                                                   | E9          | Changelog renderizado; perguntas frequentes e como contribuir                        | 0,5  |
-| [ ] | K-05 | `feat(docs): Montar tema`                                                                      | E9          | Copiar o segmento ou o CSS e colar num produto reproduz o que se vê                  | 1    |
+| [x] | K-05 | `feat(docs): Montar tema`                                                                      | E9          | Copiar o segmento ou o CSS e colar num produto reproduz o que se vê                  | 1    |
 | [ ] | K-06 | `docs: anatomia dos 10 componentes`                                                            | E9          | Marcadores acompanham DS e paleta; legenda lida pelo leitor de tela                  | 1,5  |
 
 ## E11: templates e padrões, leva 1
