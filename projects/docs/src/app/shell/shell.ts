@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { ArgButton } from '@brunomonfardini/ui';
+import { ArgButton, ArgTheme } from '@brunomonfardini/ui';
+import { pagesIn } from '../availability';
+import { DOC_MANIFEST, manifestPage } from '../manifest';
 import { DOC_PAGES } from '../registry';
 import { buildNavigation } from './navigation';
 import { DocNavRail } from './nav-rail';
@@ -15,7 +17,15 @@ import { DocThemeBar } from './theme-bar';
   styleUrl: './shell.css',
 })
 export class DocShell {
-  protected readonly sections = buildNavigation(inject(DOC_PAGES));
+  private readonly pages = inject(DOC_PAGES);
+  private readonly manifest = inject(DOC_MANIFEST);
+  private readonly theme = inject(ArgTheme);
+  /** Só as páginas do design system escolhido: as que estão fora dele somem. */
+  protected readonly sections = computed(() =>
+    buildNavigation(
+      pagesIn(this.theme.style(), this.pages, (page) => manifestPage(this.manifest, page)),
+    ),
+  );
   /** Gaveta da navegação aberta no celular; no desktop a barra de ícones fica sempre visível. */
   protected readonly menuOpen = signal(false);
 

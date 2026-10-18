@@ -51,13 +51,17 @@ export class DocNavRail {
   private readonly search = viewChild('search', { read: ElementRef<HTMLInputElement> });
   private readonly triggers = viewChildren<ElementRef<HTMLButtonElement>>('trigger');
 
-  /** Página ativa pelo caminho; o estado do playground na URL não conta. */
+  /**
+   * Página ativa pelo caminho, também nas abas dela (`subset`); o Início só
+   * no caminho exato. O estado do playground na URL não conta.
+   */
   protected readonly activeOptions: IsActiveMatchOptions = {
-    paths: 'exact',
+    paths: 'subset',
     queryParams: 'ignored',
     matrixParams: 'ignored',
     fragment: 'ignored',
   };
+  protected readonly homeOptions: IsActiveMatchOptions = { ...this.activeOptions, paths: 'exact' };
   protected readonly panelId = 'painel-navegacao';
   /** Seção com o painel aberto; `undefined` com ele fechado. */
   protected readonly open = signal<string | undefined>(undefined);

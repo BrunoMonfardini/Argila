@@ -12,6 +12,7 @@ import {
   ArgTheme,
 } from '@brunomonfardini/ui';
 import { readPreference, writePreference } from './preferences';
+import { DocThemeChoices, OPACITY_KEY, PALETTE_KEY, SCHEME_KEY, STYLE_KEY } from './theme-choices';
 
 interface Option<T extends string> {
   value: T;
@@ -48,11 +49,6 @@ const OPACITIES = Array.from({ length: (100 - MIN_OPACITY) / 5 + 1 }, (_, i) => 
   value: String(MIN_OPACITY + i * 5),
 }));
 
-const SCHEME_KEY = 'argila-docs:tema';
-const STYLE_KEY = 'argila-docs:estilo';
-const PALETTE_KEY = 'argila-docs:paleta';
-const OPACITY_KEY = 'argila-docs:opacidade';
-
 /**
  * Modo de cor, estilo, paleta e transparência do catálogo, pelo próprio
  * `ArgTheme`, o mesmo código dos produtos; as escolhas ficam salvas no navegador.
@@ -66,6 +62,7 @@ const OPACITY_KEY = 'argila-docs:opacidade';
 })
 export class DocThemeBar {
   private readonly theme = inject(ArgTheme);
+  private readonly choices = inject(DocThemeChoices);
   private readonly root = inject(DOCUMENT).documentElement;
 
   protected readonly schemes = SCHEMES;
@@ -114,11 +111,7 @@ export class DocThemeBar {
 
   /** Troca o estilo e volta à transparência dele. */
   protected selectStyle(event: Event): void {
-    const style = (event.target as HTMLSelectElement).value as ArgStyle;
-    this.theme.setStyle(style);
-    this.theme.clearSurfaceOpacity();
-    writePreference(STYLE_KEY, style);
-    writePreference(OPACITY_KEY, '');
+    this.choices.selectStyle((event.target as HTMLSelectElement).value as ArgStyle);
   }
 
   protected selectPalette(event: Event): void {

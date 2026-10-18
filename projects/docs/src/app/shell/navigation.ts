@@ -146,8 +146,14 @@ export function filterNavigation(sections: DocNavSection[], query: string): DocN
     .filter((section) => section.groups.length);
 }
 
+/** O link vale para o caminho: o mesmo, ou uma aba dele (`/componentes/button/codigo`). */
+export function linkMatches(link: DocNavLink, path: string): boolean {
+  return path === link.path || (link.path !== '/' && path.startsWith(`${link.path}/`));
+}
+
 /** A seção da página atual: a que tem um link com o caminho da URL. */
 export function sectionOf(sections: DocNavSection[], url: string): string | undefined {
   const path = url.split(/[?#;]/)[0];
-  return sections.find((section) => sectionLinks(section).some((link) => link.path === path))?.id;
+  return sections.find((section) => sectionLinks(section).some((link) => linkMatches(link, path)))
+    ?.id;
 }
