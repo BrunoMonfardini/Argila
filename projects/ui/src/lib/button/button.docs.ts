@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { ButtonAnatomyExample } from './examples/button-anatomy.example';
 import { ArgButton } from './button';
 import { ButtonSizesExample } from './examples/button-sizes.example';
 import { ButtonStatesExample } from './examples/button-states.example';
@@ -14,6 +15,20 @@ export const BUTTON_DOCS: DocPage = {
   component: ArgButton,
   hostElement: 'button',
   playgroundContent: 'Salvar',
+  anatomy: {
+    example: ButtonAnatomyExample,
+    parts: [
+      {
+        label: 'Contêiner',
+        description: 'A área clicável: cor pela variante, altura pelo tamanho.',
+      },
+      { label: 'Ícone', description: 'Opcional, antes do rótulo; decorativo, sem nome próprio.' },
+      {
+        label: 'Rótulo',
+        description: 'Verbo no infinitivo que diz o que acontece: "Salvar", "Novo agendamento".',
+      },
+    ],
+  },
   examples: [
     { name: 'Variantes', component: ButtonVariantsExample },
     {

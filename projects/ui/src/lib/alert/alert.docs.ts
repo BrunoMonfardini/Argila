@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { AlertAnatomyExample } from './examples/alert-anatomy.example';
 import { ArgAlert } from './alert';
 import { AlertFeedbackExample } from './examples/alert-feedback.example';
 import { AlertTonesExample } from './examples/alert-tones.example';
@@ -14,6 +15,36 @@ export const ALERT_DOCS: DocPage = {
   hostElement: 'div',
   playgroundContent: 'A clínica fecha mais cedo na véspera do feriado.',
   playgroundInputs: { heading: 'Horário especial' },
+  anatomy: {
+    example: AlertAnatomyExample,
+    parts: [
+      {
+        label: 'Ícone',
+        description: 'Muda com o tom; o nome do tom ("Atenção") é lido antes do texto.',
+        selector: '.arg-alert__icon',
+      },
+      {
+        label: 'Título',
+        description: 'Opcional; o assunto em poucas palavras.',
+        selector: '.arg-alert__heading',
+      },
+      {
+        label: 'Mensagem',
+        description: 'O que aconteceu e o que fazer.',
+        selector: '.arg-alert__content',
+      },
+      {
+        label: 'Ação',
+        description: 'Opcional (`arg-alert-action`): resolve o aviso ali mesmo.',
+        selector: '.arg-alert__actions',
+      },
+      {
+        label: 'Fechar',
+        description: 'Opcional (`dismissible`); quem usa tira o alerta e devolve o foco.',
+        selector: '.arg-alert__dismiss',
+      },
+    ],
+  },
   examples: [
     { name: 'Tons', component: AlertTonesExample },
     {

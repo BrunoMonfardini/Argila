@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { TabsAnatomyExample } from './examples/tabs-anatomy.example';
 import { TabsManualExample } from './examples/tabs-manual.example';
 import { TabsPetExample } from './examples/tabs-pet.example';
 import { TabsSegmentedExample } from './examples/tabs-segmented.example';
@@ -13,6 +14,31 @@ export const TABS_DOCS: DocPage = {
     'Divide um conteúdo em seções do mesmo nível, uma visível por vez: dados, vacinas e histórico de um pet. Segue o padrão "tabs" do ARIA APG. Importe tudo de uma vez com `ARG_TABS`.',
   component: ArgTabs,
   playground: false,
+  anatomy: {
+    example: TabsAnatomyExample,
+    parts: [
+      {
+        label: 'Lista de abas',
+        description: 'Um `tablist` com nome; as setas movem entre as abas.',
+        selector: '.arg-tabs__list',
+      },
+      {
+        label: 'Aba selecionada',
+        description: 'Marcada pela cor e pelo indicador; `aria-selected`.',
+        selector: '.arg-tabs__tab[aria-selected="true"]',
+      },
+      {
+        label: 'Aba',
+        description: 'Rótulo curto, de uma ou duas palavras.',
+        selector: '.arg-tabs__tab[aria-selected="false"]',
+      },
+      {
+        label: 'Painel',
+        description: 'O conteúdo da aba aberta, ligado a ela por `aria-controls`.',
+        selector: '.arg-tabs__panel',
+      },
+    ],
+  },
   examples: [
     { name: 'Ficha do pet', component: TabsPetExample },
     {

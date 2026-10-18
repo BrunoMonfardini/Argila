@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { DialogAnatomyExample } from './examples/dialog-anatomy.example';
 import { ArgDialogTitle } from './dialog-title';
 import { DialogConfirmExample } from './examples/dialog-confirm.example';
 import { DialogFormExample } from './examples/dialog-form.example';
@@ -12,6 +13,28 @@ export const DIALOG_DOCS: DocPage = {
     'Janela modal sobre o `<dialog>` nativo, aberta pelo serviço `ArgDialog`: `open(Componente, { data })` devolve uma referência com o resultado em `closed`, e `confirm({ title, message })` é a confirmação pronta.',
   component: ArgDialogTitle,
   playground: false,
+  anatomy: {
+    example: DialogAnatomyExample,
+    parts: [
+      {
+        label: 'Superfície',
+        description: 'Abre por cima da página, que fica escurecida e sem foco.',
+      },
+      {
+        label: 'Título',
+        description: 'Nomeia o diálogo (`argDialogTitle`); em confirmação, é a pergunta.',
+      },
+      {
+        label: 'Conteúdo',
+        description: 'O que a pessoa precisa saber para decidir (`arg-dialog-content`).',
+      },
+      {
+        label: 'Ações',
+        description: 'A principal por último (`arg-dialog-actions`); Esc equivale a voltar.',
+      },
+      { label: 'Fechar', description: 'Opcional; o foco volta para quem abriu o diálogo.' },
+    ],
+  },
   examples: [
     {
       name: 'Formulário',
