@@ -61,6 +61,7 @@ describe('DocShell', () => {
       'Componentes',
       'Padrões',
       'Templates',
+      'Ferramentas',
       'Ajuda',
     ]);
     expect(items.filter((b) => !b.querySelector('arg-icon'))).toEqual([]);

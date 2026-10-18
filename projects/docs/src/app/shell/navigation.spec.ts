@@ -32,6 +32,7 @@ describe('navegação do catálogo', () => {
       ['componentes', 'Componentes', 'layout'],
       ['padroes', 'Padrões', 'sparkles'],
       ['templates', 'Templates', 'copy'],
+      ['ferramentas', 'Ferramentas', 'wrench'],
     ]);
   });
 
@@ -57,12 +58,22 @@ describe('navegação do catálogo', () => {
   });
 
   it('"Sobre" abre a seção; Fundação sempre tem Tokens e Ícones', () => {
-    const sections = buildNavigation([...pages, page('Cores', 'Fundação')]);
+    const sections = buildNavigation([...pages, page('Guia de cores', 'Fundação')]);
     const labels = (id: string) =>
       sectionLinks(sections.find((s) => s.id === id)!).map((l) => l.label);
 
     expect(labels('templates')).toEqual(['Sobre templates', 'Receipt']);
-    expect(labels('fundacao')).toEqual(['Tokens', 'Ícones', 'Cores']);
+    expect(labels('fundacao')).toEqual([
+      'Tokens',
+      'Ícones',
+      'Cores',
+      'Tipografia',
+      'Espaçamento',
+      'Raio e elevação',
+      'Movimento',
+      'Guia de cores',
+    ]);
+    expect(labels('ferramentas')).toEqual(['Montar tema']);
     expect(labels('comeco')).toEqual(['Início', 'Atualizações']);
   });
 
@@ -106,6 +117,7 @@ describe('navegação do catálogo', () => {
       'acessibilidade',
       'design-systems',
       'fundacao',
+      'ferramentas',
       'ajuda',
     ]);
     expect(labels('comeco')).toEqual(['Início', 'Como começar', 'Atualizações']);

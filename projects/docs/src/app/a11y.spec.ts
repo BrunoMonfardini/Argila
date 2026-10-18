@@ -4,6 +4,7 @@ import { argIconsAll, provideArgIcons } from '@brunomonfardini/ui';
 import { a11yViolations } from '../../../ui/src/testing/a11y';
 import { App } from './app';
 import { PRODUCT_DESIGN_SYSTEMS } from './availability';
+import { FOUNDATION_TOPICS } from './pages/foundation/topics';
 import { provideDocRouter } from './app.routes';
 import { ALL_DOC_PAGES, pagePath } from './registry';
 
@@ -18,6 +19,8 @@ describe('acessibilidade do catálogo', () => {
     ...ALL_DOC_PAGES.map(pagePath),
     ...tabs,
     '/comeco/atualizacoes',
+    '/ferramentas/montar-tema',
+    ...FOUNDATION_TOPICS.map((topic) => `/fundacao/${topic.slug}`),
     ...PRODUCT_DESIGN_SYSTEMS.map((ds) => `/design-systems/${ds.id}`),
   ];
 
