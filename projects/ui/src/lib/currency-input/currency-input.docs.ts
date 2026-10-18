@@ -6,6 +6,7 @@ export const CURRENCY_INPUT_DOCS: DocPage = {
   slug: 'currency-input',
   title: 'Currency Input',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Campo de valor em reais. Os dígitos entram pela direita, como numa calculadora, e o formulário recebe um inteiro em centavos: R$ 89,90 vira `8990`.',
   component: ArgCurrencyInput,

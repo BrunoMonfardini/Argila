@@ -6,6 +6,7 @@ export const STEPPER_DOCS: DocPage = {
   slug: 'stepper',
   title: 'Stepper',
   category: 'Componentes',
+  group: 'Navegação',
   summary:
     'Mostra em que etapa de um fluxo em sequência a pessoa está: agendamento, cadastro, pagamento. Feita, atual e pendente se distinguem pela forma e pelo texto, não só pela cor.',
   component: ArgStepper,

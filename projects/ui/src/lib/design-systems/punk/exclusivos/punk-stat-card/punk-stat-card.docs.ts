@@ -6,6 +6,8 @@ export const PUNK_STAT_CARD_DOCS: DocPage = {
   slug: 'punk-stat-card',
   title: 'Card de indicador (Punk)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'punk',
   summary:
     'Exclusivo do Punk: bloco de cor chapada com um rótulo e um número, como os cards de atividade da referência. Em outros design systems, use um Card.',
   component: ArgPunkStatCard,

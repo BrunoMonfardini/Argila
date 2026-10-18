@@ -6,6 +6,8 @@ export const PUNK_DOT_TRACK_DOCS: DocPage = {
   slug: 'punk-dot-track',
   title: 'Trilha de pontos (Punk)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'punk',
   summary:
     'Exclusivo do Punk: pílula com pontos e uma alça que anda, para o andamento de uma campanha ou etapa. Em outros design systems, use a Progress Bar.',
   component: ArgPunkDotTrack,

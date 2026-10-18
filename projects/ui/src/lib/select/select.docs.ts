@@ -7,6 +7,7 @@ export const SELECT_DOCS: DocPage = {
   slug: 'select',
   title: 'Select',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Escolha de uma opção numa lista, sobre o `<select>` nativo: a lista aberta é a do sistema, o que no celular vira o seletor nativo. Use dentro de um `arg-field`.',
   component: ArgSelect,

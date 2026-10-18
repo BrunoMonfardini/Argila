@@ -25,8 +25,10 @@ export const pageTitle: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
 
 export const routes: Routes = [
   { path: '', component: HomePage, title: 'Argila' },
-  { path: 'fundamentos/tokens', component: TokensPage, title: 'Tokens · Argila' },
-  { path: 'fundamentos/icones', component: IconsPage, title: 'Ícones · Argila' },
+  { path: 'fundacao/tokens', component: TokensPage, title: 'Tokens · Argila' },
+  { path: 'fundacao/icones', component: IconsPage, title: 'Ícones · Argila' },
+  // Endereços antigos, de antes de "Fundamentos" virar "Fundação"
+  { path: 'fundamentos/:slug', redirectTo: 'fundacao/:slug' },
   { path: ':categoria/:slug', component: ComponentPage, title: pageTitle },
   { path: '**', redirectTo: '' },
 ];

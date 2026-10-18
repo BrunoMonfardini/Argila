@@ -6,6 +6,7 @@ export const PAGINATION_DOCS: DocPage = {
   slug: 'pagination',
   title: 'Pagination',
   category: 'Componentes',
+  group: 'Navegação',
   summary:
     'Navega entre as páginas de uma lista longa: anterior, próxima, números das páginas e "Página 3 de 24".',
   component: ArgPagination,

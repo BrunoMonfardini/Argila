@@ -7,6 +7,7 @@ export const ALERT_DOCS: DocPage = {
   slug: 'alert',
   title: 'Alert',
   category: 'Componentes',
+  group: 'Feedback',
   summary:
     'Mensagem de feedback na página: informação, sucesso, aviso ou erro, com ícone, título opcional, ações e botão de fechar.',
   component: ArgAlert,

@@ -6,6 +6,7 @@ export const COMBOBOX_DOCS: DocPage = {
   slug: 'combobox',
   title: 'Combobox',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Campo com sugestões enquanto se digita: filtra uma lista local ou busca no servidor, com carregando e "nenhum resultado". Segue o padrão "combobox with list autocomplete" do ARIA APG.',
   component: ArgCombobox,

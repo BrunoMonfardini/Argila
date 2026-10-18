@@ -9,6 +9,7 @@ export const LIST_DOCS: DocPage = {
   slug: 'list',
   title: 'List',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
     'Lista de itens sobre `<ul>` e `<ol>` nativos, com áreas para ícone ou avatar, título, descrição e valor à direita. Importe tudo de uma vez com `ARG_LIST`.',
   component: ArgList,

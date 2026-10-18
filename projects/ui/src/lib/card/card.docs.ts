@@ -8,6 +8,7 @@ export const CARD_DOCS: DocPage = {
   slug: 'card',
   title: 'Card',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
     'Agrupa o resumo de uma coisa (cliente, pet, serviço) com áreas de cabeçalho, conteúdo e ações. Com `arg-card-link`, o card inteiro vira clicável. Importe tudo de uma vez com `ARG_CARD`.',
   component: ArgCard,

@@ -38,6 +38,8 @@ import { TIME_SLOTS_DOCS } from '../../../ui/src/lib/time-slots/time-slots.docs'
 import { TOAST_DOCS } from '../../../ui/src/lib/toast/toast.docs';
 import { TOOLTIP_DOCS } from '../../../ui/src/lib/tooltip/tooltip.docs';
 import { LIST_LOADING_DOCS } from '../../../ui/src/patterns/loading.docs';
+import { ABOUT_DESIGN_SYSTEMS_DOCS } from '../../../ui/src/docs/pages/about-design-systems.docs';
+import { ABOUT_TEMPLATES_DOCS } from '../../../ui/src/docs/pages/about-templates.docs';
 import { NB_STICKER_DOCS } from '../../../ui/src/lib/design-systems/neo-brutalista/exclusivos/nb-sticker/nb-sticker.docs';
 import { NB_RULES_DOCS } from '../../../ui/src/lib/design-systems/neo-brutalista/exclusivos/nb-rules/nb-rules.docs';
 import { PUNK_STAT_CARD_DOCS } from '../../../ui/src/lib/design-systems/punk/exclusivos/punk-stat-card/punk-stat-card.docs';
@@ -54,6 +56,8 @@ export type { DocCategory, DocExample, DocPage } from '../../../ui/src/docs/doc-
  * e acrescente aqui. O CI confere que nenhum componente exportado ficou de fora.
  */
 export const ALL_DOC_PAGES: readonly DocPage[] = [
+  ABOUT_DESIGN_SYSTEMS_DOCS,
+  ABOUT_TEMPLATES_DOCS,
   XP_BALLOON_DOCS,
   XP_WINDOW_DOCS,
   PUNK_BURST_DOCS,
@@ -108,9 +112,11 @@ export const DOC_PAGES = new InjectionToken<readonly DocPage[]>('DOC_PAGES', {
 });
 
 const CATEGORY_PATHS: Record<DocCategory, string> = {
-  Fundamentos: 'fundamentos',
+  Fundação: 'fundacao',
+  'Design systems': 'design-systems',
   Componentes: 'componentes',
   Padrões: 'padroes',
+  Templates: 'templates',
 };
 
 /** Segmento da URL de cada categoria: "Padrões" → "padroes". */

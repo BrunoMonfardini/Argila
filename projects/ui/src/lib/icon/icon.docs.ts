@@ -8,8 +8,9 @@ export const ICON_DOCS: DocPage = {
   slug: 'icon',
   title: 'Icon',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
-    'Ícone desenhado pelo time, na cor do texto ao redor. Registre os ícones que o produto usa com `provideArgIcons`; a lista completa está em Fundamentos › Ícones.',
+    'Ícone desenhado pelo time, na cor do texto ao redor. Registre os ícones que o produto usa com `provideArgIcons`; a lista completa está em Fundação › Ícones.',
   component: ArgIcon,
   playgroundInputs: { name: 'plus', size: 'lg' },
   examples: [

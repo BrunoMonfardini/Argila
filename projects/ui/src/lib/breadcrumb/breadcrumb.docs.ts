@@ -6,6 +6,7 @@ export const BREADCRUMB_DOCS: DocPage = {
   slug: 'breadcrumb',
   title: 'Breadcrumb',
   category: 'Componentes',
+  group: 'Navegação',
   summary:
     'Trilha de navegação: mostra onde a página está na hierarquia e leva às páginas acima dela. Importe tudo de uma vez com `ARG_BREADCRUMB`.',
   component: ArgBreadcrumb,

@@ -8,6 +8,7 @@ export const AVATAR_DOCS: DocPage = {
   slug: 'avatar',
   title: 'Avatar',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
     'Foto de uma pessoa ou pet. Sem foto, ou se ela não carregar, mostra as iniciais do nome.',
   component: ArgAvatar,

@@ -7,6 +7,7 @@ export const EMPTY_STATE_DOCS: DocPage = {
   slug: 'empty-state',
   title: 'Empty State',
   category: 'Componentes',
+  group: 'Feedback',
   summary:
     'O que mostrar quando não há dados: um título que diz o que falta, um texto que explica e, se houver, a ação que resolve. Veja também o padrão "Carregamento de lista".',
   component: ArgEmptyState,

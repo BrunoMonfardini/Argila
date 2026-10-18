@@ -9,6 +9,7 @@ export const ICON_BUTTON_DOCS: DocPage = {
   slug: 'icon-button',
   title: 'Icon Button',
   category: 'Componentes',
+  group: 'Ações',
   summary:
     'Botão só com ícone, para ações conhecidas em pouco espaço: fechar, adicionar, editar. O `label` é obrigatório e vira o nome do botão para leitores de tela.',
   component: ArgIconButton,

@@ -6,6 +6,8 @@ export const PUNK_BURST_DOCS: DocPage = {
   slug: 'punk-burst',
   title: 'Estrela explosão (Punk)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'punk',
   summary:
     'Exclusivo do Punk: estrela "explosão", só ornamento, para capas e cards, como na tela de entrada da referência.',
   component: ArgPunkBurst,

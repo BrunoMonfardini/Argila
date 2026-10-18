@@ -8,6 +8,7 @@ export const LINK_DOCS: DocPage = {
   slug: 'link',
   title: 'Link',
   category: 'Componentes',
+  group: 'Ações',
   summary:
     'Leva a outra página ou endereço. Sempre sublinhado, para não depender só da cor. Para ações (salvar, enviar), use o Button.',
   component: ArgLink,

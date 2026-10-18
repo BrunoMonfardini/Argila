@@ -8,6 +8,7 @@ export const BUTTON_DOCS: DocPage = {
   slug: 'button',
   title: 'Button',
   category: 'Componentes',
+  group: 'Ações',
   summary:
     'Dispara uma ação: primária, secundária, terciária ou destrutiva, com estado de carregamento. Use uma única variante primária por tela.',
   component: ArgButton,

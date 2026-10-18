@@ -6,6 +6,7 @@ export const FILE_UPLOAD_DOCS: DocPage = {
   slug: 'file-upload',
   title: 'File Upload',
   category: 'Componentes',
+  group: 'Formulário',
   summary:
     'Campo de arquivos com área para arrastar e soltar, prévia de imagens, validação de tipo e tamanho e progresso de envio. O envio em si (ex.: Supabase Storage) vem de um `uploader` passado por quem usa.',
   component: ArgFileUpload,

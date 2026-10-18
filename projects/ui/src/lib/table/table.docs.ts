@@ -6,6 +6,7 @@ export const TABLE_DOCS: DocPage = {
   slug: 'table',
   title: 'Table',
   category: 'Componentes',
+  group: 'Exibição de dados',
   summary:
     'Tabela de dados sobre a `<table>` nativa: ordenação pelos títulos, seleção de linhas, carregando, vazio e rolagem horizontal no celular. Importe tudo de uma vez com `ARG_TABLE`.',
   component: ArgTable,

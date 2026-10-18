@@ -6,6 +6,8 @@ export const XP_BALLOON_DOCS: DocPage = {
   slug: 'xp-balloon',
   title: 'Balão (Windows XP)',
   category: 'Componentes',
+  group: 'Exclusivos',
+  designSystem: 'windows-xp',
   summary:
     'Exclusivo do Windows XP: balão de aviso curto, como o "System Update Complete" da referência. Para avisos que somem sozinhos, use o Toast.',
   component: ArgXpBalloon,

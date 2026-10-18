@@ -8,6 +8,7 @@ export const SPINNER_DOCS: DocPage = {
   slug: 'spinner',
   title: 'Spinner',
   category: 'Componentes',
+  group: 'Carregamento',
   summary:
     'Indicador de progresso indeterminado, para esperas curtas ou carregamentos sem forma previsível.',
   component: ArgSpinner,

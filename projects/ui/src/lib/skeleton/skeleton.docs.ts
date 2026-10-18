@@ -9,6 +9,7 @@ export const SKELETON_DOCS: DocPage = {
   slug: 'skeleton',
   title: 'Skeleton',
   category: 'Componentes',
+  group: 'Carregamento',
   summary:
     'Espaço reservado com brilho enquanto o conteúdo carrega. Mostra a forma do que vem e evita que a tela pule quando os dados chegam.',
   component: ArgSkeleton,
