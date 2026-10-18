@@ -1,0 +1,5 @@
+/* Badge: cantos pequenos. */
+
+:root[data-arg-style='coda'] .arg-badge {
+  --arg-badge-radius: var(--arg-radius-control);
+}

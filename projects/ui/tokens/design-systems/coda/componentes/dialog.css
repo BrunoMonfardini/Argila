@@ -1,0 +1,5 @@
+/* Diálogo: contorno de 2px rosa. */
+
+:root[data-arg-style='coda'] .arg-dialog {
+  border: 2px solid var(--arg-color-border-strong);
+}

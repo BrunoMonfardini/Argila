@@ -1,0 +1,5 @@
+/* Select: o mesmo campo do Input. */
+
+:root[data-arg-style='coda'] .arg-select {
+  --arg-input-border: var(--arg-color-border-strong);
+}

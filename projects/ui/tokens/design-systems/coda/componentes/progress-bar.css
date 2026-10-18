@@ -1,0 +1,5 @@
+/* Barra de progresso: trilho com contorno de 2px. */
+
+:root[data-arg-style='coda'] .arg-progress {
+  border: 2px solid var(--arg-color-border-strong);
+}

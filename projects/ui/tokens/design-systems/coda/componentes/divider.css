@@ -1,0 +1,6 @@
+/* Divisor: linha de 2px na borda rosa. */
+
+:root[data-arg-style='coda'] .arg-divider {
+  --arg-divider-color: var(--arg-color-border);
+  --arg-divider-thickness: 2px;
+}

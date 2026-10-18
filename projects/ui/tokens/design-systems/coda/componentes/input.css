@@ -1,0 +1,5 @@
+/* Campos: contorno de 2px na cor da borda rosa. */
+
+:root[data-arg-style='coda'] .arg-input {
+  --arg-input-border: var(--arg-color-border-strong);
+}

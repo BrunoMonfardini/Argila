@@ -1,0 +1,5 @@
+/* Spinner: rosa. */
+
+:root[data-arg-style='coda'] .arg-spinner {
+  --arg-spinner-color: var(--arg-color-primary);
+}
