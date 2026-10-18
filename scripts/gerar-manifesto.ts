@@ -55,6 +55,7 @@ if (process.argv.includes('--check')) {
     root,
     docsFiles,
     lastCommit,
+    changelog: readFileSync(resolve(root, 'projects/ui/CHANGELOG.md'), 'utf8'),
     semanticCss: readFileSync(resolve(root, 'projects/ui/tokens/semantic.css'), 'utf8'),
   });
 

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 import { RouterLink } from '@angular/router';
 import { ARG_DESIGN_SYSTEMS, ArgAlert, ArgButton, ArgTheme } from '@brunomonfardini/ui';
 import { DocAvailability, availabilityAcross, availabilityIn } from '../../availability';
+import { DocCode } from '../../code/code';
 import { DOC_MANIFEST, manifestPage } from '../../manifest';
 import { DOC_PAGES, DocPage, findPage } from '../../registry';
 import { DocPlayground } from '../../playground/playground';
@@ -42,6 +43,7 @@ export function formatUpdatedAt(iso: string): string {
   imports: [
     ArgAlert,
     ArgButton,
+    DocCode,
     DocExampleFrame,
     DocPlayground,
     DocPropsTable,

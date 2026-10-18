@@ -6,7 +6,8 @@ import type { ArgStyle } from '../lib/design-systems/design-systems';
  * `<componente>.docs.ts` ao lado do código. Estes arquivos não entram no
  * pacote publicado: o `public-api.ts` não os exporta.
  */
-export type DocCategory = 'Fundação' | 'Componentes' | 'Padrões' | 'Templates' | 'Design systems';
+export type DocCategory =
+  'Guias' | 'Fundação' | 'Componentes' | 'Padrões' | 'Templates' | 'Design systems';
 
 export interface DocExample {
   /** Título do exemplo na página, ex.: "Variantes". Único dentro da página. */
@@ -27,6 +28,8 @@ export interface DocSection {
   heading: string;
   /** Parágrafos; aceitam `código` entre crases. */
   body: string[];
+  /** Bloco de código depois dos parágrafos, com o botão de copiar. */
+  code?: { language: 'ts' | 'html' | 'css' | 'sh'; label: string; code: string };
 }
 
 export interface DocPage {

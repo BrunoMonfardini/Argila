@@ -47,7 +47,7 @@
 /* A barra de ícones tem largura fixa; o painel abre por cima do conteúdo */
 .doc-shell__body {
   display: grid;
-  grid-template-columns: 6rem minmax(0, 1fr);
+  grid-template-columns: 6.5rem minmax(0, 1fr);
 }
 
 .doc-shell__nav {

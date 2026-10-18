@@ -79,6 +79,9 @@
                 @for (paragraph of section.body; track paragraph) {
                   <p><doc-text [text]="paragraph" /></p>
                 }
+                @if (section.code; as code) {
+                  <doc-code [code]="code.code" [language]="code.language" [label]="code.label" />
+                }
               </section>
             }
 

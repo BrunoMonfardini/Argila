@@ -7,10 +7,13 @@ import {
   withComponentInputBinding,
   withInMemoryScrolling,
 } from '@angular/router';
+import { PRODUCT_DESIGN_SYSTEMS } from './availability';
 import { ComponentPage } from './pages/component-page/component-page';
+import { DesignSystemPage } from './pages/design-system/design-system-page';
 import { HomePage } from './pages/home/home';
 import { IconsPage } from './pages/icons/icons-page';
 import { TokensPage } from './pages/tokens/tokens-page';
+import { UpdatesPage } from './pages/updates/updates-page';
 import { DOC_PAGES, findPage } from './registry';
 
 /** Título da aba: "Button · Argila". */
@@ -25,6 +28,14 @@ export const pageTitle: ResolveFn<string> = (route: ActivatedRouteSnapshot) => {
 
 export const routes: Routes = [
   { path: '', component: HomePage, title: 'Argila' },
+  { path: 'comeco/atualizacoes', component: UpdatesPage, title: 'Atualizações · Argila' },
+  // Uma página por design system de produto, montada do manifesto
+  ...PRODUCT_DESIGN_SYSTEMS.map((ds) => ({
+    path: `design-systems/${ds.id}`,
+    component: DesignSystemPage,
+    title: `${ds.nome} · Argila`,
+    data: { id: ds.id },
+  })),
   { path: 'fundacao/tokens', component: TokensPage, title: 'Tokens · Argila' },
   { path: 'fundacao/icones', component: IconsPage, title: 'Ícones · Argila' },
   // Endereços antigos, de antes de "Fundamentos" virar "Fundação"
