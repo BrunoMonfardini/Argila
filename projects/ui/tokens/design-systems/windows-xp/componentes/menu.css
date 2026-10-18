@@ -1,0 +1,9 @@
+/* Menu: o item em foco ganha a faixa azul com texto branco, como os menus de sistema. */
+
+:root[data-arg-style='windows-xp'] arg-menu {
+  --arg-menu-item-bg-hover: var(--arg-color-primary);
+}
+
+:root[data-arg-style='windows-xp'] arg-menu .arg-menu__item:is(:hover, :focus-visible) {
+  color: var(--arg-color-on-primary);
+}

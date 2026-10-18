@@ -1,0 +1,5 @@
+/* Badge: etiqueta de cantos quase retos. */
+
+:root[data-arg-style='windows-xp'] .arg-badge {
+  --arg-badge-radius: 0.125rem;
+}

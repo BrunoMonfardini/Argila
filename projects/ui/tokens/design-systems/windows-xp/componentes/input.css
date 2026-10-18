@@ -1,0 +1,6 @@
+/* Campos: borda de 1px, cantos de 4px e o rebaixo de 1px, como o campo de comando da referência. */
+
+:root[data-arg-style='windows-xp'] .arg-input {
+  --arg-input-border: var(--arg-color-border-strong);
+  --arg-input-border-hover: var(--arg-color-primary);
+}

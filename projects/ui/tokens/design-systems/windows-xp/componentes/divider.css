@@ -1,0 +1,5 @@
+/* Divisor: linha cinza de 1px. */
+
+:root[data-arg-style='windows-xp'] .arg-divider {
+  --arg-divider-color: var(--arg-color-border);
+}

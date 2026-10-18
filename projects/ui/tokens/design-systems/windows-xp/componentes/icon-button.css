@@ -1,0 +1,5 @@
+/* Botão de ícone: quadrado de relevo, cantos quase retos. */
+
+:root[data-arg-style='windows-xp'] .arg-icon-button {
+  --arg-button-radius: 0.125rem;
+}

@@ -1,0 +1,5 @@
+/* Tooltip: caixa de cantos retos. */
+
+:root[data-arg-style='windows-xp'] arg-tooltip-panel {
+  --arg-tooltip-radius: 0;
+}

@@ -1,0 +1,5 @@
+/* Spinner: azul. */
+
+:root[data-arg-style='windows-xp'] .arg-spinner {
+  --arg-spinner-color: var(--arg-color-primary);
+}

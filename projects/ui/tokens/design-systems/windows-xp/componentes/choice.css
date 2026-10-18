@@ -1,0 +1,9 @@
+/* Checkbox e radio marcados em azul. */
+
+:root[data-arg-style='windows-xp'] :is(.arg-checkbox, .arg-radio) {
+  --arg-choice-accent: var(--arg-color-primary);
+}
+
+:root[data-arg-style='windows-xp'] .arg-switch {
+  --arg-switch-on: var(--arg-color-primary);
+}

@@ -1,0 +1,16 @@
+/* Botões em alto-relevo de 1px: o primário é o bloco azul; o secundário, a face cinza de janela. */
+
+:root[data-arg-style='windows-xp'] .arg-button.arg-button--secondary {
+  --arg-button-bg: var(--arg-color-surface-sunken);
+  --arg-button-bg-hover: color-mix(
+    in oklab,
+    var(--arg-color-surface-sunken),
+    var(--arg-color-shade) 6%
+  );
+  --arg-button-fg: var(--arg-color-text);
+  --arg-button-border: var(--arg-color-border-strong);
+}
+
+:root[data-arg-style='windows-xp'] .arg-button:not(.arg-button--tertiary, .arg-button--secondary) {
+  --arg-button-border: color-mix(in oklab, var(--arg-button-bg), #000 25%);
+}

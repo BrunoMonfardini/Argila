@@ -1202,19 +1202,55 @@ export const ARG_ALLOWED_COLORS: Readonly<
   "windows-xp": {
     "nativa": {
       "primary": [
+        "cobre",
+        "caramelo",
+        "terracota",
+        "oliva",
+        "musgo",
+        "petroleo",
+        "ardosia",
+        "anil",
         "ameixa",
         "vinho",
-        "grafite"
+        "coral",
+        "mostarda",
+        "grafite",
+        "menta",
+        "lavanda"
       ],
       "secondary": [
+        "cobre",
+        "caramelo",
+        "terracota",
+        "oliva",
+        "musgo",
+        "petroleo",
+        "ardosia",
+        "anil",
         "ameixa",
         "vinho",
-        "grafite"
+        "coral",
+        "mostarda",
+        "grafite",
+        "menta",
+        "lavanda"
       ],
       "accent": [
+        "cobre",
+        "caramelo",
+        "terracota",
+        "oliva",
+        "musgo",
+        "petroleo",
+        "ardosia",
+        "anil",
         "ameixa",
         "vinho",
-        "grafite"
+        "coral",
+        "mostarda",
+        "grafite",
+        "menta",
+        "lavanda"
       ]
     },
     "alto-contraste": {

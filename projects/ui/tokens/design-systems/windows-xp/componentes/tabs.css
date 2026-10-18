@@ -1,0 +1,19 @@
+/* Abas em pasta: a aberta fica em relevo sobre a linha da pasta. */
+
+:root[data-arg-style='windows-xp'] arg-tabs {
+  --arg-tabs-indicator: transparent;
+  --arg-tabs-border: var(--arg-color-border-strong);
+}
+
+:root[data-arg-style='windows-xp'] arg-tabs .arg-tabs__tab {
+  margin-block-end: -1px;
+  border: 1px solid transparent;
+  border-radius: 0.25rem 0.25rem 0 0;
+  background: var(--arg-color-surface-sunken);
+}
+
+:root[data-arg-style='windows-xp'] arg-tabs .arg-tabs__tab[aria-selected='true'] {
+  border-color: var(--arg-color-border-strong);
+  border-block-end-color: var(--arg-color-surface-solid);
+  background: var(--arg-color-surface-solid);
+}

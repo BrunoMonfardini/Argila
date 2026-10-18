@@ -1,0 +1,10 @@
+/* Barra de progresso: trilho rebaixado de 1px, mais alto, preenchimento azul. */
+
+:root[data-arg-style='windows-xp'] .arg-progress {
+  --arg-progress-radius: 0.125rem;
+  border: 1px solid var(--arg-color-border-strong);
+}
+
+:root[data-arg-style='windows-xp'] .arg-progress:not(.arg-progress--sm) {
+  --arg-progress-height: 1.25rem;
+}

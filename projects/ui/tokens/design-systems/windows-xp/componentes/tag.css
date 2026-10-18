@@ -1,0 +1,5 @@
+/* Tag: etiqueta de cantos quase retos com borda de 1px. */
+
+:root[data-arg-style='windows-xp'] .arg-tag {
+  --arg-tag-radius: 0.125rem;
+}

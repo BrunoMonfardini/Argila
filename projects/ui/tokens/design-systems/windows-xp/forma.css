@@ -1,24 +1,29 @@
 /*
- * Estilo Windows XP (visual clássico): cantos retos, botões em alto-relevo,
- * campos rebaixados e Tahoma. As cores (cinza de janela e azul-marinho da
- * barra de título) ficam na paleta nativa, em paletas/nativa.css.
- *
- * O relevo usa tons de cinza próprios: faz parte da forma, não da paleta.
+ * Forma do Windows XP, como o "Retro-OS UI Kit" (docs/referencias/windows-xp.jpg):
+ * bordas de 1px, raio de 4px no máximo, botões em alto-relevo de 1px e campos
+ * rebaixados, sem sombra pesada. Títulos em fonte de pixel (Pixelify Sans,
+ * carregada pelo produto); o corpo é a Tahoma do sistema.
  */
 :root[data-arg-style='windows-xp'],
 :root[data-arg-brand='windows-xp'] {
-  --arg-radius-control: var(--arg-core-radius-0);
-  --arg-radius-container: var(--arg-core-radius-0);
+  --arg-radius-control: 0.25rem;
+  --arg-radius-container: 0.25rem;
 
-  --arg-shadow-color: light-dark(rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.7));
-  --arg-shadow-sm: 1px 1px 0 var(--arg-shadow-color);
-  --arg-shadow-md: 2px 2px 0 var(--arg-shadow-color);
-  --arg-shadow-lg: 3px 3px 0 var(--arg-shadow-color);
+  --arg-shadow-color: light-dark(rgb(0 0 0 / 0.35), rgb(0 0 0 / 0.7));
+  --arg-shadow-1: 1px 1px 0 var(--arg-shadow-color);
+  --arg-shadow-2: 2px 2px 0 var(--arg-shadow-color);
+  --arg-shadow-3: 3px 3px 0 var(--arg-shadow-color);
+  --arg-shadow-4: 4px 4px 0 var(--arg-shadow-color);
+  --arg-shadow-5: 6px 6px 0 var(--arg-shadow-color);
+  --arg-shadow-sm: var(--arg-shadow-1);
+  --arg-shadow-md: var(--arg-shadow-2);
+  --arg-shadow-lg: var(--arg-shadow-3);
+  /* Relevo de 1px: claro em cima e à esquerda, escuro embaixo e à direita */
   --arg-shadow-control:
-    inset -1px -1px light-dark(#404040, #000000), inset 1px 1px light-dark(#ffffff, #6a6a6a),
-    inset -2px -2px light-dark(#808080, #1a1a1a), inset 2px 2px light-dark(#dfdfdf, #4a4a4a);
-  --arg-shadow-field:
-    inset 1px 1px light-dark(#808080, #000000), inset 2px 2px light-dark(#404040, #111111);
+    inset -1px -1px light-dark(rgb(0 0 0 / 0.35), rgb(0 0 0 / 0.6)),
+    inset 1px 1px light-dark(rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.15));
+  --arg-shadow-field: inset 1px 1px light-dark(rgb(0 0 0 / 0.25), rgb(0 0 0 / 0.6));
 
-  --arg-font-family: Tahoma, 'MS Sans Serif', 'Segoe UI', Geneva, sans-serif;
+  --arg-font-family: Tahoma, 'Segoe UI', Geneva, sans-serif;
+  --arg-font-family-heading: 'Pixelify Sans', Tahoma, sans-serif;
 }

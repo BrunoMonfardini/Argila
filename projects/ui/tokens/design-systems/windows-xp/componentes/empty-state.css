@@ -1,0 +1,10 @@
+/* Estado vazio: painel de borda cheia de 1px. */
+
+:root[data-arg-style='windows-xp'] .arg-empty-state {
+  --arg-empty-state-icon-bg: var(--arg-color-primary-soft);
+  --arg-empty-state-icon-fg: var(--arg-color-on-primary-soft);
+}
+
+:root[data-arg-style='windows-xp'] .arg-empty-state.arg-empty-state--bordered {
+  border-style: solid;
+}
