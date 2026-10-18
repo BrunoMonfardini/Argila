@@ -24,7 +24,7 @@
     aria-label="Páginas do catálogo"
     [class.doc-shell__nav--open]="menuOpen()"
   >
-    <doc-nav-rail [sections]="sections" (navigate)="closeMenu()" />
+    <doc-nav-rail [sections]="sections()" (navigate)="closeMenu()" />
   </nav>
 
   <main id="conteudo" class="doc-shell__main" tabindex="-1">

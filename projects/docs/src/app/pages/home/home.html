@@ -10,7 +10,7 @@
   das superfícies: todos os componentes acompanham, porque só usam tokens.
 </p>
 
-@for (section of sections; track section.id) {
+@for (section of sections(); track section.id) {
   <section [attr.aria-labelledby]="'inicio-' + $index">
     <h2 [id]="'inicio-' + $index">{{ section.title }}</h2>
     <ul class="doc-home__cards">

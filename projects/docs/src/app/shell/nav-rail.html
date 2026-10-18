@@ -53,7 +53,7 @@
                   [routerLink]="link.path"
                   routerLinkActive="doc-panel__link--active"
                   ariaCurrentWhenActive="page"
-                  [routerLinkActiveOptions]="activeOptions"
+                  [routerLinkActiveOptions]="link.path === '/' ? homeOptions : activeOptions"
                   (click)="follow()"
                 >
                   <span arg-list-title>{{ link.label }}</span>
