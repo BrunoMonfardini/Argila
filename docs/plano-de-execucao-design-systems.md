@@ -29,7 +29,7 @@ _Atualizado em 17/10/2026._
 | E6      | **Pronto** (#92, #93): Punk e os exclusivos                                                                                                                                                            |
 | E7      | **Pronto** (#94, #95): Windows XP e os exclusivos                                                                                                                                                      |
 | E8      | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
-| E9      | **Em andamento**: E9a (barra de ícones com painel, famílias, Fundação, Design systems e Templates)                                                                                                     |
+| E9      | **Em andamento**: E9a pronto (#97: barra de ícones com painel, famílias, Fundação, Design systems e Templates); E9b (catálogo filtrado pelo DS, abas na URL, índice e "Atualizado em") em review       |
 | E10–E12 | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
@@ -244,8 +244,8 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 | [x] | C-01 | `feat(icons): ícones da navegação` (`book`, `rocket`, `layers`, `layout`, `wrench`, `help-circle`, `accessibility`, `sparkles`) | E2         | Os 8 passam no gerador                                                                          | 0,5  |
 | [x] | C-02 | `feat(docs): barra de ícones e painel` (busca no painel, gaveta no celular)                                                     | C-01       | Navegável só por teclado; painel fecha com Esc e clique fora                                    | 1,5  |
 | [x] | C-03 | `feat(docs): DocPage novo e famílias de componentes`                                                                            | E2         | Campos opcionais da 4.4; componentes agrupados nas 9 famílias                                   | 1    |
-| [ ] | C-04 | `feat(docs): catálogo filtrado pelo DS` (fora some, herdado avisa, "Disponível em")                                             | C-03       | Trocar para Windows XP esconde a Agenda; abrir a URL dela mostra o aviso com os DS que a têm    | 1    |
-| [ ] | C-05 | `feat(docs): páginas em abas, "Atualizado em" e índice`                                                                         | C-03       | Aba ativa na URL; data vem do último commit do `*.docs.ts`                                      | 1,5  |
+| [x] | C-04 | `feat(docs): catálogo filtrado pelo DS` (fora some, herdado avisa, "Disponível em")                                             | C-03       | Trocar para Windows XP esconde a Agenda; abrir a URL dela mostra o aviso com os DS que a têm    | 1    |
+| [x] | C-05 | `feat(docs): páginas em abas, "Atualizado em" e índice`                                                                         | C-03       | Aba ativa na URL; data vem do último commit do `*.docs.ts`                                      | 1,5  |
 | [ ] | C-06 | `feat(docs): barra de tema por DS` (só opções aceitas; URL e navegador; link inválido cai no padrão)                            | C-04       | Escolher Punk mostra só Néon, Viva e Alto contraste; o link compartilhado reproduz a combinação | 1    |
 | [x] | C-07 | `feat(docs): categorias Design systems e Templates`                                                                             | C-03       | As duas aparecem na navegação, ainda com páginas "Sobre"                                        | 0,5  |
 
