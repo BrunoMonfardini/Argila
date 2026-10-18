@@ -1,5 +1,6 @@
 import { DocPage } from '../../docs/doc-page';
 import { PaginationClientsExample } from './examples/pagination-clients.example';
+import { PaginationDotsExample } from './examples/pagination-dots.example';
 import { ArgPagination } from './pagination';
 
 export const PAGINATION_DOCS: DocPage = {
@@ -12,7 +13,15 @@ export const PAGINATION_DOCS: DocPage = {
   component: ArgPagination,
   hostElement: 'nav',
   playgroundInputs: { total: 24, page: 5 },
-  examples: [{ name: 'Lista de clientes', component: PaginationClientsExample }],
+  examples: [
+    { name: 'Lista de clientes', component: PaginationClientsExample },
+    {
+      name: 'Pontos',
+      description:
+        'Com `variant="dots"`: um ponto por página, para carrosséis e passos de boas-vindas com poucas páginas.',
+      component: PaginationDotsExample,
+    },
+  ],
   guidelines: {
     do: [
       'Ponha a paginação logo abaixo da lista que ela controla.',
@@ -21,6 +30,7 @@ export const PAGINATION_DOCS: DocPage = {
     ],
     dont: [
       'Não use para poucos itens que cabem numa tela.',
+      'Não use pontos com muitas páginas: acima de umas 8, prefira os números.',
       'Não pagine resultados que a pessoa precisa comparar entre si: prefira filtros.',
     ],
   },

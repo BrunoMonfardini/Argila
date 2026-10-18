@@ -1,4 +1,5 @@
 import { DocPage } from '../../docs/doc-page';
+import { DrawerBottomExample } from './examples/drawer-bottom.example';
 import { DrawerFiltersExample } from './examples/drawer-filters.example';
 import { DrawerNavigationExample } from './examples/drawer-navigation.example';
 
@@ -20,6 +21,12 @@ export const DRAWER_DOCS: DocPage = {
       name: 'Menu',
       description: 'Gaveta à esquerda (`side: \x27start\x27`) para navegação.',
       component: DrawerNavigationExample,
+    },
+    {
+      name: 'De baixo',
+      description:
+        'Com `side: \x27bottom\x27`, sobe de baixo em qualquer largura (bottom sheet): opções rápidas sobre o que está na tela.',
+      component: DrawerBottomExample,
     },
   ],
   guidelines: {
