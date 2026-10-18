@@ -13,6 +13,7 @@ export interface SourceFile {
 /** O que as regras precisam de um manifesto. */
 export interface DesignSystemRules {
   id: string;
+  /** `curados` aqui é a lista completa (núcleo mínimo incluído): ver `curatedComponents`. */
   componentes: { curados: readonly string[]; fora: readonly string[] };
   exclusivos: readonly string[];
   prefixo?: string;

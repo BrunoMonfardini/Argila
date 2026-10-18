@@ -9,7 +9,8 @@
     "**/coverage/**",
     "**/*.spec.ts",
     "**/*.generated.ts",
-    "projects/ui/tokens/colors.css"
+    "projects/ui/tokens/colors.css",
+    "projects/ui/tokens/design-systems/*/index.css"
   ],
   "reporters": ["console"],
   "exitCode": 1
