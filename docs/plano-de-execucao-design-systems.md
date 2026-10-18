@@ -30,7 +30,7 @@ _Atualizado em 17/10/2026._
 | E7      | **Pronto** (#94, #95): Windows XP e os exclusivos                                                                                                                                                      |
 | E8      | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
 | E9      | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
-| E10     | **Em andamento**: E10a pronto (#100: páginas dos DS e guias); E10b (Fundação e Montar tema) em review                                                                                                  |
+| E10     | **Pronto** (#100, #101 e o E10c: anatomia dos 10 componentes)                                                                                                                                          |
 | E11–E12 | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
@@ -49,7 +49,7 @@ Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
 | [ ] | E7    | `feat/ds-windows-xp`       | DS Windows XP fiel à referência                                       | E3          | 3 d  |
 | [ ] | E8    | `feat/ds-coda`             | CODA como sexto DS, com núcleo mínimo curado                          | E3          | 2 d  |
 | [x] | E9    | `feat/catalogo-estrutura`  | Navegação nova, catálogo filtrado pelo DS, páginas em abas            | E2          | 7 d  |
-| [ ] | E10   | `feat/catalogo-conteudo`   | Páginas dos DS, Como começar, Fundação, Montar tema, anatomia         | E4 a E8, E9 | 7 d  |
+| [x] | E10   | `feat/catalogo-conteudo`   | Páginas dos DS, Como começar, Fundação, Montar tema, anatomia         | E4 a E8, E9 | 7 d  |
 | [ ] | E11   | `feat/templates-e-padroes` | 5 templates, padrões da leva 1, variantes                             | E9          | 9 d  |
 | [ ] | E12   | `feat/padroes-leva-2`      | Padrões da leva 2                                                     | E11         | 6 d  |
 
@@ -259,7 +259,7 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 | [x] | K-03 | `docs: Fundação` (Cores, Tipografia, Espaçamento, Raio e elevação, Movimento)                  | E9          | Cada página mostra os valores do DS e da paleta escolhidos                           | 1,5  |
 | [x] | K-04 | `docs: Atualizações e Ajuda`                                                                   | E9          | Changelog renderizado; perguntas frequentes e como contribuir                        | 0,5  |
 | [x] | K-05 | `feat(docs): Montar tema`                                                                      | E9          | Copiar o segmento ou o CSS e colar num produto reproduz o que se vê                  | 1    |
-| [ ] | K-06 | `docs: anatomia dos 10 componentes`                                                            | E9          | Marcadores acompanham DS e paleta; legenda lida pelo leitor de tela                  | 1,5  |
+| [x] | K-06 | `docs: anatomia dos 10 componentes`                                                            | E9          | Marcadores acompanham DS e paleta; legenda lida pelo leitor de tela                  | 1,5  |
 
 ## E11: templates e padrões, leva 1
 
