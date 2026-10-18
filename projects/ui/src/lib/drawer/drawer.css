@@ -48,6 +48,24 @@
   animation-name: arg-drawer-from-start;
 }
 
+/* De baixo em qualquer largura (bottom sheet) */
+.arg-drawer.arg-drawer-bottom {
+  inset: auto 0 0;
+  width: 100%;
+  height: auto;
+  max-height: 85dvh;
+  margin: 0;
+  border-radius: var(--arg-dialog-radius) var(--arg-dialog-radius) 0 0;
+}
+
+.arg-drawer-bottom > * {
+  flex: initial;
+}
+
+.arg-drawer-bottom[open] {
+  animation-name: arg-drawer-from-bottom;
+}
+
 /* Celular: a gaveta sobe de baixo, na largura toda, e a página continua visível em cima */
 @media (width < 40rem) {
   .arg-drawer,

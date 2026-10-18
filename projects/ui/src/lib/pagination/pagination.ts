@@ -4,6 +4,9 @@ import { ArgAnnouncer } from '../internal/announcer';
 /** Um número de página, ou `'gap'` para as reticências entre números distantes. */
 export type ArgPageItem = number | 'gap';
 
+/** `numbers`: Anterior, números e Próxima. `dots`: um ponto por página, para poucas páginas. */
+export type ArgPaginationVariant = 'numbers' | 'dots';
+
 /**
  * Quais páginas mostrar: sempre a primeira e a última, a atual e `siblings`
  * vizinhas de cada lado; o resto vira reticências. Uma reticência nunca
@@ -33,14 +36,18 @@ export function pageItems(page: number, total: number, siblings = 1): ArgPageIte
  * A página atual tem `aria-current="page"` e, ao trocar, "Página 3 de 12" é
  * anunciado pelo leitor de tela. Anterior e Próxima ficam com
  * `aria-disabled` nas pontas, sem perder o foco.
+ *
+ * Com `variant="dots"`, um ponto por página (carrossel, passos de boas-vindas):
+ * cada ponto é um botão com o nome "Página 2", e a posição fica só para o
+ * leitor de tela.
  */
 @Component({
   selector: 'nav[arg-pagination]',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './pagination.html',
-  styleUrl: './pagination.css',
+  styleUrls: ['./pagination.css', '../internal/sr-only.css'],
   host: {
-    class: 'arg-pagination',
+    '[class]': '"arg-pagination arg-pagination--" + variant()',
     '[attr.aria-label]': 'label()',
   },
 })
@@ -57,6 +64,8 @@ export class ArgPagination {
   readonly previousText = input('Anterior');
   /** Texto do botão de avançar uma página. */
   readonly nextText = input('Próxima');
+  /** `numbers` (padrão) ou `dots`: um ponto por página, para até umas 8 páginas. */
+  readonly variant = input<ArgPaginationVariant>('numbers');
 
   private readonly announcer = inject(ArgAnnouncer);
 
@@ -64,6 +73,8 @@ export class ArgPagination {
   protected readonly items = computed(() =>
     pageItems(this.current(), this.total(), this.siblings()),
   );
+  /** Todas as páginas, para os pontos. */
+  protected readonly pages = computed(() => Array.from({ length: this.total() }, (_, i) => i + 1));
   protected readonly status = computed(() => `Página ${this.current()} de ${this.total()}`);
   protected readonly isFirst = computed(() => this.current() <= 1);
   protected readonly isLast = computed(() => this.current() >= this.total());

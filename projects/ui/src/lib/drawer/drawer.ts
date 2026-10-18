@@ -6,8 +6,10 @@ export interface ArgDrawerConfig<D = unknown> extends Omit<ArgDialogConfig<D>, '
   /**
    * Lateral em telas largas: `end` (direita, padrão) para filtros e detalhes,
    * `start` (esquerda) para navegação. Em telas estreitas, a gaveta sobe de baixo.
+   * `bottom` sobe de baixo em qualquer largura (bottom sheet), para opções
+   * rápidas sobre o que está na tela.
    */
-  side?: 'start' | 'end';
+  side?: 'start' | 'end' | 'bottom';
 }
 
 /**
