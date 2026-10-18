@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { argIconsAll, provideArgIcons } from '@brunomonfardini/ui';
 import { a11yViolations } from '../../../ui/src/testing/a11y';
 import { App } from './app';
+import { PRODUCT_DESIGN_SYSTEMS } from './availability';
 import { provideDocRouter } from './app.routes';
 import { ALL_DOC_PAGES, pagePath } from './registry';
 
@@ -16,6 +17,8 @@ describe('acessibilidade do catálogo', () => {
     '/fundacao/icones',
     ...ALL_DOC_PAGES.map(pagePath),
     ...tabs,
+    '/comeco/atualizacoes',
+    ...PRODUCT_DESIGN_SYSTEMS.map((ds) => `/design-systems/${ds.id}`),
   ];
 
   it.each(urls)('%s não tem violações', async (url) => {

@@ -267,3 +267,16 @@ describe('buildManifest: "Atualizado em"', () => {
     expect(Object.keys(manifest.pages['Componentes/sample'])).not.toContain('updatedAt');
   });
 });
+
+describe('buildManifest: changelog', () => {
+  it('guarda o CHANGELOG.md quando passado, e só então', () => {
+    const docsFiles = [resolve(FIXTURES, 'sample.docs.ts')];
+
+    expect(
+      buildManifest({ root: ROOT, docsFiles, semanticCss: '', changelog: '# x' }).changelog,
+    ).toBe('# x');
+    expect(Object.keys(buildManifest({ root: ROOT, docsFiles, semanticCss: '' }))).not.toContain(
+      'changelog',
+    );
+  });
+});

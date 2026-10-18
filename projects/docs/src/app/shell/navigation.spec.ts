@@ -27,6 +27,7 @@ describe('navegação do catálogo', () => {
 
     expect(sections.map((s) => [s.id, s.title, s.icon])).toEqual([
       ['comeco', 'Começo', 'rocket'],
+      ['design-systems', 'Design systems', 'layers'],
       ['fundacao', 'Fundação', 'book'],
       ['componentes', 'Componentes', 'layout'],
       ['padroes', 'Padrões', 'sparkles'],
@@ -62,7 +63,7 @@ describe('navegação do catálogo', () => {
 
     expect(labels('templates')).toEqual(['Sobre templates', 'Receipt']);
     expect(labels('fundacao')).toEqual(['Tokens', 'Ícones', 'Cores']);
-    expect(labels('comeco')).toEqual(['Início']);
+    expect(labels('comeco')).toEqual(['Início', 'Atualizações']);
   });
 
   it('busca pelo título e pelo resumo, sem diferenciar acento e maiúsculas', () => {
@@ -88,6 +89,36 @@ describe('navegação do catálogo', () => {
     expect(sectionOf(sections, '/componentes/button/codigo')).toBe('componentes');
     expect(sectionOf(sections, '/')).toBe('comeco');
     expect(sectionOf(sections, '/nao-existe')).toBeUndefined();
+  });
+
+  it('guias entram na seção de cada um; os DS de produto, depois do Sobre', () => {
+    const sections = buildNavigation([
+      page('Como começar', 'Guias', { slug: 'como-comecar' }),
+      page('Acessibilidade', 'Guias', { slug: 'acessibilidade' }),
+      page('Ajuda', 'Guias', { slug: 'ajuda' }),
+      page('Sobre design systems', 'Design systems', { slug: 'sobre' }),
+    ]);
+    const labels = (id: string) =>
+      sectionLinks(sections.find((s) => s.id === id)!).map((l) => l.label);
+
+    expect(sections.map((s) => s.id)).toEqual([
+      'comeco',
+      'acessibilidade',
+      'design-systems',
+      'fundacao',
+      'ajuda',
+    ]);
+    expect(labels('comeco')).toEqual(['Início', 'Como começar', 'Atualizações']);
+    expect(labels('design-systems')).toEqual([
+      'Sobre design systems',
+      'Argila',
+      'CODA',
+      'Transparente',
+      'Windows XP',
+      'Neo-brutalista',
+      'Punk',
+    ]);
+    expect(sectionLinks(sections[2])[1].path).toBe('/design-systems/argila');
   });
 
   it('normaliza acentos', () => {
