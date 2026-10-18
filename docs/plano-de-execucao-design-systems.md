@@ -31,7 +31,7 @@ _Atualizado em 17/10/2026._
 | E8    | **Pronto** (#96): CODA com o núcleo mínimo curado                                                                                                                                                      |
 | E9    | **Pronto** (#97, #98 e o E9c: barra de tema com cores, segmentos de exemplo e escolhas na URL)                                                                                                         |
 | E10   | **Pronto** (#100, #101 e o E10c: anatomia dos 10 componentes)                                                                                                                                          |
-| E11   | **Em andamento**: E11a (paginação em pontos e gaveta de baixo; o stepper vertical já existia) em review                                                                                                |
+| E11   | **Em andamento**: E11a pronto (#103: variantes da 4.7); E11b (os 5 templates) em review                                                                                                                |
 | E12   | A fazer                                                                                                                                                                                                |
 
 Detalhes do E0 em [validacao-temas.md](validacao-temas.md#situação).
@@ -266,7 +266,7 @@ Especificação: [seção 4](plano-estilos-paletas-e-catalogo.md#4-catálogo).
 
 | ✓   | ID   | Item                                                                                 | Depende de | Pronto quando                                                                            | Est. |
 | --- | ---- | ------------------------------------------------------------------------------------ | ---------- | ---------------------------------------------------------------------------------------- | ---- |
-| [ ] | T-01 | `docs: os 5 templates` (Empty State, Ending Screen, Error Message, Loaders, Receipt) | E9         | Cada template funciona nos 6 DS só com o núcleo mínimo                                   | 3,5  |
+| [x] | T-01 | `docs: os 5 templates` (Empty State, Ending Screen, Error Message, Loaders, Receipt) | E9         | Cada template funciona nos 6 DS só com o núcleo mínimo                                   | 3,5  |
 | [x] | T-02 | `feat: variantes da 4.7` (paginação em pontos, stepper vertical, drawer de baixo)    | E9         | Variantes testadas e com exemplos                                                        | 2    |
 | [ ] | T-03 | `docs: padrões da leva 1` (8 páginas no formato fixo)                                | T-02       | Toda página segue Problema → Solução → Exemplo → Variações → Faça/não faça → Componentes | 3,5  |
 
