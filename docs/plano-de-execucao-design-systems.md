@@ -223,8 +223,8 @@ Sem imagem de referência: a ficha parte do visual atual. Quando chegar uma imag
 
 | ✓   | ID    | Item                                                                                                                           | Depende de | Pronto quando                                                                 | Est. |
 | --- | ----- | ------------------------------------------------------------------------------------------------------------------------------ | ---------- | ----------------------------------------------------------------------------- | ---- |
-| [ ] | CD-01 | `feat(coda): manifesto completo` (paletas aceitas Viva, Preto e branco e Alto contraste; regras de uso; sem transparência)     | E3         | CODA aparece como DS no `ArgTheme` e na matriz de contraste, com as 4 paletas | 0,5  |
-| [ ] | CD-02 | `feat(coda): núcleo mínimo curado` (Silkscreen em todos os componentes, tamanhos ajustados, quebra de linha em rótulos longos) | CD-01      | Os 19 do núcleo sem texto cortado nem estouro em 320px de largura             | 1    |
+| [x] | CD-01 | `feat(coda): manifesto completo` (paletas aceitas Viva, Preto e branco e Alto contraste; regras de uso; sem transparência)     | E3         | CODA aparece como DS no `ArgTheme` e na matriz de contraste, com as 4 paletas | 0,5  |
+| [x] | CD-02 | `feat(coda): núcleo mínimo curado` (Silkscreen em todos os componentes, tamanhos ajustados, quebra de linha em rótulos longos) | CD-01      | Os 19 do núcleo sem texto cortado nem estouro em 320px de largura             | 1    |
 | [ ] | CD-03 | `docs(coda): ficha e capturas`                                                                                                 | CD-02      | Página do DS com ficha, paletas e regras; capturas anexadas ao PR             | 0,5  |
 
 ---
