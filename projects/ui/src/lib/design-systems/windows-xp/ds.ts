@@ -4,6 +4,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const windowsXp = {
   id: 'windows-xp',
   nome: 'Windows XP',
+  linguagem:
+    'Sistema operacional retrô ("Retro-OS UI Kit"): janelas com barra de título azul, bordas de 1px, botões com bisel e títulos em pixel.',
   referencia: 'windows-xp.jpg',
   modos: ['light', 'dark'],
   transparencia: false,

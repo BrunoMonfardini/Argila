@@ -4,6 +4,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const coda = {
   id: 'coda',
   nome: 'CODA',
+  linguagem:
+    'Pixel em tudo: fonte bitmap, contornos marcados de 2px e rosa e amarelo sobre grafite.',
   modos: ['light', 'dark'],
   transparencia: false,
   paletas: ['nativa', 'viva', 'mono', 'alto-contraste'],

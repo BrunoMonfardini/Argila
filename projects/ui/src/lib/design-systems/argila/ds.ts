@@ -7,6 +7,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const argila = {
   id: 'argila',
   nome: 'Argila',
+  linguagem:
+    '3D macio "de massinha": superfícies quase brancas, volume com sombra difusa embaixo e realce de luz em cima, controles em pílula e nada de contorno escuro.',
   referencia: 'argila.jpg',
   modos: ['light', 'dark'],
   transparencia: true,

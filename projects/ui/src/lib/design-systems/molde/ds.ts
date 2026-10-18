@@ -4,6 +4,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const molde = {
   id: 'molde',
   nome: 'Molde',
+  linguagem:
+    'Ponto de partida neutro para criar um design system novo: plano, cinza e sem personalidade de propósito.',
   modos: ['light', 'dark'],
   transparencia: true,
   paletas: ['nativa', 'terrosa'],

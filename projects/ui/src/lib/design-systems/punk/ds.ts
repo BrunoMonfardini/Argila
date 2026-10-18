@@ -4,6 +4,8 @@ import type { ArgDesignSystem } from '../design-system';
 export const punk = {
   id: 'punk',
   nome: 'Punk',
+  linguagem:
+    'Fundo preto absoluto, cards de cor chapada em néon, pílulas brancas, títulos pesados e a estrela "explosão" como ornamento.',
   referencia: 'punk.jpg',
   // Só escuro: a referência inteira é escura, e um claro inventado desviaria dela (PK-04)
   modos: ['dark'],
