@@ -92,6 +92,13 @@
               <doc-playground [page]="page" [component]="component" />
             }
 
+            @if (page.anatomy; as anatomy) {
+              <section aria-labelledby="anatomia">
+                <h2 id="anatomia">Anatomia</h2>
+                <doc-anatomy [anatomy]="anatomy" />
+              </section>
+            }
+
             @if (page.examples.length) {
               <section aria-labelledby="exemplos">
                 <h2 id="exemplos">Exemplos</h2>

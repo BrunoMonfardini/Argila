@@ -68,6 +68,7 @@ export function tableOfContents(
         level: 2,
       })),
       options.playground && { id: 'playground', label: 'Playground', level: 2 },
+      page.anatomy && { id: 'anatomia', label: 'Anatomia', level: 2 },
     );
     if (page.examples.length) {
       entries.push(
