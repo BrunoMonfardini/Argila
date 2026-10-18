@@ -230,7 +230,8 @@ await load(`${base}/`);
 const onlyPages = list(options.paginas);
 const pages = (
   await evaluate<string[]>(
-    `[...new Set([...document.querySelectorAll('#navegacao a[href]')].map((a) => a.getAttribute('href')))]`,
+    // O Início lista todas as páginas (o painel da navegação só existe aberto)
+    `['/', ...new Set([...document.querySelectorAll('a.doc-home__card[href]')].map((a) => a.getAttribute('href')))]`,
   )
 ).filter((page) => !onlyPages || onlyPages.some((filter) => page.includes(filter)));
 

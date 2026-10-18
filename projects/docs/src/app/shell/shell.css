@@ -44,28 +44,20 @@
   margin-inline-start: auto;
 }
 
-/*
- * A barra lateral acompanha o nome mais longo no tema atual (fontes largas,
- * como as pixeladas, pedem mais espaço), entre 16rem e 22rem: sem quebrar
- * linha e sem rolagem para o lado.
- */
+/* A barra de ícones tem largura fixa; o painel abre por cima do conteúdo */
 .doc-shell__body {
   display: grid;
-  grid-template-columns: fit-content(22rem) minmax(0, 1fr);
+  grid-template-columns: 6rem minmax(0, 1fr);
 }
 
 .doc-shell__nav {
   position: sticky;
   inset-block-start: 4rem;
+  z-index: var(--arg-z-sticky);
   align-self: start;
-  min-height: calc(100dvh - 4rem);
-  max-height: calc(100dvh - 4rem);
-  min-width: 16rem;
-  scrollbar-gutter: stable;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: var(--arg-space-6) var(--arg-space-3);
+  height: calc(100dvh - 4rem);
   border-inline-end: 1px solid var(--arg-color-border);
+  background: var(--arg-color-surface);
 }
 
 .doc-shell__main {
@@ -81,7 +73,7 @@
   display: none;
 }
 
-/* Celular: a barra lateral vira um painel aberto pelo botão Menu */
+/* Celular: a barra de ícones e o painel ficam numa gaveta aberta pelo botão Menu */
 @media (max-width: 48rem) {
   .doc-shell__header {
     padding-inline: var(--arg-space-4);
@@ -102,8 +94,7 @@
   .doc-shell__nav {
     display: none;
     position: static;
-    min-height: 0;
-    max-height: none;
+    height: auto;
     border-inline-end: 0;
     border-block-end: 1px solid var(--arg-color-border);
   }

@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { DocCode } from '../../code/code';
 import { DOC_PAGES } from '../../registry';
 import { DocText } from '../../shared/text';
-import { buildNavigation } from '../../shell/navigation';
+import { buildNavigation, sectionLinks } from '../../shell/navigation';
 
 /** Página inicial: o que é o Argila e um índice de tudo o que o catálogo tem. */
 @Component({
@@ -15,6 +15,8 @@ import { buildNavigation } from '../../shell/navigation';
 })
 export class HomePage {
   protected readonly install = 'pnpm add @brunomonfardini/ui';
-  /** As mesmas seções da barra lateral, sem o "Começo", que é esta página. */
-  protected readonly sections = buildNavigation(inject(DOC_PAGES)).slice(1);
+  /** As mesmas seções da navegação, sem o "Começo", que é esta página. */
+  protected readonly sections = buildNavigation(inject(DOC_PAGES))
+    .filter((section) => section.id !== 'comeco')
+    .map((section) => ({ id: section.id, title: section.title, links: sectionLinks(section) }));
 }
