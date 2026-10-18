@@ -103,7 +103,13 @@ export interface ArgDesignSystem {
   /** Fontes que o produto precisa carregar (Google Fonts). */
   readonly fontes?: { readonly titulo?: string; readonly corpo?: string };
   readonly componentes: {
-    /** Com pele própria em `componentes/<nome>.css`. Os demais são herdados. */
+    /** Cura todo o núcleo mínimo (`ARG_CORE_MINIMUM`), além dos `curados`. */
+    readonly nucleoMinimo?: boolean;
+    /**
+     * Com pele própria em `componentes/<nome>.css`, além do núcleo mínimo
+     * quando `nucleoMinimo`. Os demais são herdados. A lista completa sai de
+     * `curatedComponents`.
+     */
     readonly curados: readonly ArgComponentName[];
     /** Fora do DS: não aparecem no catálogo dele. */
     readonly fora: readonly ArgComponentName[];
@@ -119,4 +125,10 @@ export interface ArgDesignSystem {
   readonly regras: readonly string[];
   /** Base interna para criar DS novos; não é oferecida aos produtos. */
   readonly interno?: boolean;
+}
+
+/** Todos os componentes curados de um design system: o núcleo mínimo (se declarado) e os extras. */
+export function curatedComponents(ds: ArgDesignSystem): ArgComponentName[] {
+  const core: readonly ArgComponentName[] = ds.componentes.nucleoMinimo ? ARG_CORE_MINIMUM : [];
+  return [...new Set([...core, ...ds.componentes.curados])].sort();
 }
