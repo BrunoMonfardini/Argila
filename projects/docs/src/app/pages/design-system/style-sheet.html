@@ -134,6 +134,64 @@
             <div arg-alert tone="info" live="off">A clínica fecha mais cedo hoje.</div>
           </div>
         }
+        @case ('rampas') {
+          <ul class="doc-sheet__ramps">
+            @for (ramp of ramps(); track ramp.label) {
+              <li
+                class="doc-sheet__ramp"
+                [style.--ramp]="'var(' + ramp.tokens[2] + ')'"
+                [style.--ramp-fg]="ramp.fg"
+              >
+                <span class="doc-sheet__ramp-name">{{ ramp.label }}<br />{{ ramp.hex }}</span>
+                <span class="doc-sheet__ramp-steps" aria-hidden="true">
+                  @for (token of ramp.tokens; track token) {
+                    <span [style.background]="'var(' + token + ')'"></span>
+                  }
+                </span>
+              </li>
+            }
+          </ul>
+        }
+        @case ('icones') {
+          <div class="doc-sheet__row">
+            @for (grid of iconGrids; track grid.size) {
+              <figure class="doc-sheet__icon-grid">
+                <span>
+                  @for (icon of gridIcons; track icon) {
+                    <arg-icon [name]="icon" [size]="grid.size" />
+                  }
+                </span>
+                <figcaption>{{ grid.label }}</figcaption>
+              </figure>
+            }
+          </div>
+        }
+        @case ('janela') {
+          <section arg-xp-window title="Janela">
+            <p>Conteúdo da janela.</p>
+          </section>
+        }
+        @case ('modal') {
+          <section arg-xp-window title="Confirmar" [controls]="['close']">
+            <p>Confirmar a ação?</p>
+            <div class="doc-sheet__row">
+              <button arg-button type="button" variant="secondary">OK</button>
+              <button arg-button type="button" variant="secondary">Cancelar</button>
+            </div>
+          </section>
+        }
+        @case ('balao') {
+          <div arg-xp-balloon>Atualização do sistema concluída</div>
+        }
+        @case ('regras') {
+          <div class="doc-sheet__rules">
+            <ul>
+              @for (rule of rules(); track rule) {
+                <li>{{ rule }}</li>
+              }
+            </ul>
+          </div>
+        }
         @case ('controles') {
           <div class="doc-sheet__row">
             <label arg-choice><input type="checkbox" arg-checkbox /> Opção</label>

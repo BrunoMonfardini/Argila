@@ -221,3 +221,90 @@ code {
   background: var(--arg-color-surface-sunken);
   color: var(--arg-color-text-muted);
 }
+
+/* Rampas de cor (Windows XP): o bloco da cor com os cinco tons embaixo */
+.doc-sheet__ramps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  gap: var(--arg-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.doc-sheet__ramp {
+  display: grid;
+  border: 2px solid var(--arg-color-text);
+  border-radius: var(--arg-radius-control);
+  overflow: hidden;
+}
+
+.doc-sheet__ramp-name {
+  padding: var(--arg-space-3);
+  background: var(--ramp, var(--arg-color-surface-sunken));
+  /* Texto preto ou branco, o que passa no contraste com a cor da rampa */
+  color: var(--ramp-fg, var(--arg-color-text));
+  font-family: var(--arg-font-family-heading);
+  text-transform: uppercase;
+}
+
+.doc-sheet__ramp-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  block-size: 1.5rem;
+}
+
+.doc-sheet__icon-grid {
+  display: grid;
+  justify-items: center;
+  gap: var(--arg-space-2);
+  margin: 0;
+}
+
+.doc-sheet__icon-grid > span {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: var(--arg-space-3);
+  padding: var(--arg-space-3);
+  border: 1px solid var(--arg-color-border-strong);
+  border-radius: var(--arg-radius-control);
+}
+
+/* Cartão de regras com os cantos recortados em degraus de pixel */
+.doc-sheet__rules {
+  --degrau: 6px;
+  --cantos: polygon(
+    0 calc(var(--degrau) * 2),
+    var(--degrau) calc(var(--degrau) * 2),
+    var(--degrau) var(--degrau),
+    calc(var(--degrau) * 2) var(--degrau),
+    calc(var(--degrau) * 2) 0,
+    calc(100% - var(--degrau) * 2) 0,
+    calc(100% - var(--degrau) * 2) var(--degrau),
+    calc(100% - var(--degrau)) var(--degrau),
+    calc(100% - var(--degrau)) calc(var(--degrau) * 2),
+    100% calc(var(--degrau) * 2),
+    100% calc(100% - var(--degrau) * 2),
+    calc(100% - var(--degrau)) calc(100% - var(--degrau) * 2),
+    calc(100% - var(--degrau)) calc(100% - var(--degrau)),
+    calc(100% - var(--degrau) * 2) calc(100% - var(--degrau)),
+    calc(100% - var(--degrau) * 2) 100%,
+    calc(var(--degrau) * 2) 100%,
+    calc(var(--degrau) * 2) calc(100% - var(--degrau)),
+    var(--degrau) calc(100% - var(--degrau)),
+    var(--degrau) calc(100% - var(--degrau) * 2),
+    0 calc(100% - var(--degrau) * 2)
+  );
+
+  padding: 2px;
+  background: var(--arg-color-text);
+  clip-path: var(--cantos);
+}
+
+.doc-sheet__rules > ul {
+  margin: 0;
+  padding: var(--arg-space-4) var(--arg-space-6);
+  background: var(--arg-color-surface-sunken);
+  clip-path: var(--cantos);
+  font-size: var(--arg-font-size-body-lg);
+}
