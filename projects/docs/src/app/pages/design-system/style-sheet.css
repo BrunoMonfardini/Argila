@@ -30,6 +30,12 @@
   min-width: 0;
 }
 
+/* Conteúdo largo (abas em caixa alta, fontes largas) rola por dentro, sem alargar a coluna */
+.doc-sheet__section > *,
+.doc-sheet__stack > * {
+  min-width: 0;
+}
+
 .doc-sheet__section h3 {
   margin: 0;
   font-size: var(--arg-font-size-heading-sm);
@@ -72,6 +78,7 @@ code {
 .doc-sheet__type li,
 .doc-sheet__spaces li {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--arg-space-3);
   align-items: baseline;
   justify-content: space-between;

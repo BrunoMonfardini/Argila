@@ -71,10 +71,11 @@ export const SWATCHES = [
   { token: '--arg-color-background', label: 'Fundo' },
   { token: '--arg-color-border', label: 'Borda' },
   { token: '--arg-color-focus', label: 'Anel de foco' },
-  { token: '--arg-color-success', label: 'Sucesso' },
-  { token: '--arg-color-warning', label: 'Aviso' },
-  { token: '--arg-color-danger', label: 'Erro' },
-  { token: '--arg-color-info', label: 'Informação' },
+  // Os blocos de feedback (alertas, selos), que são as cores das referências
+  { token: '--arg-color-success-soft', label: 'Sucesso' },
+  { token: '--arg-color-warning-soft', label: 'Aviso' },
+  { token: '--arg-color-danger-soft', label: 'Erro' },
+  { token: '--arg-color-info-soft', label: 'Informação' },
 ];
 
 export const TYPE_SCALE = [
