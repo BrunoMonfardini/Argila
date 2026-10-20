@@ -308,3 +308,49 @@ code {
   clip-path: var(--cantos);
   font-size: var(--arg-font-size-body-lg);
 }
+
+/* Punk: a tela de entrada, com a estrela e o título em caixa alta */
+.doc-sheet__entry {
+  display: grid;
+  gap: var(--arg-space-4);
+  padding: var(--arg-space-6);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-background);
+}
+
+.doc-sheet__entry-title {
+  margin: 0;
+  font-family: var(--arg-font-family-heading);
+  font-size: var(--arg-font-size-heading-md);
+  font-weight: var(--arg-font-weight-heading);
+  line-height: var(--arg-line-height-heading);
+  text-transform: uppercase;
+}
+
+.doc-sheet__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--arg-space-3);
+}
+
+/* O item aberto da lista fica no rosa da marca, como o Instagram da referência */
+.doc-sheet__list-item--current {
+  border-color: var(--arg-color-primary);
+  background: var(--arg-color-primary);
+  color: var(--arg-color-on-primary);
+}
+
+.doc-sheet__bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--arg-space-2);
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-full);
+  background: var(--arg-color-surface);
+}
+
+/* Os ícones da barra ficam na cor do texto; só o item aberto é a pílula branca */
+.doc-sheet__bottom-nav [arg-icon-button] {
+  --arg-button-fg: var(--arg-color-text);
+}
