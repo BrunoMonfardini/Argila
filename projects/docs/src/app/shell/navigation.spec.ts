@@ -70,6 +70,7 @@ describe('navegação do catálogo', () => {
       'Tipografia',
       'Espaçamento',
       'Raio e elevação',
+      'Fundos',
       'Movimento',
       'Guia de cores',
     ]);

@@ -11,6 +11,8 @@ const PUNK: ThemeChoice = {
   scheme: 'dark',
   colors: { accent: 'mostarda' },
   surfaceOpacity: undefined,
+  background: 'liso',
+  defaultBackground: 'liso',
 };
 
 describe('Montar tema', () => {
@@ -26,6 +28,9 @@ describe('Montar tema', () => {
     expect(
       segmentOf({ ...PUNK, style: 'argila', palette: 'nativa', colors: {}, surfaceOpacity: 0.7 }),
     ).toEqual({ style: 'argila', scheme: 'dark', surfaceOpacity: 0.7 });
+    expect(segmentOf({ ...PUNK, style: 'argila', background: 'degrade' })).toMatchObject({
+      background: 'degrade',
+    });
   });
 
   it('gera o provideArgila e o HTML com os atributos', () => {

@@ -16,6 +16,8 @@ const MANIFEST: Manifest = {
     { name: '--arg-radius-control', value: '8px', group: 'Raio' },
     { name: '--arg-shadow-2', value: 'none', group: 'Elevação' },
     { name: '--arg-shadow-color', value: '#000', group: 'Elevação' },
+    { name: '--arg-background-image', value: 'none', group: 'Fundo' },
+    { name: '--arg-gradient-brand', value: 'linear-gradient(…)', group: 'Fundo' },
     { name: '--arg-motion-fast', value: '120ms', group: 'Movimento' },
     { name: '--arg-motion-easing', value: 'ease', group: 'Movimento' },
   ],
@@ -30,8 +32,10 @@ describe('Fundação', () => {
       'tipografia',
       'espacamento',
       'raio-e-elevacao',
+      'fundos',
       'movimento',
     ]);
+    expect(names('fundos')).toEqual(['--arg-background-image', '--arg-gradient-brand']);
     expect(names('cores')).toEqual(['--arg-color-primary']);
     expect(names('espacamento')).toEqual(['--arg-space-4']);
     expect(names('tipografia')).toEqual(['--arg-font-size-body', '--arg-line-height-body']);
@@ -84,6 +88,26 @@ describe('Fundação', () => {
 
     expect(button.textContent?.trim()).toBe('Voltar');
     expect(root.querySelectorAll('.doc-foundation__dot--moved').length).toBe(2);
+  });
+
+  it('em Fundos, escolhe o fundo do catálogo; num DS só liso, explica', async () => {
+    const { harness, root } = await open('/fundacao/fundos');
+    const theme = TestBed.inject(ArgTheme);
+    const degrade = Array.from(root.querySelectorAll('button')).find(
+      (b) => b.textContent?.trim() === 'Degradê',
+    )!;
+
+    degrade.click();
+    await harness.fixture.whenStable();
+    expect(theme.background()).toBe('degrade');
+    expect(degrade.getAttribute('aria-pressed')).toBe('true');
+    expect(root.querySelectorAll('.doc-foundation__swatch--wide').length).toBe(2);
+
+    theme.setStyle('punk');
+    await harness.fixture.whenStable();
+    expect(root.textContent).toContain('O Punk tem só o fundo liso.');
+    theme.setStyle('argila');
+    document.documentElement.removeAttribute('data-arg-style');
   });
 
   it('cada tipo de amostra aparece no seu tópico', async () => {
