@@ -17,7 +17,7 @@ _Atualizado em 20/10/2026._
 | Marco                       | Situação              |
 | --------------------------- | --------------------- |
 | G: ferramenta de comparação | Pronto                |
-| AR: Argila                  | AR-01 e AR-02 prontos |
+| AR: Argila                  | AR-01 a AR-05 prontos |
 | NB: Neo-brutalista          | A fazer               |
 | TR: Transparente            | A fazer               |
 | XP: Windows XP              | A fazer               |
@@ -54,9 +54,9 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 | --- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---- |
 | [x] | AR-01 | `feat(argila): cores da referência` (texto, links e rótulos em cinza neutro; menta só em preenchimentos, foco e destaques; feedback menta, amarelo e rosa)                                                | Nenhum texto corrido em verde; o contraste passa em claro e escuro | 1    |
 | [x] | AR-02 | `feat(argila): alertas e toasts em pílula preenchida` (fundo chapado no tom, sem contorno nem faixa, ícone em círculo de contorno, texto escuro)                                                          | Os três alertas da referência reproduzidos                         | 0,5  |
-| [ ] | AR-03 | `feat(argila): campo rebaixado com aro em relevo` (Input, Select e grupo com ação)                                                                                                                        | A busca da referência reproduzida, com o foco menta brilhando      | 1    |
-| [ ] | AR-04 | `feat(argila): abas e chips` (segmentadas, sublinhadas, chips de filtro, selecionado e desabilitado)                                                                                                      | As duas abas e os três chips da referência reproduzidos            | 1    |
-| [ ] | AR-05 | `feat(argila): botões` (menta com volume; hover com brilho; desabilitado cinza sem volume)                                                                                                                | Os três botões da referência reproduzidos                          | 0,5  |
+| [x] | AR-03 | `feat(argila): campo rebaixado com aro em relevo` (Input, Select e grupo com ação)                                                                                                                        | A busca da referência reproduzida, com o foco menta brilhando      | 1    |
+| [x] | AR-04 | `feat(argila): abas e chips` (segmentadas, sublinhadas, chips de filtro, selecionado e desabilitado)                                                                                                      | As duas abas e os três chips da referência reproduzidos            | 1    |
+| [x] | AR-05 | `feat(argila): botões` (menta com volume; hover com brilho; desabilitado cinza sem volume)                                                                                                                | Os três botões da referência reproduzidos                          | 0,5  |
 | [ ] | AR-06 | `feat(argila): cards e elevação em camadas` (cinco níveis; card com camadas embaixo e miniatura)                                                                                                          | O card e a pilha de elevação da referência reproduzidos            | 1    |
 | [ ] | AR-07 | `feat(argila): escala tipográfica`                                                                                                                                                                        | A escala da referência na Fundação → Tipografia                    | 0,5  |
 | [ ] | AR-08 | `docs(argila): folha de estilo da referência` (Color Tokens, Typography Scale, Spacing, Radius, Elevation, Buttons, Inputs, Chips, Tabs, Alerts e Cards, na grade da imagem, com a régua fina de moldura) | A página do Argila lado a lado com `argila.jpg`                    | 1,5  |
