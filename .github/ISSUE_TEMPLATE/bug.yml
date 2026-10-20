@@ -1,0 +1,52 @@
+name: Bug
+description: Algo no pacote ou no catálogo não funciona como deveria.
+title: 'fix(<componente>): '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar. **Falha de segurança não vai aqui**: use o reporte privado do [SECURITY.md](https://github.com/BrunoMonfardini/Argila/blob/main/SECURITY.md).
+  - type: input
+    id: componente
+    attributes:
+      label: Componente, token ou página
+      placeholder: 'ex.: arg-tabs, --arg-color-primary, /componentes/dialog'
+    validations:
+      required: true
+  - type: input
+    id: versao
+    attributes:
+      label: Versão de @brunomonfardini/ui
+      placeholder: 'ex.: 0.9.0 (ou o commit, se for no catálogo)'
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      description: Passo a passo. Um link do catálogo com o tema na URL (?ds=…&paleta=…&modo=…) ajuda muito.
+      placeholder: |
+        1. Abra …
+        2. Clique em …
+        3. Veja …
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que esperava e o que aconteceu
+    validations:
+      required: true
+  - type: dropdown
+    id: ds
+    attributes:
+      label: Design system
+      multiple: true
+      options: [Argila, CODA, Transparente, Windows XP, Neo-brutalista, Punk, Todos]
+  - type: checkboxes
+    id: acessibilidade
+    attributes:
+      label: Acessibilidade
+      options:
+        - label: O problema afeta teclado, leitor de tela ou contraste

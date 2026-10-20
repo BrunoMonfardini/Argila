@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Vulnerabilidade de segurança
+    url: https://github.com/BrunoMonfardini/Argila/security/advisories/new
+    about: Nunca em issue pública. Reporte em particular, como explica o SECURITY.md.
+  - name: Dúvida de uso
+    url: https://argila-catalogo.vercel.app
+    about: Veja os exemplos vivos no catálogo e o manual de uso (projects/ui/README.md) antes de abrir uma issue.
