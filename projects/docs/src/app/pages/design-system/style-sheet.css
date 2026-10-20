@@ -23,6 +23,20 @@
     var(--arg-color-surface-solid);
 }
 
+/*
+ * Transparente: a folha de vidro sobre as manchas do fundo em degradê, como
+ * sugere a referência (o vidro só aparece sobre fundo com cor).
+ */
+.doc-sheet--transparente {
+  padding: var(--arg-space-8);
+  border-radius: var(--arg-radius-container);
+  background:
+    radial-gradient(60% 55% at 12% 8%, var(--arg-color-background-tint-1), transparent 70%),
+    radial-gradient(55% 50% at 88% 12%, var(--arg-color-background-tint-2), transparent 70%),
+    radial-gradient(80% 60% at 50% 105%, var(--arg-color-background-tint-3), transparent 70%),
+    var(--arg-color-background);
+}
+
 .doc-sheet__section {
   display: grid;
   align-content: start;

@@ -72,6 +72,13 @@ export class DesignSystemPage {
   protected readonly statusLabels = STATUS_LABELS;
   protected readonly ds = computed((): ArgDesignSystem => ARG_DESIGN_SYSTEMS[this.id()]);
   protected readonly active = computed(() => this.theme.style() === this.id());
+  /** Sugere o fundo em degradê no DS que o aceita, enquanto o catálogo está liso. */
+  protected readonly suggestsGradient = computed(
+    () =>
+      this.active() &&
+      this.theme.backgrounds().includes('degrade') &&
+      this.theme.background() !== 'degrade',
+  );
   protected readonly schemes = computed(() =>
     this.ds()
       .modos.map((mode) => SCHEME_LABELS[mode])
@@ -157,5 +164,9 @@ export class DesignSystemPage {
 
   protected apply(): void {
     this.choices.selectStyle(this.id());
+  }
+
+  protected showGradient(): void {
+    this.choices.selectBackground('degrade');
   }
 }

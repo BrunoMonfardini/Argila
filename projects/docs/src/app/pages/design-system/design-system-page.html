@@ -16,6 +16,14 @@
   <section aria-labelledby="folha-de-estilo">
     <h2 id="folha-de-estilo">Folha de estilo</h2>
     @if (active()) {
+      @if (suggestsGradient()) {
+        <p class="doc-ds__suggestion">
+          O {{ ds().nome }} fica melhor sobre o fundo em degradê.
+          <button arg-button type="button" size="sm" variant="secondary" (click)="showGradient()">
+            Ver com o degradê
+          </button>
+        </p>
+      }
       <doc-style-sheet [style]="id()" />
     } @else {
       <p>A folha de estilo aparece com o {{ ds().nome }} aplicado ao catálogo.</p>
