@@ -13,7 +13,7 @@ import {
 } from './style-sheet';
 
 describe('folha de estilo', () => {
-  async function render(style: 'argila' | 'punk' | 'neo-brutalista' | 'windows-xp') {
+  async function render(style: 'argila' | 'punk' | 'coda' | 'neo-brutalista' | 'windows-xp') {
     TestBed.configureTestingModule({ providers: [provideArgIcons(argIconsAll)] });
     const fixture = TestBed.createComponent(DocStyleSheet);
     fixture.componentRef.setInput('style', style);
@@ -24,7 +24,7 @@ describe('folha de estilo', () => {
   const headings = (root: HTMLElement) =>
     Array.from(root.querySelectorAll('h3'), (h) => h.textContent?.trim());
 
-  afterEach(() => delete STYLE_SHEET_SECTIONS.punk);
+  afterEach(() => delete STYLE_SHEET_SECTIONS.coda);
 
   it('tem as seções da referência do Argila, na ordem dela', async () => {
     const root = await render('argila');
@@ -35,8 +35,8 @@ describe('folha de estilo', () => {
   });
 
   it('cada DS pode ter a ordem e as seções da sua referência', async () => {
-    STYLE_SHEET_SECTIONS.punk = ['cards', 'botoes'];
-    const root = await render('punk');
+    STYLE_SHEET_SECTIONS.coda = ['cards', 'botoes'];
+    const root = await render('coda');
 
     expect(headings(root)).toEqual(['Cards', 'Botões']);
   });
@@ -64,6 +64,20 @@ describe('folha de estilo', () => {
     expect(root.querySelector('[arg-xp-balloon]')).not.toBeNull();
     expect(root.querySelectorAll('.doc-sheet__rules li').length).toBe(3);
     expect(root.querySelectorAll('.doc-sheet__icon-grid arg-icon').length).toBe(12);
+    expect(a11yViolations(root)).toEqual([]);
+  });
+
+  it('o Punk mostra as telas do app da referência', async () => {
+    const root = await render('punk');
+
+    expect(
+      Array.from(root.querySelectorAll('.doc-sheet__section > h3'), (h) => h.textContent?.trim()),
+    ).toEqual(STYLE_SHEET_SECTIONS.punk!.map((section) => SECTION_TITLES[section]));
+    expect(root.querySelector('arg-punk-burst')).not.toBeNull();
+    expect(root.querySelectorAll('[arg-punk-stat-card]').length).toBe(4);
+    expect(root.querySelectorAll('.doc-sheet__list-item--current').length).toBe(1);
+    expect(root.querySelectorAll('.doc-sheet__section--notificacoes [arg-alert]').length).toBe(3);
+    expect(root.querySelector('.doc-sheet__bottom-nav [aria-current="page"]')).not.toBeNull();
     expect(a11yViolations(root)).toEqual([]);
   });
 
