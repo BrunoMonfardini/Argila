@@ -6,7 +6,7 @@ import { basename, join } from 'node:path';
  * um subconjunto pequeno e previsível (o padrão de desenho do time), então um
  * leitor próprio basta e dá mensagens de erro em português.
  *
- * Padrão: docs/design-system-proprio.md#12-ícones
+ * Padrão: projects/ui/icons/README.md
  */
 
 export interface IconSource {

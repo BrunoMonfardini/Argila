@@ -6,7 +6,7 @@ const root = resolve(import.meta.dirname, '..');
 const read = (path: string) => readFileSync(resolve(root, path), 'utf8');
 
 /**
- * Publicação do catálogo na Vercel (PR-20). O catálogo é uma SPA com rotas
+ * Publicação do catálogo na Vercel. O catálogo é uma SPA com rotas
  * por caminho: recarregar /componentes/agenda precisa abrir o index.html.
  */
 describe('catálogo publicado', () => {
