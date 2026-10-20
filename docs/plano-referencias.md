@@ -14,14 +14,14 @@ Plano de execução, PR a PR, para deixar cada design system igual à imagem del
 
 _Atualizado em 20/10/2026._
 
-| Marco                       | Situação                                                   |
-| --------------------------- | ---------------------------------------------------------- |
-| G: ferramenta de comparação | Pronto                                                     |
-| AR: Argila                  | Pronto                                                     |
-| NB: Neo-brutalista          | Pronto                                                     |
-| TR: Transparente            | TR-01 a TR-04 prontos; TR-05 a fazer (o fundo F já existe) |
-| XP: Windows XP              | A fazer                                                    |
-| PK: Punk                    | A fazer                                                    |
+| Marco                       | Situação |
+| --------------------------- | -------- |
+| G: ferramenta de comparação | Pronto   |
+| AR: Argila                  | Pronto   |
+| NB: Neo-brutalista          | Pronto   |
+| TR: Transparente            | Pronto   |
+| XP: Windows XP              | A fazer  |
+| PK: Punk                    | A fazer  |
 
 O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
@@ -107,7 +107,7 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 | [x] | TR-02 | `feat(transparente): vidro claro e fino` (aro de 1px claro, brilho iridescente nos cantos, reflexo no topo, sombra colorida difusa; sem o contorno escuro de hoje) | O card e o painel da referência reproduzidos        | 1,5  |
 | [x] | TR-03 | `feat(transparente): botões e campos` (secundário incolor; botão de ícone quadrado; busca com o segmento "+"; select com o checkbox verde-água)                    | As três primeiras linhas da referência reproduzidas | 1    |
 | [x] | TR-04 | `feat(transparente): switch, abas e toast` (switch verde-água; abas e toast em pílula de vidro; toast com contorno laranja)                                        | A quarta linha da referência reproduzida            | 1    |
-| [ ] | TR-05 | `docs(transparente): folha de estilo da referência` (a folha de componentes de vidro, na mesma grade da imagem, sobre o fundo em degradê do marco F como sugestão) | A página do Transparente lado a lado com a imagem   | 1    |
+| [x] | TR-05 | `docs(transparente): folha de estilo da referência` (a folha de componentes de vidro, na mesma grade da imagem, sobre o fundo em degradê do marco F como sugestão) | A página do Transparente lado a lado com a imagem   | 1    |
 
 ---
 
