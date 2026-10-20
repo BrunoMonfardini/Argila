@@ -93,13 +93,15 @@ Exemplo: uma input `pill` no Tag.
 
 ## 6. Mudar um token (cor, espaço, raio, fonte)
 
-| Para mudar…                                   | Onde                                                                    |
-| --------------------------------------------- | ----------------------------------------------------------------------- |
-| O valor padrão de um token, em todos os DS    | `projects/ui/tokens/semantic.css`                                       |
-| A forma de um DS (raio, borda, sombra, fonte) | `projects/ui/tokens/design-systems/<ds>/forma.css`                      |
-| As cores próprias de um DS                    | `projects/ui/tokens/design-systems/<ds>/paletas/nativa.css`             |
-| As cores de uma paleta compartilhada          | `projects/ui/tokens/palettes/<paleta>.css`                              |
-| As cores de marca da lista fixa               | `projects/ui/src/lib/design-systems/colors.ts`, depois `npm run colors` |
+| Para mudar…                                   | Onde                                                                         |
+| --------------------------------------------- | ---------------------------------------------------------------------------- |
+| O valor padrão de um token, em todos os DS    | `projects/ui/tokens/semantic.css`                                            |
+| A forma de um DS (raio, borda, sombra, fonte) | `projects/ui/tokens/design-systems/<ds>/forma.css`                           |
+| As cores próprias de um DS                    | `projects/ui/tokens/design-systems/<ds>/paletas/nativa.css`                  |
+| As cores de uma paleta compartilhada          | `projects/ui/tokens/palettes/<paleta>.css`                                   |
+| As cores de marca da lista fixa               | `projects/ui/src/lib/design-systems/colors.ts`, depois `npm run colors`      |
+| O fundo em degradê (manchas e força)          | `--arg-color-background-tint-*` e `--arg-background-image` no `semantic.css` |
+| Os fundos que um DS aceita                    | `fundos` no `ds.ts` do DS (sem o campo, só o liso)                           |
 
 Depois rode `npm run test`: o teste de contraste confere cada par de cores em cada DS × paleta × modo e diz qual par caiu abaixo de 4,5:1. A página **Fundação** do catálogo mostra os valores de agora de cada token.
 

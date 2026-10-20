@@ -167,7 +167,7 @@ tokens/design-systems/<ds>/
   index.css            junta tudo (só @import)
 ```
 
-O manifesto (`ds.ts`) é a única fonte do que o DS aceita: modos (claro e escuro), paletas, transparência, componentes curados (`nucleoMinimo` e `curados`) e fora (`fora`), exclusivos, fontes e regras de uso. O `ArgTheme`, os testes de contraste, o checkup e o catálogo leem dali. A lista de todos os DS está em [`design-systems.ts`](../projects/ui/src/lib/design-systems/design-systems.ts).
+O manifesto (`ds.ts`) é a única fonte do que o DS aceita: modos (claro e escuro), paletas, transparência, fundos (liso, degradê), componentes curados (`nucleoMinimo` e `curados`) e fora (`fora`), exclusivos, fontes e regras de uso. O `ArgTheme`, os testes de contraste, o checkup e o catálogo leem dali. A lista de todos os DS está em [`design-systems.ts`](../projects/ui/src/lib/design-systems/design-systems.ts).
 
 ## Tokens e temas
 
@@ -183,7 +183,7 @@ O manifesto (`ds.ts`) é a única fonte do que o DS aceita: modos (claro e escur
 | `tokens/styles/`, `tokens/palettes/nativas/`                                              | Caminhos antigos, mantidos por compatibilidade até a próxima versão major                                                          |
 | [`src/lib/design-systems/palettes.ts`](../projects/ui/src/lib/design-systems/palettes.ts) | O registro das paletas compartilhadas                                                                                              |
 | [`src/lib/design-systems/colors.ts`](../projects/ui/src/lib/design-systems/colors.ts)     | A lista fixa de cores de marca; `colors.generated.ts` diz quais passam no contraste em cada DS × paleta                            |
-| [`src/lib/theme/theme.ts`](../projects/ui/src/lib/theme/theme.ts)                         | `ArgTheme`: troca DS, paleta, modo, cores, transparência e segmento em tempo de execução                                           |
+| [`src/lib/theme/theme.ts`](../projects/ui/src/lib/theme/theme.ts)                         | `ArgTheme`: troca DS, paleta, modo, cores, transparência, fundo e segmento em tempo de execução                                    |
 
 ## O catálogo (`projects/docs`)
 
