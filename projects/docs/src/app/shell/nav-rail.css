@@ -46,13 +46,13 @@
 }
 
 .doc-rail__item--current {
-  color: var(--arg-color-primary);
+  color: var(--arg-color-text);
   font-weight: var(--arg-font-weight-strong);
 }
 
 .doc-rail__item[aria-expanded='true'] {
-  background: var(--arg-color-primary-subtle);
-  color: var(--arg-color-primary);
+  background: var(--arg-color-primary-soft);
+  color: var(--arg-color-on-primary-soft);
 }
 
 .doc-rail__label {
@@ -108,8 +108,8 @@ a {
 
 /* a.: mais específico que o fundo transparente da ação da lista */
 a.doc-panel__link--active {
-  background: var(--arg-color-primary-subtle);
-  color: var(--arg-color-primary);
+  background: var(--arg-color-primary-soft);
+  color: var(--arg-color-on-primary-soft);
 }
 
 .doc-panel__search {
