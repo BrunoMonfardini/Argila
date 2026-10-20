@@ -20,6 +20,7 @@ import { DocAvailability, availabilityIn, coreComponentOf } from '../../availabi
 import { DOC_MANIFEST, manifestPage } from '../../manifest';
 import { DOC_PAGES, DocPage, pagePath } from '../../registry';
 import { DocThemeChoices } from '../../shell/theme-choices';
+import { DocStyleSheet } from './style-sheet';
 
 export interface DocComponentRow {
   name: string;
@@ -53,7 +54,7 @@ export const SHAPE_TOKENS = [
  */
 @Component({
   selector: 'doc-design-system-page',
-  imports: [ArgButton, RouterLink],
+  imports: [ArgButton, DocStyleSheet, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './design-system-page.html',
   styleUrl: './design-system-page.css',
