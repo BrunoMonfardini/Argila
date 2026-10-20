@@ -8,6 +8,20 @@ Publicado como `@brunomonfardini/ui`. Documentação de uso para produtos: [proj
 
 Este repositório segue o [padrão de pipeline e qualidade de código](docs/padrao-de-pipeline.md), comum a todos os projetos da empresa: testes unitários obrigatórios, DRY, main protegida e a mesma esteira de CI.
 
+## Por onde começar
+
+| Quero…                                                       | Leia                                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| Rodar o projeto pela primeira vez                            | [Comandos no Git Bash](#comandos-no-git-bash), passos 1 a 3                  |
+| Ver os componentes funcionando                               | `npm run dev`, ou o [catálogo publicado](https://argila-catalogo.vercel.app) |
+| Saber onde fica um componente, um design system ou um token  | [Mapa do projeto](docs/mapa-do-projeto.md)                                   |
+| Mudar um componente, um token, uma paleta ou criar algo novo | [Como alterar](docs/como-alterar.md), com o passo a passo de cada caso       |
+| Usar o Argila num produto                                    | [projects/ui/README.md](projects/ui/README.md)                               |
+| Configurar o VS Code                                         | [VS Code](#vs-code)                                                          |
+| Entender as decisões e os planos                             | [docs/README.md](docs/README.md)                                             |
+
+**Em resumo:** a biblioteca fica em `projects/ui` (um componente por pasta em `src/lib/`, o CSS de tema em `tokens/`); o catálogo, em `projects/docs`. Sete design systems (Argila, CODA, Transparente, Windows XP, Neo-brutalista, Punk e o Molde, interno) mudam a aparência dos mesmos componentes, escolhidos por `data-arg-style` no `<html>`.
+
 ## Comandos no Git Bash
 
 **Todos os comandos deste README são para o Git Bash**, no Windows. Para abrir:
@@ -63,7 +77,11 @@ cd "/c/Users/vieir/OneDrive/dev/publico/03 - completo/Projeto - todos/Argila"
 npm run dev
 ```
 
-Abre o catálogo em <http://localhost:4200>, começando pela página **Início**, com links para os fundamentos (tokens e ícones), cada componente e os padrões de uso. Mudanças nos componentes aparecem na hora.
+Abre o catálogo em <http://localhost:4200>. Mudanças nos componentes aparecem na hora.
+
+- **À esquerda**, a barra de ícones: Começo, Acessibilidade, Design systems, Fundação, Componentes, Padrões, Templates, Ferramentas e Ajuda. Cada ícone abre um painel com as páginas da seção e uma busca em todo o catálogo.
+- **No topo**, a barra de tema: design system, paleta, cores, modo, opacidade e segmento. O catálogo inteiro acompanha, e a escolha fica no endereço (dá para mandar o link).
+- **Em cada componente**, as abas Visão geral (playground, anatomia e exemplos com código), Regras de uso, Código (propriedades e tokens) e Acessibilidade.
 
 Para parar o servidor: **Ctrl + C** no Git Bash.
 
@@ -125,6 +143,8 @@ start "https://github.com/BrunoMonfardini/Argila/compare/feat/nome-da-mudanca?ex
 Cada commit e o título do PR seguem Conventional Commits. O merge é por rebase: os commits entram na `main` como estão, então faça um commit por feature (veja o [padrão de pipeline](docs/padrao-de-pipeline.md#commits-e-título-do-pr)).
 
 ### 6. Verificar antes de abrir o PR
+
+No VS Code, **Terminal → Run Task → Verificar tudo** roda as checagens abaixo em ordem. No terminal:
 
 Os mesmos passos que o CI roda. Se todos passarem aqui, passam lá:
 
@@ -215,30 +235,51 @@ Os scripts `version-packages` e `release` são do workflow de publicação. **N�
 | `Some packages have been changed but no changesets were found`                   | Mudança sem changeset                         | `npm run changeset` (ou `npm run changeset -- --empty`), commit e push |
 | `Port 4200 is already in use`                                                    | Outro catálogo já está rodando                | Feche o outro (Ctrl + C) ou `npm run dev -- --port 4201`               |
 
+## VS Code
+
+Abra a pasta `Argila` no VS Code (**File → Open Folder**). A pasta `.vscode/` do projeto já traz:
+
+- **Extensões recomendadas:** ao abrir, o VS Code oferece instalar todas (ou em Extensões, filtro `@recommended`):
+  - Angular Language Service;
+  - ESLint, Prettier e EditorConfig;
+  - Jest;
+  - autocompletar dos tokens `--arg-*` no CSS;
+  - erros do TypeScript legíveis;
+  - GitHub (PRs e Actions).
+- **Formatação ao salvar**, com o Prettier e as correções do ESLint, iguais às do CI.
+- **Componentes agrupados no explorador:** `button.ts` aparece como um item só, com `button.html`, `button.css`, `button.spec.ts` e `button.docs.ts` dentro dele.
+- **Arquivos gerados só para leitura** (`*.generated.ts`, `tokens/colors.css`): mude a fonte e rode o gerador.
+- **Tarefas** (Terminal → Run Task):
+
+  | Tarefa                       | O que faz                                                    |
+  | ---------------------------- | ------------------------------------------------------------ |
+  | Catálogo                     | `npm run dev` (também com Ctrl + Shift + B)                  |
+  | Manifesto em modo watch      | Regera a tabela de propriedades e os exemplos a cada mudança |
+  | Testes                       | `npm run test`                                               |
+  | Testes do arquivo aberto     | Só os testes ligados ao arquivo do editor                    |
+  | Verificar tudo               | As checagens do CI, em ordem                                 |
+  | Checkup visual de uma página | O checkup só da página que você digitar                      |
+  | Gerar ícones, Gerar cores    | Os geradores                                                 |
+
+- **Depuração** (Run and Debug, F5):
+  - **Catálogo no Chrome** (ou no Edge): sobe o catálogo e abre o navegador, com pontos de parada no TypeScript;
+  - **Testes do arquivo aberto**: roda o Jest com o depurador.
+
 ## Estrutura
 
+O [Mapa do projeto](docs/mapa-do-projeto.md) mostra onde fica cada coisa, com uma tabela de todos os componentes (pasta, uso, página no catálogo e design systems com pele própria). Em resumo:
+
 ```text
-docs/
-  padrao-de-pipeline.md   → regras de pipeline e qualidade de todos os projetos
-  design-system-proprio.md, plano-de-execucao.md → plano do design system 100% nosso
-projects/docs/            → o catálogo: aplicação Angular nossa (npm run dev)
-scripts/                  → geradores de ícones e do manifesto do catálogo, com testes
-projects/ui/
-  tokens/                 → CSS dos tokens, publicado em @brunomonfardini/ui/tokens/
-    primitives.css        → camada 1: valores brutos (--arg-core-*)
-    semantic.css          → camada 2: valores por uso (--arg-*), claro/escuro
-    base.css              → estilos base opcionais do documento
-    themes/               → exemplos de tema de produto
-  icons/                  → SVGs dos ícones, desenhados pelo time
-  src/lib/
-    button/               → um componente por pasta: .ts, .html, .css, .spec.ts, .docs.ts, examples/
-    icon/                 → arg-icon e o código gerado dos ícones
-    list/                 → lista (ArgList, ArgListItem, ArgListAction)
-    skeleton/             → placeholder com shimmer
-    spinner/              → indicador de carregamento
-    theme/                → ArgTheme: tema e marca em tempo de execução
-  src/patterns/           → páginas de padrões de uso (componentes combinados)
-  src/docs/doc-page.ts    → formato das páginas do catálogo (não publicado)
+projects/ui/            → a biblioteca publicada (@brunomonfardini/ui)
+  src/lib/<componente>/ → um componente por pasta: .ts, .css, .spec.ts, .docs.ts e examples/
+  src/lib/design-systems/ → manifesto de cada design system, paletas, cores e exclusivos
+  src/lib/theme/        → ArgTheme e provideArgila: tema em tempo de execução
+  src/patterns/, src/templates/, src/docs/ → páginas do catálogo (não publicadas)
+  tokens/               → o CSS de tema: tokens, design systems e paletas
+  icons/                → os SVGs dos ícones, desenhados pelo time
+projects/docs/          → o catálogo (npm run dev)
+scripts/                → geradores (manifesto, ícones, cores), checkup visual e testes de regras
+docs/                   → guias e planos (índice em docs/README.md)
 ```
 
 ## Tokens em três camadas
@@ -252,7 +293,7 @@ Regras:
 - Componente nunca usa cor, espaçamento ou raio literal: sempre um token semântico.
 - Estados de interação (hover, pressed, subtle) são derivados com `color-mix()`, então um tenant só troca a cor base.
 - Claro/escuro usa `light-dark()`: um token, dois valores, sem blocos duplicados.
-- O contraste é testado: `npm run test` calcula cada par de cores que aparece junto (texto sobre superfície, `on-primary` sobre `primary` e seus estados, cores de feedback) em claro e escuro, com a marca padrão e com cada arquivo de `tokens/themes/`. Abaixo de 4.5:1 para texto, ou de 3:1 para o anel de foco, o teste falha e diz qual par. Os pares ficam em `scripts/contraste-dos-tokens.spec.ts`.
+- O contraste é testado: `npm run test` calcula cada par de cores que aparece junto (texto sobre superfície, `on-primary` sobre `primary` e seus estados, cores de feedback) em cada design system × paleta × modo. Abaixo de 4,5:1 para texto, ou de 3:1 para o anel de foco, o teste falha e diz qual par; a paleta Alto contraste precisa de 7:1. Os pares ficam em `scripts/lib/pares.ts`.
 
 ## Convenções de componente
 
@@ -300,6 +341,6 @@ Configuração única (até lá, o workflow só avisa que não publicou):
    - `VERCEL_PROJECT_ID`: o Project ID, em **Project Settings → General**.
 4. Rode o workflow uma vez em **Actions → Catálogo → Run workflow**, ou faça um merge na `main`.
 
-## Próximos passos
+## Documentação
 
-Para onde o Argila vai: o [design system 100% nosso](docs/design-system-proprio.md) (sem objetos de terceiros, catálogo próprio, 41 componentes) e o [plano de execução](docs/plano-de-execucao.md), PR a PR.
+O índice de todos os guias e planos, com o que cada um cobre e o que já está concluído, está em [docs/README.md](docs/README.md).

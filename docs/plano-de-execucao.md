@@ -14,17 +14,17 @@ Ao final do plano, o Argila tem **41 componentes**, ícones desenhados pelo time
 
 ## Onde estamos
 
-_Atualizado em 13/10/2026._
+_Atualizado em 19/10/2026._
 
-| Marco | Situação                                                                                                                                                                                              |
-| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0    | **Código pronto** (PR-01 a PR-03 mergeados). Faltam OPS-01 (importar o ruleset) e OPS-02 (responder D1-D4)                                                                                            |
-| M1    | **Pronto** (PR-04 a PR-07): fonte do sistema, padrão e componente de ícones, e os 44 ícones do primeiro lote (desenhados para revisão do time)                                                        |
-| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                                                                         |
-| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                                                                         |
-| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                                                                                    |
-| M5    | **Pronto** (ondas 1 a 6: base de formulários, exibição e feedback, camadas, navegação, domínio dos produtos e dados). **Próximo:** M6                                                                 |
-| M6    | **Código pronto** (PR-20): o workflow `catalogo.yml` publica na Vercel (D3 seguiu a opção padrão). Falta OPS-03 (criar o projeto `argila-catalogo` na Vercel e os 3 secrets; passo a passo no README) |
+| Marco | Situação                                                                                                                                       |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0    | **Pronto** (PR-01 a PR-03; ruleset da `main` ativo). Falta só OPS-02 (responder D1-D4)                                                         |
+| M1    | **Pronto** (PR-04 a PR-07): fonte do sistema, padrão e componente de ícones, e os 44 ícones do primeiro lote (desenhados para revisão do time) |
+| M2    | **Pronto** (PR-08 a PR-13): o catálogo próprio de componentes                                                                                  |
+| M3    | **Pronto** (PR-14 e PR-15): Storybook removido; `npm run dev` abre o catálogo                                                                  |
+| M4    | **Pronto** (PR-16 a PR-19): acessibilidade, contraste, checagem do catálogo e utilitários internos                                             |
+| M5    | **Pronto** (ondas 1 a 6: base de formulários, exibição e feedback, camadas, navegação, domínio dos produtos e dados)                           |
+| M6    | **Pronto** (PR-20): o catálogo é publicado na Vercel a cada merge na `main`, em <https://argila-catalogo.vercel.app>                           |
 
 **Próxima fase:** design systems distintos, testes com Jest e catálogo novo, no [plano de execução dos design systems](plano-de-execucao-design-systems.md).
 
@@ -104,7 +104,7 @@ Precisam de resposta antes do marco indicado. Sem elas, o plano segue a opção 
 | [x] | PR-01  | `feat: biblioteca navegável de componentes com npm run dev` (branch `feat/biblioteca-dev`)        | —          | Mergeado; `npm run dev` abre a página Introdução                | —    |
 | [x] | PR-02  | `feat(tokens): tokens semânticos de carregamento` (branch `feat/tokens-carregamento`)             | —          | Mergeado; `--arg-loading-*` no `:root` muda skeleton e spinner  | —    |
 | [x] | PR-03  | `docs: design system próprio e plano de execução` (branch `docs/design-system-proprio`)           | —          | Mergeado; este plano revisado pelo time                         | —    |
-| [ ] | OPS-01 | **Fora do código:** importar o ruleset da `main` no GitHub (Settings → Rules → Rulesets → Import) | —          | Push direto na `main` recusado pelo GitHub; merge só por rebase | 0,5  |
+| [x] | OPS-01 | **Fora do código:** importar o ruleset da `main` no GitHub (Settings → Rules → Rulesets → Import) | —          | Push direto na `main` recusado pelo GitHub; merge só por rebase | 0,5  |
 | [ ] | OPS-02 | **Fora do código:** responder D1 a D4                                                             | PR-03      | Respostas registradas na tabela de decisões                     | 0,5  |
 
 ---
@@ -232,7 +232,7 @@ Cada onda depende das anteriores; dentro de uma onda, os itens podem ser feitos 
 | ✓   | ID     | Item                                                                                                                                                         | Depende de | Pronto quando                                                        | Est. |
 | --- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | -------------------------------------------------------------------- | ---- |
 | [x] | PR-20  | `ci: publica o catálogo a cada merge na main` (no destino escolhido em D3)                                                                                   | M3, D3     | Link fixo no README; recarregar qualquer página do catálogo funciona | 1    |
-| [ ] | OPS-03 | **Fora do código:** criar o projeto `argila-catalogo` na Vercel e os secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID` e `VERCEL_PROJECT_ID` (passo a passo no README) | PR-20      | O workflow Catálogo publica e o link do README abre                  | 0,5  |
+| [x] | OPS-03 | **Fora do código:** criar o projeto `argila-catalogo` na Vercel e os secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID` e `VERCEL_PROJECT_ID` (passo a passo no README) | PR-20      | O workflow Catálogo publica e o link do README abre                  | 0,5  |
 
 Pode ser feito logo depois do M3, sem esperar o M4 e o M5: o catálogo publicado ganha cada componente novo automaticamente.
 
