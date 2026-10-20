@@ -1,10 +1,30 @@
-/* Toast: caixa de contorno grosso com sombra dura. */
+/*
+ * Toast como a pilha da referência: caixa chapada no tom (ciano, verde,
+ * amarelo; o erro em rosa claro), texto preto, contorno de 3px e sombra dura.
+ */
 
 :root[data-arg-style='neo-brutalista'] arg-toast-stack {
   --arg-toast-shadow: var(--arg-shadow-3);
 }
 
 :root[data-arg-style='neo-brutalista'] arg-toast-stack .arg-toast {
-  border-width: 3px;
-  border-color: var(--arg-color-border);
+  border: 3px solid var(--arg-color-nb-tinta, var(--arg-color-border));
+  background: var(--arg-color-info-soft);
+  color: var(--arg-color-nb-tinta, var(--arg-color-border));
+}
+
+:root[data-arg-style='neo-brutalista'] arg-toast-stack .arg-toast--success {
+  background: var(--arg-color-success-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-toast-stack .arg-toast--warning {
+  background: var(--arg-color-warning-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-toast-stack .arg-toast--danger {
+  background: var(--arg-color-nb-rosa, var(--arg-color-danger-soft));
+}
+
+:root[data-arg-style='neo-brutalista'] arg-toast-stack .arg-toast__icon {
+  color: currentColor;
 }

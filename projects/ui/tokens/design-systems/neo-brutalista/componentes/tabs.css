@@ -1,4 +1,8 @@
-/* Abas: contorno grosso embaixo e indicador em tinta preta. */
+/*
+ * Abas como na referência: em caixa alta, com contorno grosso embaixo; a aba
+ * ativa é um bloco ciano contornado em tinta preta (e em negrito: o estado
+ * não depende só da cor).
+ */
 
 :root[data-arg-style='neo-brutalista'] arg-tabs {
   --arg-tabs-indicator: var(--arg-color-text);
@@ -7,4 +11,14 @@
 
 :root[data-arg-style='neo-brutalista'] arg-tabs .arg-tabs__tab {
   text-transform: uppercase;
+}
+
+:root[data-arg-style='neo-brutalista']
+  arg-tabs:not(.arg-tabs--segmented)
+  .arg-tabs__tab[aria-selected='true'] {
+  border: 3px solid var(--arg-color-border);
+  border-block-end: 0;
+  border-radius: 0.25rem 0.25rem 0 0;
+  background: var(--arg-color-primary-soft);
+  color: var(--arg-color-on-primary-soft);
 }

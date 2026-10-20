@@ -26,6 +26,15 @@
   text-transform: uppercase;
 }
 
+/* Destrutivo: o bloco magenta da referência, com texto preto */
+:root[data-arg-style='neo-brutalista']
+  .arg-button.arg-button--danger:not([disabled], [aria-disabled='true']) {
+  --arg-button-bg: var(--arg-color-danger-soft);
+  --arg-button-bg-hover: color-mix(in oklab, var(--arg-color-danger-soft), #000 8%);
+  --arg-button-bg-pressed: color-mix(in oklab, var(--arg-color-danger-soft), #000 14%);
+  --arg-button-fg: var(--arg-color-on-danger-soft);
+}
+
 :root[data-arg-style='neo-brutalista'] .arg-button.arg-button--secondary {
   --arg-button-bg: var(--arg-color-surface);
   --arg-button-fg: var(--arg-color-text);

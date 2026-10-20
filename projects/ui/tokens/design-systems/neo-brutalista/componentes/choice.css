@@ -1,4 +1,4 @@
-/* Checkbox, radio e switch: marcados em tinta preta, maiores (alvo de 44px na linha). */
+/* Checkbox e radio marcados em tinta preta, maiores (alvo de 44px na linha); o switch ligado é o bloco amarelo da referência. */
 
 :root[data-arg-style='neo-brutalista'] :is(.arg-checkbox, .arg-radio) {
   --arg-choice-accent: var(--arg-color-text);
@@ -6,5 +6,9 @@
 }
 
 :root[data-arg-style='neo-brutalista'] .arg-switch {
-  --arg-switch-on: var(--arg-color-primary);
+  --arg-switch-on: var(--arg-color-warning-soft);
+  --arg-switch-off: var(--arg-color-surface-solid);
+  --arg-switch-thumb: var(--arg-color-nb-tinta, var(--arg-color-text));
+
+  border: 2px solid var(--arg-color-border);
 }

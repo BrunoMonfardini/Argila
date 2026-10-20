@@ -27,4 +27,28 @@
   --arg-color-border: light-dark(#000000, #f2efe4);
   --arg-color-border-strong: light-dark(#000000, #f2efe4);
   --arg-color-focus: light-dark(#000000, #ffd700);
+
+  /*
+   * Os blocos de cor da referência, iguais no claro e no escuro, sempre com
+   * texto preto: informação ciano, sucesso verde, aviso amarelo e erro
+   * magenta (o #FF00FF da referência, que como bloco passa de 6:1 com preto).
+   */
+  --arg-color-info-soft: #00c2cb;
+  --arg-color-on-info-soft: #000000;
+  --arg-color-success-soft: #3ddc84;
+  --arg-color-on-success-soft: #000000;
+  --arg-color-warning-soft: #ffd700;
+  --arg-color-on-warning-soft: #000000;
+  --arg-color-danger-soft: #ff00ff;
+  --arg-color-on-danger-soft: #000000;
+  /* Como texto, o erro é o magenta escuro (o #FF00FF não chega a 4,5:1 no papel) */
+  --arg-color-danger: light-dark(#a3008f, #ff7af5);
+  --arg-color-on-danger: light-dark(#ffffff, #000000);
+  --arg-color-danger-subtle: light-dark(#fbe0f7, #3d0a37);
+
+  /* As outras cores dos componentes da referência: o rosa claro de um toast e o salmão do destrutivo em contorno */
+  /* A tinta dos blocos: preta também no escuro, como na referência */
+  --arg-color-nb-tinta: #000000;
+  --arg-color-nb-rosa: #ffb3e6;
+  --arg-color-nb-salmao: #f4978e;
 }
