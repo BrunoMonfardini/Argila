@@ -19,7 +19,7 @@ _Atualizado em 20/10/2026._
 | G: ferramenta de comparação | Pronto                                                     |
 | AR: Argila                  | Pronto                                                     |
 | NB: Neo-brutalista          | Pronto                                                     |
-| TR: Transparente            | TR-01 a TR-04 prontos; TR-05 espera o fundo em degradê (F) |
+| TR: Transparente            | TR-01 a TR-04 prontos; TR-05 a fazer (o fundo F já existe) |
 | XP: Windows XP              | A fazer                                                    |
 | PK: Punk                    | A fazer                                                    |
 

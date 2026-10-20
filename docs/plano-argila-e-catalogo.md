@@ -32,7 +32,7 @@ _Atualizado em 20/10/2026._
 | Marco       | Situação                                         |
 | ----------- | ------------------------------------------------ |
 | Referências | No [plano das referências](plano-referencias.md) |
-| F           | A fazer                                          |
+| F           | Pronto                                           |
 | L           | A fazer                                          |
 | P           | A fazer                                          |
 
@@ -75,10 +75,10 @@ Um fundo formado pelas cores do tema: o primário, o secundário e o destaque se
 
 | ✓   | ID   | Item                                                                                                                                                                                                                                     | Pronto quando                                                                                              | Est. |
 | --- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---- |
-| [ ] | F-01 | `feat(tokens): fundos` (`--arg-background-image`, `liso` por padrão; `degrade`, com manchas radiais de `primary`, `secondary` e `accent` misturadas ao fundo, em claro e escuro; `data-arg-background` no `<html>`)                      | Trocar a primária muda o degradê; o teste de contraste confere o texto da página sobre cada cor do degradê | 1,5  |
-| [ ] | F-02 | `feat(theme): fundo no manifesto e no ArgTheme` (`fundos` aceitos por DS, com o nativo de cada um, como as linhas do Windows XP; `ArgTheme.setBackground()`; `background` nos segmentos; o DS que não aceita volta ao padrão, com aviso) | `setBackground('degrade')` funciona no Argila; num DS que não aceita, cai no padrão                        | 1    |
-| [ ] | F-03 | `feat(tokens): degradê da marca para áreas de destaque` (`--arg-gradient-brand`, do primário ao secundário, para faixas, banners e o botão primário do Transparente)                                                                     | O degradê acompanha as cores de marca da lista fixa, com contraste em todo ponto                           | 0,5  |
-| [ ] | F-04 | `feat(docs): fundo no Personalizar, no Montar tema e na Fundação` (escolha de fundo no nível Ajuste; a página Fundação → Fundos com as amostras em cada DS; o segmento copiado leva o fundo)                                             | Escolher "Degradê" no catálogo muda o fundo e vai para o link e para o código do Montar tema               | 1    |
+| [x] | F-01 | `feat(tokens): fundos` (`--arg-background-image`, `liso` por padrão; `degrade`, com manchas radiais de `primary`, `secondary` e `accent` misturadas ao fundo, em claro e escuro; `data-arg-background` no `<html>`)                      | Trocar a primária muda o degradê; o teste de contraste confere o texto da página sobre cada cor do degradê | 1,5  |
+| [x] | F-02 | `feat(theme): fundo no manifesto e no ArgTheme` (`fundos` aceitos por DS, com o nativo de cada um, como as linhas do Windows XP; `ArgTheme.setBackground()`; `background` nos segmentos; o DS que não aceita volta ao padrão, com aviso) | `setBackground('degrade')` funciona no Argila; num DS que não aceita, cai no padrão                        | 1    |
+| [x] | F-03 | `feat(tokens): degradê da marca para áreas de destaque` (`--arg-gradient-brand`, do primário ao secundário, para faixas, banners e o botão primário do Transparente)                                                                     | O degradê acompanha as cores de marca da lista fixa, com contraste em todo ponto                           | 0,5  |
+| [x] | F-04 | `feat(docs): fundo no Personalizar, no Montar tema e na Fundação` (escolha de fundo no nível Ajuste; a página Fundação → Fundos com as amostras em cada DS; o segmento copiado leva o fundo)                                             | Escolher "Degradê" no catálogo muda o fundo e vai para o link e para o código do Montar tema               | 1    |
 
 ## L: catálogo mais leve
 
