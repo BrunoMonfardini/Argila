@@ -3,6 +3,7 @@ import {
   ARG_CARD,
   ARG_CHOICE,
   ARG_INPUT_GROUP,
+  ARG_LIST,
   ARG_TABLE,
   ARG_TABS,
   ArgAlert,
@@ -17,6 +18,9 @@ import {
   ArgInput,
   ArgPagination,
   ArgProgressBar,
+  ArgPunkBurst,
+  ArgPunkDotTrack,
+  ArgPunkStatCard,
   ArgSelect,
   ArgStepper,
   ArgStyle,
@@ -52,7 +56,12 @@ export type StyleSheetSection =
   | 'janela'
   | 'modal'
   | 'balao'
-  | 'regras';
+  | 'regras'
+  | 'entrada'
+  | 'indicadores'
+  | 'lista'
+  | 'notificacoes'
+  | 'navegacao';
 
 /** A ordem da referência do Argila ("Product UI Styleguide"), a padrão. */
 export const DEFAULT_SECTIONS: readonly StyleSheetSection[] = [
@@ -106,6 +115,19 @@ export const STYLE_SHEET_SECTIONS: Partial<Record<ArgStyle, readonly StyleSheetS
     'alertas',
     'cards',
   ],
+  // As telas do app da referência: entrada, início, conversas, notificações e a barra inferior
+  punk: [
+    'entrada',
+    'indicadores',
+    'lista',
+    'notificacoes',
+    'chips',
+    'navegacao',
+    'botoes',
+    'campos',
+    'cores',
+    'tipografia',
+  ],
   // "Neo-Brutalist Design System": Foundations, Components, Data display e Feedback
   'neo-brutalista': [
     'cores',
@@ -154,6 +176,11 @@ export const SECTION_TITLES: Record<StyleSheetSection, string> = {
   modal: 'Modal',
   balao: 'Toast',
   regras: 'Cartão de regras',
+  entrada: 'Entrada',
+  indicadores: 'Indicadores',
+  lista: 'Lista',
+  notificacoes: 'Notificações',
+  navegacao: 'Navegação inferior',
 };
 
 /** Rampas de cor das referências que as têm: a cor, o código e os cinco tons. */
@@ -220,6 +247,7 @@ const RADII = [
     ARG_CARD,
     ARG_CHOICE,
     ARG_INPUT_GROUP,
+    ARG_LIST,
     ARG_TABLE,
     ARG_TABS,
     ArgAlert,
@@ -232,6 +260,9 @@ const RADII = [
     ArgInput,
     ArgPagination,
     ArgProgressBar,
+    ArgPunkBurst,
+    ArgPunkDotTrack,
+    ArgPunkStatCard,
     ArgSelect,
     ArgStepper,
     ArgTag,
@@ -253,6 +284,12 @@ export class DocStyleSheet {
   protected readonly radii = RADII;
   protected readonly levels = [1, 2, 3, 4, 5];
   protected readonly gridIcons = GRID_ICONS;
+  protected readonly channels = [
+    { name: 'Facebook', current: false },
+    { name: 'Instagram', current: true },
+    { name: 'Site', current: false },
+    { name: 'E-mail', current: false },
+  ];
   protected readonly iconGrids = [
     { size: 'sm', label: '16px' },
     { size: 'lg', label: '24px' },

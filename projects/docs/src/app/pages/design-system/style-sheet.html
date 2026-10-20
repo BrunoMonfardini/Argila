@@ -192,6 +192,50 @@
             </ul>
           </div>
         }
+        @case ('entrada') {
+          <div class="doc-sheet__entry">
+            <arg-punk-burst />
+            <p class="doc-sheet__entry-title">Seus leads num lugar só</p>
+            <button arg-button type="button">Começar</button>
+          </div>
+        }
+        @case ('indicadores') {
+          <div class="doc-sheet__cards">
+            <article arg-punk-stat-card tone="yellow" label="Campanha" value="75%">
+              <arg-punk-dot-track label="Progresso da campanha" [value]="6" [max]="8" />
+            </article>
+            <article arg-punk-stat-card tone="pink" label="Encontros hoje" value="3"></article>
+            <article arg-punk-stat-card tone="blue" label="Ligação marcada" value="16:45"></article>
+            <article arg-punk-stat-card tone="green" label="Leads na semana" value="128"></article>
+          </div>
+        }
+        @case ('lista') {
+          <ul arg-list>
+            @for (channel of channels; track channel.name) {
+              <li arg-list-item [class.doc-sheet__list-item--current]="channel.current">
+                <span arg-list-title>{{ channel.name }}</span>
+                <arg-icon arg-list-trailing name="chevron-right" />
+              </li>
+            }
+          </ul>
+        }
+        @case ('notificacoes') {
+          <div class="doc-sheet__stack">
+            <div arg-alert tone="success" heading="Nova conversa">Projeto Comfort Town</div>
+            <div arg-alert tone="success" heading="Nova visita">Projeto Comfort Town</div>
+            <div arg-alert tone="warning" heading="Visita amanhã">Projeto Greenville Park</div>
+          </div>
+        }
+        @case ('navegacao') {
+          <nav class="doc-sheet__bottom-nav" aria-label="Navegação inferior de exemplo">
+            <button arg-button type="button" size="sm" aria-current="page">
+              <arg-icon name="layout" /> Início
+            </button>
+            <button arg-icon-button type="button" icon="mail" label="Conversas"></button>
+            <button arg-icon-button type="button" icon="menu" label="Listas"></button>
+            <button arg-icon-button type="button" icon="user" label="Perfil"></button>
+          </nav>
+        }
         @case ('controles') {
           <div class="doc-sheet__row">
             <label arg-choice><input type="checkbox" arg-checkbox /> Opção</label>
