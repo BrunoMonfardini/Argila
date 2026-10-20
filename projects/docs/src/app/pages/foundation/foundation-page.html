@@ -12,6 +12,27 @@
     </p>
   }
 
+  @if (topic.sample === 'backdrop') {
+    @if (backgrounds().length > 1) {
+      <div class="doc-foundation__choices" role="group" aria-label="Fundo do catálogo">
+        @for (option of backgrounds(); track option) {
+          <button
+            arg-button
+            type="button"
+            size="sm"
+            [variant]="background() === option ? 'secondary' : 'tertiary'"
+            [attr.aria-pressed]="background() === option"
+            (click)="selectBackground(option)"
+          >
+            {{ option === 'degrade' ? 'Degradê' : option === 'liso' ? 'Liso' : 'Linhas' }}
+          </button>
+        }
+      </div>
+    } @else {
+      <p>O {{ context().split(' com ')[0] }} tem só o fundo liso.</p>
+    }
+  }
+
   <div class="doc-table" tabindex="0" role="region" [attr.aria-label]="'Tokens de ' + topic.title">
     <table>
       <thead>
@@ -63,6 +84,18 @@
                     "
                     [style.box-shadow]="
                       row.name.includes('shadow') ? 'var(' + row.name + ')' : null
+                    "
+                  ></span>
+                }
+                @case ('backdrop') {
+                  <span
+                    class="doc-foundation__swatch doc-foundation__swatch--wide"
+                    [style.background]="'var(--arg-color-background)'"
+                    [style.background-image]="
+                      row.name.includes('color') ? null : 'var(' + row.name + ')'
+                    "
+                    [style.background-color]="
+                      row.name.includes('color') ? 'var(' + row.name + ')' : null
                     "
                   ></span>
                 }

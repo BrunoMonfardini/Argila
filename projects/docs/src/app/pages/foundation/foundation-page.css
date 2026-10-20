@@ -74,3 +74,13 @@
     transition: none;
   }
 }
+
+.doc-foundation__swatch--wide {
+  inline-size: 4rem;
+}
+
+.doc-foundation__choices {
+  display: flex;
+  gap: var(--arg-space-2);
+  margin-block-end: var(--arg-space-4);
+}

@@ -1,5 +1,6 @@
 import {
   ARG_BRAND_ROLES,
+  ArgBackgroundName,
   ArgColorScheme,
   ArgColors,
   ArgPalette,
@@ -17,6 +18,9 @@ export interface ThemeChoice {
   scheme: ArgColorScheme;
   colors: ArgColors;
   surfaceOpacity: number | undefined;
+  background: ArgBackgroundName;
+  /** Fundo padrão do design system: não precisa ir no segmento. */
+  defaultBackground: ArgBackgroundName;
 }
 
 /** O segmento que reproduz a escolha; campos que valem por padrão ficam de fora. */
@@ -29,6 +33,7 @@ export function segmentOf(choice: ThemeChoice): ArgSegment {
   );
   if (Object.keys(colors).length) segment['colors'] = colors;
   if (choice.surfaceOpacity !== undefined) segment['surfaceOpacity'] = choice.surfaceOpacity;
+  if (choice.background !== choice.defaultBackground) segment['background'] = choice.background;
   return segment as ArgSegment;
 }
 

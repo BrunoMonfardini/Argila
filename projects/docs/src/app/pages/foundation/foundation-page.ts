@@ -7,9 +7,10 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { ARG_SHARED_PALETTES, ArgButton, ArgTheme } from '@brunomonfardini/ui';
+import { ARG_SHARED_PALETTES, ArgBackgroundName, ArgButton, ArgTheme } from '@brunomonfardini/ui';
 import { DOC_MANIFEST } from '../../manifest';
 import { DocThemeVersion } from '../../shared/theme-version';
+import { DocThemeChoices } from '../../shell/theme-choices';
 import { computedTokenValue } from '../tokens/token-kind';
 import { findTopic, topicTokens } from './topics';
 
@@ -39,6 +40,7 @@ export class FoundationPage {
   private readonly root = inject(DOCUMENT).documentElement;
   private readonly version = inject(DocThemeVersion);
   private readonly theme = inject(ArgTheme);
+  private readonly choices = inject(DocThemeChoices);
 
   protected readonly topic = computed(() => findTopic(this.slug()));
   /** "Punk com a paleta Viva, escuro": de onde vêm os valores mostrados. */
@@ -61,6 +63,15 @@ export class FoundationPage {
       current: computedTokenValue(token.name, this.root) || '—',
     }));
   });
+  /** Os fundos do design system atual; com um só, a escolha some. */
+  protected readonly backgrounds = this.theme.backgrounds;
+  protected readonly background = this.theme.background;
+
+  /** Aplica o fundo ao catálogo, como a barra de tema. */
+  protected selectBackground(background: ArgBackgroundName): void {
+    this.choices.selectBackground(background);
+  }
+
   /** A amostra de movimento: anda quando a pessoa pede. */
   protected readonly moved = signal(false);
 

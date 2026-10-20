@@ -62,6 +62,8 @@ export class ThemeBuilderPage {
       scheme: this.theme.colorScheme(),
       colors: this.theme.colors(),
       surfaceOpacity: this.theme.surfaceOpacity(),
+      background: this.theme.background(),
+      defaultBackground: this.theme.backgrounds()[0],
     }),
   );
   protected readonly segment = computed(() => segmentCode(this.current()));

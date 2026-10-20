@@ -7,6 +7,7 @@ import {
   ARG_PALETTES,
   ARG_SEGMENTS,
   ARG_SHARED_PALETTES,
+  ArgBackgroundName,
   ArgBrandColor,
   ArgBrandRole,
   ArgButton,
@@ -47,6 +48,12 @@ const PALETTES: Option<ArgPalette>[] = ARG_PALETTES.map((value) => ({
   label: PALETTE_LABELS[value],
 }));
 
+const BACKGROUND_LABELS: Record<ArgBackgroundName, string> = {
+  liso: 'Liso',
+  degrade: 'Degradê',
+  linhas: 'Linhas',
+};
+
 const ROLES: Option<ArgBrandRole>[] = [
   { value: 'primary', label: 'Primária' },
   { value: 'secondary', label: 'Secundária' },
@@ -80,6 +87,11 @@ export class DocThemeBar {
   protected readonly palettes = computed(() =>
     this.theme.palettes().map((value) => PALETTES.find((option) => option.value === value)!),
   );
+  /** Só os fundos que o design system atual aceita; com um só, o campo some. */
+  protected readonly backgrounds = computed(() =>
+    this.theme.backgrounds().map((value) => ({ value, label: BACKGROUND_LABELS[value] })),
+  );
+  protected readonly background = this.theme.background;
   /** Por papel, só as cores da lista fixa que passam no contraste no DS e na paleta atuais. */
   protected readonly colorOptions = computed(() => {
     const allowed = this.theme.allowedColors();
@@ -134,6 +146,10 @@ export class DocThemeBar {
 
   protected selectPalette(event: Event): void {
     this.choices.selectPalette(value(event) as ArgPalette);
+  }
+
+  protected selectBackground(event: Event): void {
+    this.choices.selectBackground(value(event) as ArgBackgroundName);
   }
 
   protected selectColor(role: ArgBrandRole, event: Event): void {
