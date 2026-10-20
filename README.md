@@ -18,7 +18,7 @@ Este repositório segue o [padrão de pipeline e qualidade de código](docs/padr
 | Mudar um componente, um token, uma paleta ou criar algo novo | [Como alterar](docs/como-alterar.md), com o passo a passo de cada caso       |
 | Usar o Argila num produto                                    | [projects/ui/README.md](projects/ui/README.md)                               |
 | Configurar o VS Code                                         | [VS Code](#vs-code)                                                          |
-| Entender as decisões e os planos                             | [docs/README.md](docs/README.md)                                             |
+| Ver toda a documentação                                      | [docs/README.md](docs/README.md)                                             |
 
 **Em resumo:** a biblioteca fica em `projects/ui` (um componente por pasta em `src/lib/`, o CSS de tema em `tokens/`); o catálogo, em `projects/docs`. Sete design systems (Argila, CODA, Transparente, Windows XP, Neo-brutalista, Punk e o Molde, interno) mudam a aparência dos mesmos componentes, escolhidos por `data-arg-style` no `<html>`.
 
@@ -279,7 +279,7 @@ projects/ui/            → a biblioteca publicada (@brunomonfardini/ui)
   icons/                → os SVGs dos ícones, desenhados pelo time
 projects/docs/          → o catálogo (npm run dev)
 scripts/                → geradores (manifesto, ícones, cores), checkup visual e testes de regras
-docs/                   → guias e planos (índice em docs/README.md)
+docs/                   → guias (índice em docs/README.md)
 ```
 
 ## Tokens em três camadas
@@ -343,4 +343,4 @@ Configuração única (até lá, o workflow só avisa que não publicou):
 
 ## Documentação
 
-O índice de todos os guias e planos, com o que cada um cobre e o que já está concluído, está em [docs/README.md](docs/README.md).
+O índice de todos os guias está em [docs/README.md](docs/README.md).

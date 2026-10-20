@@ -19,7 +19,7 @@ Argila/
 │   └── icons/                    os SVGs dos ícones
 ├── projects/docs/              ← o catálogo (aplicação Angular)
 ├── scripts/                    ← geradores (ícones, cores, manifesto) e checagens
-├── docs/                       ← guias e planos (índice em docs/README.md)
+├── docs/                       ← guias (índice em docs/README.md)
 └── .github/workflows/          ← CI, publicação do pacote e do catálogo
 ```
 

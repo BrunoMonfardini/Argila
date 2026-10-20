@@ -226,7 +226,7 @@ Monitoramento dos testes, igual em todos os repositórios:
 - `reports/` e `coverage/` sobem como artefatos por 14 dias.
 - `it.only` é bloqueado pelo `eslint-plugin-jest`; `jest.retryTimes` é proibido (teste instável vira issue `teste-instável`).
 
-O Argila é a referência: veja a seção 6 do [plano de design systems](plano-estilos-paletas-e-catalogo.md#6-testes-com-jest).
+O Argila é a referência: veja o `jest.config.mjs`, o `scripts/relatorio-de-testes.ts` e o `.github/workflows/ci.yml` dele.
 
 No Angular, o `lint` também recebe `"maxWarnings": 0` nas opções do target `lint` do `angular.json`.
 
