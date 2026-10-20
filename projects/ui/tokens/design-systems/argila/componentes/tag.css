@@ -1,8 +1,31 @@
-/* Tag: pílula de superfície com volume, como os chips da referência. */
+/*
+ * Chips como na referência: os de filtro em menta claro com volume; o
+ * selecionado em menta, com o ✓; o desabilitado cinza e plano. A Tag comum
+ * é uma pílula de superfície com volume.
+ */
 
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
-  .arg-tag:not(.arg-tag--selected, .arg-tag--disabled) {
+  .arg-tag:not(.arg-tag--selectable, .arg-tag--disabled) {
   --arg-tag-bg: var(--arg-color-surface-raised);
   --arg-tag-border: transparent;
+
   box-shadow: var(--arg-shadow-1);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-tag.arg-tag--selectable:not(.arg-tag--selected, .arg-tag--disabled) {
+  --arg-tag-bg: color-mix(
+    in oklab,
+    var(--arg-color-primary-soft) 55%,
+    var(--arg-color-surface-raised)
+  );
+  --arg-tag-fg: var(--arg-color-on-primary-soft);
+  --arg-tag-border: transparent;
+
+  box-shadow: var(--arg-shadow-control);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-tag.arg-tag--selected:not(.arg-tag--disabled) {
+  box-shadow: var(--arg-shadow-control);
 }

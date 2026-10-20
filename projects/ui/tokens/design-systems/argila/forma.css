@@ -25,6 +25,10 @@
   /* Campo rebaixado: sombra por dentro em cima, realce embaixo */
   --arg-shadow-field:
     inset 0 2px 5px var(--arg-shadow-color), inset 0 -1px 0 var(--arg-shadow-highlight);
+  /* Campo da referência: a pílula rebaixada dentro de um aro claro em relevo */
+  --arg-shadow-field-raised:
+    var(--arg-shadow-field), 0 0 0 5px var(--arg-color-surface-raised),
+    0 4px 12px 5px var(--arg-shadow-color);
 
   /* Foco: anel afastado, para o brilho não encostar no volume */
   --arg-focus-ring-offset: 3px;
