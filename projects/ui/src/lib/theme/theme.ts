@@ -1,5 +1,10 @@
 import { DOCUMENT, Injectable, computed, inject, isDevMode, signal } from '@angular/core';
-import { ARG_DEFAULT_STYLE, type ArgDesignSystem } from '../design-systems/design-system';
+import {
+  ARG_DEFAULT_STYLE,
+  backgroundsOf,
+  type ArgBackgroundName,
+  type ArgDesignSystem,
+} from '../design-systems/design-system';
 export {
   ARG_SHARED_PALETTES,
   type ArgPaletteName,
@@ -34,7 +39,9 @@ export {
   ARG_COMPONENTS,
   ARG_DEFAULT_STYLE,
   ARG_CORE_MINIMUM,
+  backgroundsOf,
   curatedComponents,
+  type ArgBackgroundName,
   type ArgComponentName,
   type ArgDesignSystem,
   type ArgSchemeName,
@@ -74,6 +81,12 @@ function readPalette(root: HTMLElement, style: ArgStyle): ArgPalette {
   const value = root.getAttribute('data-arg-palette');
   const accepted: readonly string[] = designSystem(style).paletas;
   return (value !== null && accepted.includes(value) ? value : accepted[0]) as ArgPalette;
+}
+
+function readBackground(root: HTMLElement, style: ArgStyle): ArgBackgroundName {
+  const value = root.getAttribute('data-arg-background');
+  const accepted: readonly string[] = backgroundsOf(designSystem(style));
+  return (value !== null && accepted.includes(value) ? value : accepted[0]) as ArgBackgroundName;
 }
 
 function readColors(root: HTMLElement): ArgColors {
@@ -158,6 +171,12 @@ export class ArgTheme {
   readonly palettes = computed(() => this.designSystem().paletas as readonly ArgPalette[]);
   /** O design system atual aceita o controle de transparência? */
   readonly acceptsTransparency = computed(() => this.designSystem().transparencia);
+  /** Fundos que o design system atual aceita; o primeiro é o padrão. */
+  readonly backgrounds = computed(() => backgroundsOf(this.designSystem()));
+
+  private readonly _background = signal(readBackground(this.root, this._style()));
+  /** Fundo da página: liso, degradê ou o nativo do DS. */
+  readonly background = this._background.asReadonly();
 
   private readonly _palette = signal(readPalette(this.root, this._style()));
 
@@ -212,6 +231,29 @@ export class ArgTheme {
       );
       this.clearSurfaceOpacity();
     }
+    if (!this.backgrounds().includes(this._background())) {
+      warn(
+        `o design system "${style}" não aceita o fundo "${this._background()}"; voltou ao padrão.`,
+      );
+      this.setBackground(this.backgrounds()[0]);
+    }
+  }
+
+  /**
+   * Troca o fundo da página. Um fundo que o design system atual não aceita
+   * vira o padrão dele, com aviso em desenvolvimento. O liso tira o atributo.
+   */
+  setBackground(background: ArgBackgroundName): void {
+    const accepted = this.backgrounds();
+    const value = accepted.includes(background) ? background : accepted[0];
+    if (value !== background) {
+      warn(
+        `o design system "${this._style()}" não aceita o fundo "${background}"; usando "${value}".`,
+      );
+    }
+    if (value === 'liso') this.root.removeAttribute('data-arg-background');
+    else this.root.setAttribute('data-arg-background', value);
+    this._background.set(value);
   }
 
   /**
@@ -263,7 +305,7 @@ export class ArgTheme {
 
   /**
    * Aplica de uma vez um segmento declarado em `provideArgila`: design
-   * system, paleta (ou a padrão dele), cores, modo e transparência. Um nome
+   * system, paleta (ou a padrão dele), cores, modo, transparência e fundo. Um nome
    * que não foi declarado é ignorado, com aviso em desenvolvimento.
    */
   setSegment(name: string): void {
@@ -280,6 +322,7 @@ export class ArgTheme {
     this.setColorScheme(segment.scheme ?? this._colorScheme());
     if (segment.surfaceOpacity === undefined) this.clearSurfaceOpacity();
     else this.setSurfaceOpacity(segment.surfaceOpacity);
+    this.setBackground(segment.background ?? this.backgrounds()[0]);
     this.setColors(segment.colors ?? {});
     this.root.setAttribute('data-arg-segment', name);
     this._segment.set(name);

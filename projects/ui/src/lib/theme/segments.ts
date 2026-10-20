@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import type { ArgBrandRole } from '../design-systems/colors';
+import type { ArgBackgroundName } from '../design-systems/design-system';
 import type { ArgPaletteOf, ArgStyle } from '../design-systems/design-systems';
 import type { ArgColorScheme, ArgColors } from './theme';
 
@@ -19,6 +20,8 @@ export type ArgSegment = {
     colors?: ArgColors;
     /** Opacidade das superfícies, se o design system aceitar transparência. */
     surfaceOpacity?: number;
+    /** Fundo da página; sem ele, vale o padrão do design system. */
+    background?: ArgBackgroundName;
   };
 }[ArgStyle];
 
@@ -44,6 +47,9 @@ export function argSegmentAttributes(segment: ArgSegment): Record<string, string
   const attributes: Record<string, string> = { 'data-arg-style': segment.style };
   if (segment.palette) attributes['data-arg-palette'] = segment.palette;
   if (segment.scheme) attributes['data-arg-theme'] = segment.scheme;
+  if (segment.background && segment.background !== 'liso') {
+    attributes['data-arg-background'] = segment.background;
+  }
   for (const [role, color] of Object.entries(segment.colors ?? {}) as [ArgBrandRole, string][]) {
     attributes[`data-arg-${role}`] = color;
   }

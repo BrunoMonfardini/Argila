@@ -27,6 +27,14 @@
   color-scheme: light dark;
 }
 
+/* Fundo em degradê: quente em cima (primária e secundária), destaque embaixo */
+:root[data-arg-background='degrade'] {
+  --arg-background-image:
+    radial-gradient(60% 55% at 12% 8%, var(--arg-color-background-tint-1), transparent 70%),
+    radial-gradient(55% 50% at 88% 12%, var(--arg-color-background-tint-2), transparent 70%),
+    radial-gradient(80% 60% at 50% 105%, var(--arg-color-background-tint-3), transparent 70%);
+}
+
 :root {
   /* Interação: cor usada para escurecer (claro) ou clarear (escuro) estados */
   --arg-color-shade: light-dark(#000, #fff);
@@ -196,6 +204,38 @@
   --arg-color-on-warning-soft: light-dark(#3a2f05, #fdf6d8);
   --arg-color-danger-soft: light-dark(#f09a9a, #6b2626);
   --arg-color-on-danger-soft: light-dark(#3d0c0c, #fde6e6);
+
+  /*
+   * Fundo em degradê (data-arg-background='degrade'): manchas da primária, da
+   * secundária e do destaque misturadas ao fundo, como luz desfocada. O texto
+   * da página passa sobre cada uma (teste de contraste).
+   */
+  --arg-color-background-tint-1: color-mix(
+    in oklab,
+    var(--arg-color-primary) 12%,
+    light-dark(#fff, #000)
+  );
+  --arg-color-background-tint-2: color-mix(
+    in oklab,
+    var(--arg-color-secondary) 12%,
+    light-dark(#fff, #000)
+  );
+  --arg-color-background-tint-3: color-mix(
+    in oklab,
+    var(--arg-color-accent) 12%,
+    light-dark(#fff, #000)
+  );
+  /* A imagem do fundo da página: nenhuma no liso, as manchas no degradê */
+  --arg-background-image: none;
+  /*
+   * Degradê da marca, da primária à secundária, para faixas e banners; o
+   * texto por cima é on-primary (passa nas duas pontas).
+   */
+  --arg-gradient-brand: linear-gradient(
+    135deg,
+    var(--arg-color-primary),
+    var(--arg-color-secondary)
+  );
 
   /* Espaçamento */
   --arg-space-0: var(--arg-core-space-0);

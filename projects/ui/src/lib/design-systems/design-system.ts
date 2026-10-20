@@ -12,6 +12,17 @@ import type { ArgPaletteName } from './palettes';
 export type ArgSchemeName = 'light' | 'dark';
 
 /**
+ * Fundos da página: `liso` (só a cor de fundo), `degrade` (manchas da
+ * primária, da secundária e do destaque) e `linhas` (o nativo do Windows XP).
+ */
+export type ArgBackgroundName = 'liso' | 'degrade' | 'linhas';
+
+/** Os fundos de um DS; sem `fundos` no manifesto, só o liso. */
+export function backgroundsOf(ds: ArgDesignSystem): readonly ArgBackgroundName[] {
+  return ds.fundos ?? ['liso'];
+}
+
+/**
  * O design system padrão: vale sem `data-arg-style`. O CSS dele usa a raiz
  * `:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))`,
  * que exclui os temas antigos de `data-arg-brand`.
@@ -97,6 +108,8 @@ export interface ArgDesignSystem {
   readonly modos: readonly [ArgSchemeName, ...ArgSchemeName[]];
   /** Aceita o controle de transparência das superfícies. */
   readonly transparencia: boolean;
+  /** Fundos aceitos; o primeiro é o padrão. Sem o campo, só o `liso`. */
+  readonly fundos?: readonly [ArgBackgroundName, ...ArgBackgroundName[]];
   /**
    * Paletas aceitas; a primeira é a padrão. `nativa` é a paleta do próprio
    * DS (`paletas/nativa.css`); as outras são compartilhadas (`palettes.ts`).
