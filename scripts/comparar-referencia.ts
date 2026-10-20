@@ -17,7 +17,7 @@ import {
   comparisonUrl,
 } from './lib/comparacao.ts';
 import { loadDesignSystems } from './lib/design-systems.ts';
-import { openBrowser } from './lib/navegador.ts';
+import { openBrowser } from './navegador.ts';
 
 const { values: options } = parseArgs({
   options: {
