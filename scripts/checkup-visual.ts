@@ -14,9 +14,7 @@
  * contraste baixo entra no relatório, mas não falha (fundos com imagem e
  * sobreposições confundem a medida).
  */
-import { spawn } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import {
@@ -29,6 +27,7 @@ import {
   reportHtml,
 } from './lib/checkup.ts';
 import { loadDesignSystems } from './lib/design-systems.ts';
+import { openBrowser, sleep } from './lib/navegador.ts';
 
 const { values: options } = parseArgs({
   options: {
@@ -49,110 +48,8 @@ const designSystems = (await loadDesignSystems(ROOT)).filter(
 const combos = combinations(designSystems, list(options.paletas));
 const output = resolve(ROOT, options.saida);
 
-const CHROME_PATHS = [
-  process.env.CHROME_PATH,
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/usr/bin/google-chrome',
-  '/usr/bin/chromium',
-];
-const chromePath = CHROME_PATHS.find((path) => path && existsSync(path));
-if (!chromePath) {
-  console.error('Chrome não encontrado. Informe o caminho em CHROME_PATH.');
-  process.exit(2);
-}
-
-const PORT = 9300 + Math.floor(Math.random() * 500);
-const profile = mkdtempSync(join(tmpdir(), 'argila-checkup-'));
-const chrome = spawn(chromePath, [
-  '--headless=new',
-  `--remote-debugging-port=${PORT}`,
-  `--user-data-dir=${profile}`,
-  '--hide-scrollbars',
-  'about:blank',
-]);
-
-const sleep = (ms: number) => new Promise((done) => setTimeout(done, ms));
-
-async function devtools<T>(path: string, method = 'GET'): Promise<T> {
-  for (let attempt = 0; attempt < 50; attempt++) {
-    try {
-      return (await (await fetch(`http://127.0.0.1:${PORT}${path}`, { method })).json()) as T;
-    } catch {
-      await sleep(200);
-    }
-  }
-  throw new Error('o Chrome não respondeu');
-}
-
-interface Message {
-  id?: number;
-  method?: string;
-  params?: Record<string, unknown>;
-  result?: Record<string, unknown>;
-}
-
-await devtools('/json/version');
-const target = await devtools<{ webSocketDebuggerUrl: string }>('/json/new?about:blank', 'PUT');
-const socket = new WebSocket(target.webSocketDebuggerUrl);
-const pending = new Map<number, (message: Message) => void>();
-const listeners: ((message: Message) => void)[] = [];
-let nextId = 0;
-socket.onmessage = (event) => {
-  const message = JSON.parse(String(event.data)) as Message;
-  if (message.id !== undefined) pending.get(message.id)?.(message);
-  else listeners.forEach((listener) => listener(message));
-};
-await new Promise((done) => (socket.onopen = done));
-
-/** Tempo máximo de cada comando ao Chrome: uma página travada não pode parar o checkup. */
-const TIMEOUT = 30_000;
-
-function withTimeout<T>(promise: Promise<T>, label: string): Promise<T> {
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  const timeout = new Promise<never>((_, fail) => {
-    timer = setTimeout(
-      () => fail(new Error(`${label} não respondeu em ${TIMEOUT / 1000}s`)),
-      TIMEOUT,
-    );
-  });
-  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
-}
-
-function send(method: string, params: Record<string, unknown> = {}): Promise<Message> {
-  const id = ++nextId;
-  const answer = new Promise<Message>((done) => {
-    pending.set(id, done);
-    socket.send(JSON.stringify({ id, method, params }));
-  });
-  return withTimeout(answer, method).finally(() => pending.delete(id));
-}
-
-function nextEvent(method: string): Promise<Message> {
-  return new Promise((done) =>
-    listeners.push((message) => message.method === method && done(message)),
-  );
-}
-
-/** Avalia uma expressão na página e devolve o valor. */
-async function evaluate<T>(expression: string): Promise<T> {
-  const { result } = await send('Runtime.evaluate', {
-    expression,
-    awaitPromise: true,
-    returnByValue: true,
-  });
-  const details = result?.['exceptionDetails'] as { text?: string } | undefined;
-  if (details) throw new Error(details.text ?? 'erro na página');
-  return (result?.['result'] as { value: T }).value;
-}
-
-async function load(url: string): Promise<void> {
-  const loaded = nextEvent('Page.loadEventFired');
-  await send('Page.navigate', { url });
-  await withTimeout(loaded, `carregar ${url}`);
-  await sleep(1500);
-}
+const browser = await openBrowser();
+const { evaluate, load, screenshot } = browser;
 
 /** Navega pelo roteador do catálogo, sem recarregar. */
 async function visit(path: string): Promise<void> {
@@ -190,19 +87,8 @@ async function applyTheme(combo: Combination): Promise<string[]> {
   })()`);
 }
 
-async function screenshot(file: string): Promise<void> {
-  const metrics = await send('Page.getLayoutMetrics');
-  const size = metrics.result?.['cssContentSize'] as { width: number; height: number };
-  const shot = await send('Page.captureScreenshot', {
-    format: 'png',
-    captureBeyondViewport: true,
-    clip: { x: 0, y: 0, width: 1280, height: Math.min(size.height, 4000), scale: 1 },
-  });
-  writeFileSync(file, Buffer.from(String(shot.result?.['data']), 'base64'));
-}
-
 let errors: string[] = [];
-listeners.push((message) => {
+browser.listen((message) => {
   if (message.method === 'Runtime.exceptionThrown') {
     const details = message.params?.['exceptionDetails'] as {
       text: string;
@@ -214,15 +100,6 @@ listeners.push((message) => {
     const args = message.params['args'] as { value?: unknown; description?: string }[];
     errors.push(args.map((arg) => String(arg.value ?? arg.description)).join(' '));
   }
-});
-
-await send('Page.enable');
-await send('Runtime.enable');
-await send('Emulation.setDeviceMetricsOverride', {
-  width: 1280,
-  height: 900,
-  deviceScaleFactor: 1,
-  mobile: false,
 });
 
 const base = options.url.replace(/\/$/, '');
@@ -292,8 +169,7 @@ async function checkPage(page: string, name: string): Promise<void> {
 
 writeFileSync(join(output, 'relatorio.html'), reportHtml(pages, combos, issues));
 writeFileSync(join(output, 'problemas.json'), JSON.stringify(issues, null, 2));
-socket.close();
-chrome.kill();
+browser.close();
 
 const count = (kind: Issue['kind']) => issues.filter((issue) => issue.kind === kind).length;
 console.log(
