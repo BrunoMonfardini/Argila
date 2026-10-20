@@ -14,5 +14,6 @@
 
 - [Cada design system o mais próximo possível da sua referência](plano-referencias.md)
 - [Fundos em degradê, catálogo mais leve e personalização por importância](plano-argila-e-catalogo.md)
+- [Fundo de imagem desfocada e cores tiradas da imagem](plano-fundo-de-imagem.md)
 
 As especificações e os planos de execução das fases concluídas (design system próprio e os sete design systems) foram removidos: o que eles decidiam está no código, nos manifestos dos design systems e nos guias acima. Para consultá-los, veja o histórico do git (`git log --all -- docs/plano-de-execucao.md`).
