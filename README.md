@@ -16,9 +16,12 @@ Este repositório segue o [padrão de pipeline e qualidade de código](docs/padr
 | Ver os componentes funcionando                               | `npm run dev`, ou o [catálogo publicado](https://argila-catalogo.vercel.app) |
 | Saber onde fica um componente, um design system ou um token  | [Mapa do projeto](docs/mapa-do-projeto.md)                                   |
 | Mudar um componente, um token, uma paleta ou criar algo novo | [Como alterar](docs/como-alterar.md), com o passo a passo de cada caso       |
-| Usar o Argila num produto                                    | [projects/ui/README.md](projects/ui/README.md)                               |
+| Usar o Argila num produto                                    | [Manual de importação](projects/ui/README.md#manual-de-importação)           |
+| Saber o que pode e o que não pode no uso                     | [Regras de uso](projects/ui/README.md#regras-de-uso)                         |
 | Contribuir (fluxo, commits, revisão)                         | [CONTRIBUTING.md](CONTRIBUTING.md)                                           |
-| Reportar uma vulnerabilidade                                 | [SECURITY.md](SECURITY.md)                                                   |
+| Reportar uma vulnerabilidade                                 | [SECURITY.md](SECURITY.md) (em particular, nunca em issue)                   |
+| Reportar um bug ou sugerir algo                              | [Issues](https://github.com/BrunoMonfardini/Argila/issues/new/choose)        |
+| Saber as regras de convivência                               | [Código de conduta](CODE_OF_CONDUCT.md)                                      |
 | Configurar o VS Code                                         | [VS Code](#vs-code)                                                          |
 | Ver toda a documentação                                      | [docs/README.md](docs/README.md)                                             |
 
