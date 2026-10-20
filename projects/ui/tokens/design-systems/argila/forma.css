@@ -30,6 +30,27 @@
     var(--arg-shadow-field), 0 0 0 5px var(--arg-color-surface-raised),
     0 4px 12px 5px var(--arg-shadow-color);
 
+  /*
+   * Tipografia da referência: Display bem maior que os títulos, e títulos em
+   * peso médio (a referência não usa negrito pesado)
+   */
+  --arg-font-size-display: 3rem;
+  --arg-font-size-heading-lg: 2.25rem;
+  --arg-font-size-heading-md: 1.75rem;
+  --arg-font-size-heading-sm: 1.375rem;
+  --arg-font-weight-heading: 600;
+
+  /*
+   * Cartão "em pilha" da referência: duas camadas mais estreitas aparecendo
+   * embaixo, cada uma um pouco mais escura, sobre o volume de sempre
+   */
+  --arg-shadow-stack:
+    0 7px 0 -3px
+      color-mix(in oklab, var(--arg-color-surface-raised-solid), var(--arg-color-shade) 5%),
+    0 14px 0 -6px
+      color-mix(in oklab, var(--arg-color-surface-raised-solid), var(--arg-color-shade) 10%),
+    var(--arg-shadow-2);
+
   /* Foco: anel afastado, para o brilho não encostar no volume */
   --arg-focus-ring-offset: 3px;
 }
