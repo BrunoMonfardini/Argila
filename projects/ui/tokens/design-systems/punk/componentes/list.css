@@ -1,4 +1,7 @@
-/* Lista: linhas de contorno cinza e cantos arredondados, como as listas de conversas da referência. */
+/*
+ * Lista como as de conversas e contatos da referência: cada item é uma
+ * pílula de card com contorno #2A2A2A, separada das outras.
+ */
 
 :root[data-arg-style='punk'] .arg-list {
   --arg-list-divider: transparent;
@@ -6,6 +9,6 @@
 }
 
 :root[data-arg-style='punk'] .arg-list .arg-list__item {
-  border: 1px solid var(--arg-color-border-strong);
+  border: 1px solid var(--arg-color-border);
   border-radius: 1rem;
 }

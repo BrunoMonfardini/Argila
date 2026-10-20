@@ -1,5 +1,38 @@
-/* Alerta: cantos de cartão. */
+/*
+ * Alerta como as notificações da referência: bloco chapado no tom (verde,
+ * amarelo, azul; o erro em coral), cantos de card, texto e ícone pretos.
+ */
 
 :root[data-arg-style='punk'] .arg-alert {
   --arg-alert-radius: var(--arg-radius-container);
+  --arg-alert-bg: var(--arg-color-info-soft);
+  --arg-alert-fg: var(--arg-color-on-info-soft);
+
+  border: 0;
+}
+
+:root[data-arg-style='punk'] .arg-alert.arg-alert--success {
+  --arg-alert-bg: var(--arg-color-success-soft);
+  --arg-alert-fg: var(--arg-color-on-success-soft);
+}
+
+:root[data-arg-style='punk'] .arg-alert.arg-alert--warning {
+  --arg-alert-bg: var(--arg-color-warning-soft);
+  --arg-alert-fg: var(--arg-color-on-warning-soft);
+}
+
+:root[data-arg-style='punk'] .arg-alert.arg-alert--danger {
+  --arg-alert-bg: var(--arg-color-danger-soft);
+  --arg-alert-fg: var(--arg-color-on-danger-soft);
+}
+
+:root[data-arg-style='punk'] .arg-alert .arg-alert__icon {
+  color: currentColor;
+}
+
+/* Ações do alerta: contorno e texto na cor do bloco (preto), não no branco da página */
+:root[data-arg-style='punk'] .arg-alert :is(.arg-button--secondary, .arg-button--tertiary) {
+  --arg-button-fg: currentColor;
+  --arg-button-border: currentColor;
+  --arg-button-bg-hover: color-mix(in oklab, currentColor 12%, transparent);
 }

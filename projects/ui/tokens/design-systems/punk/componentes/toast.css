@@ -1,5 +1,33 @@
-/* Toast: cantos de cartão, como os cards de notificação da referência. */
+/*
+ * Toast como os cards de notificação da referência: bloco chapado no tom,
+ * com cantos de card e texto preto.
+ */
 
 :root[data-arg-style='punk'] arg-toast-stack {
   --arg-toast-radius: var(--arg-radius-container);
+}
+
+:root[data-arg-style='punk'] arg-toast-stack .arg-toast {
+  border: 0;
+  background: var(--arg-color-info-soft);
+  color: var(--arg-color-on-info-soft);
+}
+
+:root[data-arg-style='punk'] arg-toast-stack .arg-toast--success {
+  background: var(--arg-color-success-soft);
+  color: var(--arg-color-on-success-soft);
+}
+
+:root[data-arg-style='punk'] arg-toast-stack .arg-toast--warning {
+  background: var(--arg-color-warning-soft);
+  color: var(--arg-color-on-warning-soft);
+}
+
+:root[data-arg-style='punk'] arg-toast-stack .arg-toast--danger {
+  background: var(--arg-color-danger-soft);
+  color: var(--arg-color-on-danger-soft);
+}
+
+:root[data-arg-style='punk'] arg-toast-stack .arg-toast__icon {
+  color: currentColor;
 }

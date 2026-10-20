@@ -33,4 +33,14 @@
   --arg-color-info: #4c8dff;
   --arg-color-success: #3fe36b;
   --arg-color-warning: #edf040;
+
+  /* Blocos de feedback chapados, como as notificações verdes da referência */
+  --arg-color-info-soft: #4c8dff;
+  --arg-color-on-info-soft: #000000;
+  --arg-color-success-soft: #3fe36b;
+  --arg-color-on-success-soft: #000000;
+  --arg-color-warning-soft: #edf040;
+  --arg-color-on-warning-soft: #000000;
+  --arg-color-danger-soft: #ff7a7a;
+  --arg-color-on-danger-soft: #000000;
 }
