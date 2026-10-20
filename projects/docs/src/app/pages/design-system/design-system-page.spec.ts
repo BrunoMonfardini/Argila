@@ -72,6 +72,24 @@ describe('DesignSystemPage', () => {
     expect(root.querySelectorAll('#tokens ~ .doc-table tbody tr').length).toBe(6);
   });
 
+  it('no DS que aceita o degradê, sugere vê-lo com um clique', async () => {
+    const { harness, root } = await open('/design-systems/transparente');
+    const theme = TestBed.inject(ArgTheme);
+    theme.setStyle('transparente');
+    await harness.fixture.whenStable();
+
+    const suggestion = root.querySelector('.doc-ds__suggestion')!;
+    expect(suggestion.textContent).toContain('fica melhor sobre o fundo em degradê');
+    suggestion.querySelector('button')!.click();
+    await harness.fixture.whenStable();
+
+    expect(theme.background()).toBe('degrade');
+    expect(root.querySelector('.doc-ds__suggestion')).toBeNull();
+    theme.setStyle('argila');
+    document.documentElement.removeAttribute('data-arg-background');
+    document.documentElement.removeAttribute('data-arg-style');
+  });
+
   it('os DS internos não têm página', async () => {
     const { root } = await open('/design-systems/molde');
 
