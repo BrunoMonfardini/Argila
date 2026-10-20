@@ -60,6 +60,12 @@ export const PAIRS: ContrastPair[] = [
     { foreground: `--arg-color-${tone}`, background: '--arg-color-surface', minimum: TEXT },
     // Corpo do Alert: texto comum sobre o fundo suave do tom
     { foreground: '--arg-color-text', background: `--arg-color-${tone}-subtle`, minimum: TEXT },
+    // Pílula chapada do tom (alertas e selos "de massinha"): texto por cima
+    {
+      foreground: `--arg-color-on-${tone}-soft`,
+      background: `--arg-color-${tone}-soft`,
+      minimum: TEXT,
+    },
   ]),
   // Badge e Tag neutros: texto sobre o fundo rebaixado
   { foreground: '--arg-color-text', background: '--arg-color-surface-sunken', minimum: TEXT },
