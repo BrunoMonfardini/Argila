@@ -12,7 +12,7 @@ import {
 } from './style-sheet';
 
 describe('folha de estilo', () => {
-  async function render(style: 'argila' | 'punk') {
+  async function render(style: 'argila' | 'punk' | 'neo-brutalista') {
     TestBed.configureTestingModule({ providers: [provideArgIcons(argIconsAll)] });
     const fixture = TestBed.createComponent(DocStyleSheet);
     fixture.componentRef.setInput('style', style);
@@ -38,6 +38,17 @@ describe('folha de estilo', () => {
     const root = await render('punk');
 
     expect(headings(root)).toEqual(['Cards', 'Botões']);
+  });
+
+  it('o Neo-brutalista segue as seções da referência dele, sem violações', async () => {
+    const root = await render('neo-brutalista');
+
+    expect(headings(root)).toEqual(
+      STYLE_SHEET_SECTIONS['neo-brutalista']!.map((section) => SECTION_TITLES[section]),
+    );
+    expect(root.querySelector('arg-stepper')).not.toBeNull();
+    expect(root.querySelector('arg-table')).not.toBeNull();
+    expect(a11yViolations(root)).toEqual([]);
   });
 
   it('usa os componentes de verdade, sem violações de acessibilidade', async () => {
