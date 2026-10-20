@@ -2,6 +2,65 @@
 
 Componentes Angular acessíveis e temas por cliente via design tokens.
 
+## Manual de importação
+
+Do zero até o primeiro componente na tela, num app Angular 22 (standalone):
+
+| Passo | O que fazer                                                                                   | Onde                                         |
+| ----- | --------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 1     | Apontar o escopo `@brunomonfardini` para o GitHub Packages e ter um token `read:packages`     | `.npmrc` na raiz ([Instalação](#instalação)) |
+| 2     | `pnpm add @brunomonfardini/ui`                                                                | Terminal                                     |
+| 3     | Incluir `argila.css` (e, se quiser, `base.css` e `temas.css`) antes dos estilos do produto    | `angular.json` → `styles`                    |
+| 4     | Registrar só os ícones usados com `provideArgIcons([...])`                                    | `app.config.ts` ([Uso](#uso))                |
+| 5     | Escolher a aparência: design system, paleta, modo e fundo, ou um segmento com `provideArgila` | `<html>` ou `app.config.ts` ([Tema](#tema))  |
+| 6     | Importar o componente no `imports` do seu componente e usar no template                       | O seu componente ([Uso](#uso))               |
+
+Um `app.config.ts` completo:
+
+```ts
+import { ApplicationConfig } from '@angular/core';
+import { argIconPlus, argIconX, provideArgIcons, provideArgila } from '@brunomonfardini/ui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideArgIcons([argIconPlus, argIconX]),
+    provideArgila({
+      segments: { padrao: { style: 'argila', scheme: 'auto' } },
+      defaultSegment: 'padrao',
+    }),
+  ],
+};
+```
+
+Se algo não aparecer com o estilo certo, confira primeiro o passo 3: sem o `argila.css`, os
+componentes ficam sem tokens.
+
+## Regras de uso
+
+**Licença.** O código é [MIT](https://github.com/BrunoMonfardini/Argila/blob/main/LICENSE): pode usar, copiar, alterar e distribuir, inclusive
+em produto comercial, desde que mantenha o aviso de copyright e a licença nas cópias. Vem sem
+garantia.
+
+**No produto:**
+
+- Use só os tokens semânticos (`--arg-color-*`, `--arg-space-*`, `--arg-radius-*`) no CSS do
+  produto, nunca os primitivos (`--arg-core-*`) nem cores literais: assim o tema e o modo
+  escuro continuam valendo.
+- Mude a aparência pelo tema (design system, paleta, cores da lista fixa, `setBrand`), não
+  sobrescrevendo as classes internas `.arg-*`: elas podem mudar entre versões menores.
+- Cor livre de tenant (`setBrand`) fica fora do teste de contraste do Argila: garanta 4,5:1
+  entre cada cor e o texto por cima. As cores da lista fixa (`setColors`) já são conferidas.
+- Respeite os nomes acessíveis obrigatórios (`label` do botão de ícone, da barra de progresso,
+  do spinner): o tipo não compila sem eles por um motivo.
+- Cada design system tem regras próprias ("faça e não faça"), na página dele no catálogo
+  (Design systems → nome) e em `ARG_DESIGN_SYSTEMS[ds].regras`.
+- Enquanto o pacote estiver em `0.x`, uma versão menor pode quebrar API: leia o
+  [CHANGELOG](CHANGELOG.md) antes de atualizar.
+
+**Problemas:** bug ou ideia, abra uma issue com o modelo do repositório. Falha de segurança,
+nunca em público: siga o [SECURITY.md](https://github.com/BrunoMonfardini/Argila/blob/main/SECURITY.md). A convivência no projeto segue o
+[código de conduta](https://github.com/BrunoMonfardini/Argila/blob/main/CODE_OF_CONDUCT.md).
+
 ## Instalação
 
 O pacote é privado, publicado no GitHub Packages. No produto, crie um `.npmrc` na raiz:
@@ -173,6 +232,18 @@ volta ao padrão dele, com aviso no console em modo de desenvolvimento: um modo 
 suportado, uma paleta não aceita e a transparência (CODA, Windows XP, Neo-brutalista e Punk não aceitam).
 `setPalette()` com uma paleta não aceita usa a padrão, e `setSurfaceOpacity()` num DS sem
 transparência é ignorado.
+
+Fundo da página: `liso` (padrão) ou `degrade`, com manchas suaves da primária, da secundária
+e do destaque, que acompanham a paleta e as cores de marca. O Windows XP tem o fundo nativo
+`linhas` (varredura). Cada DS declara os fundos que aceita (`theme.backgrounds()`); o padrão
+não leva atributo.
+
+```ts
+theme.setBackground('degrade'); // ou data-arg-background="degrade" no <html>
+```
+
+Para faixas e banners, `--arg-gradient-brand` vai da primária à secundária, com
+`--arg-color-on-primary` por cima.
 
 Superfícies translúcidas: `--arg-surface-opacity` (padrão 1; 0.6 no Transparente). Paletas e
 temas sobrescrevem as cores opacas `--arg-color-surface-solid`, `-raised-solid` e
