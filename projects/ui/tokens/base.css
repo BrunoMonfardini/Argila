@@ -15,6 +15,8 @@ html {
   line-height: var(--arg-line-height-body);
   color: var(--arg-color-text);
   background: var(--arg-color-background);
+  background-image: var(--arg-background-image);
+  background-attachment: fixed;
   -webkit-text-size-adjust: 100%;
 }
 

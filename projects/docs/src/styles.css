@@ -4,6 +4,8 @@
  */
 body {
   background: var(--arg-color-background);
+  background-image: var(--arg-background-image);
+  background-attachment: fixed;
 }
 
 h1,

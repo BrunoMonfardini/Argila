@@ -10,8 +10,16 @@ export const NON_TEXT = 3;
 
 /** Pares de cor que aparecem juntos nos componentes. */
 export const PAIRS: ContrastPair[] = [
-  // Texto sobre fundos
-  ...['background', 'surface', 'surface-raised', 'surface-sunken'].flatMap((bg) => [
+  // Texto sobre fundos (os tints são as manchas do fundo em degradê)
+  ...[
+    'background',
+    'background-tint-1',
+    'background-tint-2',
+    'background-tint-3',
+    'surface',
+    'surface-raised',
+    'surface-sunken',
+  ].flatMap((bg) => [
     { foreground: '--arg-color-text', background: `--arg-color-${bg}`, minimum: TEXT },
     { foreground: '--arg-color-text-muted', background: `--arg-color-${bg}`, minimum: TEXT },
   ]),
@@ -24,6 +32,8 @@ export const PAIRS: ContrastPair[] = [
   { foreground: '--arg-color-primary-hover', background: '--arg-color-surface', minimum: TEXT },
   // Botão primário em todos os estados
   { foreground: '--arg-color-on-primary', background: '--arg-color-primary', minimum: TEXT },
+  // Degradê da marca (--arg-gradient-brand): o texto passa nas duas pontas
+  { foreground: '--arg-color-on-primary', background: '--arg-color-secondary', minimum: TEXT },
   { foreground: '--arg-color-on-primary', background: '--arg-color-primary-hover', minimum: TEXT },
   {
     foreground: '--arg-color-on-primary',

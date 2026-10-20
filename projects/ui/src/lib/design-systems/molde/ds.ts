@@ -8,6 +8,7 @@ export const molde = {
     'Ponto de partida neutro para criar um design system novo: plano, cinza e sem personalidade de propósito.',
   modos: ['light', 'dark'],
   transparencia: true,
+  fundos: ['liso', 'degrade'],
   paletas: ['nativa', 'terrosa'],
   componentes: { curados: [], fora: [] },
   exclusivos: [],
