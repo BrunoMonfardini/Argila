@@ -17,6 +17,8 @@ Este repositório segue o [padrão de pipeline e qualidade de código](docs/padr
 | Saber onde fica um componente, um design system ou um token  | [Mapa do projeto](docs/mapa-do-projeto.md)                                   |
 | Mudar um componente, um token, uma paleta ou criar algo novo | [Como alterar](docs/como-alterar.md), com o passo a passo de cada caso       |
 | Usar o Argila num produto                                    | [projects/ui/README.md](projects/ui/README.md)                               |
+| Contribuir (fluxo, commits, revisão)                         | [CONTRIBUTING.md](CONTRIBUTING.md)                                           |
+| Reportar uma vulnerabilidade                                 | [SECURITY.md](SECURITY.md)                                                   |
 | Configurar o VS Code                                         | [VS Code](#vs-code)                                                          |
 | Ver toda a documentação                                      | [docs/README.md](docs/README.md)                                             |
 
