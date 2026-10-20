@@ -1,0 +1,23 @@
+name: Ideia ou componente novo
+description: Sugira um componente, uma variante, um token ou uma melhoria.
+title: 'feat(<componente>): '
+labels: [ideia]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Que problema isso resolve?
+      description: A situação do produto em que falta algo hoje.
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Proposta
+      description: Como você imagina o uso (HTML, inputs, estados). Imagem de referência é bem-vinda.
+    validations:
+      required: true
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: O que já tentou com os componentes atuais
