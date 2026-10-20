@@ -134,6 +134,56 @@
             <div arg-alert tone="info" live="off">A clínica fecha mais cedo hoje.</div>
           </div>
         }
+        @case ('controles') {
+          <div class="doc-sheet__row">
+            <label arg-choice><input type="checkbox" arg-checkbox /> Opção</label>
+            <label arg-choice><input type="checkbox" arg-checkbox checked /> Marcada</label>
+            <label arg-choice><input type="radio" arg-radio name="folha-radio" /> Uma</label>
+            <label arg-choice
+              ><input type="radio" arg-radio name="folha-radio" checked /> Outra</label
+            >
+            <label arg-choice><input type="checkbox" arg-switch /> Desligado</label>
+            <label arg-choice><input type="checkbox" arg-switch checked /> Ligado</label>
+          </div>
+        }
+        @case ('passos') {
+          <arg-stepper [steps]="['Serviço', 'Horário', 'Pagamento']" [current]="1" />
+        }
+        @case ('paginacao') {
+          <nav arg-pagination label="Paginação de exemplo" [total]="10" [page]="1"></nav>
+        }
+        @case ('selos') {
+          <div class="doc-sheet__row">
+            <span arg-badge tone="info">Novo</span>
+            <span arg-badge tone="success">Pago</span>
+            <span arg-badge tone="warning">Aguardando</span>
+            <span arg-badge tone="danger">Atrasado</span>
+            <span arg-badge>Rascunho</span>
+          </div>
+        }
+        @case ('avatares') {
+          <div class="doc-sheet__row">
+            <arg-avatar name="Helena Moura" />
+            <arg-avatar name="Igor Martins" size="lg" />
+          </div>
+        }
+        @case ('tabela') {
+          <arg-table
+            caption="Agendamentos de exemplo"
+            rowKey="nome"
+            [columns]="columns"
+            [rows]="rows"
+          />
+        }
+        @case ('progresso') {
+          <progress arg-progress label="Progresso de exemplo" [value]="76" [max]="100"></progress>
+        }
+        @case ('vazio') {
+          <section arg-empty-state heading="Nenhum item ainda" icon="plus" [level]="4" bordered>
+            Os itens aparecem aqui assim que alguém criar o primeiro.
+            <button arg-button arg-empty-state-action type="button">Criar o primeiro</button>
+          </section>
+        }
         @case ('cards') {
           <article arg-card variant="elevated" class="doc-sheet__card">
             <div>
