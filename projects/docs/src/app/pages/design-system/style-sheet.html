@@ -1,0 +1,152 @@
+<div class="doc-sheet">
+  @for (section of sections(); track section) {
+    <section
+      class="doc-sheet__section"
+      [class]="'doc-sheet__section doc-sheet__section--' + section"
+      [attr.aria-labelledby]="id(section)"
+    >
+      <h3 [id]="id(section)">{{ titles[section] }}</h3>
+      @switch (section) {
+        @case ('cores') {
+          <ul class="doc-sheet__swatches">
+            @for (swatch of swatches; track swatch.token) {
+              <li>
+                <span
+                  class="doc-sheet__swatch"
+                  [style.background]="'var(' + swatch.token + ')'"
+                ></span>
+                <span class="doc-sheet__label">{{ swatch.label }}</span>
+                <code>{{ swatch.token }}</code>
+              </li>
+            }
+          </ul>
+        }
+        @case ('tipografia') {
+          <ul class="doc-sheet__type">
+            @for (step of typeScale; track step.token) {
+              <li>
+                <span
+                  [style.font-size]="'var(' + step.token + ')'"
+                  [style.font-family]="
+                    step.heading ? 'var(--arg-font-family-heading)' : 'var(--arg-font-family)'
+                  "
+                  [style.font-weight]="
+                    step.heading
+                      ? 'var(--arg-font-weight-heading)'
+                      : 'var(--arg-font-weight-regular)'
+                  "
+                  >{{ step.label }}</span
+                >
+                <code>{{ step.token }}</code>
+              </li>
+            }
+          </ul>
+        }
+        @case ('espacamento') {
+          <ul class="doc-sheet__spaces">
+            @for (space of spaces; track space) {
+              <li>
+                <span class="doc-sheet__space" [style.width]="'var(' + space + ')'"></span>
+                <code>{{ space }}</code>
+              </li>
+            }
+          </ul>
+        }
+        @case ('raio') {
+          <ul class="doc-sheet__radii">
+            @for (radius of radii; track radius.token) {
+              <li>
+                <span
+                  class="doc-sheet__radius"
+                  [style.border-radius]="'var(' + radius.token + ')'"
+                ></span>
+                <span class="doc-sheet__label">{{ radius.label }}</span>
+              </li>
+            }
+          </ul>
+        }
+        @case ('elevacao') {
+          <ol class="doc-sheet__levels">
+            @for (level of levels; track level) {
+              <li [style.box-shadow]="'var(--arg-shadow-' + level + ')'">Nível {{ level }}</li>
+            }
+          </ol>
+        }
+        @case ('botoes') {
+          <div class="doc-sheet__row">
+            <button arg-button type="button">Ação principal</button>
+            <button arg-button type="button" variant="secondary">Secundária</button>
+            <button arg-button type="button" variant="tertiary">Terciária</button>
+            <button arg-button type="button" variant="danger">Excluir</button>
+            <button arg-button type="button" disabled>Desabilitado</button>
+          </div>
+        }
+        @case ('campos') {
+          <div class="doc-sheet__stack">
+            <arg-input-group>
+              <input
+                arg-input
+                type="search"
+                placeholder="Buscar faturas"
+                aria-label="Buscar faturas"
+              />
+              <button
+                arg-icon-button
+                argInputAction
+                type="button"
+                variant="secondary"
+                icon="search"
+                label="Buscar"
+              ></button>
+            </arg-input-group>
+            <select arg-select aria-label="Plano">
+              <option>Plano mensal</option>
+              <option>Plano anual</option>
+            </select>
+          </div>
+        }
+        @case ('chips') {
+          <div class="doc-sheet__row" role="group" aria-label="Chips de exemplo">
+            <arg-tag selectable><arg-icon name="filter" /> Filtro</arg-tag>
+            <arg-tag selectable [selected]="true">Selecionado</arg-tag>
+            <arg-tag selectable disabled>Desabilitado</arg-tag>
+          </div>
+        }
+        @case ('abas') {
+          <div class="doc-sheet__stack">
+            <arg-tabs label="Abas segmentadas de exemplo" variant="segmented">
+              <arg-tab label="Visão geral">Resumo da conta.</arg-tab>
+              <arg-tab label="Cobrança">Faturas e pagamentos.</arg-tab>
+              <arg-tab label="Equipe">Pessoas com acesso.</arg-tab>
+            </arg-tabs>
+            <arg-tabs label="Abas sublinhadas de exemplo">
+              <arg-tab label="Visão geral">Resumo da conta.</arg-tab>
+              <arg-tab label="Cobrança">Faturas e pagamentos.</arg-tab>
+              <arg-tab label="Equipe">Pessoas com acesso.</arg-tab>
+            </arg-tabs>
+          </div>
+        }
+        @case ('alertas') {
+          <div class="doc-sheet__stack">
+            <div arg-alert tone="success" live="off">Pagamento confirmado.</div>
+            <div arg-alert tone="warning" live="off">A fatura vence amanhã.</div>
+            <div arg-alert tone="danger" live="off">Não foi possível salvar.</div>
+            <div arg-alert tone="info" live="off">A clínica fecha mais cedo hoje.</div>
+          </div>
+        }
+        @case ('cards') {
+          <article arg-card class="doc-sheet__card">
+            <div>
+              <h4 arg-card-title>Título</h4>
+              <p>Banho e tosa toda sexta, com lembrete por WhatsApp.</p>
+              <arg-tag>Imagem</arg-tag>
+            </div>
+            <span class="doc-sheet__thumb" aria-hidden="true"
+              ><arg-icon name="image" size="lg"
+            /></span>
+          </article>
+        }
+      }
+    </section>
+  }
+</div>

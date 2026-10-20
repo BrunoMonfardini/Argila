@@ -1,0 +1,145 @@
+:host {
+  display: block;
+}
+
+/* Duas colunas, como as folhas das referências; uma só no celular */
+.doc-sheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: var(--arg-space-8) var(--arg-space-6);
+}
+
+.doc-sheet__section {
+  display: grid;
+  align-content: start;
+  gap: var(--arg-space-3);
+  min-width: 0;
+}
+
+.doc-sheet__section h3 {
+  margin: 0;
+  font-size: var(--arg-font-size-heading-sm);
+}
+
+.doc-sheet ul,
+.doc-sheet ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+code {
+  color: var(--arg-color-text-muted);
+  font-size: var(--arg-font-size-caption);
+}
+
+.doc-sheet__label {
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-sheet__swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+  gap: var(--arg-space-3);
+}
+
+.doc-sheet__swatches li {
+  display: grid;
+  gap: var(--arg-space-1);
+}
+
+.doc-sheet__swatch {
+  height: 4rem;
+  border: 1px solid var(--arg-color-border);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-1);
+}
+
+.doc-sheet__type li,
+.doc-sheet__spaces li {
+  display: flex;
+  gap: var(--arg-space-3);
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: var(--arg-space-1);
+  border-block-end: 1px solid var(--arg-color-border);
+}
+
+.doc-sheet__type span {
+  line-height: 1.2;
+}
+
+.doc-sheet__spaces li {
+  align-items: center;
+}
+
+.doc-sheet__space {
+  height: 1.25rem;
+  background: var(--arg-color-primary-soft);
+}
+
+.doc-sheet__radii {
+  display: flex;
+  gap: var(--arg-space-4);
+}
+
+.doc-sheet__radii li {
+  display: grid;
+  gap: var(--arg-space-1);
+  justify-items: center;
+}
+
+.doc-sheet__radius {
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid var(--arg-color-border);
+  box-shadow: var(--arg-shadow-2);
+  background: var(--arg-color-surface-raised);
+}
+
+/* Os níveis empilhados, cada um um pouco abaixo e à direita do anterior */
+.doc-sheet__levels {
+  display: grid;
+  gap: var(--arg-space-2);
+}
+
+.doc-sheet__levels li {
+  padding: var(--arg-space-3) var(--arg-space-4);
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface-raised);
+  font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-sheet__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--arg-space-2);
+  align-items: center;
+}
+
+.doc-sheet__stack {
+  display: grid;
+  gap: var(--arg-space-3);
+}
+
+.doc-sheet__card {
+  display: flex;
+  gap: var(--arg-space-4);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.doc-sheet__card p {
+  margin: var(--arg-space-1) 0 var(--arg-space-3);
+}
+
+.doc-sheet__thumb {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: var(--arg-radius-container);
+  background: var(--arg-color-surface-sunken);
+  color: var(--arg-color-text-muted);
+}
