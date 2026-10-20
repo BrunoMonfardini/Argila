@@ -47,7 +47,7 @@ code {
 
 .doc-page__category {
   margin-block-end: var(--arg-space-1);
-  color: var(--arg-color-primary);
+  color: var(--arg-color-text-muted);
   font-size: var(--arg-font-size-body-sm);
   font-weight: var(--arg-font-weight-strong);
 }
