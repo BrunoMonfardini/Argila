@@ -1,4 +1,4 @@
-<div class="doc-sheet">
+<div class="doc-sheet" [class]="'doc-sheet doc-sheet--' + style()">
   @for (section of sections(); track section) {
     <section
       class="doc-sheet__section"
@@ -135,7 +135,7 @@
           </div>
         }
         @case ('cards') {
-          <article arg-card class="doc-sheet__card">
+          <article arg-card variant="elevated" class="doc-sheet__card">
             <div>
               <h4 arg-card-title>Título</h4>
               <p>Banho e tosa toda sexta, com lembrete por WhatsApp.</p>
