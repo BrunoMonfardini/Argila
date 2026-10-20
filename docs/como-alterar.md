@@ -128,7 +128,7 @@ Depois rode `npm run test`: o teste de contraste confere cada par de cores em ca
 3. Registre a página em `projects/docs/src/app/registry.ts` (`ALL_DOC_PAGES`). O `npm run manifest:check` falha se um componente exportado ficar sem página.
 4. Acrescente o nome em `ARG_COMPONENTS` (`projects/ui/src/lib/design-systems/design-system.ts`). O teste de arquitetura falha se uma pasta de componente ficar fora da lista.
 5. Acrescente uma linha na tabela do [mapa](mapa-do-projeto.md#os-componentes). O teste do mapa falha se o componente faltar.
-6. Siga o [checklist de componente pronto](design-system-proprio.md#checklist-de-um-componente-pronto) e crie um changeset `minor`.
+6. Confira o [checklist de componente pronto](#checklist-de-um-componente-pronto) e crie um changeset `minor`.
 
 ## 10. Criar um componente exclusivo de um design system
 
@@ -173,3 +173,15 @@ Padrões e templates usam **só componentes do núcleo mínimo**, para funcionar
 2. Mudança visual? Rode o checkup das páginas afetadas (`npm run checkup -- --paginas <nome>`) com o catálogo aberto.
 3. Crie o changeset: `npm run changeset` (mudou o pacote) ou `npm run changeset -- --empty` (só catálogo, documentação ou CI).
 4. Faça commits separados por tipo (`feat:`, `test:`, `docs:`) e abra o PR. O merge é por rebase, depois do CI verde.
+
+## Checklist de um componente pronto
+
+- [ ] Só tokens semânticos e de componente; nenhuma cor, espaço ou raio literal
+- [ ] Seletor de atributo sobre o elemento nativo, quando ele existe
+- [ ] Teclado completo, conforme o padrão do ARIA APG
+- [ ] Funciona em claro, escuro, alto contraste (`forced-colors`) e com `prefers-reduced-motion`
+- [ ] Toda input com JSDoc
+- [ ] `*.spec.ts` com cobertura de 80% ou mais, incluindo acessibilidade
+- [ ] `*.docs.ts` com resumo, família (`group`), pelo menos um exemplo e "faça / não faça"
+- [ ] Exportado no `public-api.ts`, registrado no catálogo e no [mapa](mapa-do-projeto.md#os-componentes)
+- [ ] Changeset `minor`

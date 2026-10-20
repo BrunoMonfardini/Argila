@@ -2,7 +2,7 @@
 
 Roteiro para uma pessoa conferir, no catálogo, o que os testes automáticos não veem: se cada design system está bonito, legível e fiel à referência. Marque cada item quando tiver conferido.
 
-_Atualizado em 19/10/2026, com os sete design systems e o catálogo novo (planos E0 a E12 concluídos)._
+_Atualizado em 19/10/2026, com os sete design systems e o catálogo novo._
 
 ## Como conferir
 
@@ -55,10 +55,10 @@ Para cada DS, nos modos que ele tem, com a paleta nativa e com uma compartilhada
 
 ## 5. Pontos em aberto
 
-- [ ] As cores de feedback (informação, sucesso, aviso e erro) na paleta Terrosa ainda são as padrão; o plano antigo previa tons dessaturados. Decidir se ajusta.
+- [ ] As cores de feedback (informação, sucesso, aviso e erro) na paleta Terrosa ainda são as padrão; a ideia original era usar tons dessaturados. Decidir se ajusta.
 
 ## Histórico
 
 - **15/10/2026:** roteiro criado depois do PR de estilos e paletas (#68).
 - **17/10/2026:** checkup completo (42 páginas × 20 combinações) sem erros; painéis do Transparente corrigidos (#73).
-- **18/10/2026:** planos E0 a E12 concluídos (#71 a #106): sete design systems, catálogo novo, templates e padrões. Ruleset da `main` ativo e GitHub CLI em uso.
+- **18/10/2026:** sete design systems e catálogo novo concluídos (#71 a #106): sete design systems, catálogo novo, templates e padrões. Ruleset da `main` ativo e GitHub CLI em uso.
