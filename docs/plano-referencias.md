@@ -14,14 +14,14 @@ Plano de execução, PR a PR, para deixar cada design system igual à imagem del
 
 _Atualizado em 20/10/2026._
 
-| Marco                       | Situação |
-| --------------------------- | -------- |
-| G: ferramenta de comparação | A fazer  |
-| AR: Argila                  | A fazer  |
-| NB: Neo-brutalista          | A fazer  |
-| TR: Transparente            | A fazer  |
-| XP: Windows XP              | A fazer  |
-| PK: Punk                    | A fazer  |
+| Marco                       | Situação                  |
+| --------------------------- | ------------------------- |
+| G: ferramenta de comparação | G-01 pronto; G-02 a fazer |
+| AR: Argila                  | A fazer                   |
+| NB: Neo-brutalista          | A fazer                   |
+| TR: Transparente            | A fazer                   |
+| XP: Windows XP              | A fazer                   |
+| PK: Punk                    | A fazer                   |
 
 O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
@@ -31,7 +31,7 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
 | ✓   | ID   | Item                                                                                                                                                                                                                                                               | Pronto quando                                                                           | Est. |
 | --- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ---- |
-| [ ] | G-01 | `feat(scripts): comparação com a referência` (`npm run comparar -- --ds <id>`: captura a página do DS no catálogo, nos modos dele, e monta `comparacao/<ds>.html` com a imagem de referência ao lado, na mesma altura; local, fora do git e do catálogo publicado) | Um comando gera a comparação de qualquer DS com referência                              | 1    |
+| [x] | G-01 | `feat(scripts): comparação com a referência` (`npm run comparar -- --ds <id>`: captura a página do DS no catálogo, nos modos dele, e monta `comparacao/<ds>.html` com a imagem de referência ao lado, na mesma altura; local, fora do git e do catálogo publicado) | Um comando gera a comparação de qualquer DS com referência                              | 1    |
 | [ ] | G-02 | `feat(docs): página do DS no formato da referência` (a página de cada DS ganha uma "folha de estilo" com as mesmas seções da imagem, na mesma ordem, montada com os componentes de verdade; o conteúdo de cada folha vem nos itens de cada DS)                     | A página do Argila mostra a folha; os outros DS mostram a folha padrão até o item deles | 1,5  |
 
 ---

@@ -205,17 +205,18 @@ As páginas de texto (Como começar, Acessibilidade, Ajuda e as "Sobre") ficam e
 
 ## Scripts e checagens
 
-| Arquivo                                                                           | Comando              | O que faz                                                                       |
-| --------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------------------- |
-| [`scripts/gerar-manifesto.ts`](../scripts/gerar-manifesto.ts)                     | `npm run manifest`   | Lê o código e gera o manifesto do catálogo                                      |
-| [`scripts/gerar-icones.ts`](../scripts/gerar-icones.ts)                           | `npm run icons`      | Valida os SVGs de `projects/ui/icons/` e gera `icons.generated.ts`              |
-| [`scripts/gerar-cores.ts`](../scripts/gerar-cores.ts)                             | `npm run colors`     | Gera `tokens/colors.css` e a lista de cores aceitas por DS × paleta             |
-| [`scripts/checkup-visual.ts`](../scripts/checkup-visual.ts)                       | `npm run checkup`    | Percorre o catálogo em todos os temas no Chrome e gera `checkup/relatorio.html` |
-| [`scripts/contraste-dos-tokens.spec.ts`](../scripts/contraste-dos-tokens.spec.ts) | `npm run test`       | Contraste de todo par de cores, em todo DS × paleta × modo                      |
-| [`scripts/arquitetura.spec.ts`](../scripts/arquitetura.spec.ts)                   | `npm run test`       | Regras dos DS: pele só para curados, exclusivos com prefixo…                    |
-| [`scripts/nucleo-minimo.spec.ts`](../scripts/nucleo-minimo.spec.ts)               | `npm run test`       | Templates e padrões usam só o núcleo mínimo                                     |
-| [`scripts/mapa-do-projeto.spec.ts`](../scripts/mapa-do-projeto.spec.ts)           | `npm run test`       | Este mapa tem todo componente que existe                                        |
-| [`.dependency-cruiser.cjs`](../.dependency-cruiser.cjs)                           | `npm run arch:check` | Quem pode importar quem (um DS nunca importa outro, por exemplo)                |
+| Arquivo                                                                           | Comando              | O que faz                                                                                     |
+| --------------------------------------------------------------------------------- | -------------------- | --------------------------------------------------------------------------------------------- |
+| [`scripts/gerar-manifesto.ts`](../scripts/gerar-manifesto.ts)                     | `npm run manifest`   | Lê o código e gera o manifesto do catálogo                                                    |
+| [`scripts/gerar-icones.ts`](../scripts/gerar-icones.ts)                           | `npm run icons`      | Valida os SVGs de `projects/ui/icons/` e gera `icons.generated.ts`                            |
+| [`scripts/gerar-cores.ts`](../scripts/gerar-cores.ts)                             | `npm run colors`     | Gera `tokens/colors.css` e a lista de cores aceitas por DS × paleta                           |
+| [`scripts/comparar-referencia.ts`](../scripts/comparar-referencia.ts)             | `npm run comparar`   | Captura a página de cada DS e monta `comparacao/<ds>.html` com a imagem de referência ao lado |
+| [`scripts/checkup-visual.ts`](../scripts/checkup-visual.ts)                       | `npm run checkup`    | Percorre o catálogo em todos os temas no Chrome e gera `checkup/relatorio.html`               |
+| [`scripts/contraste-dos-tokens.spec.ts`](../scripts/contraste-dos-tokens.spec.ts) | `npm run test`       | Contraste de todo par de cores, em todo DS × paleta × modo                                    |
+| [`scripts/arquitetura.spec.ts`](../scripts/arquitetura.spec.ts)                   | `npm run test`       | Regras dos DS: pele só para curados, exclusivos com prefixo…                                  |
+| [`scripts/nucleo-minimo.spec.ts`](../scripts/nucleo-minimo.spec.ts)               | `npm run test`       | Templates e padrões usam só o núcleo mínimo                                                   |
+| [`scripts/mapa-do-projeto.spec.ts`](../scripts/mapa-do-projeto.spec.ts)           | `npm run test`       | Este mapa tem todo componente que existe                                                      |
+| [`.dependency-cruiser.cjs`](../.dependency-cruiser.cjs)                           | `npm run arch:check` | Quem pode importar quem (um DS nunca importa outro, por exemplo)                              |
 
 ## Configuração do repositório
 

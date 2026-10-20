@@ -200,6 +200,14 @@ npm run checkup -- --estilos coda,transparente --paletas nativa --paginas date-p
 Outro endereço (ex.: porta 4201): `--url http://localhost:4201`. Se o Chrome não for achado,
 informe o caminho em `CHROME_PATH`.
 
+**Mudou a aparência de um design system?** Compare a página dele com a imagem de referência (`docs/referencias/`), também com o catálogo aberto:
+
+```bash
+npm run comparar -- --ds argila
+```
+
+Gera `comparacao/argila.html`, com a referência ao lado das capturas do DS em cada modo. Sem `--ds`, compara todos os que têm referência. Fica fora do git: as imagens são só do time.
+
 Corrigir a formatação de todos os arquivos:
 
 ```bash
