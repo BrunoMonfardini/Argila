@@ -27,7 +27,7 @@ import {
   reportHtml,
 } from './lib/checkup.ts';
 import { loadDesignSystems } from './lib/design-systems.ts';
-import { openBrowser, sleep } from './lib/navegador.ts';
+import { openBrowser, sleep } from './navegador.ts';
 
 const { values: options } = parseArgs({
   options: {
