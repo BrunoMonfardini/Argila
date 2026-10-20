@@ -30,6 +30,12 @@
   min-width: 0;
 }
 
+/* Passos e paginação precisam de largura: ocupam a linha toda */
+.doc-sheet__section--passos,
+.doc-sheet__section--paginacao {
+  grid-column: 1 / -1;
+}
+
 /* Conteúdo largo (abas em caixa alta, fontes largas) rola por dentro, sem alargar a coluna */
 .doc-sheet__section > *,
 .doc-sheet__stack > * {

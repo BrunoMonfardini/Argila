@@ -1,15 +1,24 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import {
   ARG_CARD,
+  ARG_CHOICE,
   ARG_INPUT_GROUP,
+  ARG_TABLE,
   ARG_TABS,
   ArgAlert,
+  ArgAvatar,
+  ArgBadge,
   ArgButton,
+  ArgEmptyState,
   ArgIcon,
   ArgIconButton,
   ArgInput,
+  ArgPagination,
+  ArgProgressBar,
   ArgSelect,
+  ArgStepper,
   ArgStyle,
+  ArgTableColumn,
   ArgTag,
 } from '@brunomonfardini/ui';
 
@@ -25,7 +34,15 @@ export type StyleSheetSection =
   | 'chips'
   | 'abas'
   | 'alertas'
-  | 'cards';
+  | 'cards'
+  | 'controles'
+  | 'passos'
+  | 'paginacao'
+  | 'selos'
+  | 'avatares'
+  | 'tabela'
+  | 'progresso'
+  | 'vazio';
 
 /** A ordem da referência do Argila ("Product UI Styleguide"), a padrão. */
 export const DEFAULT_SECTIONS: readonly StyleSheetSection[] = [
@@ -46,7 +63,28 @@ export const DEFAULT_SECTIONS: readonly StyleSheetSection[] = [
  * A ordem das seções de cada DS, como na imagem de referência dele. Os itens
  * de cada DS no plano das referências ajustam esta tabela.
  */
-export const STYLE_SHEET_SECTIONS: Partial<Record<ArgStyle, readonly StyleSheetSection[]>> = {};
+export const STYLE_SHEET_SECTIONS: Partial<Record<ArgStyle, readonly StyleSheetSection[]>> = {
+  // "Neo-Brutalist Design System": Foundations, Components, Data display e Feedback
+  'neo-brutalista': [
+    'cores',
+    'tipografia',
+    'espacamento',
+    'elevacao',
+    'botoes',
+    'campos',
+    'controles',
+    'abas',
+    'passos',
+    'paginacao',
+    'cards',
+    'selos',
+    'avatares',
+    'tabela',
+    'alertas',
+    'progresso',
+    'vazio',
+  ],
+};
 
 export const SECTION_TITLES: Record<StyleSheetSection, string> = {
   cores: 'Cores',
@@ -60,6 +98,14 @@ export const SECTION_TITLES: Record<StyleSheetSection, string> = {
   abas: 'Abas',
   alertas: 'Alertas',
   cards: 'Cards',
+  controles: 'Controles',
+  passos: 'Passos',
+  paginacao: 'Paginação',
+  selos: 'Selos',
+  avatares: 'Avatares',
+  tabela: 'Tabela',
+  progresso: 'Progresso',
+  vazio: 'Estado vazio',
 };
 
 export const SWATCHES = [
@@ -103,14 +149,22 @@ const RADII = [
   selector: 'doc-style-sheet',
   imports: [
     ARG_CARD,
+    ARG_CHOICE,
     ARG_INPUT_GROUP,
+    ARG_TABLE,
     ARG_TABS,
     ArgAlert,
+    ArgAvatar,
+    ArgBadge,
     ArgButton,
+    ArgEmptyState,
     ArgIcon,
     ArgIconButton,
     ArgInput,
+    ArgPagination,
+    ArgProgressBar,
     ArgSelect,
+    ArgStepper,
     ArgTag,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -127,6 +181,15 @@ export class DocStyleSheet {
   protected readonly spaces = SPACES;
   protected readonly radii = RADII;
   protected readonly levels = [1, 2, 3, 4, 5];
+  protected readonly columns: ArgTableColumn[] = [
+    { key: 'nome', label: 'Nome', sortable: true },
+    { key: 'servico', label: 'Serviço' },
+    { key: 'valor', label: 'Valor', align: 'end' },
+  ];
+  protected readonly rows = [
+    { nome: 'Thor', servico: 'Banho', valor: 'R$ 60,00' },
+    { nome: 'Mel', servico: 'Tosa', valor: 'R$ 35,00' },
+  ];
   protected readonly sections = computed(
     () => STYLE_SHEET_SECTIONS[this.style()] ?? DEFAULT_SECTIONS,
   );
