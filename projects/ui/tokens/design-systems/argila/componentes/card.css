@@ -1,4 +1,7 @@
-/* Cartões: sem contorno, apoiados no volume (nível 1, ou 2 quando elevados). */
+/*
+ * Cartões sem contorno, apoiados no volume. O elevado ganha as camadas
+ * empilhadas da referência; o comum fica no nível 1 (2 no hover).
+ */
 
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
   .arg-card:not(.arg-card--elevated) {
@@ -10,6 +13,8 @@
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
   .arg-card.arg-card--elevated {
   --arg-card-border: transparent;
-  --arg-card-shadow: var(--arg-shadow-2);
-  --arg-card-shadow-hover: var(--arg-shadow-3);
+  --arg-card-shadow: var(--arg-shadow-stack);
+  --arg-card-shadow-hover: var(--arg-shadow-stack), var(--arg-shadow-3);
+
+  margin-block-end: 14px;
 }
