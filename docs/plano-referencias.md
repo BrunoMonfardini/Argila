@@ -14,14 +14,14 @@ Plano de execução, PR a PR, para deixar cada design system igual à imagem del
 
 _Atualizado em 20/10/2026._
 
-| Marco                       | Situação |
-| --------------------------- | -------- |
-| G: ferramenta de comparação | Pronto   |
-| AR: Argila                  | Pronto   |
-| NB: Neo-brutalista          | Pronto   |
-| TR: Transparente            | Pronto   |
-| XP: Windows XP              | Pronto   |
-| PK: Punk                    | A fazer  |
+| Marco                       | Situação                             |
+| --------------------------- | ------------------------------------ |
+| G: ferramenta de comparação | Pronto                               |
+| AR: Argila                  | Pronto                               |
+| NB: Neo-brutalista          | Pronto                               |
+| TR: Transparente            | Pronto                               |
+| XP: Windows XP              | Pronto                               |
+| PK: Punk                    | PK-01 a PK-03 prontos; PK-04 a fazer |
 
 O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
@@ -150,11 +150,12 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
 ### PRs
 
-| ✓   | ID    | Item                                                                                                                                                                     | Pronto quando                                       | Est. |
-| --- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ---- |
-| [ ] | PK-01 | `feat(punk): navegação inferior e listas` (App Shell com a barra inferior em pílula branca no celular; listas em contorno `#2A2A2A` com chevron; busca em pílula escura) | As telas Chats e Contact reproduzidas               | 1    |
-| [ ] | PK-02 | `feat(punk): calendário, chips e notificações` (dia escolhido em rosa no Date Picker; chips com o selecionado em rosa; toasts e alertas de sucesso em blocos verdes)     | As telas Planned Calls e Notifications reproduzidas | 1    |
-| [ ] | PK-03 | `docs(punk): folha de estilo da referência` (telas de app montadas com os componentes: entrada com a estrela, início com os cards, contatos, notificações)               | A página do Punk lado a lado com a imagem           | 1,5  |
+| ✓   | ID    | Item                                                                                                                                                                     | Pronto quando                                           | Est. |
+| --- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------- | ---- |
+| [x] | PK-01 | `feat(punk): navegação inferior e listas` (App Shell com a barra inferior em pílula branca no celular; listas em contorno `#2A2A2A` com chevron; busca em pílula escura) | As telas Chats e Contact reproduzidas                   | 1    |
+| [x] | PK-02 | `feat(punk): calendário, chips e notificações` (dia escolhido em rosa no Date Picker; chips com o selecionado em rosa; toasts e alertas de sucesso em blocos verdes)     | As telas Planned Calls e Notifications reproduzidas     | 1    |
+| [x] | PK-03 | `docs(punk): folha de estilo da referência` (telas de app montadas com os componentes: entrada com a estrela, início com os cards, contatos, notificações)               | A página do Punk lado a lado com a imagem               | 1,5  |
+| [ ] | PK-04 | `feat(app-shell): barra inferior no celular` (o App Shell ainda não tem barra inferior; a folha do Punk mostra a pílula branca montada à mão até ela existir)            | A barra inferior da referência no App Shell, no celular | 1    |
 
 ---
 
