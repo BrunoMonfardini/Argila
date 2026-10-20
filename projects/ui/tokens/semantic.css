@@ -183,6 +183,20 @@
     var(--arg-color-shade) 22%
   );
 
+  /*
+   * Preenchimento suave de cada tom: as pílulas chapadas de alerta da
+   * referência do Argila (menta, amarelo e rosa), com texto escuro por cima
+   * (on-*-soft). Outros design systems trocam pelos seus blocos de cor.
+   */
+  --arg-color-info-soft: light-dark(#bcdaf7, #23405f);
+  --arg-color-on-info-soft: light-dark(#10233a, #e6f1fd);
+  --arg-color-success-soft: light-dark(#9fe3c7, #2a5c4b);
+  --arg-color-on-success-soft: light-dark(#14322a, #e6fbf2);
+  --arg-color-warning-soft: light-dark(#f3e08a, #5c4d14);
+  --arg-color-on-warning-soft: light-dark(#3a2f05, #fdf6d8);
+  --arg-color-danger-soft: light-dark(#f09a9a, #6b2626);
+  --arg-color-on-danger-soft: light-dark(#3d0c0c, #fde6e6);
+
   /* Espaçamento */
   --arg-space-0: var(--arg-core-space-0);
   --arg-space-1: var(--arg-core-space-1);
