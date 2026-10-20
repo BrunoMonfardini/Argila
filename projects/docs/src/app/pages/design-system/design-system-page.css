@@ -46,3 +46,10 @@
     gap: var(--arg-space-1);
   }
 }
+
+.doc-ds__suggestion {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--arg-space-3);
+}
