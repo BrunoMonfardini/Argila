@@ -22,11 +22,18 @@
   --arg-button-fg: var(--arg-color-on-primary-soft);
 }
 
-/* Secundária: pílula de superfície com volume, sem contorno */
+/* Secundária: pílula de superfície com volume, sem contorno; texto neutro */
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
   .arg-button.arg-button--secondary {
   --arg-button-bg: var(--arg-color-surface-raised);
   --arg-button-border: transparent;
+  --arg-button-fg: var(--arg-color-text);
+}
+
+/* Terciária: só o texto, neutro; o hover acende o fundo suave da marca */
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-button.arg-button--tertiary {
+  --arg-button-fg: var(--arg-color-text);
 }
 
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))

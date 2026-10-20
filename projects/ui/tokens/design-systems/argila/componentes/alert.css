@@ -1,6 +1,46 @@
-/* Alerta: cantos de cartão e mais ar; os tons continuam vindo do componente. */
+/*
+ * Alerta em pílula preenchida, como na referência: fundo chapado no tom
+ * (menta, amarelo, rosa; azul na informação), texto e ícone escuros, sem
+ * contorno nem faixa lateral, com o volume de massinha.
+ */
 
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-alert {
-  --arg-alert-radius: var(--arg-radius-container);
-  --arg-alert-padding: var(--arg-space-4) var(--arg-space-5);
+  --arg-alert-bg: var(--arg-color-info-soft);
+  --arg-alert-fg: var(--arg-color-on-info-soft);
+  --arg-alert-radius: 1.75rem;
+  --arg-alert-padding: var(--arg-space-3) var(--arg-space-5);
+
+  border-color: transparent;
+  box-shadow: var(--arg-shadow-control);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-alert.arg-alert--success {
+  --arg-alert-bg: var(--arg-color-success-soft);
+  --arg-alert-fg: var(--arg-color-on-success-soft);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-alert.arg-alert--warning {
+  --arg-alert-bg: var(--arg-color-warning-soft);
+  --arg-alert-fg: var(--arg-color-on-warning-soft);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-alert.arg-alert--danger {
+  --arg-alert-bg: var(--arg-color-danger-soft);
+  --arg-alert-fg: var(--arg-color-on-danger-soft);
+}
+
+/* O ícone acompanha o texto, como o contorno escuro da referência */
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-alert
+  .arg-alert__icon {
+  color: currentColor;
+}
+
+@media (forced-colors: active) {
+  :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-alert {
+    border-color: CanvasText;
+  }
 }

@@ -1,5 +1,15 @@
-/* Link: sublinhado um pouco mais afastado do texto. */
+/*
+ * Link em cinza neutro, sublinhado, como o texto da referência: o menta fica
+ * para os preenchimentos (botões, chips, foco).
+ */
 
-:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-link {
+/* Vale também para os links comuns do documento (base.css) */
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) {
+  --arg-color-text-link: var(--arg-color-text);
+}
+
+:root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand]))
+  .arg-link:not(.arg-link--muted) {
+  --arg-link-color-hover: var(--arg-color-text-muted);
   --arg-link-underline-offset: 0.25em;
 }
