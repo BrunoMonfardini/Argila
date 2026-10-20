@@ -20,7 +20,7 @@ _Atualizado em 20/10/2026._
 | AR: Argila                  | Pronto   |
 | NB: Neo-brutalista          | Pronto   |
 | TR: Transparente            | Pronto   |
-| XP: Windows XP              | A fazer  |
+| XP: Windows XP              | Pronto   |
 | PK: Punk                    | A fazer  |
 
 O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
@@ -127,12 +127,12 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
 | ✓   | ID    | Item                                                                                                                                                                | Pronto quando                                               | Est. |
 | --- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ---- |
-| [ ] | XP-01 | `feat(windows-xp): as cores e as rampas da referência` (as quatro cores com cinco tons cada, como tokens; primária azul `#0078D7` ajustada só se o contraste pedir) | As rampas da referência na página do DS                     | 0,5  |
-| [ ] | XP-02 | `feat(windows-xp): fundo com linhas de varredura` (o fundo nativo do DS, pelo marco F do plano geral)                                                               | A página inteira com as listras finas, sem perder contraste | 0,5  |
-| [ ] | XP-03 | `feat(windows-xp): botões, barra de progresso e checkbox com bisel`                                                                                                 | Buttons, Disable (barra) e Checkbox reproduzidos            | 1    |
-| [ ] | XP-04 | `feat(windows-xp): abas em pasta, campo rebaixado, toast em balão e modal`                                                                                          | Tabs, Input, Toast e Modal reproduzidos                     | 1    |
-| [ ] | XP-05 | `feat(windows-xp): títulos em bitmap e cartão de regras com cantos em degrau` (a Caixa de regras e os títulos das seções)                                           | Type scale e Rules card reproduzidos                        | 0,5  |
-| [ ] | XP-06 | `docs(windows-xp): folha de estilo da referência` (Color tokens, Type scale, Icon grid, Borders & radius e Component gallery)                                       | A página do Windows XP lado a lado com a imagem             | 1    |
+| [x] | XP-01 | `feat(windows-xp): as cores e as rampas da referência` (as quatro cores com cinco tons cada, como tokens; primária azul `#0078D7` ajustada só se o contraste pedir) | As rampas da referência na página do DS                     | 0,5  |
+| [x] | XP-02 | `feat(windows-xp): fundo com linhas de varredura` (o fundo nativo do DS, pelo marco F do plano geral)                                                               | A página inteira com as listras finas, sem perder contraste | 0,5  |
+| [x] | XP-03 | `feat(windows-xp): botões, barra de progresso e checkbox com bisel`                                                                                                 | Buttons, Disable (barra) e Checkbox reproduzidos            | 1    |
+| [x] | XP-04 | `feat(windows-xp): abas em pasta, campo rebaixado, toast em balão e modal`                                                                                          | Tabs, Input, Toast e Modal reproduzidos                     | 1    |
+| [x] | XP-05 | `feat(windows-xp): títulos em bitmap e cartão de regras com cantos em degrau` (a Caixa de regras e os títulos das seções)                                           | Type scale e Rules card reproduzidos                        | 0,5  |
+| [x] | XP-06 | `docs(windows-xp): folha de estilo da referência` (Color tokens, Type scale, Icon grid, Borders & radius e Component gallery)                                       | A página do Windows XP lado a lado com a imagem             | 1    |
 
 ---
 
