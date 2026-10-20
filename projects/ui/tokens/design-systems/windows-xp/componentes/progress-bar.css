@@ -1,10 +1,33 @@
-/* Barra de progresso: trilho rebaixado de 1px, mais alto, preenchimento azul. */
+/*
+ * Barra de progresso da referência: trilho claro rebaixado de 1px, com as
+ * pontas arredondadas, e o preenchimento azul em bisel (topo mais claro).
+ */
 
 :root[data-arg-style='windows-xp'] .arg-progress {
-  --arg-progress-radius: 0.125rem;
+  --arg-progress-radius: 0.5rem;
   border: 1px solid var(--arg-color-border-strong);
+  box-shadow: var(--arg-shadow-field);
 }
 
 :root[data-arg-style='windows-xp'] .arg-progress:not(.arg-progress--sm) {
   --arg-progress-height: 1.25rem;
+}
+
+:root[data-arg-style='windows-xp'] .arg-progress::-webkit-progress-value {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--arg-progress-fill), #fff 30%),
+    var(--arg-progress-fill) 50%,
+    color-mix(in oklab, var(--arg-progress-fill), #000 15%)
+  );
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--arg-progress-fill), #000 35%);
+}
+
+:root[data-arg-style='windows-xp'] .arg-progress::-moz-progress-bar {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--arg-progress-fill), #fff 30%),
+    var(--arg-progress-fill) 50%,
+    color-mix(in oklab, var(--arg-progress-fill), #000 15%)
+  );
 }

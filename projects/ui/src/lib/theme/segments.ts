@@ -1,7 +1,11 @@
 import { InjectionToken } from '@angular/core';
 import type { ArgBrandRole } from '../design-systems/colors';
-import type { ArgBackgroundName } from '../design-systems/design-system';
-import type { ArgPaletteOf, ArgStyle } from '../design-systems/design-systems';
+import { backgroundsOf, type ArgBackgroundName } from '../design-systems/design-system';
+import {
+  ARG_DESIGN_SYSTEMS,
+  type ArgPaletteOf,
+  type ArgStyle,
+} from '../design-systems/design-systems';
 import type { ArgColorScheme, ArgColors } from './theme';
 
 /**
@@ -47,7 +51,9 @@ export function argSegmentAttributes(segment: ArgSegment): Record<string, string
   const attributes: Record<string, string> = { 'data-arg-style': segment.style };
   if (segment.palette) attributes['data-arg-palette'] = segment.palette;
   if (segment.scheme) attributes['data-arg-theme'] = segment.scheme;
-  if (segment.background && segment.background !== 'liso') {
+  // O fundo padrão do DS não precisa de atributo: o CSS do DS já o aplica
+  const defaultBackground = backgroundsOf(ARG_DESIGN_SYSTEMS[segment.style])[0];
+  if (segment.background && segment.background !== defaultBackground) {
     attributes['data-arg-background'] = segment.background;
   }
   for (const [role, color] of Object.entries(segment.colors ?? {}) as [ArgBrandRole, string][]) {

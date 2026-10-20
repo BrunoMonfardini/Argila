@@ -1,18 +1,62 @@
 /*
- * Fundo da tela com linhas de varredura finas, como o monitor da referência.
- * Só no <html>: as janelas e os cartões ficam lisos por cima. Some em
- * forced-colors e com prefers-reduced-transparency.
+ * O que o Windows XP muda além da forma, das cores e dos componentes, como o
+ * "Retro-OS UI Kit" (docs/referencias/windows-xp.jpg).
+ */
+
+/*
+ * Rampas das quatro cores da referência, do escuro ao claro (o 3 é a cor
+ * dela). Amostras fixas, para ilustrações e para a folha de estilo; a
+ * interface usa os tokens semânticos.
  */
 :root[data-arg-style='windows-xp'] {
-  background-image: repeating-linear-gradient(
+  --arg-color-xp-cinza-1: #3c3c3c;
+  --arg-color-xp-cinza-2: #6e6e6e;
+  --arg-color-xp-cinza-3: #a0a0a0;
+  --arg-color-xp-cinza-4: #c8c8c8;
+  --arg-color-xp-cinza-5: #e0e0e0;
+  --arg-color-xp-branco-1: #8c8c8c;
+  --arg-color-xp-branco-2: #b4b4b4;
+  --arg-color-xp-branco-3: #f0f0f0;
+  --arg-color-xp-branco-4: #f8f8f8;
+  --arg-color-xp-branco-5: #ffffff;
+  --arg-color-xp-azul-1: #003d73;
+  --arg-color-xp-azul-2: #005a9e;
+  --arg-color-xp-azul-3: #0078d7;
+  --arg-color-xp-azul-4: #4ca3e8;
+  --arg-color-xp-azul-5: #a6d0f3;
+  --arg-color-xp-vermelho-1: #6e0810;
+  --arg-color-xp-vermelho-2: #a80c19;
+  --arg-color-xp-vermelho-3: #e81123;
+  --arg-color-xp-vermelho-4: #f0646f;
+  --arg-color-xp-vermelho-5: #f8b6bb;
+}
+
+/*
+ * Fundo nativo: linhas de varredura finas, como o monitor da referência. É o
+ * padrão do DS (sem atributo) e o fundo "linhas"; o "liso" tira. As janelas
+ * e os cartões ficam lisos por cima.
+ */
+:root[data-arg-style='windows-xp']:not([data-arg-background]),
+:root[data-arg-style='windows-xp'][data-arg-background='linhas'] {
+  --arg-background-image: repeating-linear-gradient(
     to bottom,
     transparent 0 3px,
-    light-dark(rgb(0 0 0 / 0.035), rgb(255 255 255 / 0.03)) 3px 4px
+    light-dark(rgb(0 0 0 / 0.04), rgb(255 255 255 / 0.035)) 3px 4px
   );
 }
 
 @media (forced-colors: active), (prefers-reduced-transparency: reduce) {
   :root[data-arg-style='windows-xp'] {
-    background-image: none;
+    --arg-background-image: none;
   }
+}
+
+/* Títulos em pixel e caixa alta; o título da página no azul da referência */
+:root[data-arg-style='windows-xp'] :is(h1, h2, h3, h4) {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+:root[data-arg-style='windows-xp'] h1 {
+  color: var(--arg-color-primary);
 }
