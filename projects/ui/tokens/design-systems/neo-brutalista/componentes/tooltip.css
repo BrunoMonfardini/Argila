@@ -1,5 +1,7 @@
-/* Tooltip: caixa preta de cantos retos. */
+/* Tooltip como na referência: caixa preta de cantos retos, com texto claro. */
 
 :root[data-arg-style='neo-brutalista'] arg-tooltip-panel {
   --arg-tooltip-radius: 0.25rem;
+  --arg-tooltip-bg: var(--arg-color-nb-tinta, var(--arg-color-border));
+  --arg-tooltip-fg: var(--arg-color-background);
 }

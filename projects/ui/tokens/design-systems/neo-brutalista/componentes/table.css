@@ -1,4 +1,7 @@
-/* Tabela: caixa de contorno grosso com sombra dura; cabeçalho em caixa alta. */
+/*
+ * Tabela como na referência: caixa de contorno grosso com sombra dura e o
+ * cabeçalho em bloco preto, com texto claro em caixa alta.
+ */
 
 :root[data-arg-style='neo-brutalista'] arg-table .arg-table__scroll {
   border: 3px solid var(--arg-color-border);
@@ -7,5 +10,11 @@
 }
 
 :root[data-arg-style='neo-brutalista'] arg-table .arg-table__table th {
+  background: var(--arg-color-text);
+  color: var(--arg-color-background);
   text-transform: uppercase;
+}
+
+:root[data-arg-style='neo-brutalista'] arg-table .arg-table__table th button {
+  color: inherit;
 }
