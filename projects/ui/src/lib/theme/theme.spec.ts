@@ -209,6 +209,20 @@ describe('ArgTheme', () => {
       expect(root.hasAttribute('data-arg-background')).toBe(false);
     });
 
+    it('no Windows XP, as linhas são o padrão (sem atributo) e o liso vai no atributo', () => {
+      theme.setStyle('windows-xp');
+      expect(theme.backgrounds()).toEqual(['linhas', 'liso']);
+      expect(theme.background()).toBe('linhas');
+      expect(root.hasAttribute('data-arg-background')).toBe(false);
+
+      theme.setBackground('liso');
+      expect(root.getAttribute('data-arg-background')).toBe('liso');
+
+      theme.setStyle('argila');
+      expect(theme.background()).toBe('liso');
+      expect(root.hasAttribute('data-arg-background')).toBe(false);
+    });
+
     it('lê o fundo já presente no <html>, ignorando um que o DS não aceita', () => {
       root.setAttribute('data-arg-background', 'degrade');
       TestBed.resetTestingModule();

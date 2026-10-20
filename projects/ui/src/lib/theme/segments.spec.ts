@@ -119,6 +119,14 @@ describe('segmentos', () => {
       'data-arg-palette': 'oceano',
       'data-arg-background': 'degrade',
     });
+    // O fundo padrão do DS não vai como atributo; os outros, sim
+    expect(argSegmentAttributes({ style: 'windows-xp', background: 'linhas' })).toEqual({
+      'data-arg-style': 'windows-xp',
+    });
+    expect(argSegmentAttributes({ style: 'windows-xp', background: 'liso' })).toEqual({
+      'data-arg-style': 'windows-xp',
+      'data-arg-background': 'liso',
+    });
     expect(INVALID.style).toBe('windows-xp');
   });
 });
