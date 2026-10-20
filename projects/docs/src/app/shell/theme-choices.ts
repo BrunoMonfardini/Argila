@@ -8,6 +8,7 @@ import {
   ARG_MIN_SURFACE_OPACITY,
   ARG_PALETTES,
   ARG_SEGMENTS,
+  ArgBackgroundName,
   ArgBrandColor,
   ArgBrandRole,
   ArgColorScheme,
@@ -25,6 +26,7 @@ export const PALETTE_KEY = 'argila-docs:paleta';
 export const OPACITY_KEY = 'argila-docs:opacidade';
 export const COLORS_KEY = 'argila-docs:cores';
 export const SEGMENT_KEY = 'argila-docs:segmento';
+export const BACKGROUND_KEY = 'argila-docs:fundo';
 
 /** Nomes das escolhas na URL: `?ds=punk&paleta=viva&modo=dark`. */
 export const THEME_PARAMS = {
@@ -32,6 +34,7 @@ export const THEME_PARAMS = {
   palette: 'paleta',
   scheme: 'modo',
   opacity: 'opacidade',
+  background: 'fundo',
   segment: 'segmento',
 } as const;
 
@@ -127,6 +130,12 @@ export class DocThemeChoices {
     this.save();
   }
 
+  /** Fundo da página: liso, degradê ou o nativo do DS. */
+  selectBackground(background: ArgBackgroundName): void {
+    this.theme.setBackground(background);
+    this.save();
+  }
+
   /** Cor de marca de um papel; `undefined` volta à cor da paleta. */
   selectColor(role: ArgBrandRole, color: ArgBrandColor | undefined): void {
     const colors: ArgColors = { ...this.theme.colors() };
@@ -152,6 +161,8 @@ export class DocThemeChoices {
     if (scheme) raw.modo = scheme;
     const opacity = readText(OPACITY_KEY);
     if (opacity) raw.opacidade = opacity;
+    const background = readText(BACKGROUND_KEY);
+    if (background) raw.fundo = background;
     const segment = readText(SEGMENT_KEY);
     if (segment) raw.segmento = segment;
     for (const pair of (readText(COLORS_KEY) ?? '').split(',')) {
@@ -165,7 +176,7 @@ export class DocThemeChoices {
 
   /**
    * Aplica as escolhas na ordem em que dependem umas das outras (DS → paleta
-   * → modo → cores → transparência). O que não vale cai no padrão do DS e
+   * → modo → cores → transparência → fundo). O que não vale cai no padrão do DS e
    * vira uma frase do aviso.
    */
   private apply(raw: RawChoices): string[] {
@@ -221,6 +232,16 @@ export class DocThemeChoices {
     } else if (raw.opacidade) {
       problems.push(`A opacidade “${raw.opacidade}” não vale; usamos a do design system.`);
     }
+
+    const backgrounds: readonly string[] = this.theme.backgrounds();
+    if (raw.fundo && !backgrounds.includes(raw.fundo)) {
+      problems.push(`O ${ds.nome} não aceita o fundo “${raw.fundo}”; usamos o liso.`);
+    }
+    this.theme.setBackground(
+      (raw.fundo && backgrounds.includes(raw.fundo)
+        ? raw.fundo
+        : backgrounds[0]) as ArgBackgroundName,
+    );
     return problems;
   }
 
@@ -249,6 +270,9 @@ export class DocThemeChoices {
     }
     const opacity = this.theme.surfaceOpacity();
     if (opacity !== undefined) params[THEME_PARAMS.opacity] = String(Math.round(opacity * 100));
+    if (this.theme.background() !== this.theme.backgrounds()[0]) {
+      params[THEME_PARAMS.background] = this.theme.background();
+    }
     for (const role of ARG_BRAND_ROLES) {
       const color = this.theme.colors()[role];
       if (color) params[COLOR_PARAMS[role]] = color;
@@ -265,6 +289,10 @@ export class DocThemeChoices {
     writePreference(SCHEME_KEY, this.theme.colorScheme());
     writePreference(OPACITY_KEY, opacity === undefined ? '' : String(Math.round(opacity * 100)));
     writePreference(SEGMENT_KEY, segment ?? '');
+    writePreference(
+      BACKGROUND_KEY,
+      this.theme.background() === this.theme.backgrounds()[0] ? '' : this.theme.background(),
+    );
     writePreference(
       COLORS_KEY,
       ARG_BRAND_ROLES.flatMap((role) => {

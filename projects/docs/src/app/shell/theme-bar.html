@@ -42,6 +42,19 @@
   </select>
 </label>
 
+@if (backgrounds().length > 1) {
+  <label class="doc-theme-bar__field">
+    <span>Fundo</span>
+    <select arg-select (change)="selectBackground($event)">
+      @for (option of backgrounds(); track option.value) {
+        <option [value]="option.value" [selected]="option.value === background()">
+          {{ option.label }}
+        </option>
+      }
+    </select>
+  </label>
+}
+
 <details class="doc-theme-bar__colors">
   <summary>Cores</summary>
   <div class="doc-theme-bar__colors-panel">

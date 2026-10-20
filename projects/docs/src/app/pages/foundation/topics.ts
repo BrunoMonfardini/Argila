@@ -1,7 +1,7 @@
 import type { ManifestToken } from '../../manifest';
 
 /** Como a página desenha a amostra dos tokens do tópico. */
-export type FoundationSample = 'color' | 'type' | 'space' | 'shape' | 'motion';
+export type FoundationSample = 'color' | 'type' | 'space' | 'shape' | 'motion' | 'backdrop';
 
 export interface FoundationTopic {
   slug: string;
@@ -45,6 +45,15 @@ export const FOUNDATION_TOPICS: FoundationTopic[] = [
     sample: 'shape',
     includes: (name) =>
       /^--arg-radius-/.test(name) || /^--arg-shadow-(sm|md|lg|[1-5]|control|field)$/.test(name),
+  },
+  {
+    slug: 'fundos',
+    title: 'Fundos',
+    summary:
+      'O fundo da página: liso ou em degradê, com manchas da primária, da secundária e do destaque. O texto passa no contraste sobre cada mancha.',
+    sample: 'backdrop',
+    includes: (name) =>
+      /^--arg-(background-image|gradient-brand|color-background-tint-\d)$/.test(name),
   },
   {
     slug: 'movimento',
