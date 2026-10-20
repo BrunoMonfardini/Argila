@@ -1,4 +1,22 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
-  "recommendations": ["angular.ng-template"]
+  // Extensões recomendadas para trabalhar no Argila. O VS Code oferece instalar
+  // todas ao abrir a pasta (ou: Extensões → filtro "@recommended").
+  "recommendations": [
+    // Angular: autocompletar e erros nos templates (inputs, seletores, @if/@for)
+    "angular.ng-template",
+    // Lint (inclui as regras de acessibilidade dos templates) e formatação, iguais às do CI
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    // Rodar e depurar os testes do Jest pelo editor, um por um
+    "orta.vscode-jest",
+    // Autocompletar os tokens (--arg-*) nos arquivos CSS, lidos de projects/ui/tokens
+    "vunguyentuan.vscode-css-variables",
+    // Erros do TypeScript legíveis, e na própria linha
+    "yoavbls.pretty-ts-errors",
+    "usernamehw.errorlens",
+    // PRs e o CI do GitHub dentro do editor
+    "github.vscode-pull-request-github",
+    "github.vscode-github-actions"
+  ]
 }

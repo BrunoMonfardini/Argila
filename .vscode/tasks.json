@@ -1,0 +1,142 @@
+{
+  // Tarefas do Argila: Terminal → Run Task (ou Ctrl+Shift+P → "Tasks: Run Task").
+  // "Testes" é a tarefa de teste padrão; "Catálogo" é a de build padrão (Ctrl+Shift+B).
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Catálogo",
+      "detail": "npm run dev: abre o catálogo em http://localhost:4200",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": {
+        "owner": "angular",
+        "pattern": { "regexp": "^$" },
+        "background": {
+          "activeBegins": true,
+          "beginsPattern": "Building|Changes detected",
+          "endsPattern": "Application bundle generation (complete|failed)"
+        }
+      }
+    },
+    {
+      "label": "Manifesto em modo watch",
+      "detail": "Regera a tabela de propriedades e o código dos exemplos a cada mudança",
+      "type": "shell",
+      "command": "node --watch-path=projects/ui/src --watch-path=projects/ui/tokens scripts/gerar-manifesto.ts",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Testes",
+      "detail": "npm run test: todos os testes, com cobertura",
+      "type": "npm",
+      "script": "test",
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Testes em modo watch",
+      "detail": "Roda de novo só o que mudou",
+      "type": "npm",
+      "script": "test:watch",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Testes do arquivo aberto",
+      "detail": "Os testes ligados ao arquivo do editor (o .spec.ts ou o código que ele testa)",
+      "type": "shell",
+      "command": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage=false --findRelatedTests \"${relativeFile}\"",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Checkup visual de uma página",
+      "detail": "Com o catálogo aberto: erros, rolagem e contraste em todos os temas",
+      "type": "shell",
+      "command": "npm run checkup -- --paginas ${input:pagina}",
+      "problemMatcher": []
+    },
+    {
+      "label": "Gerar ícones",
+      "detail": "Valida os SVGs de projects/ui/icons e gera o código",
+      "type": "npm",
+      "script": "icons",
+      "problemMatcher": []
+    },
+    {
+      "label": "Gerar cores",
+      "detail": "Gera tokens/colors.css e as cores aceitas por DS × paleta",
+      "type": "npm",
+      "script": "colors",
+      "problemMatcher": []
+    },
+    {
+      "label": "Formatar tudo",
+      "type": "npm",
+      "script": "format",
+      "problemMatcher": []
+    },
+    {
+      "label": "Verificar tudo",
+      "detail": "As mesmas checagens do CI, em ordem; para na primeira que falhar",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Verificar: formatação",
+        "Verificar: lint",
+        "Verificar: tipos",
+        "Testes",
+        "Verificar: duplicação",
+        "Verificar: arquitetura",
+        "Verificar: catálogo"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Verificar: formatação",
+      "type": "npm",
+      "script": "format:check",
+      "problemMatcher": []
+    },
+    {
+      "label": "Verificar: lint",
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "label": "Verificar: tipos",
+      "type": "npm",
+      "script": "typecheck",
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Verificar: duplicação",
+      "type": "npm",
+      "script": "dup:check",
+      "problemMatcher": []
+    },
+    {
+      "label": "Verificar: arquitetura",
+      "type": "npm",
+      "script": "arch:check",
+      "problemMatcher": []
+    },
+    {
+      "label": "Verificar: catálogo",
+      "type": "npm",
+      "script": "manifest:check",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "pagina",
+      "type": "promptString",
+      "description": "Parte do endereço da página (ex.: button, componentes/card, padroes/)",
+      "default": "button"
+    }
+  ]
+}
