@@ -6,13 +6,18 @@
 :root[data-arg-style='transparente']:not([data-arg-palette]),
 :root[data-arg-style='transparente'][data-arg-palette='nativa'],
 :root[data-arg-brand='transparente'] {
-  --arg-color-primary: light-dark(#a53611, #ff9a62);
+  /*
+   * Laranja-coral da referência ("Start project"). O degradê do botão vai de um
+   * laranja claro (com #FFB27A) a um mais fundo; esta é a cor do meio, onde fica o texto branco, ajustada para passar de 4,5:1 também como texto sobre o fundo cinza.
+   */
+  --arg-color-primary: light-dark(#ad4317, #ff9a62);
   --arg-color-on-primary: light-dark(#ffffff, #2a1206);
-  --arg-color-primary-soft: light-dark(#fbd2b8, #5c3016);
+  --arg-color-primary-soft: light-dark(#ffd9c4, #5c3016);
   --arg-color-on-primary-soft: light-dark(#3a1606, #ffe9da);
   --arg-color-secondary: light-dark(#2f3542, #eef0f4);
   --arg-color-on-secondary: light-dark(#ffffff, #1e2128);
-  --arg-color-accent: light-dark(#1d5fd0, #8ab8ff);
+  /* O azul do "Pro plan" da referência */
+  --arg-color-accent: light-dark(#1e58d4, #8ab8ff);
   --arg-color-on-accent: light-dark(#ffffff, #0b1d3d);
 
   --arg-color-background: light-dark(#eceef1, #14161a);
@@ -20,7 +25,8 @@
   --arg-color-surface-raised-solid: light-dark(#ffffff, #33363d);
   --arg-color-surface-sunken-solid: light-dark(#f2f4f7, #14161a);
 
-  --arg-color-text: light-dark(#2b2f36, #eef0f4);
+  /* Texto em cinza-ardósia, como os rótulos da referência */
+  --arg-color-text: light-dark(#33415c, #eef0f4);
   --arg-color-text-muted: light-dark(#596172, #aab1bf);
 
   --arg-color-border: light-dark(rgb(255 255 255 / 0.9), rgb(255 255 255 / 0.08));
@@ -28,5 +34,7 @@
   --arg-color-focus: light-dark(var(--arg-core-blue-600), var(--arg-core-blue-300));
 
   /* Ligado e marcado: o verde-água da referência */
-  --arg-color-success: light-dark(#167a5a, #5fd9b0);
+  --arg-color-success: light-dark(#127a5a, #5fd9b0);
+  --arg-color-success-soft: light-dark(#bdeedc, #1d5242);
+  --arg-color-on-success-soft: light-dark(#0b3326, #e3fbf2);
 }

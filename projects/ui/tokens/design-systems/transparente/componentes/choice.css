@@ -1,4 +1,4 @@
-/* Marcados e ligados em verde-água (a cor de sucesso da paleta), como na referência. */
+/* Marcados e ligados em verde-água, como na referência; o switch ligado é um degradê do verde. */
 
 :root[data-arg-style='transparente'] :is(.arg-checkbox, .arg-radio) {
   --arg-choice-accent: var(--arg-color-success);
@@ -6,4 +6,25 @@
 
 :root[data-arg-style='transparente'] .arg-switch {
   --arg-switch-on: var(--arg-color-success);
+}
+
+:root[data-arg-style='transparente'] .arg-switch:checked {
+  background-image:
+    radial-gradient(
+      circle closest-side,
+      var(--arg-switch-thumb) calc(100% - 1px),
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--arg-color-success), #fff 25%),
+      var(--arg-color-success)
+    );
+  background-size:
+    calc(var(--arg-switch-height) - var(--arg-switch-inset) * 2)
+      calc(var(--arg-switch-height) - var(--arg-switch-inset) * 2),
+    100% 100%;
+  background-position:
+    calc(100% - var(--arg-switch-inset)) center,
+    0 0;
 }
