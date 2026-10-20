@@ -6,13 +6,14 @@ import { provideDocRouter } from '../../app.routes';
 import {
   DEFAULT_SECTIONS,
   DocStyleSheet,
+  RAMPS,
   SECTION_TITLES,
   STYLE_SHEET_SECTIONS,
   SWATCHES,
 } from './style-sheet';
 
 describe('folha de estilo', () => {
-  async function render(style: 'argila' | 'punk' | 'neo-brutalista') {
+  async function render(style: 'argila' | 'punk' | 'neo-brutalista' | 'windows-xp') {
     TestBed.configureTestingModule({ providers: [provideArgIcons(argIconsAll)] });
     const fixture = TestBed.createComponent(DocStyleSheet);
     fixture.componentRef.setInput('style', style);
@@ -48,6 +49,21 @@ describe('folha de estilo', () => {
     );
     expect(root.querySelector('arg-stepper')).not.toBeNull();
     expect(root.querySelector('arg-table')).not.toBeNull();
+    expect(a11yViolations(root)).toEqual([]);
+  });
+
+  it('o Windows XP tem as rampas, a janela, o balão e o cartão de regras da referência', async () => {
+    const root = await render('windows-xp');
+
+    expect(
+      Array.from(root.querySelectorAll('.doc-sheet__section > h3'), (h) => h.textContent?.trim()),
+    ).toEqual(STYLE_SHEET_SECTIONS['windows-xp']!.map((section) => SECTION_TITLES[section]));
+    expect(root.querySelectorAll('.doc-sheet__ramp').length).toBe(RAMPS['windows-xp']!.length);
+    expect(root.querySelectorAll('.doc-sheet__ramp-steps span').length).toBe(20);
+    expect(root.querySelectorAll('section[arg-xp-window]').length).toBe(2);
+    expect(root.querySelector('[arg-xp-balloon]')).not.toBeNull();
+    expect(root.querySelectorAll('.doc-sheet__rules li').length).toBe(3);
+    expect(root.querySelectorAll('.doc-sheet__icon-grid arg-icon').length).toBe(12);
     expect(a11yViolations(root)).toEqual([]);
   });
 
