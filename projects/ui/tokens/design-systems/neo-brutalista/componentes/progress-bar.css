@@ -1,7 +1,9 @@
-/* Barra de progresso: trilho alto com contorno, cantos retos. */
+/* Barra de progresso como na referência: trilho alto com contorno, cantos retos e o preenchimento em bloco ciano. */
 
 :root[data-arg-style='neo-brutalista'] .arg-progress {
   --arg-progress-radius: 0;
+  --arg-progress-fill: var(--arg-color-primary-soft);
+
   border: 3px solid var(--arg-color-border);
 }
 

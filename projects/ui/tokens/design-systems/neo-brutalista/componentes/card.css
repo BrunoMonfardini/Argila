@@ -15,3 +15,8 @@
   --arg-card-shadow: var(--arg-shadow-3);
   --arg-card-shadow-hover: var(--arg-shadow-4);
 }
+
+/* Título em caixa alta, como o "BOLD TITLE" da referência */
+:root[data-arg-style='neo-brutalista'] .arg-card [arg-card-title] {
+  text-transform: uppercase;
+}

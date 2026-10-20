@@ -1,6 +1,30 @@
-/* Stepper: marcadores maiores, com o passo atual no bloco de destaque. */
+/*
+ * Passos como na referência: marcadores grandes contornados em tinta preta;
+ * o feito é o bloco ciano, o atual é o bloco amarelo, o pendente fica branco.
+ */
 
 :root[data-arg-style='neo-brutalista'] arg-stepper {
   --arg-stepper-marker-size: 2.25rem;
   --arg-stepper-line: var(--arg-color-border);
+  --arg-stepper-accent: var(--arg-color-primary-soft);
+  --arg-stepper-on-accent: var(--arg-color-on-primary-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-stepper .arg-stepper__marker {
+  border: 3px solid var(--arg-color-nb-tinta, var(--arg-color-border));
+  background: var(--arg-color-surface-solid);
+  color: var(--arg-color-text);
+}
+
+:root[data-arg-style='neo-brutalista']
+  arg-stepper
+  .arg-stepper__step--current
+  .arg-stepper__marker {
+  border-color: var(--arg-color-nb-tinta, var(--arg-color-border));
+  background: var(--arg-color-warning-soft);
+  color: var(--arg-color-on-warning-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] arg-stepper .arg-stepper__step--done .arg-stepper__marker {
+  border-color: var(--arg-color-nb-tinta, var(--arg-color-border));
 }
