@@ -1,7 +1,9 @@
-/* Select: o mesmo campo rebaixado em pílula do Input. */
+/* Select: o mesmo campo rebaixado com aro em relevo do Input. */
 
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) .arg-select {
   --arg-input-bg: var(--arg-color-surface-sunken);
   --arg-input-border: transparent;
   --arg-input-padding-inline: var(--arg-space-4);
+
+  box-shadow: var(--arg-shadow-field-raised);
 }

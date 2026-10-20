@@ -1,6 +1,11 @@
-/* Abas: o indicador da aba ativa na cor da marca e sem linha de base pesada. */
+/*
+ * Abas como na referência: as segmentadas num trilho rebaixado, com a aba
+ * aberta em menta; as sublinhadas com a barra menta. A aba aberta também
+ * fica em negrito, então o estado não depende só da cor.
+ */
 
 :root:is([data-arg-style='argila'], :not([data-arg-style], [data-arg-brand])) arg-tabs {
-  --arg-tabs-indicator: var(--arg-color-primary);
+  --arg-tabs-indicator: var(--arg-color-primary-soft);
   --arg-tabs-border: var(--arg-color-border);
+  --arg-tabs-selected-bg: var(--arg-color-primary-soft);
 }
