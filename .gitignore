@@ -48,6 +48,8 @@ Thumbs.db
 
 # Checkup visual: capturas e relatório gerados por scripts/checkup-visual.ts
 /checkup
+# Comparação com as referências (scripts/comparar-referencia.ts): as imagens são só do time
+/comparacao
 
 # Relatórios dos testes (JUnit)
 /reports
