@@ -1,0 +1,32 @@
+{
+  // Depuração: Run and Debug (Ctrl+Shift+D), escolha a configuração e F5.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Catálogo no Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "Catálogo",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Catálogo no Edge",
+      "type": "msedge",
+      "request": "launch",
+      "preLaunchTask": "Catálogo",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Testes do arquivo aberto",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+      "runtimeArgs": ["--experimental-vm-modules"],
+      "args": ["--runInBand", "--coverage=false", "--findRelatedTests", "${relativeFile}"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+    }
+  ]
+}

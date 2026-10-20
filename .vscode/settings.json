@@ -1,0 +1,65 @@
+{
+  // Formatação e lint ao salvar, com as mesmas regras do CI
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["typescript", "html"],
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false,
+    "editor.wordWrap": "on"
+  },
+
+  // O TypeScript do projeto, não o embutido no VS Code
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.quoteStyle": "single",
+
+  // Cada componente aparece como um item só no explorador: abra button.ts para
+  // ver button.html, button.css, button.spec.ts e button.docs.ts logo abaixo
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.html, ${capture}.css, ${capture}.spec.ts, ${capture}.docs.ts",
+    "package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, .npmrc",
+    "README.md": "CHANGELOG.md",
+    "eslint.config.js": ".prettierrc, .prettierignore, .editorconfig, .jscpd.json, .dependency-cruiser.cjs, commitlint.config.js",
+    "jest.config.mjs": "jest.setup.ts"
+  },
+
+  // Arquivos gerados: abrem só para leitura (mude a fonte e rode o gerador)
+  "files.readonlyInclude": {
+    "**/*.generated.ts": true,
+    "projects/ui/tokens/colors.css": true,
+    "projects/docs/src/generated/**": true
+  },
+
+  // Fora da busca e do explorador: saídas de build, cache e relatórios
+  "files.exclude": {
+    "**/.angular": true
+  },
+  "search.exclude": {
+    "**/dist": true,
+    "**/coverage": true,
+    "**/.angular": true,
+    "reports": true,
+    "checkup": true,
+    "projects/docs/src/generated": true,
+    "pnpm-lock.yaml": true
+  },
+
+  // Jest em modo ESM, como o npm run test; roda quando pedido (não a cada salvamento)
+  "jest.jestCommandLine": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage=false",
+  "jest.runMode": "on-demand",
+
+  // Autocompletar --arg-* no CSS, a partir dos tokens
+  "cssVariables.lookupFiles": ["projects/ui/tokens/**/*.css"],
+
+  // Os comandos do README são para o Git Bash
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
+}
