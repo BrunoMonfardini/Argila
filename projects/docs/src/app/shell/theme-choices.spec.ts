@@ -16,6 +16,7 @@ describe('DocThemeChoices', () => {
     for (const name of [
       'data-arg-style',
       'data-arg-palette',
+      'data-arg-background',
       'data-arg-primary',
       'data-arg-accent',
     ]) {
@@ -56,6 +57,19 @@ describe('DocThemeChoices', () => {
     expect(theme.colors()).toEqual({ primary: 'anil' });
     expect(theme.surfaceOpacity()).toBe(0.7);
     expect(choices.notice()).toBeUndefined();
+  });
+
+  it('o link leva o fundo, e o fundo que o DS não aceita avisa', async () => {
+    const { theme, choices } = await open('/?ds=transparente&fundo=degrade');
+    expect(theme.background()).toBe('degrade');
+    expect(root.getAttribute('data-arg-background')).toBe('degrade');
+    expect(localStorage.getItem('argila-docs:fundo')).toBe('degrade');
+    expect(choices.notice()).toBeUndefined();
+    TestBed.resetTestingModule();
+
+    const punk = await open('/?ds=punk&fundo=degrade');
+    expect(punk.theme.background()).toBe('liso');
+    expect(punk.choices.notice()).toEqual(['O Punk não aceita o fundo “degrade”; usamos o liso.']);
   });
 
   it('o link vale mais que o salvo no navegador', async () => {

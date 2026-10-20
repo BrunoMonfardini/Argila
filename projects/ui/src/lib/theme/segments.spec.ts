@@ -13,7 +13,7 @@ const SEGMENTS = {
     scheme: 'dark',
     colors: { accent: 'caramelo' },
   },
-  vidro: { style: 'transparente', palette: 'oceano', surfaceOpacity: 0.6 },
+  vidro: { style: 'transparente', palette: 'oceano', surfaceOpacity: 0.6, background: 'degrade' },
 } satisfies Record<string, ArgSegment>;
 
 // O tipo recusa paleta que o design system não aceita (o Windows XP não aceita a Terrosa)
@@ -29,6 +29,7 @@ describe('segmentos', () => {
       'data-arg-palette',
       'data-arg-theme',
       'data-arg-segment',
+      'data-arg-background',
       'data-arg-primary',
       'data-arg-secondary',
       'data-arg-accent',
@@ -67,11 +68,13 @@ describe('segmentos', () => {
     expect(theme.palette()).toBe('oceano');
     expect(theme.colors()).toEqual({});
     expect(theme.surfaceOpacity()).toBe(0.6);
+    expect(theme.background()).toBe('degrade');
 
     theme.setSegment('essencial');
     expect(theme.style()).toBe('argila');
     expect(theme.palette()).toBe('nativa');
     expect(theme.surfaceOpacity()).toBeUndefined();
+    expect(theme.background()).toBe('liso');
   });
 
   it('trocar de segmento não avisa sobre a paleta e as cores do anterior', () => {
@@ -111,6 +114,11 @@ describe('segmentos', () => {
       'data-arg-accent': 'caramelo',
     });
     expect(argSegmentAttributes(SEGMENTS.essencial)).toEqual({ 'data-arg-style': 'argila' });
+    expect(argSegmentAttributes(SEGMENTS.vidro)).toEqual({
+      'data-arg-style': 'transparente',
+      'data-arg-palette': 'oceano',
+      'data-arg-background': 'degrade',
+    });
     expect(INVALID.style).toBe('windows-xp');
   });
 });

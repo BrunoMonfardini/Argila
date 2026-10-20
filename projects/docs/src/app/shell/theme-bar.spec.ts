@@ -15,6 +15,7 @@ describe('DocThemeBar', () => {
     localStorage.clear();
     root.removeAttribute('data-arg-style');
     root.removeAttribute('data-arg-palette');
+    root.removeAttribute('data-arg-background');
     for (const role of ['primary', 'secondary', 'accent']) root.removeAttribute(`data-arg-${role}`);
     root.style.removeProperty('--arg-surface-opacity');
     root.setAttribute('data-arg-theme', 'light');
@@ -115,6 +116,20 @@ describe('DocThemeBar', () => {
 
     choose(select('Estilo'), 'molde');
     expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
+  });
+
+  it('troca o fundo, e o campo some no estilo que só tem o liso', async () => {
+    const { fixture, select } = await setup();
+
+    choose(select('Fundo'), 'degrade');
+    await fixture.whenStable();
+    expect(root.getAttribute('data-arg-background')).toBe('degrade');
+    expect(localStorage.getItem('argila-docs:fundo')).toBe('degrade');
+
+    choose(select('Estilo'), 'punk');
+    await fixture.whenStable();
+    expect(root.hasAttribute('data-arg-background')).toBe(false);
+    expect(fixture.nativeElement.textContent).not.toContain('Fundo');
   });
 
   it('desabilita a opacidade, com o motivo, no estilo que não aceita transparência', async () => {

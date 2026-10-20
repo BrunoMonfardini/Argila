@@ -25,6 +25,7 @@ describe('ArgTheme', () => {
     root.removeAttribute('data-arg-theme');
     root.removeAttribute('data-arg-style');
     root.removeAttribute('data-arg-palette');
+    root.removeAttribute('data-arg-background');
     for (const role of ['primary', 'secondary', 'accent']) root.removeAttribute(`data-arg-${role}`);
   });
 
@@ -173,6 +174,49 @@ describe('ArgTheme', () => {
 
       expect(theme.surfaceOpacity()).toBeUndefined();
       expect(root.style.getPropertyValue('--arg-surface-opacity')).toBe('');
+    });
+
+    it('começa no fundo liso, sem atributo', () => {
+      expect(theme.background()).toBe('liso');
+      expect(root.hasAttribute('data-arg-background')).toBe(false);
+    });
+
+    it('aplica o fundo em degradê e volta ao liso', () => {
+      theme.setBackground('degrade');
+      expect(theme.background()).toBe('degrade');
+      expect(root.getAttribute('data-arg-background')).toBe('degrade');
+
+      theme.setBackground('liso');
+      expect(root.hasAttribute('data-arg-background')).toBe(false);
+    });
+
+    it('recusa, com aviso, um fundo que o design system não aceita', () => {
+      theme.setStyle('punk');
+
+      theme.setBackground('degrade');
+
+      expect(theme.backgrounds()).toEqual(['liso']);
+      expect(theme.background()).toBe('liso');
+      expect(warn).toHaveBeenCalledWith(expect.stringContaining('não aceita o fundo "degrade"'));
+    });
+
+    it('ao trocar para um design system sem o fundo atual, volta ao padrão dele', () => {
+      theme.setBackground('degrade');
+
+      theme.setStyle('neo-brutalista');
+
+      expect(theme.background()).toBe('liso');
+      expect(root.hasAttribute('data-arg-background')).toBe(false);
+    });
+
+    it('lê o fundo já presente no <html>, ignorando um que o DS não aceita', () => {
+      root.setAttribute('data-arg-background', 'degrade');
+      TestBed.resetTestingModule();
+      expect(TestBed.inject(ArgTheme).background()).toBe('degrade');
+
+      root.setAttribute('data-arg-background', 'linhas');
+      TestBed.resetTestingModule();
+      expect(TestBed.inject(ArgTheme).background()).toBe('liso');
     });
   });
 
