@@ -1,7 +1,32 @@
-/* Alerta: banner de contorno grosso em tinta preta; o tom fica na barra lateral e no fundo. */
+/*
+ * Alerta como os banners da referência: bloco chapado no tom (verde, amarelo,
+ * magenta; ciano na informação), texto e ícone pretos, contorno de 3px e
+ * sombra dura.
+ */
 
 :root[data-arg-style='neo-brutalista'] .arg-alert {
-  border: 3px solid var(--arg-color-border);
-  border-inline-start-width: 10px;
+  --arg-alert-bg: var(--arg-color-info-soft);
+  --arg-alert-fg: var(--arg-color-on-info-soft);
+
+  border: 3px solid var(--arg-color-nb-tinta, var(--arg-color-border));
   box-shadow: var(--arg-shadow-2);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-alert.arg-alert--success {
+  --arg-alert-bg: var(--arg-color-success-soft);
+  --arg-alert-fg: var(--arg-color-on-success-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-alert.arg-alert--warning {
+  --arg-alert-bg: var(--arg-color-warning-soft);
+  --arg-alert-fg: var(--arg-color-on-warning-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-alert.arg-alert--danger {
+  --arg-alert-bg: var(--arg-color-danger-soft);
+  --arg-alert-fg: var(--arg-color-on-danger-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-alert .arg-alert__icon {
+  color: currentColor;
 }

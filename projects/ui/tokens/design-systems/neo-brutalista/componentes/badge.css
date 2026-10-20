@@ -1,7 +1,33 @@
-/* Badge: etiqueta retangular com contorno, em caixa alta. */
+/*
+ * Badge como as etiquetas da referência: bloco retangular chapado, contorno
+ * preto, texto preto em caixa alta.
+ */
 
 :root[data-arg-style='neo-brutalista'] .arg-badge {
   --arg-badge-radius: 0.25rem;
-  border: 2px solid var(--arg-color-border);
+  --arg-badge-fg: var(--arg-color-text);
+
+  border: 2px solid var(--arg-color-nb-tinta, var(--arg-color-border));
   text-transform: uppercase;
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-badge.arg-badge--primary,
+:root[data-arg-style='neo-brutalista'] .arg-badge.arg-badge--info {
+  --arg-badge-bg: var(--arg-color-info-soft);
+  --arg-badge-fg: var(--arg-color-on-info-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-badge.arg-badge--success {
+  --arg-badge-bg: var(--arg-color-success-soft);
+  --arg-badge-fg: var(--arg-color-on-success-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-badge.arg-badge--warning {
+  --arg-badge-bg: var(--arg-color-warning-soft);
+  --arg-badge-fg: var(--arg-color-on-warning-soft);
+}
+
+:root[data-arg-style='neo-brutalista'] .arg-badge.arg-badge--danger {
+  --arg-badge-bg: var(--arg-color-danger-soft);
+  --arg-badge-fg: var(--arg-color-on-danger-soft);
 }
