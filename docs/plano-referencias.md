@@ -14,14 +14,14 @@ Plano de execução, PR a PR, para deixar cada design system igual à imagem del
 
 _Atualizado em 20/10/2026._
 
-| Marco                       | Situação                  |
-| --------------------------- | ------------------------- |
-| G: ferramenta de comparação | G-01 pronto; G-02 a fazer |
-| AR: Argila                  | A fazer                   |
-| NB: Neo-brutalista          | A fazer                   |
-| TR: Transparente            | A fazer                   |
-| XP: Windows XP              | A fazer                   |
-| PK: Punk                    | A fazer                   |
+| Marco                       | Situação              |
+| --------------------------- | --------------------- |
+| G: ferramenta de comparação | Pronto                |
+| AR: Argila                  | AR-01 e AR-02 prontos |
+| NB: Neo-brutalista          | A fazer               |
+| TR: Transparente            | A fazer               |
+| XP: Windows XP              | A fazer               |
+| PK: Punk                    | A fazer               |
 
 O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
@@ -32,7 +32,7 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 | ✓   | ID   | Item                                                                                                                                                                                                                                                               | Pronto quando                                                                           | Est. |
 | --- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | ---- |
 | [x] | G-01 | `feat(scripts): comparação com a referência` (`npm run comparar -- --ds <id>`: captura a página do DS no catálogo, nos modos dele, e monta `comparacao/<ds>.html` com a imagem de referência ao lado, na mesma altura; local, fora do git e do catálogo publicado) | Um comando gera a comparação de qualquer DS com referência                              | 1    |
-| [ ] | G-02 | `feat(docs): página do DS no formato da referência` (a página de cada DS ganha uma "folha de estilo" com as mesmas seções da imagem, na mesma ordem, montada com os componentes de verdade; o conteúdo de cada folha vem nos itens de cada DS)                     | A página do Argila mostra a folha; os outros DS mostram a folha padrão até o item deles | 1,5  |
+| [x] | G-02 | `feat(docs): página do DS no formato da referência` (a página de cada DS ganha uma "folha de estilo" com as mesmas seções da imagem, na mesma ordem, montada com os componentes de verdade; o conteúdo de cada folha vem nos itens de cada DS)                     | A página do Argila mostra a folha; os outros DS mostram a folha padrão até o item deles | 1,5  |
 
 ---
 
@@ -52,8 +52,8 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
 | ✓   | ID    | Item                                                                                                                                                                                                      | Pronto quando                                                      | Est. |
 | --- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | ---- |
-| [ ] | AR-01 | `feat(argila): cores da referência` (texto, links e rótulos em cinza neutro; menta só em preenchimentos, foco e destaques; feedback menta, amarelo e rosa)                                                | Nenhum texto corrido em verde; o contraste passa em claro e escuro | 1    |
-| [ ] | AR-02 | `feat(argila): alertas e toasts em pílula preenchida` (fundo chapado no tom, sem contorno nem faixa, ícone em círculo de contorno, texto escuro)                                                          | Os três alertas da referência reproduzidos                         | 0,5  |
+| [x] | AR-01 | `feat(argila): cores da referência` (texto, links e rótulos em cinza neutro; menta só em preenchimentos, foco e destaques; feedback menta, amarelo e rosa)                                                | Nenhum texto corrido em verde; o contraste passa em claro e escuro | 1    |
+| [x] | AR-02 | `feat(argila): alertas e toasts em pílula preenchida` (fundo chapado no tom, sem contorno nem faixa, ícone em círculo de contorno, texto escuro)                                                          | Os três alertas da referência reproduzidos                         | 0,5  |
 | [ ] | AR-03 | `feat(argila): campo rebaixado com aro em relevo` (Input, Select e grupo com ação)                                                                                                                        | A busca da referência reproduzida, com o foco menta brilhando      | 1    |
 | [ ] | AR-04 | `feat(argila): abas e chips` (segmentadas, sublinhadas, chips de filtro, selecionado e desabilitado)                                                                                                      | As duas abas e os três chips da referência reproduzidos            | 1    |
 | [ ] | AR-05 | `feat(argila): botões` (menta com volume; hover com brilho; desabilitado cinza sem volume)                                                                                                                | Os três botões da referência reproduzidos                          | 0,5  |
