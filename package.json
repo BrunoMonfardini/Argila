@@ -24,6 +24,7 @@
     "colors": "node scripts/gerar-cores.ts",
     "colors:check": "node scripts/gerar-cores.ts --check",
     "checkup": "node scripts/checkup-visual.ts",
+    "comparar": "node scripts/comparar-referencia.ts",
     "dev": "pnpm manifest && ng serve docs --open",
     "manifest": "node scripts/gerar-manifesto.ts",
     "manifest:check": "node scripts/gerar-manifesto.ts --check",
