@@ -176,7 +176,7 @@ providers: [provideArgIcons([argIconPlus, argIconTrash, argIconCalendar])];
 ### 1.3 Critério de pronto da fase
 
 - [x] Token de fonte sem `Inter`; nenhuma fonte ou ícone carregado de um domínio externo.
-- [ ] Primeiro lote de ícones desenhado no padrão e validado pelo `gerar-icones.ts`.
+- [x] Primeiro lote de ícones desenhado no padrão e validado pelo `gerar-icones.ts`.
 - [x] `arg-icon` e `provideArgIcons` com testes; nome de ícone inválido não compila.
 
 ---
@@ -443,10 +443,10 @@ node --watch-path=projects/ui/src --watch-path=projects/ui/tokens scripts/gerar-
 
 ### 2.9 Critério de pronto da fase
 
-- [ ] `npm run dev` abre o catálogo próprio, com todas as páginas que existem hoje no Storybook.
-- [ ] Playground, exemplos com código, tabela de propriedades e barra de tema funcionando.
-- [ ] O catálogo usa os componentes do Argila na própria interface.
-- [ ] Testes unitários do gerador de manifesto e do playground (são código nosso como qualquer outro).
+- [x] `npm run dev` abre o catálogo próprio, com todas as páginas que existem hoje no Storybook.
+- [x] Playground, exemplos com código, tabela de propriedades e barra de tema funcionando.
+- [x] O catálogo usa os componentes do Argila na própria interface.
+- [x] Testes unitários do gerador de manifesto e do playground (são código nosso como qualquer outro).
 
 ---
 

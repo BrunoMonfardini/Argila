@@ -122,7 +122,7 @@ Item de lista, com áreas opcionais:
 </ul>
 ```
 
-Exemplos vivos, playground e padrões combinados (carregamento, vazio) no catálogo: `npm run dev`.
+Exemplos vivos, playground, padrões e templates no catálogo: `npm run dev` ou <https://argila-catalogo.vercel.app>. A página de cada design system (Design systems → nome) diz quais componentes ele cura, herda ou deixa de fora.
 
 ## Tema
 
@@ -130,10 +130,10 @@ Modo de cor, no `<html>`: `data-arg-theme="light" | "dark" | "auto"`.
 
 A aparência vem de um **design system** (DS) e de uma **paleta** aceita por ele, também no `<html>`:
 
-| Eixo          | Atributo           | Define                             | Valores                                                                                       |
-| ------------- | ------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------- |
-| Design system | `data-arg-style`   | forma: raio, borda, sombra, fonte  | `argila` (padrão), `molde`, `coda`, `transparente`, `windows-xp`                              |
-| Paleta        | `data-arg-palette` | cores, só entre as que o DS aceita | `nativa` (a do DS, padrão), `terrosa`, `oceano`, `floresta`, `mono`, `alto-contraste`, `viva` |
+| Eixo          | Atributo           | Define                             | Valores                                                                                                    |
+| ------------- | ------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Design system | `data-arg-style`   | forma: raio, borda, sombra, fonte  | `argila` (padrão), `coda`, `transparente`, `windows-xp`, `neo-brutalista`, `punk`; `molde` é a base neutra |
+| Paleta        | `data-arg-palette` | cores, só entre as que o DS aceita | `nativa` (a do DS, padrão), `terrosa`, `oceano`, `floresta`, `mono`, `alto-contraste`, `viva`, `pastel`    |
 
 O Argila, o padrão, tem forma "de massinha" (pílulas, volume, campos rebaixados) e vem no
 próprio `argila.css`; para o visual plano de antes, use `data-arg-style="molde"`.
@@ -170,7 +170,7 @@ theme.setSurfaceOpacity(0.7); // superfícies translúcidas, de 0.4 a 1
 O `ArgTheme` respeita o manifesto do DS atual: `theme.schemes()`, `theme.palettes()` e
 `theme.acceptsTransparency()` dizem o que vale agora. Ao trocar de DS, o que ele não aceita
 volta ao padrão dele, com aviso no console em modo de desenvolvimento: um modo de cor não
-suportado, uma paleta não aceita e a transparência (CODA e Windows XP não aceitam).
+suportado, uma paleta não aceita e a transparência (CODA, Windows XP, Neo-brutalista e Punk não aceitam).
 `setPalette()` com uma paleta não aceita usa a padrão, e `setSurfaceOpacity()` num DS sem
 transparência é ignorado.
 
