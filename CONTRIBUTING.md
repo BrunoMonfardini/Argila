@@ -6,7 +6,7 @@ Obrigado por ajudar o Argila. Este guia resume o caminho de uma mudança até a 
 
 - **Prepare a máquina e rode o catálogo** seguindo os passos 1 a 3 do [README](README.md#comandos-no-git-bash). Use `pnpm install` e os scripts do `package.json`, nunca `npm install` nem `ng` direto.
 - **Ache onde mexer** no [Mapa do projeto](docs/mapa-do-projeto.md) e siga o passo a passo do caso em [Como alterar](docs/como-alterar.md).
-- **Bug ou ideia grande?** Abra uma issue antes, para combinar a abordagem. Vulnerabilidade não vai em issue: veja o [SECURITY.md](SECURITY.md).
+- **Bug ou ideia grande?** Abra uma issue antes, com o modelo de bug ou de ideia, para combinar a abordagem. Vulnerabilidade não vai em issue: veja o [SECURITY.md](SECURITY.md).
 
 ## O fluxo
 
@@ -38,3 +38,5 @@ O PR precisa dos checks `verify` e `pr-checks` verdes, de uma aprovação de out
 ## Licença
 
 Ao contribuir, você concorda que a sua contribuição seja distribuída sob a [licença MIT](LICENSE) do projeto.
+
+Ao participar, você concorda com o [código de conduta](CODE_OF_CONDUCT.md).
