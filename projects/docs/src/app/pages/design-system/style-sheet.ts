@@ -64,6 +64,20 @@ export const DEFAULT_SECTIONS: readonly StyleSheetSection[] = [
  * de cada DS no plano das referências ajustam esta tabela.
  */
 export const STYLE_SHEET_SECTIONS: Partial<Record<ArgStyle, readonly StyleSheetSection[]>> = {
+  // A folha de componentes de vidro: só componentes, na ordem da imagem; os fundamentos depois
+  transparente: [
+    'botoes',
+    'campos',
+    'controles',
+    'abas',
+    'alertas',
+    'cards',
+    'chips',
+    'cores',
+    'tipografia',
+    'raio',
+    'elevacao',
+  ],
   // "Neo-Brutalist Design System": Foundations, Components, Data display e Feedback
   'neo-brutalista': [
     'cores',
