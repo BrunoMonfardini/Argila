@@ -14,14 +14,14 @@ Plano de execução, PR a PR, para deixar cada design system igual à imagem del
 
 _Atualizado em 20/10/2026._
 
-| Marco                       | Situação |
-| --------------------------- | -------- |
-| G: ferramenta de comparação | Pronto   |
-| AR: Argila                  | Pronto   |
-| NB: Neo-brutalista          | A fazer  |
-| TR: Transparente            | A fazer  |
-| XP: Windows XP              | A fazer  |
-| PK: Punk                    | A fazer  |
+| Marco                       | Situação                                        |
+| --------------------------- | ----------------------------------------------- |
+| G: ferramenta de comparação | Pronto                                          |
+| AR: Argila                  | Pronto                                          |
+| NB: Neo-brutalista          | NB-01 a NB-03 prontos; aba ativa do NB-04 feita |
+| TR: Transparente            | A fazer                                         |
+| XP: Windows XP              | A fazer                                         |
+| PK: Punk                    | A fazer                                         |
 
 O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
@@ -79,9 +79,9 @@ O CODA não tem imagem de referência e fica fora deste plano até ganhar uma.
 
 | ✓   | ID    | Item                                                                                                                                                                                                                                         | Pronto quando                                                | Est. |
 | --- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ---- |
-| [ ] | NB-01 | `feat(neo-brutalista): todas as cores da referência` (os seis blocos e mais verde, rosa claro e salmão como tokens da paleta nativa; feedback chapado: sucesso verde, aviso amarelo, erro magenta, informação ciano, sempre com texto preto) | As cores da referência existem e passam no contraste         | 1    |
-| [ ] | NB-02 | `feat(neo-brutalista): alertas, toasts e modal` (preenchidos no tom, contorno de 3px, sombra dura; modal em moldura cinza)                                                                                                                   | A seção Feedback da referência reproduzida                   | 1    |
-| [ ] | NB-03 | `feat(neo-brutalista): botões e controles` (as cinco variantes, ícone quadrado; toggle amarelo; checkbox e radio pretos)                                                                                                                     | As seções Buttons e Controls reproduzidas                    | 1    |
+| [x] | NB-01 | `feat(neo-brutalista): todas as cores da referência` (os seis blocos e mais verde, rosa claro e salmão como tokens da paleta nativa; feedback chapado: sucesso verde, aviso amarelo, erro magenta, informação ciano, sempre com texto preto) | As cores da referência existem e passam no contraste         | 1    |
+| [x] | NB-02 | `feat(neo-brutalista): alertas, toasts e modal` (preenchidos no tom, contorno de 3px, sombra dura; modal em moldura cinza)                                                                                                                   | A seção Feedback da referência reproduzida                   | 1    |
+| [x] | NB-03 | `feat(neo-brutalista): botões e controles` (as cinco variantes, ícone quadrado; toggle amarelo; checkbox e radio pretos)                                                                                                                     | As seções Buttons e Controls reproduzidas                    | 1    |
 | [ ] | NB-04 | `feat(neo-brutalista): abas, passos, paginação e breadcrumb` (aba ativa ciano com contador amarelo; passos coloridos; quadrados com a atual em ciano)                                                                                        | As seções Tabs, Steps, Pagination e Breadcrumbs reproduzidas | 1    |
 | [ ] | NB-05 | `feat(neo-brutalista): dados` (card com título em caixa alta e botão ciano; selos chapados; avatares; tooltip preto; cabeçalho da tabela preto)                                                                                              | A seção Data display reproduzida                             | 1    |
 | [ ] | NB-06 | `docs(neo-brutalista): folha de estilo da referência` (Foundations, Components, Data display e Feedback, com os adesivos inclinados como regras de uso)                                                                                      | A página do Neo-brutalista lado a lado com a imagem          | 1,5  |
