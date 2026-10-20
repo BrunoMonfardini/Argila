@@ -1,4 +1,12 @@
-/* Botões em alto-relevo de 1px: o primário é o bloco azul; o secundário, a face cinza de janela. */
+/*
+ * Botões com bisel de 1px, como a referência: o primário é o bloco azul com
+ * o topo mais claro e contorno azul-escuro; o secundário, a face cinza de
+ * janela. Claro em cima e à esquerda, escuro embaixo e à direita.
+ */
+
+:root[data-arg-style='windows-xp'] .arg-button {
+  --arg-button-shadow: var(--arg-shadow-control);
+}
 
 :root[data-arg-style='windows-xp'] .arg-button.arg-button--secondary {
   --arg-button-bg: var(--arg-color-surface-sunken);
@@ -12,5 +20,30 @@
 }
 
 :root[data-arg-style='windows-xp'] .arg-button:not(.arg-button--tertiary, .arg-button--secondary) {
-  --arg-button-border: color-mix(in oklab, var(--arg-button-bg), #000 25%);
+  --arg-button-border: color-mix(in oklab, var(--arg-button-bg), #000 35%);
+}
+
+:root[data-arg-style='windows-xp']
+  .arg-button:not(
+    .arg-button--tertiary,
+    .arg-button--secondary,
+    .arg-button--danger,
+    [disabled],
+    [aria-disabled='true']
+  ) {
+  --arg-button-bg: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--arg-color-primary), #fff 14%),
+    var(--arg-color-primary) 45%
+  );
+  --arg-button-bg-hover: linear-gradient(
+    180deg,
+    var(--arg-color-primary),
+    color-mix(in oklab, var(--arg-color-primary), #000 14%) 45%
+  );
+  --arg-button-border: color-mix(in oklab, var(--arg-color-primary), #000 35%);
+}
+
+:root[data-arg-style='windows-xp'] .arg-button.arg-button--tertiary {
+  --arg-button-shadow: none;
 }

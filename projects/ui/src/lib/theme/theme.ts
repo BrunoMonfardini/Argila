@@ -216,6 +216,8 @@ export class ArgTheme {
    * aviso em desenvolvimento: a paleta, o modo de cor e a transparência.
    */
   setStyle(style: ArgStyle): void {
+    // O fundo padrão do DS anterior vira o padrão do novo (o liso do Argila, as linhas do XP)
+    const wasDefaultBackground = this._background() === this.backgrounds()[0];
     this.root.setAttribute('data-arg-style', style);
     this._style.set(style);
     this.setColorScheme(this._colorScheme());
@@ -231,17 +233,23 @@ export class ArgTheme {
       );
       this.clearSurfaceOpacity();
     }
-    if (!this.backgrounds().includes(this._background())) {
+    if (wasDefaultBackground) {
+      this.setBackground(this.backgrounds()[0]);
+    } else if (!this.backgrounds().includes(this._background())) {
       warn(
         `o design system "${style}" não aceita o fundo "${this._background()}"; voltou ao padrão.`,
       );
       this.setBackground(this.backgrounds()[0]);
+    } else {
+      // O atributo depende do padrão do DS: reaplica o fundo escolhido no DS novo
+      this.setBackground(this._background());
     }
   }
 
   /**
    * Troca o fundo da página. Um fundo que o design system atual não aceita
-   * vira o padrão dele, com aviso em desenvolvimento. O liso tira o atributo.
+   * vira o padrão dele, com aviso em desenvolvimento. O padrão do DS tira o
+   * atributo (o CSS do DS já o aplica); os outros vão em `data-arg-background`.
    */
   setBackground(background: ArgBackgroundName): void {
     const accepted = this.backgrounds();
@@ -251,7 +259,7 @@ export class ArgTheme {
         `o design system "${this._style()}" não aceita o fundo "${background}"; usando "${value}".`,
       );
     }
-    if (value === 'liso') this.root.removeAttribute('data-arg-background');
+    if (value === accepted[0]) this.root.removeAttribute('data-arg-background');
     else this.root.setAttribute('data-arg-background', value);
     this._background.set(value);
   }

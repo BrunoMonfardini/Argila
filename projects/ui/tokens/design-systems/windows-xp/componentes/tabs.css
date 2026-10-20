@@ -1,4 +1,7 @@
-/* Abas em pasta: a aberta fica em relevo sobre a linha da pasta. */
+/*
+ * Abas em pasta, como a referência: a aberta é clara e se funde ao conteúdo;
+ * as fechadas ficam cinza, com bisel e o texto apagado.
+ */
 
 :root[data-arg-style='windows-xp'] arg-tabs {
   --arg-tabs-indicator: transparent;
@@ -7,13 +10,15 @@
 
 :root[data-arg-style='windows-xp'] arg-tabs .arg-tabs__tab {
   margin-block-end: -1px;
-  border: 1px solid transparent;
+  border: 1px solid var(--arg-color-border-strong);
   border-radius: 0.25rem 0.25rem 0 0;
-  background: var(--arg-color-surface-sunken);
+  background: color-mix(in oklab, var(--arg-color-surface-sunken), var(--arg-color-shade) 8%);
+  box-shadow: inset 1px 1px light-dark(rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.12));
+  color: var(--arg-color-text-muted);
 }
 
 :root[data-arg-style='windows-xp'] arg-tabs .arg-tabs__tab[aria-selected='true'] {
-  border-color: var(--arg-color-border-strong);
   border-block-end-color: var(--arg-color-surface-solid);
   background: var(--arg-color-surface-solid);
+  color: var(--arg-color-text);
 }

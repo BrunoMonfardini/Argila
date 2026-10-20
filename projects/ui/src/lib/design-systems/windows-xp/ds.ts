@@ -9,6 +9,8 @@ export const windowsXp = {
   referencia: 'windows-xp.jpg',
   modos: ['light', 'dark'],
   transparencia: false,
+  // As linhas de varredura são o fundo nativo; o liso fica a uma escolha
+  fundos: ['linhas', 'liso'],
   paletas: ['nativa', 'alto-contraste'],
   fontes: { titulo: 'Pixelify Sans' },
   componentes: {
