@@ -9,6 +9,20 @@
   gap: var(--arg-space-8) var(--arg-space-6);
 }
 
+/* Argila: a prancheta da referência, com a grade fina de régua por trás (D4) */
+.doc-sheet--argila {
+  padding: var(--arg-space-8);
+  border-radius: var(--arg-radius-container);
+  box-shadow: var(--arg-shadow-3);
+  background:
+    repeating-linear-gradient(
+      to right,
+      color-mix(in oklab, var(--arg-color-border) 70%, transparent) 0 1px,
+      transparent 1px 4rem
+    ),
+    var(--arg-color-surface-solid);
+}
+
 .doc-sheet__section {
   display: grid;
   align-content: start;
@@ -97,17 +111,54 @@ code {
   background: var(--arg-color-surface-raised);
 }
 
-/* Os níveis empilhados, cada um um pouco abaixo e à direita do anterior */
+/*
+ * Os níveis empilhados como na referência: cada um sai de trás do anterior,
+ * um pouco mais escuro, com a sombra do próprio nível
+ */
 .doc-sheet__levels {
   display: grid;
-  gap: var(--arg-space-2);
+  padding-block-end: var(--arg-space-2);
 }
 
 .doc-sheet__levels li {
-  padding: var(--arg-space-3) var(--arg-space-4);
+  position: relative;
+  padding: var(--arg-space-6) var(--arg-space-4) var(--arg-space-2);
   border-radius: var(--arg-radius-container);
-  background: var(--arg-color-surface-raised);
+  background: color-mix(
+    in oklab,
+    var(--arg-color-surface-raised-solid),
+    var(--arg-color-shade) calc(var(--nivel, 0) * 5%)
+  );
   font-size: var(--arg-font-size-body-sm);
+}
+
+.doc-sheet__levels li + li {
+  margin-block-start: calc(var(--arg-space-6) * -1 + var(--arg-space-2));
+}
+
+.doc-sheet__levels li:nth-child(1) {
+  --nivel: 0;
+  z-index: 5;
+}
+
+.doc-sheet__levels li:nth-child(2) {
+  --nivel: 1;
+  z-index: 4;
+}
+
+.doc-sheet__levels li:nth-child(3) {
+  --nivel: 2;
+  z-index: 3;
+}
+
+.doc-sheet__levels li:nth-child(4) {
+  --nivel: 3;
+  z-index: 2;
+}
+
+.doc-sheet__levels li:nth-child(5) {
+  --nivel: 4;
+  z-index: 1;
 }
 
 .doc-sheet__row {
