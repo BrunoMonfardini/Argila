@@ -182,8 +182,7 @@ describe('contraste dos tokens', () => {
 describe('contraste sobre o fundo de imagem', () => {
   /** O texto que fica direto sobre o fundo da página. */
   const PAGE_TEXT = ['--arg-color-text', '--arg-color-text-muted', '--arg-color-text-link'];
-  // Os design systems com fundo de manchas; o 'imagem' entra nos fundos deles
-  const withImage = designSystems.filter((ds) => ds.fundos?.includes('degrade'));
+  const withImage = designSystems.filter((ds) => ds.fundos?.includes('imagem'));
 
   it('algum design system tem o fundo', () => {
     expect(withImage.length).toBeGreaterThan(0);

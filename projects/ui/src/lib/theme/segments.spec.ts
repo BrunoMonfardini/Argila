@@ -2,7 +2,7 @@ import { jest } from '@jest/globals';
 import { ApplicationRef } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideArgila } from './provide-argila';
-import { type ArgSegment, argSegmentAttributes } from './segments';
+import { type ArgSegment, argSegmentAttributes, argSegmentStyles } from './segments';
 import { ArgTheme } from './theme';
 
 const SEGMENTS = {
@@ -14,6 +14,14 @@ const SEGMENTS = {
     colors: { accent: 'caramelo' },
   },
   vidro: { style: 'transparente', palette: 'oceano', surfaceOpacity: 0.6, background: 'degrade' },
+  foto: {
+    style: 'transparente',
+    scheme: 'dark',
+    background: 'imagem',
+    backgroundImage: 'assets/fundo.jpg',
+    backgroundVeil: 0.55,
+    backgroundMotion: true,
+  },
 } satisfies Record<string, ArgSegment>;
 
 // O tipo recusa paleta que o design system não aceita (o Windows XP não aceita a Terrosa)
@@ -30,6 +38,7 @@ describe('segmentos', () => {
       'data-arg-theme',
       'data-arg-segment',
       'data-arg-background',
+      'data-arg-background-motion',
       'data-arg-primary',
       'data-arg-secondary',
       'data-arg-accent',
@@ -37,6 +46,8 @@ describe('segmentos', () => {
       root.removeAttribute(name);
     }
     root.style.removeProperty('--arg-surface-opacity');
+    root.style.removeProperty('--arg-background-photo');
+    root.style.removeProperty('--arg-background-veil');
     jest.restoreAllMocks();
   });
 
@@ -128,5 +139,38 @@ describe('segmentos', () => {
       'data-arg-background': 'liso',
     });
     expect(INVALID.style).toBe('windows-xp');
+  });
+
+  it('setSegment aplica a imagem, o véu e o movimento, e o próximo segmento os tira', () => {
+    const theme = setup('foto');
+
+    expect(theme.background()).toBe('imagem');
+    expect(theme.backgroundImage()).toBe('assets/fundo.jpg');
+    expect(theme.backgroundVeil()).toBe(0.55);
+    expect(theme.backgroundMotion()).toBe(true);
+    expect(root.hasAttribute('data-arg-background-motion')).toBe(true);
+
+    theme.setSegment('essencial');
+
+    expect(theme.background()).toBe('liso');
+    expect(theme.backgroundImage()).toBeUndefined();
+    expect(theme.backgroundVeil()).toBeUndefined();
+    expect(theme.backgroundMotion()).toBe(false);
+    expect(root.style.getPropertyValue('--arg-background-photo')).toBe('');
+  });
+
+  it('argSegmentAttributes leva o movimento; argSegmentStyles, a imagem, o véu e a opacidade', () => {
+    expect(argSegmentAttributes(SEGMENTS.foto)).toEqual({
+      'data-arg-style': 'transparente',
+      'data-arg-theme': 'dark',
+      'data-arg-background': 'imagem',
+      'data-arg-background-motion': '',
+    });
+    expect(argSegmentStyles(SEGMENTS.foto)).toEqual({
+      '--arg-background-photo': 'url("assets/fundo.jpg")',
+      '--arg-background-veil': 'color-mix(in oklab, var(--arg-color-background) 55%, transparent)',
+    });
+    expect(argSegmentStyles(SEGMENTS.vidro)).toEqual({ '--arg-surface-opacity': '0.6' });
+    expect(argSegmentStyles(SEGMENTS.essencial)).toEqual({});
   });
 });
