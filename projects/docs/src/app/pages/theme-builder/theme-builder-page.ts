@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { ArgPalette, ArgTheme } from '@brunomonfardini/ui';
 import { DocCode } from '../../code/code';
 import { DocThemeBar } from '../../shell/theme-bar';
+import { DocImageTheme } from './image-theme';
 import { htmlCode, segmentCode, segmentOf } from './theme-code';
 
 /**
@@ -10,7 +11,7 @@ import { htmlCode, segmentCode, segmentOf } from './theme-code';
  */
 @Component({
   selector: 'doc-theme-builder-page',
-  imports: [DocCode, DocThemeBar],
+  imports: [DocCode, DocImageTheme, DocThemeBar],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <p class="doc-page__category">Ferramentas</p>
@@ -23,6 +24,16 @@ import { htmlCode, segmentCode, segmentOf } from './theme-code';
     <section aria-labelledby="escolhas">
       <h2 id="escolhas">Escolhas</h2>
       <doc-theme-bar class="doc-builder__bar" />
+    </section>
+
+    <section aria-labelledby="imagem">
+      <h2 id="imagem">A partir de uma imagem</h2>
+      <p>
+        Envie uma imagem do produto: o catálogo tira as três cores principais, escolhe as mais
+        próximas da lista que passa no contraste, sugere o modo e usa a imagem como fundo, com o véu
+        mínimo para o texto continuar legível sobre ela.
+      </p>
+      <doc-image-theme />
     </section>
 
     <section aria-labelledby="segmento">
