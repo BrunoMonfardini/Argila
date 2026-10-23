@@ -3,7 +3,9 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from '@jest/globals';
 import {
   checkContrast,
+  checkVeilContrast,
   contrastFailures,
+  minimumVeil,
   parseTokenBlocks,
   resolveColor,
   tokensForRoot,
@@ -12,7 +14,7 @@ import {
   type TokenBlocks,
 } from './lib/contraste.ts';
 import { loadDesignSystems, rootAttributes } from './lib/design-systems.ts';
-import { PAIRS, READING_PAIRS, pairsFor } from './lib/pares.ts';
+import { PAIRS, READING_PAIRS, TEXT, pairsFor } from './lib/pares.ts';
 import { ARG_ALLOWED_COLORS } from '../projects/ui/src/lib/design-systems/colors.generated.ts';
 
 /**
@@ -175,4 +177,32 @@ describe('contraste dos tokens', () => {
       ]),
     );
   });
+});
+
+describe('contraste sobre o fundo de imagem', () => {
+  /** O texto que fica direto sobre o fundo da página. */
+  const PAGE_TEXT = ['--arg-color-text', '--arg-color-text-muted', '--arg-color-text-link'];
+  // Os design systems com fundo de manchas; o 'imagem' entra nos fundos deles
+  const withImage = designSystems.filter((ds) => ds.fundos?.includes('degrade'));
+
+  it('algum design system tem o fundo', () => {
+    expect(withImage.length).toBeGreaterThan(0);
+  });
+
+  for (const ds of withImage) {
+    for (const palette of ds.paletas) {
+      const tokens = tokensForRoot(files, {
+        ...rootAttributes(ds.id, palette),
+        'data-arg-background': 'imagem',
+      });
+      for (const scheme of ds.modos) {
+        const mode = scheme === 'light' ? 'claro' : 'escuro';
+        it(`estilo ${ds.id}, paleta ${palette}, tema ${mode}: texto passa sobre o véu em preto e em branco`, () => {
+          const failures = contrastFailures(checkVeilContrast(tokens, PAGE_TEXT, TEXT, scheme));
+          const needed = failures.length ? minimumVeil(tokens, PAGE_TEXT, TEXT, scheme) : undefined;
+          expect({ failures, veilMinimo: needed }).toEqual({ failures: [], veilMinimo: undefined });
+        });
+      }
+    }
+  }
 });

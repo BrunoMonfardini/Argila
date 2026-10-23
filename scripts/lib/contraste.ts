@@ -358,3 +358,56 @@ export function contrastFailures(results: ContrastResult[]): string[] {
         `${r.scheme}: ${r.foreground} sobre ${r.background} = ${r.ratio}:1 (mínimo ${r.minimum}:1)`,
     );
 }
+
+/** Pixels do pior caso sob o véu do fundo de imagem: preto e branco puros. */
+const VEIL_BACKDROPS = ['#000', '#fff'];
+
+/**
+ * Contraste do texto da página sobre o fundo de imagem, no pior caso: o véu
+ * (`--arg-background-veil`) composto sobre um pixel preto e um branco. As
+ * manchas ficam embaixo do véu, como parte da imagem, então o pior caso já
+ * as cobre.
+ */
+export function checkVeilContrast(
+  tokens: Map<string, string>,
+  foregrounds: string[],
+  minimum: number,
+  scheme: ColorScheme,
+): ContrastResult[] {
+  const veil = resolveColor('var(--arg-background-veil)', tokens, scheme);
+  return VEIL_BACKDROPS.flatMap((pixel) => {
+    const background = composite(veil, parseHex(pixel));
+    return foregrounds.map((foreground) => {
+      const color = composite(resolveColor(`var(${foreground})`, tokens, scheme), background);
+      const ratio = Math.floor(contrastRatio(color, background) * 100) / 100;
+      return {
+        foreground,
+        background: `--arg-background-veil sobre ${pixel}`,
+        minimum,
+        scheme,
+        ratio,
+      };
+    });
+  });
+}
+
+/**
+ * A menor opacidade do véu, em pontos percentuais, com que todo o texto passa
+ * no pior caso; `undefined` se nem o véu opaco basta.
+ */
+export function minimumVeil(
+  tokens: Map<string, string>,
+  foregrounds: string[],
+  minimum: number,
+  scheme: ColorScheme,
+): number | undefined {
+  for (let percent = 0; percent <= 100; percent++) {
+    const trial = new Map(tokens).set(
+      '--arg-background-veil',
+      `color-mix(in oklab, var(--arg-color-background) ${percent}%, transparent)`,
+    );
+    const results = checkVeilContrast(trial, foregrounds, minimum, scheme);
+    if (contrastFailures(results).length === 0) return percent;
+  }
+  return undefined;
+}
