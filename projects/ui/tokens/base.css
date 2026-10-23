@@ -22,7 +22,7 @@ html {
 
 /*
  * Fundo de imagem: a imagem desfocada (::before) e, por cima, as manchas
- * sobre o véu (::after), fixas atrás do conteúdo. A camada passa da tela
+ * cobertas pelo véu (::after), fixas atrás do conteúdo. A camada passa da tela
  * o dobro do desfoque, para a borda borrada não aparecer. O body não pode
  * ter fundo próprio, ou cobre as duas.
  */
@@ -42,8 +42,10 @@ html {
 
 :root[data-arg-background='imagem']::after {
   inset: 0;
-  background-color: var(--arg-background-veil);
-  background-image: var(--arg-background-spots);
+  /* O véu é a primeira camada: fica por cima das manchas */
+  background-image:
+    linear-gradient(var(--arg-background-veil), var(--arg-background-veil)),
+    var(--arg-background-spots);
 }
 
 body {

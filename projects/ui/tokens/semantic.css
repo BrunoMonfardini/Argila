@@ -96,14 +96,15 @@
 
 /*
  * Fundo de imagem: a imagem do produto (--arg-background-photo) desfocada numa
- * camada fixa, as manchas translúcidas por cima e o véu com a cor de fundo,
- * que garante o contraste do texto sobre qualquer imagem. As camadas ficam
- * em base.css (html::before e html::after).
+ * camada fixa, as manchas translúcidas por cima e o véu com a cor de fundo
+ * cobrindo as duas. As manchas ficam sob o véu, como parte da imagem: o
+ * contraste depende só dele. As camadas ficam em base.css (html::before e
+ * html::after).
  */
 :root[data-arg-background='imagem'] {
-  --arg-background-glow-1: color-mix(in oklab, var(--arg-color-primary) 22%, transparent);
-  --arg-background-glow-2: color-mix(in oklab, var(--arg-color-secondary) 22%, transparent);
-  --arg-background-glow-3: color-mix(in oklab, var(--arg-color-accent) 22%, transparent);
+  --arg-background-glow-1: color-mix(in oklab, var(--arg-color-primary) 45%, transparent);
+  --arg-background-glow-2: color-mix(in oklab, var(--arg-color-secondary) 45%, transparent);
+  --arg-background-glow-3: color-mix(in oklab, var(--arg-color-accent) 45%, transparent);
 }
 
 /*
@@ -340,11 +341,14 @@
   /*
    * Fundo de imagem (data-arg-background='imagem'): a imagem do produto, como
    * `url("assets/fundo.jpg")`, o desfoque dela e o véu com a cor de fundo
-   * entre a imagem e o conteúdo.
+   * entre a imagem e o conteúdo. O véu padrão vale para qualquer imagem: é o
+   * menor com que o texto da página passa sobre um pixel preto ou branco em
+   * todo design system, paleta e modo (teste de contraste). Para uma imagem
+   * conhecida, o Montar tema calcula um véu mais fino.
    */
   --arg-background-photo: none;
   --arg-background-blur: 48px;
-  --arg-background-veil: color-mix(in oklab, var(--arg-color-background) 72%, transparent);
+  --arg-background-veil: color-mix(in oklab, var(--arg-color-background) 95%, transparent);
   /*
    * Degradê da marca, da primária à secundária, para faixas e banners; o
    * texto por cima é on-primary (passa nas duas pontas).
