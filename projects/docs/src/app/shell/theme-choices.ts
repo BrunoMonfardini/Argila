@@ -148,6 +148,18 @@ export class DocThemeChoices {
     this.save();
   }
 
+  /**
+   * O tema tirado de uma imagem enviada: o modo, as cores de marca e a
+   * imagem como fundo. O véu é calculado depois, com o tema já aplicado.
+   */
+  selectImageTheme(choice: { scheme: ArgColorScheme; colors: ArgColors; image: string }): void {
+    this.theme.setColorScheme(choice.scheme);
+    this.theme.setColors(choice.colors);
+    this.theme.setBackgroundImage(choice.image);
+    this.theme.setBackground('imagem');
+    this.save();
+  }
+
   /** O fundo `imagem` sem imagem enviada usa a de exemplo do catálogo. */
   private useSampleImage(background: string | undefined): void {
     if (background === 'imagem' && !this.theme.backgroundImage()) {
