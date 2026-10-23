@@ -7,6 +7,7 @@ import {
   ArgSegment,
   ArgStyle,
   argSegmentAttributes,
+  argSegmentStyles,
 } from '@brunomonfardini/ui';
 
 /** O que a barra de tema escolheu agora: o mesmo estado do `ArgTheme`. */
@@ -21,7 +22,14 @@ export interface ThemeChoice {
   background: ArgBackgroundName;
   /** Fundo padrão do design system: não precisa ir no segmento. */
   defaultBackground: ArgBackgroundName;
+  /** Imagem do fundo `imagem` no catálogo; no código, vira o caminho no produto. */
+  backgroundImage?: string;
+  backgroundVeil?: number;
+  backgroundMotion?: boolean;
 }
+
+/** Onde a imagem do fundo fica no produto: o catálogo não sabe, então sugere este caminho. */
+export const PRODUCT_BACKGROUND_IMAGE = 'assets/fundo.jpg';
 
 /** O segmento que reproduz a escolha; campos que valem por padrão ficam de fora. */
 export function segmentOf(choice: ThemeChoice): ArgSegment {
@@ -34,6 +42,11 @@ export function segmentOf(choice: ThemeChoice): ArgSegment {
   if (Object.keys(colors).length) segment['colors'] = colors;
   if (choice.surfaceOpacity !== undefined) segment['surfaceOpacity'] = choice.surfaceOpacity;
   if (choice.background !== choice.defaultBackground) segment['background'] = choice.background;
+  if (choice.background === 'imagem' && choice.backgroundImage) {
+    segment['backgroundImage'] = PRODUCT_BACKGROUND_IMAGE;
+    if (choice.backgroundVeil !== undefined) segment['backgroundVeil'] = choice.backgroundVeil;
+  }
+  if (choice.backgroundMotion) segment['backgroundMotion'] = true;
   return segment as ArgSegment;
 }
 
@@ -68,6 +81,9 @@ export function htmlCode(segment: ArgSegment): string {
     .map(([name, value]) => `${name}="${value}"`)
     .join(' ');
   const html = `<html ${attributes}>`;
-  if (segment.surfaceOpacity === undefined) return html;
-  return `${html}\n\n<!-- No CSS do produto -->\n<style>\n  :root {\n    --arg-surface-opacity: ${segment.surfaceOpacity};\n  }\n</style>`;
+  const styles = Object.entries(argSegmentStyles(segment))
+    .map(([name, value]) => `    ${name}: ${value};`)
+    .join('\n');
+  if (!styles) return html;
+  return `${html}\n\n<!-- No CSS do produto -->\n<style>\n  :root {\n${styles}\n  }\n</style>`;
 }

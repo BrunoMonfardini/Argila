@@ -64,6 +64,9 @@ export class ThemeBuilderPage {
       surfaceOpacity: this.theme.surfaceOpacity(),
       background: this.theme.background(),
       defaultBackground: this.theme.backgrounds()[0],
+      backgroundImage: this.theme.backgroundImage(),
+      backgroundVeil: this.theme.backgroundVeil(),
+      backgroundMotion: this.theme.backgroundMotion(),
     }),
   );
   protected readonly segment = computed(() => segmentCode(this.current()));

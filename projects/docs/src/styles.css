@@ -1,12 +1,8 @@
 /*
  * Estilos globais do catálogo. Só tokens do Argila: o catálogo é o primeiro
- * cliente do design system.
+ * cliente do design system. O fundo da página vem do base.css, no <html>: o
+ * body não pinta fundo, ou cobriria o fundo de imagem.
  */
-body {
-  background: var(--arg-color-background);
-  background-image: var(--arg-background-image);
-  background-attachment: fixed;
-}
 
 h1,
 h2,
