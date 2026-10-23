@@ -102,6 +102,13 @@ Exemplo: uma input `pill` no Tag.
 | As cores de marca da lista fixa               | `projects/ui/src/lib/design-systems/colors.ts`, depois `npm run colors`      |
 | O fundo em degradê (manchas e força)          | `--arg-color-background-tint-*` e `--arg-background-image` no `semantic.css` |
 | Os fundos que um DS aceita                    | `fundos` no `ds.ts` do DS (sem o campo, só o liso)                           |
+| O desfoque do fundo de imagem                 | `--arg-background-blur` no `semantic.css`                                    |
+| A força das manchas sobre a imagem            | `--arg-background-glow-*` no `semantic.css` (ficam sob o véu)                |
+| O véu padrão do fundo de imagem               | `--arg-background-veil` no `semantic.css`: veja abaixo                       |
+| O movimento das manchas                       | `@keyframes arg-background-drift` no `semantic.css`                          |
+| As camadas do fundo de imagem                 | `html::before` (imagem) e `html::after` (manchas e véu) no `base.css`        |
+
+O véu padrão é o menor com que `text`, `text-muted` e `text-link` passam sobre um pixel preto ou branco puro em todo DS que aceita o fundo `imagem`. Mudou uma cor de texto ou de fundo? O teste "contraste sobre o fundo de imagem" diz, quando falha, a opacidade mínima que o véu precisa (`veilMinimo`): ponha esse valor no token.
 
 Depois rode `npm run test`: o teste de contraste confere cada par de cores em cada DS × paleta × modo e diz qual par caiu abaixo de 4,5:1. A página **Fundação** do catálogo mostra os valores de agora de cada token.
 
