@@ -27,12 +27,98 @@
   color-scheme: light dark;
 }
 
+/*
+ * Posição de cada mancha do degradê. Registradas para poderem ser animadas
+ * (data-arg-background-motion); paradas, ficam nos valores iniciais.
+ */
+@property --arg-background-spot-1-x {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 12%;
+}
+@property --arg-background-spot-1-y {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 8%;
+}
+@property --arg-background-spot-2-x {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 88%;
+}
+@property --arg-background-spot-2-y {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 12%;
+}
+@property --arg-background-spot-3-x {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 50%;
+}
+@property --arg-background-spot-3-y {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 105%;
+}
+
 /* Fundo em degradê: quente em cima (primária e secundária), destaque embaixo */
 :root[data-arg-background='degrade'] {
   --arg-background-image:
-    radial-gradient(60% 55% at 12% 8%, var(--arg-color-background-tint-1), transparent 70%),
-    radial-gradient(55% 50% at 88% 12%, var(--arg-color-background-tint-2), transparent 70%),
-    radial-gradient(80% 60% at 50% 105%, var(--arg-color-background-tint-3), transparent 70%);
+    radial-gradient(
+      60% 55% at var(--arg-background-spot-1-x, 12%) var(--arg-background-spot-1-y, 8%),
+      var(--arg-color-background-tint-1),
+      transparent 70%
+    ),
+    radial-gradient(
+      55% 50% at var(--arg-background-spot-2-x, 88%) var(--arg-background-spot-2-y, 12%),
+      var(--arg-color-background-tint-2),
+      transparent 70%
+    ),
+    radial-gradient(
+      80% 60% at var(--arg-background-spot-3-x, 50%) var(--arg-background-spot-3-y, 105%),
+      var(--arg-color-background-tint-3),
+      transparent 70%
+    );
+}
+
+/*
+ * Fundo em movimento: as manchas passeiam devagar pela página, num ciclo de
+ * 30 s que volta ao ponto de partida. Só a posição muda; as cores e o
+ * contraste são os do degradê parado.
+ */
+@keyframes arg-background-drift {
+  0%,
+  100% {
+    --arg-background-spot-1-x: 12%;
+    --arg-background-spot-1-y: 8%;
+    --arg-background-spot-2-x: 88%;
+    --arg-background-spot-2-y: 12%;
+    --arg-background-spot-3-x: 50%;
+    --arg-background-spot-3-y: 105%;
+  }
+  33% {
+    --arg-background-spot-1-x: 30%;
+    --arg-background-spot-1-y: 22%;
+    --arg-background-spot-2-x: 70%;
+    --arg-background-spot-2-y: 4%;
+    --arg-background-spot-3-x: 28%;
+    --arg-background-spot-3-y: 95%;
+  }
+  66% {
+    --arg-background-spot-1-x: 6%;
+    --arg-background-spot-1-y: 30%;
+    --arg-background-spot-2-x: 94%;
+    --arg-background-spot-2-y: 28%;
+    --arg-background-spot-3-x: 72%;
+    --arg-background-spot-3-y: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-arg-background-motion] {
+    animation: arg-background-drift 30s ease-in-out infinite;
+  }
 }
 
 :root {
