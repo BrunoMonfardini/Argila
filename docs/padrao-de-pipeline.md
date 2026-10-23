@@ -263,10 +263,10 @@ on:
   push:
     branches: [main]
 
-# Um novo push na mesma branch cancela a execução anterior
+# Um novo push no mesmo PR cancela a execução anterior; push na main nunca é cancelado
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 # Menor permissão possível para o token do workflow
 permissions:
@@ -333,6 +333,7 @@ jobs:
 
 - **`--frozen-lockfile` sempre.** Se o CI reclamar do lockfile, rode `pnpm install` localmente e faça commit do `pnpm-lock.yaml`. Nunca troque para `--no-frozen-lockfile`.
 - **Versões fixas:** Node pelo `.nvmrc`, pnpm pelo campo `packageManager`. Ninguém instala "a última".
+- **Actions fixadas pelo commit:** `uses: actions/checkout@<sha> # v7.0.1`, nunca só a tag (`@v7`), que pode ser movida para outro código. O comentário diz a versão; o Dependabot atualiza os dois juntos. O esqueleto acima usa as tags só para ficar legível.
 - **Nada de `continue-on-error`** nem step comentado para "destravar" o PR. Check vermelho se corrige, não se desliga.
 - **Tempo:** o `verify` deve terminar em menos de 10 minutos. Passou disso, investigue cache e paralelização.
 - **Dados externos do evento** (título, corpo, nome da branch) só entram em comandos por `env:`, para evitar injeção de código.
@@ -455,7 +456,9 @@ A `main` é protegida por um **ruleset** no GitHub. O arquivo fica versionado em
 Complementos no repositório:
 
 - **Settings → General → Pull Requests:** deixe marcado só "Allow rebase merging" e marque "Automatically delete head branches".
-- **`.github/dependabot.yml`:** atualização semanal de dependências npm (agrupadas por família) e mensal das actions.
+- **`.github/dependabot.yml`:** atualização semanal de dependências npm (agrupadas por família) e mensal das actions, com no máximo 5 PRs abertos de cada.
+- **`.github/CODEOWNERS`:** o dono do repositório recebe o pedido de review de todo PR, e o de `.github/` em especial.
+- **`.github/workflows/secret-scan.yml`:** gitleaks nos PRs e na `main` (só os commits novos) e, toda semana ou sob demanda, no histórico completo.
 - **`.github/pull_request_template.md`:** seções "O que muda", "Como testar" e o checklist da seção 11.
 
 ---
@@ -526,6 +529,7 @@ module.exports = {
 - Segredos de CI ficam em **Environments do GitHub** (`staging`, `production`), não em segredos gerais do repositório, para que só o job daquele ambiente os veja.
 - `permissions: contents: read` em todo workflow; aumente só no job que precisa e só a permissão necessária.
 - **Dependabot** ativo e **Secret scanning com push protection** ligado (Settings → Code security).
+- **Varredura de segredos no CI** (`secret-scan.yml`, com gitleaks): pega o que escapou do push protection, inclusive no histórico antigo.
 - PR de dependência passa pelo mesmo CI. Atualização major é revisada como qualquer mudança de código.
 - Chave `service_role` do Supabase só em Edge Functions e na esteira, nunca no front.
 
