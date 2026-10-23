@@ -20,6 +20,32 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/*
+ * Fundo de imagem: a imagem desfocada (::before) e, por cima, as manchas
+ * sobre o véu (::after), fixas atrás do conteúdo. A camada passa da tela
+ * o dobro do desfoque, para a borda borrada não aparecer. O body não pode
+ * ter fundo próprio, ou cobre as duas.
+ */
+:root[data-arg-background='imagem']::before,
+:root[data-arg-background='imagem']::after {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+}
+
+:root[data-arg-background='imagem']::before {
+  inset: calc(var(--arg-background-blur) * -2);
+  background: var(--arg-background-photo) center / cover no-repeat;
+  filter: blur(var(--arg-background-blur));
+}
+
+:root[data-arg-background='imagem']::after {
+  inset: 0;
+  background-color: var(--arg-background-veil);
+  background-image: var(--arg-background-spots);
+}
+
 body {
   margin: 0;
 }
