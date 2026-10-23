@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import {
   checkContrast,
+  checkVeilContrast,
   composite,
   contrastFailures,
   contrastRatio,
@@ -8,6 +9,7 @@ import {
   luminance,
   matchesRoot,
   mergeTokens,
+  minimumVeil,
   mixOklab,
   parseTokenBlocks,
   resolveColor,
@@ -243,5 +245,55 @@ describe('checkContrast e contrastFailures', () => {
 
     // Branco a 10% sobre preto fica quase preto: o cinza contrasta pouco
     expect(result.ratio).toBeLessThan(4.5);
+  });
+});
+
+describe('fundo de imagem', () => {
+  const veilTokens = (veil: string) =>
+    new Map([
+      ['--arg-color-background', '#ffffff'],
+      ['--arg-color-text', '#222222'],
+      ['--arg-background-veil', veil],
+    ]);
+
+  it('confere cada texto sobre o véu em preto e em branco', () => {
+    const results = checkVeilContrast(veilTokens('#ffffff'), ['--arg-color-text'], 4.5, 'light');
+
+    expect(results.map((r) => r.background)).toEqual([
+      '--arg-background-veil sobre #000',
+      '--arg-background-veil sobre #fff',
+    ]);
+    // Véu opaco: o pixel por baixo não importa
+    expect(results[0].ratio).toBe(results[1].ratio);
+  });
+
+  it('um véu fino demais falha sobre o pixel preto', () => {
+    const thin = 'color-mix(in oklab, var(--arg-color-background) 20%, transparent)';
+    const failures = contrastFailures(
+      checkVeilContrast(veilTokens(thin), ['--arg-color-text'], 4.5, 'light'),
+    );
+
+    expect(failures[0]).toMatch(
+      /^light: --arg-color-text sobre --arg-background-veil sobre #000 = /,
+    );
+  });
+
+  it('acha a menor opacidade do véu que passa', () => {
+    const tokens = veilTokens('transparent');
+    const percent = minimumVeil(tokens, ['--arg-color-text'], 4.5, 'light')!;
+    const at = (p: number) =>
+      new Map(tokens).set(
+        '--arg-background-veil',
+        `color-mix(in oklab, var(--arg-color-background) ${p}%, transparent)`,
+      );
+
+    expect(percent).toBeGreaterThan(0);
+    expect(
+      contrastFailures(checkVeilContrast(at(percent), ['--arg-color-text'], 4.5, 'light')),
+    ).toEqual([]);
+    expect(
+      contrastFailures(checkVeilContrast(at(percent - 1), ['--arg-color-text'], 4.5, 'light')),
+    ).not.toEqual([]);
+    expect(minimumVeil(tokens, ['--arg-color-text'], 30, 'light')).toBeUndefined();
   });
 });
