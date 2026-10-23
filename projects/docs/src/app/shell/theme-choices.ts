@@ -150,12 +150,14 @@ export class DocThemeChoices {
 
   /**
    * O tema tirado de uma imagem enviada: o modo, as cores de marca e a
-   * imagem como fundo. O véu é calculado depois, com o tema já aplicado.
+   * imagem como fundo, com o véu calculado pelo ArgTheme.
    */
   selectImageTheme(choice: { scheme: ArgColorScheme; colors: ArgColors; image: string }): void {
     this.theme.setColorScheme(choice.scheme);
     this.theme.setColors(choice.colors);
     this.theme.setBackgroundImage(choice.image);
+    // O véu fica com o ArgTheme, que o calcula para a imagem nova
+    this.theme.clearBackgroundVeil();
     this.theme.setBackground('imagem');
     this.save();
   }

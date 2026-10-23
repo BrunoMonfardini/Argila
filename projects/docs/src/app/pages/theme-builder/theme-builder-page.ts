@@ -76,7 +76,8 @@ export class ThemeBuilderPage {
       background: this.theme.background(),
       defaultBackground: this.theme.backgrounds()[0],
       backgroundImage: this.theme.backgroundImage(),
-      backgroundVeil: this.theme.backgroundVeil(),
+      // O véu calculado não vai para o código: no produto, o ArgTheme calcula de novo
+      backgroundVeil: this.theme.backgroundVeilFixed() ? this.theme.backgroundVeil() : undefined,
       backgroundMotion: this.theme.backgroundMotion(),
     }),
   );

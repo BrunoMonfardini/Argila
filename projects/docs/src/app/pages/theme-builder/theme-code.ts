@@ -34,7 +34,7 @@ export const PRODUCT_BACKGROUND_IMAGE = 'assets/fundo.jpg';
 /** Comentários do código copiado, nos campos que dependem da imagem do produto. */
 const FIELD_COMMENTS: Partial<Record<string, string>> = {
   backgroundImage: 'Troque pelo caminho da sua imagem',
-  backgroundVeil: 'Calculado para a imagem enviada; com outra imagem, calcule de novo',
+  backgroundVeil: 'Véu fixado: sem esta linha, o ArgTheme calcula o véu para a imagem',
 };
 
 /** O segmento que reproduz a escolha; campos que valem por padrão ficam de fora. */

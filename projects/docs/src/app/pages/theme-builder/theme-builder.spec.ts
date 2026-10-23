@@ -84,7 +84,7 @@ describe('Montar tema', () => {
     });
     expect(segmentCode(segment)).toContain(`      // Troque pelo caminho da sua imagem
       backgroundImage: 'assets/fundo.jpg',
-      // Calculado para a imagem enviada; com outra imagem, calcule de novo
+      // Véu fixado: sem esta linha, o ArgTheme calcula o véu para a imagem
       backgroundVeil: 0.55,`);
     expect(segmentCode(segment)).not.toContain('blob:');
     expect(htmlCode(segment)).toContain('data-arg-background-motion=""');

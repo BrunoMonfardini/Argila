@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { ArgTheme, provideArgila } from '@brunomonfardini/ui';
+import { ARG_VEIL_MEASURER, ArgTheme, provideArgila } from '@brunomonfardini/ui';
 import { DOC_IMAGE_READER, type DocImageReader } from './image-reader';
 import { DocImageTheme } from './image-theme';
 
@@ -20,6 +20,10 @@ describe('Montar tema a partir de uma imagem', () => {
       pixels: jest.fn(async () => blueImage()),
       url: jest.fn(() => 'blob:http://localhost/imagem'),
       release: jest.fn(),
+    };
+    // O véu é do ArgTheme: a medição da imagem e das cores do tema é simulada
+    const measurer = {
+      imagePixels: jest.fn(async () => blueImage()),
       themeColors: jest.fn(() => ({
         background: [17, 17, 17] as const,
         texts: [[238, 238, 238] as const],
@@ -31,6 +35,7 @@ describe('Montar tema a partir de uma imagem', () => {
         provideRouter([]),
         provideArgila({}),
         { provide: DOC_IMAGE_READER, useValue: reader },
+        { provide: ARG_VEIL_MEASURER, useValue: measurer },
       ],
     });
     root.setAttribute('data-arg-style', 'transparente');
@@ -78,6 +83,9 @@ describe('Montar tema a partir de uma imagem', () => {
 
     element.querySelector<HTMLButtonElement>('button[variant="primary"], button')!.click();
     await fixture.whenStable();
+    // A medição do véu é assíncrona
+    for (let i = 0; i < 5; i++) await Promise.resolve();
+    await fixture.whenStable();
 
     expect(theme.colorScheme()).toBe('dark');
     expect(theme.colors().primary).toBe('anil');
@@ -85,6 +93,7 @@ describe('Montar tema a partir de uma imagem', () => {
     expect(theme.backgroundImage()).toBe('blob:http://localhost/imagem');
     // Imagem escura no modo escuro: o véu sai bem mais fino que o padrão
     expect(theme.backgroundVeil()).toBeLessThan(0.95);
+    expect(theme.backgroundVeilFixed()).toBe(false);
     expect(element.querySelector('[role="status"]')?.textContent).toContain('Véu de');
     expect(element.textContent).toContain('A imagem fica só nesta aba');
   });

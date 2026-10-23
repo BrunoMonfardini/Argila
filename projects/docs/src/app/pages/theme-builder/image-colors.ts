@@ -20,9 +20,6 @@ export interface ImagePalette {
   readonly colors: readonly ImageColor[];
   /** O modo sugerido pela luminosidade média da imagem. */
   readonly scheme: ArgSchemeName;
-  /** Os pixels mais escuro e mais claro, para o cálculo do véu. */
-  readonly darkest: string;
-  readonly lightest: string;
 }
 
 /** Grupos do k-means: mais que as três cores, para sobrar escolha. */
@@ -121,12 +118,10 @@ export function extractColors(pixels: Uint8ClampedArray): ImagePalette {
     points.push(rgbToOklab(pixels[i], pixels[i + 1], pixels[i + 2]));
   }
   if (!points.length) {
-    return { colors: [], scheme: 'light', darkest: '#000000', lightest: '#ffffff' };
+    return { colors: [], scheme: 'light' };
   }
   const lightness = points.map(([L]) => L);
   const mean = lightness.reduce((sum, L) => sum + L, 0) / points.length;
-  const darkest = points[lightness.indexOf(Math.min(...lightness))];
-  const lightest = points[lightness.indexOf(Math.max(...lightness))];
 
   const colors = kMeans(points, GROUPS)
     .filter(({ count }) => count > 0)
@@ -144,7 +139,5 @@ export function extractColors(pixels: Uint8ClampedArray): ImagePalette {
   return {
     colors,
     scheme: mean < DARK_BELOW ? 'dark' : 'light',
-    darkest: oklabToHex(darkest),
-    lightest: oklabToHex(lightest),
   };
 }
