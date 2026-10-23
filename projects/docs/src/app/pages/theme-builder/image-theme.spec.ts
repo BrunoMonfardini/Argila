@@ -86,6 +86,7 @@ describe('Montar tema a partir de uma imagem', () => {
     // Imagem escura no modo escuro: o véu sai bem mais fino que o padrão
     expect(theme.backgroundVeil()).toBeLessThan(0.95);
     expect(element.querySelector('[role="status"]')?.textContent).toContain('Véu de');
+    expect(element.textContent).toContain('A imagem fica só nesta aba');
   });
 
   it('num design system sem o fundo de imagem, aplica só o modo e as cores', async () => {

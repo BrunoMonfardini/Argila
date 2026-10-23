@@ -82,7 +82,11 @@ describe('Montar tema', () => {
       backgroundVeil: 0.55,
       backgroundMotion: true,
     });
-    expect(segmentCode(segment)).toContain("backgroundImage: 'assets/fundo.jpg',");
+    expect(segmentCode(segment)).toContain(`      // Troque pelo caminho da sua imagem
+      backgroundImage: 'assets/fundo.jpg',
+      // Calculado para a imagem enviada; com outra imagem, calcule de novo
+      backgroundVeil: 0.55,`);
+    expect(segmentCode(segment)).not.toContain('blob:');
     expect(htmlCode(segment)).toContain('data-arg-background-motion=""');
     expect(htmlCode(segment)).toContain('--arg-background-photo: url("assets/fundo.jpg");');
     expect(htmlCode(segment)).toContain(
