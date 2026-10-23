@@ -242,6 +242,30 @@ não leva atributo.
 theme.setBackground('degrade'); // ou data-arg-background="degrade" no <html>
 ```
 
+Fundo de imagem (Argila, CODA, Molde e Transparente): uma imagem do produto desfocada atrás da
+página, com as manchas das cores de marca por cima e um véu com a cor de fundo cobrindo as
+duas, para o texto continuar legível. As camadas ficam no `base.css`; o `body` não pode ter
+fundo próprio, ou cobre a imagem.
+
+```ts
+theme.setBackgroundImage('assets/fundo.jpg'); // antes do setBackground
+theme.setBackground('imagem');
+theme.setBackgroundVeil(0.74); // opcional: o véu calculado para esta imagem
+theme.setBackgroundMotion(true); // as manchas se movem devagar
+```
+
+O véu padrão (95%) vale para qualquer imagem: com ele, o texto passa no contraste mesmo sobre
+um pixel preto ou branco puro, mas a imagem quase some. Para uma imagem conhecida, o **Montar
+tema** do catálogo calcula o véu mínimo dela: envie a imagem, aplique e copie o segmento, que
+já traz `backgroundVeil`. Trocou a imagem, as cores ou o design system? Calcule de novo. As
+mesmas escolhas vão no segmento (`background: 'imagem'`, `backgroundImage`, `backgroundVeil`,
+`backgroundMotion`); sem Angular, `argSegmentAttributes` dá os atributos do `<html>` e
+`argSegmentStyles`, as variáveis CSS.
+
+Dicas de imagem: desfocada, ela não perde nada com pouca resolução, então use uma pequena
+(até 400 px de largura, em WebP ou JPG). O desfoque é `--arg-background-blur` (48px). O
+movimento das manchas fica parado para quem pediu movimento reduzido no sistema.
+
 Para faixas e banners, `--arg-gradient-brand` vai da primária à secundária, com
 `--arg-color-on-primary` por cima.
 
