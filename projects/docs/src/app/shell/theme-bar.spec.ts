@@ -16,6 +16,8 @@ describe('DocThemeBar', () => {
     root.removeAttribute('data-arg-style');
     root.removeAttribute('data-arg-palette');
     root.removeAttribute('data-arg-background');
+    root.removeAttribute('data-arg-background-motion');
+    root.style.removeProperty('--arg-background-photo');
     for (const role of ['primary', 'secondary', 'accent']) root.removeAttribute(`data-arg-${role}`);
     root.style.removeProperty('--arg-surface-opacity');
     root.setAttribute('data-arg-theme', 'light');
@@ -130,6 +132,25 @@ describe('DocThemeBar', () => {
     await fixture.whenStable();
     expect(root.hasAttribute('data-arg-background')).toBe(false);
     expect(fixture.nativeElement.textContent).not.toContain('Fundo');
+  });
+
+  it('o fundo imagem usa a imagem de exemplo e o interruptor liga o movimento', async () => {
+    const { fixture, select } = await setup();
+    const motion = () =>
+      Array.from<HTMLInputElement>(
+        fixture.nativeElement.querySelectorAll('input[arg-switch]'),
+      ).find((input) => input.closest('label')?.textContent?.trim() === 'Movimento')!;
+
+    choose(select('Fundo'), 'imagem');
+    await fixture.whenStable();
+    expect(root.getAttribute('data-arg-background')).toBe('imagem');
+    expect(root.style.getPropertyValue('--arg-background-photo')).toContain('exemplo.svg');
+
+    motion().checked = true;
+    motion().dispatchEvent(new Event('change'));
+    await fixture.whenStable();
+    expect(root.hasAttribute('data-arg-background-motion')).toBe(true);
+    expect(motion().getAttribute('role')).toBe('switch');
   });
 
   it('desabilita a opacidade, com o motivo, no estilo que não aceita transparência', async () => {

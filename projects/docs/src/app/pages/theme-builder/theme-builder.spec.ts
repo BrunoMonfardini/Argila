@@ -2,7 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { ArgTheme, argSegmentAttributes, provideArgila } from '@brunomonfardini/ui';
 import { provideDocRouter } from '../../app.routes';
-import { ThemeChoice, htmlCode, segmentCode, segmentOf } from './theme-code';
+import {
+  PRODUCT_BACKGROUND_IMAGE,
+  ThemeChoice,
+  htmlCode,
+  segmentCode,
+  segmentOf,
+} from './theme-code';
 
 const PUNK: ThemeChoice = {
   style: 'punk',
@@ -53,6 +59,37 @@ describe('Montar tema', () => {
     expect(htmlCode({ style: 'transparente', surfaceOpacity: 0.6 })).toContain(
       '--arg-surface-opacity: 0.6;',
     );
+  });
+
+  it('o fundo imagem leva o caminho da imagem no produto, o véu e o movimento', () => {
+    const choice: ThemeChoice = {
+      ...PUNK,
+      style: 'transparente',
+      palette: 'nativa',
+      colors: {},
+      background: 'imagem',
+      backgroundImage: 'blob:http://localhost/123',
+      backgroundVeil: 0.55,
+      backgroundMotion: true,
+    };
+    const segment = segmentOf(choice);
+
+    expect(segment).toEqual({
+      style: 'transparente',
+      scheme: 'dark',
+      background: 'imagem',
+      backgroundImage: PRODUCT_BACKGROUND_IMAGE,
+      backgroundVeil: 0.55,
+      backgroundMotion: true,
+    });
+    expect(segmentCode(segment)).toContain("backgroundImage: 'assets/fundo.jpg',");
+    expect(htmlCode(segment)).toContain('data-arg-background-motion=""');
+    expect(htmlCode(segment)).toContain('--arg-background-photo: url("assets/fundo.jpg");');
+    expect(htmlCode(segment)).toContain(
+      '--arg-background-veil: color-mix(in oklab, var(--arg-color-background) 55%, transparent);',
+    );
+    // Sem o fundo imagem, a imagem e o véu não vão para o código
+    expect(segmentOf({ ...choice, background: 'degrade' })).not.toHaveProperty('backgroundImage');
   });
 
   it('colar o segmento num produto reproduz o que se vê', () => {
