@@ -12,7 +12,7 @@ export const argila = {
   referencia: 'argila.jpg',
   modos: ['light', 'dark'],
   transparencia: true,
-  fundos: ['liso', 'degrade'],
+  fundos: ['liso', 'degrade', 'imagem'],
   paletas: ['nativa', 'terrosa', 'oceano', 'floresta', 'mono', 'alto-contraste'],
   componentes: {
     nucleoMinimo: true,

@@ -8,7 +8,7 @@ export const coda = {
     'Pixel em tudo: fonte bitmap, contornos marcados de 2px e rosa e amarelo sobre grafite.',
   modos: ['light', 'dark'],
   transparencia: false,
-  fundos: ['liso', 'degrade'],
+  fundos: ['liso', 'degrade', 'imagem'],
   paletas: ['nativa', 'viva', 'mono', 'alto-contraste'],
   fontes: { corpo: 'Silkscreen' },
   componentes: {

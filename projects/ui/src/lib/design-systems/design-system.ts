@@ -13,9 +13,11 @@ export type ArgSchemeName = 'light' | 'dark';
 
 /**
  * Fundos da página: `liso` (só a cor de fundo), `degrade` (manchas da
- * primária, da secundária e do destaque) e `linhas` (o nativo do Windows XP).
+ * primária, da secundária e do destaque), `imagem` (uma imagem do produto
+ * desfocada, com as manchas e um véu por cima) e `linhas` (o nativo do
+ * Windows XP).
  */
-export type ArgBackgroundName = 'liso' | 'degrade' | 'linhas';
+export type ArgBackgroundName = 'liso' | 'degrade' | 'imagem' | 'linhas';
 
 /** Os fundos de um DS; sem `fundos` no manifesto, só o liso. */
 export function backgroundsOf(ds: ArgDesignSystem): readonly ArgBackgroundName[] {
