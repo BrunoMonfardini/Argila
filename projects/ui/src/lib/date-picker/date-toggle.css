@@ -19,8 +19,13 @@
   pointer-events: auto;
 }
 
-/* Calendário: modal, junto do campo pelo anchor CSS; sem suporte, no centro */
+/*
+ * Calendário: modal, junto do campo pelo anchor CSS; sem suporte, no centro.
+ * Fica dentro do host, que tem pointer-events: none: sem o auto, herda o none e
+ * nenhum clique chega aos dias (o top layer não reinicia propriedades herdadas).
+ */
 .arg-date-toggle__dialog {
+  pointer-events: auto;
   margin: 0;
   padding: var(--arg-space-3);
   border: 1px solid var(--arg-color-border);
