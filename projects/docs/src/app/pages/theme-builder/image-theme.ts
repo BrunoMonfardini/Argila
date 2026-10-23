@@ -11,7 +11,6 @@ import { DocThemeChoices } from '../../shell/theme-choices';
 import { type BrandMatch, matchBrandColors } from './brand-match';
 import { type ImagePalette, extractColors } from './image-colors';
 import { DOC_IMAGE_READER } from './image-reader';
-import { minimumVeil, parseColor } from './veil';
 
 const ROLE_LABELS: Record<ArgBrandRole, string> = {
   primary: 'Primária',
@@ -94,17 +93,21 @@ interface Analysis {
       </button>
     }
 
-    @if (veil() !== undefined) {
+    @if (showingImage()) {
       <p role="status">
-        Véu de {{ veilPercent() }}%: o menor com que o texto da página passa sobre esta imagem. Ele
-        vai no segmento como <code>backgroundVeil</code>. Mudou o design system, a paleta ou as
-        cores depois? Aplique de novo para recalcular.
+        @if (veil() === undefined) {
+          Calculando o véu para esta imagem…
+        } @else {
+          Véu de {{ veilPercent() }}%: o menor com que o texto da página passa sobre esta imagem,
+          calculado pelo <code>ArgTheme</code>. Ele se recalcula sozinho quando o design system, a
+          paleta, as cores ou o modo mudam, e no produto o <code>ArgTheme</code> faz a mesma conta
+          com a sua imagem: o código não precisa levar o véu.
+        }
       </p>
       <p>
-        A imagem fica só nesta aba: o link e o código levam o modo, as cores e o véu, mas não a
-        imagem. No produto, ponha a imagem em <code>src/assets/fundo.jpg</code> ou troque o caminho
-        de <code>backgroundImage</code> no código. Ao recarregar, o catálogo volta à imagem de
-        exemplo.
+        A imagem fica só nesta aba: o link e o código levam o modo e as cores, mas não a imagem. No
+        produto, ponha a imagem em <code>src/assets/fundo.jpg</code> ou troque o caminho de
+        <code>backgroundImage</code> no código. Ao recarregar, o catálogo volta à imagem de exemplo.
       </p>
     }
   `,
@@ -158,8 +161,13 @@ export class DocImageTheme {
   protected readonly maxSize = MAX_SIZE;
   protected readonly analysis = signal<Analysis | undefined>(undefined);
   protected readonly error = signal<string | undefined>(undefined);
-  /** O véu calculado no último "Aplicar". */
-  protected readonly veil = signal<number | undefined>(undefined);
+  /** A imagem enviada está no fundo do catálogo agora? */
+  protected readonly showingImage = computed(
+    () =>
+      this.theme.background() === 'imagem' && this.theme.backgroundImage() === this.analysis()?.url,
+  );
+  /** O véu que o `ArgTheme` calculou para a imagem. */
+  protected readonly veil = this.theme.backgroundVeil;
   protected readonly veilPercent = computed(() => Math.round((this.veil() ?? 0) * 100));
   protected readonly acceptsImage = computed(() => this.theme.backgrounds().includes('imagem'));
   protected readonly dsName = computed(() => this.theme.designSystem().nome);
@@ -168,7 +176,6 @@ export class DocImageTheme {
   async analyze(files: File[]): Promise<void> {
     const file = files[0];
     this.error.set(undefined);
-    this.veil.set(undefined);
     if (!file) {
       this.analysis.set(undefined);
       return;
@@ -186,7 +193,7 @@ export class DocImageTheme {
     }
   }
 
-  /** Aplica ao catálogo e calcula o véu com o tema já aplicado. */
+  /** Aplica ao catálogo; o véu fica com o `ArgTheme`, que o calcula para a imagem. */
   apply(): void {
     const result = this.analysis();
     if (!result) return;
@@ -196,11 +203,6 @@ export class DocImageTheme {
       colors,
       image: result.url,
     });
-    if (this.theme.background() !== 'imagem') return;
-    const pixels = [result.palette.darkest, result.palette.lightest].map(parseColor);
-    const veil = minimumVeil(pixels, this.reader.themeColors());
-    this.theme.setBackgroundVeil(veil);
-    this.veil.set(veil);
   }
 
   protected roleLabel(match: BrandMatch): string {

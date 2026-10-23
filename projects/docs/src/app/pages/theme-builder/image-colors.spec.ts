@@ -48,14 +48,12 @@ describe('extrator de cores', () => {
     expect(near(colors[0].hex, '#2846c8')).toBe(true);
   });
 
-  it('sugere o modo pela luminosidade média e guarda os extremos', () => {
+  it('sugere o modo pela luminosidade média', () => {
     const dark = extractColors(stripes([11, 26, 51, 800], [31, 111, 224, 200]));
     const light = extractColors(stripes([240, 236, 228, 800], [31, 111, 224, 200]));
 
     expect(dark.scheme).toBe('dark');
     expect(light.scheme).toBe('light');
-    expect(dark.darkest).toBe('#0b1a33');
-    expect(dark.lightest).toBe('#1f6fe0');
   });
 
   it('a mesma imagem dá sempre as mesmas cores', () => {
@@ -68,8 +66,6 @@ describe('extrator de cores', () => {
     expect(extractColors(stripes([200, 40, 40, 10, 0]))).toEqual({
       colors: [],
       scheme: 'light',
-      darkest: '#000000',
-      lightest: '#ffffff',
     });
   });
 });
