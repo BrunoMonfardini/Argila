@@ -1,4 +1,4 @@
-import { DOCUMENT, Injectable, computed, inject, isDevMode, signal } from '@angular/core';
+import { DOCUMENT, Injectable, computed, effect, inject, isDevMode, signal } from '@angular/core';
 import {
   ARG_DEFAULT_STYLE,
   backgroundsOf,
@@ -19,6 +19,12 @@ import {
   type ArgBrandRole,
 } from '../design-systems/colors';
 import { ARG_ALLOWED_COLORS } from '../design-systems/colors.generated';
+import {
+  ARG_VEIL_MEASURER,
+  type ArgRgb,
+  argImageExtremes,
+  argMinimumVeil,
+} from './background-veil';
 import { ARG_SEGMENTS, argBackgroundPhoto, argBackgroundVeil } from './segments';
 
 export {
@@ -405,24 +411,91 @@ export class ArgTheme {
   }
 
   private readonly _backgroundVeil = signal<number | undefined>(undefined);
-  /** Opacidade do véu escolhida; `undefined` quando vale o véu padrão. */
+  /**
+   * Opacidade do véu aplicada: a fixada com `setBackgroundVeil` ou a calculada
+   * para a imagem; `undefined` enquanto vale o véu padrão.
+   */
   readonly backgroundVeil = this._backgroundVeil.asReadonly();
 
+  private readonly _backgroundVeilFixed = signal(false);
+  /** O véu foi fixado com `setBackgroundVeil`? Sem isso, ele é calculado para a imagem. */
+  readonly backgroundVeilFixed = this._backgroundVeilFixed.asReadonly();
+
   /**
-   * Opacidade do véu sobre a imagem, de 0 a 1 (presa aos limites). O véu
-   * padrão passa no contraste com qualquer imagem; um mais fino só vale para
-   * a imagem para a qual foi calculado (o Montar tema do catálogo calcula).
+   * Fixa a opacidade do véu sobre a imagem, de 0 a 1 (presa aos limites), no
+   * lugar da calculada. Um véu mais fino que o calculado pode deixar o texto
+   * sem contraste: o contraste fica por conta do produto.
    */
   setBackgroundVeil(opacity: number): void {
-    const value = Math.min(1, Math.max(0, opacity));
-    this.root.style.setProperty('--arg-background-veil', argBackgroundVeil(value));
+    this._backgroundVeilFixed.set(true);
+    this.applyVeil(Math.min(1, Math.max(0, opacity)));
+  }
+
+  /** Volta ao véu calculado para a imagem (ou ao padrão, sem imagem). */
+  clearBackgroundVeil(): void {
+    this._backgroundVeilFixed.set(false);
+    this.applyVeil(undefined);
+  }
+
+  private applyVeil(value: number | undefined): void {
+    if (value === undefined) this.root.style.removeProperty('--arg-background-veil');
+    else this.root.style.setProperty('--arg-background-veil', argBackgroundVeil(value));
     this._backgroundVeil.set(value);
   }
 
-  /** Volta ao véu padrão. */
-  clearBackgroundVeil(): void {
-    this.root.style.removeProperty('--arg-background-veil');
-    this._backgroundVeil.set(undefined);
+  private readonly measurer = inject(ARG_VEIL_MEASURER);
+  /** Os extremos da imagem atual: medir a imagem é caro, as cores mudam mais. */
+  private measured?: { url: string; pixels: Promise<ArgRgb[]> };
+  /** Cada cálculo tem um número; só o último aplica o resultado. */
+  private veilRun = 0;
+  /** O modo do sistema, para o modo `auto`: as cores do texto mudam com ele. */
+  private readonly systemDark = signal(false);
+
+  constructor() {
+    const query = this.root.ownerDocument.defaultView?.matchMedia?.('(prefers-color-scheme: dark)');
+    if (query) {
+      this.systemDark.set(query.matches);
+      query.addEventListener('change', (event) => this.systemDark.set(event.matches));
+    }
+  }
+
+  /**
+   * Véu automático: com o fundo `imagem` e sem véu fixado, mede a imagem e
+   * aplica o menor véu com que o texto da página passa sobre ela. Trocar a
+   * imagem, o design system, a paleta, as cores ou o modo recalcula. Se a
+   * imagem não puder ser lida, fica o véu padrão, que vale para qualquer uma.
+   */
+  private readonly autoVeil = effect(() => {
+    const url = this._backgroundImage();
+    const fixed = this._backgroundVeilFixed();
+    const active = !fixed && this._background() === 'imagem' && url !== undefined;
+    // As cores do texto e das manchas entram na conta: mudou alguma, recalcula
+    this._style();
+    this._palette();
+    this._colorScheme();
+    this._colors();
+    this.systemDark();
+    const run = ++this.veilRun;
+    if (active) void this.measureVeil(url, run);
+    else if (!fixed) this.applyVeil(undefined);
+  });
+
+  private async measureVeil(url: string, run: number): Promise<void> {
+    try {
+      if (this.measured?.url !== url) {
+        this.measured = { url, pixels: this.measurer.imagePixels(url).then(argImageExtremes) };
+      }
+      const pixels = await this.measured.pixels;
+      if (run !== this.veilRun || !pixels.length) return;
+      this.applyVeil(argMinimumVeil(pixels, this.measurer.themeColors()));
+    } catch {
+      this.measured = undefined;
+      if (run !== this.veilRun) return;
+      warn(
+        `não deu para medir a imagem "${url}" (de outra origem sem CORS?); o véu fica no padrão, que vale para qualquer imagem.`,
+      );
+      this.applyVeil(undefined);
+    }
   }
 
   private readonly _backgroundMotion = signal(this.root.hasAttribute('data-arg-background-motion'));

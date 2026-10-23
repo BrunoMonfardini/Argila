@@ -49,6 +49,7 @@ export * from './lib/design-systems/windows-xp/exclusivos/xp-window/xp-window';
 export * from './lib/design-systems/windows-xp/exclusivos/xp-balloon/xp-balloon';
 export * from './lib/theme/theme';
 export * from './lib/theme/segments';
+export * from './lib/theme/background-veil';
 export * from './lib/design-systems/oklab';
 export * from './lib/theme/provide-argila';
 export * from './lib/time-slots/time-slots';
