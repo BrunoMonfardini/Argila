@@ -9,6 +9,13 @@ import {
   ArgBrandColor,
   ArgTheme,
 } from './theme';
+import {
+  ARG_VEIL_MEASURER,
+  type ArgVeilColors,
+  type ArgVeilMeasurer,
+  argImageExtremes,
+  argMinimumVeil,
+} from './background-veil';
 
 describe('ArgTheme', () => {
   let theme: ArgTheme;
@@ -309,6 +316,121 @@ describe('ArgTheme', () => {
         theme.setBackgroundMotion(false);
         expect(theme.backgroundMotion()).toBe(false);
         expect(root.hasAttribute('data-arg-background-motion')).toBe(false);
+      });
+
+      describe('véu automático', () => {
+        /** Imagem escura com um ponto claro; o tema escuro tem texto claro. */
+        const IMAGE = new Uint8ClampedArray([...[10, 10, 20, 255], ...[120, 140, 200, 255]]);
+        const COLORS: ArgVeilColors = {
+          background: [17, 17, 17],
+          texts: [[238, 238, 238]],
+          spots: [],
+        };
+        let measurer: {
+          imagePixels: jest.Mock<ArgVeilMeasurer['imagePixels']>;
+          themeColors: jest.Mock<ArgVeilMeasurer['themeColors']>;
+        };
+
+        beforeEach(() => {
+          measurer = {
+            imagePixels: jest.fn(async () => IMAGE),
+            themeColors: jest.fn(() => COLORS),
+          };
+          TestBed.resetTestingModule();
+          TestBed.configureTestingModule({
+            providers: [{ provide: ARG_VEIL_MEASURER, useValue: measurer }],
+          });
+          theme = TestBed.inject(ArgTheme);
+        });
+
+        /** Roda o efeito do véu e espera a medição (assíncrona) terminar. */
+        async function settle() {
+          TestBed.tick();
+          for (let i = 0; i < 5; i++) await Promise.resolve();
+        }
+
+        const expected = argMinimumVeil(argImageExtremes(IMAGE), COLORS);
+
+        it('mede a imagem e aplica o menor véu que passa no contraste', async () => {
+          theme.setBackgroundImage('assets/fundo.jpg');
+          theme.setBackground('imagem');
+          await settle();
+
+          expect(measurer.imagePixels).toHaveBeenCalledWith('assets/fundo.jpg');
+          expect(theme.backgroundVeil()).toBe(expected);
+          expect(theme.backgroundVeilFixed()).toBe(false);
+          expect(root.style.getPropertyValue('--arg-background-veil')).toContain(
+            `${Math.round(expected * 1000) / 10}%`,
+          );
+        });
+
+        it('recalcula quando as cores mudam, sem medir a imagem de novo', async () => {
+          theme.setBackgroundImage('assets/fundo.jpg');
+          theme.setBackground('imagem');
+          await settle();
+          measurer.themeColors.mockReturnValue({ ...COLORS, texts: [[255, 255, 255]] });
+
+          theme.setColorScheme('dark');
+          await settle();
+
+          expect(measurer.imagePixels).toHaveBeenCalledTimes(1);
+          expect(measurer.themeColors).toHaveBeenCalledTimes(2);
+          expect(theme.backgroundVeil()).toBeLessThanOrEqual(expected);
+        });
+
+        it('o véu fixado vence o calculado; limpar volta ao calculado', async () => {
+          theme.setBackgroundImage('assets/fundo.jpg');
+          theme.setBackground('imagem');
+          theme.setBackgroundVeil(0.3);
+          await settle();
+
+          expect(theme.backgroundVeil()).toBe(0.3);
+          expect(theme.backgroundVeilFixed()).toBe(true);
+
+          theme.clearBackgroundVeil();
+          await settle();
+          expect(theme.backgroundVeil()).toBe(expected);
+        });
+
+        it('sem o fundo imagem, não mede nada e o véu fica no padrão', async () => {
+          theme.setBackgroundImage('assets/fundo.jpg');
+          theme.setBackground('degrade');
+          await settle();
+
+          expect(measurer.imagePixels).not.toHaveBeenCalled();
+          expect(theme.backgroundVeil()).toBeUndefined();
+        });
+
+        it('imagem que não pode ser lida fica no véu padrão, com aviso', async () => {
+          const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+          measurer.imagePixels.mockRejectedValue(new Error('tainted canvas'));
+          theme.setBackgroundImage('https://outro.site/fundo.jpg');
+          theme.setBackground('imagem');
+          await settle();
+
+          expect(theme.backgroundVeil()).toBeUndefined();
+          expect(root.style.getPropertyValue('--arg-background-veil')).toBe('');
+          expect(warn).toHaveBeenCalledWith(expect.stringContaining('não deu para medir a imagem'));
+          warn.mockRestore();
+        });
+
+        it('só o cálculo mais recente vale: trocar de imagem no meio descarta o anterior', async () => {
+          let release!: (pixels: Uint8ClampedArray) => void;
+          measurer.imagePixels.mockImplementationOnce(
+            () => new Promise((resolve) => (release = resolve)),
+          );
+          theme.setBackgroundImage('assets/lenta.jpg');
+          theme.setBackground('imagem');
+          TestBed.tick();
+          theme.setBackgroundImage('assets/rapida.jpg');
+          await settle();
+          const fast = theme.backgroundVeil();
+
+          release(new Uint8ClampedArray([255, 255, 255, 255]));
+          await settle();
+
+          expect(theme.backgroundVeil()).toBe(fast);
+        });
       });
     });
   });
