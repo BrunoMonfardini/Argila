@@ -232,6 +232,85 @@ describe('ArgTheme', () => {
       TestBed.resetTestingModule();
       expect(TestBed.inject(ArgTheme).background()).toBe('liso');
     });
+
+    describe('fundo de imagem', () => {
+      afterEach(() => {
+        theme.setBackgroundImage(undefined);
+        theme.clearBackgroundVeil();
+        theme.setBackgroundMotion(false);
+      });
+
+      it('aplica a imagem e o fundo imagem', () => {
+        theme.setBackgroundImage('assets/fundo.jpg');
+        theme.setBackground('imagem');
+
+        expect(theme.backgroundImage()).toBe('assets/fundo.jpg');
+        expect(theme.background()).toBe('imagem');
+        expect(root.getAttribute('data-arg-background')).toBe('imagem');
+        expect(root.style.getPropertyValue('--arg-background-photo')).toBe(
+          'url("assets/fundo.jpg")',
+        );
+      });
+
+      it('escapa aspas e barras da URL e tira quebras de linha', () => {
+        theme.setBackgroundImage('a"b\\c\nd.jpg');
+
+        expect(root.style.getPropertyValue('--arg-background-photo')).toBe(
+          'url("a\\"b\\\\cd.jpg")',
+        );
+      });
+
+      it('sem imagem, o fundo imagem vira o degradê, com aviso', () => {
+        theme.setBackground('imagem');
+
+        expect(theme.background()).toBe('degrade');
+        expect(warn).toHaveBeenCalledWith(expect.stringContaining('precisa de setBackgroundImage'));
+      });
+
+      it('tirar a imagem de um fundo imagem volta ao degradê', () => {
+        theme.setBackgroundImage('assets/fundo.jpg');
+        theme.setBackground('imagem');
+
+        theme.setBackgroundImage(undefined);
+
+        expect(theme.background()).toBe('degrade');
+        expect(root.style.getPropertyValue('--arg-background-photo')).toBe('');
+      });
+
+      it('um design system sem o fundo imagem volta ao padrão dele', () => {
+        theme.setBackgroundImage('assets/fundo.jpg');
+        theme.setBackground('imagem');
+
+        theme.setStyle('punk');
+
+        expect(theme.background()).toBe('liso');
+      });
+
+      it('aplica o véu em porcentagem, preso entre 0 e 1, e volta ao padrão', () => {
+        theme.setBackgroundVeil(0.555);
+        expect(theme.backgroundVeil()).toBe(0.555);
+        expect(root.style.getPropertyValue('--arg-background-veil')).toBe(
+          'color-mix(in oklab, var(--arg-color-background) 55.5%, transparent)',
+        );
+
+        theme.setBackgroundVeil(2);
+        expect(theme.backgroundVeil()).toBe(1);
+
+        theme.clearBackgroundVeil();
+        expect(theme.backgroundVeil()).toBeUndefined();
+        expect(root.style.getPropertyValue('--arg-background-veil')).toBe('');
+      });
+
+      it('liga e desliga o movimento', () => {
+        theme.setBackgroundMotion(true);
+        expect(theme.backgroundMotion()).toBe(true);
+        expect(root.hasAttribute('data-arg-background-motion')).toBe(true);
+
+        theme.setBackgroundMotion(false);
+        expect(theme.backgroundMotion()).toBe(false);
+        expect(root.hasAttribute('data-arg-background-motion')).toBe(false);
+      });
+    });
   });
 
   describe('cores de marca da lista fixa', () => {
