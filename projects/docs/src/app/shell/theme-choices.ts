@@ -27,6 +27,10 @@ export const OPACITY_KEY = 'argila-docs:opacidade';
 export const COLORS_KEY = 'argila-docs:cores';
 export const SEGMENT_KEY = 'argila-docs:segmento';
 export const BACKGROUND_KEY = 'argila-docs:fundo';
+export const MOTION_KEY = 'argila-docs:movimento';
+
+/** A imagem do fundo `imagem` no catálogo, enquanto ninguém enviar outra. */
+export const DOC_SAMPLE_BACKGROUND = '/fundos/exemplo.svg';
 
 /** Nomes das escolhas na URL: `?ds=punk&paleta=viva&modo=dark`. */
 export const THEME_PARAMS = {
@@ -35,6 +39,7 @@ export const THEME_PARAMS = {
   scheme: 'modo',
   opacity: 'opacidade',
   background: 'fundo',
+  motion: 'movimento',
   segment: 'segmento',
 } as const;
 
@@ -130,10 +135,24 @@ export class DocThemeChoices {
     this.save();
   }
 
-  /** Fundo da página: liso, degradê ou o nativo do DS. */
+  /** Fundo da página: liso, degradê, imagem ou o nativo do DS. */
   selectBackground(background: ArgBackgroundName): void {
+    this.useSampleImage(background);
     this.theme.setBackground(background);
     this.save();
+  }
+
+  /** As manchas do degradê e da imagem se movem. */
+  selectMotion(on: boolean): void {
+    this.theme.setBackgroundMotion(on);
+    this.save();
+  }
+
+  /** O fundo `imagem` sem imagem enviada usa a de exemplo do catálogo. */
+  private useSampleImage(background: string | undefined): void {
+    if (background === 'imagem' && !this.theme.backgroundImage()) {
+      this.theme.setBackgroundImage(DOC_SAMPLE_BACKGROUND);
+    }
   }
 
   /** Cor de marca de um papel; `undefined` volta à cor da paleta. */
@@ -163,6 +182,8 @@ export class DocThemeChoices {
     if (opacity) raw.opacidade = opacity;
     const background = readText(BACKGROUND_KEY);
     if (background) raw.fundo = background;
+    const motion = readText(MOTION_KEY);
+    if (motion) raw.movimento = motion;
     const segment = readText(SEGMENT_KEY);
     if (segment) raw.segmento = segment;
     for (const pair of (readText(COLORS_KEY) ?? '').split(',')) {
@@ -237,6 +258,8 @@ export class DocThemeChoices {
     if (raw.fundo && !backgrounds.includes(raw.fundo)) {
       problems.push(`O ${ds.nome} não aceita o fundo “${raw.fundo}”; usamos o liso.`);
     }
+    this.useSampleImage(raw.fundo);
+    this.theme.setBackgroundMotion(raw.movimento === '1');
     this.theme.setBackground(
       (raw.fundo && backgrounds.includes(raw.fundo)
         ? raw.fundo
@@ -273,6 +296,7 @@ export class DocThemeChoices {
     if (this.theme.background() !== this.theme.backgrounds()[0]) {
       params[THEME_PARAMS.background] = this.theme.background();
     }
+    if (this.theme.backgroundMotion()) params[THEME_PARAMS.motion] = '1';
     for (const role of ARG_BRAND_ROLES) {
       const color = this.theme.colors()[role];
       if (color) params[COLOR_PARAMS[role]] = color;
@@ -293,6 +317,7 @@ export class DocThemeChoices {
       BACKGROUND_KEY,
       this.theme.background() === this.theme.backgrounds()[0] ? '' : this.theme.background(),
     );
+    writePreference(MOTION_KEY, this.theme.backgroundMotion() ? '1' : '');
     writePreference(
       COLORS_KEY,
       ARG_BRAND_ROLES.flatMap((role) => {

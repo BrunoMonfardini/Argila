@@ -11,10 +11,12 @@ import {
   ArgBrandColor,
   ArgBrandRole,
   ArgButton,
+  ArgChoice,
   ArgColorScheme,
   ArgPalette,
   ArgSelect,
   ArgStyle,
+  ArgSwitch,
   ArgTheme,
 } from '@brunomonfardini/ui';
 import { DOC_SEGMENT_LABELS } from '../segments';
@@ -71,7 +73,7 @@ const MIN_OPACITY = ARG_MIN_SURFACE_OPACITY * 100;
  */
 @Component({
   selector: 'doc-theme-bar',
-  imports: [ArgButton, ArgSelect],
+  imports: [ArgButton, ArgChoice, ArgSelect, ArgSwitch],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './theme-bar.html',
   styleUrl: './theme-bar.css',
@@ -93,6 +95,7 @@ export class DocThemeBar {
     this.theme.backgrounds().map((value) => ({ value, label: BACKGROUND_LABELS[value] })),
   );
   protected readonly background = this.theme.background;
+  protected readonly motion = this.theme.backgroundMotion;
   /** Por papel, só as cores da lista fixa que passam no contraste no DS e na paleta atuais. */
   protected readonly colorOptions = computed(() => {
     const allowed = this.theme.allowedColors();
@@ -151,6 +154,10 @@ export class DocThemeBar {
 
   protected selectBackground(event: Event): void {
     this.choices.selectBackground(value(event) as ArgBackgroundName);
+  }
+
+  protected selectMotion(event: Event): void {
+    this.choices.selectMotion((event.target as HTMLInputElement).checked);
   }
 
   protected selectColor(role: ArgBrandRole, event: Event): void {

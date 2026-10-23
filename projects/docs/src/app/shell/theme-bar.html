@@ -53,6 +53,10 @@
       }
     </select>
   </label>
+  <label arg-choice class="doc-theme-bar__field">
+    <input type="checkbox" arg-switch [checked]="motion()" (change)="selectMotion($event)" />
+    Movimento
+  </label>
 }
 
 <details class="doc-theme-bar__colors">
