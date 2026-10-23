@@ -100,6 +100,12 @@ interface Analysis {
         vai no segmento como <code>backgroundVeil</code>. Mudou o design system, a paleta ou as
         cores depois? Aplique de novo para recalcular.
       </p>
+      <p>
+        A imagem fica só nesta aba: o link e o código levam o modo, as cores e o véu, mas não a
+        imagem. No produto, ponha a imagem em <code>src/assets/fundo.jpg</code> ou troque o caminho
+        de <code>backgroundImage</code> no código. Ao recarregar, o catálogo volta à imagem de
+        exemplo.
+      </p>
     }
   `,
   styles: `
