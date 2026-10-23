@@ -19,7 +19,7 @@ import {
   type ArgBrandRole,
 } from '../design-systems/colors';
 import { ARG_ALLOWED_COLORS } from '../design-systems/colors.generated';
-import { ARG_SEGMENTS } from './segments';
+import { ARG_SEGMENTS, argBackgroundPhoto, argBackgroundVeil } from './segments';
 
 export {
   ARG_BRAND_COLORS,
@@ -250,14 +250,20 @@ export class ArgTheme {
    * Troca o fundo da página. Um fundo que o design system atual não aceita
    * vira o padrão dele, com aviso em desenvolvimento. O padrão do DS tira o
    * atributo (o CSS do DS já o aplica); os outros vão em `data-arg-background`.
+   * O `imagem` precisa de `setBackgroundImage` antes; sem imagem, vira o
+   * `degrade`, também com aviso.
    */
   setBackground(background: ArgBackgroundName): void {
     const accepted = this.backgrounds();
-    const value = accepted.includes(background) ? background : accepted[0];
+    let value = accepted.includes(background) ? background : accepted[0];
     if (value !== background) {
       warn(
         `o design system "${this._style()}" não aceita o fundo "${background}"; usando "${value}".`,
       );
+    }
+    if (value === 'imagem' && !this._backgroundImage()) {
+      warn('o fundo "imagem" precisa de setBackgroundImage antes; usando "degrade".');
+      value = 'degrade';
     }
     if (value === accepted[0]) this.root.removeAttribute('data-arg-background');
     else this.root.setAttribute('data-arg-background', value);
@@ -330,6 +336,11 @@ export class ArgTheme {
     this.setColorScheme(segment.scheme ?? this._colorScheme());
     if (segment.surfaceOpacity === undefined) this.clearSurfaceOpacity();
     else this.setSurfaceOpacity(segment.surfaceOpacity);
+    // A imagem antes do fundo: o 'imagem' sem imagem vira o degradê
+    this.setBackgroundImage(segment.backgroundImage);
+    if (segment.backgroundVeil === undefined) this.clearBackgroundVeil();
+    else this.setBackgroundVeil(segment.backgroundVeil);
+    this.setBackgroundMotion(segment.backgroundMotion ?? false);
     this.setBackground(segment.background ?? this.backgrounds()[0]);
     this.setColors(segment.colors ?? {});
     this.root.setAttribute('data-arg-segment', name);
@@ -375,5 +386,57 @@ export class ArgTheme {
   clearSurfaceOpacity(): void {
     this.root.style.removeProperty('--arg-surface-opacity');
     this._surfaceOpacity.set(undefined);
+  }
+
+  private readonly _backgroundImage = signal<string | undefined>(undefined);
+  /** Imagem do fundo `imagem`; `undefined` sem imagem. */
+  readonly backgroundImage = this._backgroundImage.asReadonly();
+
+  /**
+   * Imagem do fundo `imagem`, como `'assets/fundo.jpg'`, em
+   * `--arg-background-photo`. Sem URL, tira a imagem; se o fundo era o
+   * `imagem`, ele vira o `degrade`.
+   */
+  setBackgroundImage(url: string | undefined): void {
+    if (url) this.root.style.setProperty('--arg-background-photo', argBackgroundPhoto(url));
+    else this.root.style.removeProperty('--arg-background-photo');
+    this._backgroundImage.set(url || undefined);
+    if (!url && this._background() === 'imagem') this.setBackground('degrade');
+  }
+
+  private readonly _backgroundVeil = signal<number | undefined>(undefined);
+  /** Opacidade do véu escolhida; `undefined` quando vale o véu padrão. */
+  readonly backgroundVeil = this._backgroundVeil.asReadonly();
+
+  /**
+   * Opacidade do véu sobre a imagem, de 0 a 1 (presa aos limites). O véu
+   * padrão passa no contraste com qualquer imagem; um mais fino só vale para
+   * a imagem para a qual foi calculado (o Montar tema do catálogo calcula).
+   */
+  setBackgroundVeil(opacity: number): void {
+    const value = Math.min(1, Math.max(0, opacity));
+    this.root.style.setProperty('--arg-background-veil', argBackgroundVeil(value));
+    this._backgroundVeil.set(value);
+  }
+
+  /** Volta ao véu padrão. */
+  clearBackgroundVeil(): void {
+    this.root.style.removeProperty('--arg-background-veil');
+    this._backgroundVeil.set(undefined);
+  }
+
+  private readonly _backgroundMotion = signal(this.root.hasAttribute('data-arg-background-motion'));
+  /** As manchas do fundo se movem? */
+  readonly backgroundMotion = this._backgroundMotion.asReadonly();
+
+  /**
+   * Liga ou desliga o movimento das manchas do `degrade` e do `imagem`
+   * (`data-arg-background-motion`). Com movimento reduzido no sistema, elas
+   * ficam paradas de qualquer jeito.
+   */
+  setBackgroundMotion(on: boolean): void {
+    if (on) this.root.setAttribute('data-arg-background-motion', '');
+    else this.root.removeAttribute('data-arg-background-motion');
+    this._backgroundMotion.set(on);
   }
 }

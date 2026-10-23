@@ -51,6 +51,7 @@ const PALETTES: Option<ArgPalette>[] = ARG_PALETTES.map((value) => ({
 const BACKGROUND_LABELS: Record<ArgBackgroundName, string> = {
   liso: 'Liso',
   degrade: 'Degradê',
+  imagem: 'Imagem',
   linhas: 'Linhas',
 };
 

@@ -9,7 +9,7 @@ export const transparente = {
   referencia: 'transparente.jpg',
   modos: ['light', 'dark'],
   transparencia: true,
-  fundos: ['liso', 'degrade'],
+  fundos: ['liso', 'degrade', 'imagem'],
   paletas: ['nativa', 'oceano', 'terrosa', 'mono'],
   componentes: {
     nucleoMinimo: true,
