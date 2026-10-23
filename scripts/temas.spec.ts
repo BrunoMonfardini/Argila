@@ -259,3 +259,29 @@ describe('tokens dos componentes', () => {
     expect(missing).toEqual([]);
   });
 });
+
+describe('fundo em movimento', () => {
+  const semantic = read('projects/ui/tokens/semantic.css').replace(/\/\*[\s\S]*?\*\//g, '');
+
+  it('anima só quem não pediu movimento reduzido', () => {
+    const animated = [...semantic.matchAll(/([^{}]+)\{[^{}]*animation:\s*arg-background-drift/g)];
+    expect(animated).toHaveLength(1);
+    const before = semantic.slice(0, animated[0]!.index);
+    expect(before.trimEnd().endsWith('@media (prefers-reduced-motion: no-preference) {')).toBe(
+      true,
+    );
+  });
+
+  it('registra cada posição que o degradê usa e a animação muda', () => {
+    const registered = new Set([...semantic.matchAll(/@property\s+(--[\w-]+)/g)].map(([, p]) => p));
+    const used = new Set(
+      [...semantic.matchAll(/var\((--arg-background-spot-[\w-]+)/g)].map(([, p]) => p),
+    );
+    const keyframes = semantic.match(/@keyframes arg-background-drift\s*\{([\s\S]*?\n)\}/)?.[1];
+    const animated = new Set([...(keyframes ?? '').matchAll(/(--[\w-]+):/g)].map(([, p]) => p));
+
+    expect(used.size).toBe(6);
+    expect([...used].filter((p) => !registered.has(p))).toEqual([]);
+    expect([...animated].sort()).toEqual([...used].sort());
+  });
+});
