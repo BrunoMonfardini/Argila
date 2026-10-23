@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { ArgTheme, provideArgila } from '@brunomonfardini/ui';
 import { DOC_SEGMENTS } from '../segments';
-import { DocThemeChoices } from './theme-choices';
+import { DOC_SAMPLE_BACKGROUND, DocThemeChoices } from './theme-choices';
 
 @Component({ template: '' })
 class Blank {}
@@ -17,12 +17,14 @@ describe('DocThemeChoices', () => {
       'data-arg-style',
       'data-arg-palette',
       'data-arg-background',
+      'data-arg-background-motion',
       'data-arg-primary',
       'data-arg-accent',
     ]) {
       root.removeAttribute(name);
     }
     root.style.removeProperty('--arg-surface-opacity');
+    root.style.removeProperty('--arg-background-photo');
     root.setAttribute('data-arg-theme', 'auto');
     history.replaceState(null, '', '/');
   });
@@ -70,6 +72,23 @@ describe('DocThemeChoices', () => {
     const punk = await open('/?ds=punk&fundo=degrade');
     expect(punk.theme.background()).toBe('liso');
     expect(punk.choices.notice()).toEqual(['O Punk não aceita o fundo “degrade”; usamos o liso.']);
+  });
+
+  it('o fundo imagem usa a imagem de exemplo, e o movimento vai e volta pelo link', async () => {
+    const { theme, router } = await open('/?ds=transparente&fundo=imagem&movimento=1');
+
+    expect(theme.background()).toBe('imagem');
+    expect(theme.backgroundImage()).toBe(DOC_SAMPLE_BACKGROUND);
+    expect(theme.backgroundMotion()).toBe(true);
+    expect(root.hasAttribute('data-arg-background-motion')).toBe(true);
+    expect(localStorage.getItem('argila-docs:movimento')).toBe('1');
+
+    TestBed.inject(DocThemeChoices).selectMotion(false);
+    await new Promise((resolve) => setTimeout(resolve));
+
+    expect(theme.backgroundMotion()).toBe(false);
+    expect(router.url).not.toContain('movimento');
+    expect(localStorage.getItem('argila-docs:movimento')).toBe('');
   });
 
   it('o link vale mais que o salvo no navegador', async () => {
