@@ -250,17 +250,23 @@ fundo próprio, ou cobre a imagem.
 ```ts
 theme.setBackgroundImage('assets/fundo.jpg'); // antes do setBackground
 theme.setBackground('imagem');
-theme.setBackgroundVeil(0.74); // opcional: o véu calculado para esta imagem
 theme.setBackgroundMotion(true); // as manchas se movem devagar
 ```
 
-O véu padrão (95%) vale para qualquer imagem: com ele, o texto passa no contraste mesmo sobre
-um pixel preto ou branco puro, mas a imagem quase some. Para uma imagem conhecida, o **Montar
-tema** do catálogo calcula o véu mínimo dela: envie a imagem, aplique e copie o segmento, que
-já traz `backgroundVeil`. Trocou a imagem, as cores ou o design system? Calcule de novo. As
-mesmas escolhas vão no segmento (`background: 'imagem'`, `backgroundImage`, `backgroundVeil`,
-`backgroundMotion`); sem Angular, `argSegmentAttributes` dá os atributos do `<html>` e
-`argSegmentStyles`, as variáveis CSS.
+**O véu se calcula sozinho.** O `ArgTheme` mede a imagem no navegador (uma cópia de 64×64) e
+aplica o menor véu com que o texto da página passa no contraste sobre ela; trocar a imagem, o
+design system, a paleta, as cores ou o modo recalcula (`theme.backgroundVeil()` diz o valor).
+Enquanto mede, e se não der para ler a imagem (de outra origem sem CORS, ou sem navegador,
+como no SSR), vale o véu padrão, 95%, que passa até sobre um pixel preto ou branco puro, com
+aviso no console em desenvolvimento. Imagem de outro domínio precisa responder com
+`Access-Control-Allow-Origin`.
+
+Para fixar o véu, `theme.setBackgroundVeil(0.6)` (ou `backgroundVeil` no segmento); aí o
+contraste fica por conta do produto. `clearBackgroundVeil()` volta ao calculado. As escolhas
+vão no segmento (`background: 'imagem'`, `backgroundImage`, `backgroundMotion`); sem Angular,
+`argSegmentAttributes` dá os atributos do `<html>` e `argSegmentStyles`, as variáveis CSS (sem
+`ArgTheme`, não há véu automático: use o `argMinimumVeil` e o `argImageExtremes` para
+calculá-lo).
 
 Dicas de imagem: desfocada, ela não perde nada com pouca resolução, então use uma pequena
 (até 400 px de largura, em WebP ou JPG). O desfoque é `--arg-background-blur` (48px). O
