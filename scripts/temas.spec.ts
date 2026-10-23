@@ -285,3 +285,12 @@ describe('fundo em movimento', () => {
     expect([...animated].sort()).toEqual([...used].sort());
   });
 });
+
+describe('fundo de imagem', () => {
+  it('as camadas do base.css só leem tokens definidos no semantic.css', () => {
+    const declared = declaredTokens(read('projects/ui/tokens/semantic.css'));
+    const required = [...requiredTokens(read('projects/ui/tokens/base.css'))];
+    expect(required).toEqual(expect.arrayContaining(['--arg-background-photo']));
+    expect(required.filter((token) => !declared.has(token))).toEqual([]);
+  });
+});
