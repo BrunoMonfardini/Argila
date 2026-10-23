@@ -31,6 +31,12 @@ export interface ThemeChoice {
 /** Onde a imagem do fundo fica no produto: o catálogo não sabe, então sugere este caminho. */
 export const PRODUCT_BACKGROUND_IMAGE = 'assets/fundo.jpg';
 
+/** Comentários do código copiado, nos campos que dependem da imagem do produto. */
+const FIELD_COMMENTS: Partial<Record<string, string>> = {
+  backgroundImage: 'Troque pelo caminho da sua imagem',
+  backgroundVeil: 'Calculado para a imagem enviada; com outra imagem, calcule de novo',
+};
+
 /** O segmento que reproduz a escolha; campos que valem por padrão ficam de fora. */
 export function segmentOf(choice: ThemeChoice): ArgSegment {
   const segment: Record<string, unknown> = { style: choice.style };
@@ -63,7 +69,11 @@ function literal(value: unknown): string {
 /** O `provideArgila` com o segmento, pronto para o `app.config.ts`. */
 export function segmentCode(segment: ArgSegment, name = 'meuSegmento'): string {
   const fields = Object.entries(segment)
-    .map(([key, value]) => `        ${key}: ${literal(value)},`)
+    .map(([key, value]) => {
+      const comment = FIELD_COMMENTS[key];
+      const line = `        ${key}: ${literal(value)},`;
+      return comment ? `        // ${comment}\n${line}` : line;
+    })
     .join('\n');
   return `provideArgila({
   segments: {
