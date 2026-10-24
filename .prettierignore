@@ -6,3 +6,6 @@ reports
 cobertura-main
 projects/ui/src/lib/design-systems/colors.generated.ts
 projects/ui/tokens/colors.css
+
+# Grafo do Understand Anything, gerado pelo plugin
+.ua
