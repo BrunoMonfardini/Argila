@@ -1,14 +1,15 @@
 # Documentação do Argila
 
-| Documento                                        | Para quê                                                                                                                                                       |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Mapa do projeto](mapa-do-projeto.md)            | Onde fica cada coisa: todos os componentes (pasta, uso, página no catálogo, peles), os design systems, os tokens, o catálogo e os scripts                      |
-| [Como alterar](como-alterar.md)                  | Passo a passo: mudar aparência ou comportamento, criar exemplo, token, paleta, ícone, componente, design system ou página; e o checklist de componente pronto  |
-| [Uso num produto](../projects/ui/README.md)      | Instalar o pacote, importar os tokens, escolher design system, paleta, cores e segmento                                                                        |
-| [Ícones](../projects/ui/icons/README.md)         | O padrão de desenho e como criar um ícone                                                                                                                      |
-| [Padrão de pipeline](padrao-de-pipeline.md)      | Regras comuns a todos os projetos da empresa: testes, CI, commits, PRs e merge. O "Checklist para criar um repositório" é um modelo para cada repositório novo |
-| [Validação visual dos temas](validacao-temas.md) | Roteiro para conferir à mão, no catálogo, a barra de tema e os componentes em cada design system                                                               |
-| [Referências](referencias/README.md)             | As imagens que cada design system segue (só para o time; não vão para o catálogo publicado)                                                                    |
+| Documento                                         | Para quê                                                                                                                                                       |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Mapa do projeto](mapa-do-projeto.md)             | Onde fica cada coisa: todos os componentes (pasta, uso, página no catálogo, peles), os design systems, os tokens, o catálogo e os scripts                      |
+| [Como alterar](como-alterar.md)                   | Passo a passo: mudar aparência ou comportamento, criar exemplo, token, paleta, ícone, componente, design system ou página; e o checklist de componente pronto  |
+| [Uso num produto](../projects/ui/README.md)       | Instalar o pacote, importar os tokens, escolher design system, paleta, cores e segmento                                                                        |
+| [Ícones](../projects/ui/icons/README.md)          | O padrão de desenho e como criar um ícone                                                                                                                      |
+| [Padrão de pipeline](padrao-de-pipeline.md)       | Regras comuns a todos os projetos da empresa: testes, CI, commits, PRs e merge. O "Checklist para criar um repositório" é um modelo para cada repositório novo |
+| [Validação visual dos temas](validacao-temas.md)  | Roteiro para conferir à mão, no catálogo, a barra de tema e os componentes em cada design system                                                               |
+| [Referências](referencias/README.md)              | As imagens que cada design system segue (só para o time; não vão para o catálogo publicado)                                                                    |
+| [Grafo de conhecimento](grafo-de-conhecimento.md) | Instalar o plugin Understand Anything, ver o grafo do código no navegador, fazer perguntas sobre ele e mantê-lo atualizado                                     |
 
 **Planos em andamento:**
 
