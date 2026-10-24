@@ -54,3 +54,9 @@ Thumbs.db
 # Relatórios dos testes (JUnit)
 /reports
 /cobertura-main
+
+# Understand Anything: arquivos temporários (o grafo em .ua/ é versionado)
+.ua/intermediate/
+.ua/diff-overlay.json
+.ua/tmp/
+.ua/.trash-*/
